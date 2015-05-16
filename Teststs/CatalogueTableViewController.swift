@@ -32,7 +32,9 @@ class CatalogueTableViewController: UITableViewController {
         Company(name: "Ericsson", description: "Communications technology and services."),
         Company(name: "Volvo", description: "Transportation related products and services."),
         Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
-        Company(name: "Cybercom", description: "IT consulting company.")
+        Company(name: "Cybercom", description: "IT consulting company."),
+        Company(name: "Arla Foods", description: "Farmer owned dairy company."),
+        Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
         ].sorted { $0.name < $1.name }
     
 //    var letters = [String]()
@@ -130,8 +132,9 @@ class CatalogueTableViewController: UITableViewController {
 
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let indexPath = tableView.indexPathForSelectedRow()!
-        selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
+        if let indexPath = tableView.indexPathForSelectedRow() {
+            selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
+        }
     }
 
 }
