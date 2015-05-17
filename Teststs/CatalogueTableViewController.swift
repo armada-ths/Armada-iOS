@@ -23,6 +23,8 @@ var selectedCompany: Company?
 
 class CatalogueTableViewController: UITableViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     let companies = [
         Company(name: "ABB", description: "Power and automation technologies."),
         Company(name: "Accenture", description: "Management consulting and outsourcing."),
@@ -41,11 +43,17 @@ class CatalogueTableViewController: UITableViewController {
 //    var companiesByLetters = [(letter: "", companies: [Company(name: "", description: "")])]
     var companiesByLetters: [(letter: String, companies: [Company])] = []
 
+    
+    func updateCompaniesByLetters(companies: [Company]) {
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted {$0 < $1}.map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let a = [(a: 3, b:4)]
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted {$0 < $1}.map { letter in (letter: letter, companies: self.companies.filter({ $0.name.hasPrefix(letter) })) }
+        searchBar.delegate = self
+        updateCompaniesByLetters(companies)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -135,6 +143,53 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
         }
+        
     }
 
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        view.endEditing(true)
+    }
+}
+
+
+extension CatalogueTableViewController: UISearchBarDelegate {
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println(searchText)
+        if searchText.isEmpty {
+            updateCompaniesByLetters(companies)
+        } else {
+            updateCompaniesByLetters(companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)}))
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+//        navigationController!.navigationBar.hidden = true
+//        var r = self.view.frame
+//        r.origin.y = -44
+//        r.size.height += 44
+//        
+//        self.view.frame=r;
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+//        navigationController!.navigationBar.hidden = false
+//        var r = self.view.frame
+//        r.origin.y = 0
+//        r.size.height -= 44
+//        
+//        self.view.frame=r;
+    }
+    
 }

@@ -258,6 +258,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Enter the name of a company" id="i0n-Ps-fpL">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="9Mn-LA-yuo" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -270,8 +275,8 @@
                                                 <constraint firstAttribute="width" constant="80" id="eDM-bT-VZQ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeT-U9-jZB">
-                                            <rect key="frame" x="103" y="-1" width="489" height="65"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeT-U9-jZB">
+                                            <rect key="frame" x="103" y="-1" width="456" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="GhF-mD-bjo"/>
                                             </constraints>
@@ -318,13 +323,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Catalogue" id="umj-5h-GAg">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="W1Y-ad-6y8"/>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="Vdg-vq-dY1">
                             <connections>
                                 <segue destination="Up7-GF-P9n" kind="show" id="HdS-L4-TYF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="i0n-Ps-fpL" id="jiq-To-ls4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -572,9 +579,9 @@
         <scene sceneID="cCS-x6-XqP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y8B-Vm-U7c" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" image="calendar" id="9Fo-vd-13R">
+                    <tabBarItem key="tabBarItem" title="Events" image="calendar_2" id="9Fo-vd-13R">
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="calendar-1"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="calendar_2-1"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -961,8 +968,8 @@
         <image name="adecco-logo" width="150" height="81"/>
         <image name="book" width="32" height="32"/>
         <image name="book-1" width="32" height="32"/>
-        <image name="calendar" width="24" height="24"/>
-        <image name="calendar-1" width="32" height="32"/>
+        <image name="calendar_2" width="32" height="32"/>
+        <image name="calendar_2-1" width="32" height="32"/>
         <image name="capgemini-logo" width="657" height="502"/>
         <image name="ericsson-logo" width="151" height="151"/>
         <image name="light_bulb" width="32" height="32"/>
