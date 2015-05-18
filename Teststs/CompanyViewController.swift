@@ -16,6 +16,7 @@ class CompanyViewController: UITableViewController {
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRectZero)

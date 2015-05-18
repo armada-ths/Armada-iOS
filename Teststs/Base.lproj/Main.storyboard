@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -348,37 +349,52 @@
                         <sections>
                             <tableViewSection id="deg-gA-nMI">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="74" id="PPX-P9-g1A">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="111" id="PPX-P9-g1A">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PPX-P9-g1A" id="Puy-oN-tUx">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adecco-logo" translatesAutoresizingMaskIntoConstraints="NO" id="kqe-ht-8on">
-                                                    <rect key="frame" x="8" y="8" width="120" height="57"/>
+                                                    <rect key="frame" x="244" y="18" width="112" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="120" id="qTB-f2-5dS"/>
+                                                        <constraint firstAttribute="width" constant="259" id="Jfu-bD-vgC"/>
+                                                        <constraint firstAttribute="height" constant="60" id="NIs-Wx-c3R"/>
+                                                        <constraint firstAttribute="width" constant="160" id="qTB-f2-5dS"/>
+                                                        <constraint firstAttribute="width" secondItem="kqe-ht-8on" secondAttribute="height" multiplier="15:8" id="tc9-nk-jJK"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Jfu-bD-vgC"/>
+                                                            <exclude reference="qTB-f2-5dS"/>
+                                                        </mask>
+                                                    </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best car maker in the world" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAP-dC-N67">
-                                                    <rect key="frame" x="143" y="8" width="449" height="57"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLI-vA-KdM">
+                                                    <rect key="frame" x="284" y="83" width="33" height="16"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ZAP-dC-N67" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" id="5bC-70-iMJ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ZAP-dC-N67" secondAttribute="trailing" id="G5g-eC-YmV"/>
-                                                <constraint firstItem="kqe-ht-8on" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" id="Opd-Rh-7uz"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ZAP-dC-N67" secondAttribute="bottom" id="T5j-jE-FLl"/>
-                                                <constraint firstItem="ZAP-dC-N67" firstAttribute="leading" secondItem="kqe-ht-8on" secondAttribute="trailing" constant="15" id="d7p-Gc-zF9"/>
+                                                <constraint firstItem="kqe-ht-8on" firstAttribute="leading" secondItem="Puy-oN-tUx" secondAttribute="leadingMargin" id="G1y-sf-8tK"/>
+                                                <constraint firstItem="kqe-ht-8on" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" constant="90" id="Opd-Rh-7uz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="kqe-ht-8on" secondAttribute="bottom" id="eta-VL-0Vc"/>
-                                                <constraint firstItem="ZAP-dC-N67" firstAttribute="centerY" secondItem="kqe-ht-8on" secondAttribute="centerY" constant="-0.5" id="oV8-OG-F96"/>
+                                                <constraint firstItem="kqe-ht-8on" firstAttribute="centerX" secondItem="KLI-vA-KdM" secondAttribute="centerX" id="fhR-JD-xGu"/>
+                                                <constraint firstItem="KLI-vA-KdM" firstAttribute="top" secondItem="kqe-ht-8on" secondAttribute="bottom" constant="5" id="l34-Kv-aYx"/>
+                                                <constraint firstAttribute="centerY" secondItem="kqe-ht-8on" secondAttribute="centerY" id="lGU-ur-cqc"/>
+                                                <constraint firstItem="kqe-ht-8on" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" constant="10" id="m5t-RZ-U5I"/>
                                                 <constraint firstItem="kqe-ht-8on" firstAttribute="leading" secondItem="Puy-oN-tUx" secondAttribute="leadingMargin" id="ro1-5b-JhP"/>
+                                                <constraint firstAttribute="centerX" secondItem="kqe-ht-8on" secondAttribute="centerX" id="y1l-7y-cyh"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="kqe-ht-8on" secondAttribute="trailing" constant="15" id="yUj-Wb-97S"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="G1y-sf-8tK"/>
+                                                    <exclude reference="Opd-Rh-7uz"/>
+                                                    <exclude reference="eta-VL-0Vc"/>
+                                                    <exclude reference="lGU-ur-cqc"/>
+                                                    <exclude reference="ro1-5b-JhP"/>
                                                     <exclude reference="yUj-Wb-97S"/>
                                                 </mask>
                                             </variation>
@@ -401,8 +417,8 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="kR8-q3-Mkc">
-                                                    <rect key="frame" x="86" y="82" width="415" height="152"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="kR8-q3-Mkc">
+                                                    <rect key="frame" x="8" y="52" width="584" height="195"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -530,11 +546,15 @@
                             <outlet property="delegate" destination="xY0-ap-AuY" id="AEQ-Q8-Hqu"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="zyX-lJ-BP6"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
                         <outlet property="cell1" destination="PPX-P9-g1A" id="X3X-kT-zGI"/>
-                        <outlet property="descriptionLabel" destination="ZAP-dC-N67" id="GYq-tz-YtG"/>
+                        <outlet property="descriptionLabel" destination="KLI-vA-KdM" id="BNp-4s-hFx"/>
                         <outlet property="logoImageView" destination="kqe-ht-8on" id="hH4-Vi-8nZ"/>
                     </connections>
                 </tableViewController>
@@ -726,13 +746,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4f1-DB-urC" id="rpH-6p-Ida">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7uT-2J-O0Y">
-                                                    <rect key="frame" x="22" y="7" width="101" height="30"/>
-                                                    <accessibility key="accessibilityConfiguration">
-                                                        <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                                        <bool key="isElement" value="NO"/>
-                                                    </accessibility>
-                                                    <state key="normal" title="Add education">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucX-4X-pmC">
+                                                    <rect key="frame" x="25" y="11" width="22" height="22"/>
+                                                    <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -962,7 +978,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="abb-logo" width="151" height="151"/>
+        <image name="abb-logo" width="298" height="126"/>
         <image name="academic-work-logo" width="161" height="61"/>
         <image name="accenture-logo" width="255" height="73"/>
         <image name="adecco-logo" width="150" height="81"/>
@@ -971,7 +987,7 @@
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
         <image name="capgemini-logo" width="657" height="502"/>
-        <image name="ericsson-logo" width="151" height="151"/>
+        <image name="ericsson-logo" width="280" height="248"/>
         <image name="light_bulb" width="32" height="32"/>
         <image name="light_bulb-1" width="32" height="32"/>
         <image name="location" width="700" height="467"/>
