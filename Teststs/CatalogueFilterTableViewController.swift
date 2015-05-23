@@ -27,7 +27,6 @@ class CatalogueFilterTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
-
     }
 
     /*
