@@ -20,6 +20,14 @@ public struct Company {
     }
 }
 
+public struct ArmadaEvent {
+    public let title: String
+    public let summary: String
+//    public let location: String
+//    public let startDate: NSDate
+//    public let endDate: NSDate
+}
+
 public class DataDude {
     public func companiesFromJson(json: AnyObject) -> [Company] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
@@ -28,17 +36,29 @@ public class DataDude {
                     return Company(name: name, description: description)
             }
             return nil
-        } ?? [])
+            } ?? [])
+    }
+    
+    public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {
+        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
+            if let title = json["title"] as? String,
+                let summary = json["summary"] as? String {
+                    return ArmadaEvent(title: title, summary: summary)
+            }
+            return nil
+            } ?? [])
     }
     
     func companiesFromServer() -> [Company]? {
         let companyUrl = "http://armada.nu/api/companies.json"
         if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
             let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
-            return companiesFromJson(json)
+                return companiesFromJson(json)
         }
         return nil
     }
+    
+    
 }
 
 extension Array {
