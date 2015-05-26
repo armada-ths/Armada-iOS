@@ -23,7 +23,7 @@ public struct Company {
 public struct ArmadaEvent {
     public let title: String
     public let summary: String
-//    public let location: String
+    public let location: String
     public let startDate: NSDate
     public let endDate: NSDate
 }
@@ -50,9 +50,10 @@ public class DataDude {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
             if let title = json["title"] as? String,
                 let summary = json["summary"] as? String,
+                let location = json["location"] as? String,
                 let startDateString = json["starts_at"] as? String,
                 let endDateString = json["ends_at"] as? String {
-                    return ArmadaEvent(title: title, summary: summary, startDate: dateFromString(startDateString), endDate: dateFromString(endDateString))
+                    return ArmadaEvent(title: title, summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: dateFromString(startDateString), endDate: dateFromString(endDateString))
             }
             return nil
             } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }

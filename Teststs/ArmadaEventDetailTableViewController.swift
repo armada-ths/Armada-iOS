@@ -1,23 +1,38 @@
 //
-//  ArmadaEventTableViewController.swift
+//  ArmadaEventDetailTableViewController.swift
 //  Teststs
 //
-//  Created by Sami Purmonen on 26/05/15.
+//  Created by Sami Purmonen on 27/05/15.
 //  Copyright (c) 2015 Sami Purmonen. All rights reserved.
 //
 
 import UIKit
 
-var selectedArmadaEvent: ArmadaEvent? = nil
-
-class ArmadaEventTableViewController: UITableViewController {
-
+class ArmadaEventDetailTableViewController: UITableViewController {
     
-    let armadaEvents = DataDude().eventsFromServer()!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        titleLabel.text = selectedArmadaEvent!.title
+        locationLabel.text = selectedArmadaEvent!.location
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "E dd MMMM"
+        dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
+        
+        summaryLabel.text = selectedArmadaEvent!.summary
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -32,42 +47,15 @@ class ArmadaEventTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return armadaEvents.count
-    }
-
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
-        let armadaEvent = armadaEvents[indexPath.row]
-        cell.titleLabel.text = armadaEvent.title
-        cell.summaryLabel.text = armadaEvent.summary
-        
-        let monthFormatter = NSDateFormatter()
-        monthFormatter.dateFormat = "MMM"
+        // Configure the cell...
 
-        let dayFormatter = NSDateFormatter()
-        dayFormatter.dateFormat = "d"
-        
-
-        cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
-        cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate)
-        
         return cell
     }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        selectedArmadaEvent = armadaEvents[tableView.indexPathForSelectedRow()!.row]
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
