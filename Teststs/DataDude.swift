@@ -55,7 +55,7 @@ public class DataDude {
                     return ArmadaEvent(title: title, summary: summary, startDate: dateFromString(startDateString), endDate: dateFromString(endDateString))
             }
             return nil
-            } ?? [])
+            } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
     }
     
     func companiesFromServer() -> [Company]? {
