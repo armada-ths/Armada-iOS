@@ -96,8 +96,11 @@ class CatalogueTableViewController: UITableViewController {
         cell.logoImageView.image = company.image
         return cell
     }
-
     
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        return companiesByLetters.map { $0.letter }
+    }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter

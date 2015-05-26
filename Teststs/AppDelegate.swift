@@ -26,11 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let armadaGreen = 0x1C6965
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        UINavigationBar.appearance().barTintColor = UIColor(hex: armadaGreen)
+
         UITabBar.appearance().tintColor = UIColor(hex: armadaGreen)
         window!.tintColor = UIColor(hex: armadaGreen)
+        
+        UINavigationBar.appearance().barTintColor = UIColor(hex: armadaGreen)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+//        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        
+//        UINavigationBar.appearance().tintColor = UIColor(hex: armadaGreen)
+
         
         // Override point for customization after application launch.
         return true
