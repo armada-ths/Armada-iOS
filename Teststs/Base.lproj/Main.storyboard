@@ -75,15 +75,15 @@
         <!--Events-->
         <scene sceneID="dVi-7E-2tA">
             <objects>
-                <tableViewController id="Gt1-IH-Mif" sceneMemberID="viewController">
+                <tableViewController id="Gt1-IH-Mif" customClass="ArmadaEventTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9dT-eL-PRO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Upcoming events" id="rbp-Nb-VgU">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="65" id="BwI-cp-f8j">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="65" id="BwI-cp-f8j" customClass="ArmadaEventTableViewCell" customModule="Teststs" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BwI-cp-f8j" id="54U-KX-PBt">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -411,7 +411,90 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tem-qX-E2y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2743" y="527"/>
+            <point key="canvasLocation" x="3546" y="-67"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="JbC-Ya-qil">
+            <objects>
+                <tableViewController id="zhR-XN-fDJ" customClass="ArmadaEventTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="gXA-NQ-Mqh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArmadaEventTableViewCell" rowHeight="76" id="eYh-Xb-2MJ" customClass="ArmadaEventTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eYh-Xb-2MJ" id="GUy-qR-HFQ">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8h-ZN-XOG">
+                                            <rect key="frame" x="8" y="32" width="50" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="tsH-r8-dZH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V34-xV-TIy">
+                                            <rect key="frame" x="77" y="10" width="96" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Regarded as one of the most successful events last year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcy-xs-zEb">
+                                            <rect key="frame" x="77" y="36" width="482" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsK-1s-UT1">
+                                            <rect key="frame" x="35" y="8" width="23" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MsK-1s-UT1" firstAttribute="trailing" secondItem="s8h-ZN-XOG" secondAttribute="trailing" id="2TR-cs-f5D"/>
+                                        <constraint firstItem="Zcy-xs-zEb" firstAttribute="top" secondItem="V34-xV-TIy" secondAttribute="bottom" constant="1" id="5rg-K1-Zm3"/>
+                                        <constraint firstItem="s8h-ZN-XOG" firstAttribute="bottom" secondItem="GUy-qR-HFQ" secondAttribute="bottomMargin" id="7Su-eG-08w"/>
+                                        <constraint firstItem="MsK-1s-UT1" firstAttribute="centerY" secondItem="V34-xV-TIy" secondAttribute="centerY" id="8Ou-uE-feM"/>
+                                        <constraint firstItem="MsK-1s-UT1" firstAttribute="top" secondItem="GUy-qR-HFQ" secondAttribute="topMargin" id="8f7-gc-Oaa"/>
+                                        <constraint firstItem="V34-xV-TIy" firstAttribute="leading" secondItem="MsK-1s-UT1" secondAttribute="trailing" constant="19" id="Lyj-lO-SIu"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Zcy-xs-zEb" secondAttribute="trailing" id="YoM-OL-1zm"/>
+                                        <constraint firstItem="Zcy-xs-zEb" firstAttribute="centerY" secondItem="s8h-ZN-XOG" secondAttribute="centerY" id="aUz-cy-byQ"/>
+                                        <constraint firstItem="s8h-ZN-XOG" firstAttribute="top" secondItem="MsK-1s-UT1" secondAttribute="bottom" id="ecL-dK-noo"/>
+                                        <constraint firstItem="Zcy-xs-zEb" firstAttribute="leading" secondItem="V34-xV-TIy" secondAttribute="leading" id="pUX-jT-JYX"/>
+                                        <constraint firstItem="s8h-ZN-XOG" firstAttribute="leading" secondItem="GUy-qR-HFQ" secondAttribute="leadingMargin" id="x3x-5B-uhG"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="7Su-eG-08w"/>
+                                            <exclude reference="5rg-K1-Zm3"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dayLabel" destination="MsK-1s-UT1" id="pkh-ps-qYg"/>
+                                    <outlet property="monthLabel" destination="s8h-ZN-XOG" id="B7f-9l-kas"/>
+                                    <outlet property="summaryLabel" destination="Zcy-xs-zEb" id="nlt-ft-ace"/>
+                                    <outlet property="titleLabel" destination="V34-xV-TIy" id="O46-BX-R2f"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="zhR-XN-fDJ" id="s9k-UU-ipe"/>
+                            <outlet property="delegate" destination="zhR-XN-fDJ" id="JPo-Wm-Ocu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Events" id="SrR-jD-9BU"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1200"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAX-0c-LsP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2801" y="423"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ewd-XJ-ZNd">
@@ -1089,7 +1172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHP-aR-DnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2474" y="872"/>
+            <point key="canvasLocation" x="2168" y="1110"/>
         </scene>
         <!--Events-->
         <scene sceneID="cCS-x6-XqP">
@@ -1107,12 +1190,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Gt1-IH-Mif" kind="relationship" relationship="rootViewController" id="dOU-tg-t0R"/>
+                        <segue destination="zhR-XN-fDJ" kind="relationship" relationship="rootViewController" id="adD-Ym-SzY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YXr-v7-MiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1739" y="-73"/>
+            <point key="canvasLocation" x="2043" y="178"/>
         </scene>
         <!--Catalogue-->
         <scene sceneID="ftX-X8-XDU">

@@ -39,6 +39,12 @@ class TeststsTests: XCTestCase {
         XCTAssert(companies[0].name == "ACAD-International AB")
     }
     
+    func testEventsFromServer() {
+        let events = DataDude().eventsFromServer()!
+        XCTAssert(events.count == 33)
+        XCTAssert(events[0].title == "Vårrekrytering")
+    }
+    
     func testParsingCompaniesFromJson() {
         let json: AnyObject = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("companies", withExtension: "json")!)!, options: nil, error: nil)!
         let companies = DataDude().companiesFromJson(json)
