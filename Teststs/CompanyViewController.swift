@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class CompanyViewController: UITableViewController {
 
     @IBOutlet weak var cell1: UITableViewCell!

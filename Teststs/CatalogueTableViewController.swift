@@ -9,23 +9,13 @@
 import UIKit
 
 
-struct Company {
-    let name: String
-    let description: String
-    
-    var image: UIImage {
-        let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-        return UIImage(named: "\(name2)-logo.png")!
-    }
-}
-
 var selectedCompany: Company?
 
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    let companies = [
+    var companies = [
         Company(name: "ABB", description: "Power and automation technologies."),
         Company(name: "Accenture", description: "Management consulting and outsourcing."),
         Company(name: "Academic Work", description: "Young professionals consulting."),
@@ -38,6 +28,8 @@ class CatalogueTableViewController: UITableViewController {
         Company(name: "Arla Foods", description: "Farmer owned dairy company."),
         Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
         ].sorted { $0.name < $1.name }
+
+//    companies = DataDude().companiesFromServer()!
     
 //    var letters = [String]()
 //    var companiesByLetters = [(letter: "", companies: [Company(name: "", description: "")])]

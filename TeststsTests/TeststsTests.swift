@@ -32,4 +32,17 @@ class TeststsTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testCompaniesFromServer() {
+        let companies = DataDude().companiesFromServer()!
+        XCTAssert(companies.count == 150)
+        XCTAssert(companies[0].name == "ACAD-International AB")
+    }
+    
+    func testParsingCompaniesFromJson() {
+        let json: AnyObject = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("companies", withExtension: "json")!)!, options: nil, error: nil)!
+        let companies = DataDude().companiesFromJson(json)
+        XCTAssert(companies.count == 150)
+        XCTAssert(companies[0].name == "ACAD-International AB")
+    }
 }
