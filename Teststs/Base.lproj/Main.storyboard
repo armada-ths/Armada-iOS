@@ -1063,7 +1063,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="84" id="ba4-oD-xPZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="131" id="ba4-oD-xPZ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ba4-oD-xPZ" id="GJc-27-i2h">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1096,6 +1096,7 @@
                                                 <constraint firstAttribute="centerY" secondItem="i9g-yo-koa" secondAttribute="centerY" id="C9j-II-e4x"/>
                                                 <constraint firstItem="i9g-yo-koa" firstAttribute="width" secondItem="gxN-Q1-p1Q" secondAttribute="height" multiplier="48:47" id="SZB-t9-0Iy"/>
                                                 <constraint firstItem="i9g-yo-koa" firstAttribute="width" secondItem="yEv-fD-pdI" secondAttribute="height" multiplier="48:47" id="VXO-f6-bzW"/>
+                                                <constraint firstItem="i9g-yo-koa" firstAttribute="top" secondItem="GJc-27-i2h" secondAttribute="topMargin" constant="10" id="WnM-oY-uPP"/>
                                                 <constraint firstItem="i9g-yo-koa" firstAttribute="centerY" secondItem="gxN-Q1-p1Q" secondAttribute="centerY" id="bxh-BC-2NE"/>
                                                 <constraint firstItem="i9g-yo-koa" firstAttribute="height" secondItem="gxN-Q1-p1Q" secondAttribute="height" id="cIi-qb-13Z"/>
                                                 <constraint firstItem="yEv-fD-pdI" firstAttribute="leading" secondItem="i9g-yo-koa" secondAttribute="trailing" constant="50" id="caD-yd-blN"/>
@@ -1107,6 +1108,7 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="C9j-II-e4x"/>
                                                     <exclude reference="SZB-t9-0Iy"/>
                                                     <exclude reference="VXO-f6-bzW"/>
                                                 </mask>

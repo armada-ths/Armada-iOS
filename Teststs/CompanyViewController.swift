@@ -86,8 +86,6 @@ class CompanyViewController: UITableViewController {
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
-        
-
     }
     
     /*
