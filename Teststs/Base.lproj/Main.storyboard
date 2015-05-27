@@ -742,6 +742,7 @@
         <!--Company View Controller-->
         <scene sceneID="TA5-Du-nsb">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SnR-vx-p8v" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="CompanyViewController" id="xY0-ap-AuY" customClass="CompanyViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="th5-Hr-AjP">
                         <rect key="frame" x="0.0" y="64" width="600" height="1400"/>
@@ -750,6 +751,12 @@
                         <sections>
                             <tableViewSection id="deg-gA-nMI">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="64" id="imi-U4-S40">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="imi-U4-S40" id="6Gj-pJ-MTK">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="111" id="PPX-P9-g1A">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PPX-P9-g1A" id="Puy-oN-tUx">
@@ -1128,7 +1135,6 @@
                         <outlet property="positionLabel" destination="Uql-KC-wW6" id="bsD-2m-bDr"/>
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SnR-vx-p8v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="3417"/>
         </scene>

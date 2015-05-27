@@ -59,8 +59,7 @@ class CompanyViewController: UITableViewController {
         }
         
     }
-    
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.animateWithDuration(0.5) {
@@ -69,7 +68,7 @@ class CompanyViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 2 {
+        if indexPath.row == 3 {
             FavoriteCompanies.append(company!.name)
             let cell = tableView.cellForRowAtIndexPath(indexPath)!
             cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
@@ -79,11 +78,16 @@ class CompanyViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if contains(FavoriteCompanies, company!.name) && indexPath.row == 2 {
+        if indexPath.row == 0 {
+            return navigationController!.navigationBar.frame.height
+        }
+        if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
             return 0
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
+        
+
     }
     
     /*
