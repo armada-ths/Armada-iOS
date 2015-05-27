@@ -48,22 +48,19 @@ class CompanyViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 2 {
             FavoriteCompanies.append(selectedCompany!.name)
-            tableView.reloadData()
+            let cell = tableView.cellForRowAtIndexPath(indexPath)!
+            cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if contains(FavoriteCompanies, selectedCompany!.name) && indexPath.row == 2 {
-            favoritesButton.hidden = true
             return 0
         } else {
-            if indexPath.row == 2 {
-                favoritesButton.hidden = false
-            }
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
-    
-
     }
     
     /*
