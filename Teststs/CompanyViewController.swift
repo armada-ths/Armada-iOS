@@ -79,7 +79,7 @@ class CompanyViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return navigationController!.navigationBar.frame.height
+            return navigationController!.navigationBar.frame.maxY
         }
         if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
             return 0
