@@ -34,12 +34,12 @@ class CompanyViewController: UITableViewController {
     }
     
     @IBAction func addToFavorites(sender: AnyObject) {
-        favoriteCompanies += [selectedCompany!.name]
+        FavoriteCompanies.append(selectedCompany!.name)
         tableView.reloadData()
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if contains(favoriteCompanies, selectedCompany!.name) && indexPath.row == 2 {
+        if contains(FavoriteCompanies, selectedCompany!.name) && indexPath.row == 2 {
             favoritesButton.hidden = true
             return 0
         } else {

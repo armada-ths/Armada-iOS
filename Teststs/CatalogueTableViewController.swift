@@ -12,8 +12,6 @@ import UIKit
 var selectedCompany: Company?
 
 
-var favoriteCompanies = [String]()
-
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -64,7 +62,7 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     func updateFavorites() {
-        companies = allCompanies.filter { contains(favoriteCompanies, $0.name) }
+        companies = allCompanies.filter { contains(FavoriteCompanies, $0.name) }
         updateCompaniesByLetters(companies)
     }
     
@@ -86,7 +84,7 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     func updateFavoritesUI() {
-        if favoriteCompanies.isEmpty {
+        if FavoriteCompanies.isEmpty {
             let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
             label.text = "No Favorites"
             label.textAlignment = .Center
@@ -154,15 +152,14 @@ class CatalogueTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            favoriteCompanies = favoriteCompanies.filter({ $0 !=  self.companiesByLetters[indexPath.section].companies[indexPath.row].name })
+            FavoriteCompanies.removeAtIndex(indexPath.row)
             let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
-
             
             tableView.beginUpdates()
             updateFavorites()
             if deleteSection {
-                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: favoriteCompanies.isEmpty ? .None : .Fade)
-                if favoriteCompanies.isEmpty {
+                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
+                if FavoriteCompanies.isEmpty {
                     updateFavoritesUI()
                 }
             } else {
