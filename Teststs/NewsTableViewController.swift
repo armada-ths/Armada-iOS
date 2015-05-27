@@ -8,6 +8,8 @@
 
 import UIKit
 
+var selectedNewsItem:News!
+
 class NewsTableViewController: UITableViewController {
 
     let news = DataDude().newsFromServer()!
@@ -66,6 +68,9 @@ class NewsTableViewController: UITableViewController {
 
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        selectedNewsItem = news[tableView.indexPathForSelectedRow()!.row]
+    }
 
     /*
     // Override to support conditional editing of the table view.
