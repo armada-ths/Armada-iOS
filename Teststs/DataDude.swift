@@ -11,10 +11,73 @@ import UIKit
 
 
 public struct Company: Equatable {
+    
+    init!(json: [String: AnyObject]){
+
+        if let name = json["name"] as? String,
+            let description = json["description"] as? String,
+            let website = json["website_url"] as? String,
+            let facebook = json["facebook_url"] as? String,
+            let linkedin = json["linkedin_url"] as? String,
+            let twitter = json["twitter_url"] as? String,
+            let locationDescription = json["fair_location_description"] as? String,
+            let locationUrl = json["map_url"] as? String,
+            let employeesSweeden = json["employees_sweden"] as? Int,
+            let employeesWorld = json["employees_world"] as? Int,
+            
+            let workFields = json["work_fields"] as? [[String:AnyObject]],
+            let programmes = json["programmes"] as? [[String:AnyObject]],
+            let jobTypes = json["job_types"] as? [[String:AnyObject]],
+            let continents = json["continents"] as? [[String:AnyObject]],
+            let companyValues = json["company_values"] as? [[String:AnyObject]]{
+        
+                self.name = name
+                self.description = description
+                self.website = website
+                self.facebook=facebook
+                self.linkedin = linkedin
+                self.twitter=twitter
+                self.employeesSweeden = employeesSweeden
+                self.employeesWorld = employeesWorld
+                self.locationDescription = locationDescription
+                self.locationUrl = locationUrl
+                
+                
+                
+                self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                self.companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                self.continents = Array.removeNils(continents.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                self.workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                
+        }else {
+            return nil
+        }
+        
+    }
+    
+    
     public let name: String
     public let description: String
+    public let website: String
+    public let facebook: String
+    public let linkedin: String
+    public let twitter: String
+    public let locationDescription: String
+    public let locationUrl: String
+    public let workFields: [String]
+    public let programmes: [String]
+    public let jobTypes: [String]
+    public let companyValues: [String]
+    public let continents: [String]
+    public let employeesSweeden: Int
+    public let employeesWorld: Int
     
     public var image: UIImage {
+        let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
+        return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
+    }
+    public var map: UIImage {
         let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
         return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
     }
@@ -48,11 +111,7 @@ public class DataDude {
     
     public func companiesFromJson(json: AnyObject) -> [Company] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
-            if let name = json["name"] as? String,
-                let description = json["description"] as? String {
-                    return Company(name: name, description: description)
-            }
-            return nil
+            return Company(json: json)
             } ?? [])
     }
     
@@ -80,7 +139,7 @@ public class DataDude {
     }
     
     func companiesFromServer() -> [Company]? {
-        let companyUrl = "http://armada.nu/api/companies.json"
+        let companyUrl = "http://armada.nu/api/companies.json?include=relations"
         if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
             let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
                 return companiesFromJson(json)
