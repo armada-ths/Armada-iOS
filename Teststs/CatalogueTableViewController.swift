@@ -11,52 +11,20 @@ import UIKit
 
 var selectedCompany: Company?
 
-var companies = [
-    Company(name: "ABB", description: "Power and automation technologies."),
-    Company(name: "Accenture", description: "Management consulting and outsourcing."),
-    Company(name: "Academic Work", description: "Young professionals consulting."),
-    Company(name: "Adecco", description: "Human resource consulting."),
-    Company(name: "Capgemini", description: "Consulting, technology and outsourcing services."),
-    Company(name: "Ericsson", description: "Communications technology and services."),
-    Company(name: "Volvo", description: "Transportation related products and services."),
-    Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
-    Company(name: "Cybercom", description: "IT consulting company."),
-    Company(name: "Arla Foods", description: "Farmer owned dairy company."),
-    Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
-    ].sorted { $0.name < $1.name }
 
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var allCompanies = [
-        Company(name: "ABB", description: "Power and automation technologies."),
-        Company(name: "Accenture", description: "Management consulting and outsourcing."),
-        Company(name: "Academic Work", description: "Young professionals consulting."),
-        Company(name: "Adecco", description: "Human resource consulting."),
-        Company(name: "Capgemini", description: "Consulting, technology and outsourcing services."),
-        Company(name: "Ericsson", description: "Communications technology and services."),
-        Company(name: "Volvo", description: "Transportation related products and services."),
-        Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
-        Company(name: "Cybercom", description: "IT consulting company."),
-        Company(name: "Arla Foods", description: "Farmer owned dairy company."),
-        Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
-        ].sorted { $0.name < $1.name }
+    var allCompanies = DataDude().companiesFromServer()!
 
     
-    var companies = [
-        Company(name: "ABB", description: "Power and automation technologies."),
-        Company(name: "Accenture", description: "Management consulting and outsourcing."),
-        Company(name: "Academic Work", description: "Young professionals consulting."),
-        Company(name: "Adecco", description: "Human resource consulting."),
-        Company(name: "Capgemini", description: "Consulting, technology and outsourcing services."),
-        Company(name: "Ericsson", description: "Communications technology and services."),
-        Company(name: "Volvo", description: "Transportation related products and services."),
-        Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
-        Company(name: "Cybercom", description: "IT consulting company."),
-        Company(name: "Arla Foods", description: "Farmer owned dairy company."),
-        Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
-        ].sorted { $0.name < $1.name }
+    var companies:[Company]
+
+    required init!(coder aDecoder: NSCoder!) {
+        companies = allCompanies
+        super.init(coder: aDecoder)
+    }
 
 //    companies = DataDude().companiesFromServer()!
     
@@ -72,6 +40,7 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+
 //        tableView.tableFooterView = UIView(frame: CGRectZero)
 
     }
