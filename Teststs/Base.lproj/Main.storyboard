@@ -743,8 +743,8 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLI-vA-KdM">
-                                                    <rect key="frame" x="284" y="83" width="33" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLI-vA-KdM">
+                                                    <rect key="frame" x="18" y="83" width="565" height="16"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -758,11 +758,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Uql-KC-wW6" firstAttribute="trailing" secondItem="Puy-oN-tUx" secondAttribute="trailingMargin" id="CLZ-ZA-UOo"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="KLI-vA-KdM" secondAttribute="trailing" constant="10" id="Dev-bU-tXD"/>
                                                 <constraint firstItem="kqe-ht-8on" firstAttribute="leading" secondItem="Puy-oN-tUx" secondAttribute="leadingMargin" id="G1y-sf-8tK"/>
                                                 <constraint firstItem="kqe-ht-8on" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" constant="90" id="Opd-Rh-7uz"/>
                                                 <constraint firstItem="Uql-KC-wW6" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" id="RuA-Av-kze"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="kqe-ht-8on" secondAttribute="bottom" id="eta-VL-0Vc"/>
                                                 <constraint firstItem="kqe-ht-8on" firstAttribute="centerX" secondItem="KLI-vA-KdM" secondAttribute="centerX" id="fhR-JD-xGu"/>
+                                                <constraint firstItem="KLI-vA-KdM" firstAttribute="leading" secondItem="Puy-oN-tUx" secondAttribute="leadingMargin" constant="10" id="jME-JF-Utp"/>
                                                 <constraint firstItem="KLI-vA-KdM" firstAttribute="top" secondItem="kqe-ht-8on" secondAttribute="bottom" constant="5" id="l34-Kv-aYx"/>
                                                 <constraint firstAttribute="centerY" secondItem="kqe-ht-8on" secondAttribute="centerY" id="lGU-ur-cqc"/>
                                                 <constraint firstItem="kqe-ht-8on" firstAttribute="top" secondItem="Puy-oN-tUx" secondAttribute="topMargin" constant="10" id="m5t-RZ-U5I"/>
@@ -778,6 +780,7 @@
                                                     <exclude reference="lGU-ur-cqc"/>
                                                     <exclude reference="ro1-5b-JhP"/>
                                                     <exclude reference="yUj-Wb-97S"/>
+                                                    <exclude reference="Dev-bU-tXD"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

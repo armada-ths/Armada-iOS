@@ -125,7 +125,7 @@ public class DataDude {
             return Company(json: json)
             } ?? [])
         println(allCompanyValues(companies))
-        return companies
+        return companies.sorted { $0.name < $1.name }
     }
     
     public func allCompanyValues(companies:[Company]) -> Set<String>{
