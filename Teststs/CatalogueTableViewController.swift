@@ -148,7 +148,6 @@ class CatalogueTableViewController: UITableViewController {
             favoriteCompanies = favoriteCompanies.filter({ $0 !=  self.companiesByLetters[indexPath.section].companies[indexPath.row].name })
             let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
             updateFavorites()
-            
             if deleteSection {
                 tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
             } else {

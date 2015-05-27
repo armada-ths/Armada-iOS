@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blog is unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRl-6z-HXg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Blog is unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRl-6z-HXg">
                                 <rect key="frame" x="16" y="64" width="568" height="487"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1138,6 +1138,7 @@
                     <connections>
                         <outlet property="cell1" destination="PPX-P9-g1A" id="X3X-kT-zGI"/>
                         <outlet property="descriptionLabel" destination="KLI-vA-KdM" id="BNp-4s-hFx"/>
+                        <outlet property="favoritesButton" destination="mAg-sQ-oaQ" id="WXb-Gz-Y2O"/>
                         <outlet property="logoImageView" destination="kqe-ht-8on" id="hH4-Vi-8nZ"/>
                     </connections>
                 </tableViewController>
