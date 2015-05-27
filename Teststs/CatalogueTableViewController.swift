@@ -56,7 +56,6 @@ class CatalogueTableViewController: UITableViewController {
     
     func updateCompaniesByLetters(companies: [Company]) {
         companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted {$0 < $1}.map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
-        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -66,7 +65,8 @@ class CatalogueTableViewController: UITableViewController {
         
         searchBar.delegate = self
         updateCompaniesByLetters(companies)
-        
+        tableView.reloadData()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -74,17 +74,25 @@ class CatalogueTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func updateFavorites() {
+        companies = allCompanies.filter { contains(favoriteCompanies, $0.name) }
+        updateCompaniesByLetters(companies)
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-        if restorationIdentifier == "Favorites" {
-            companies = allCompanies.filter { contains(favoriteCompanies, $0.name) }
-            updateCompaniesByLetters(companies)
-
+        if isFavorites {
+            updateFavorites()
         }
+        tableView.reloadData()
+
+    }
+    
+    var isFavorites: Bool {
+        return restorationIdentifier == "Favorites"
     }
 
     override func didReceiveMemoryWarning() {
@@ -124,25 +132,34 @@ class CatalogueTableViewController: UITableViewController {
         return companiesByLetters[section].letter
     }
     
-    /*
+
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
-        return true
+        return isFavorites
     }
-    */
 
-    /*
+
+
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.beginUpdates()
+            favoriteCompanies = favoriteCompanies.filter({ $0 !=  self.companiesByLetters[indexPath.section].companies[indexPath.row].name })
+            let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
+            updateFavorites()
+            
+            if deleteSection {
+                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+            } else {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            tableView.endUpdates()
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
