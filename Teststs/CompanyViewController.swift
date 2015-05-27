@@ -37,14 +37,25 @@ class CompanyViewController: UITableViewController {
         FavoriteCompanies.append(selectedCompany!.name)
         tableView.reloadData()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+
+    }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if contains(FavoriteCompanies, selectedCompany!.name) && indexPath.row == 2 {
             favoritesButton.hidden = true
             return 0
         } else {
+            if indexPath.row == 2 {
+                favoritesButton.hidden = false
+            }
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
+    
+
     }
     
     /*

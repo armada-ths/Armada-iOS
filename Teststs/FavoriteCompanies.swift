@@ -26,6 +26,7 @@ class _FavoriteCompanies: SequenceType, CollectionType {
     func append(companyName: String) {
         var companyNames = (Ω[key] as? [String]) ?? []
         companyNames.append(companyName)
+        companyNames = companyNames.sorted({ $0 < $1 })
         Ω[key] = companyNames
     }
     
