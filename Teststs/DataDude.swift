@@ -24,6 +24,9 @@ public struct Company: Equatable {
             let locationUrl = json["map_url"] as? String,
             let employeesSweeden = json["employees_sweden"] as? Int,
             let employeesWorld = json["employees_world"] as? Int,
+            let contactName = json["contact_name"] as? String,
+            let contactEmail = json["contact_email"] as? String,
+            let contactPhone = json["contact_number"] as? String,
             
             let workFields = json["work_fields"] as? [[String:AnyObject]],
             let programmes = json["programmes"] as? [[String:AnyObject]],
@@ -41,6 +44,9 @@ public struct Company: Equatable {
                 self.employeesWorld = employeesWorld
                 self.locationDescription = locationDescription
                 self.locationUrl = locationUrl
+                self.contactName = contactName
+                self.contactEmail = contactEmail
+                self.contactPhone = contactPhone
                 
                 self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
                 self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
@@ -70,6 +76,9 @@ public struct Company: Equatable {
     public let continents: [String]
     public let employeesSweeden: Int
     public let employeesWorld: Int
+    public let contactName: String
+    public let contactEmail: String
+    public let contactPhone: String
     
     public var image: UIImage {
         let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
@@ -116,7 +125,7 @@ public class DataDude {
     }
     
     public func allCompanyValues(companies:[Company]) -> Set<String>{
-        return Set(companies.map({$0.companyValues}).reduce([String](), combine: +))
+        return Set(companies.map({$0.jobTypes}).reduce([String](), combine: +))
     }
     
     public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {
