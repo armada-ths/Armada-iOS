@@ -85,8 +85,12 @@ public struct Company: Equatable {
         return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
     }
     public var map: UIImage {
-        let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-        return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
+        if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
+            let data = NSData(contentsOfURL: url),
+            let image = UIImage(data: data){
+                return image
+        }
+        return UIImage()
     }
 }
 
