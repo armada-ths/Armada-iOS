@@ -1,94 +1,97 @@
-//
-//  CatalogueFilterTableViewController.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 16/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
-class CatalogueFilterTableViewController: UITableViewController {
+let CompanyFilter = _CompanyFilter()
+class _CompanyFilter {
+    
+    private init() {}
+    
+    let Ω = NSUserDefaults.standardUserDefaults()
+    
+    var education: String? {
+        get { return Ω["CompanyFilterEducation"] as? String }
+        set {  Ω["CompanyFilterEducation"] = newValue }
+    }
+    
+    var jobs: [String] {
+        get { return Ω["CompanyFilterJobs"] as? [String] ?? [] }
+        set { Ω["CompanyFilterJobs"] = newValue }
+    }
+}
 
+class CatalogueFilterTableViewController: UITableViewController {
+    
     @IBOutlet weak var educationTableViewCell: UITableViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
-    }
-
+    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        educationTableViewCell.textLabel?.text = CompanyFilter.education ?? "Not Specified"
+        tableView.reloadData()
     }
     
-    /*
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 5
+    }
+    
+    let jobs = ["Summer Job", "Master Thesis", "Internship"]
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return [1,1,0,jobs.count,1][section]
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ["", "I am studying...", "", "...And looking for...",
+        "...At companies that are..."][section]
+    }
+    
+    func cellWithIdentifier(identifier: String) -> UITableViewCell {
+        return tableView.dequeueReusableCellWithIdentifier(identifier) as! UITableViewCell
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+        let cell: UITableViewCell
+        switch indexPath.section {
+        case 0:
+            cell = cellWithIdentifier("ApplyFilterCell")
+        case 1:
+            cell = cellWithIdentifier("SelectEducationCell")
+            cell.textLabel?.text = CompanyFilter.education ?? "Not Selected"
+        case 2:
+            if indexPath.row == tableView.numberOfRowsInSection(indexPath.section) - 1 {
+                return cellWithIdentifier("AddAttributeCell")
+            } else {
+                cell = cellWithIdentifier("AttributeCell")
+            }
+        case 3:
+            cell = cellWithIdentifier("JobCell")
+            let job = jobs[indexPath.row]
+            cell.textLabel?.text = job
+            cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
+        default: cell = cellWithIdentifier("InternationalCell")
+        }
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 3 {
+            let job = jobs[indexPath.row]
+            if contains(CompanyFilter.jobs, job) {
+                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
+            } else {
+                CompanyFilter.jobs = CompanyFilter.jobs + [job]
+            }
+            tableView.reloadData()
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

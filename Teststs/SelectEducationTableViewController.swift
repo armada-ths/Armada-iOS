@@ -8,18 +8,7 @@
 
 import UIKit
 
-let CompanyFilter = _CompanyFilter()
-class _CompanyFilter {
-    
-    private init() {}
-    
-    let Ω = NSUserDefaults.standardUserDefaults()
-    
-    var education: String? {
-        get { return Ω["CompanyFilterEducation"] as? String }
-        set {  Ω["CompanyFilterEducation"] = newValue }
-    }
-}
+
 
 class SelectEducationTableViewController: UITableViewController {
 
