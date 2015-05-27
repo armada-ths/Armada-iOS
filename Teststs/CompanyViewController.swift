@@ -47,6 +47,8 @@ class CompanyViewController: UITableViewController {
         positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
         logoImageView.image = company?.image
         descriptionLabel.text = company?.description
+        
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,7 +56,7 @@ class CompanyViewController: UITableViewController {
         parentViewController!.title = company!.name
 //        positionLabel.hidden = false
         
-        UIView.animateWithDuration(0.5) {
+        UIView.animateWithDuration(0.1) {
             self.positionLabel.alpha = 1
         }
         
@@ -62,7 +64,7 @@ class CompanyViewController: UITableViewController {
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        UIView.animateWithDuration(0.5) {
+        UIView.animateWithDuration(0.1) {
             self.positionLabel.alpha = 0
         }
     }

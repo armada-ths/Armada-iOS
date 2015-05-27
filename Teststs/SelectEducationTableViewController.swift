@@ -1,20 +1,43 @@
 //
-//  CatalogueFilterTableViewController.swift
+//  SelectEducationTableViewController.swift
 //  Teststs
 //
-//  Created by Sami Purmonen on 16/05/15.
+//  Created by Sami Purmonen on 28/05/15.
 //  Copyright (c) 2015 Sami Purmonen. All rights reserved.
 //
 
 import UIKit
 
-class CatalogueFilterTableViewController: UITableViewController {
+let CompanyFilter = _CompanyFilter()
+class _CompanyFilter {
+    
+    private init() {}
+    
+    let Ω = NSUserDefaults.standardUserDefaults()
+    
+    var education: String? {
+        get { return Ω["CompanyFilterEducation"] as? String }
+        set {  Ω["CompanyFilterEducation"] = newValue }
+    }
+}
 
-    @IBOutlet weak var educationTableViewCell: UITableViewCell!
+class SelectEducationTableViewController: UITableViewController {
+
+    
+    let educations = [
+        "Computer Science",
+        "Industrial Management",
+        "Biotechnology",
+        "Physics",
+        "Electro"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if CompanyFilter.education == nil {
+            CompanyFilter.education = educations[0]
+        }
+        updateAccessories()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,23 +51,37 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
+
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
+        return 1
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        educationTableViewCell.textLabel?.text = CompanyFilter.education ?? "Not Specified"
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete method implementation.
+        // Return the number of rows in the section.
+        return educations.count
     }
-    
-    /*
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectEducationTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        cell.textLabel?.text = educations[indexPath.row]
         return cell
     }
-    */
+    
+    func updateAccessories() {
+        for i in 0..<tableView.numberOfRowsInSection(0) {
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0))?.accessoryType = educations[i] == CompanyFilter.education ? .Checkmark : .None
+        }
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        CompanyFilter.education = educations[indexPath.row]
+        updateAccessories()
+    }
 
     /*
     // Override to support conditional editing of the table view.
