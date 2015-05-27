@@ -60,18 +60,7 @@ class CatalogueTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        
         searchBar.delegate = self
-        updateCompaniesByLetters(companies)
-        tableView.reloadData()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     func updateFavorites() {
@@ -85,10 +74,32 @@ class CatalogueTableViewController: UITableViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         if isFavorites {
+            tableView.sectionHeaderHeight = 0
             updateFavorites()
+            searchBar.placeholder = "Search Favorites"
+            updateFavoritesUI()
+        } else {
+            updateCompaniesByLetters(companies)
         }
         tableView.reloadData()
-
+    }
+    
+    func updateFavoritesUI() {
+        if favoriteCompanies.isEmpty {
+            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+            label.text = "No Favorites"
+            label.textAlignment = .Center
+            label.sizeToFit()
+            label.textColor = UIColor.lightGrayColor()
+            label.font = UIFont.systemFontOfSize(25)
+            searchBar.hidden = true
+            tableView.backgroundView = label
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            searchBar.hidden = false
+        }
     }
     
     var isFavorites: Bool {
@@ -125,7 +136,7 @@ class CatalogueTableViewController: UITableViewController {
     
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return companiesByLetters.map { $0.letter }
+        return isFavorites ? [] : companiesByLetters.map { $0.letter }
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -144,16 +155,23 @@ class CatalogueTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            tableView.beginUpdates()
             favoriteCompanies = favoriteCompanies.filter({ $0 !=  self.companiesByLetters[indexPath.section].companies[indexPath.row].name })
             let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
+
+            
+            tableView.beginUpdates()
             updateFavorites()
             if deleteSection {
-                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: favoriteCompanies.isEmpty ? .None : .Fade)
+                if favoriteCompanies.isEmpty {
+                    updateFavoritesUI()
+                }
             } else {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
+
             tableView.endUpdates()
+
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
@@ -198,6 +216,7 @@ extension CatalogueTableViewController: UISearchBarDelegate {
         } else {
             updateCompaniesByLetters(companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)}))
         }
+        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -210,22 +229,10 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-//        navigationController!.navigationBar.hidden = true
-//        var r = self.view.frame
-//        r.origin.y = -44
-//        r.size.height += 44
-//        
-//        self.view.frame=r;
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
-//        navigationController!.navigationBar.hidden = false
-//        var r = self.view.frame
-//        r.origin.y = 0
-//        r.size.height -= 44
-//        
-//        self.view.frame=r;
     }
     
 }
