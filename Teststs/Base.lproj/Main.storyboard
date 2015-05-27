@@ -39,39 +39,6 @@
             </objects>
             <point key="canvasLocation" x="561" y="1681"/>
         </scene>
-        <!--Detail-->
-        <scene sceneID="Cn3-H9-jdl">
-            <objects>
-                <viewController title="Detail" id="Ah7-4n-0Wa" customClass="DetailViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cIm-e0-J51"/>
-                        <viewControllerLayoutGuide type="bottom" id="a0L-h9-sNL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MMQ-IT-qOo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No events available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Veb-IC-02g">
-                                <rect key="frame" x="16" y="64" width="568" height="487"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Veb-IC-02g" firstAttribute="top" secondItem="cIm-e0-J51" secondAttribute="bottom" id="9zu-uH-3Bb"/>
-                            <constraint firstItem="a0L-h9-sNL" firstAttribute="top" secondItem="Veb-IC-02g" secondAttribute="bottom" id="B5i-3Y-2AQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Veb-IC-02g" secondAttribute="trailing" id="Y2L-1R-I7f"/>
-                            <constraint firstItem="Veb-IC-02g" firstAttribute="leading" secondItem="MMQ-IT-qOo" secondAttribute="leadingMargin" id="i0B-Md-Tdm"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Events" id="cra-N8-TIN"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3496" y="-417"/>
-        </scene>
         <!--Events-->
         <scene sceneID="dVi-7E-2tA">
             <objects>
@@ -738,7 +705,7 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="qeT-U9-jZB" id="PW5-O2-GwW"/>
                                     <outlet property="logoImageView" destination="b51-f4-Jxb" id="YHf-5p-3GG"/>
-                                    <segue destination="Hrj-ay-Myv" kind="show" id="ccV-ir-XRV"/>
+                                    <segue destination="bEp-MO-iUH" kind="show" id="yCJ-Bz-RNS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -760,14 +727,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1150" y="1426"/>
+            <point key="canvasLocation" x="-885" y="2310"/>
+        </scene>
+        <!--Companies Page View Controller-->
+        <scene sceneID="B3R-gX-zbo">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bEp-MO-iUH" customClass="CompaniesPageViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="4pa-wa-18Z"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e8B-y7-rbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1577" y="3031"/>
         </scene>
         <!--Company View Controller-->
         <scene sceneID="TA5-Du-nsb">
             <objects>
-                <tableViewController id="xY0-ap-AuY" customClass="CompanyViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CompanyViewController" id="xY0-ap-AuY" customClass="CompanyViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="th5-Hr-AjP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1400"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -1144,7 +1122,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnR-vx-p8v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="3417"/>
+            <point key="canvasLocation" x="53" y="3417"/>
         </scene>
         <!--Armada Event Detail Table View Controller-->
         <scene sceneID="sJj-Xg-Tuh">
@@ -1311,7 +1289,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZG-LJ-2Hh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2947" y="2623"/>
+            <point key="canvasLocation" x="3759" y="2623"/>
         </scene>
         <!--News Table View Controller-->
         <scene sceneID="hc7-q5-FZd">
@@ -1382,39 +1360,6 @@ The Thesis Pro</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nst-0h-vNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-347" y="1417"/>
-        </scene>
-        <!--News-->
-        <scene sceneID="xOK-M7-Ks0">
-            <objects>
-                <viewController id="Ma1-XE-eBW" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cag-Rh-sJT"/>
-                        <viewControllerLayoutGuide type="bottom" id="uxH-sJ-k6o"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sNl-hd-OgT">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No news available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSX-zn-gVh">
-                                <rect key="frame" x="16" y="64" width="568" height="487"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="tSX-zn-gVh" secondAttribute="trailing" id="693-zD-OOJ"/>
-                            <constraint firstItem="tSX-zn-gVh" firstAttribute="top" secondItem="cag-Rh-sJT" secondAttribute="bottom" id="Bye-tu-4Ic"/>
-                            <constraint firstItem="uxH-sJ-k6o" firstAttribute="top" secondItem="tSX-zn-gVh" secondAttribute="bottom" id="Gfn-m3-Mnj"/>
-                            <constraint firstItem="tSX-zn-gVh" firstAttribute="leading" secondItem="sNl-hd-OgT" secondAttribute="leadingMargin" id="fEG-DU-gXd"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="News" id="hPv-fu-8NV"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LHP-aR-DnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4939" y="1040"/>
         </scene>
         <!--Events-->
         <scene sceneID="cCS-x6-XqP">
@@ -1683,7 +1628,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdJ-jN-UUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="3233"/>
+            <point key="canvasLocation" x="1362" y="3233"/>
         </scene>
         <!--Filter-->
         <scene sceneID="c3A-W0-uzU">
@@ -1870,7 +1815,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6x-Zj-QrF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="3165"/>
+            <point key="canvasLocation" x="704" y="3165"/>
         </scene>
         <!--Add education-->
         <scene sceneID="jzB-mL-Gr6">
@@ -1958,7 +1903,7 @@ The Thesis Pro</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a68-Za-cJr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PuX-ym-IQa" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1185" y="3582"/>
+            <point key="canvasLocation" x="1997" y="3582"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F3S-Sl-gkg">
@@ -1994,25 +1939,7 @@ The Thesis Pro</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRx-3o-bkz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="3466"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6W3-Ps-Wmy">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hrj-ay-Myv" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EdN-w3-iDl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xY0-ap-AuY" kind="relationship" relationship="rootViewController" id="vbV-AF-Qkt"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0cC-no-CzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-759" y="2205"/>
+            <point key="canvasLocation" x="1254" y="4102"/>
         </scene>
         <!--News Detail Table View Controller-->
         <scene sceneID="aCn-BI-Rzn">
@@ -2130,7 +2057,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIO-tS-38z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="657" y="2413"/>
+            <point key="canvasLocation" x="1469" y="2413"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="rZw-5g-N49">
@@ -2194,7 +2121,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                 <connections>
                                     <outlet property="descriptionLabel" destination="8cI-hy-UDP" id="nns-Cz-mr4"/>
                                     <outlet property="logoImageView" destination="JAf-qC-IHp" id="WNa-yP-8BW"/>
-                                    <segue destination="Hrj-ay-Myv" kind="show" id="wNF-FC-dlO"/>
+                                    <segue destination="bEp-MO-iUH" kind="show" id="LVJ-xs-Xvd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2212,7 +2139,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F05-Dj-OFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1962" y="1412"/>
+            <point key="canvasLocation" x="-1870" y="2268"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pdo-Zj-v9l">
@@ -2236,6 +2163,24 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                 <placeholder placeholderIdentifier="IBFirstResponder" id="di9-3F-42E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2079" y="502"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0El-xy-a7h">
+            <objects>
+                <navigationController storyboardIdentifier="CompanyNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="CiZ-My-zSm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MTh-u1-knO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xY0-ap-AuY" kind="relationship" relationship="rootViewController" id="RaC-X3-YFb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQM-Yj-lgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-680" y="3207"/>
         </scene>
     </scenes>
     <resources>
@@ -2264,6 +2209,6 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wNF-FC-dlO"/>
+        <segue reference="LVJ-xs-Xvd"/>
     </inferredMetricsTieBreakers>
 </document>

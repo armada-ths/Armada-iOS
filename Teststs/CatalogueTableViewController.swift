@@ -11,6 +11,19 @@ import UIKit
 
 var selectedCompany: Company?
 
+var companies = [
+    Company(name: "ABB", description: "Power and automation technologies."),
+    Company(name: "Accenture", description: "Management consulting and outsourcing."),
+    Company(name: "Academic Work", description: "Young professionals consulting."),
+    Company(name: "Adecco", description: "Human resource consulting."),
+    Company(name: "Capgemini", description: "Consulting, technology and outsourcing services."),
+    Company(name: "Ericsson", description: "Communications technology and services."),
+    Company(name: "Volvo", description: "Transportation related products and services."),
+    Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
+    Company(name: "Cybercom", description: "IT consulting company."),
+    Company(name: "Arla Foods", description: "Farmer owned dairy company."),
+    Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
+    ].sorted { $0.name < $1.name }
 
 class CatalogueTableViewController: UITableViewController {
     
@@ -59,6 +72,8 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+//        tableView.tableFooterView = UIView(frame: CGRectZero)
+
     }
     
     func updateFavorites() {
@@ -192,7 +207,7 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
         }
-        
+        (segue.destinationViewController as! CompaniesPageViewController).companies = companies
     }
 
     

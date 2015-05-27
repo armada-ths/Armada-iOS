@@ -10,7 +10,7 @@ import UIKit
 
 
 
-public struct Company {
+public struct Company: Equatable {
     public let name: String
     public let description: String
     
@@ -18,6 +18,10 @@ public struct Company {
         let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
         return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
     }
+}
+
+public func ==(x: Company, y: Company) -> Bool {
+    return x.name == y.name
 }
 
 public struct ArmadaEvent {

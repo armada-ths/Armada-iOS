@@ -19,14 +19,12 @@ class CompanyViewController: UITableViewController {
     
     @IBOutlet weak var favoritesButton: UIButton!
     
+    
+    var company: Company? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        title = selectedCompany!.name
-        logoImageView.image = selectedCompany!.image
-        descriptionLabel.text = selectedCompany!.description
-        favoritesButton.resignFirstResponder()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,11 +41,14 @@ class CompanyViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+        parentViewController!.title = company?.name
+        logoImageView.image = company?.image
+        descriptionLabel.text = company?.description
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 2 {
-            FavoriteCompanies.append(selectedCompany!.name)
+            FavoriteCompanies.append(company!.name)
             let cell = tableView.cellForRowAtIndexPath(indexPath)!
             cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
             tableView.beginUpdates()
@@ -56,7 +57,7 @@ class CompanyViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if contains(FavoriteCompanies, selectedCompany!.name) && indexPath.row == 2 {
+        if contains(FavoriteCompanies, company!.name) && indexPath.row == 2 {
             return 0
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
