@@ -27,6 +27,7 @@ class CompanyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        positionLabel.alpha = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +52,20 @@ class CompanyViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         parentViewController!.title = company!.name
+//        positionLabel.hidden = false
+        
+        UIView.animateWithDuration(0.5) {
+            self.positionLabel.alpha = 1
+        }
+        
+    }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.animateWithDuration(0.5) {
+            self.positionLabel.alpha = 0
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

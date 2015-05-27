@@ -32,19 +32,13 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let index = find(companies, (viewController as! CompanyViewController).company!)!
-        if index+1 < companies.count {
-            return viewControllerForCompany(companies[index+1])
-        }
-        return nil
+        let index = (find(companies, (viewController as! CompanyViewController).company!)! + 1) % companies.count
+        return viewControllerForCompany(companies[index])
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let index = find(companies, (viewController as! CompanyViewController).company!)!
-        if index-1 >= 0 {
-            return viewControllerForCompany(companies[index-1])
-        }
-        return nil
+        let index = (find(companies, (viewController as! CompanyViewController).company!)! - 1 + companies.count) % companies.count
+        return viewControllerForCompany(companies[index])
     }
     
 }

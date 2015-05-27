@@ -732,8 +732,7 @@
         <!--Companies Page View Controller-->
         <scene sceneID="B3R-gX-zbo">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bEp-MO-iUH" customClass="CompaniesPageViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="bEp-MO-iUH" customClass="CompaniesPageViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="4pa-wa-18Z"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8B-y7-rbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2173,24 +2172,6 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
             </objects>
             <point key="canvasLocation" x="-2079" y="502"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="0El-xy-a7h">
-            <objects>
-                <navigationController storyboardIdentifier="CompanyNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="CiZ-My-zSm" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MTh-u1-knO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xY0-ap-AuY" kind="relationship" relationship="rootViewController" id="RaC-X3-YFb"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XQM-Yj-lgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-680" y="3207"/>
-        </scene>
     </scenes>
     <resources>
         <image name="abb-logo" width="298" height="126"/>
@@ -2218,6 +2199,6 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LVJ-xs-Xvd"/>
+        <segue reference="yCJ-Bz-RNS"/>
     </inferredMetricsTieBreakers>
 </document>
