@@ -11,9 +11,27 @@ import UIKit
 
 var selectedCompany: Company?
 
+
+var favoriteCompanies = [String]()
+
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    var allCompanies = [
+        Company(name: "ABB", description: "Power and automation technologies."),
+        Company(name: "Accenture", description: "Management consulting and outsourcing."),
+        Company(name: "Academic Work", description: "Young professionals consulting."),
+        Company(name: "Adecco", description: "Human resource consulting."),
+        Company(name: "Capgemini", description: "Consulting, technology and outsourcing services."),
+        Company(name: "Ericsson", description: "Communications technology and services."),
+        Company(name: "Volvo", description: "Transportation related products and services."),
+        Company(name: "Combitech", description: "Consultancy combining technology, environment and security."),
+        Company(name: "Cybercom", description: "IT consulting company."),
+        Company(name: "Arla Foods", description: "Farmer owned dairy company."),
+        Company(name: "Astra Zeneca", description: "Innovation-driven, integrated biopharmaceutical company."),
+        ].sorted { $0.name < $1.name }
+
     
     var companies = [
         Company(name: "ABB", description: "Power and automation technologies."),
@@ -44,6 +62,8 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+        
         searchBar.delegate = self
         updateCompaniesByLetters(companies)
         
@@ -54,10 +74,16 @@ class CatalogueTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        if restorationIdentifier == "Favorites" {
+            companies = allCompanies.filter { contains(favoriteCompanies, $0.name) }
+            updateCompaniesByLetters(companies)
+
         }
     }
 
@@ -151,7 +177,6 @@ class CatalogueTableViewController: UITableViewController {
 extension CatalogueTableViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        println(searchText)
         if searchText.isEmpty {
             updateCompaniesByLetters(companies)
         } else {

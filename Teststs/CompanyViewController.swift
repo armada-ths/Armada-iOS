@@ -32,6 +32,9 @@ class CompanyViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func addToFavorites(sender: AnyObject) {
+        favoriteCompanies += [selectedCompany!.name]
+    }
 
     /*
     // MARK: - Navigation

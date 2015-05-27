@@ -65,7 +65,6 @@ public class DataDude {
             } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
     }
     public func newsFromJson(json: AnyObject) -> [News] {
-        println(json)
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
                 let content = json["content"] as? String,

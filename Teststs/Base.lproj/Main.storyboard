@@ -509,10 +509,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <segue destination="Xl5-nI-M3F" kind="relationship" relationship="viewControllers" id="Hv3-cl-nmc"/>
                         <segue destination="a2f-UO-1RC" kind="relationship" relationship="viewControllers" id="wJH-4d-qqY"/>
                         <segue destination="Y8B-Vm-U7c" kind="relationship" relationship="viewControllers" id="ZHt-ki-B9l"/>
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
-                        <segue destination="ORi-7J-0Lm" kind="relationship" relationship="viewControllers" id="f7c-dT-EKo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -872,6 +872,9 @@
                                                     <state key="normal" title="Add to Favorites">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="addToFavorites:" destination="xY0-ap-AuY" eventType="touchUpInside" id="MMa-Kr-sWS"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1323,13 +1326,13 @@ The Thesis Pro</string>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sXN-fA-RTe" id="Thh-OK-Tof">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-MN-gLq">
-                                            <rect key="frame" x="77" y="23.5" width="515" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-MN-gLq">
+                                            <rect key="frame" x="77" y="24" width="515" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYs-Uy-rkg">
-                                            <rect key="frame" x="35.5" y="8" width="22.5" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYs-Uy-rkg">
+                                            <rect key="frame" x="36" y="8" width="23" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -1479,7 +1482,7 @@ The Thesis Pro</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RR8-uB-vjl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="479" y="680"/>
+            <point key="canvasLocation" x="451" y="846"/>
         </scene>
         <!--News-->
         <scene sceneID="cVF-l2-LOf">
@@ -1823,54 +1826,6 @@ The Thesis Pro</string>
             </objects>
             <point key="canvasLocation" x="-1571" y="2205"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="RsO-Z2-NBQ">
-            <objects>
-                <viewController id="cWk-8E-maF" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Mne-JT-TKm"/>
-                        <viewControllerLayoutGuide type="bottom" id="2wN-63-O5K"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Hv6-Rg-lQY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-O8-Hgm">
-                                <rect key="frame" x="277" y="314" width="307" height="251"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYF-9L-1UA">
-                                <rect key="frame" x="88" y="314" width="307" height="251"/>
-                                <color key="backgroundColor" red="0.88627450980392153" green="0.95294117647058818" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQb-bw-JLu">
-                                <rect key="frame" x="236" y="20" width="168" height="152"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IoY-Ed-dJX">
-                                <rect key="frame" x="319" y="20" width="187" height="152"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4U7-Zd-fHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="329" y="4225"/>
-        </scene>
         <!--News Detail Table View Controller-->
         <scene sceneID="aCn-BI-Rzn">
             <objects>
@@ -1989,6 +1944,111 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
             </objects>
             <point key="canvasLocation" x="-155" y="2413"/>
         </scene>
+        <!--Favorites-->
+        <scene sceneID="rZw-5g-N49">
+            <objects>
+                <tableViewController restorationIdentifier="Favorites" title="Favorites" id="XsM-DD-yqw" customClass="CatalogueTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="JxM-rR-8ye">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Catalogue" id="EbI-z7-tCi">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="D6G-ZE-lN6" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D6G-ZE-lN6" id="MU7-nm-cho">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="JAf-qC-IHp">
+                                            <rect key="frame" x="8" y="4" width="75" height="49"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="75" id="tGb-dq-XgO"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cI-hy-UDP">
+                                            <rect key="frame" x="103" y="-4" width="489" height="65"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="bbu-nD-oPG"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8cI-hy-UDP" firstAttribute="centerY" secondItem="JAf-qC-IHp" secondAttribute="centerY" id="0S7-iG-0wl"/>
+                                        <constraint firstItem="JAf-qC-IHp" firstAttribute="bottom" secondItem="MU7-nm-cho" secondAttribute="bottomMargin" id="7HF-ZX-drF"/>
+                                        <constraint firstItem="JAf-qC-IHp" firstAttribute="top" secondItem="MU7-nm-cho" secondAttribute="top" constant="4" id="BZb-uU-KCk"/>
+                                        <constraint firstItem="JAf-qC-IHp" firstAttribute="leading" secondItem="MU7-nm-cho" secondAttribute="leadingMargin" constant="2" id="Frb-SP-RzF"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8cI-hy-UDP" secondAttribute="trailing" id="Hil-Tc-oE3"/>
+                                        <constraint firstAttribute="bottom" secondItem="JAf-qC-IHp" secondAttribute="bottom" constant="4" id="Ysm-qM-yp0"/>
+                                        <constraint firstItem="8cI-hy-UDP" firstAttribute="top" secondItem="MU7-nm-cho" secondAttribute="topMargin" constant="2" id="arK-co-v3J"/>
+                                        <constraint firstItem="JAf-qC-IHp" firstAttribute="top" secondItem="MU7-nm-cho" secondAttribute="topMargin" id="eQW-bi-gy1"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="8cI-hy-UDP" secondAttribute="bottom" constant="2" id="h23-4i-gIb"/>
+                                        <constraint firstItem="JAf-qC-IHp" firstAttribute="leading" secondItem="MU7-nm-cho" secondAttribute="leadingMargin" id="niT-jW-KWH"/>
+                                        <constraint firstItem="8cI-hy-UDP" firstAttribute="leading" secondItem="MU7-nm-cho" secondAttribute="leadingMargin" constant="3" id="t9B-w4-wJD"/>
+                                        <constraint firstItem="8cI-hy-UDP" firstAttribute="leading" secondItem="JAf-qC-IHp" secondAttribute="trailing" constant="20" id="vOy-hm-6l2"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="7HF-ZX-drF"/>
+                                            <exclude reference="Frb-SP-RzF"/>
+                                            <exclude reference="eQW-bi-gy1"/>
+                                            <exclude reference="arK-co-v3J"/>
+                                            <exclude reference="h23-4i-gIb"/>
+                                            <exclude reference="t9B-w4-wJD"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="8cI-hy-UDP" id="nns-Cz-mr4"/>
+                                    <outlet property="logoImageView" destination="JAf-qC-IHp" id="WNa-yP-8BW"/>
+                                    <segue destination="Hrj-ay-Myv" kind="show" id="wNF-FC-dlO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XsM-DD-yqw" id="V77-2c-kkQ"/>
+                            <outlet property="delegate" destination="XsM-DD-yqw" id="P44-CQ-0AL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favorites" id="TQr-1t-mQp">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="1Bh-LD-0Bn"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="EbI-z7-tCi" id="a0r-3z-YCz"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F05-Dj-OFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1957" y="1400"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pdo-Zj-v9l">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xl5-nI-M3F" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="GUl-4V-JXZ">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="book-1"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0rC-Z0-Anm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XsM-DD-yqw" kind="relationship" relationship="rootViewController" id="pib-hu-rdU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="di9-3F-42E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2079" y="502"/>
+        </scene>
     </scenes>
     <resources>
         <image name="abb-logo" width="298" height="126"/>
@@ -2015,4 +2075,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="world_times-1" width="32" height="32"/>
         <image name="worldmap" width="543" height="286"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="wNF-FC-dlO"/>
+    </inferredMetricsTieBreakers>
 </document>
