@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7512"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -79,7 +79,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9dT-eL-PRO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Upcoming events" id="rbp-Nb-VgU">
                                 <cells>
@@ -420,9 +420,9 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="gXA-NQ-Mqh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArmadaEventTableViewCell" rowHeight="76" id="eYh-Xb-2MJ" customClass="ArmadaEventTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ArmadaEventTableViewCell" rowHeight="76" id="eYh-Xb-2MJ" customClass="I">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eYh-Xb-2MJ" id="GUy-qR-HFQ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1163,7 +1163,7 @@
                                                     <string key="text">The Thesis Proposal
 The Thesis Pro</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1263,7 +1263,7 @@ The Thesis Pro</string>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofG-8h-FqF">
                                                     <rect key="frame" x="8" y="8" width="584" height="134"/>
-                                                    <mutableString key="text">A new event designed to show students the opportunities they have to do their master or bachelor thesis within your organisation. This is a great way for your organisation to hand-pick motivated students and get a new angle on the potential cases you have. You will provide and present current cases which are eligible to turn into master or bachelor thesis, and the students will form a thesis proposal concerning the problem. After your presenta- tion there will be time for mingle and dinner with the students which will start working on pitching the ideas for your organisation. After a given period of time your organisation will be able to select the Thesis that interests you the most. </mutableString>
+                                                    <string key="text">A new event designed to show students the opportunities they have to do their master or bachelor thesis within your organisation. This is a great way for your organisation to hand-pick motivated students and get a new angle on the potential cases you have. You will provide and present current cases which are eligible to turn into master or bachelor thesis, and the students will form a thesis proposal concerning the problem. After your presenta- tion there will be time for mingle and dinner with the students which will start working on pitching the ideas for your organisation. After a given period of time your organisation will be able to select the Thesis that interests you the most. </string>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1309,6 +1309,75 @@ The Thesis Pro</string>
             </objects>
             <point key="canvasLocation" x="3575" y="531"/>
         </scene>
+        <!--News Table View Controller-->
+        <scene sceneID="hc7-q5-FZd">
+            <objects>
+                <tableViewController id="8lS-ZJ-p1Y" customClass="NewsTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="22" sectionFooterHeight="22" id="c5t-dH-SSK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="NewsTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsTableViewCell" rowHeight="68" id="sXN-fA-RTe" customClass="NewsTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sXN-fA-RTe" id="Thh-OK-Tof">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-MN-gLq">
+                                            <rect key="frame" x="77" y="23.5" width="515" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYs-Uy-rkg">
+                                            <rect key="frame" x="35.5" y="8" width="22.5" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W94-vR-4VC">
+                                            <rect key="frame" x="8" y="32" width="50" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="uiO-ds-wJB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="trailing" secondItem="W94-vR-4VC" secondAttribute="trailing" id="N2r-Hu-JXf"/>
+                                        <constraint firstAttribute="centerY" secondItem="aol-MN-gLq" secondAttribute="centerY" id="Ua6-Wf-Azg"/>
+                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="centerY" secondItem="aol-MN-gLq" secondAttribute="centerY" id="Y5p-iV-8q8"/>
+                                        <constraint firstItem="W94-vR-4VC" firstAttribute="top" secondItem="kYs-Uy-rkg" secondAttribute="bottom" id="eTd-27-f3O"/>
+                                        <constraint firstItem="aol-MN-gLq" firstAttribute="leading" secondItem="kYs-Uy-rkg" secondAttribute="trailing" constant="19" id="wVm-gs-N05"/>
+                                        <constraint firstItem="W94-vR-4VC" firstAttribute="leading" secondItem="Thh-OK-Tof" secondAttribute="leadingMargin" id="yEv-6y-Wzu"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aol-MN-gLq" secondAttribute="trailing" id="znQ-Ne-DUJ"/>
+                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="top" secondItem="Thh-OK-Tof" secondAttribute="topMargin" id="zyA-6H-MeC"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Y5p-iV-8q8"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dayLabel" destination="kYs-Uy-rkg" id="FDq-lv-BEy"/>
+                                    <outlet property="monthLabel" destination="W94-vR-4VC" id="UFP-v7-WEt"/>
+                                    <outlet property="titleLabel" destination="aol-MN-gLq" id="mM9-p4-f4h"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8lS-ZJ-p1Y" id="QLJ-i8-QR9"/>
+                            <outlet property="delegate" destination="8lS-ZJ-p1Y" id="Bma-Q8-mi6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="5B8-iV-T56"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nst-0h-vNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1701" y="1149"/>
+        </scene>
         <!--News-->
         <scene sceneID="xOK-M7-Ks0">
             <objects>
@@ -1321,7 +1390,7 @@ The Thesis Pro</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No news available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSX-zn-gVh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No news available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSX-zn-gVh">
                                 <rect key="frame" x="16" y="64" width="568" height="487"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1340,7 +1409,7 @@ The Thesis Pro</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHP-aR-DnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2168" y="1110"/>
+            <point key="canvasLocation" x="2043" y="672"/>
         </scene>
         <!--Events-->
         <scene sceneID="cCS-x6-XqP">
@@ -1427,12 +1496,12 @@ The Thesis Pro</string>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Ma1-XE-eBW" kind="relationship" relationship="rootViewController" id="Cmv-iH-4kG"/>
+                        <segue destination="8lS-ZJ-p1Y" kind="relationship" relationship="rootViewController" id="8SY-Ai-pi6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMZ-3K-5hj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="872"/>
+            <point key="canvasLocation" x="836" y="900"/>
         </scene>
         <!--Filter-->
         <scene sceneID="vpy-9n-6x0">
@@ -1800,6 +1869,173 @@ The Thesis Pro</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4U7-Zd-fHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="329" y="4225"/>
+        </scene>
+        <!--Armada Event Detail Table View Controller-->
+        <scene sceneID="aCn-BI-Rzn">
+            <objects>
+                <tableViewController id="ff2-Lg-wGH" customClass="ArmadaEventDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UG5-sB-t31">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="TW3-AM-CAZ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="72" id="9Es-et-tag">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Es-et-tag" id="EmC-3l-SMx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmh-ei-ib4">
+                                                    <rect key="frame" x="181" y="8" width="239" height="55"/>
+                                                    <string key="text">The Thesis Proposal
+The Thesis Pro</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="Fmh-ei-ib4" secondAttribute="centerX" id="1bW-so-GRi"/>
+                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="7HR-pH-7mT"/>
+                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="hTQ-sa-vx1"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Fmh-ei-ib4" secondAttribute="bottom" id="wYX-cF-hGx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="utN-e8-tne">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="utN-e8-tne" id="Gvk-H4-SUl">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_pin" translatesAutoresizingMaskIntoConstraints="NO" id="aVC-rx-uVr">
+                                                    <rect key="frame" x="8" y="8" width="23" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="aVC-rx-uVr" secondAttribute="height" multiplier="34:33" id="Okd-zU-9rB"/>
+                                                        <constraint firstAttribute="width" constant="23" id="sce-Dg-hM4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Valhallavägen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TI8-Ls-A9Y">
+                                                    <rect key="frame" x="41" y="11" width="82" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TI8-Ls-A9Y" firstAttribute="leading" secondItem="aVC-rx-uVr" secondAttribute="trailing" constant="10" id="0Di-Z4-XD5"/>
+                                                <constraint firstItem="aVC-rx-uVr" firstAttribute="leading" secondItem="Gvk-H4-SUl" secondAttribute="leadingMargin" id="E0V-yH-P4e"/>
+                                                <constraint firstItem="TI8-Ls-A9Y" firstAttribute="centerY" secondItem="aVC-rx-uVr" secondAttribute="centerY" id="kgr-Mh-QWP"/>
+                                                <constraint firstItem="aVC-rx-uVr" firstAttribute="top" secondItem="Gvk-H4-SUl" secondAttribute="topMargin" id="txS-tL-gou"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="VgO-eX-VRv">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VgO-eX-VRv" id="Xim-hF-Cm5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-RQ-nBJ">
+                                                    <rect key="frame" x="8" y="8" width="23" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="23" id="3W3-6N-8W8"/>
+                                                        <constraint firstAttribute="width" secondItem="JdP-RQ-nBJ" secondAttribute="height" multiplier="34:33" id="Nmi-s0-t1P"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="monday 2 november " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELW-GY-SJF">
+                                                    <rect key="frame" x="41" y="11" width="128" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JdP-RQ-nBJ" firstAttribute="leading" secondItem="Xim-hF-Cm5" secondAttribute="leadingMargin" id="DdY-uh-kvp"/>
+                                                <constraint firstItem="ELW-GY-SJF" firstAttribute="leading" secondItem="JdP-RQ-nBJ" secondAttribute="trailing" constant="10" id="Yhd-eO-QJ1"/>
+                                                <constraint firstItem="ELW-GY-SJF" firstAttribute="centerY" secondItem="JdP-RQ-nBJ" secondAttribute="centerY" id="unB-As-EB3"/>
+                                                <constraint firstItem="JdP-RQ-nBJ" firstAttribute="top" secondItem="Xim-hF-Cm5" secondAttribute="topMargin" id="xGR-AE-Lec"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="iw8-t9-YQD">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iw8-t9-YQD" id="zuF-Xn-Jv5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="8bA-ov-NCB">
+                                                    <rect key="frame" x="8" y="8" width="23" height="22"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8bA-ov-NCB" secondAttribute="height" multiplier="34:33" id="lFO-2w-fkR"/>
+                                                        <constraint firstAttribute="width" constant="23" id="uHv-qZ-tSd"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10:00 - 17:00 " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUL-MZ-74J">
+                                                    <rect key="frame" x="41" y="11" width="84" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WUL-MZ-74J" firstAttribute="leading" secondItem="8bA-ov-NCB" secondAttribute="trailing" constant="10" id="Cnz-3w-b8F"/>
+                                                <constraint firstItem="WUL-MZ-74J" firstAttribute="centerY" secondItem="8bA-ov-NCB" secondAttribute="centerY" id="fbh-eG-jdn"/>
+                                                <constraint firstItem="8bA-ov-NCB" firstAttribute="top" secondItem="zuF-Xn-Jv5" secondAttribute="topMargin" id="g7U-Cj-zwD"/>
+                                                <constraint firstItem="8bA-ov-NCB" firstAttribute="leading" secondItem="zuF-Xn-Jv5" secondAttribute="leadingMargin" id="kGz-hp-J5U"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="665" id="Ob1-tU-kIY">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ob1-tU-kIY" id="Djk-5H-r4P">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aoq-3S-VG0">
+                                                    <rect key="frame" x="8" y="8" width="584" height="134"/>
+                                                    <string key="text">A new event designed to show students the opportunities they have to do their master or bachelor thesis within your organisation. This is a great way for your organisation to hand-pick motivated students and get a new angle on the potential cases you have. You will provide and present current cases which are eligible to turn into master or bachelor thesis, and the students will form a thesis proposal concerning the problem. After your presenta- tion there will be time for mingle and dinner with the students which will start working on pitching the ideas for your organisation. After a given period of time your organisation will be able to select the Thesis that interests you the most. </string>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="leading" secondItem="Djk-5H-r4P" secondAttribute="leadingMargin" id="7Vq-IM-Pdr"/>
+                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="top" secondItem="Djk-5H-r4P" secondAttribute="topMargin" id="8SP-td-PYS"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Aoq-3S-VG0" secondAttribute="trailing" id="A9V-CK-xf0"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Aoq-3S-VG0" secondAttribute="bottom" id="ljA-tf-Axu"/>
+                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="leading" secondItem="Djk-5H-r4P" secondAttribute="leadingMargin" id="oxe-0G-lhA"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="7Vq-IM-Pdr"/>
+                                                    <exclude reference="ljA-tf-Axu"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="ff2-Lg-wGH" id="ksX-zt-PSC"/>
+                            <outlet property="delegate" destination="ff2-Lg-wGH" id="w2O-VX-3mQ"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ln4-xa-lSU"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1400"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="ELW-GY-SJF" id="kws-wt-eMh"/>
+                        <outlet property="locationLabel" destination="TI8-Ls-A9Y" id="7UT-Zr-mJp"/>
+                        <outlet property="summaryLabel" destination="Aoq-3S-VG0" id="FVw-PQ-bNL"/>
+                        <outlet property="timeLabel" destination="WUL-MZ-74J" id="nj5-oG-zkG"/>
+                        <outlet property="titleLabel" destination="Fmh-ei-ib4" id="EIs-cM-TVG"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cIO-tS-38z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2415" y="1263"/>
         </scene>
     </scenes>
     <resources>

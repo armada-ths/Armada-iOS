@@ -24,6 +24,9 @@
 		26A15D401B07C5F500793724 /* CatalogueFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A15D3F1B07C5F500793724 /* CatalogueFilterTableViewController.swift */; };
 		26C9607C1B06A434005A13E7 /* CatalogueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9607B1B06A434005A13E7 /* CatalogueTableViewController.swift */; };
 		26C9607E1B06A61A005A13E7 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9607D1B06A61A005A13E7 /* CompanyTableViewCell.swift */; };
+		DA0006921B153856006BFDBD /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = DA0006911B153856006BFDBD /* news.json */; };
+		DA0006941B153B6A006BFDBD /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */; };
+		DA0006961B153C54006BFDBD /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0006951B153C54006BFDBD /* NewsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		26A15D3F1B07C5F500793724 /* CatalogueFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogueFilterTableViewController.swift; sourceTree = "<group>"; };
 		26C9607B1B06A434005A13E7 /* CatalogueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogueTableViewController.swift; sourceTree = "<group>"; };
 		26C9607D1B06A61A005A13E7 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
+		DA0006911B153856006BFDBD /* news.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = news.json; path = ../../../Downloads/news.json; sourceTree = "<group>"; };
+		DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		DA0006951B153C54006BFDBD /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,8 @@
 				265B7DEA1B053A080074450B /* Images.xcassets */,
 				265B7DEC1B053A080074450B /* LaunchScreen.xib */,
 				265B7DDF1B053A080074450B /* Supporting Files */,
+				DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */,
+				DA0006951B153C54006BFDBD /* NewsTableViewController.swift */,
 			);
 			path = Teststs;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 		265B7DF61B053A080074450B /* TeststsTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA0006911B153856006BFDBD /* news.json */,
 				265B7DF91B053A080074450B /* TeststsTests.swift */,
 				2602AD5D1B1511A000B0DB32 /* events.json */,
 				2602AD591B14F4D500B0DB32 /* companies.json */,
@@ -234,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0006921B153856006BFDBD /* news.json in Resources */,
 				2602AD5E1B1511A000B0DB32 /* events.json in Resources */,
 				2602AD5A1B14F4D500B0DB32 /* companies.json in Resources */,
 			);
@@ -250,6 +260,8 @@
 				2602AD601B15133D00B0DB32 /* ArmadaEventTableViewController.swift in Sources */,
 				2602AD551B14F2A100B0DB32 /* DataDude.swift in Sources */,
 				2671038C1B06B81D00C79164 /* CompanyViewController.swift in Sources */,
+				DA0006961B153C54006BFDBD /* NewsTableViewController.swift in Sources */,
+				DA0006941B153B6A006BFDBD /* NewsTableViewCell.swift in Sources */,
 				2602AD621B15135400B0DB32 /* ArmadaEventTableViewCell.swift in Sources */,
 				2602AD641B152E6C00B0DB32 /* ArmadaEventDetailTableViewController.swift in Sources */,
 				26C9607E1B06A61A005A13E7 /* CompanyTableViewCell.swift in Sources */,
