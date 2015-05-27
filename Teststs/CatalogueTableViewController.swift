@@ -78,6 +78,7 @@ class CatalogueTableViewController: UITableViewController {
             updateFavorites()
             searchBar.placeholder = "Search Favorites"
             updateFavoritesUI()
+            navigationItem.rightBarButtonItem?.title = nil
         } else {
             updateCompaniesByLetters(companies)
         }
@@ -149,8 +150,6 @@ class CatalogueTableViewController: UITableViewController {
         // Return NO if you do not want the specified item to be editable.
         return isFavorites
     }
-
-
 
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
