@@ -42,8 +42,6 @@ public struct Company: Equatable {
                 self.locationDescription = locationDescription
                 self.locationUrl = locationUrl
                 
-                
-                
                 self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
                 self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
                 self.companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})

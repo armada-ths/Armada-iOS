@@ -11,7 +11,6 @@ import UIKit
 
 var selectedCompany: Company?
 
-var companies = DataDude().companiesFromServer()!
 
 class CatalogueTableViewController: UITableViewController {
     
@@ -20,7 +19,12 @@ class CatalogueTableViewController: UITableViewController {
     var allCompanies = DataDude().companiesFromServer()!
 
     
-    var companies = DataDude().companiesFromServer()!
+    var companies:[Company]
+
+    required init!(coder aDecoder: NSCoder!) {
+        companies = allCompanies
+        super.init(coder: aDecoder)
+    }
 
 //    companies = DataDude().companiesFromServer()!
     
