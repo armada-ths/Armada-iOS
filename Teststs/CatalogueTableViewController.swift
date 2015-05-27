@@ -207,7 +207,7 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
         }
-        (segue.destinationViewController as! CompaniesPageViewController).companies = companies
+        (segue.destinationViewController as? CompaniesPageViewController)?.companies = companies
     }
 
     
