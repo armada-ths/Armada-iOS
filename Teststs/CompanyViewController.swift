@@ -19,8 +19,10 @@ class CompanyViewController: UITableViewController {
     
     @IBOutlet weak var favoritesButton: UIButton!
     
+    @IBOutlet weak var positionLabel: UILabel!
     
     var company: Company? = nil
+    var companies = [Company]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +43,14 @@ class CompanyViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        parentViewController!.title = company?.name
+        positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
         logoImageView.image = company?.image
         descriptionLabel.text = company?.description
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        parentViewController!.title = company!.name
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
