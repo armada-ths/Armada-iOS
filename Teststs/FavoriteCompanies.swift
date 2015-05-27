@@ -36,6 +36,12 @@ class _FavoriteCompanies: SequenceType, CollectionType {
         Ω[key] = companyNames
     }
     
+    func remove(companyName: String) {
+        var companyNames = (Ω[key] as? [String]) ?? []
+        companyNames = companyNames.filter({ $0 != companyName })
+        Ω[key] = companyNames
+    }
+    
     var count: Int {
         return ((Ω[key] as? [String]) ?? []).count
     }

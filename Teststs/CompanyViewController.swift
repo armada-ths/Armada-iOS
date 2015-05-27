@@ -25,6 +25,7 @@ class CompanyViewController: UITableViewController {
         title = selectedCompany!.name
         logoImageView.image = selectedCompany!.image
         descriptionLabel.text = selectedCompany!.description
+        favoritesButton.resignFirstResponder()
         // Do any additional setup after loading the view.
     }
 
@@ -33,15 +34,22 @@ class CompanyViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addToFavorites(sender: AnyObject) {
-        FavoriteCompanies.append(selectedCompany!.name)
-        tableView.reloadData()
+    @IBAction func addToFavorites(sender: UIButton) {
+        sender.resignFirstResponder()
+//        FavoriteCompanies.append(selectedCompany!.name)
+//        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 2 {
+            FavoriteCompanies.append(selectedCompany!.name)
+            tableView.reloadData()
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

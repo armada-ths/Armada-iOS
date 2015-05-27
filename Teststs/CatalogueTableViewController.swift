@@ -90,7 +90,7 @@ class CatalogueTableViewController: UITableViewController {
             label.textAlignment = .Center
             label.sizeToFit()
             label.textColor = UIColor.lightGrayColor()
-            label.font = UIFont.systemFontOfSize(25)
+            label.font = UIFont.systemFontOfSize(30)
             searchBar.hidden = true
             tableView.backgroundView = label
             tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -152,9 +152,8 @@ class CatalogueTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            FavoriteCompanies.removeAtIndex(indexPath.row)
+            FavoriteCompanies.remove(companiesByLetters[indexPath.section].companies[indexPath.row].name)
             let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
-            
             tableView.beginUpdates()
             updateFavorites()
             if deleteSection {
@@ -165,7 +164,6 @@ class CatalogueTableViewController: UITableViewController {
             } else {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
-
             tableView.endUpdates()
 
         } else if editingStyle == .Insert {
