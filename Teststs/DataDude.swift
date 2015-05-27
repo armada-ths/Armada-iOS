@@ -42,11 +42,11 @@ public struct Company: Equatable {
                 self.locationDescription = locationDescription
                 self.locationUrl = locationUrl
                 
-                self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
-                self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
-                self.companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
-                self.continents = Array.removeNils(continents.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
-                self.workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last!})
+                self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                self.companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                self.continents = Array.removeNils(continents.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                self.workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
                 
         }else {
             return nil
@@ -108,9 +108,15 @@ public class DataDude {
     }
     
     public func companiesFromJson(json: AnyObject) -> [Company] {
-        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
+        let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
             } ?? [])
+        println(allCompanyValues(companies))
+        return companies
+    }
+    
+    public func allCompanyValues(companies:[Company]) -> Set<String>{
+        return Set(companies.map({$0.companyValues}).reduce([String](), combine: +))
     }
     
     public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {
