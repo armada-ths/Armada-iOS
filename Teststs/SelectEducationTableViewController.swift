@@ -62,9 +62,13 @@ class SelectEducationTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectEducationTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        let program = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]
+        let numJobs = DataDude.companies.filter({ contains($0.programmes, program) }).count
         cell.textLabel?.text = educations[indexPath.section][indexPath.row]
-        cell.textLabel?.font = UIFont.systemFontOfSize(10)
-        cell.accessoryType = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row] == CompanyFilter.education ? .Checkmark : .None
+        cell.detailTextLabel?.text = "\(numJobs)"
+//        cell.textLabel?.font = UIFont.systemFontOfSize(11)
+//        cell.detailTextLabel?.font = UIFont.systemFontOfSize(11)
+        cell.accessoryType = program == CompanyFilter.education ? .None : .None
         return cell
     }
     
@@ -72,7 +76,7 @@ class SelectEducationTableViewController: UITableViewController {
         for i in 0..<tableView.numberOfSections() {
             for j in 0..<tableView.numberOfRowsInSection(i) {
                 let program = headers[i] + " in " + educations[i][j]
-                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))?.accessoryType = program == CompanyFilter.education ? .Checkmark : .None
+                tableView.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))?.accessoryType = program == CompanyFilter.education ? .None : .None
             }
         }
     }

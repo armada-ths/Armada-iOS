@@ -1116,7 +1116,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnR-vx-p8v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="3417"/>
+            <point key="canvasLocation" x="-221" y="3395"/>
         </scene>
         <!--Armada Event Detail Table View Controller-->
         <scene sceneID="sJj-Xg-Tuh">
@@ -1524,7 +1524,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dna-sh-dXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1194" y="2707"/>
+            <point key="canvasLocation" x="1261" y="2696"/>
         </scene>
         <!--Filter-->
         <scene sceneID="c3A-W0-uzU">
@@ -1709,9 +1709,9 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6x-Zj-QrF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704" y="3165"/>
+            <point key="canvasLocation" x="674" y="2997"/>
         </scene>
-        <!--Add education-->
+        <!--Select Education-->
         <scene sceneID="7qS-Q7-qvH">
             <objects>
                 <tableViewController storyboardIdentifier="SelectEducationTableViewCell" id="xYg-Bf-1on" customClass="SelectEducationTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
@@ -1720,10 +1720,24 @@ The Thesis Pro</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="SelectEducationTableViewCell" id="2f5-wf-bMz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="SelectEducationTableViewCell" textLabel="k8p-md-1ow" detailTextLabel="U9E-i1-1jt" style="IBUITableViewCellStyleValue1" id="2f5-wf-bMz">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2f5-wf-bMz" id="iqS-n8-hrk">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k8p-md-1ow">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U9E-i1-1jt">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="hvx-yP-SEd" kind="unwind" unwindAction="unwind:" id="vZ6-NE-WhR"/>
@@ -1757,15 +1771,21 @@ The Thesis Pro</string>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="S8L-il-OTA">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="wwP-Lh-Gqr" detailTextLabel="Gtu-03-YNP" style="IBUITableViewCellStyleValue2" id="S8L-il-OTA">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S8L-il-OTA" id="Lgr-Pp-DaT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mediateknik" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nB-Ba-fHz">
-                                            <rect key="frame" x="13" y="11" width="94" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wwP-Lh-Gqr">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gtu-03-YNP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -1778,7 +1798,7 @@ The Thesis Pro</string>
                             <outlet property="delegate" destination="xYg-Bf-1on" id="wEN-y7-ZPa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Add education" id="x9O-hD-Qko">
+                    <navigationItem key="navigationItem" title="Select Education" id="x9O-hD-Qko">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DEc-SB-3aF">
                             <connections>
                                 <segue destination="hvx-yP-SEd" kind="unwind" unwindAction="unwind:" id="QAx-6x-A8F"/>
@@ -1789,7 +1809,7 @@ The Thesis Pro</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Rb-66-SDC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hvx-yP-SEd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1375" y="3291"/>
+            <point key="canvasLocation" x="807" y="3741"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="F3S-Sl-gkg">

@@ -76,9 +76,10 @@ class CatalogueFilterTableViewController: UITableViewController {
         case 3:
             cell = cellWithIdentifier("JobCell")
             let job = jobs[indexPath.row]
-            cell.textLabel?.text = job
+            let numJobs = DataDude.companies.filter({ contains($0.jobTypes, job) }).count
+            cell.textLabel?.text = job + " (\(numJobs))"
             cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
-            cell.textLabel?.font = UIFont.systemFontOfSize(10)
+            cell.textLabel?.font = UIFont.systemFontOfSize(12)
         default: cell = cellWithIdentifier("InternationalCell")
         }
         return cell
