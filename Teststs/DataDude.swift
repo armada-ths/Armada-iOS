@@ -131,7 +131,6 @@ public class _DataDude {
         let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
             } ?? [])
-        println(allCompanyValues(companies))
         self.companies = companies.sorted { $0.name < $1.name }
         return companies.sorted { $0.name < $1.name }
     }
@@ -143,6 +142,10 @@ public class _DataDude {
     
     var jobs: [String] {
         return Array(Set(companies.map({$0.jobTypes}).reduce([String](), combine: +)))
+    }
+    
+    var programmes: [String] {
+        return Array(Set(companies.map({$0.programmes}).reduce([String](), combine: +))).sorted(<).filter({$0.rangeOfString(" in ") != nil})
     }
     
     public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {

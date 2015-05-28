@@ -66,6 +66,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         case 1:
             cell = cellWithIdentifier("SelectEducationCell")
             cell.textLabel?.text = CompanyFilter.education ?? "Not Selected"
+            cell.textLabel?.font = UIFont.systemFontOfSize(10)
         case 2:
             if indexPath.row == tableView.numberOfRowsInSection(indexPath.section) - 1 {
                 return cellWithIdentifier("AddAttributeCell")
