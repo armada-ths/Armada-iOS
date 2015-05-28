@@ -8,12 +8,24 @@
 
 import UIKit
 
-
+var allCompanyNames = [
+    "ABB",
+    "Accenture",
+    "Academic Work",
+    "Adecco",
+    "Capgemini",
+    "Ericsson",
+    "Volvo",
+    "Combitech",
+    "Cybercom",
+    "Arla Foods",
+    "Astra Zeneca",
+    ].sorted { $0 < $1 }
 
 public struct Company: Equatable {
     
     init!(json: [String: AnyObject]){
-
+        
         if let name = json["name"] as? String,
             let description = json["description"] as? String,
             let website = json["website_url"] as? String,
@@ -33,7 +45,7 @@ public struct Company: Equatable {
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
             let companyValues = json["company_values"] as? [[String:AnyObject]]{
-        
+                
                 self.name = name
                 self.description = description
                 self.website = website
@@ -82,7 +94,10 @@ public struct Company: Equatable {
     
     public var image: UIImage {
         let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-        return UIImage(named: "\(name2)-logo.png") ?? UIImage(named: "abb-logo.png")!
+        
+        let safeImageName = allCompanyNames[Int(rand()) % allCompanyNames.count].stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
+        
+        return UIImage(named: "\(name2)-logo.png") ??  UIImage(named: "\(safeImageName)-logo.png")!
     }
     public var map: UIImage {
         if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
@@ -138,7 +153,7 @@ public class _DataDude {
     public func allCompanyValues(companies:[Company]) -> Set<String>{
         return Set(companies.map({$0.jobTypes}).reduce([String](), combine: +))
     }
-
+    
     
     var jobs: [String] {
         return Array(Set(companies.map({$0.jobTypes}).reduce([String](), combine: +)))
@@ -197,7 +212,7 @@ public class _DataDude {
         }
         return nil
     }
-
+    
 }
 
 extension Array {

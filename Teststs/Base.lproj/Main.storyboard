@@ -635,7 +635,7 @@
                                                 <constraint firstAttribute="width" constant="75" id="eDM-bT-VZQ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeT-U9-jZB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeT-U9-jZB">
                                             <rect key="frame" x="103" y="-1" width="456" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="GhF-mD-bjo"/>
@@ -1424,7 +1424,7 @@ The Thesis Pro</string>
             </objects>
             <point key="canvasLocation" x="-356" y="672"/>
         </scene>
-        <!--Catalogue Filter Table View Controller-->
+        <!--Filter-->
         <scene sceneID="wrj-ox-j3d">
             <objects>
                 <tableViewController id="Af4-R1-YXy" customClass="CatalogueFilterTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
@@ -1526,7 +1526,7 @@ The Thesis Pro</string>
                             <outlet property="delegate" destination="Af4-R1-YXy" id="1vk-Pz-6GX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="3no-lE-4ga"/>
+                    <navigationItem key="navigationItem" title="Filter" id="3no-lE-4ga"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dna-sh-dXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1979,7 +1979,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                                 <constraint firstAttribute="width" constant="75" id="tGb-dq-XgO"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cI-hy-UDP">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cI-hy-UDP">
                                             <rect key="frame" x="103" y="-4" width="489" height="65"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="bbu-nD-oPG"/>
@@ -2102,7 +2102,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="LVJ-xs-Xvd"/>
         <segue reference="mQk-Qq-R15"/>
-        <segue reference="yCJ-Bz-RNS"/>
     </inferredMetricsTieBreakers>
 </document>
