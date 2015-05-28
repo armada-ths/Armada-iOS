@@ -71,12 +71,8 @@ class SelectEducationTableViewController: UITableViewController {
     func updateAccessories() {
         for i in 0..<tableView.numberOfSections() {
             for j in 0..<tableView.numberOfRowsInSection(i) {
-                println("\(i),\(j)")
                 let program = headers[i] + " in " + educations[i][j]
                 tableView.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))?.accessoryType = program == CompanyFilter.education ? .Checkmark : .None
-                if program == CompanyFilter.education {
-                    println(program)
-                }
             }
         }
     }

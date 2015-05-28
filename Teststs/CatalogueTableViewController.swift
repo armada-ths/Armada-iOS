@@ -68,11 +68,16 @@ class CatalogueTableViewController: UITableViewController {
         } else {
             var filteredCompanies = companies
             if let education = CompanyFilter.education {
+                println("Filtering with education: \(education)")
                 filteredCompanies = companies.filter { contains($0.programmes, education) }
             }
+            
+            println("Companies for education \(filteredCompanies.count)")
             if let job = CompanyFilter.jobs.first {
-                filteredCompanies = companies.filter { contains($0.jobTypes, job) }
+                println("Filtering with job: \(job)")
+                filteredCompanies = filteredCompanies.filter { contains($0.jobTypes, job) }
             }
+            println("Companies \(filteredCompanies.count)")
             updateCompaniesByLetters(filteredCompanies)
         }
         tableView.reloadData()
