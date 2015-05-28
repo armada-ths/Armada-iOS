@@ -13,7 +13,7 @@ var selectedArmadaEvent: ArmadaEvent? = nil
 class ArmadaEventTableViewController: UITableViewController {
 
     
-    let armadaEvents = DataDude().eventsFromServer()!
+    let armadaEvents = DataDude.eventsFromServer()!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,7 +16,7 @@ class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var allCompanies = DataDude().companiesFromServer()!
+    var allCompanies = DataDude.companiesFromServer()!
 
     
     var companies:[Company]

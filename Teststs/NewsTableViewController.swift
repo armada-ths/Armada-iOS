@@ -12,7 +12,7 @@ var selectedNewsItem:News!
 
 class NewsTableViewController: UITableViewController {
 
-    let news = DataDude().newsFromServer()!
+    let news = DataDude.newsFromServer()!
     
     override func viewDidLoad() {
         super.viewDidLoad()

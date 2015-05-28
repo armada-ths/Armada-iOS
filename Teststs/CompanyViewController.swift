@@ -20,6 +20,12 @@ class CompanyViewController: UITableViewController {
     @IBOutlet weak var favoritesButton: UIButton!
     
     @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var locationImageView: UIImageView!
+    @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var jobLabel: UILabel!
+    @IBOutlet weak var fieldsLabel: UILabel!
+    @IBOutlet weak var educationLabel: UILabel!
+    @IBOutlet weak var websiteLabel: UILabel!
     
     var company: Company? = nil
     var companies = [Company]()
@@ -47,7 +53,13 @@ class CompanyViewController: UITableViewController {
         positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
         logoImageView.image = company?.image
         descriptionLabel.text = company?.description
+        locationImageView.image = company?.map
         
+        aboutLabel.text = company?.description
+        jobLabel.text = ", ".join(company?.jobTypes ?? [])
+        fieldsLabel.text = ", ".join(company?.workFields ?? [])
+        educationLabel.text = ", ".join(company?.programmes ?? [])
+        websiteLabel.text = company?.website
         
     }
     

@@ -112,7 +112,12 @@ public struct News {
     public let publishedDate: NSDate
 }
 
-public class DataDude {
+
+let DataDude = _DataDude()
+public class _DataDude {
+    
+    private init() {}
+    
     func dateFromString(string: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
@@ -120,16 +125,24 @@ public class DataDude {
         return dateFormatter.dateFromString(":".join(b[0..<b.count-1]) + b[b.count-1])!
     }
     
+    
+    var companies = [Company]()
     public func companiesFromJson(json: AnyObject) -> [Company] {
         let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
             } ?? [])
         println(allCompanyValues(companies))
+        self.companies = companies.sorted { $0.name < $1.name }
         return companies.sorted { $0.name < $1.name }
     }
     
     public func allCompanyValues(companies:[Company]) -> Set<String>{
         return Set(companies.map({$0.jobTypes}).reduce([String](), combine: +))
+    }
+
+    
+    var jobs: [String] {
+        return Array(Set(companies.map({$0.jobTypes}).reduce([String](), combine: +)))
     }
     
     public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {

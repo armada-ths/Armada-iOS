@@ -43,7 +43,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         return 5
     }
     
-    let jobs = ["Summer Job", "Master Thesis", "Internship"]
+    let jobs = DataDude.jobs
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return [1,1,0,jobs.count,1][section]
