@@ -40,9 +40,6 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        
-        //        tableView.tableFooterView = UIView(frame: CGRectZero)
-        
     }
     
     func updateFavorites() {
@@ -62,6 +59,7 @@ class CatalogueTableViewController: UITableViewController {
             searchBar.placeholder = "Search Favorites"
             updateFavoritesUI()
             navigationItem.rightBarButtonItem?.title = nil
+            navigationItem.title = "Catalogue (\(companies.count)/\(allCompanies.count))"
         } else {
             var filteredCompanies = companies
             if CompanyFilter.applyFilter {
@@ -76,9 +74,11 @@ class CatalogueTableViewController: UITableViewController {
                     filteredCompanies = filteredCompanies.filter { contains($0.jobTypes, job) }
                 }
             }
-            println("Companies \(filteredCompanies.count)")
+            navigationItem.title = "Catalogue (\(filteredCompanies.count)/\(allCompanies.count))"
+
             updateCompaniesByLetters(filteredCompanies)
         }
+        
         tableView.reloadData()
     }
     

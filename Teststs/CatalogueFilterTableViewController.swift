@@ -77,7 +77,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         case 1:
             cell = cellWithIdentifier("SelectEducationCell")
             cell.textLabel?.text = CompanyFilter.education ?? "Not Selected"
-            cell.textLabel?.font = UIFont.systemFontOfSize(10)
+            cell.textLabel?.font = UIFont.systemFontOfSize(12)
         case 2:
             if indexPath.row == tableView.numberOfRowsInSection(indexPath.section) - 1 {
                 return cellWithIdentifier("AddAttributeCell")
@@ -88,6 +88,7 @@ class CatalogueFilterTableViewController: UITableViewController {
             cell = cellWithIdentifier("JobCell")
             let job = jobs[indexPath.row]
             let numJobs = DataDude.companies.filter({ contains($0.jobTypes, job) }).count
+            
             cell.textLabel?.text = job + " (\(numJobs))"
             cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
             cell.textLabel?.font = UIFont.systemFontOfSize(12)
