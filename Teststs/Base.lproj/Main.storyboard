@@ -1433,13 +1433,16 @@ The Thesis Pro</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ApplyFilterCell" id="ChC-jJ-pcU">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ApplyFilterCell" id="ChC-jJ-pcU" customClass="ApplyFilterTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ChC-jJ-pcU" id="o8d-xd-tOC">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6L-ju-uMf">
                                             <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchChanged:" destination="ChC-jJ-pcU" eventType="valueChanged" id="kEW-Zq-Vle"/>
+                                            </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply Filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oX-XS-Ksn">
                                             <rect key="frame" x="8" y="11" width="87" height="21"/>
@@ -1455,6 +1458,9 @@ The Thesis Pro</string>
                                         <constraint firstAttribute="centerY" secondItem="Q6L-ju-uMf" secondAttribute="centerY" id="vKV-Kr-VIx"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="applyFilterSwitch" destination="Q6L-ju-uMf" id="LPk-oC-0MQ"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SelectEducationCell" id="aGW-gL-1Vz">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1524,7 +1530,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dna-sh-dXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1261" y="2696"/>
+            <point key="canvasLocation" x="1328" y="2710"/>
         </scene>
         <!--Filter-->
         <scene sceneID="c3A-W0-uzU">
@@ -1544,6 +1550,9 @@ The Thesis Pro</string>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3S7-gW-556">
                                                     <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="clickedApplyFilter:" destination="dZL-8M-auH" eventType="valueChanged" id="beG-Ne-TZ7"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply Filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lb-Y0-DwK">
                                                     <rect key="frame" x="8" y="11" width="87" height="21"/>
@@ -1943,7 +1952,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIO-tS-38z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1469" y="2413"/>
+            <point key="canvasLocation" x="2023" y="2393"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="rZw-5g-N49">
