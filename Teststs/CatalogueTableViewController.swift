@@ -55,6 +55,10 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        
+
+        
+        
         if isFavorites {
             tableView.sectionHeaderHeight = 0
             updateFavorites()
@@ -62,7 +66,14 @@ class CatalogueTableViewController: UITableViewController {
             updateFavoritesUI()
             navigationItem.rightBarButtonItem?.title = nil
         } else {
-            updateCompaniesByLetters(companies)
+            var filteredCompanies = companies
+            if let education = CompanyFilter.education {
+                filteredCompanies = companies.filter { contains($0.programmes, education) }
+            }
+            if let job = CompanyFilter.jobs.first {
+                filteredCompanies = companies.filter { contains($0.jobTypes, job) }
+            }
+            updateCompaniesByLetters(filteredCompanies)
         }
         tableView.reloadData()
     }

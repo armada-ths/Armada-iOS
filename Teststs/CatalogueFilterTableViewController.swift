@@ -78,6 +78,7 @@ class CatalogueFilterTableViewController: UITableViewController {
             let job = jobs[indexPath.row]
             cell.textLabel?.text = job
             cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
+            cell.textLabel?.font = UIFont.systemFontOfSize(10)
         default: cell = cellWithIdentifier("InternationalCell")
         }
         return cell

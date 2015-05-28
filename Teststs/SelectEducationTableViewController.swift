@@ -64,14 +64,19 @@ class SelectEducationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectEducationTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = educations[indexPath.section][indexPath.row]
         cell.textLabel?.font = UIFont.systemFontOfSize(10)
+        cell.accessoryType = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row] == CompanyFilter.education ? .Checkmark : .None
         return cell
     }
     
     func updateAccessories() {
         for i in 0..<tableView.numberOfSections() {
             for j in 0..<tableView.numberOfRowsInSection(i) {
+                println("\(i),\(j)")
                 let program = headers[i] + " in " + educations[i][j]
                 tableView.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))?.accessoryType = program == CompanyFilter.education ? .Checkmark : .None
+                if program == CompanyFilter.education {
+                    println(program)
+                }
             }
         }
     }
