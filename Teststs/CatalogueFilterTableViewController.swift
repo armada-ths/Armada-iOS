@@ -72,11 +72,19 @@ class CatalogueFilterTableViewController: UITableViewController {
         let cell: UITableViewCell
         switch indexPath.section {
         case 0:
-            cell = cellWithIdentifier("ApplyFilterCell")
+            cell = cellWithIdentifier("ApplyFilterTableViewCell")
             (cell as! ApplyFilterTableViewCell).applyFilterSwitch.on = CompanyFilter.applyFilter
         case 1:
-            cell = cellWithIdentifier("SelectEducationCell")
-            cell.textLabel?.text = CompanyFilter.education ?? "Not Selected"
+            let specialCell = cellWithIdentifier("SelectedEducationTableViewCell") as! SelectedEducationTableViewCell
+            if let zebra = CompanyFilter.education?.componentsSeparatedByString(" in ") {
+                specialCell.fieldLabel.text = zebra[1]
+                specialCell.degreeLabel.text = zebra[0]
+            } else {
+                specialCell.fieldLabel.text = "Not Selected"
+                specialCell.degreeLabel.text = ""
+            }
+            cell = specialCell
+            
             cell.textLabel?.font = UIFont.systemFontOfSize(12)
         case 2:
             if indexPath.row == tableView.numberOfRowsInSection(indexPath.section) - 1 {
@@ -91,7 +99,7 @@ class CatalogueFilterTableViewController: UITableViewController {
             
             cell.textLabel?.text = job + " (\(numJobs))"
             cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
-            cell.textLabel?.font = UIFont.systemFontOfSize(12)
+            cell.textLabel?.font = UIFont.systemFontOfSize(14)
         default: cell = cellWithIdentifier("InternationalCell")
         }
         return cell
@@ -107,5 +115,12 @@ class CatalogueFilterTableViewController: UITableViewController {
             }
             tableView.reloadData()
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 4 {
+            return 54
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
 }

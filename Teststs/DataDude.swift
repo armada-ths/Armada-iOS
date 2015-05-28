@@ -96,7 +96,7 @@ public struct Company: Equatable {
         let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
         
         let safeImageName = allCompanyNames[Int(rand()) % allCompanyNames.count].stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-        
+
         return UIImage(named: "\(name2)-logo.png") ??  UIImage(named: "\(safeImageName)-logo.png")!
     }
     public var map: UIImage {
