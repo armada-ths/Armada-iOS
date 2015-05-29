@@ -76,7 +76,6 @@ public struct Company: Equatable, Hashable {
         return name.hashValue
     }
     
-    
     public let name: String
     public let description: String
     public let website: String
@@ -150,7 +149,16 @@ public struct News {
 let DataDude = _DataDude()
 public class _DataDude {
     
-    private init() {}
+    let companies: [Company]
+    private init() {
+        if let companies = _DataDude.companiesFromFile() {
+            println("Retrieved companies from file!")
+            self.companies = companies
+        } else {
+            println("Retrieved companies from server!")
+            self.companies = _DataDude.companiesFromServer()!
+        }
+    }
     
     func dateFromString(string: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
@@ -160,15 +168,10 @@ public class _DataDude {
     }
     
     
-    var companies = [Company]()
-    public func companiesFromJson(json: AnyObject) -> [Company] {
+    class public func companiesFromJson(json: AnyObject) -> [Company] {
         let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
             } ?? [])
-        self.companies = companies.sorted { $0.name < $1.name }
-        
-        
-        println("Companies not knowing what they want: \(self.companies.filter({ $0.programmes.isEmpty }).count)")
         return companies.sorted { $0.name < $1.name }
     }
     
@@ -208,10 +211,24 @@ public class _DataDude {
             } ?? [])
     }
     
-    func companiesFromServer() -> [Company]? {
+    static let companiesFileName = "companies.json"
+    
+    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as! [String])[0]
+    
+    class func companiesFromFile() -> [Company]? {
+        if let data = NSData(contentsOfFile: dir.stringByAppendingPathComponent(companiesFileName)),
+            let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+            return companiesFromJson(json)
+        }
+        return nil
+    }
+    
+    class func companiesFromServer() -> [Company]? {
         let companyUrl = "http://armada.nu/api/companies.json?include=relations"
         if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
             let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
+                var err: NSError?
+                data.writeToFile(dir.stringByAppendingPathComponent(companiesFileName), atomically: true)
                 return companiesFromJson(json)
         }
         return nil

@@ -371,7 +371,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V34-xV-TIy">
-                                            <rect key="frame" x="77" y="10" width="96" height="21"/>
+                                            <rect key="frame" x="77" y="10" width="482" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -397,6 +397,7 @@
                                         <constraint firstItem="V34-xV-TIy" firstAttribute="leading" secondItem="MsK-1s-UT1" secondAttribute="trailing" constant="19" id="Lyj-lO-SIu"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Zcy-xs-zEb" secondAttribute="trailing" id="YoM-OL-1zm"/>
                                         <constraint firstItem="Zcy-xs-zEb" firstAttribute="centerY" secondItem="s8h-ZN-XOG" secondAttribute="centerY" id="aUz-cy-byQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="V34-xV-TIy" secondAttribute="trailing" id="dHT-J6-jTB"/>
                                         <constraint firstItem="s8h-ZN-XOG" firstAttribute="top" secondItem="MsK-1s-UT1" secondAttribute="bottom" id="ecL-dK-noo"/>
                                         <constraint firstItem="Zcy-xs-zEb" firstAttribute="leading" secondItem="V34-xV-TIy" secondAttribute="leading" id="pUX-jT-JYX"/>
                                         <constraint firstItem="s8h-ZN-XOG" firstAttribute="leading" secondItem="GUy-qR-HFQ" secondAttribute="leadingMargin" id="x3x-5B-uhG"/>
@@ -635,7 +636,7 @@
                                                 <constraint firstAttribute="width" constant="75" id="eDM-bT-VZQ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WoG-3D-GS6">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WoG-3D-GS6">
                                             <rect key="frame" x="8" y="18" width="75" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1126,6 +1127,7 @@
                         <outlet property="fieldsLabel" destination="EXG-km-x4c" id="Bpi-eF-qSW"/>
                         <outlet property="jobLabel" destination="1uG-GG-8e5" id="Htu-Pr-I8s"/>
                         <outlet property="locationImageView" destination="kR8-q3-Mkc" id="kiT-dx-vu8"/>
+                        <outlet property="locationLabel" destination="TUQ-e7-XNJ" id="H46-qZ-4Yu"/>
                         <outlet property="logoImageView" destination="kqe-ht-8on" id="hH4-Vi-8nZ"/>
                         <outlet property="positionLabel" destination="Uql-KC-wW6" id="bsD-2m-bDr"/>
                         <outlet property="websiteLabel" destination="aPg-YA-Ujc" id="eqf-An-o9x"/>
@@ -1152,7 +1154,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLE-R2-gfS">
-                                                    <rect key="frame" x="181" y="8" width="239" height="55"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="55"/>
                                                     <string key="text">The Thesis Proposal
 The Thesis Pro</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="27"/>
@@ -1162,10 +1164,17 @@ The Thesis Pro</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="PLE-R2-gfS" secondAttribute="bottom" id="5M6-w5-jWm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PLE-R2-gfS" secondAttribute="trailing" id="7Md-Jh-p9d"/>
                                                 <constraint firstItem="PLE-R2-gfS" firstAttribute="top" secondItem="nuF-iR-LxT" secondAttribute="topMargin" id="Ks4-di-v0F"/>
+                                                <constraint firstItem="PLE-R2-gfS" firstAttribute="leading" secondItem="nuF-iR-LxT" secondAttribute="leadingMargin" id="Oha-EK-4rn"/>
                                                 <constraint firstAttribute="centerX" secondItem="PLE-R2-gfS" secondAttribute="centerX" id="Vts-C6-Krq"/>
                                                 <constraint firstItem="PLE-R2-gfS" firstAttribute="top" secondItem="nuF-iR-LxT" secondAttribute="topMargin" id="wA2-Ld-Uen"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Vts-C6-Krq"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="n94-m4-fO2">
@@ -1326,7 +1335,7 @@ The Thesis Pro</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="77" y="10" width="96" height="21"/>
+                                            <rect key="frame" x="77" y="10" width="482" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1354,6 +1363,7 @@ The Thesis Pro</string>
                                         <constraint firstItem="deV-iO-NaU" firstAttribute="trailing" secondItem="h5x-cC-29F" secondAttribute="trailing" id="avP-Xd-Gee"/>
                                         <constraint firstItem="J46-C6-eLz" firstAttribute="centerY" secondItem="h5x-cC-29F" secondAttribute="centerY" id="gi3-HJ-Nss"/>
                                         <constraint firstItem="h5x-cC-29F" firstAttribute="top" secondItem="deV-iO-NaU" secondAttribute="bottom" id="jtL-eN-tYl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="f1j-mq-Ob6" secondAttribute="trailing" id="ldq-1r-TF0"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="J46-C6-eLz" secondAttribute="trailing" id="rNP-bN-yyY"/>
                                     </constraints>
                                     <variation key="default">
@@ -2005,7 +2015,7 @@ The Thesis Pro</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The application is now closed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmh-ei-ib4">
-                                                    <rect key="frame" x="126" y="8" width="349" height="55"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="55"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2014,9 +2024,16 @@ The Thesis Pro</string>
                                             <constraints>
                                                 <constraint firstAttribute="centerX" secondItem="Fmh-ei-ib4" secondAttribute="centerX" id="1bW-so-GRi"/>
                                                 <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="7HR-pH-7mT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Fmh-ei-ib4" secondAttribute="trailing" id="Wep-s8-osQ"/>
                                                 <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="hTQ-sa-vx1"/>
+                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="leading" secondItem="EmC-3l-SMx" secondAttribute="leadingMargin" id="scS-oO-xZl"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Fmh-ei-ib4" secondAttribute="bottom" id="wYX-cF-hGx"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="1bW-so-GRi"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="VgO-eX-VRv">
@@ -2255,7 +2272,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vvO-dd-zrJ"/>
+        <segue reference="yCJ-Bz-RNS"/>
         <segue reference="mQk-Qq-R15"/>
     </inferredMetricsTieBreakers>
 </document>

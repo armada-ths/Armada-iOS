@@ -16,11 +16,14 @@ class CompanyViewController: UITableViewController {
     @IBOutlet weak var educationLabel: UILabel!
     @IBOutlet weak var websiteLabel: UILabel!
     
+    @IBOutlet weak var locationLabel: UILabel!
     var company: Company? = nil
     var companies = [Company]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 120
         tableView.tableFooterView = UIView(frame: CGRectZero)
         positionLabel.alpha = 0
     }
@@ -47,6 +50,7 @@ class CompanyViewController: UITableViewController {
         
         descriptionLabel.text = company?.description
         
+        locationLabel.text = company?.locationDescription
         company?.asyncLocationImage { image in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.locationImageView.image = image
@@ -59,11 +63,12 @@ class CompanyViewController: UITableViewController {
         educationLabel.text = ", ".join(company?.programmes ?? [])
         websiteLabel.text = company?.website
         
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        parentViewController!.title = company!.name
+        parentViewController!.title = company!.shortName
         UIView.animateWithDuration(0.1) {
             self.positionLabel.alpha = 1
         }

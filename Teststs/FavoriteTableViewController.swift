@@ -2,15 +2,8 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
     
-    
-    var allCompanies = DataDude.companiesFromServer()!
-    
-    var companies:[Company]
-    
-    required init!(coder aDecoder: NSCoder!) {
-        companies = allCompanies
-        super.init(coder: aDecoder)
-    }
+    var companies = DataDude.companies
+
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
@@ -23,8 +16,9 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     func updateFavorites() {
-        companies = allCompanies.filter { contains(FavoriteCompanies, $0.name) }
+        companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
         updateCompaniesByLetters(companies)
+        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,10 +26,14 @@ class FavoritesTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        println("Favorites: \(FavoriteCompanies.count)")
+        for company in FavoriteCompanies {
+            println(company)
+        }
+        
         updateFavorites()
         updateFavoritesUI()
-        navigationItem.rightBarButtonItem?.title = nil
-        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
+        
         tableView.reloadData()
     }
     
@@ -114,8 +112,8 @@ class FavoritesTableViewController: UITableViewController {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
             tableView.endUpdates()
-            
         }
+        
     }
     
     

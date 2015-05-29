@@ -6,14 +6,8 @@ class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var allCompanies = DataDude.companiesFromServer()!
     
-    var companies:[Company]
-    
-    required init!(coder aDecoder: NSCoder!) {
-        companies = allCompanies
-        super.init(coder: aDecoder)
-    }
+    var companies = DataDude.companies
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
@@ -24,11 +18,6 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-    }
-    
-    func updateFavorites() {
-        companies = allCompanies.filter { contains(FavoriteCompanies, $0.name) }
-        updateCompaniesByLetters(companies)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -87,25 +76,6 @@ class CatalogueTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter
-    }
-    
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            FavoriteCompanies.remove(companiesByLetters[indexPath.section].companies[indexPath.row].name)
-            let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
-            tableView.beginUpdates()
-            updateFavorites()
-            if deleteSection {
-                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
-            } else {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            }
-            tableView.endUpdates()
-            
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
     }
     
     
