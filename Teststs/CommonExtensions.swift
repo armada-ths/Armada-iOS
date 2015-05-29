@@ -19,3 +19,13 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }
+
+extension Int {
+    var thousandsSeparatedString: String {
+        let x = self
+        let thousands = x / 1000
+        let nonThousands = x % 1000
+        let paddedNonThousands = Array(0..<(3-count("\(nonThousands)"))).reduce("") {a,b in a + "0"}
+        return thousands > 0 ? "\(thousands) \(paddedNonThousands)\(nonThousands)" : "\(nonThousands)"
+    }
+}

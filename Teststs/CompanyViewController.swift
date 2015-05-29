@@ -5,7 +5,6 @@ class CompanyViewController: UITableViewController {
 
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
@@ -13,17 +12,19 @@ class CompanyViewController: UITableViewController {
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var jobLabel: UILabel!
     @IBOutlet weak var fieldsLabel: UILabel!
-    @IBOutlet weak var educationLabel: UILabel!
     @IBOutlet weak var websiteLabel: UILabel!
     
+    @IBOutlet weak var countriesLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     var company: Company? = nil
     var companies = [Company]()
     
+    @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 120
+        self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
         positionLabel.alpha = 0
     }
@@ -48,22 +49,18 @@ class CompanyViewController: UITableViewController {
             companyNameLabel.text = company!.shortName
         }
         
-        descriptionLabel.text = company?.description
-        
         locationLabel.text = company?.locationDescription
         company?.asyncLocationImage { image in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.locationImageView.image = image
             }
         }
-
         aboutLabel.text = company?.description
         jobLabel.text = ", ".join(company?.jobTypes ?? [])
         fieldsLabel.text = ", ".join(company?.workFields ?? [])
-        educationLabel.text = ", ".join(company?.programmes ?? [])
         websiteLabel.text = company?.website
-        
-        
+        countriesLabel.text = "\(company!.countries)"
+        employeeLabel.text = "\(company!.employeesWorld.thousandsSeparatedString)"
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -97,7 +94,9 @@ class CompanyViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return navigationController!.navigationBar.frame.maxY
+            if let navigationController = navigationController {
+                return navigationController.navigationBar.frame.maxY
+            }
         }
         if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
             return 0

@@ -39,6 +39,7 @@ public struct Company: Equatable, Hashable {
             let contactName = json["contact_name"] as? String,
             let contactEmail = json["contact_email"] as? String,
             let contactPhone = json["contact_number"] as? String,
+            let countries = json["countries_presence_count"] as? Int,
             
             let workFields = json["work_fields"] as? [[String:AnyObject]],
             let programmes = json["programmes"] as? [[String:AnyObject]],
@@ -59,6 +60,7 @@ public struct Company: Equatable, Hashable {
                 self.contactName = contactName
                 self.contactEmail = contactEmail
                 self.contactPhone = contactPhone
+                self.countries = countries
                 
                 self.programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
                 self.jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
@@ -94,6 +96,7 @@ public struct Company: Equatable, Hashable {
     public let contactName: String
     public let contactEmail: String
     public let contactPhone: String
+    public let countries: Int
     
     public var image: UIImage? {
         return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch))// ?? UIImage(named: "cheeseburger")
