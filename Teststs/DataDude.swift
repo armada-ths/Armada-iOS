@@ -92,12 +92,8 @@ public struct Company: Equatable {
     public let contactEmail: String
     public let contactPhone: String
     
-    public var image: UIImage {
-        let name2 = name.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-        
-        let safeImageName = allCompanyNames[Int(rand()) % allCompanyNames.count].stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil).lowercaseString
-
-        return UIImage(named: "\(name2)-logo.png") ??  UIImage(named: "\(safeImageName)-logo.png")!
+    public var image: UIImage? {
+        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch))
     }
     public var map: UIImage {
         if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
@@ -106,6 +102,25 @@ public struct Company: Equatable {
                 return image
         }
         return UIImage()
+    }
+    
+    // Pretty code for shortening uninteresting stuff like AB in names
+    var shortName: String {
+        return (reduce([" sverige", " ab", " sweden"], name) {
+        $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
+        }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
+    }
+    
+    func asyncLocationImage(callback: UIImage? -> Void) {
+        NSOperationQueue().addOperationWithBlock {
+            if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
+                let data = NSData(contentsOfURL: url),
+                let image = UIImage(data: data){
+                    callback(image)
+            } else {
+                callback(nil)
+            }
+        }
     }
 }
 

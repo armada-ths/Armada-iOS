@@ -19,6 +19,7 @@ class CompanyViewController: UITableViewController {
     
     @IBOutlet weak var favoritesButton: UIButton!
     
+    @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var aboutLabel: UILabel!
@@ -52,9 +53,26 @@ class CompanyViewController: UITableViewController {
         tableView.reloadData()
         positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
         logoImageView.image = company?.image
-        descriptionLabel.text = company?.description
-        locationImageView.image = company?.map
         
+        
+        if let image = company!.image {
+            logoImageView.image = image
+            companyNameLabel.hidden = true
+        } else {
+            logoImageView.image = nil
+            companyNameLabel.hidden = false
+            companyNameLabel.text = company!.shortName
+        }
+
+        
+        descriptionLabel.text = company?.description
+        
+        company?.asyncLocationImage { image in
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.locationImageView.image = image
+            }
+        }
+
         aboutLabel.text = company?.description
         jobLabel.text = ", ".join(company?.jobTypes ?? [])
         fieldsLabel.text = ", ".join(company?.workFields ?? [])

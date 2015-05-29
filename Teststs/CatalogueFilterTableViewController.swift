@@ -26,7 +26,6 @@ class _CompanyFilter {
 class CatalogueFilterTableViewController: UITableViewController {
     
     @IBOutlet weak var educationTableViewCell: UITableViewCell!
-    @IBOutlet weak var applyFilterSwitch: UISwitch!
     
     override func viewDidLoad() {
 
@@ -76,7 +75,7 @@ class CatalogueFilterTableViewController: UITableViewController {
             (cell as! ApplyFilterTableViewCell).applyFilterSwitch.on = CompanyFilter.applyFilter
         case 1:
             let specialCell = cellWithIdentifier("SelectedEducationTableViewCell") as! SelectedEducationTableViewCell
-            if let zebra = CompanyFilter.education?.componentsSeparatedByString(" in ") {
+            if let zebra = CompanyFilter.education?.componentsSeparatedByString(" in ") where zebra.count == 2 {
                 specialCell.fieldLabel.text = zebra[1]
                 specialCell.degreeLabel.text = zebra[0]
             } else {
