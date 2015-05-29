@@ -89,6 +89,10 @@ class CompanyViewController: UITableViewController {
             tableView.beginUpdates()
             tableView.endUpdates()
         }
+        
+        if indexPath.row == 9 {
+            UIApplication.sharedApplication().openURL(NSURL(string: "http://" + company!.website)!)
+        }
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -101,4 +105,19 @@ class CompanyViewController: UITableViewController {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
+    
+    
+    @IBAction func facebookButtonClicked(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: company!.facebook)!)
+    }
+    
+    @IBAction func linkedinButtonClicked(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: company!.linkedin)!)
+    }
+    
+    @IBAction func twitterButtonClicked(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: company!.twitter)!)
+    }
+    
+    
 }
