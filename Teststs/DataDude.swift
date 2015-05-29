@@ -96,7 +96,7 @@ public struct Company: Equatable, Hashable {
     public let contactPhone: String
     
     public var image: UIImage? {
-        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)) ?? UIImage(named: "cheeseburger")
+        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch))// ?? UIImage(named: "cheeseburger")
     }
     public var map: UIImage {
         if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
@@ -153,10 +153,10 @@ public class _DataDude {
     private init() {
         if let companies = _DataDude.companiesFromFile() {
             println("Retrieved companies from file!")
-            self.companies = companies
+            self.companies = companies.filter({ $0.image != nil })
         } else {
             println("Retrieved companies from server!")
-            self.companies = _DataDude.companiesFromServer()!
+            self.companies = _DataDude.companiesFromServer()!.filter({ $0.image != nil })
         }
     }
     
