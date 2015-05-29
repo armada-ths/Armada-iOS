@@ -1,10 +1,7 @@
 import UIKit
 
-var selectedCompany: Company?
-
-class CatalogueTableViewController: UITableViewController {
+class FavoritesTableViewController: UITableViewController {
     
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var allCompanies = DataDude.companiesFromServer()!
     
@@ -23,7 +20,6 @@ class CatalogueTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
     }
     
     func updateFavorites() {
@@ -36,11 +32,27 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-
-            companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
-            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
-            updateCompaniesByLetters(companies)
+        updateFavorites()
+        updateFavoritesUI()
+        navigationItem.rightBarButtonItem?.title = nil
+        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
         tableView.reloadData()
+    }
+    
+    func updateFavoritesUI() {
+        if FavoriteCompanies.isEmpty {
+            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+            label.text = "No Favorites"
+            label.textAlignment = .Center
+            label.sizeToFit()
+            label.textColor = UIColor.lightGrayColor()
+            label.font = UIFont.systemFontOfSize(30)
+            tableView.backgroundView = label
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,17 +88,14 @@ class CatalogueTableViewController: UITableViewController {
             cell.companyNameLabel.hidden = false
             cell.companyNameLabel.text = company.shortName
         }
-
+        
         return cell
     }
     
-    
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        return companiesByLetters.map { $0.letter }
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return companiesByLetters[section].letter
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return NO if you do not want the specified item to be editable.
+        return true
     }
     
     // Override to support editing the table view.
@@ -98,6 +107,9 @@ class CatalogueTableViewController: UITableViewController {
             updateFavorites()
             if deleteSection {
                 tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
+                if FavoriteCompanies.isEmpty {
+                    updateFavoritesUI()
+                }
             } else {
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
@@ -115,38 +127,4 @@ class CatalogueTableViewController: UITableViewController {
         }
         (segue.destinationViewController as? CompaniesPageViewController)?.companies = companies
     }
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        view.endEditing(true)
-    }
-}
-
-
-extension CatalogueTableViewController: UISearchBarDelegate {
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            updateCompaniesByLetters(companies)
-        } else {
-            updateCompaniesByLetters(companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)}))
-        }
-        tableView.reloadData()
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-    }
-
 }

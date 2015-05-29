@@ -2107,16 +2107,11 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <!--Favorites-->
         <scene sceneID="rZw-5g-N49">
             <objects>
-                <tableViewController restorationIdentifier="Favorites" title="Favorites" id="XsM-DD-yqw" customClass="CatalogueTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="Favorites" title="Favorites" id="XsM-DD-yqw" customClass="FavoritesTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="22" sectionFooterHeight="22" id="JxM-rR-8ye">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Search Catalogue" id="EbI-z7-tCi">
-                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="ZwJ-br-dB3" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -2176,6 +2171,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                     <outlet property="companyNameLabel" destination="dZ8-TB-5Ke" id="UUk-0e-bW9"/>
                                     <outlet property="descriptionLabel" destination="gw5-dT-fvo" id="UyV-g6-Xmq"/>
                                     <outlet property="logoImageView" destination="oHP-ik-fvG" id="obu-fD-I5K"/>
+                                    <segue destination="bEp-MO-iUH" kind="show" id="vvO-dd-zrJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2184,16 +2180,11 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                             <outlet property="delegate" destination="XsM-DD-yqw" id="P44-CQ-0AL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Favorites" id="TQr-1t-mQp">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="1Bh-LD-0Bn"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchBar" destination="EbI-z7-tCi" id="a0r-3z-YCz"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Favorites" id="TQr-1t-mQp"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F05-Dj-OFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1870" y="2268"/>
+            <point key="canvasLocation" x="-1916" y="2559"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pdo-Zj-v9l">
@@ -2264,6 +2255,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vvO-dd-zrJ"/>
         <segue reference="mQk-Qq-R15"/>
     </inferredMetricsTieBreakers>
 </document>
