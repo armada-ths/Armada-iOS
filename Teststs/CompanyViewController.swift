@@ -116,8 +116,12 @@ class CompanyViewController: UITableViewController {
     }
     
     @IBAction func twitterButtonClicked(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: company!.twitter)!)
+        if let twitterAppUrl = NSURL(string: "twitter:///user?screen_name=" + company!.twitter.componentsSeparatedByString("/").last!) where  UIApplication.sharedApplication().canOpenURL(twitterAppUrl) {
+            UIApplication.sharedApplication().openURL(twitterAppUrl)
+        } else {
+            if let url = NSURL(string: company!.twitter) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
     }
-    
-    
 }
