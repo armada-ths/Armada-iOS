@@ -56,7 +56,8 @@ class CatalogueTableViewController: UITableViewController {
         
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
-        
+        cell.descriptionLabel.text = company.name
+
         cell.workFieldLabel.text = company.workFields.first
         if let image = company.image {
             cell.logoImageView.image = image

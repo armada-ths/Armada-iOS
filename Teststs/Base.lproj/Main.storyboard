@@ -686,7 +686,7 @@
                                     <segue destination="bEp-MO-iUH" kind="show" id="yCJ-Bz-RNS"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="PNb-9m-1yl" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PNb-9m-1yl" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PNb-9m-1yl" id="G1F-zg-tSJ">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -763,6 +763,87 @@
                                     <segue destination="bEp-MO-iUH" kind="show" id="0g8-hy-b5S"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="Anm-UY-6fv" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Anm-UY-6fv" id="6dK-Mj-GQR">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-fA-3bL">
+                                            <rect key="frame" x="8" y="6" width="80" height="51"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="wPX-OW-rMc"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
+                                            <rect key="frame" x="108" y="13" width="484" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="pMB-MH-EG6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="pMB-MH-EG6"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-UM-rOW">
+                                            <rect key="frame" x="8" y="14" width="80" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
+                                            <rect key="frame" x="108" y="33" width="86" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" constant="2" id="2fe-Rz-U8S"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="EQe-lC-rVo" secondAttribute="bottom" constant="2" id="Hk0-12-e5e"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="centerX" secondItem="F0R-UM-rOW" secondAttribute="centerX" id="IN5-ME-MGu"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="centerY" secondItem="0mL-fA-3bL" secondAttribute="centerY" id="NKD-D1-YRI"/>
+                                        <constraint firstAttribute="bottom" secondItem="0mL-fA-3bL" secondAttribute="bottom" constant="6" id="Onz-Ta-KHU"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="leading" secondItem="6dK-Mj-GQR" secondAttribute="leadingMargin" constant="2" id="Ph8-k3-WyP"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="leading" secondItem="6dK-Mj-GQR" secondAttribute="leadingMargin" id="Q1C-Qq-EuS"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="centerY" secondItem="F0R-UM-rOW" secondAttribute="centerY" id="QS8-ao-buE"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" id="TxU-bA-oE4"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="6dK-Mj-GQR" secondAttribute="leadingMargin" constant="3" id="VPC-U4-og8"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="EQe-lC-rVo" secondAttribute="top" constant="-7" id="bwU-pa-3Ch"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="width" secondItem="F0R-UM-rOW" secondAttribute="width" id="cja-mz-JUw"/>
+                                        <constraint firstItem="2EN-Vx-IFa" firstAttribute="top" secondItem="EQe-lC-rVo" secondAttribute="bottom" constant="2" id="eoR-ko-nTf"/>
+                                        <constraint firstItem="2EN-Vx-IFa" firstAttribute="leading" secondItem="EQe-lC-rVo" secondAttribute="leading" id="fXd-CB-dfy"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="EQe-lC-rVo" secondAttribute="trailing" id="gxu-Jl-aes"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="bottom" secondItem="6dK-Mj-GQR" secondAttribute="bottomMargin" id="jrX-sU-aeH"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="2EN-Vx-IFa" secondAttribute="bottom" constant="3" id="uP7-15-9EA"/>
+                                        <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="top" constant="6" id="xQc-RL-KNH"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="20" id="zsz-N0-e0h"/>
+                                        <constraint firstItem="2EN-Vx-IFa" firstAttribute="top" secondItem="0mL-fA-3bL" secondAttribute="top" constant="5" id="zxH-Y9-NhP"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Ph8-k3-WyP"/>
+                                            <exclude reference="jrX-sU-aeH"/>
+                                            <exclude reference="TxU-bA-oE4"/>
+                                            <exclude reference="VPC-U4-og8"/>
+                                            <exclude reference="2fe-Rz-U8S"/>
+                                            <exclude reference="Hk0-12-e5e"/>
+                                            <exclude reference="NKD-D1-YRI"/>
+                                            <exclude reference="uP7-15-9EA"/>
+                                            <exclude reference="zxH-Y9-NhP"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="companyNameLabel" destination="F0R-UM-rOW" id="TqF-kD-FQq"/>
+                                    <outlet property="descriptionLabel" destination="EQe-lC-rVo" id="05k-OG-qb0"/>
+                                    <outlet property="logoImageView" destination="0mL-fA-3bL" id="CvE-dE-ROC"/>
+                                    <outlet property="workFieldLabel" destination="2EN-Vx-IFa" id="rpm-iV-m1l"/>
+                                    <segue destination="bEp-MO-iUH" kind="show" id="JLB-o6-3oq"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="7lO-dz-MqH" id="Z1i-qx-guq"/>
@@ -782,7 +863,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-953" y="2834"/>
+            <point key="canvasLocation" x="-943" y="2516"/>
         </scene>
         <!--Companies Page View Controller-->
         <scene sceneID="B3R-gX-zbo">
@@ -2278,14 +2359,14 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="52q-gC-2bj" id="ptm-Ql-hda">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="VFo-74-sbP">
-                                            <rect key="frame" x="8" y="6" width="80" height="47"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="VFo-74-sbP">
+                                            <rect key="frame" x="8" y="6" width="80" height="51"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="FA7-2Z-eJX"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-tH-1ZC">
-                                            <rect key="frame" x="108" y="24" width="484" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-tH-1ZC">
+                                            <rect key="frame" x="108" y="13" width="484" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="2YF-tv-dwM"/>
                                             </constraints>
@@ -2297,14 +2378,14 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-Uv-lwD">
-                                            <rect key="frame" x="8" y="21" width="80" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-Uv-lwD">
+                                            <rect key="frame" x="8" y="14" width="80" height="36"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-cA-ylL">
-                                            <rect key="frame" x="108" y="11" width="86" height="12"/>
+                                            <rect key="frame" x="108" y="33" width="86" height="12"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -2318,11 +2399,13 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                         <constraint firstItem="sJn-tH-1ZC" firstAttribute="leading" secondItem="VFo-74-sbP" secondAttribute="trailing" constant="20" id="Hbw-8w-Wt3"/>
                                         <constraint firstItem="VFo-74-sbP" firstAttribute="leading" secondItem="ptm-Ql-hda" secondAttribute="leadingMargin" constant="2" id="Hql-ea-HR3"/>
                                         <constraint firstItem="sJn-tH-1ZC" firstAttribute="top" secondItem="ptm-Ql-hda" secondAttribute="topMargin" constant="2" id="IDA-pL-IQf"/>
+                                        <constraint firstItem="x2r-cA-ylL" firstAttribute="top" secondItem="sJn-tH-1ZC" secondAttribute="bottom" constant="2" id="SIf-CS-HT6"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="sJn-tH-1ZC" secondAttribute="bottom" constant="2" id="SPj-zE-lcz"/>
                                         <constraint firstItem="VFo-74-sbP" firstAttribute="bottom" secondItem="ptm-Ql-hda" secondAttribute="bottomMargin" id="U9W-Hx-NcQ"/>
                                         <constraint firstItem="x2r-cA-ylL" firstAttribute="top" secondItem="VFo-74-sbP" secondAttribute="top" constant="5" id="USO-zg-yg1"/>
                                         <constraint firstItem="sJn-tH-1ZC" firstAttribute="centerY" secondItem="VFo-74-sbP" secondAttribute="centerY" id="VIG-9A-uiy"/>
                                         <constraint firstItem="VFo-74-sbP" firstAttribute="top" secondItem="ptm-Ql-hda" secondAttribute="top" constant="6" id="dp7-U4-Zln"/>
+                                        <constraint firstItem="VFo-74-sbP" firstAttribute="top" secondItem="sJn-tH-1ZC" secondAttribute="top" constant="-7" id="fBL-xJ-Lyg"/>
                                         <constraint firstItem="VFo-74-sbP" firstAttribute="centerX" secondItem="9Nz-Uv-lwD" secondAttribute="centerX" id="g4R-jt-2mY"/>
                                         <constraint firstItem="VFo-74-sbP" firstAttribute="width" secondItem="9Nz-Uv-lwD" secondAttribute="width" id="gtU-yc-3Bi"/>
                                         <constraint firstAttribute="bottom" secondItem="VFo-74-sbP" secondAttribute="bottom" constant="6" id="ke9-NC-NZr"/>
@@ -2339,6 +2422,8 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                                             <exclude reference="IDA-pL-IQf"/>
                                             <exclude reference="SPj-zE-lcz"/>
                                             <exclude reference="VIG-9A-uiy"/>
+                                            <exclude reference="lz7-WG-e8z"/>
+                                            <exclude reference="USO-zg-yg1"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

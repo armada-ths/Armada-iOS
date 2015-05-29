@@ -96,7 +96,7 @@ public struct Company: Equatable, Hashable {
     public let contactPhone: String
     
     public var image: UIImage? {
-        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch))
+        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)) ?? UIImage(named: "cheeseburger")
     }
     public var map: UIImage {
         if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
