@@ -78,6 +78,8 @@ class FavoritesTableViewController: UITableViewController {
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         
+        
+        cell.workFieldLabel.text = company.workFields.first
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true
