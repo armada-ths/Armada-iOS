@@ -351,7 +351,7 @@
         <scene sceneID="JbC-Ya-qil">
             <objects>
                 <tableViewController id="zhR-XN-fDJ" customClass="ArmadaEventTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="gXA-NQ-Mqh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" id="gXA-NQ-Mqh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -1309,58 +1309,69 @@ The Thesis Pro</string>
         <scene sceneID="hc7-q5-FZd">
             <objects>
                 <tableViewController id="8lS-ZJ-p1Y" customClass="NewsTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="10" sectionFooterHeight="10" id="c5t-dH-SSK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="60" sectionHeaderHeight="10" sectionFooterHeight="10" id="c5t-dH-SSK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="NewsTableViewCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsTableViewCell" rowHeight="76" id="sXN-fA-RTe" customClass="NewsTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsTableViewCell" rowHeight="76" id="5VX-70-Ek9" customClass="NewsTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sXN-fA-RTe" id="Thh-OK-Tof">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5VX-70-Ek9" id="u2Q-xS-hKF">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aol-MN-gLq">
-                                            <rect key="frame" x="77" y="24" width="515" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYs-Uy-rkg">
-                                            <rect key="frame" x="36" y="8" width="23" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5x-cC-29F">
+                                            <rect key="frame" x="8" y="32" width="50" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="Nx4-mx-rSf"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W94-vR-4VC">
-                                            <rect key="frame" x="8" y="32" width="50" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="uiO-ds-wJB"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
+                                            <rect key="frame" x="77" y="10" width="96" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Regarded as one of the most successful events last year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J46-C6-eLz">
+                                            <rect key="frame" x="77" y="36" width="482" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deV-iO-NaU">
+                                            <rect key="frame" x="35" y="8" width="23" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="trailing" secondItem="W94-vR-4VC" secondAttribute="trailing" id="N2r-Hu-JXf"/>
-                                        <constraint firstAttribute="centerY" secondItem="aol-MN-gLq" secondAttribute="centerY" id="Ua6-Wf-Azg"/>
-                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="centerY" secondItem="aol-MN-gLq" secondAttribute="centerY" id="Y5p-iV-8q8"/>
-                                        <constraint firstItem="W94-vR-4VC" firstAttribute="top" secondItem="kYs-Uy-rkg" secondAttribute="bottom" id="eTd-27-f3O"/>
-                                        <constraint firstItem="aol-MN-gLq" firstAttribute="leading" secondItem="kYs-Uy-rkg" secondAttribute="trailing" constant="19" id="wVm-gs-N05"/>
-                                        <constraint firstItem="W94-vR-4VC" firstAttribute="leading" secondItem="Thh-OK-Tof" secondAttribute="leadingMargin" id="yEv-6y-Wzu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="aol-MN-gLq" secondAttribute="trailing" id="znQ-Ne-DUJ"/>
-                                        <constraint firstItem="kYs-Uy-rkg" firstAttribute="top" secondItem="Thh-OK-Tof" secondAttribute="topMargin" id="zyA-6H-MeC"/>
+                                        <constraint firstItem="h5x-cC-29F" firstAttribute="leading" secondItem="u2Q-xS-hKF" secondAttribute="leadingMargin" id="ACx-ns-MaH"/>
+                                        <constraint firstItem="deV-iO-NaU" firstAttribute="centerY" secondItem="f1j-mq-Ob6" secondAttribute="centerY" id="GZ8-lZ-oTS"/>
+                                        <constraint firstItem="J46-C6-eLz" firstAttribute="leading" secondItem="f1j-mq-Ob6" secondAttribute="leading" id="J00-Kq-2pp"/>
+                                        <constraint firstItem="f1j-mq-Ob6" firstAttribute="leading" secondItem="deV-iO-NaU" secondAttribute="trailing" constant="19" id="N6c-fe-h9t"/>
+                                        <constraint firstItem="h5x-cC-29F" firstAttribute="bottom" secondItem="u2Q-xS-hKF" secondAttribute="bottomMargin" id="NHu-1a-aR6"/>
+                                        <constraint firstItem="deV-iO-NaU" firstAttribute="top" secondItem="u2Q-xS-hKF" secondAttribute="topMargin" id="TbY-IM-Bv0"/>
+                                        <constraint firstItem="J46-C6-eLz" firstAttribute="top" secondItem="f1j-mq-Ob6" secondAttribute="bottom" constant="1" id="Z1d-w3-qAn"/>
+                                        <constraint firstItem="deV-iO-NaU" firstAttribute="trailing" secondItem="h5x-cC-29F" secondAttribute="trailing" id="avP-Xd-Gee"/>
+                                        <constraint firstItem="J46-C6-eLz" firstAttribute="centerY" secondItem="h5x-cC-29F" secondAttribute="centerY" id="gi3-HJ-Nss"/>
+                                        <constraint firstItem="h5x-cC-29F" firstAttribute="top" secondItem="deV-iO-NaU" secondAttribute="bottom" id="jtL-eN-tYl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="J46-C6-eLz" secondAttribute="trailing" id="rNP-bN-yyY"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="Y5p-iV-8q8"/>
+                                            <exclude reference="NHu-1a-aR6"/>
+                                            <exclude reference="Z1d-w3-qAn"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="dayLabel" destination="kYs-Uy-rkg" id="FDq-lv-BEy"/>
-                                    <outlet property="monthLabel" destination="W94-vR-4VC" id="UFP-v7-WEt"/>
-                                    <outlet property="titleLabel" destination="aol-MN-gLq" id="mM9-p4-f4h"/>
-                                    <segue destination="ff2-Lg-wGH" kind="show" id="Tuy-ij-CFF"/>
+                                    <outlet property="dayLabel" destination="deV-iO-NaU" id="trx-c7-Wge"/>
+                                    <outlet property="descriptionLabel" destination="J46-C6-eLz" id="KDl-xf-Kbb"/>
+                                    <outlet property="monthLabel" destination="h5x-cC-29F" id="ew6-er-6cq"/>
+                                    <outlet property="titleLabel" destination="f1j-mq-Ob6" id="KcF-sj-RbM"/>
+                                    <segue destination="ff2-Lg-wGH" kind="show" id="YOo-Vg-e22"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2094,7 +2105,7 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cIO-tS-38z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="2393"/>
+            <point key="canvasLocation" x="51" y="2035"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="rZw-5g-N49">

@@ -52,7 +52,7 @@ class NewsTableViewController: UITableViewController {
         
         let newsItem = news[indexPath.row]
         cell.titleLabel.text = newsItem.title
-
+        cell.descriptionLabel.text = newsItem.content
         
         let monthFormatter = NSDateFormatter()
         monthFormatter.dateFormat = "MMM"

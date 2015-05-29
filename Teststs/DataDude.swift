@@ -162,6 +162,9 @@ public class _DataDude {
             return Company(json: json)
             } ?? [])
         self.companies = companies.sorted { $0.name < $1.name }
+        
+        
+        println("Companies not knowing what they want: \(self.companies.filter({ $0.programmes.isEmpty }).count)")
         return companies.sorted { $0.name < $1.name }
     }
     
