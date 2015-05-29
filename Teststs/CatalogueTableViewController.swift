@@ -1,23 +1,12 @@
-//
-//  CatalogueTableViewController.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 16/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
-
 var selectedCompany: Company?
-
 
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
     var allCompanies = DataDude.companiesFromServer()!
-    
     
     var companies:[Company]
     
@@ -26,15 +15,10 @@ class CatalogueTableViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
     
-    //    companies = DataDude().companiesFromServer()!
-    
-    //    var letters = [String]()
-    //    var companiesByLetters = [(letter: "", companies: [Company(name: "", description: "")])]
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
-    
     func updateCompaniesByLetters(companies: [Company]) {
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted {$0 < $1}.map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
     }
     
     override func viewDidLoad() {
@@ -52,33 +36,18 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-        
         if isFavorites {
             tableView.sectionHeaderHeight = 0
             updateFavorites()
             searchBar.placeholder = "Search Favorites"
             updateFavoritesUI()
             navigationItem.rightBarButtonItem?.title = nil
-            navigationItem.title = "Catalogue (\(companies.count)/\(allCompanies.count))"
+            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
         } else {
-            var filteredCompanies = companies
-            if CompanyFilter.applyFilter {
-                if let education = CompanyFilter.education {
-                    println("Filtering with education: \(education)")
-                    filteredCompanies = companies.filter { contains($0.programmes, education) }
-                }
-                
-                println("Companies for education \(filteredCompanies.count)")
-                if let job = CompanyFilter.jobs.first {
-                    println("Filtering with job: \(job)")
-                    filteredCompanies = filteredCompanies.filter { contains($0.jobTypes, job) }
-                }
-            }
-            navigationItem.title = "Catalogue (\(filteredCompanies.count)/\(allCompanies.count))"
-
-            updateCompaniesByLetters(filteredCompanies)
+            companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
+            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
+            updateCompaniesByLetters(companies)
         }
-        
         tableView.reloadData()
     }
     
@@ -180,22 +149,6 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-    
-    }
-    */
-    
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return NO if you do not want the item to be re-orderable.
-    return true
-    }
-    */
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
@@ -236,5 +189,5 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
     }
-    
+
 }

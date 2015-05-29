@@ -22,7 +22,7 @@ var allCompanyNames = [
     "Astra Zeneca",
     ].sorted { $0 < $1 }
 
-public struct Company: Equatable {
+public struct Company: Equatable, Hashable {
     
     init!(json: [String: AnyObject]){
         
@@ -70,6 +70,10 @@ public struct Company: Equatable {
             return nil
         }
         
+    }
+    
+    public var hashValue: Int {
+        return name.hashValue
     }
     
     

@@ -13,7 +13,7 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     var companies = [Company]()
 
     func viewControllerForCompany(company: Company) -> UIViewController {
-        var vc = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
         vc.company = company
         vc.companies = companies
         return vc

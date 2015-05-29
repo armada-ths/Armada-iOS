@@ -1,24 +1,12 @@
-//
-//  CompanyViewController.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 16/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 
 class CompanyViewController: UITableViewController {
 
     @IBOutlet weak var cell1: UITableViewCell!
-    
-    
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
     @IBOutlet weak var favoritesButton: UIButton!
-    
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
@@ -42,18 +30,11 @@ class CompanyViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addToFavorites(sender: UIButton) {
-        sender.resignFirstResponder()
-//        FavoriteCompanies.append(selectedCompany!.name)
-//        tableView.reloadData()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
         logoImageView.image = company?.image
-        
         
         if let image = company!.image {
             logoImageView.image = image
@@ -63,7 +44,6 @@ class CompanyViewController: UITableViewController {
             companyNameLabel.hidden = false
             companyNameLabel.text = company!.shortName
         }
-
         
         descriptionLabel.text = company?.description
         
@@ -84,12 +64,9 @@ class CompanyViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         parentViewController!.title = company!.name
-//        positionLabel.hidden = false
-        
         UIView.animateWithDuration(0.1) {
             self.positionLabel.alpha = 1
         }
-        
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -119,15 +96,4 @@ class CompanyViewController: UITableViewController {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -21,6 +21,17 @@ class _CompanyFilter {
         get { return Ω["CompanyFilterApplyFilter"] as? Bool ?? false }
         set { Ω["CompanyFilterApplyFilter"] = newValue }
     }
+    
+    var filteredCompanies: [Company] {
+        var filteredCompanies = DataDude.companies
+        if let education = CompanyFilter.education {
+            filteredCompanies = filteredCompanies.filter { contains($0.programmes, education) }
+        }
+        filteredCompanies = Array(Set(reduce(CompanyFilter.jobs, [Company]()) { (companies, job) in
+            return companies + filteredCompanies.filter { contains($0.jobTypes, job) }
+            }))
+        return filteredCompanies.sorted { $0.name < $1.name }
+    }
 }
 
 class CatalogueFilterTableViewController: UITableViewController {
@@ -28,9 +39,9 @@ class CatalogueFilterTableViewController: UITableViewController {
     @IBOutlet weak var educationTableViewCell: UITableViewCell!
     
     override func viewDidLoad() {
-
         super.viewDidLoad()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,6 +56,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        updateTitle()
         tableView.reloadData()
     }
     
@@ -60,11 +72,15 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["", "I am studying...", "", "...And looking for...",
-        "...At companies that are..."][section]
+            "...At companies that are..."][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
         return tableView.dequeueReusableCellWithIdentifier(identifier) as! UITableViewCell
+    }
+    
+    func updateTitle() {
+        navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) companies"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -105,6 +121,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if indexPath.section == 3 {
             let job = jobs[indexPath.row]
             if contains(CompanyFilter.jobs, job) {
@@ -114,6 +131,7 @@ class CatalogueFilterTableViewController: UITableViewController {
             }
             tableView.reloadData()
         }
+        updateTitle()
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
