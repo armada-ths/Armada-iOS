@@ -52,8 +52,11 @@ class CompanyViewController: UITableViewController {
         locationLabel.text = company?.locationDescription
         company?.asyncLocationImage { image in
             NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.locationImageView.image = image
+                UIView.transitionWithView(self.locationImageView, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                                    self.locationImageView.image = image
+                }, completion: nil)
             }
+            
         }
         aboutLabel.text = company?.description
         jobLabel.text = ", ".join(company?.jobTypes ?? [])
