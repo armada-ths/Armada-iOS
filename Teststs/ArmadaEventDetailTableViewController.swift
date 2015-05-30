@@ -18,7 +18,7 @@ class ArmadaEventDetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         titleLabel.text = selectedArmadaEvent!.title
         locationLabel.text = selectedArmadaEvent!.location
         

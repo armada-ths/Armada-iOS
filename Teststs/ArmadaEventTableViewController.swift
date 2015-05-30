@@ -17,7 +17,9 @@ class ArmadaEventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 220
+        tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -48,7 +50,7 @@ class ArmadaEventTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
 
         let armadaEvent = armadaEvents[indexPath.row]
-        cell.titleLabel.text = armadaEvent.title
+        cell.titleLabel.text = armadaEvent.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         cell.summaryLabel.text = armadaEvent.summary
         
         let monthFormatter = NSDateFormatter()
@@ -59,7 +61,9 @@ class ArmadaEventTableViewController: UITableViewController {
         
 
         cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
-        cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate)
+        cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString
+        
+        cell.locationLabel.text = armadaEvent.location
         
         return cell
     }
