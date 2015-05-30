@@ -795,7 +795,7 @@
             <objects>
                 <tableViewController id="LCT-gq-bgE" customClass="ArmadaEventTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="T4x-Uo-TgO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -913,228 +913,6 @@
                                     <segue destination="0xZ-Yp-KEd" kind="show" id="pK3-Qa-ACo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="299" id="0Sw-dH-1Qy">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Sw-dH-1Qy" id="S2i-7Z-hGs">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNq-fq-MzF">
-                                            <rect key="frame" x="45" y="18" width="13" height="27"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOV" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdH-H2-oSN">
-                                            <rect key="frame" x="8" y="45" width="50" height="27"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="NAJ-GV-xet"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Valhallvägen, 10:00-17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ard-44-Rsn">
-                                            <rect key="frame" x="73" y="50" width="155" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-Ym-Gnj">
-                                            <rect key="frame" x="73" y="76" width="519" height="126"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="454" id="m0v-QC-FYD"/>
-                                            </constraints>
-                                            <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
-</string>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="m0v-QC-FYD"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u70-fN-yLl">
-                                            <rect key="frame" x="73" y="18" width="215" height="30"/>
-                                            <string key="text">The Thesis Proposal
-The Thesis Pro</string>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="u70-fN-yLl" firstAttribute="leading" secondItem="tNq-fq-MzF" secondAttribute="trailing" constant="15" id="5m9-No-9eR"/>
-                                        <constraint firstItem="tNq-fq-MzF" firstAttribute="top" secondItem="S2i-7Z-hGs" secondAttribute="topMargin" constant="10" id="7iM-P0-8bA"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="fOi-Ym-Gnj" secondAttribute="trailing" id="B5Y-wn-GcF"/>
-                                        <constraint firstItem="jdH-H2-oSN" firstAttribute="top" secondItem="tNq-fq-MzF" secondAttribute="bottom" id="HA4-8s-7Yy"/>
-                                        <constraint firstItem="tNq-fq-MzF" firstAttribute="top" secondItem="u70-fN-yLl" secondAttribute="top" id="Nyu-9Z-naN"/>
-                                        <constraint firstAttribute="centerX" secondItem="u70-fN-yLl" secondAttribute="centerX" id="d7W-kx-ckP"/>
-                                        <constraint firstAttribute="centerX" secondItem="fOi-Ym-Gnj" secondAttribute="centerX" id="huQ-cM-QVB"/>
-                                        <constraint firstItem="fOi-Ym-Gnj" firstAttribute="leading" secondItem="Ard-44-Rsn" secondAttribute="leading" id="irT-AD-sz1"/>
-                                        <constraint firstItem="Ard-44-Rsn" firstAttribute="top" secondItem="u70-fN-yLl" secondAttribute="bottom" constant="2" id="jGs-2I-bDh"/>
-                                        <constraint firstItem="tNq-fq-MzF" firstAttribute="trailing" secondItem="jdH-H2-oSN" secondAttribute="trailing" id="mTi-vq-Ymc"/>
-                                        <constraint firstItem="Ard-44-Rsn" firstAttribute="leading" secondItem="u70-fN-yLl" secondAttribute="leading" id="rMk-lQ-yfc"/>
-                                        <constraint firstItem="jdH-H2-oSN" firstAttribute="leading" secondItem="S2i-7Z-hGs" secondAttribute="leadingMargin" id="t6v-A1-PKc"/>
-                                        <constraint firstItem="fOi-Ym-Gnj" firstAttribute="top" secondItem="Ard-44-Rsn" secondAttribute="bottom" constant="10" id="uKu-oH-T45"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="d7W-kx-ckP"/>
-                                            <exclude reference="huQ-cM-QVB"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="299" id="Jm2-XT-CUZ">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jm2-XT-CUZ" id="kf4-W8-fRh">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20j-k5-PSa">
-                                            <rect key="frame" x="43" y="18" width="25" height="27"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOV" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6E-Rv-S2j">
-                                            <rect key="frame" x="8" y="45" width="60" height="27"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="RQy-qs-GZb"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valhallvägen, 10:00-17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veH-FN-KVl">
-                                            <rect key="frame" x="83" y="50" width="155" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4M-JZ-cie">
-                                            <rect key="frame" x="83" y="76" width="509" height="126"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="454" id="O10-pj-3Sx"/>
-                                            </constraints>
-                                            <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
-</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="O10-pj-3Sx"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQc-AA-eL2">
-                                            <rect key="frame" x="83" y="18" width="234" height="30"/>
-                                            <string key="text">The Thesis Proposal
-The Thesis Pro</string>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="20j-k5-PSa" firstAttribute="top" secondItem="sQc-AA-eL2" secondAttribute="top" id="3TZ-f0-bRI"/>
-                                        <constraint firstItem="M4M-JZ-cie" firstAttribute="leading" secondItem="veH-FN-KVl" secondAttribute="leading" id="EJg-8H-TUP"/>
-                                        <constraint firstAttribute="centerX" secondItem="sQc-AA-eL2" secondAttribute="centerX" id="NnM-cD-WlU"/>
-                                        <constraint firstItem="sQc-AA-eL2" firstAttribute="leading" secondItem="20j-k5-PSa" secondAttribute="trailing" constant="15" id="PZh-mz-As1"/>
-                                        <constraint firstItem="j6E-Rv-S2j" firstAttribute="leading" secondItem="kf4-W8-fRh" secondAttribute="leadingMargin" id="QFS-fg-M1n"/>
-                                        <constraint firstItem="20j-k5-PSa" firstAttribute="trailing" secondItem="j6E-Rv-S2j" secondAttribute="trailing" id="Qbg-sb-nKf"/>
-                                        <constraint firstItem="veH-FN-KVl" firstAttribute="leading" secondItem="sQc-AA-eL2" secondAttribute="leading" id="Zgu-pX-raO"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="M4M-JZ-cie" secondAttribute="trailing" id="dPd-eN-02l"/>
-                                        <constraint firstItem="veH-FN-KVl" firstAttribute="top" secondItem="sQc-AA-eL2" secondAttribute="bottom" constant="2" id="gWO-K4-znh"/>
-                                        <constraint firstItem="j6E-Rv-S2j" firstAttribute="top" secondItem="20j-k5-PSa" secondAttribute="bottom" id="hhO-fY-iff"/>
-                                        <constraint firstItem="M4M-JZ-cie" firstAttribute="top" secondItem="veH-FN-KVl" secondAttribute="bottom" constant="10" id="vYI-wU-drw"/>
-                                        <constraint firstAttribute="centerX" secondItem="M4M-JZ-cie" secondAttribute="centerX" id="yKa-C2-gfu"/>
-                                        <constraint firstItem="20j-k5-PSa" firstAttribute="top" secondItem="kf4-W8-fRh" secondAttribute="topMargin" constant="10" id="zfs-vq-v8Y"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="NnM-cD-WlU"/>
-                                            <exclude reference="yKa-C2-gfu"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="299" id="xAL-Ej-Eyk">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xAL-Ej-Eyk" id="d8A-hN-zjE">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="14" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u66-w4-sG6">
-                                            <rect key="frame" x="40" y="28" width="28" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NOV" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZw-sg-0Zl">
-                                            <rect key="frame" x="8" y="58" width="60" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="g7S-YR-7pY"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valhallvägen, 10:00-17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jn5-BD-dLP">
-                                            <rect key="frame" x="83" y="60" width="155" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opX-WT-gQ0">
-                                            <rect key="frame" x="83" y="91" width="509" height="126"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="454" id="yrR-yM-Nyh"/>
-                                            </constraints>
-                                            <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
-</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="yrR-yM-Nyh"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9t1-sc-rbo">
-                                            <rect key="frame" x="83" y="28" width="234" height="30"/>
-                                            <string key="text">The Thesis Proposal
-The Thesis Pro</string>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerX" secondItem="9t1-sc-rbo" secondAttribute="centerX" id="5XD-5u-ZoX"/>
-                                        <constraint firstItem="opX-WT-gQ0" firstAttribute="leading" secondItem="jn5-BD-dLP" secondAttribute="leading" id="9sa-6x-s6P"/>
-                                        <constraint firstItem="u66-w4-sG6" firstAttribute="top" secondItem="9t1-sc-rbo" secondAttribute="top" id="DV2-n9-Cl0"/>
-                                        <constraint firstItem="jn5-BD-dLP" firstAttribute="leading" secondItem="9t1-sc-rbo" secondAttribute="leading" id="Ekh-nm-fdr"/>
-                                        <constraint firstItem="eZw-sg-0Zl" firstAttribute="leading" secondItem="d8A-hN-zjE" secondAttribute="leadingMargin" id="KMZ-ju-4jH"/>
-                                        <constraint firstItem="jn5-BD-dLP" firstAttribute="top" secondItem="9t1-sc-rbo" secondAttribute="bottom" constant="2" id="QhK-rc-arI"/>
-                                        <constraint firstItem="opX-WT-gQ0" firstAttribute="top" secondItem="jn5-BD-dLP" secondAttribute="bottom" constant="15" id="W51-p2-kwl"/>
-                                        <constraint firstItem="eZw-sg-0Zl" firstAttribute="top" secondItem="u66-w4-sG6" secondAttribute="bottom" id="bNF-8L-6dj"/>
-                                        <constraint firstItem="u66-w4-sG6" firstAttribute="trailing" secondItem="eZw-sg-0Zl" secondAttribute="trailing" id="kOl-7o-8Jn"/>
-                                        <constraint firstItem="9t1-sc-rbo" firstAttribute="leading" secondItem="u66-w4-sG6" secondAttribute="trailing" constant="15" id="o8L-No-V90"/>
-                                        <constraint firstAttribute="centerX" secondItem="opX-WT-gQ0" secondAttribute="centerX" id="pc4-Z0-JL8"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="opX-WT-gQ0" secondAttribute="trailing" id="ubK-Sh-KPe"/>
-                                        <constraint firstItem="u66-w4-sG6" firstAttribute="top" secondItem="d8A-hN-zjE" secondAttribute="topMargin" constant="20" id="vBY-Pm-nWu"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="5XD-5u-ZoX"/>
-                                            <exclude reference="pc4-Z0-JL8"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -1146,18 +924,18 @@ The Thesis Pro</string>
                     <navigationItem key="navigationItem" title="Events" id="6iY-55-R9g"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="1400"/>
+                    <size key="freeformSize" width="600" height="700"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSS-vh-xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2211" y="1910"/>
+            <point key="canvasLocation" x="2019" y="1796"/>
         </scene>
         <!--Armada Event Detail Table View Controller-->
         <scene sceneID="mIn-a2-LvB">
             <objects>
                 <tableViewController id="0xZ-Yp-KEd" customClass="ArmadaEventDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="1000" sectionHeaderHeight="22" sectionFooterHeight="22" id="A0R-qj-tls">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="1400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1166,19 +944,19 @@ The Thesis Pro</string>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4R-9e-iq0" id="fWR-HB-0nt">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-KY-1w0">
-                                            <rect key="frame" x="73" y="18" width="126" height="28"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-KY-1w0">
+                                            <rect key="frame" x="73" y="18" width="519" height="32"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu8-aF-FdB">
-                                            <rect key="frame" x="46" y="18" width="12" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu8-aF-FdB">
+                                            <rect key="frame" x="45" y="18" width="13" height="27"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxq-0g-lfS">
-                                            <rect key="frame" x="8" y="42" width="50" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxq-0g-lfS">
+                                            <rect key="frame" x="8" y="45" width="50" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="qSd-zz-ioW"/>
                                             </constraints>
@@ -1186,14 +964,14 @@ The Thesis Pro</string>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Valhallvägen, 10:00-17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1af-8W-Ije">
-                                            <rect key="frame" x="73" y="48" width="133" height="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valhallvägen, 10:00-17:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1af-8W-Ije">
+                                            <rect key="frame" x="73" y="52" width="155" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0A-k0-jYK">
-                                            <rect key="frame" x="73" y="72" width="519" height="94"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0A-k0-jYK">
+                                            <rect key="frame" x="73" y="78" width="519" height="172"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="454" id="10F-Xb-qYa"/>
                                                 <constraint firstAttribute="height" constant="50" id="rtT-lu-mfr"/>
@@ -1216,6 +994,7 @@ The Thesis Pro</string>
                                         <constraint firstItem="Xu8-aF-FdB" firstAttribute="trailing" secondItem="hxq-0g-lfS" secondAttribute="trailing" id="63F-Tc-llq"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="j0A-k0-jYK" secondAttribute="bottom" id="7mO-fW-sdA"/>
                                         <constraint firstItem="hxq-0g-lfS" firstAttribute="leading" secondItem="fWR-HB-0nt" secondAttribute="leadingMargin" id="AC4-DC-M40"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="EXi-KY-1w0" secondAttribute="trailing" id="ERq-Nc-bkc"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="j0A-k0-jYK" secondAttribute="trailing" id="Edf-gm-E9D"/>
                                         <constraint firstItem="j0A-k0-jYK" firstAttribute="top" secondItem="1af-8W-Ije" secondAttribute="bottom" constant="10" id="M5Z-jO-gG9"/>
                                         <constraint firstItem="j0A-k0-jYK" firstAttribute="leading" secondItem="EXi-KY-1w0" secondAttribute="leading" id="Rs0-lG-dlx"/>
@@ -1234,6 +1013,7 @@ The Thesis Pro</string>
                                         <mask key="constraints">
                                             <exclude reference="ZDS-Ci-Em6"/>
                                             <exclude reference="bUA-0D-zta"/>
+                                            <exclude reference="7mO-fW-sdA"/>
                                             <exclude reference="UzG-DA-JSE"/>
                                             <exclude reference="fFe-RE-kKm"/>
                                             <exclude reference="sqI-Ke-GLO"/>
@@ -1258,7 +1038,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUf-nt-rfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3539" y="1556"/>
+            <point key="canvasLocation" x="2855" y="1019"/>
         </scene>
         <!--News-->
         <scene sceneID="hc7-q5-FZd">
@@ -1333,7 +1113,7 @@ The Thesis Pro</string>
                                     <outlet property="descriptionLabel" destination="J46-C6-eLz" id="KDl-xf-Kbb"/>
                                     <outlet property="isReadLabel" destination="aLV-XF-mYu" id="Rrc-c4-gYx"/>
                                     <outlet property="titleLabel" destination="f1j-mq-Ob6" id="KcF-sj-RbM"/>
-                                    <segue destination="ff2-Lg-wGH" kind="show" id="YOo-Vg-e22"/>
+                                    <segue destination="0xZ-Yp-KEd" kind="show" id="E5c-yw-E2s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1346,7 +1126,7 @@ The Thesis Pro</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nst-0h-vNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-347" y="1417"/>
+            <point key="canvasLocation" x="2083" y="599"/>
         </scene>
         <!--Events-->
         <scene sceneID="cCS-x6-XqP">
@@ -1953,129 +1733,6 @@ The Thesis Pro</string>
             </objects>
             <point key="canvasLocation" x="-66" y="2223"/>
         </scene>
-        <!--News Detail Table View Controller-->
-        <scene sceneID="aCn-BI-Rzn">
-            <objects>
-                <tableViewController id="ff2-Lg-wGH" customClass="NewsDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UG5-sB-t31">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <sections>
-                            <tableViewSection id="TW3-AM-CAZ">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="72" id="9Es-et-tag">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Es-et-tag" id="EmC-3l-SMx">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The application is now closed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fmh-ei-ib4">
-                                                    <rect key="frame" x="8" y="8" width="584" height="55"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="Fmh-ei-ib4" secondAttribute="centerX" id="1bW-so-GRi"/>
-                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="7HR-pH-7mT"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Fmh-ei-ib4" secondAttribute="trailing" id="Wep-s8-osQ"/>
-                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="top" secondItem="EmC-3l-SMx" secondAttribute="topMargin" id="hTQ-sa-vx1"/>
-                                                <constraint firstItem="Fmh-ei-ib4" firstAttribute="leading" secondItem="EmC-3l-SMx" secondAttribute="leadingMargin" id="scS-oO-xZl"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Fmh-ei-ib4" secondAttribute="bottom" id="wYX-cF-hGx"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="1bW-so-GRi"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="39" id="VgO-eX-VRv">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VgO-eX-VRv" id="Xim-hF-Cm5">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-RQ-nBJ">
-                                                    <rect key="frame" x="8" y="8" width="23" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="23" id="3W3-6N-8W8"/>
-                                                        <constraint firstAttribute="width" secondItem="JdP-RQ-nBJ" secondAttribute="height" multiplier="34:33" id="Nmi-s0-t1P"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="monday 2 november " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELW-GY-SJF">
-                                                    <rect key="frame" x="41" y="11" width="128" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="JdP-RQ-nBJ" firstAttribute="leading" secondItem="Xim-hF-Cm5" secondAttribute="leadingMargin" id="DdY-uh-kvp"/>
-                                                <constraint firstItem="ELW-GY-SJF" firstAttribute="leading" secondItem="JdP-RQ-nBJ" secondAttribute="trailing" constant="10" id="Yhd-eO-QJ1"/>
-                                                <constraint firstItem="ELW-GY-SJF" firstAttribute="centerY" secondItem="JdP-RQ-nBJ" secondAttribute="centerY" id="unB-As-EB3"/>
-                                                <constraint firstItem="JdP-RQ-nBJ" firstAttribute="top" secondItem="Xim-hF-Cm5" secondAttribute="topMargin" id="xGR-AE-Lec"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="665" id="Ob1-tU-kIY">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ob1-tU-kIY" id="Djk-5H-r4P">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aoq-3S-VG0">
-                                                    <rect key="frame" x="8" y="8" width="584" height="131"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment>
-                                                            <string key="content">The application for team leader, creator, coordinator and developer is now closed. Thank you for your applications! We'll contact you for a interview as soon as possible and all applicants will be notified 3 of May. 
-
-A new recruitment period opens in August. We will then recruit hosts for the fair and events. For the application in August, Swedish isn't a requirement and international students will be able to apply! </string>
-                                                            <attributes>
-                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="leading" secondItem="Djk-5H-r4P" secondAttribute="leadingMargin" id="7Vq-IM-Pdr"/>
-                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="top" secondItem="Djk-5H-r4P" secondAttribute="topMargin" id="8SP-td-PYS"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Aoq-3S-VG0" secondAttribute="trailing" id="A9V-CK-xf0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Aoq-3S-VG0" secondAttribute="bottom" id="ljA-tf-Axu"/>
-                                                <constraint firstItem="Aoq-3S-VG0" firstAttribute="leading" secondItem="Djk-5H-r4P" secondAttribute="leadingMargin" id="oxe-0G-lhA"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="7Vq-IM-Pdr"/>
-                                                    <exclude reference="ljA-tf-Axu"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="ff2-Lg-wGH" id="ksX-zt-PSC"/>
-                            <outlet property="delegate" destination="ff2-Lg-wGH" id="w2O-VX-3mQ"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ln4-xa-lSU"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="contentLabel" destination="Aoq-3S-VG0" id="Xbo-xk-sgU"/>
-                        <outlet property="dateLabel" destination="ELW-GY-SJF" id="3A3-bT-nSX"/>
-                        <outlet property="titleLabel" destination="Fmh-ei-ib4" id="6LJ-Yn-VYt"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cIO-tS-38z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="147" y="2293"/>
-        </scene>
         <!--Favorites-->
         <scene sceneID="rZw-5g-N49">
             <objects>
@@ -2291,7 +1948,6 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="astronaut" width="128" height="128"/>
         <image name="book" width="32" height="32"/>
         <image name="book-1" width="32" height="32"/>
-        <image name="calendar" width="32" height="32"/>
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
         <image name="ericsson-logo" width="280" height="248"/>
@@ -2307,7 +1963,8 @@ A new recruitment period opens in August. We will then recruit hosts for the fai
         <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mQk-Qq-R15"/>
         <segue reference="vvO-dd-zrJ"/>
+        <segue reference="mQk-Qq-R15"/>
+        <segue reference="E5c-yw-E2s"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -52,6 +52,10 @@ class ArmadaEventDetailTableViewController: UITableViewController {
         timeFormatter.dateFormat = "HH:mm"
         
         cell.locationLabel.text = selectedArmadaEvent!.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
+        
+        if selectedArmadaEvent!.location.isEmpty {
+            cell.locationLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+        }
 //        cell.timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
         
         cell.summaryLabel.text = selectedArmadaEvent!.summary
