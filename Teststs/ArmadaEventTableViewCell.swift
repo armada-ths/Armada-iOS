@@ -18,6 +18,8 @@ class ArmadaEventTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    @IBOutlet weak var isReadLabel: UILabel!
+    
     @IBOutlet weak var locationLabel: UILabel!
 
     override func setSelected(selected: Bool, animated: Bool) {

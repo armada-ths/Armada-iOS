@@ -10,9 +10,10 @@ import UIKit
 
 var selectedArmadaEvent: ArmadaEvent? = nil
 
+var readArmadaEvents = [String]()
+
 class ArmadaEventTableViewController: UITableViewController {
 
-    
     let armadaEvents = DataDude.eventsFromServer()!
     
     override func viewDidLoad() {
@@ -21,10 +22,15 @@ class ArmadaEventTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 220
         tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = true
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +56,7 @@ class ArmadaEventTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
 
         let armadaEvent = armadaEvents[indexPath.row]
-        cell.titleLabel.text = armadaEvent.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        cell.titleLabel.text = armadaEvent.title
         cell.summaryLabel.text = armadaEvent.summary
         
         let monthFormatter = NSDateFormatter()
@@ -59,7 +65,7 @@ class ArmadaEventTableViewController: UITableViewController {
         let dayFormatter = NSDateFormatter()
         dayFormatter.dateFormat = "d"
         
-
+        cell.isReadLabel.hidden = contains(readArmadaEvents, armadaEvent.title)
         cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
         cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString
         
@@ -71,6 +77,10 @@ class ArmadaEventTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         selectedArmadaEvent = armadaEvents[tableView.indexPathForSelectedRow()!.row]
+        if !contains(readArmadaEvents, selectedArmadaEvent!.title) {
+            readArmadaEvents.append(selectedArmadaEvent!.title)
+        }
+        
     }
 
     /*

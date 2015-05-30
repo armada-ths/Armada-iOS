@@ -10,52 +10,55 @@ import UIKit
 
 class ArmadaEventDetailTableViewController: UITableViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var summaryLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        titleLabel.text = selectedArmadaEvent!.title
-        locationLabel.text = selectedArmadaEvent!.location
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "E dd MMMM"
-        dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
-        
-        let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
-        timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
-        
-        summaryLabel.text = selectedArmadaEvent!.summary
-        
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 300
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
 
     // MARK: - Table view data source
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
+        cell.titleLabel.text = selectedArmadaEvent!.title
 
+        
+        let monthFormatter = NSDateFormatter()
+        monthFormatter.dateFormat = "MMM"
+        
+        let dayFormatter = NSDateFormatter()
+        dayFormatter.dateFormat = "d"
+        
+        cell.dayLabel.text = dayFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+        cell.monthLabel.text = monthFormatter.stringFromDate(selectedArmadaEvent!.startDate).uppercaseString
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "E dd MMMM"
+//        cell.dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+        
+        let timeFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        
+        cell.locationLabel.text = selectedArmadaEvent!.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
+//        cell.timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
+        
+        cell.summaryLabel.text = selectedArmadaEvent!.summary
         // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

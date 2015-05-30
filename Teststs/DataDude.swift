@@ -198,7 +198,7 @@ public class _DataDude {
                 let location = json["location"] as? String,
                 let startDateString = json["starts_at"] as? String,
                 let endDateString = json["ends_at"] as? String {
-                    return ArmadaEvent(title: title, summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString))
+                    return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString))
             }
             return nil
             } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
