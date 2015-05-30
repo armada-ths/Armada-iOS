@@ -116,7 +116,8 @@ class CatalogueFilterTableViewController: UITableViewController {
 //            cell.textLabel?.font = UIFont.systemFontOfSize(14)
             
             
-            (cell as! SelectJobTableViewCell).jobNameLabel.text = job
+            (cell as! SelectJobTableViewCell).jobName = job
+            (cell as! SelectJobTableViewCell).jobNameLabel.text = job + " (\(numJobs))"
             (cell as! SelectJobTableViewCell).jobSwitch.on = contains(CompanyFilter.jobs, job)
             (cell as! SelectJobTableViewCell).controller = self
             

@@ -18,9 +18,7 @@ class SelectJobTableViewCell: UITableViewCell {
         controller!.updateTitle()
     }
 
-    var jobName: String {
-        return jobNameLabel.text!
-    }
+    var jobName = ""
     
     @IBOutlet weak var jobNameLabel: UILabel!
     
