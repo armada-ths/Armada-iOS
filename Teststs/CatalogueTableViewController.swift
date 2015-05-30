@@ -58,7 +58,7 @@ class CatalogueTableViewController: UITableViewController {
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
 
-        cell.workFieldLabel.text = company.workFields.first
+        cell.workFieldLabel.text = company.workFields.first ?? "Other"
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true

@@ -80,8 +80,7 @@ class FavoritesTableViewController: UITableViewController {
         
         cell.descriptionLabel.text = company.name
         
-        
-        cell.workFieldLabel.text = company.workFields.first
+        cell.workFieldLabel.text = company.workFields.first ?? "Other"
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true
