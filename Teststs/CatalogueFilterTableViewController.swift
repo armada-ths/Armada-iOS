@@ -117,8 +117,12 @@ class CatalogueFilterTableViewController: UITableViewController {
             
             
             (cell as! SelectJobTableViewCell).jobName = job
-            (cell as! SelectJobTableViewCell).jobNameLabel.text = job + " (\(numJobs))"
+            (cell as! SelectJobTableViewCell).jobNameLabel.text = job //+ " (\(numJobs))"
+            (cell as! SelectJobTableViewCell).jobCountLabel.text = "\(numJobs)" //+ " (\(numJobs))"
+
             (cell as! SelectJobTableViewCell).jobSwitch.on = contains(CompanyFilter.jobs, job)
+//            (cell as! SelectJobTableViewCell).jobCountLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
+//            (cell as! SelectJobTableViewCell).jobNameLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
             (cell as! SelectJobTableViewCell).controller = self
             
         default: cell = cellWithIdentifier("InternationalCell")
@@ -137,11 +141,12 @@ class CatalogueFilterTableViewController: UITableViewController {
 //            }
             tableView.reloadData()
         }
+        tableView.reloadData()
         updateTitle()
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 4 {
+        if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 {
             return 54
         }
         return super.tableView(tableView, heightForRowAtIndexPath: indexPath)

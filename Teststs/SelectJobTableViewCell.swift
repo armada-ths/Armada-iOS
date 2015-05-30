@@ -16,8 +16,10 @@ class SelectJobTableViewCell: UITableViewCell {
         CompanyFilter.jobs = sender.on ? CompanyFilter.jobs + [jobName] : CompanyFilter.jobs.filter { $0 != self.jobName }
         
         controller!.updateTitle()
+//        controller!.tableView.reloadData()
     }
 
+    @IBOutlet weak var jobCountLabel: UILabel!
     var jobName = ""
     
     @IBOutlet weak var jobNameLabel: UILabel!
