@@ -1363,11 +1363,35 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="JobCell" rowHeight="44" id="J4s-fR-TGY">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="JobCell" rowHeight="44" id="J4s-fR-TGY" customClass="SelectJobTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J4s-fR-TGY" id="rAV-KB-4E1">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="htF-eO-kmJ">
+                                            <rect key="frame" x="530" y="6" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="changedJob:" destination="J4s-fR-TGY" eventType="valueChanged" id="oCF-Lm-myi"/>
+                                            </connections>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukf-oF-vrH">
+                                            <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="htF-eO-kmJ" secondAttribute="trailing" id="1C1-4W-abV"/>
+                                        <constraint firstAttribute="centerY" secondItem="Ukf-oF-vrH" secondAttribute="centerY" id="604-qa-gac"/>
+                                        <constraint firstItem="Ukf-oF-vrH" firstAttribute="leading" secondItem="rAV-KB-4E1" secondAttribute="leadingMargin" id="jK5-Kd-8oo"/>
+                                        <constraint firstAttribute="centerY" secondItem="htF-eO-kmJ" secondAttribute="centerY" id="ob8-DL-2wD"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="jobNameLabel" destination="Ukf-oF-vrH" id="cAn-sJ-sAZ"/>
+                                    <outlet property="jobSwitch" destination="htF-eO-kmJ" id="TL2-W6-Aoy"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InternationalCell" rowHeight="64" id="qBK-y4-V4T">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -1940,7 +1964,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYN-Iz-1N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="3444"/>
+            <point key="canvasLocation" x="1988" y="3414"/>
         </scene>
     </scenes>
     <resources>

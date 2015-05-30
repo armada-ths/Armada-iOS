@@ -61,7 +61,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     let jobs = DataDude.jobs
@@ -111,24 +111,29 @@ class CatalogueFilterTableViewController: UITableViewController {
             cell = cellWithIdentifier("JobCell")
             let job = jobs[indexPath.row]
             let numJobs = DataDude.companies.filter({ contains($0.jobTypes, job) }).count
+//            cell.textLabel?.text = job + " (\(numJobs))"
+//            cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
+//            cell.textLabel?.font = UIFont.systemFontOfSize(14)
             
-            cell.textLabel?.text = job + " (\(numJobs))"
-            cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
-            cell.textLabel?.font = UIFont.systemFontOfSize(14)
+            
+            (cell as! SelectJobTableViewCell).jobNameLabel.text = job
+            (cell as! SelectJobTableViewCell).jobSwitch.on = contains(CompanyFilter.jobs, job)
+            (cell as! SelectJobTableViewCell).controller = self
+            
         default: cell = cellWithIdentifier("InternationalCell")
         }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        return
         if indexPath.section == 3 {
             let job = jobs[indexPath.row]
-            if contains(CompanyFilter.jobs, job) {
-                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
-            } else {
-                CompanyFilter.jobs = CompanyFilter.jobs + [job]
-            }
+//            if contains(CompanyFilter.jobs, job) {
+//                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
+//            } else {
+//                CompanyFilter.jobs = CompanyFilter.jobs + [job]
+//            }
             tableView.reloadData()
         }
         updateTitle()
