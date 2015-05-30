@@ -10,17 +10,21 @@ import UIKit
 
 var selectedNewsItem:News!
 
-class NewsTableViewController: UITableViewController {
 
+
+
+class NewsTableViewController: UITableViewController {
+    var readArmadaNews = [String]()
     let news = DataDude.newsFromServer()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("NEWSSSS\(news.count)")
+                self.tableView.rowHeight = UITableViewAutomaticDimension
+                self.tableView.estimatedRowHeight = 200
         
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = true
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -31,6 +35,11 @@ class NewsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -53,6 +62,7 @@ class NewsTableViewController: UITableViewController {
         let newsItem = news[indexPath.row]
         cell.titleLabel.text = newsItem.title
         cell.descriptionLabel.text = newsItem.content
+
         
         let monthFormatter = NSDateFormatter()
         monthFormatter.dateFormat = "MMM"
@@ -60,9 +70,12 @@ class NewsTableViewController: UITableViewController {
         let dayFormatter = NSDateFormatter()
         dayFormatter.dateFormat = "d"
         
+        cell.descriptionLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate) + " " + monthFormatter.stringFromDate(newsItem.publishedDate)
         
-        cell.dayLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate)
-        cell.monthLabel.text = monthFormatter.stringFromDate(newsItem.publishedDate)
+        cell.isReadLabel.hidden = contains(readArmadaNews, newsItem.title)
+        
+//        cell.dayLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate)
+//        cell.monthLabel.text = monthFormatter.stringFromDate(newsItem.publishedDate)
         
         return cell
 
@@ -70,6 +83,9 @@ class NewsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         selectedNewsItem = news[tableView.indexPathForSelectedRow()!.row]
+        if !contains(readArmadaNews, selectedNewsItem!.title) {
+            readArmadaNews.append(selectedNewsItem!.title)
+        }
     }
 
     /*

@@ -20,6 +20,7 @@ class NewsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    @IBOutlet weak var isReadLabel: UILabel!
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

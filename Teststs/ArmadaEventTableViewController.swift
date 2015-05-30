@@ -10,11 +10,12 @@ import UIKit
 
 var selectedArmadaEvent: ArmadaEvent? = nil
 
-var readArmadaEvents = [String]()
+
 
 class ArmadaEventTableViewController: UITableViewController {
 
     let armadaEvents = DataDude.eventsFromServer()!
+    var readArmadaEvents = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
