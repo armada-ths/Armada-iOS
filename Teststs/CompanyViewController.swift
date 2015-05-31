@@ -31,14 +31,9 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         positionLabel.alpha = 0
 
         mapWebView.delegate = self
-        mapWebView.scalesPageToFit = true
-        
-        println(selectedCompany!.continents)
-        
         NSOperationQueue().addOperationWithBlock {
         var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
         let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil) + "{ fill:#349939}"})
-        println(companyStyle)
         html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
