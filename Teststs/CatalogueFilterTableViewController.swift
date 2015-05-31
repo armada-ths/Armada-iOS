@@ -24,12 +24,14 @@ class _CompanyFilter {
     
     var filteredCompanies: [Company] {
         var filteredCompanies = DataDude.companies
-        if let education = CompanyFilter.education {
-            filteredCompanies = filteredCompanies.filter { contains($0.programmes, education) }
+        if applyFilter {
+            if let education = CompanyFilter.education {
+                filteredCompanies = filteredCompanies.filter { contains($0.programmes, education) }
+            }
+            filteredCompanies = Array(Set(reduce(CompanyFilter.jobs, [Company]()) { (companies, job) in
+                return companies + filteredCompanies.filter { contains($0.jobTypes, job) }
+                }))
         }
-        filteredCompanies = Array(Set(reduce(CompanyFilter.jobs, [Company]()) { (companies, job) in
-            return companies + filteredCompanies.filter { contains($0.jobTypes, job) }
-            }))
         return filteredCompanies.sorted { $0.name < $1.name }
     }
 }
@@ -46,9 +48,6 @@ class CatalogueFilterTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    @IBAction func clickedApplyFilter(sender: UISwitch) {
-        CompanyFilter.applyFilter = sender.on
     }
     
     // MARK: - Table view data source
@@ -89,6 +88,8 @@ class CatalogueFilterTableViewController: UITableViewController {
         case 0:
             cell = cellWithIdentifier("ApplyFilterTableViewCell")
             (cell as! ApplyFilterTableViewCell).applyFilterSwitch.on = CompanyFilter.applyFilter
+            (cell as! ApplyFilterTableViewCell).controller = self
+            
         case 1:
             let specialCell = cellWithIdentifier("SelectedEducationTableViewCell") as! SelectedEducationTableViewCell
             if let zebra = CompanyFilter.education?.componentsSeparatedByString(" in ") where zebra.count == 2 {
@@ -111,18 +112,18 @@ class CatalogueFilterTableViewController: UITableViewController {
             cell = cellWithIdentifier("JobCell")
             let job = jobs[indexPath.row]
             let numJobs = DataDude.companies.filter({ contains($0.jobTypes, job) }).count
-//            cell.textLabel?.text = job + " (\(numJobs))"
-//            cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
-//            cell.textLabel?.font = UIFont.systemFontOfSize(14)
+            //            cell.textLabel?.text = job + " (\(numJobs))"
+            //            cell.accessoryType = contains(CompanyFilter.jobs, job) ? .Checkmark : .None
+            //            cell.textLabel?.font = UIFont.systemFontOfSize(14)
             
             
             (cell as! SelectJobTableViewCell).jobName = job
             (cell as! SelectJobTableViewCell).jobNameLabel.text = job //+ " (\(numJobs))"
             (cell as! SelectJobTableViewCell).jobCountLabel.text = "\(numJobs)" //+ " (\(numJobs))"
-
+            
             (cell as! SelectJobTableViewCell).jobSwitch.on = contains(CompanyFilter.jobs, job)
-//            (cell as! SelectJobTableViewCell).jobCountLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
-//            (cell as! SelectJobTableViewCell).jobNameLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
+            //            (cell as! SelectJobTableViewCell).jobCountLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
+            //            (cell as! SelectJobTableViewCell).jobNameLabel.textColor = (cell as! SelectJobTableViewCell).jobSwitch.on ? UIColor.blackColor() : UIColor.lightGrayColor()
             (cell as! SelectJobTableViewCell).controller = self
             
         default: cell = cellWithIdentifier("InternationalCell")
@@ -134,11 +135,11 @@ class CatalogueFilterTableViewController: UITableViewController {
         return
         if indexPath.section == 3 {
             let job = jobs[indexPath.row]
-//            if contains(CompanyFilter.jobs, job) {
-//                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
-//            } else {
-//                CompanyFilter.jobs = CompanyFilter.jobs + [job]
-//            }
+            //            if contains(CompanyFilter.jobs, job) {
+            //                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
+            //            } else {
+            //                CompanyFilter.jobs = CompanyFilter.jobs + [job]
+            //            }
             tableView.reloadData()
         }
         tableView.reloadData()
