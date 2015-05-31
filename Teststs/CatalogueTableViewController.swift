@@ -27,7 +27,7 @@ class CatalogueTableViewController: UITableViewController {
         }
 
             companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
-            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
+            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
             updateCompaniesByLetters(companies)
         tableView.reloadData()
     }

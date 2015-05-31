@@ -80,7 +80,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     func updateTitle() {
-        navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) companies"
+        navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) Companies"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

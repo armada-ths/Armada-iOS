@@ -18,7 +18,7 @@ class FavoritesTableViewController: UITableViewController {
     func updateFavorites() {
         companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
         updateCompaniesByLetters(companies)
-        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) companies"
+        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
     }
     
     override func viewWillAppear(animated: Bool) {
