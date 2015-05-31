@@ -213,7 +213,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
                                             <rect key="frame" x="108" y="32" width="94" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -372,7 +372,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Employees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQ3-0j-qhF">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Employees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQ3-0j-qhF">
                                                     <rect key="frame" x="275" y="122" width="66" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
@@ -656,32 +656,45 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="159" id="pqs-if-sgc">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="190" id="cJb-Fg-IJj">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqs-if-sgc" id="jGi-X0-F8v">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJb-Fg-IJj" id="a9h-9D-xwx">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="We're Located In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbf-EX-ff5">
-                                                    <rect key="frame" x="8" y="8" width="126" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We're Located In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pI-BP-EBK">
+                                                    <rect key="frame" x="8" y="8" width="104" height="16"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="worldmap" translatesAutoresizingMaskIntoConstraints="NO" id="9mb-Ab-BLD">
-                                                    <rect key="frame" x="8" y="33" width="584" height="117"/>
-                                                </imageView>
+                                                <webView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="ZhN-hm-cDy">
+                                                    <rect key="frame" x="8" y="29" width="584" height="152"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="584" id="QSr-8U-ey9"/>
+                                                        <constraint firstAttribute="height" constant="121" id="T8X-na-MHp"/>
+                                                        <constraint firstAttribute="height" constant="152" id="VLo-3e-wtp"/>
+                                                        <constraint firstAttribute="height" constant="142" id="hm6-zd-Ekl"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="T8X-na-MHp"/>
+                                                            <exclude reference="hm6-zd-Ekl"/>
+                                                        </mask>
+                                                    </variation>
+                                                </webView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="9mb-Ab-BLD" firstAttribute="top" secondItem="Cbf-EX-ff5" secondAttribute="bottom" constant="5" id="8ms-Xh-rHP"/>
-                                                <constraint firstItem="Cbf-EX-ff5" firstAttribute="top" secondItem="jGi-X0-F8v" secondAttribute="topMargin" id="TEa-Ne-M4a"/>
-                                                <constraint firstItem="9mb-Ab-BLD" firstAttribute="top" secondItem="jGi-X0-F8v" secondAttribute="topMargin" id="f44-vI-bbO"/>
-                                                <constraint firstItem="9mb-Ab-BLD" firstAttribute="leading" secondItem="jGi-X0-F8v" secondAttribute="leadingMargin" id="if1-k1-75c"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9mb-Ab-BLD" secondAttribute="bottom" id="nQJ-97-Fsg"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9mb-Ab-BLD" secondAttribute="trailing" id="uXN-31-mOy"/>
-                                                <constraint firstItem="Cbf-EX-ff5" firstAttribute="leading" secondItem="jGi-X0-F8v" secondAttribute="leadingMargin" id="zh5-97-nJo"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZhN-hm-cDy" secondAttribute="bottom" constant="8" id="2Yf-pX-WiA"/>
+                                                <constraint firstAttribute="centerX" secondItem="ZhN-hm-cDy" secondAttribute="centerX" id="7Yg-Gs-zZ1"/>
+                                                <constraint firstItem="4pI-BP-EBK" firstAttribute="leading" secondItem="a9h-9D-xwx" secondAttribute="leadingMargin" id="8Nz-Nl-iaP"/>
+                                                <constraint firstItem="4pI-BP-EBK" firstAttribute="top" secondItem="ZhN-hm-cDy" secondAttribute="top" id="FnK-tA-2C7"/>
+                                                <constraint firstItem="4pI-BP-EBK" firstAttribute="top" secondItem="a9h-9D-xwx" secondAttribute="topMargin" id="bQY-r0-9cu"/>
+                                                <constraint firstItem="4pI-BP-EBK" firstAttribute="leading" secondItem="ZhN-hm-cDy" secondAttribute="leading" id="uTr-22-nDt"/>
+                                                <constraint firstItem="ZhN-hm-cDy" firstAttribute="top" secondItem="4pI-BP-EBK" secondAttribute="bottom" constant="5" id="vMP-u9-eSk"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="f44-vI-bbO"/>
+                                                    <exclude reference="FnK-tA-2C7"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -788,6 +801,7 @@
                         <outlet property="locationImageView" destination="kR8-q3-Mkc" id="kiT-dx-vu8"/>
                         <outlet property="locationLabel" destination="TUQ-e7-XNJ" id="H46-qZ-4Yu"/>
                         <outlet property="logoImageView" destination="kqe-ht-8on" id="hH4-Vi-8nZ"/>
+                        <outlet property="mapWebView" destination="ZhN-hm-cDy" id="OqQ-9i-mXU"/>
                         <outlet property="positionLabel" destination="Uql-KC-wW6" id="bsD-2m-bDr"/>
                         <outlet property="websiteLabel" destination="aPg-YA-Ujc" id="eqf-An-o9x"/>
                     </connections>
@@ -1383,7 +1397,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukf-oF-vrH">
                                             <rect key="frame" x="8" y="21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="54" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dq7-lI-UOn">
@@ -1880,7 +1894,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-cA-ylL">
                                             <rect key="frame" x="108" y="33" width="94" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -1998,7 +2012,6 @@
         <image name="light_bulb-1" width="32" height="32"/>
         <image name="linkedin" width="128" height="128"/>
         <image name="twitter" width="128" height="128"/>
-        <image name="worldmap" width="543" height="286"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IXa-Wp-hnl"/>

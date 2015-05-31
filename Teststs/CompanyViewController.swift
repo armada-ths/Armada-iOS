@@ -1,7 +1,7 @@
 import UIKit
 
 
-class CompanyViewController: UITableViewController {
+class CompanyViewController: UITableViewController, UIWebViewDelegate {
 
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var logoImageView: UIImageView!
@@ -19,6 +19,8 @@ class CompanyViewController: UITableViewController {
     var company: Company? = nil
     var companies = [Company]()
     
+    @IBOutlet weak var mapWebView: UIWebView!
+    
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,25 @@ class CompanyViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
         positionLabel.alpha = 0
+
+        mapWebView.delegate = self
+        mapWebView.scalesPageToFit = true
+        
+        println(selectedCompany!.continents)
+        var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
+        let companyStyle = company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil) + "{ fill:#349939}"})
+        println(companyStyle)
+        html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
+        mapWebView.loadHTMLString(html, baseURL: nil)
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+//        let contentSize = webView.scrollView.contentSize
+//        let viewSize = webView.bounds.size
+//        let rw = viewSize.height / contentSize.height
+//        webView.scrollView.minimumZoomScale = rw
+//        webView.scrollView.maximumZoomScale = rw
+//        webView.scrollView.zoomScale = rw
     }
 
     override func didReceiveMemoryWarning() {
