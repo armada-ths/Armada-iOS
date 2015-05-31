@@ -32,9 +32,9 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
 
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
-        var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
-        let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil) + "{ fill:#349939}"})
-        html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
+            var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
+            let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil) + "{ fill:#349939}"})
+            html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
             }
