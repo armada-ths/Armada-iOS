@@ -130,21 +130,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        return
-        if indexPath.section == 3 {
-            let job = jobs[indexPath.row]
-//            if contains(CompanyFilter.jobs, job) {
-//                CompanyFilter.jobs = CompanyFilter.jobs.filter({ $0 != job })
-//            } else {
-//                CompanyFilter.jobs = CompanyFilter.jobs + [job]
-//            }
-            tableView.reloadData()
-        }
-        tableView.reloadData()
-        updateTitle()
-    }
-    
+
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2 {
             return 54
