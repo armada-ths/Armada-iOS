@@ -496,16 +496,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-sQ-oaQ">
-                                                    <rect key="frame" x="8" y="8" width="113" height="27"/>
+                                                    <rect key="frame" x="8" y="8" width="113" height="30"/>
                                                     <state key="normal" title="Add to Favorites">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="mAg-sQ-oaQ" secondAttribute="bottom" id="EFQ-b9-tdn"/>
-                                                <constraint firstItem="mAg-sQ-oaQ" firstAttribute="leading" secondItem="5ar-9J-Kyf" secondAttribute="leadingMargin" id="kIl-eY-Nmc"/>
-                                                <constraint firstItem="mAg-sQ-oaQ" firstAttribute="top" secondItem="5ar-9J-Kyf" secondAttribute="topMargin" id="xWJ-r8-H7l"/>
+                                                <constraint firstItem="mAg-sQ-oaQ" firstAttribute="top" secondItem="5ar-9J-Kyf" secondAttribute="top" constant="8" id="1Di-lp-UlC"/>
+                                                <constraint firstAttribute="bottom" secondItem="mAg-sQ-oaQ" secondAttribute="bottom" priority="750" constant="8" id="ezA-Ku-icv"/>
+                                                <constraint firstItem="mAg-sQ-oaQ" firstAttribute="leading" secondItem="5ar-9J-Kyf" secondAttribute="leading" constant="8" id="hpR-wb-HsG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
