@@ -6,9 +6,7 @@ class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    
     var companies = DataDude.companies
-    
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
     func updateCompaniesByLetters(companies: [Company]) {
@@ -22,12 +20,13 @@ class CatalogueTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
         companies = CompanyFilter.filteredCompanies
         navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
         updateCompaniesByLetters(companies)
         tableView.reloadData()
         updateFavoritesUI()
+        
+//        performSegueWithIdentifier("CatalogueSegue", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,6 +111,7 @@ class CatalogueTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow() {
                 companiesPageViewController.selectedCompany = selectedCompany
             }
+            (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
         }
     }
     

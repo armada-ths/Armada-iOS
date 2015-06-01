@@ -150,6 +150,7 @@ class FavoritesTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow() {
                 companiesPageViewController.selectedCompany = selectedCompany
             }
+            (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
         }
     }
 }

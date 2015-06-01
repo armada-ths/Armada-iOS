@@ -9,7 +9,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Ewd-XJ-ZNd">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZEp-63-beV" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZEp-63-beV" customClass="TabBarController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eak-ZC-Sdy"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -40,7 +40,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kt9-Ng-2sJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2668" y="1133"/>
+            <point key="canvasLocation" x="-2544" y="393"/>
         </scene>
         <!--Catalogue-->
         <scene sceneID="Jtk-fX-Rua">
@@ -58,7 +58,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAk-FN-x88" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1878" y="867"/>
+            <point key="canvasLocation" x="-2106" y="1147"/>
         </scene>
         <!--Catalogue-->
         <scene sceneID="5gy-2q-Wgj">
@@ -152,7 +152,7 @@
                                     <outlet property="descriptionLabel" destination="EQe-lC-rVo" id="05k-OG-qb0"/>
                                     <outlet property="logoImageView" destination="0mL-fA-3bL" id="CvE-dE-ROC"/>
                                     <outlet property="workFieldLabel" destination="2EN-Vx-IFa" id="rpm-iV-m1l"/>
-                                    <segue destination="PxU-nO-Jqt" kind="showDetail" id="mja-PR-QlL"/>
+                                    <segue destination="PxU-nO-Jqt" kind="showDetail" identifier="CatalogueSegue" id="mja-PR-QlL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -174,7 +174,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-279" y="2464"/>
+            <point key="canvasLocation" x="-67" y="2774"/>
         </scene>
         <!--Companies Page View Controller-->
         <scene sceneID="B3R-gX-zbo">
@@ -1629,7 +1629,7 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EVK-AU-F8t"/>
         <segue reference="E5c-yw-E2s"/>
+        <segue reference="mja-PR-QlL"/>
     </inferredMetricsTieBreakers>
 </document>

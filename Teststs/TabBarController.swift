@@ -1,5 +1,5 @@
 //
-//  CompanySplitViewController.swift
+//  TabBarController.swift
 //  Teststs
 //
 //  Created by Sami Purmonen on 01/06/15.
@@ -8,14 +8,11 @@
 
 import UIKit
 
-class CompanySplitViewController: UISplitViewController, UISplitViewControllerDelegate {
+class TabBarController: UITabBarController {
 
-    var shouldCollapse = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
-        preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        selectedIndex = 1
         // Do any additional setup after loading the view.
     }
 
@@ -24,10 +21,6 @@ class CompanySplitViewController: UISplitViewController, UISplitViewControllerDe
         // Dispose of any resources that can be recreated.
     }
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        return shouldCollapse
-    }
-
 
     /*
     // MARK: - Navigation
