@@ -30,12 +30,33 @@ class CatalogueTableViewController: UITableViewController {
             navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
             updateCompaniesByLetters(companies)
         tableView.reloadData()
+        updateFavoritesUI()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func updateFavoritesUI() {
+        if companies.isEmpty {
+            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width/2.0, view.bounds.size.height))
+            label.text = "No Companies Matched Your Filter"
+            label.numberOfLines = 2
+            label.textAlignment = .Center
+            label.sizeToFit()
+            label.textColor = UIColor.lightGrayColor()
+            label.font = UIFont.systemFontOfSize(30)
+            tableView.backgroundView = label
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            searchBar.hidden = true
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            searchBar.hidden = false
+        }
+    }
+
     
     // MARK: - Table view data source
     

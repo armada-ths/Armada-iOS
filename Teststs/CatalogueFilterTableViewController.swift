@@ -30,7 +30,7 @@ class _CompanyFilter {
             }
             filteredCompanies = Array(Set(reduce(CompanyFilter.jobs, [Company]()) { (companies, job) in
                 return companies + filteredCompanies.filter { contains($0.jobTypes, job) }
-                }))
+            }))
         }
         return filteredCompanies.sorted { $0.name < $1.name }
     }
@@ -60,18 +60,18 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 4 - 1
     }
     
     let jobs = DataDude.jobs
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return [1,1,0,jobs.count,1][section]
+        return [1,1,0,jobs.count,1][section+1]
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["", "I am studying...", "", "...And looking for...",
-            "...At companies that are..."][section]
+            "...At companies that are..."][section+1]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
@@ -84,7 +84,9 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
-        switch indexPath.section {
+    
+        
+        switch indexPath.section + 1 {
         case 0:
             cell = cellWithIdentifier("ApplyFilterTableViewCell")
             (cell as! ApplyFilterTableViewCell).applyFilterSwitch.on = CompanyFilter.applyFilter
@@ -96,8 +98,8 @@ class CatalogueFilterTableViewController: UITableViewController {
                 specialCell.fieldLabel.text = zebra[1]
                 specialCell.degreeLabel.text = zebra[0]
             } else {
-                specialCell.fieldLabel.text = "Not Selected"
-                specialCell.degreeLabel.text = ""
+                specialCell.fieldLabel.text = "Unspecified"
+                specialCell.degreeLabel.text = "All Programmes"
             }
             cell = specialCell
             

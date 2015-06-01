@@ -22,12 +22,12 @@ class SelectEducationTableViewController: UITableViewController {
     //    ]
     
     
-    let headers = Array(Set(DataDude.programmes.map { $0.componentsSeparatedByString(" in ")[0] }))
+    let headers = Array(Set((["All Programmes in Unspecified"] + DataDude.programmes).map { $0.componentsSeparatedByString(" in ")[0] })).sorted({$0 < $1})
     var educations = [[String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let programTuples = DataDude.programmes.map({ $0.componentsSeparatedByString(" in ") })
+        let programTuples = (["All Programmes in Unspecified"] + DataDude.programmes).sorted({$0 < $1}).map({ $0.componentsSeparatedByString(" in ") })
         educations = headers.map { header in programTuples.filter({ header == $0[0]}).map({$0[1]}) }
         updateAccessories()
         // Uncomment the following line to preserve selection between presentations
