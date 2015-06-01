@@ -113,8 +113,12 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
         if indexPath.row == 0 {
-            return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)  ? 44 : 64
+            if let y = navigationController?.navigationBar.frame.maxY where y > 0 {
+                return y
+            }
+            return 64
         }
         if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
             return 0.000001

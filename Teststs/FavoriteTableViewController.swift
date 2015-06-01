@@ -33,7 +33,6 @@ class FavoritesTableViewController: UITableViewController {
         
         updateFavorites()
         updateFavoritesUI()
-        
         tableView.reloadData()
     }
     
