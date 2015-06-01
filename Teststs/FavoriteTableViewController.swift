@@ -124,6 +124,6 @@ class FavoritesTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
         }
-        (segue.destinationViewController as? CompaniesPageViewController)?.companies = companies
+        ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController)?.companies = companies
     }
 }
