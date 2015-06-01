@@ -89,9 +89,18 @@ class FavoritesTableViewController: UITableViewController {
         return true
     }
     
+    
+    var isEditingTableView = false
+    override func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+        isEditingTableView = true
+    }
+    
     override func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+        if !isEditingTableView {
+            return
+        }
+        isEditingTableView = false
         updateFavoritesUI()
-        performSegueWithIdentifier("FavoritesSegue", sender: self)
         showSelectedCompany()
         println("Ended Editing! \(indexPath.row)")
     }
@@ -109,16 +118,21 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     func showSelectedCompany() {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            if let company = self.lastCompany,
-//                let nearestCompany = self.companies.filter({ $0.name >= company.name }).first ?? self.companies.filter({ $0.name < company.name }).last,
-                let nearestCompany = self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first,
-                let row = find(self.companies, nearestCompany) {
-                    println("Last company: \(company.name), Nearest company: \(nearestCompany.name), Row: \(row)")
-                    self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                if let company = self.lastCompany,
+                    let nearestCompany = self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first,
+                    let row = find(self.companies, nearestCompany) {
+                        println("Last company: \(company.name), Nearest company: \(nearestCompany.name), Row: \(row)")
+                        self.lastCompany = nearestCompany
+                        self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+                        if company != nearestCompany {
+                            self.performSegueWithIdentifier("FavoritesSegue", sender: self)
+                        }
+                }
             }
-        }
     }
+    
+    
     
     
     var lastCompany: Company? = nil
@@ -127,6 +141,7 @@ class FavoritesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         lastCompany = companies[indexPath.row]
         println("Selected \(lastCompany?.name)")
+        //        self.performSegueWithIdentifier("FavoritesSegue", sender: self)
     }
     
     var selectedCompany: Company? {
