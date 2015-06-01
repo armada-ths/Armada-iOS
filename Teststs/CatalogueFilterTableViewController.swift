@@ -60,18 +60,18 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4 - 1
+        return 4
     }
     
     let jobs = DataDude.jobs
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return [1,1,0,jobs.count,1][section+1]
+        return [1,1,0,jobs.count,1][section]
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["", "I am studying...", "", "...And looking for...",
-            "...At companies that are..."][section+1]
+            "...At companies that are..."][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
@@ -86,7 +86,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         let cell: UITableViewCell
     
         
-        switch indexPath.section + 1 {
+        switch indexPath.section {
         case 0:
             cell = cellWithIdentifier("ApplyFilterTableViewCell")
             (cell as! ApplyFilterTableViewCell).applyFilterSwitch.on = CompanyFilter.applyFilter

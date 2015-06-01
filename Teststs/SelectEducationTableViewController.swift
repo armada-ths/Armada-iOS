@@ -63,7 +63,8 @@ class SelectEducationTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectEducationTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         let program = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]
-        let numJobs = DataDude.companies.filter({ contains($0.programmes, program) }).count
+
+        let numJobs = indexPath.section == 0 ? DataDude.companies.count : DataDude.companies.filter({ contains($0.programmes, program) }).count
         cell.textLabel?.text = educations[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = "\(numJobs)"
 //        cell.textLabel?.font = UIFont.systemFontOfSize(11)
@@ -85,6 +86,9 @@ class SelectEducationTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         CompanyFilter.education = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]
+        if indexPath.section == 0 {
+            CompanyFilter.education = nil
+        }
         updateAccessories()
     }
 

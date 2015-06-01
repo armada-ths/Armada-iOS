@@ -25,10 +25,9 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-
-            companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
-            navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
-            updateCompaniesByLetters(companies)
+        companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
+        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
+        updateCompaniesByLetters(companies)
         tableView.reloadData()
         updateFavoritesUI()
     }
@@ -40,13 +39,14 @@ class CatalogueTableViewController: UITableViewController {
     
     func updateFavoritesUI() {
         if companies.isEmpty {
-            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width/2.0, view.bounds.size.height))
-            label.text = "No Companies Matched Your Filter"
+            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+            label.font = UIFont.systemFontOfSize(30)
+            label.text = "No Company Matches\nYour Filter"
             label.numberOfLines = 2
             label.textAlignment = .Center
             label.sizeToFit()
             label.textColor = UIColor.lightGrayColor()
-            label.font = UIFont.systemFontOfSize(30)
+
             tableView.backgroundView = label
             tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             searchBar.hidden = true
@@ -56,7 +56,7 @@ class CatalogueTableViewController: UITableViewController {
             searchBar.hidden = false
         }
     }
-
+    
     
     // MARK: - Table view data source
     
@@ -78,7 +78,7 @@ class CatalogueTableViewController: UITableViewController {
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
-
+        
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         if let image = company.image {
             cell.logoImageView.image = image
@@ -88,7 +88,7 @@ class CatalogueTableViewController: UITableViewController {
             cell.companyNameLabel.hidden = false
             cell.companyNameLabel.text = company.shortName
         }
-
+        
         return cell
     }
     
@@ -141,5 +141,5 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
     }
-
+    
 }
