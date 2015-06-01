@@ -18,6 +18,7 @@
 		260848141B1989290039DF06 /* SelectJobTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260848131B1989290039DF06 /* SelectJobTableViewCell.swift */; };
 		261B58BB1B1641ED006F3968 /* CompaniesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B58BA1B1641ED006F3968 /* CompaniesPageViewController.swift */; };
 		262648A51B16D9FD00B24057 /* SelectedEducationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262648A41B16D9FD00B24057 /* SelectedEducationTableViewCell.swift */; };
+		2649BCF11B1C8B9400F15B2B /* CompanySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2649BCF01B1C8B9400F15B2B /* CompanySplitViewController.swift */; };
 		265B7DE21B053A080074450B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B7DE11B053A080074450B /* AppDelegate.swift */; };
 		265B7DE91B053A080074450B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 265B7DE71B053A080074450B /* Main.storyboard */; };
 		265B7DEB1B053A080074450B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 265B7DEA1B053A080074450B /* Images.xcassets */; };
@@ -60,6 +61,7 @@
 		260848131B1989290039DF06 /* SelectJobTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectJobTableViewCell.swift; sourceTree = "<group>"; };
 		261B58BA1B1641ED006F3968 /* CompaniesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesPageViewController.swift; sourceTree = "<group>"; };
 		262648A41B16D9FD00B24057 /* SelectedEducationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedEducationTableViewCell.swift; sourceTree = "<group>"; };
+		2649BCF01B1C8B9400F15B2B /* CompanySplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanySplitViewController.swift; sourceTree = "<group>"; };
 		265B7DDC1B053A080074450B /* Teststs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teststs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		265B7DE01B053A080074450B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		265B7DE11B053A080074450B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				26A15D3F1B07C5F500793724 /* CatalogueFilterTableViewController.swift */,
 				2602AD5F1B15133D00B0DB32 /* ArmadaEventTableViewController.swift */,
 				2603EE811B16B4F900FF6E3B /* ApplyFilterTableViewCell.swift */,
+				2649BCF01B1C8B9400F15B2B /* CompanySplitViewController.swift */,
 				26D9DAA41B167A4A001BE83F /* SelectEducationTableViewController.swift */,
 				260848131B1989290039DF06 /* SelectJobTableViewCell.swift */,
 				2602AD611B15135400B0DB32 /* ArmadaEventTableViewCell.swift */,
@@ -290,6 +293,7 @@
 				26E819F81B180315000354F9 /* FavoriteTableViewController.swift in Sources */,
 				260848141B1989290039DF06 /* SelectJobTableViewCell.swift in Sources */,
 				26C9607C1B06A434005A13E7 /* CatalogueTableViewController.swift in Sources */,
+				2649BCF11B1C8B9400F15B2B /* CompanySplitViewController.swift in Sources */,
 				DAC451791B1541D3002592F8 /* NewsDetailTableViewController.swift in Sources */,
 				2602AD601B15133D00B0DB32 /* ArmadaEventTableViewController.swift in Sources */,
 				262648A51B16D9FD00B24057 /* SelectedEducationTableViewCell.swift in Sources */,
@@ -437,6 +441,7 @@
 				INFOPLIST_FILE = Teststs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -447,6 +452,7 @@
 				INFOPLIST_FILE = Teststs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

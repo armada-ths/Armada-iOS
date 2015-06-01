@@ -22,10 +22,8 @@ class CatalogueTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-        companies = CompanyFilter.applyFilter ? CompanyFilter.filteredCompanies : DataDude.companies
+
+        companies = CompanyFilter.filteredCompanies
         navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
         updateCompaniesByLetters(companies)
         tableView.reloadData()
@@ -106,7 +104,7 @@ class CatalogueTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
             selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
         }
-        (segue.destinationViewController as? CompaniesPageViewController)?.companies = companies
+        ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController)?.companies = companies
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

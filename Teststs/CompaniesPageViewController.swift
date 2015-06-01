@@ -20,10 +20,17 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad() 
+        super.viewDidLoad()
+        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+        navigationItem.leftItemsSupplementBackButton = true
         delegate = self
         dataSource = self
-        setViewControllers([viewControllerForCompany(selectedCompany!)], direction: .Forward, animated: true, completion: {done in })
+        if let company = selectedCompany {
+            setViewControllers([viewControllerForCompany(company)], direction: .Forward, animated: true, completion: {done in })
+        } else {
+            self.view.userInteractionEnabled = false
+            setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")! as! UIViewController], direction: .Forward, animated: true, completion: { done in })
+        }
     }
 
     override func didReceiveMemoryWarning() {

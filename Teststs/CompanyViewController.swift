@@ -2,7 +2,7 @@ import UIKit
 
 
 class CompanyViewController: UITableViewController, UIWebViewDelegate {
-
+    
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var favoritesButton: UIButton!
@@ -24,12 +24,12 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
         positionLabel.alpha = 0
-
+        
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
             var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
@@ -40,7 +40,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             }
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,33 +49,38 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        positionLabel.text = "\(find(companies, company!)!+1)/\(companies.count)"
-        logoImageView.image = company?.image
         
-        if let image = company!.image {
-            logoImageView.image = image
-            companyNameLabel.hidden = true
-        } else {
-            logoImageView.image = nil
-            companyNameLabel.hidden = false
-            companyNameLabel.text = company!.shortName
-        }
-        
-        locationLabel.text = company?.locationDescription
-        company?.asyncLocationImage { image in
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                UIView.transitionWithView(self.locationImageView, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                                    self.locationImageView.image = image
-                }, completion: nil)
+        if let company = company {
+            positionLabel.text = "\(find(companies, company)!+1)/\(companies.count)"
+            logoImageView.image = company.image
+            
+            if let image = company.image {
+                logoImageView.image = image
+                companyNameLabel.hidden = true
+            } else {
+                logoImageView.image = nil
+                companyNameLabel.hidden = false
+                companyNameLabel.text = company.shortName
             }
             
+            locationLabel.text = company.locationDescription
+            company.asyncLocationImage { image in
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    UIView.transitionWithView(self.locationImageView, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                        self.locationImageView.image = image
+                        }, completion: nil)
+                }
+                
+            }
+            aboutLabel.text = company.description
+            jobLabel.text = ", ".join(company.jobTypes ?? [])
+            fieldsLabel.text = ", ".join(company.workFields ?? [])
+            websiteLabel.text = company.website
+            countriesLabel.text = "\(company.countries)"
+            employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"
+        } else {
+            assert(false)
         }
-        aboutLabel.text = company?.description
-        jobLabel.text = ", ".join(company?.jobTypes ?? [])
-        fieldsLabel.text = ", ".join(company?.workFields ?? [])
-        websiteLabel.text = company?.website
-        countriesLabel.text = "\(company!.countries)"
-        employeeLabel.text = "\(company!.employeesWorld.thousandsSeparatedString)"
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -85,7 +90,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             self.positionLabel.alpha = 1
         }
     }
-
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.animateWithDuration(0.1) {
@@ -106,15 +111,13 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             UIApplication.sharedApplication().openURL(NSURL(string: "http://" + company!.website)!)
         }
     }
-
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            if let navigationController = navigationController {
-                return navigationController.navigationBar.frame.maxY
-            }
+            return UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)  ? 44 : 64
         }
         if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
-            return 0
+            return 0.000001
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
