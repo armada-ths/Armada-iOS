@@ -1435,7 +1435,7 @@
         <scene sceneID="rZw-5g-N49">
             <objects>
                 <tableViewController restorationIdentifier="Favorites" title="Favorites" id="XsM-DD-yqw" customClass="FavoritesTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="JxM-rR-8ye">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="JxM-rR-8ye">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1518,7 +1518,7 @@
                                     <outlet property="descriptionLabel" destination="sJn-tH-1ZC" id="QcV-eH-8Wl"/>
                                     <outlet property="logoImageView" destination="VFo-74-sbP" id="cRX-Ab-zxe"/>
                                     <outlet property="workFieldLabel" destination="x2r-cA-ylL" id="SaV-Ru-rvA"/>
-                                    <segue destination="PxU-nO-Jqt" kind="showDetail" id="EVK-AU-F8t"/>
+                                    <segue destination="PxU-nO-Jqt" kind="showDetail" identifier="FavoritesSegue" id="EVK-AU-F8t"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1531,7 +1531,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F05-Dj-OFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-832" y="1951"/>
+            <point key="canvasLocation" x="-1202" y="2625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pdo-Zj-v9l">

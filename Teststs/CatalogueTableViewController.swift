@@ -1,6 +1,6 @@
 import UIKit
 
-var selectedCompany: Company?
+//var selectedCompany: Company?
 
 class CatalogueTableViewController: UITableViewController {
     
@@ -99,12 +99,20 @@ class CatalogueTableViewController: UITableViewController {
         return companiesByLetters[section].letter
     }
     
+    var selectedCompany: Company? {
+        if let indexPath = tableView.indexPathForSelectedRow() {
+            return companiesByLetters[indexPath.section].companies[indexPath.row]
+        }
+        return nil
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
+        if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
+            companiesPageViewController.companies = companies
+            if let indexPath = tableView.indexPathForSelectedRow() {
+                companiesPageViewController.selectedCompany = selectedCompany
+            }
         }
-        ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController)?.companies = companies
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

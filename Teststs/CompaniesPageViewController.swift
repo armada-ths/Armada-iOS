@@ -11,6 +11,7 @@ import UIKit
 class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var companies = [Company]()
+    var selectedCompany: Company! = nil
 
     func viewControllerForCompany(company: Company) -> UIViewController {
         let vc = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController

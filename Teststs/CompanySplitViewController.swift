@@ -23,7 +23,7 @@ class CompanySplitViewController: UISplitViewController, UISplitViewControllerDe
     }
     
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        return selectedCompany == nil
+        return false
     }
 
 

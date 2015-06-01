@@ -2,13 +2,10 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
     
-    var companies = DataDude.companies
-
-    
-    var companiesByLetters: [(letter: String, companies: [Company])] = []
-    
-    func updateCompaniesByLetters(companies: [Company]) {
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+    var companies = [Company]() {
+        didSet {
+            //            performSegueWithIdentifier("FavoritesSegue", sender: self)
+        }
     }
     
     override func viewDidLoad() {
@@ -17,23 +14,16 @@ class FavoritesTableViewController: UITableViewController {
     
     func updateFavorites() {
         companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
-        updateCompaniesByLetters(companies)
         navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-        println("Favorites: \(FavoriteCompanies.count)")
-        for company in FavoriteCompanies {
-            println(company)
-        }
-        
         updateFavorites()
         updateFavoritesUI()
         tableView.reloadData()
+        showSelectedCompany()
+//        clearsSelectionOnViewWillAppear = false
     }
     
     func updateFavoritesUI() {
@@ -62,19 +52,19 @@ class FavoritesTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return companiesByLetters.count
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return companiesByLetters[section].companies.count
+        return companies.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTableViewCell", forIndexPath: indexPath) as! CompanyTableViewCell
         
-        let company = companiesByLetters[indexPath.section].companies[indexPath.row]
+        let company = companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         
         cell.descriptionLabel.text = company.name
@@ -98,31 +88,74 @@ class FavoritesTableViewController: UITableViewController {
         return true
     }
     
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            FavoriteCompanies.remove(companiesByLetters[indexPath.section].companies[indexPath.row].name)
-            let deleteSection = companiesByLetters[indexPath.section].companies.count == 1
             tableView.beginUpdates()
-            updateFavorites()
-            if deleteSection {
-                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
-                if FavoriteCompanies.isEmpty {
-                    updateFavoritesUI()
-                }
-            } else {
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            }
+            FavoriteCompanies.remove(companies[indexPath.row].name)
+            companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.endUpdates()
+
+            //            let deleteSection = companies.isEmpty
+            //            if deleteSection {
+            //                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
+            //                if FavoriteCompanies.isEmpty {
+            //                    updateFavoritesUI()
+            //                }
+            //            } else {
+            //
+            //            }
         }
         
+        
+        showSelectedCompany()
+        updateFavoritesUI()
+        performSegueWithIdentifier("FavoritesSegue", sender: self)
+    }
+    
+    func showSelectedCompany() {
+//        if let company = lastCompany,
+//            let row = find(companies, company) {
+//                tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+//        }
+        
+        if let company = lastCompany {
+            if let row = find(companies, company) {
+                tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+            } else {
+                let row = max(0, lastIndexPath!.row-1)
+                if row < tableView.numberOfRowsInSection(0) {
+                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+                }
+            }
+        }
+    }
+    
+    
+    var lastCompany: Company? = nil
+    var lastIndexPath: NSIndexPath? = nil
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        lastCompany = companies[indexPath.row]
+        lastIndexPath = indexPath
+    }
+    
+    var selectedCompany: Company? {
+        if let indexPath = tableView.indexPathForSelectedRow() {
+            return companies[indexPath.row]
+        }
+        return nil
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            selectedCompany = companiesByLetters[indexPath.section].companies[indexPath.row]
+        if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
+            companiesPageViewController.companies = companies
+            if let indexPath = tableView.indexPathForSelectedRow() {
+                companiesPageViewController.selectedCompany = selectedCompany
+            }
         }
-        ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController)?.companies = companies
     }
 }
