@@ -23,6 +23,7 @@ class FavoritesTableViewController: UITableViewController {
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
+
 //        clearsSelectionOnViewWillAppear = false
     }
     
@@ -94,19 +95,12 @@ class FavoritesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             tableView.beginUpdates()
             FavoriteCompanies.remove(companies[indexPath.row].name)
+            if companies[indexPath.row] == lastCompany {
+                lastCompany = nil
+            }
             companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.endUpdates()
-
-            //            let deleteSection = companies.isEmpty
-            //            if deleteSection {
-            //                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: FavoriteCompanies.isEmpty ? .None : .Fade)
-            //                if FavoriteCompanies.isEmpty {
-            //                    updateFavoritesUI()
-            //                }
-            //            } else {
-            //
-            //            }
         }
         
         
