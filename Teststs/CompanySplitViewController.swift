@@ -13,6 +13,7 @@ class CompanySplitViewController: UISplitViewController, UISplitViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         // Do any additional setup after loading the view.
     }
 
