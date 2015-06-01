@@ -23,8 +23,8 @@ class FavoritesTableViewController: UITableViewController {
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
-
-//        clearsSelectionOnViewWillAppear = false
+        
+        //        clearsSelectionOnViewWillAppear = false
     }
     
     func updateFavoritesUI() {
@@ -90,7 +90,10 @@ class FavoritesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+        updateFavoritesUI()
+        performSegueWithIdentifier("FavoritesSegue", sender: self)
         showSelectedCompany()
+        println("Ended Editing! \(indexPath.row)")
     }
     
     // Override to support editing the table view.
@@ -98,45 +101,32 @@ class FavoritesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             tableView.beginUpdates()
             FavoriteCompanies.remove(companies[indexPath.row].name)
-            if companies[indexPath.row] == lastCompany {
-                lastCompany = nil
-            }
             companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.endUpdates()
         }
         
-        
-        showSelectedCompany()
-        updateFavoritesUI()
-        performSegueWithIdentifier("FavoritesSegue", sender: self)
     }
     
     func showSelectedCompany() {
-//        if let company = lastCompany,
-//            let row = find(companies, company) {
-//                tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
-//        }
-        
-        if let company = lastCompany {
-            if let row = find(companies, company) {
-                tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
-            } else {
-                let row = max(0, lastIndexPath!.row-1)
-                if row < tableView.numberOfRowsInSection(0) {
-                    tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
-                }
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            if let company = self.lastCompany,
+//                let nearestCompany = self.companies.filter({ $0.name >= company.name }).first ?? self.companies.filter({ $0.name < company.name }).last,
+                let nearestCompany = self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first,
+                let row = find(self.companies, nearestCompany) {
+                    println("Last company: \(company.name), Nearest company: \(nearestCompany.name), Row: \(row)")
+                    self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
             }
         }
     }
     
     
     var lastCompany: Company? = nil
-    var lastIndexPath: NSIndexPath? = nil
+    //    var lastIndexPath: NSIndexPath? = nil
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         lastCompany = companies[indexPath.row]
-        lastIndexPath = indexPath
+        println("Selected \(lastCompany?.name)")
     }
     
     var selectedCompany: Company? {
