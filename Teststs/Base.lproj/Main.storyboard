@@ -20,8 +20,8 @@
                     <connections>
                         <segue destination="jtF-cB-Wfd" kind="relationship" relationship="viewControllers" id="Sqf-mZ-L72"/>
                         <segue destination="78t-xE-H8C" kind="relationship" relationship="viewControllers" id="See-X9-kSv"/>
-                        <segue destination="Y8B-Vm-U7c" kind="relationship" relationship="viewControllers" id="ZHt-ki-B9l"/>
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
+                        <segue destination="50M-7J-mNK" kind="relationship" relationship="viewControllers" id="vpP-Rx-VV9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -827,7 +827,7 @@
                                     <outlet property="monthLabel" destination="2Hh-jm-ixV" id="g3b-Xi-FCf"/>
                                     <outlet property="summaryLabel" destination="VKd-yo-aSK" id="G8W-eA-UCD"/>
                                     <outlet property="titleLabel" destination="tcZ-wG-mJS" id="d9u-Ko-fTF"/>
-                                    <segue destination="0xZ-Yp-KEd" kind="show" id="pK3-Qa-ACo"/>
+                                    <segue destination="a8f-3o-Luk" kind="showDetail" id="a3f-QP-nME"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -845,14 +845,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSS-vh-xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2163" y="1590"/>
+            <point key="canvasLocation" x="1643" y="1606"/>
         </scene>
         <!--Armada Event Detail Table View Controller-->
         <scene sceneID="mIn-a2-LvB">
             <objects>
                 <tableViewController id="0xZ-Yp-KEd" customClass="ArmadaEventDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="1000" sectionHeaderHeight="22" sectionFooterHeight="22" id="A0R-qj-tls">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -952,10 +952,11 @@
                             <outlet property="delegate" destination="0xZ-Yp-KEd" id="RZ9-eL-KTm"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Xwo-vP-Ei8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sUf-nt-rfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1519" y="2532"/>
+            <point key="canvasLocation" x="3147" y="2628"/>
         </scene>
         <!--News-->
         <scene sceneID="hc7-q5-FZd">
@@ -1052,7 +1053,7 @@
                                     <outlet property="descriptionLabel" destination="J46-C6-eLz" id="KDl-xf-Kbb"/>
                                     <outlet property="isReadLabel" destination="aLV-XF-mYu" id="Rrc-c4-gYx"/>
                                     <outlet property="titleLabel" destination="f1j-mq-Ob6" id="KcF-sj-RbM"/>
-                                    <segue destination="0xZ-Yp-KEd" kind="show" id="E5c-yw-E2s"/>
+                                    <segue destination="a8f-3o-Luk" kind="show" id="E5c-yw-E2s"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1088,7 +1089,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YXr-v7-MiJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2109" y="646"/>
+            <point key="canvasLocation" x="1637" y="718"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="PFh-xm-fpJ">
+            <objects>
+                <splitViewController id="50M-7J-mNK" customClass="ArmadaEventSplitViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Events" image="calendar_2" id="CCP-Fs-hk9">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="calendar_2-1"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <connections>
+                        <segue destination="a8f-3o-Luk" kind="relationship" relationship="detailViewController" id="bGN-VS-YlX"/>
+                        <segue destination="Y8B-Vm-U7c" kind="relationship" relationship="masterViewController" id="lNg-DK-Vue"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cAD-GL-TEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2315" y="-278"/>
         </scene>
         <!--Catalogue-->
         <scene sceneID="ftX-X8-XDU">
@@ -1134,7 +1153,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMZ-3K-5hj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="812" y="728"/>
+            <point key="canvasLocation" x="755" y="728"/>
         </scene>
         <!--Filter-->
         <scene sceneID="wrj-ox-j3d">
@@ -1610,6 +1629,24 @@
             </objects>
             <point key="canvasLocation" x="-3448" y="1092"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="04i-h8-8iH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a8f-3o-Luk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QpA-Rf-cqe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0xZ-Yp-KEd" kind="relationship" relationship="rootViewController" id="Fsy-0O-qxu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XXz-Vu-Fl4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2335" y="2628"/>
+        </scene>
     </scenes>
     <resources>
         <image name="adecco-logo" width="150" height="81"/>
@@ -1629,7 +1666,7 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EVK-AU-F8t"/>
-        <segue reference="pK3-Qa-ACo"/>
+        <segue reference="a3f-QP-nME"/>
+        <segue reference="mja-PR-QlL"/>
     </inferredMetricsTieBreakers>
 </document>

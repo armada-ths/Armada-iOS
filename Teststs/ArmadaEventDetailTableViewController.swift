@@ -33,34 +33,36 @@ class ArmadaEventDetailTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
-        cell.titleLabel.text = selectedArmadaEvent!.title
 
-        
-        let monthFormatter = NSDateFormatter()
-        monthFormatter.dateFormat = "MMM"
-        
-        let dayFormatter = NSDateFormatter()
-        dayFormatter.dateFormat = "d"
-        
-        cell.dayLabel.text = dayFormatter.stringFromDate(selectedArmadaEvent!.startDate)
-        cell.monthLabel.text = monthFormatter.stringFromDate(selectedArmadaEvent!.startDate).uppercaseString
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "E dd MMMM"
-//        cell.dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
-        
-        let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "HH:mm"
-        
-        cell.locationLabel.text = selectedArmadaEvent!.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
-        
-        if selectedArmadaEvent!.location.isEmpty {
-            cell.locationLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+        if let selectedArmadaEvent=selectedArmadaEvent{
+            cell.titleLabel.text = selectedArmadaEvent.title
+            
+            
+            let monthFormatter = NSDateFormatter()
+            monthFormatter.dateFormat = "MMM"
+            
+            let dayFormatter = NSDateFormatter()
+            dayFormatter.dateFormat = "d"
+            
+            cell.dayLabel.text = dayFormatter.stringFromDate(selectedArmadaEvent.startDate)
+            cell.monthLabel.text = monthFormatter.stringFromDate(selectedArmadaEvent.startDate).uppercaseString
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "E dd MMMM"
+            //        cell.dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
+            
+            let timeFormatter = NSDateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            
+            cell.locationLabel.text = selectedArmadaEvent.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent.endDate)
+            
+            if selectedArmadaEvent.location.isEmpty {
+                cell.locationLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent.startDate)
+            }
+            //        cell.timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
+            
+            cell.summaryLabel.text = selectedArmadaEvent.summary
+            // Configure the cell...
         }
-//        cell.timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
-        
-        cell.summaryLabel.text = selectedArmadaEvent!.summary
-        // Configure the cell...
-
         return cell
     }
 
