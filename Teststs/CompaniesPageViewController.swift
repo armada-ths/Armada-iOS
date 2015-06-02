@@ -20,13 +20,11 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         return vc
     }
     
-    var companySplitViewController: CompanySplitViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
         println("CompaniesPageViewController did load")
-        companySplitViewController = (splitViewController as? CompanySplitViewController)!
-        companySplitViewController?.company = selectedCompany
 //        selectedCompany = (splitViewController as? CompanySplitViewController)!.company
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         navigationItem.leftItemsSupplementBackButton = true
@@ -35,18 +33,21 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         if let company = selectedCompany {
             setViewControllers([viewControllerForCompany(company)], direction: .Forward, animated: true, completion: {done in })
         } else {
+            (splitViewController as? CompanySplitViewController)?.shouldCollapse = true
             self.view.userInteractionEnabled = false
             setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")! as! UIViewController], direction: .Forward, animated: true, completion: { done in })
         }
     }
     
     override func viewDidAppear(animated: Bool) {
-        companySplitViewController?.company = selectedCompany
+        super.viewDidAppear(animated)
+        println("CompaniesPageViewController did appear")
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         println("CompaniesPageViewController did disappear")
+//        (splitViewController as? CompanySplitViewController)?.shouldCollapse = true
 //        companySplitViewController!.company = nil
     }
     
