@@ -29,6 +29,8 @@ class CatalogueTableViewController: UITableViewController {
 //        performSegueWithIdentifier("CatalogueSegue", sender: self)
     }
     
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -111,7 +113,6 @@ class CatalogueTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow() {
                 companiesPageViewController.selectedCompany = selectedCompany
             }
-            (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
         }
     }
     

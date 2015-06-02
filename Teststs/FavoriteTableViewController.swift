@@ -2,29 +2,25 @@ import UIKit
 
 class FavoritesTableViewController: UITableViewController {
     
-    var companies = [Company]() {
-        didSet {
-            //            performSegueWithIdentifier("FavoritesSegue", sender: self)
-        }
-    }
+    var companies = [Company]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func updateFavorites() {
-        companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
-        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        updateFavorites()
+        companies = DataDude.companies.filter({ contains(FavoriteCompanies, $0.name) })
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
-        
-        //        clearsSelectionOnViewWillAppear = false
+
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        self.tableView.reloadData()
+        showSelectedCompany()
     }
     
     func updateFavoritesUI() {
@@ -41,6 +37,7 @@ class FavoritesTableViewController: UITableViewController {
             tableView.backgroundView = nil
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         }
+        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,7 +64,6 @@ class FavoritesTableViewController: UITableViewController {
         
         let company = companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
-        
         cell.descriptionLabel.text = company.name
         
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
@@ -100,9 +96,29 @@ class FavoritesTableViewController: UITableViewController {
             return
         }
         isEditingTableView = false
-        updateFavoritesUI()
         showSelectedCompany()
-        println("Ended Editing! \(indexPath.row)")
+    }
+    
+    func showSelectedCompany() {
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            if self.companySplitViewController.collapsed {
+                if let indexPath = self.tableView.indexPathForSelectedRow() {
+                    self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                }
+            } else {
+                if let company = self.selectedCompany {
+                    self.selectedCompany = self.nearestCompany(company, comanies: self.companies)
+                }
+                if let company = self.selectedCompany,
+                    let row = find(self.companies, company) {
+                        self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
+                        self.performSegueWithIdentifier("FavoritesSegue", sender: self)
+                } else {
+                    self.performSegueWithIdentifier("FavoritesSegue", sender: self)
+                }
+            }
+            self.updateFavoritesUI()
+        }
     }
     
     // Override to support editing the table view.
@@ -114,51 +130,41 @@ class FavoritesTableViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.endUpdates()
         }
-        
     }
     
-    func showSelectedCompany() {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                if let company = self.lastCompany,
-                    let nearestCompany = self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first,
-                    let row = find(self.companies, nearestCompany) {
-                        println("Last company: \(company.name), Nearest company: \(nearestCompany.name), Row: \(row)")
-                        self.lastCompany = nearestCompany
-                        self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
-                        if company != nearestCompany {
-                            self.performSegueWithIdentifier("FavoritesSegue", sender: self)
-                        }
-                }
-            }
+    var companySplitViewController: CompanySplitViewController {
+        return (self.splitViewController as? CompanySplitViewController)!
     }
     
-    
-    
-    
-    var lastCompany: Company? = nil
-    //    var lastIndexPath: NSIndexPath? = nil
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        lastCompany = companies[indexPath.row]
-        println("Selected \(lastCompany?.name)")
-        //        self.performSegueWithIdentifier("FavoritesSegue", sender: self)
+    func nearestCompany(company: Company, comanies: [Company]) -> Company? {
+        return self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first
     }
     
-    var selectedCompany: Company? {
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            return companies[indexPath.row]
-        }
-        return nil
+    //    var selectedCompany: Company? {
+    //        if let indexPath = tableView.indexPathForSelectedRow() {
+    //            return companies[indexPath.row]
+    //        }
+    //        return nil
+    //    }
+    
+    
+    var selectedCompany: Company? = nil
+    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        println("will select row")
+        selectedCompany = companies[indexPath.row]
+        return indexPath
     }
+    //    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //        selectedCompany = companies[indexPath.row]
+    //    }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("Segue to CompaniesPageViewController")
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
-            if let indexPath = tableView.indexPathForSelectedRow() {
-                companiesPageViewController.selectedCompany = selectedCompany
-            }
-            (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
+            companiesPageViewController.selectedCompany = selectedCompany
         }
     }
 }

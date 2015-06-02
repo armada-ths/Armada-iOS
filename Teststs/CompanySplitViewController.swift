@@ -9,8 +9,8 @@
 import UIKit
 
 class CompanySplitViewController: UISplitViewController, UISplitViewControllerDelegate {
-
-    var shouldCollapse = true
+    
+    var company: Company? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class CompanySplitViewController: UISplitViewController, UISplitViewControllerDe
     }
     
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        return shouldCollapse
+        return company == nil
     }
 
 

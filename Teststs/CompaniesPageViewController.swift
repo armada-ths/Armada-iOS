@@ -20,8 +20,14 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         return vc
     }
     
+    var companySplitViewController: CompanySplitViewController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("CompaniesPageViewController did load")
+        companySplitViewController = (splitViewController as? CompanySplitViewController)!
+        companySplitViewController?.company = selectedCompany
+//        selectedCompany = (splitViewController as? CompanySplitViewController)!.company
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         navigationItem.leftItemsSupplementBackButton = true
         delegate = self
@@ -33,6 +39,22 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
             setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")! as! UIViewController], direction: .Forward, animated: true, completion: { done in })
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        companySplitViewController?.company = selectedCompany
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        println("CompaniesPageViewController did disappear")
+//        companySplitViewController!.company = nil
+    }
+    
+//    override func viewWillDisappear(animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        println("CompaniesPageViewController will disappear")
+//        companySplitViewController!.company = nil
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
