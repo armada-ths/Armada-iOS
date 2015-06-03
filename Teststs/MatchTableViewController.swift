@@ -3,7 +3,7 @@ import UIKit
 class MatchTableViewController: UITableViewController {
     
     var companies = [Company]()
-    
+    var matchPercentages = [Double]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -11,11 +11,11 @@ class MatchTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        companies = DataDude.companies.filter({ contains(FavoriteCompanies, $0.name) })
+        companies = Array(DataDude.companies[0..<10])
+        matchPercentages = companies.map({ _ in Double(Int(rand()) % 101) / 100 }).sorted(>)
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
-        
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -63,11 +63,16 @@ class MatchTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MatchTableViewCell", forIndexPath: indexPath) as! MatchTableViewCell
         
+        let matchPercentage = matchPercentages[indexPath.row]
+        
         let company = companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
-        
+        cell.matchProgressView.progress = Float(matchPercentage)
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
+        
+        cell.positionLabel.text = "\(indexPath.row+1)"
+        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true
@@ -159,5 +164,11 @@ class MatchTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var workFieldLabel: UILabel!
+    @IBOutlet weak var matchProgressView: UIProgressView!
+    
+    
+    @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var matchLabel: UILabel!
+    
 }
 
