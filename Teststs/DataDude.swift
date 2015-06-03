@@ -140,6 +140,7 @@ public struct ArmadaEvent {
     public let location: String
     public let startDate: NSDate
     public let endDate: NSDate
+    public let signupLink: String
 }
 
 public struct News {
@@ -197,11 +198,12 @@ public class _DataDude {
                 let summary = json["summary"] as? String,
                 let location = json["location"] as? String,
                 let startDateString = json["starts_at"] as? String,
-                let endDateString = json["ends_at"] as? String {
-                    return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString))
+                let endDateString = json["ends_at"] as? String,
+                let signupLink = json["signup_link"] as? String {
+                    return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink)
             }
             return nil
-            } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
+            } ?? []).filter { !$0.signupLink.isEmpty } //.filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
     }
     public func newsFromJson(json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in

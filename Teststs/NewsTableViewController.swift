@@ -10,9 +10,6 @@ import UIKit
 
 var selectedNewsItem:News!
 
-
-
-
 class NewsTableViewController: UITableViewController {
     var readArmadaNews = [String]()
     let news = DataDude.newsFromServer()!
@@ -89,7 +86,7 @@ class NewsTableViewController: UITableViewController {
         
         let contentWithoutHtml = NSAttributedString(data: selectedNewsItem.content.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string
         
-        selectedArmadaEvent = ArmadaEvent(title: selectedNewsItem.title, summary: contentWithoutHtml, location: "", startDate: selectedNewsItem.publishedDate, endDate: selectedNewsItem.publishedDate)
+        selectedArmadaEvent = ArmadaEvent(title: selectedNewsItem.title, summary: contentWithoutHtml, location: "", startDate: selectedNewsItem.publishedDate, endDate: selectedNewsItem.publishedDate, signupLink: "")
 
     }
 

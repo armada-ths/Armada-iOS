@@ -15,6 +15,11 @@ class ArmadaEventDetailTableViewController: UITableViewController {
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //        self.tableView.estimatedRowHeight = 300
     }
+    @IBAction func signupButtonClicked(sender: UIButton) {
+        if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
