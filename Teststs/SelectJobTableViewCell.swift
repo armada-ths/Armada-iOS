@@ -8,16 +8,19 @@
 
 import UIKit
 
+
 class SelectJobTableViewCell: UITableViewCell {
     
     weak var controller: CatalogueFilterTableViewController? = nil
     @IBOutlet weak var jobSwitch: UISwitch!
     @IBAction func changedJob(sender: UISwitch) {
-        CompanyFilter.jobs = sender.on ? CompanyFilter.jobs + [jobName] : CompanyFilter.jobs.filter { $0 != self.jobName }
-        
-        controller!.updateTitle()
+        onChange?(sender.on)
+//        CompanyFilter.jobs = sender.on ? CompanyFilter.jobs + [jobName] : CompanyFilter.jobs.filter { $0 != self.jobName }
+//        controller?	.updateTitle()
 //        controller!.tableView.reloadData()
     }
+    
+    var onChange: (Bool -> Void)?
 
     @IBOutlet weak var jobCountLabel: UILabel!
     var jobName = ""

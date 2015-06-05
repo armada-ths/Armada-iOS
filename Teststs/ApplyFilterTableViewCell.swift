@@ -13,7 +13,6 @@ class ApplyFilterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var applyFilterSwitch: UISwitch!
     @IBAction func switchChanged(sender: UISwitch) {
-        CompanyFilter.applyFilter = sender.on
         controller?.updateTitle()
     }
     

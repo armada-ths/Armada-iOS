@@ -68,11 +68,14 @@ class MatchTableViewController: UITableViewController {
         let company = companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
-        cell.matchProgressView.progress = Float(matchPercentage)
+        
+        cell.matchProgressView.setProgress(0, animated: false)
+        cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         
         cell.positionLabel.text = "\(indexPath.row+1)"
         cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
+        cell.matchLabel.hidden = true
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true
@@ -81,44 +84,11 @@ class MatchTableViewController: UITableViewController {
             cell.companyNameLabel.hidden = false
             cell.companyNameLabel.text = company.shortName
         }
-        
-        
         return cell
-    }
-    
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    
-    
-    var isEditingTableView = false
-    override func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
-        isEditingTableView = true
-    }
-    
-    override func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
-        if !isEditingTableView {
-            return
-        }
-        isEditingTableView = false
-        showSelectedCompany()
     }
     
     func showSelectedCompany() {
         
-    }
-    
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            tableView.beginUpdates()
-            FavoriteCompanies.remove(companies[indexPath.row].name)
-            companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            tableView.endUpdates()
-        }
     }
     
     var companySplitViewController: CompanySplitViewController {

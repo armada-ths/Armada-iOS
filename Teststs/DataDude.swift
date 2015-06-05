@@ -164,6 +164,22 @@ public class _DataDude {
         }
     }
     
+    var jobTypes: [String] {
+        return Array(Set(companies.flatMap({ $0.jobTypes })))
+    }
+    
+    var continents: [String] {
+        return Array(Set(companies.flatMap({ $0.continents })))
+    }
+    
+    var workFields: [String] {
+        return Array(Set(companies.flatMap({ $0.workFields })))
+    }
+    
+    var educationTypes: [String] {
+        return Array(Set(companies.flatMap({ $0.programmes })))
+    }
+    
     func dateFromString(string: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
@@ -181,11 +197,6 @@ public class _DataDude {
     
     public func allCompanyValues(companies:[Company]) -> Set<String>{
         return Set(companies.map({$0.jobTypes}).reduce([String](), combine: +))
-    }
-    
-    
-    var jobs: [String] {
-        return Array(Set(companies.map({$0.jobTypes}).reduce([String](), combine: +)))
     }
     
     var programmes: [String] {

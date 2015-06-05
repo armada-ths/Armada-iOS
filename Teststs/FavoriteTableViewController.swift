@@ -4,7 +4,6 @@ class FavoritesTableViewController: UITableViewController {
     
     var companies = [Company]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -15,7 +14,6 @@ class FavoritesTableViewController: UITableViewController {
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
-
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
