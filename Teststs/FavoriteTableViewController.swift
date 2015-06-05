@@ -138,13 +138,6 @@ class FavoritesTableViewController: UITableViewController {
         return self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first
     }
     
-    //    var selectedCompany: Company? {
-    //        if let indexPath = tableView.indexPathForSelectedRow() {
-    //            return companies[indexPath.row]
-    //        }
-    //        return nil
-    //    }
-    
     
     var selectedCompany: Company? = nil
     
@@ -153,10 +146,6 @@ class FavoritesTableViewController: UITableViewController {
         selectedCompany = companies[indexPath.row]
         return indexPath
     }
-    //    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) {
-    //        selectedCompany = companies[indexPath.row]
-    //    }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         println("Segue to CompaniesPageViewController")
