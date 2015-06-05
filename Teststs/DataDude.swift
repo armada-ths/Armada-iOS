@@ -1,11 +1,3 @@
-//
-//  DataDude.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 26/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 var allCompanyNames = [
@@ -166,6 +158,10 @@ public class _DataDude {
     
     var jobTypes: [String] {
         return Array(Set(companies.flatMap({ $0.jobTypes })))
+    }
+    
+    var companyValues: [String] {
+        return Array(Set(companies.flatMap({ $0.companyValues })))
     }
     
     var continents: [String] {

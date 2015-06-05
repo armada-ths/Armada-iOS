@@ -2,7 +2,7 @@ import UIKit
 
 class SelectEducationTableViewController: UITableViewController {
     
-    let headers = Array(Set((["All Programmes in Unspecified"] + DataDude.programmes).map { $0.componentsSeparatedByString(" in ")[0] })).sorted({$0 < $1})
+    let headers = Array(Set((["All Programmes in Unspecified"] + DataDude.programmes).map { $0.componentsSeparatedByString(" in ")[0] })).sorted(<)
     var educations = [[String]]()
     
     override func viewDidLoad() {
@@ -28,7 +28,6 @@ class SelectEducationTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SelectEducationTableViewCell", forIndexPath: indexPath) as! UITableViewCell
         let program = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]
-
         let numJobs = indexPath.section == 0 ? DataDude.companies.count : DataDude.companies.filter({ contains($0.programmes, program) }).count
         cell.textLabel?.text = educations[indexPath.section][indexPath.row]
         cell.detailTextLabel?.text = "\(numJobs)"
@@ -36,10 +35,9 @@ class SelectEducationTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        CompanyFilter.programme = headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]
-        
+        CompanyFilter[.Programmes] = [headers[indexPath.section] + " in " + educations[indexPath.section][indexPath.row]]
         if indexPath.section == 0 {
-            CompanyFilter.programme = nil
+            CompanyFilter[.Programmes] = []
         }
     }
 }
