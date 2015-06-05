@@ -1,11 +1,3 @@
-//
-//  ArmadaEventTableViewCell.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 26/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 class ArmadaEventTableViewCell: UITableViewCell {

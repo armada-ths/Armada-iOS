@@ -1,11 +1,3 @@
-//
-//  ArmadaEventDetailTableViewController.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 27/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 class ArmadaEventDetailTableViewController: UITableViewController {

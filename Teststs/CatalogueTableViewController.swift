@@ -25,11 +25,7 @@ class CatalogueTableViewController: UITableViewController {
         updateCompaniesByLetters(companies)
         tableView.reloadData()
         updateFavoritesUI()
-        
-//        performSegueWithIdentifier("CatalogueSegue", sender: self)
     }
-    
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,24 +56,18 @@ class CatalogueTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return companiesByLetters.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return companiesByLetters[section].companies.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTableViewCell", forIndexPath: indexPath) as! CompanyTableViewCell
-        
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
-        
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         if let image = company.image {
             cell.logoImageView.image = image
@@ -87,10 +77,8 @@ class CatalogueTableViewController: UITableViewController {
             cell.companyNameLabel.hidden = false
             cell.companyNameLabel.text = company.shortName
         }
-        
         return cell
     }
-    
     
     override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         return companiesByLetters.map { $0.letter }
@@ -110,9 +98,7 @@ class CatalogueTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
-            if let indexPath = tableView.indexPathForSelectedRow() {
-                companiesPageViewController.selectedCompany = selectedCompany
-            }
+            companiesPageViewController.selectedCompany = selectedCompany
         }
     }
     
@@ -120,7 +106,6 @@ class CatalogueTableViewController: UITableViewController {
         view.endEditing(true)
     }
 }
-
 
 extension CatalogueTableViewController: UISearchBarDelegate {
     

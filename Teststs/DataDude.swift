@@ -1,23 +1,8 @@
 import UIKit
 
-var allCompanyNames = [
-    "ABB",
-    "Accenture",
-    "Academic Work",
-    "Adecco",
-    "Capgemini",
-    "Ericsson",
-    "Volvo",
-    "Combitech",
-    "Cybercom",
-    "Arla Foods",
-    "Astra Zeneca",
-    ].sorted { $0 < $1 }
-
 public struct Company: Equatable, Hashable {
     
     init!(json: [String: AnyObject]){
-        
         if let name = json["name"] as? String,
             let description = json["description"] as? String,
             let website = json["website_url"] as? String,
@@ -60,10 +45,9 @@ public struct Company: Equatable, Hashable {
                 self.continents = Array.removeNils(continents.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
                 self.workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
                 
-        }else {
+        } else {
             return nil
         }
-        
     }
     
     public var hashValue: Int {
@@ -102,7 +86,6 @@ public struct Company: Equatable, Hashable {
         return UIImage()
     }
     
-    // Pretty code for shortening uninteresting stuff like AB in names
     var shortName: String {
         return (reduce([" sverige", " ab", " sweden"], name) {
         $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
@@ -183,7 +166,6 @@ public class _DataDude {
         return dateFormatter.dateFromString(":".join(b[0..<b.count-1]) + b[b.count-1])!
     }
     
-    
     class public func companiesFromJson(json: AnyObject) -> [Company] {
         let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
@@ -263,7 +245,6 @@ public class _DataDude {
         }
         return nil
     }
-    
 }
 
 extension Array {

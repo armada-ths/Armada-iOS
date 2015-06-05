@@ -11,8 +11,8 @@ class FavoritesTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         companies = DataDude.companies.filter({ contains(FavoriteCompanies, $0.name) })
-        updateFavoritesUI()
         tableView.reloadData()
+        updateFavoritesUI()
         showSelectedCompany()
     }
     

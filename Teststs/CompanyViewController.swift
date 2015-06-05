@@ -1,6 +1,5 @@
 import UIKit
 
-
 class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var cell1: UITableViewCell!

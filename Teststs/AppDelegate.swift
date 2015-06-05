@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 14/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -20,18 +12,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UITabBar.appearance().tintColor = UIColor(hex: armadaGreen)
         window!.tintColor = UIColor(hex: armadaGreen)
-        
         UINavigationBar.appearance().barTintColor = UIColor(hex: armadaGreen)
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
-        
-//        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
-        
-//        UINavigationBar.appearance().tintColor = UIColor(hex: armadaGreen)
-
-        
-        // Override point for customization after application launch.
         return true
     }
 

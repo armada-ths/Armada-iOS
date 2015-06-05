@@ -1,4 +1,3 @@
-
 import UIKit
 
 class AddCompanyPropertyTableViewController: UITableViewController {
@@ -6,7 +5,6 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     var values = [String]()
     var selectedValue: String?
     var jobCount = [Int]()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()

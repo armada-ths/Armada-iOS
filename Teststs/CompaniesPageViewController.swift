@@ -1,11 +1,3 @@
-//
-//  CompaniesPageViewController.swift
-//  Teststs
-//
-//  Created by Sami Purmonen on 27/05/15.
-//  Copyright (c) 2015 Sami Purmonen. All rights reserved.
-//
-
 import UIKit
 
 class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -19,7 +11,6 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         vc.companies = companies
         return vc
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +38,7 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         println("CompaniesPageViewController did disappear")
-//        (splitViewController as? CompanySplitViewController)?.shouldCollapse = true
-//        companySplitViewController!.company = nil
     }
-    
-//    override func viewWillDisappear(animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        println("CompaniesPageViewController will disappear")
-//        companySplitViewController!.company = nil
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,5 +54,4 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         let index = (find(companies, (viewController as! CompanyViewController).company!)! - 1 + companies.count) % companies.count
         return viewControllerForCompany(companies[index])
     }
-    
 }

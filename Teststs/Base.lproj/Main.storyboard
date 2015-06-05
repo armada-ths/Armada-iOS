@@ -1176,50 +1176,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ApplyFilterTableViewCell" rowHeight="64" id="6we-8O-fEa" customClass="ApplyFilterTableViewCell" customModule="Teststs" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6we-8O-fEa" id="pQN-BW-HyB">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kVN-aC-0pY">
-                                            <rect key="frame" x="543" y="16" width="51" height="31"/>
-                                            <connections>
-                                                <action selector="switchChanged:" destination="6we-8O-fEa" eventType="valueChanged" id="nnT-fb-qdO"/>
-                                            </connections>
-                                        </switch>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apply Filter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCI-7t-11m">
-                                            <rect key="frame" x="53" y="21" width="87" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter" translatesAutoresizingMaskIntoConstraints="NO" id="wnN-OD-X0A">
-                                            <rect key="frame" x="8" y="13" width="40" height="37"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="Nuv-cd-l3z"/>
-                                                <constraint firstAttribute="height" constant="37" id="ObG-Du-qef"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="WCI-7t-11m" secondAttribute="centerY" id="0Ol-5h-nGY"/>
-                                        <constraint firstItem="WCI-7t-11m" firstAttribute="leading" secondItem="wnN-OD-X0A" secondAttribute="trailing" constant="5" id="2MQ-bv-5RN"/>
-                                        <constraint firstItem="WCI-7t-11m" firstAttribute="leading" secondItem="pQN-BW-HyB" secondAttribute="leadingMargin" constant="70" id="7ec-AC-a5h"/>
-                                        <constraint firstAttribute="centerY" secondItem="kVN-aC-0pY" secondAttribute="centerY" id="BWc-9g-PLL"/>
-                                        <constraint firstAttribute="centerY" secondItem="wnN-OD-X0A" secondAttribute="centerY" id="YLk-0w-fQe"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="kVN-aC-0pY" secondAttribute="trailing" id="ZYe-7e-X32"/>
-                                        <constraint firstItem="wnN-OD-X0A" firstAttribute="leading" secondItem="pQN-BW-HyB" secondAttribute="leadingMargin" id="rjp-0n-eRJ"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="7ec-AC-a5h"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="applyFilterSwitch" destination="kVN-aC-0pY" id="4uc-hE-151"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SelectedEducationTableViewCell" rowHeight="64" id="FrU-oA-Zbi" customClass="SelectedEducationTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FrU-oA-Zbi" id="9ke-a0-mGS">
@@ -1261,10 +1217,24 @@
                                     <segue destination="xYg-Bf-1on" kind="show" id="DRs-VD-tKi"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyPropertyCell" id="TBs-7X-aSS">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompanyPropertyCell" textLabel="4gf-Ch-7hq" detailTextLabel="ItK-k7-DOH" style="IBUITableViewCellStyleValue1" id="TBs-7X-aSS">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TBs-7X-aSS" id="Z7o-60-Z37">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4gf-Ch-7hq">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ItK-k7-DOH">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPropertyCell" id="u6Z-fE-HNp" customClass="AddCompanyPropertyTableViewCell" customModule="Teststs" customModuleProvider="target">
@@ -1462,7 +1432,7 @@
             </objects>
             <point key="canvasLocation" x="-3440" y="1906"/>
         </scene>
-        <!--SelectProgrammeTableViewController-->
+        <!--Select Programme-->
         <scene sceneID="7qS-Q7-qvH">
             <objects>
                 <tableViewController storyboardIdentifier="SelectProgrammeTableViewController" id="xYg-Bf-1on" customClass="SelectProgrammeTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
@@ -1501,7 +1471,7 @@
                             <outlet property="delegate" destination="xYg-Bf-1on" id="wEN-y7-ZPa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="SelectProgrammeTableViewController" id="x9O-hD-Qko"/>
+                    <navigationItem key="navigationItem" title="Select Programme" id="x9O-hD-Qko"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Rb-66-SDC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hvx-yP-SEd" userLabel="Exit" sceneMemberID="exit"/>

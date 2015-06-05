@@ -38,6 +38,10 @@ extension Company {
     }
 }
 
+func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
+    return DataDude.companies.filter({ contains(($0[property]), value) }).count
+}
+
 let CompanyFilter = _CompanyFilter()
 class _CompanyFilter {
     
@@ -66,12 +70,9 @@ class _CompanyFilter {
 
 class CatalogueFilterTableViewController: UITableViewController {
     
-    @IBOutlet weak var educationTableViewCell: UITableViewCell!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -152,10 +153,10 @@ class CatalogueFilterTableViewController: UITableViewController {
         if indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1 {
             let cell = cellWithIdentifier("CompanyPropertyCell")
             cell.textLabel?.text = CompanyFilter[property][indexPath.row]
+            cell.detailTextLabel?.text = "\(numberOfCompaniesForPropertyValue(property, CompanyFilter[property][indexPath.row]))"
             return cell
         } else {
             let cell = cellWithIdentifier("AddPropertyCell") as! AddCompanyPropertyTableViewCell
-            
             cell.addButton.setTitle("Add \(property)", forState: .Normal)
             return cell
         }
