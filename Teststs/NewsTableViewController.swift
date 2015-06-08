@@ -4,54 +4,111 @@ var selectedNewsItem:News!
 
 class NewsTableViewController: UITableViewController {
     var readArmadaNews = [String]()
-    let news = [News]() //DataDude.newsFromServer()!
+    let news = DataDude.newsFromServer()!
+
+    
+    var imageView: UIImageView!
+    
+    var headerView: UIView!
+    
+    let headerHeight: CGFloat = 200+64
+    
+    var headerMaskLayer: CAShapeLayer!
+    
+    func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
+        if tableView.contentOffset.y < -headerHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+        
+        let path = UIBezierPath()
+        path.moveToPoint(CGPoint(x: 0, y: 0))
+        path.addLineToPoint(CGPoint(x: headerRect.width, y: 0))
+        path.addLineToPoint(CGPoint(x: headerRect.width, y: headerRect.height))
+        path.addLineToPoint(CGPoint(x: 0, y: headerRect.height-50))
+        headerMaskLayer?.path = path.CGPath
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        updateHeaderView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                self.tableView.rowHeight = UITableViewAutomaticDimension
-                self.tableView.estimatedRowHeight = 200
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
+        tableView.sendSubviewToBack(headerView)
+        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -headerHeight)
+        headerMaskLayer = CAShapeLayer()
+        headerMaskLayer.fillColor = UIColor.blackColor().CGColor
+        headerView.layer.mask = headerMaskLayer
+        updateHeaderView()
+
         
-
+        
         // Uncomment the following line to preserve selection between presentations
-         self.clearsSelectionOnViewWillAppear = true
-
+        self.clearsSelectionOnViewWillAppear = true
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return tableView.dequeueReusableCellWithIdentifier("NewsBackgroundTableViewCell") as! UITableViewCell
+//    }
+    
+//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 203
+//    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return news.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
+//        if indexPath.row == 0 {
+//            let cell = tableView.dequeueReusableCellWithIdentifier("NewsBackgroundTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+//            return cell
+//        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell
         
         let newsItem = news[indexPath.row]
         cell.titleLabel.text = newsItem.title
         cell.descriptionLabel.text = newsItem.content
-
+        
         
         let monthFormatter = NSDateFormatter()
         monthFormatter.dateFormat = "MMM"
@@ -62,12 +119,8 @@ class NewsTableViewController: UITableViewController {
         cell.descriptionLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate) + " " + monthFormatter.stringFromDate(newsItem.publishedDate)
         
         cell.isReadLabel.hidden = contains(readArmadaNews, newsItem.title)
-        
-//        cell.dayLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate)
-//        cell.monthLabel.text = monthFormatter.stringFromDate(newsItem.publishedDate)
-        
         return cell
-
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -79,52 +132,6 @@ class NewsTableViewController: UITableViewController {
         let contentWithoutHtml = NSAttributedString(data: selectedNewsItem.content.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string
         
         selectedArmadaEvent = ArmadaEvent(title: selectedNewsItem.title, summary: contentWithoutHtml, location: "", startDate: selectedNewsItem.publishedDate, endDate: selectedNewsItem.publishedDate, signupLink: "")
-
+        
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

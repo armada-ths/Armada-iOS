@@ -1,12 +1,12 @@
 import UIKit
-
+let armadaBlue = 0x273760
+let armadaGreen = 0x1C6965
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let armadaBlue = 0x273760
-    let armadaGreen = 0x1C6965
+
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 

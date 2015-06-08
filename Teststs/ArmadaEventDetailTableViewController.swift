@@ -34,7 +34,6 @@ class ArmadaEventDetailTableViewController: UITableViewController {
         if let selectedArmadaEvent=selectedArmadaEvent{
             cell.titleLabel.text = selectedArmadaEvent.title
             
-            
             let monthFormatter = NSDateFormatter()
             monthFormatter.dateFormat = "MMM"
             

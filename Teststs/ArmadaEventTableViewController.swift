@@ -2,13 +2,16 @@ import UIKit
 
 var selectedArmadaEvent: ArmadaEvent? = nil
 
-class ArmadaEventTableViewController: UITableViewController {
+class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
-    let armadaEvents = [ArmadaEvent]() //DataDude.eventsFromServer() ?? [ArmadaEvent]()
+    let armadaEvents = DataDude.eventsFromServer() ?? [ArmadaEvent]()
     var readArmadaEvents = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        splitViewController?.delegate = self
+        
         //self.tableView.rowHeight = UITableViewAutomaticDimension
         //self.tableView.estimatedRowHeight = 220
         //tableView.reloadData()
@@ -27,6 +30,10 @@ class ArmadaEventTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+        return true
     }
 
     // MARK: - Table view data source
