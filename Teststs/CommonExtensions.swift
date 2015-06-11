@@ -25,7 +25,7 @@ extension Int {
         let x = self
         let thousands = x / 1000
         let nonThousands = x % 1000
-        let paddedNonThousands = Array(0..<(3-count("\(nonThousands)"))).reduce("") {a,b in a + "0"}
+        let paddedNonThousands = Array(0..<(3-"\(nonThousands)".characters.count)).reduce("") {a,b in a + "0"}
         return thousands > 0 ? "\(thousands) \(paddedNonThousands)\(nonThousands)" : "\(nonThousands)"
     }
 }

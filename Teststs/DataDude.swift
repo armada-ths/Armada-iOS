@@ -87,7 +87,7 @@ public struct Company: Equatable, Hashable {
     }
     
     var shortName: String {
-        return (reduce([" sverige", " ab", " sweden"], name) {
+        return ([" sverige", " ab", " sweden"].reduce(name) {
         $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
         }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
     }
@@ -131,11 +131,16 @@ public class _DataDude {
     let companies: [Company]
     private init() {
         if let companies = _DataDude.companiesFromFile() {
-            println("Retrieved companies from file!")
+            print("Retrieved companies from file!")
             self.companies = companies.filter({ $0.image != nil })
         } else {
-            println("Retrieved companies from server!")
-            self.companies = _DataDude.companiesFromServer()!.filter({ $0.image != nil })
+            print("Retrieved companies from server!")
+            do {
+                self.companies = try _DataDude.companiesFromServer().filter({ $0.image != nil })
+            } catch {
+                print(error)
+                self.companies = []
+            }
         }
     }
     
@@ -170,7 +175,7 @@ public class _DataDude {
         let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
             return Company(json: json)
             } ?? [])
-        return companies.sorted { $0.name < $1.name }
+        return companies.sort { $0.name < $1.name }
     }
     
     public func allCompanyValues(companies:[Company]) -> Set<String>{
@@ -178,7 +183,8 @@ public class _DataDude {
     }
     
     var programmes: [String] {
-        return Array(Set(companies.map({$0.programmes}).reduce([String](), combine: +))).sorted(<).filter({$0.rangeOfString(" in ") != nil})
+        let zebra = Array(Set(companies.map({$0.programmes}).reduce([String](), combine: +))).sort(<)
+        return zebra.filter({$0.rangeOfString(" in ") != nil})
     }
     
     public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {
@@ -207,44 +213,40 @@ public class _DataDude {
     
     static let companiesFileName = "companies.json"
     
-    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as! [String])[0]
+    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
     
     class func companiesFromFile() -> [Company]? {
         if let data = NSData(contentsOfFile: dir.stringByAppendingPathComponent(companiesFileName)),
-            let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
-            return companiesFromJson(json)
-        }
-        return nil
-    }
-    
-    class func companiesFromServer() -> [Company]? {
-        let companyUrl = "http://armada.nu/api/companies.json?include=relations"
-        if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
-            let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
-                var err: NSError?
-                data.writeToFile(dir.stringByAppendingPathComponent(companiesFileName), atomically: true)
+            let json: AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: []) {
                 return companiesFromJson(json)
         }
         return nil
     }
     
-    func eventsFromServer() -> [ArmadaEvent]? {
-        let companyUrl = "http://armada.nu/api/events.json"
-        if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
-            let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
-                return eventsFromJson(json)
-        }
-        return nil
+    class func companiesFromServer() throws -> [Company] {
+        let json = try jsonFromUrl("http://armada.nu/api/companies.json?include=relations")
+        return companiesFromJson(json)
     }
     
-    func newsFromServer() -> [News]? {
-        let companyUrl = "http://armada.nu/api/news.json"
-        if let data = NSData(contentsOfURL: NSURL(string: companyUrl)!, options: nil, error: nil),
-            let json: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) {
-                return newsFromJson(json)
-        }
-        return nil
+    func eventsFromServer() throws -> [ArmadaEvent] {
+        let json = try jsonFromUrl("http://armada.nu/api/events.json")
+        return eventsFromJson(json)
     }
+    
+    
+    func newsFromServer() throws -> [News] {
+        let json = try jsonFromUrl("http://armada.nu/api/news.json")
+        return newsFromJson(json)
+    }
+}
+
+func jsonFromUrl(url: String) throws -> AnyObject {
+    if let url = NSURL(string: url) {
+        let data = try NSData(contentsOfURL: url, options: [])
+        return try NSJSONSerialization.JSONObjectWithData(data, options: [])
+    }
+    
+    throw NSError(domain: "banan", code: 1337, userInfo: [:])
 }
 
 extension Array {

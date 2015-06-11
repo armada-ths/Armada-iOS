@@ -10,7 +10,7 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        companies = DataDude.companies.filter({ contains(FavoriteCompanies, $0.name) })
+        companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
         tableView.reloadData()
         updateFavoritesUI()
         showSelectedCompany()
@@ -100,7 +100,7 @@ class FavoritesTableViewController: UITableViewController {
     func showSelectedCompany() {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             if self.companySplitViewController.collapsed {
-                if let indexPath = self.tableView.indexPathForSelectedRow() {
+                if let indexPath = self.tableView.indexPathForSelectedRow {
                     self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
                 }
             } else {
@@ -108,7 +108,7 @@ class FavoritesTableViewController: UITableViewController {
                     self.selectedCompany = self.nearestCompany(company, comanies: self.companies)
                 }
                 if let company = self.selectedCompany,
-                    let row = find(self.companies, company) {
+                    let row = self.companies.indexOf(company) {
                         self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0), animated: false, scrollPosition: .None)
                         self.performSegueWithIdentifier("FavoritesSegue", sender: self)
                 } else {
@@ -124,7 +124,7 @@ class FavoritesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             tableView.beginUpdates()
             FavoriteCompanies.remove(companies[indexPath.row].name)
-            companies = DataDude.companies.filter { contains(FavoriteCompanies, $0.name) }
+            companies = DataDude.companies.filter { FavoriteCompanies.contains($0.name) }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.endUpdates()
         }
@@ -142,13 +142,13 @@ class FavoritesTableViewController: UITableViewController {
     var selectedCompany: Company? = nil
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        println("will select row")
+        print("will select row")
         selectedCompany = companies[indexPath.row]
         return indexPath
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("Segue to CompaniesPageViewController")
+        print("Segue to CompaniesPageViewController")
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany

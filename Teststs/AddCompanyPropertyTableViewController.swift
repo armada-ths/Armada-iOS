@@ -31,7 +31,7 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AddCompanyPropertyTableViewCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("AddCompanyPropertyTableViewCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = values[indexPath.row]
         cell.detailTextLabel?.text = "\(jobCount[indexPath.row])"
         return cell

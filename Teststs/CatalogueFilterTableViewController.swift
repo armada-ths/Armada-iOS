@@ -1,6 +1,6 @@
 import UIKit
 
-enum CompanyProperty: Printable {
+enum CompanyProperty: CustomStringConvertible {
     case Programmes, JobTypes, Continents, WorkFields, CompanyValues
     
     static let All = [Programmes, JobTypes, Continents, WorkFields, CompanyValues]
@@ -39,7 +39,7 @@ extension Company {
 }
 
 func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
-    return DataDude.companies.filter({ contains(($0[property]), value) }).count
+    return DataDude.companies.filter({ ($0[property]).contains(value) }).count
 }
 
 let CompanyFilter = _CompanyFilter()
@@ -64,7 +64,7 @@ class _CompanyFilter {
                 }
             }
         }
-        return filteredCompanies.sorted { $0.name < $1.name }
+        return filteredCompanies.sort { $0.name < $1.name }
     }
 }
 
@@ -90,7 +90,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
-        println("UNWINDING")
+        print("UNWINDING")
         if let viewController = unwindSegue.sourceViewController as? AddCompanyPropertyTableViewController,
             let value = viewController.selectedValue,
                 let indexPath = lastIndexPath {
@@ -108,7 +108,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("VIEW WILL APPEAR")
+        print("VIEW WILL APPEAR")
         updateTitle()
         tableView.reloadData()
     }
@@ -127,7 +127,7 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(identifier) as! UITableViewCell
+        return tableView.dequeueReusableCellWithIdentifier(identifier)!
     }
     
     func updateTitle() {
@@ -153,7 +153,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         if indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1 {
             let cell = cellWithIdentifier("CompanyPropertyCell")
             cell.textLabel?.text = CompanyFilter[property][indexPath.row]
-            cell.detailTextLabel?.text = "\(numberOfCompaniesForPropertyValue(property, CompanyFilter[property][indexPath.row]))"
+            cell.detailTextLabel?.text = "\(numberOfCompaniesForPropertyValue(property, value: CompanyFilter[property][indexPath.row]))"
             return cell
         } else {
             let cell = cellWithIdentifier("AddPropertyCell") as! AddCompanyPropertyTableViewCell
@@ -185,13 +185,13 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println(segue.destinationViewController)
+        print(segue.destinationViewController)
         if let viewController = (segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
-            let indexPath = tableView.indexPathForSelectedRow() {
+            let indexPath = tableView.indexPathForSelectedRow {
                 lastIndexPath = indexPath
                 let property = CompanyProperty.All[indexPath.section]
-                viewController.values = property.values.filter { !contains(CompanyFilter[property], $0) }
-                viewController.jobCount = property.values.map { value in DataDude.companies.filter({ contains(($0[property]), value) }).count }
+                viewController.values = property.values.filter { !CompanyFilter[property].contains($0) }
+                viewController.jobCount = property.values.map { value in DataDude.companies.filter({ ($0[property]).contains(value) }).count }
                 viewController.title = "Add \(property)"
         }
     }

@@ -16,7 +16,7 @@ class CompanySplitViewController: UISplitViewController, UISplitViewControllerDe
         // Dispose of any resources that can be recreated.
     }
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
         return shouldCollapse
     }
 }

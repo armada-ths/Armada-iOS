@@ -15,7 +15,7 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     override func viewDidLoad() {
         super.viewDidLoad()
         (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
-        println("CompaniesPageViewController did load")
+        print("CompaniesPageViewController did load")
 //        selectedCompany = (splitViewController as? CompanySplitViewController)!.company
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
         navigationItem.leftItemsSupplementBackButton = true
@@ -26,18 +26,18 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         } else {
             (splitViewController as? CompanySplitViewController)?.shouldCollapse = true
             self.view.userInteractionEnabled = false
-            setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")! as! UIViewController], direction: .Forward, animated: true, completion: { done in })
+            setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")], direction: .Forward, animated: true, completion: { done in })
         }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        println("CompaniesPageViewController did appear")
+        print("CompaniesPageViewController did appear")
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        println("CompaniesPageViewController did disappear")
+        print("CompaniesPageViewController did disappear")
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,12 +46,12 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let index = (find(companies, (viewController as! CompanyViewController).company!)! + 1) % companies.count
+        let index = (companies.indexOf((viewController as! CompanyViewController).company!)! + 1) % companies.count
         return viewControllerForCompany(companies[index])
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let index = (find(companies, (viewController as! CompanyViewController).company!)! - 1 + companies.count) % companies.count
+        let index = (companies.indexOf((viewController as! CompanyViewController).company!)! - 1 + companies.count) % companies.count
         return viewControllerForCompany(companies[index])
     }
 }

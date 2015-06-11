@@ -26,7 +26,7 @@ class _FavoriteCompanies: SequenceType, CollectionType {
     func append(companyName: String) {
         var companyNames = (Ω[key] as? [String]) ?? []
         companyNames.append(companyName)
-        companyNames = companyNames.sorted({ $0 < $1 })
+        companyNames = companyNames.sort({ $0 < $1 })
         Ω[key] = companyNames
     }
     
@@ -50,9 +50,9 @@ class _FavoriteCompanies: SequenceType, CollectionType {
         return ((Ω[key] as? [String]) ?? [])[index]
     }
     
-    func generate() -> GeneratorOf<String> {
+    func generate() -> AnyGenerator<String> {
         var index = 0
-        return GeneratorOf {
+        return anyGenerator {
             if index < self.count {
                 return self[index++]
             }

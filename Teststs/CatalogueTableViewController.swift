@@ -10,7 +10,7 @@ class CatalogueTableViewController: UITableViewController {
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
     func updateCompaniesByLetters(companies: [Company]) {
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sorted(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sort(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
     }
     
     override func viewDidLoad() {
@@ -80,7 +80,7 @@ class CatalogueTableViewController: UITableViewController {
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return companiesByLetters.map { $0.letter }
     }
     
@@ -89,7 +89,7 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     var selectedCompany: Company? {
-        if let indexPath = tableView.indexPathForSelectedRow() {
+        if let indexPath = tableView.indexPathForSelectedRow {
             return companiesByLetters[indexPath.section].companies[indexPath.row]
         }
         return nil
@@ -102,7 +102,7 @@ class CatalogueTableViewController: UITableViewController {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
     }
 }

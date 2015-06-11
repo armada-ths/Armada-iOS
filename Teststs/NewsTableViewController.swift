@@ -4,8 +4,14 @@ var selectedNewsItem:News!
 
 class NewsTableViewController: UITableViewController {
     var readArmadaNews = [String]()
-    let news = DataDude.newsFromServer()!
-
+    let news: [News] = {
+        do {
+            return try DataDude.newsFromServer()
+        } catch {
+            print(error)
+            return []
+        }
+        }()
     
     var imageView: UIImageView!
     
@@ -118,18 +124,18 @@ class NewsTableViewController: UITableViewController {
         
         cell.descriptionLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate) + " " + monthFormatter.stringFromDate(newsItem.publishedDate)
         
-        cell.isReadLabel.hidden = contains(readArmadaNews, newsItem.title)
+        cell.isReadLabel.hidden = readArmadaNews.contains(newsItem.title)
         return cell
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        selectedNewsItem = news[tableView.indexPathForSelectedRow()!.row]
-        if !contains(readArmadaNews, selectedNewsItem!.title) {
+        selectedNewsItem = news[tableView.indexPathForSelectedRow!.row]
+        if !readArmadaNews.contains(selectedNewsItem!.title) {
             readArmadaNews.append(selectedNewsItem!.title)
         }
         
-        let contentWithoutHtml = NSAttributedString(data: selectedNewsItem.content.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string
+        let contentWithoutHtml = (try! NSAttributedString(data: selectedNewsItem.content.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)).string
         
         selectedArmadaEvent = ArmadaEvent(title: selectedNewsItem.title, summary: contentWithoutHtml, location: "", startDate: selectedNewsItem.publishedDate, endDate: selectedNewsItem.publishedDate, signupLink: "")
         

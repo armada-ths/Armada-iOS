@@ -31,8 +31,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
-            var html = String(NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding, error: nil)!)
-            let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: nil, range: nil) + "{ fill:#349939}"})
+            var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
+            let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
             html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
@@ -49,7 +49,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         super.viewWillAppear(animated)
         tableView.reloadData()
         
-            positionLabel.text = "\(find(companies, company)!+1)/\(companies.count)"
+            positionLabel.text = "\(companies.indexOf(company)!+1)/\(companies.count)"
             logoImageView.image = company.image
             
             if let image = company.image {
@@ -117,7 +117,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             }
             return 64
         }
-        if contains(FavoriteCompanies, company!.name) && indexPath.row == 3 {
+        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
             return 0.000001
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)

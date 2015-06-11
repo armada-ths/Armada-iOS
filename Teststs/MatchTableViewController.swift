@@ -12,7 +12,7 @@ class MatchTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         companies = Array(DataDude.companies[0..<10])
-        matchPercentages = companies.map({ _ in Double(Int(rand()) % 101) / 100 }).sorted(>)
+        matchPercentages = companies.map({ _ in Double(Int(rand()) % 101) / 100 }).sort(>)
         updateFavoritesUI()
         tableView.reloadData()
         showSelectedCompany()
@@ -102,14 +102,14 @@ class MatchTableViewController: UITableViewController {
     var selectedCompany: Company? = nil
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        println("will select row")
+        print("will select row")
         selectedCompany = companies[indexPath.row]
         return indexPath
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("Segue to CompaniesPageViewController")
+        print("Segue to CompaniesPageViewController")
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany

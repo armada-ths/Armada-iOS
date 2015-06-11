@@ -4,7 +4,14 @@ var selectedArmadaEvent: ArmadaEvent? = nil
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
-    let armadaEvents = DataDude.eventsFromServer() ?? [ArmadaEvent]()
+    let armadaEvents: [ArmadaEvent] = {
+        do {
+            return try DataDude.eventsFromServer()
+        } catch {
+            return []
+        }
+        }()
+    
     var readArmadaEvents = [String]()
     
     override func viewDidLoad() {
@@ -32,7 +39,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         // Dispose of any resources that can be recreated.
     }
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
         return true
     }
 
@@ -63,7 +70,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         let dayFormatter = NSDateFormatter()
         dayFormatter.dateFormat = "d"
         
-        cell.isReadLabel.hidden = contains(readArmadaEvents, armadaEvent.title)
+        cell.isReadLabel.hidden = readArmadaEvents.contains(armadaEvent.title)
         cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
         cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString
         
@@ -74,8 +81,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        selectedArmadaEvent = armadaEvents[tableView.indexPathForSelectedRow()!.row]
-        if !contains(readArmadaEvents, selectedArmadaEvent!.title) {
+        selectedArmadaEvent = armadaEvents[tableView.indexPathForSelectedRow!.row]
+        if !readArmadaEvents.contains(selectedArmadaEvent!.title) {
             readArmadaEvents.append(selectedArmadaEvent!.title)
         }
         
