@@ -10,7 +10,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         } catch {
             return []
         }
-        }()
+    }()
     
     var readArmadaEvents = [String]()
     
@@ -19,8 +19,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         
         splitViewController?.delegate = self
         
-        //self.tableView.rowHeight = UITableViewAutomaticDimension
-        //self.tableView.estimatedRowHeight = 220
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 400
         //tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
          self.clearsSelectionOnViewWillAppear = true
@@ -70,11 +70,11 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         let dayFormatter = NSDateFormatter()
         dayFormatter.dateFormat = "d"
         
-        cell.isReadLabel.hidden = readArmadaEvents.contains(armadaEvent.title)
+//        cell.isReadLabel.hidden = readArmadaEvents.contains(armadaEvent.title)
         cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
         cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString
-        
-        cell.locationLabel.text = armadaEvent.location
+        cell.eventImageView.image = UIImage(named: armadaEvent.title)
+//        cell.locationLabel.text = armadaEvent.location
         
         return cell
     }

@@ -172,9 +172,7 @@ public class _DataDude {
     }
     
     class public func companiesFromJson(json: AnyObject) -> [Company] {
-        let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Company? in
-            return Company(json: json)
-            } ?? [])
+        let companies = Array.removeNils((json as? [[String: AnyObject]])?.map { Company(json: $0) } ?? [])
         return companies.sort { $0.name < $1.name }
     }
     
@@ -198,8 +196,9 @@ public class _DataDude {
                     return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink)
             }
             return nil
-            } ?? []).filter { !$0.signupLink.isEmpty } //.filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
+            } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
     }
+    
     public func newsFromJson(json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
@@ -232,7 +231,6 @@ public class _DataDude {
         let json = try jsonFromUrl("http://armada.nu/api/events.json")
         return eventsFromJson(json)
     }
-    
     
     func newsFromServer() throws -> [News] {
         let json = try jsonFromUrl("http://armada.nu/api/news.json")

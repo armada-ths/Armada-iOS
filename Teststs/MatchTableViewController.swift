@@ -73,16 +73,16 @@ class MatchTableViewController: UITableViewController {
         cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         
-        cell.positionLabel.text = "\(indexPath.row+1)"
-        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
-        cell.matchLabel.hidden = true
+//        cell.positionLabel.text = "\(indexPath.row+1)"
+//        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
+//        cell.matchLabel.hidden = true
         if let image = company.image {
             cell.logoImageView.image = image
-            cell.companyNameLabel.hidden = true
+//            cell.companyNameLabel.hidden = true
         } else {
             cell.logoImageView.image = nil
-            cell.companyNameLabel.hidden = false
-            cell.companyNameLabel.text = company.shortName
+//            cell.companyNameLabel.hidden = false
+//            cell.companyNameLabel.text = company.shortName
         }
         return cell
     }

@@ -14,6 +14,8 @@ class ArmadaEventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationLabel: UILabel!
 
+    @IBOutlet weak var eventImageView: UIImageView!
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

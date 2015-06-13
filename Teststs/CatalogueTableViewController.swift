@@ -1,7 +1,5 @@
 import UIKit
 
-//var selectedCompany: Company?
-
 class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!

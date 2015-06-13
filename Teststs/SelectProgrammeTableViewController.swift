@@ -20,7 +20,7 @@ class SelectProgrammeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SelectProgrammeTableViewCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SelectProgrammeTableViewCell", forIndexPath: indexPath)
         let program = headers[indexPath.section] + " in " + programmes[indexPath.section][indexPath.row]
         let numJobs = indexPath.section == 0 ? DataDude.companies.count : DataDude.companies.filter({ $0.programmes.contains(program) }).count
         cell.textLabel?.text = programmes[indexPath.section][indexPath.row]

@@ -183,7 +183,6 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     var lastIndexPath: NSIndexPath? = nil
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(segue.destinationViewController)
         if let viewController = (segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
