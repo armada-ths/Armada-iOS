@@ -6,6 +6,7 @@ class FavoritesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -137,7 +138,6 @@ class FavoritesTableViewController: UITableViewController {
     func nearestCompany(company: Company, comanies: [Company]) -> Company? {
         return self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first
     }
-    
     
     var selectedCompany: Company? = nil
     

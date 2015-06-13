@@ -19,7 +19,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         
         splitViewController?.delegate = self
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
         //tableView.reloadData()
         // Uncomment the following line to preserve selection between presentations
@@ -61,8 +61,14 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
 
         let armadaEvent = armadaEvents[indexPath.row]
-        cell.titleLabel.text = armadaEvent.title
-        cell.summaryLabel.text = armadaEvent.summary
+        
+        
+
+        let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
+        let title = " ".join(titleComponents[0..<titleComponents.count-1]) + (titleComponents.count > 1 ? "\n" : "") + titleComponents.last!
+        
+        cell.titleLabel.text = title
+//        cell.summaryLabel.text = armadaEvent.summary
         
         let monthFormatter = NSDateFormatter()
         monthFormatter.dateFormat = "MMM"
