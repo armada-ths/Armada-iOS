@@ -27,6 +27,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.reloadData()
         positionLabel.alpha = 0
         
         mapWebView.delegate = self
