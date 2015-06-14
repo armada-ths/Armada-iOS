@@ -48,8 +48,11 @@ class ArmadaEventDetailTableViewController: UITableViewController {
             
             let timeFormatter = NSDateFormatter()
             timeFormatter.dateFormat = "HH:mm"
+
             
-//            cell.eventImageView.image = UIImage(named: selectedArmadaEvent.title)
+            if cell.eventImageView != nil {
+                cell.eventImageView.image = UIImage(named: selectedArmadaEvent.title)
+            }
 //            cell.locationLabel.text = selectedArmadaEvent.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent.endDate)
             
             if selectedArmadaEvent.location.isEmpty {
