@@ -3,6 +3,7 @@ import UIKit
 class ArmadaEventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var title2Label: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!

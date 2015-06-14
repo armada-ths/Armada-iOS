@@ -4,6 +4,7 @@ var selectedArmadaEvent: ArmadaEvent? = nil
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
+
     let armadaEvents: [ArmadaEvent] = {
         do {
             return try DataDude.eventsFromServer()
@@ -65,9 +66,15 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         
 
         let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
-        let title = " ".join(titleComponents[0..<titleComponents.count-1]) + (titleComponents.count > 1 ? "\n" : "") + titleComponents.last!
+//        let title = " ".join(titleComponents[0..<titleComponents.count-1]) + (titleComponents.count > 1 ? "\n" : "") + titleComponents.last!
+        
+        
+        let title = titleComponents.count > 1 ? " ".join(titleComponents[0..<titleComponents.count-1]) : titleComponents.last
         
         cell.titleLabel.text = title
+        cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
+
+        
 //        cell.summaryLabel.text = armadaEvent.summary
         
         let monthFormatter = NSDateFormatter()
