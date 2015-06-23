@@ -41,6 +41,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         }
     }
     
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,11 +57,11 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             
             if let image = company.image {
                 logoImageView.image = image
-                companyNameLabel.hidden = true
+//                companyNameLabel.hidden = true
             } else {
                 logoImageView.image = nil
-                companyNameLabel.hidden = false
-                companyNameLabel.text = company.shortName
+//                companyNameLabel.hidden = false
+//                companyNameLabel.text = company.shortName
             }
             
             locationLabel.text = company.locationDescription
@@ -110,8 +112,11 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         }
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         if indexPath.row == 0 {
             if let y = navigationController?.navigationBar.frame.maxY where y > 0 {
                 return y
@@ -121,7 +126,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
             return 0.000001
         } else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+            return UITableViewAutomaticDimension
         }
     }
     
