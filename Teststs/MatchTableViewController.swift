@@ -47,7 +47,7 @@ class MatchTableViewController: UITableViewController {
                     percentage *= Double(valueFieldsMatches+1) / Double(MatchFilter[.CompanyValues].count+1)
                 }
                 
-                
+                percentage -= Double(company.employeesWorld)/1000000.0
             }
             let zebra = (company: company, percentage: percentage)
             matches.append(zebra)
