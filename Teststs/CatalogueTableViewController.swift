@@ -39,7 +39,7 @@ class CatalogueTableViewController: UITableViewController {
             label.textAlignment = .Center
             label.sizeToFit()
             label.textColor = UIColor.lightGrayColor()
-
+            
             tableView.backgroundView = label
             tableView.separatorStyle = UITableViewCellSeparatorStyle.None
             searchBar.hidden = true
@@ -94,9 +94,13 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany
+        }
+        if let controller = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CatalogueFilterTableViewController) {
+            controller.CompanyFilter = CompanyFilter
         }
     }
     

@@ -42,16 +42,21 @@ func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String)
     return DataDude.companies.filter({ ($0[property]).contains(value) }).count
 }
 
-let CompanyFilter = _CompanyFilter()
+let CompanyFilter = _CompanyFilter(userDefaultsKey: "CompanyFilter")
+let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
 class _CompanyFilter {
     
-    private init() {}
+    let userDefaultsKey: String
+    
+    private init(userDefaultsKey: String) {
+        self.userDefaultsKey = userDefaultsKey
+    }
     
     let Ω = NSUserDefaults.standardUserDefaults()
     
     subscript(companyProperty: CompanyProperty) -> [String] {
-        get { return Ω["CompanyFilter\(companyProperty)"] as? [String] ?? [] }
-        set { Ω["CompanyFilter\(companyProperty)"] = newValue }
+        get { return Ω["\(userDefaultsKey)\(companyProperty)"] as? [String] ?? [] }
+        set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
     var filteredCompanies: [Company] {
@@ -69,6 +74,8 @@ class _CompanyFilter {
 }
 
 class CatalogueFilterTableViewController: UITableViewController {
+    
+    var CompanyFilter: _CompanyFilter! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()

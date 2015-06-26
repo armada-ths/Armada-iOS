@@ -1,8 +1,10 @@
 import UIKit
 
+
+
 class MatchTableViewController: UITableViewController {
     
-    var companies = [Company]()
+    var companiesWithMatchPercentages = [(company: Company, percentage: Double)]()
     var matchPercentages = [Double]()
     
     override func viewDidLoad() {
@@ -11,23 +13,57 @@ class MatchTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        companies = Array(DataDude.companies[0..<10])
-        matchPercentages = companies.map({ _ in Double(Int(rand()) % 101) / 100 }).sort(>)
-        updateFavoritesUI()
-        tableView.reloadData()
-        showSelectedCompany()
+
+        self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
+        self.updateFavoritesUI()
+        self.tableView.reloadData()
+    }
+    
+    func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
+        var matches = [(company: Company, percentage: Double)]()
+        for company in DataDude.companies {
+            var percentage = 0.0
+            if let programme = MatchFilter[.Programmes].first {
+                if company[.Programmes].contains(programme) {
+                    percentage = 1
+                }
+
+                let numMatchingJobTypes = Set(company[.JobTypes]).intersect(MatchFilter[.JobTypes]).count
+                if numMatchingJobTypes == 0 && MatchFilter[.JobTypes].count != 0 {
+                    percentage *= 0.5
+                }
+                
+                if Set(company[.Continents]).intersect(MatchFilter[.Continents]).isEmpty && MatchFilter[.Continents].count != 0 {
+                    percentage *= 0.5
+                }
+                
+                let workFieldsMatches = Set(company[.WorkFields]).intersect(MatchFilter[.WorkFields]).count
+                if MatchFilter[.WorkFields].count > 0 {
+                    percentage *= Double(workFieldsMatches+1) / Double(MatchFilter[.WorkFields].count+1)
+                }
+                
+                let valueFieldsMatches = Set(company[.CompanyValues]).intersect(MatchFilter[.CompanyValues]).count
+                if MatchFilter[.CompanyValues].count > 0 {
+                    percentage *= Double(valueFieldsMatches+1) / Double(MatchFilter[.CompanyValues].count+1)
+                }
+                
+                
+            }
+            let zebra = (company: company, percentage: percentage)
+            matches.append(zebra)
+        }
+        return matches.sort { $0.percentage > $1.percentage }
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.tableView.reloadData()
-        showSelectedCompany()
     }
-        @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     func updateFavoritesUI() {
-        if FavoriteCompanies.isEmpty {
+        if companiesWithMatchPercentages.isEmpty {
             let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
-            label.text = "No Favorites"
+            label.text = "No Matches"
             label.textAlignment = .Center
             label.sizeToFit()
             label.textColor = UIColor.lightGrayColor()
@@ -38,7 +74,7 @@ class MatchTableViewController: UITableViewController {
             tableView.backgroundView = nil
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         }
-        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
+        navigationItem.title = "Top 10 Matches"
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,62 +93,63 @@ class MatchTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return companies.count
+        return companiesWithMatchPercentages.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MatchTableViewCell", forIndexPath: indexPath) as! MatchTableViewCell
         
-        let matchPercentage = matchPercentages[indexPath.row]
         
-        let company = companies[indexPath.row]
+        let companyWithMatchPercentage = companiesWithMatchPercentages[indexPath.row]
+        let matchPercentage = companyWithMatchPercentage.percentage
+        let company = companyWithMatchPercentage.company
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
         
-        cell.matchProgressView.setProgress(0, animated: false)
+//        cell.matchProgressView.setProgress(0, animated: false)
         cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
+        
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         
-//        cell.positionLabel.text = "\(indexPath.row+1)"
-//        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
-//        cell.matchLabel.hidden = true
+        //        cell.positionLabel.text = "\(indexPath.row+1)"
+        //        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
+        //        cell.matchLabel.hidden = true
         if let image = company.image {
             cell.logoImageView.image = image
-//            cell.companyNameLabel.hidden = true
+            //            cell.companyNameLabel.hidden = true
         } else {
             cell.logoImageView.image = nil
-//            cell.companyNameLabel.hidden = false
-//            cell.companyNameLabel.text = company.shortName
+            //            cell.companyNameLabel.hidden = false
+            //            cell.companyNameLabel.text = company.shortName
         }
         return cell
-    }
-    
-    func showSelectedCompany() {
-        
     }
     
     var companySplitViewController: CompanySplitViewController {
         return (self.splitViewController as? CompanySplitViewController)!
     }
     
-    func nearestCompany(company: Company, comanies: [Company]) -> Company? {
-        return self.companies.filter({ $0.name <= company.name }).last ?? self.companies.filter({ $0.name > company.name }).first
-    }
-    
     var selectedCompany: Company? = nil
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         print("will select row")
-        selectedCompany = companies[indexPath.row]
+        selectedCompany = companiesWithMatchPercentages[indexPath.row].company
         return indexPath
     }
     
     
+    
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("Segue to CompaniesPageViewController")
+        let companies = companiesWithMatchPercentages.map { $0.company }
         if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany
+        }
+        if let controller = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CatalogueFilterTableViewController) {
+            controller.CompanyFilter = MatchFilter
         }
     }
 }
