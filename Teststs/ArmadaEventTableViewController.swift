@@ -90,7 +90,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         print("WUT: " + monthFormatter.stringFromDate(armadaEvent.startDate))
         
         print(armadaEvent.title)
-        cell.eventImageView.image = UIImage(named: armadaEvent.title)
+        cell.eventImageView.image = UIImage(named: armadaEvent.title.stringByReplacingOccurrencesOfString("ä", withString: ""))
 //        cell.locationLabel.text = armadaEvent.location
         
         return cell

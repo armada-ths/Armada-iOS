@@ -55,7 +55,7 @@ class ArmadaEventDetailTableViewController: UITableViewController {
 
             
             if cell.eventImageView != nil {
-                cell.eventImageView.image = UIImage(named: selectedArmadaEvent.title)
+                cell.eventImageView.image = UIImage(named: selectedArmadaEvent.title.stringByReplacingOccurrencesOfString("ä", withString: ""))
             }
 //            cell.locationLabel.text = selectedArmadaEvent.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent.endDate)
             
