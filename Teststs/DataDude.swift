@@ -248,7 +248,7 @@ func jsonFromUrl(url: String) throws -> AnyObject {
 }
 
 extension Array {
-    static func removeNils(array: [T?]) -> [T] {
+    static func removeNils(array: [Element?]) -> [Element] {
         return array.filter { $0 != nil }.map { $0! }
     }
 }
