@@ -88,6 +88,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
         
         print("WUT: " + monthFormatter.stringFromDate(armadaEvent.startDate))
+        
+        print(armadaEvent.title)
         cell.eventImageView.image = UIImage(named: armadaEvent.title)
 //        cell.locationLabel.text = armadaEvent.location
         
