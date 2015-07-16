@@ -96,21 +96,7 @@ class CatalogueFilterTableViewController: UITableViewController {
         
     }
     // MARK: - Table view data source
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
-        print("UNWINDING")
-        if let viewController = unwindSegue.sourceViewController as? AddCompanyPropertyTableViewController,
-            let value = viewController.selectedValue {
-                    let property = viewController.property
-                    CompanyFilter[property] = CompanyFilter[property] + [value]
-        }
-        if let viewController = unwindSegue.sourceViewController as? SelectProgrammeTableViewController {
-            if let value = viewController.selectedProgramme {
-                CompanyFilter[.Programmes] = [value]
-            } else {
-                CompanyFilter[.Programmes] = []
-            }
-        }
-    }
+    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

@@ -5,7 +5,6 @@ private let headers = Array(Set(programmeTuples.map { $0[0] })).sort(<)
 private let programmes = headers.map { header in programmeTuples.filter({ header == $0[0]}).map({$0[1]}) }
 
 class SelectProgrammeTableViewController: UITableViewController {
-    var selectedProgramme: String?
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return programmes.count
@@ -29,8 +28,11 @@ class SelectProgrammeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        if indexPath.section != 0 {
-            selectedProgramme = headers[indexPath.section] + " in " + programmes[indexPath.section][indexPath.row]
+        if indexPath.section > 0 {
+            let selectedProgramme = headers[indexPath.section] + " in " + programmes[indexPath.section][indexPath.row]
+            CompanyFilter[.Programmes] = [selectedProgramme]
+        } else {
+            CompanyFilter[.Programmes] = []
         }
         return indexPath
     }

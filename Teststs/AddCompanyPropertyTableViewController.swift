@@ -3,7 +3,6 @@ import UIKit
 class AddCompanyPropertyTableViewController: UITableViewController {
     
     var values = [String]()
-    var selectedValue: String?
     var jobCount = [Int]()
     var property: CompanyProperty!
 
@@ -29,7 +28,7 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        selectedValue = values[indexPath.row]
+        CompanyFilter[property] = CompanyFilter[property] + [values[indexPath.row]]
         return indexPath
     }
 
