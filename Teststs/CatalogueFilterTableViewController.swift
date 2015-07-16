@@ -99,9 +99,8 @@ class CatalogueFilterTableViewController: UITableViewController {
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {
         print("UNWINDING")
         if let viewController = unwindSegue.sourceViewController as? AddCompanyPropertyTableViewController,
-            let value = viewController.selectedValue,
-                let indexPath = lastIndexPath {
-                    let property = CompanyProperty.All[indexPath.section]
+            let value = viewController.selectedValue {
+                    let property = viewController.property
                     CompanyFilter[property] = CompanyFilter[property] + [value]
         }
         if let viewController = unwindSegue.sourceViewController as? SelectProgrammeTableViewController {
@@ -188,17 +187,12 @@ class CatalogueFilterTableViewController: UITableViewController {
         return 54
     }
     
-    var lastIndexPath: NSIndexPath? = nil
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(segue.destinationViewController)
         if let viewController = (segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-                lastIndexPath = indexPath
-                let property = CompanyProperty.All[indexPath.section]
-                viewController.values = property.values.filter { !CompanyFilter[property].contains($0) }
-                viewController.jobCount = property.values.map { value in DataDude.companies.filter({ ($0[property]).contains(value) }).count }
-                viewController.title = "Add \(property)"
+                viewController.property = CompanyProperty.All[indexPath.section]
+
         }
     }
 }
