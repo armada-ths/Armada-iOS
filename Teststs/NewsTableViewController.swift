@@ -17,18 +17,19 @@ class NewsTableViewController: UITableViewController {
     
     var headerView: UIView!
     
-    let headerHeight: CGFloat = 200+64
+    var headerHeight: CGFloat = 200
     
     var headerMaskLayer: CAShapeLayer!
     
     func updateHeaderView() {
         var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
-        if tableView.contentOffset.y < -headerHeight {
-            headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y
+        let difference =  -tableView.contentOffset.y - headerHeight - 64
+        if difference > 0  {
+            headerRect.origin.y =  -headerHeight - difference
+            headerRect.size.height = headerHeight + difference
         }
         headerView.frame = headerRect
-        
+    
         let path = UIBezierPath()
         path.moveToPoint(CGPoint(x: 0, y: 0))
         path.addLineToPoint(CGPoint(x: headerRect.width, y: 0))
@@ -41,9 +42,15 @@ class NewsTableViewController: UITableViewController {
         updateHeaderView()
     }
     
+    func tap(recognizer: UITapGestureRecognizer) {
+        print(recognizer.locationInView(headerView))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         headerView = tableView.tableHeaderView
+        headerHeight = headerView.frame.height
+        headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("tap:")))
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
         tableView.sendSubviewToBack(headerView)
