@@ -88,8 +88,8 @@ public struct Company: Equatable, Hashable {
     
     var shortName: String {
         return ([" sverige", " ab", " sweden"].reduce(name) {
-        $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
-        }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
+            $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
+            }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
     }
     
     func asyncLocationImage(callback: UIImage? -> Void) {
@@ -126,23 +126,57 @@ public struct News {
 
 
 let DataDude = _DataDude()
+
+
 public class _DataDude {
     
     let companies: [Company]
-    private init() {
-        if let companies = _DataDude.companiesFromFile() {
-            print("Retrieved companies from file!")
-            self.companies = companies.filter({ $0.image != nil })
-        } else {
-            print("Retrieved companies from server!")
-            do {
-                self.companies = try _DataDude.companiesFromServer().filter({ $0.image != nil })
-            } catch {
-                print(error)
-                self.companies = []
+    
+    
+    
+    var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
+    
+    func generateMap() {
+        var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
+        for property in CompanyProperty.All {
+            print("Numbers for property: \(property)")
+            for value in property.values {
+                print("Value: \(value)")
+                if numberOfCompaniesForPropertyValueMap[property] == nil {
+                    numberOfCompaniesForPropertyValueMap[property] = [:]
+                }
+                numberOfCompaniesForPropertyValueMap[property]![value] = companies.filter({$0[property].contains(value)}).count
             }
         }
+        self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
     }
+    
+    func numberOfCompaniesContainingValue(value: String, forProperty property: CompanyProperty) -> Int? {
+        return numberOfCompaniesForPropertyValueMap[property]![value]
+    }
+    
+    private init() {
+        let companies = _DataDude.staticCompanies()
+        self.companies = companies
+        NSOperationQueue().addOperationWithBlock {
+            self.generateMap()
+        }
+    }
+    
+    class func staticCompanies() -> [Company] {
+        do {
+            let json: AnyObject = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSBundle(forClass: self).URLForResource("companies", withExtension: "json")!)!, options: [])
+            
+            return _DataDude.companiesFromJson(json).filter({ UIImage(named: $0.name) != nil })
+        } catch {
+            print(error)
+            assert(false)
+            return []
+        }
+        
+//        let companies = DataDude.companiesFromJson(json)
+    }
+
     
     var jobTypes: [String] {
         return Array(Set(companies.flatMap({ $0.jobTypes })))

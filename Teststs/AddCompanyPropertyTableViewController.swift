@@ -3,13 +3,12 @@ import UIKit
 class AddCompanyPropertyTableViewController: UITableViewController {
     
     var values = [String]()
-    var jobCount = [Int]()
     var property: CompanyProperty!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         values = property.values.filter { !CompanyFilter[property].contains($0) }
-        jobCount = property.values.map { value in DataDude.companies.filter({ ($0[property]).contains(value) }).count }
+        
         title = "Add \(property)"
     }
 
@@ -35,7 +34,7 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AddCompanyPropertyTableViewCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = values[indexPath.row]
-        cell.detailTextLabel?.text = "\(jobCount[indexPath.row])"
+        cell.detailTextLabel?.text = "\(DataDude.numberOfCompaniesContainingValue(values[indexPath.row], forProperty: property) ?? 0)"
         return cell
     }
 
