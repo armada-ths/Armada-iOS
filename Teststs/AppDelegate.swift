@@ -1,6 +1,9 @@
 import UIKit
 let armadaBlue = 0x273760
 let armadaGreen = 0x1C6965
+//let armadaGreen = 0x26956c
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
