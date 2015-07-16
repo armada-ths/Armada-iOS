@@ -139,9 +139,7 @@ public class _DataDude {
     func generateMap() {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
         for property in CompanyProperty.All {
-            print("Numbers for property: \(property)")
             for value in property.values {
-                print("Value: \(value)")
                 if numberOfCompaniesForPropertyValueMap[property] == nil {
                     numberOfCompaniesForPropertyValueMap[property] = [:]
                 }
@@ -156,10 +154,14 @@ public class _DataDude {
     }
     
     private init() {
+        let stopWatch = StopWatch()
         let companies = _DataDude.staticCompanies()
+        stopWatch.print("Reading companies")
         self.companies = companies
         NSOperationQueue().addOperationWithBlock {
+            let stopWatch = StopWatch()
             self.generateMap()
+            stopWatch.print("Making map")
         }
     }
     

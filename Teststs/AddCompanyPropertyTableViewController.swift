@@ -4,10 +4,11 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     
     var values = [String]()
     var property: CompanyProperty!
+    var companyFilter: _CompanyFilter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        values = property.values.filter { !CompanyFilter[property].contains($0) }
+        values = property.values.filter { !companyFilter[property].contains($0) }
         
         title = "Add \(property)"
     }
@@ -27,7 +28,7 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        CompanyFilter[property] = CompanyFilter[property] + [values[indexPath.row]]
+        companyFilter[property] = companyFilter[property] + [values[indexPath.row]]
         return indexPath
     }
 

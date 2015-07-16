@@ -43,12 +43,11 @@ func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String)
 }
 
 let CompanyFilter = _CompanyFilter(userDefaultsKey: "CompanyFilter")
-let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
 class _CompanyFilter {
     
     let userDefaultsKey: String
     
-    private init(userDefaultsKey: String) {
+    init(userDefaultsKey: String) {
         self.userDefaultsKey = userDefaultsKey
     }
     
@@ -178,7 +177,10 @@ class CatalogueFilterTableViewController: UITableViewController {
         if let viewController = (segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
                 viewController.property = CompanyProperty.All[indexPath.section]
-
+                viewController.companyFilter = CompanyFilter
+        }
+        if let viewController = segue.destinationViewController as? SelectProgrammeTableViewController {
+            viewController.CompanyFilter = CompanyFilter
         }
     }
 }

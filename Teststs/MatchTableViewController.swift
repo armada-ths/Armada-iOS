@@ -1,7 +1,7 @@
 import UIKit
 
 
-
+private let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
 class MatchTableViewController: UITableViewController {
     
     var companiesWithMatchPercentages = [(company: Company, percentage: Double)]()

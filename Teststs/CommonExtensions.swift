@@ -29,3 +29,13 @@ extension Int {
         return thousands > 0 ? "\(thousands) \(paddedNonThousands)\(nonThousands)" : "\(nonThousands)"
     }
 }
+
+class StopWatch {
+    let start = NSDate()
+    
+    init() {}
+    
+    func print(description: String) {
+        Swift.print("\(description) \(Int(NSDate().timeIntervalSinceDate(start)*1000))ms")
+    }
+}

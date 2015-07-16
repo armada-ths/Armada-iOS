@@ -6,6 +6,8 @@ private let programmes = headers.map { header in programmeTuples.filter({ header
 
 class SelectProgrammeTableViewController: UITableViewController {
     
+    var CompanyFilter: _CompanyFilter!
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return programmes.count
     }
