@@ -50,7 +50,14 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
             cell.monthLabel.text = selectedArmadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
             
             
+            var paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 3
+            var attrString = NSMutableAttributedString(string: selectedArmadaEvent.summary)
+            attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+            
+            
             cell.summaryLabel.text = selectedArmadaEvent.summary
+            cell.summaryLabel.attributedText = attrString
             // Configure the cell...
         }        
 
