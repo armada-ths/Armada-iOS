@@ -8,17 +8,9 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     override func viewDidLoad() {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
-        if tableView.tableHeaderView != nil {
-            initHeaderView()
-        }
         
-        if eventImageView != nil {
-            eventImageView.image = selectedArmadaEvent?.image
-        }
-        
-        if titleLabel != nil {
-            titleLabel.text = selectedArmadaEvent?.title
-        }
+        eventImageView.image = selectedArmadaEvent?.image
+        titleLabel.text = selectedArmadaEvent?.title
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
