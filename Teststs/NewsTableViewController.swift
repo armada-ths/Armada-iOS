@@ -14,7 +14,6 @@ class NewsTableViewController: ScrollZoomTableViewController {
         }()
     
     
-    
     override func updateHeaderView() {
         super.updateHeaderView()
                 let headerRect = headerView.frame
@@ -28,11 +27,10 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initHeaderView()
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
+
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         self.clearsSelectionOnViewWillAppear = true
     }

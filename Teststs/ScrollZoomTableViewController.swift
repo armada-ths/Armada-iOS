@@ -7,6 +7,7 @@ class ScrollZoomTableViewController: UITableViewController {
     }
     
     func initHeaderView() {
+        print("Initing header view")
         headerView = tableView.tableHeaderView
         headerHeight = headerView.frame.height
         tableView.tableHeaderView = nil
@@ -39,6 +40,7 @@ class ScrollZoomTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.clearsSelectionOnViewWillAppear = true
+        initHeaderView()
     }
     
 }

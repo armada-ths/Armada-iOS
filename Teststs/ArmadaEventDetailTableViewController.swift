@@ -6,7 +6,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
-        print("VIEW DID LOAD!!!")
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
         if tableView.tableHeaderView != nil {
             initHeaderView()
@@ -60,12 +60,8 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
             
             cell.summaryLabel.text = selectedArmadaEvent.summary
             // Configure the cell...
-        }
-        
-        if let news = selectedNewsItem {
-            cell.titleLabel.text = news.title
-            cell.summaryLabel.text = news.content
-        }
+        }        
+
         return cell
     }
 
