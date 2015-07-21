@@ -48,6 +48,7 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         headerView = tableView.tableHeaderView
         headerHeight = headerView.frame.height
         headerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("tap:")))
@@ -110,30 +111,12 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-//        if indexPath.row == 0 {
-//            let cell = tableView.dequeueReusableCellWithIdentifier("NewsBackgroundTableViewCell", forIndexPath: indexPath) as! UITableViewCell
-//            return cell
-//        }
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell
-        
         let newsItem = news[indexPath.row]
         cell.titleLabel.text = newsItem.title
-        cell.descriptionLabel.text = newsItem.content
-        
-        
-        let monthFormatter = NSDateFormatter()
-        monthFormatter.dateFormat = "MMM"
-        
-        let dayFormatter = NSDateFormatter()
-        dayFormatter.dateFormat = "d"
-        
-        cell.descriptionLabel.text = dayFormatter.stringFromDate(newsItem.publishedDate) + " " + monthFormatter.stringFromDate(newsItem.publishedDate)
-        
+        cell.descriptionLabel.text = newsItem.publishedDate.format("d MMM")
         cell.isReadLabel.hidden = readArmadaNews.contains(newsItem.title)
         return cell
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

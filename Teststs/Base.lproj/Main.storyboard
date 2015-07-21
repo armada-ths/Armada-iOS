@@ -1678,7 +1678,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="28" y="13" width="511" height="15"/>
+                                            <rect key="frame" x="38" y="13" width="491" height="15"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1701,7 +1701,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Regarded as one of the most successful events last year" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J46-C6-eLz">
-                                            <rect key="frame" x="28" y="31" width="319" height="16"/>
+                                            <rect key="frame" x="38" y="31" width="338" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19.5" id="Aj8-WX-6kd"/>
                                                 <constraint firstAttribute="width" constant="319" id="UC8-tR-CAK"/>
@@ -1720,6 +1720,7 @@
                                     <constraints>
                                         <constraint firstItem="J46-C6-eLz" firstAttribute="top" secondItem="f1j-mq-Ob6" secondAttribute="bottom" constant="3" id="3kZ-G5-ctV"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="f1j-mq-Ob6" secondAttribute="trailing" constant="20" id="6CP-Yr-eKp"/>
+                                        <constraint firstItem="f1j-mq-Ob6" firstAttribute="leading" secondItem="u2Q-xS-hKF" secondAttribute="leading" constant="30" id="8J5-cX-kKl"/>
                                         <constraint firstItem="aLV-XF-mYu" firstAttribute="top" secondItem="u2Q-xS-hKF" secondAttribute="topMargin" constant="5" id="JOT-W6-Aw1"/>
                                         <constraint firstItem="aLV-XF-mYu" firstAttribute="leading" secondItem="u2Q-xS-hKF" secondAttribute="leadingMargin" id="PFc-m8-lju"/>
                                         <constraint firstAttribute="centerX" secondItem="f1j-mq-Ob6" secondAttribute="centerX" id="POv-XC-oPM"/>
@@ -1734,7 +1735,7 @@
                                         <constraint firstItem="J46-C6-eLz" firstAttribute="top" secondItem="f1j-mq-Ob6" secondAttribute="bottom" constant="1" id="Z1d-w3-qAn"/>
                                         <constraint firstItem="J46-C6-eLz" firstAttribute="top" secondItem="u2Q-xS-hKF" secondAttribute="topMargin" constant="23" id="dJj-zd-yO8"/>
                                         <constraint firstItem="f1j-mq-Ob6" firstAttribute="leading" secondItem="J46-C6-eLz" secondAttribute="leading" id="hKJ-Fc-8bT"/>
-                                        <constraint firstItem="f1j-mq-Ob6" firstAttribute="centerY" secondItem="aLV-XF-mYu" secondAttribute="centerY" constant="-0.5" id="iiP-BS-rw2"/>
+                                        <constraint firstItem="f1j-mq-Ob6" firstAttribute="centerY" secondItem="aLV-XF-mYu" secondAttribute="centerY" id="iiP-BS-rw2"/>
                                         <constraint firstItem="f1j-mq-Ob6" firstAttribute="leading" secondItem="aLV-XF-mYu" secondAttribute="trailing" constant="10" id="kLI-om-HuP"/>
                                         <constraint firstItem="f1j-mq-Ob6" firstAttribute="leading" secondItem="aLV-XF-mYu" secondAttribute="trailing" constant="4" id="kmH-mK-duN"/>
                                         <constraint firstItem="f1j-mq-Ob6" firstAttribute="centerY" secondItem="aLV-XF-mYu" secondAttribute="centerY" id="mB5-1D-t6J"/>
@@ -1747,6 +1748,7 @@
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="JOT-W6-Aw1"/>
+                                            <exclude reference="PFc-m8-lju"/>
                                             <exclude reference="QCY-iE-jHo"/>
                                             <exclude reference="6CP-Yr-eKp"/>
                                             <exclude reference="POv-XC-oPM"/>
