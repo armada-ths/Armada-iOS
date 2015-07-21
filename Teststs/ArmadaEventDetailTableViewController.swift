@@ -1,12 +1,29 @@
 import UIKit
 
-class ArmadaEventDetailTableViewController: UITableViewController {
+class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
+    @IBOutlet weak var eventImageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
+        print("VIEW DID LOAD!!!")
         super.viewDidLoad()
+        if tableView.tableHeaderView != nil {
+            initHeaderView()
+        }
+        
+        if eventImageView != nil {
+            eventImageView.image = selectedArmadaEvent?.image
+        }
+        
+        if titleLabel != nil {
+            titleLabel.text = selectedArmadaEvent?.title
+        }
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
     }
+    
     @IBAction func signupButtonClicked(sender: UIButton) {
         if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
             UIApplication.sharedApplication().openURL(url)
@@ -36,36 +53,18 @@ class ArmadaEventDetailTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
 
         if let selectedArmadaEvent=selectedArmadaEvent{
-            cell.titleLabel.text = selectedArmadaEvent.title
             
-            let monthFormatter = NSDateFormatter()
-            monthFormatter.dateFormat = "MMM"
+            cell.dayLabel.text = selectedArmadaEvent.startDate.format("d")
+            cell.monthLabel.text = selectedArmadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
             
-            let dayFormatter = NSDateFormatter()
-            dayFormatter.dateFormat = "d"
-            
-            cell.dayLabel.text = dayFormatter.stringFromDate(selectedArmadaEvent.startDate)
-            cell.monthLabel.text = monthFormatter.stringFromDate(selectedArmadaEvent.startDate).uppercaseString
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "E dd MMMM"
-            //        cell.dateLabel.text = dateFormatter.stringFromDate(selectedArmadaEvent!.startDate)
-            
-            let timeFormatter = NSDateFormatter()
-            timeFormatter.dateFormat = "HH:mm"
-
-            
-            if cell.eventImageView != nil {
-                cell.eventImageView.image = UIImage(named: selectedArmadaEvent.title.stringByReplacingOccurrencesOfString("ä", withString: ""))
-            }
-//            cell.locationLabel.text = selectedArmadaEvent.location + ", " + timeFormatter.stringFromDate(selectedArmadaEvent.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent.endDate)
-            
-            if selectedArmadaEvent.location.isEmpty {
-                cell.locationLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent.startDate)
-            }
-            //        cell.timeLabel.text = timeFormatter.stringFromDate(selectedArmadaEvent!.startDate) + " - " + timeFormatter.stringFromDate(selectedArmadaEvent!.endDate)
             
             cell.summaryLabel.text = selectedArmadaEvent.summary
             // Configure the cell...
+        }
+        
+        if let news = selectedNewsItem {
+            cell.titleLabel.text = news.title
+            cell.summaryLabel.text = news.content
         }
         return cell
     }

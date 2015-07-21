@@ -17,17 +17,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         splitViewController?.delegate = self
-        
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 400
-        //tableView.reloadData()
-        // Uncomment the following line to preserve selection between presentations
          self.clearsSelectionOnViewWillAppear = true
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,52 +39,23 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return armadaEvents.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
-
         let armadaEvent = armadaEvents[indexPath.row]
-        
-        
-
         let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
-//        let title = " ".join(titleComponents[0..<titleComponents.count-1]) + (titleComponents.count > 1 ? "\n" : "") + titleComponents.last!
-        
-        
         let title = titleComponents.count > 1 ? " ".join(titleComponents[0..<titleComponents.count-1]) : titleComponents.last
-        
         cell.titleLabel.text = title
         cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
-
-        
-//        cell.summaryLabel.text = armadaEvent.summary
-        
-        let monthFormatter = NSDateFormatter()
-        monthFormatter.dateFormat = "MMM"
-
-        let dayFormatter = NSDateFormatter()
-        dayFormatter.dateFormat = "d"
-        
-//        cell.isReadLabel.hidden = readArmadaEvents.contains(armadaEvent.title)
-        cell.dayLabel.text = dayFormatter.stringFromDate(armadaEvent.startDate)
-        cell.monthLabel.text = monthFormatter.stringFromDate(armadaEvent.startDate).uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
-        
-        print("WUT: " + monthFormatter.stringFromDate(armadaEvent.startDate))
-        
-        print(armadaEvent.title)
+        cell.dayLabel.text = armadaEvent.startDate.format("d")
+        cell.monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
         cell.eventImageView.image = UIImage(named: armadaEvent.title.stringByReplacingOccurrencesOfString("ä", withString: ""))
-//        cell.locationLabel.text = armadaEvent.location
-        
         return cell
     }
     

@@ -116,6 +116,10 @@ public struct ArmadaEvent {
     public let startDate: NSDate
     public let endDate: NSDate
     public let signupLink: String
+    
+    var image: UIImage? {
+        return UIImage(named: title.stringByReplacingOccurrencesOfString("ä", withString: ""))
+    }
 }
 
 public struct News {

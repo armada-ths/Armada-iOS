@@ -67,7 +67,16 @@ extension NSDate {
     func format(format: String) -> String {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone.systemTimeZone()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en")
         dateFormatter.dateFormat = format
+        return dateFormatter.stringFromDate(self)
+    }
+    
+    func formatWithStyle(dataStyle: NSDateFormatterStyle) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone.systemTimeZone()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en")
+        dateFormatter.dateStyle = dataStyle
         return dateFormatter.stringFromDate(self)
     }
     
