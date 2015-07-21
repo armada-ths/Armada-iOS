@@ -3,6 +3,12 @@ let armadaBlue = 0x273760
 let armadaGreen = 0x1C6965
 //let armadaGreen = 0x26956c
 
+struct ColorScheme {
+    let darkGrayTextColor = UIColor(hex: 0x1e1e1e)
+    let armadaBlue = UIColor(hex: 0x273760)
+    let armadaGreen = UIColor(hex: 0x1C6965)
+}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
