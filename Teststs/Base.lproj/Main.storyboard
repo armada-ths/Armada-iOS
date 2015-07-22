@@ -953,7 +953,7 @@
         <scene sceneID="QLj-c3-t3I">
             <objects>
                 <tableViewController id="1vj-2m-lxX" customClass="ArmadaEventDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="296" sectionHeaderHeight="22" sectionFooterHeight="22" id="bS9-VI-oFT">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="296" sectionHeaderHeight="22" sectionFooterHeight="22" id="bS9-VI-oFT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -988,106 +988,104 @@
                                 </mask>
                             </variation>
                         </view>
-                        <prototypes>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArmadaEventTableViewCell" rowHeight="500" id="fZ5-Aq-5QZ" customClass="ArmadaEventTableViewCell" customModule="Teststs" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="302" width="600" height="500"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ5-Aq-5QZ" id="3Y1-U0-NBT">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-Au-yP6">
-                                            <rect key="frame" x="60" y="8" width="15" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckm-R6-lGV">
-                                            <rect key="frame" x="10" y="38" width="65" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="65" id="tpZ-86-eov"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
-                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcU-36-SIt">
-                                            <rect key="frame" x="93" y="476" width="138" height="1"/>
-                                            <color key="backgroundColor" red="0.027450980390000001" green="0.79607843140000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="138" id="evZ-MT-1IX"/>
-                                                <constraint firstAttribute="height" constant="1" id="nRZ-K8-8tf"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="Sign Up">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqF-c8-zbb">
-                                            <rect key="frame" x="90" y="8" width="487" height="479"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="mLJ-xE-J3i"/>
-                                                <constraint firstAttribute="width" constant="454" id="mmn-iL-e3e"/>
-                                            </constraints>
-                                            <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
+                        <sections>
+                            <tableViewSection id="Mhc-hr-LGk">
+                                <cells>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fZ5-Aq-5QZ">
+                                        <rect key="frame" x="0.0" y="280" width="600" height="296"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ5-Aq-5QZ" id="3Y1-U0-NBT">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="296"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-Au-yP6">
+                                                    <rect key="frame" x="60" y="8" width="15" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckm-R6-lGV">
+                                                    <rect key="frame" x="10" y="38" width="65" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="tpZ-86-eov"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcU-36-SIt">
+                                                    <rect key="frame" x="93" y="476" width="138" height="1"/>
+                                                    <color key="backgroundColor" red="0.027450980390000001" green="0.79607843140000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="138" id="evZ-MT-1IX"/>
+                                                        <constraint firstAttribute="height" constant="1" id="nRZ-K8-8tf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <state key="normal" title="Sign Up">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqF-c8-zbb">
+                                                    <rect key="frame" x="90" y="8" width="464" height="303"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="mLJ-xE-J3i"/>
+                                                        <constraint firstAttribute="width" constant="454" id="mmn-iL-e3e"/>
+                                                    </constraints>
+                                                    <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
 </string>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                            <color key="textColor" white="0.29999999999999999" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                                    <color key="textColor" white="0.29999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="mLJ-xE-J3i"/>
+                                                            <exclude reference="mmn-iL-e3e"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="topMargin" secondItem="wqF-c8-zbb" secondAttribute="top" id="658-lO-i1o"/>
+                                                <constraint firstItem="Xfz-Au-yP6" firstAttribute="trailing" secondItem="ckm-R6-lGV" secondAttribute="trailing" id="FjN-cB-2BB"/>
+                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" id="Iv1-hX-kn1"/>
+                                                <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" constant="10" id="OJ4-tN-Icv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="15" id="RSq-UE-ZnP"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="hcU-36-SIt" secondAttribute="bottom" constant="15" id="SYf-X0-tZQ"/>
+                                                <constraint firstItem="hcU-36-SIt" firstAttribute="leading" secondItem="wqF-c8-zbb" secondAttribute="leading" id="TEc-I5-LKd"/>
+                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leading" constant="90" id="WgU-AS-QCC"/>
+                                                <constraint firstItem="ckm-R6-lGV" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leadingMargin" constant="20" id="b2K-ad-3Ce"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="5" id="bQs-KX-Fmz"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="15" id="ghf-q6-0S5"/>
+                                                <constraint firstAttribute="centerX" secondItem="wqF-c8-zbb" secondAttribute="centerX" id="lQc-Md-cbp"/>
+                                                <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="top" id="opO-ZC-F6e"/>
+                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="top" id="si2-UX-hMI"/>
+                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="leading" id="xtx-lH-DNQ"/>
+                                                <constraint firstItem="ckm-R6-lGV" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="bottom" id="yDg-ee-kHl"/>
+                                                <constraint firstAttribute="topMargin" secondItem="Xfz-Au-yP6" secondAttribute="top" id="yGj-Xp-2xt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="5" id="yPo-v3-Oef"/>
+                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="trailing" constant="15" id="yrl-L0-QsS"/>
+                                                <constraint firstItem="hcU-36-SIt" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="10" id="zSf-ed-Sna"/>
+                                            </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="mLJ-xE-J3i"/>
-                                                    <exclude reference="mmn-iL-e3e"/>
+                                                    <exclude reference="b2K-ad-3Ce"/>
+                                                    <exclude reference="OJ4-tN-Icv"/>
+                                                    <exclude reference="opO-ZC-F6e"/>
+                                                    <exclude reference="658-lO-i1o"/>
+                                                    <exclude reference="Iv1-hX-kn1"/>
+                                                    <exclude reference="RSq-UE-ZnP"/>
+                                                    <exclude reference="lQc-Md-cbp"/>
+                                                    <exclude reference="xtx-lH-DNQ"/>
+                                                    <exclude reference="yPo-v3-Oef"/>
+                                                    <exclude reference="TEc-I5-LKd"/>
+                                                    <exclude reference="zSf-ed-Sna"/>
                                                 </mask>
                                             </variation>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="topMargin" secondItem="wqF-c8-zbb" secondAttribute="top" id="658-lO-i1o"/>
-                                        <constraint firstItem="Xfz-Au-yP6" firstAttribute="trailing" secondItem="ckm-R6-lGV" secondAttribute="trailing" id="FjN-cB-2BB"/>
-                                        <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" id="Iv1-hX-kn1"/>
-                                        <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" constant="10" id="OJ4-tN-Icv"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="15" id="RSq-UE-ZnP"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="hcU-36-SIt" secondAttribute="bottom" constant="15" id="SYf-X0-tZQ"/>
-                                        <constraint firstItem="hcU-36-SIt" firstAttribute="leading" secondItem="wqF-c8-zbb" secondAttribute="leading" id="TEc-I5-LKd"/>
-                                        <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leading" constant="90" id="WgU-AS-QCC"/>
-                                        <constraint firstItem="ckm-R6-lGV" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leadingMargin" constant="20" id="b2K-ad-3Ce"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="5" id="bQs-KX-Fmz"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="15" id="ghf-q6-0S5"/>
-                                        <constraint firstAttribute="centerX" secondItem="wqF-c8-zbb" secondAttribute="centerX" id="lQc-Md-cbp"/>
-                                        <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="top" id="opO-ZC-F6e"/>
-                                        <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="top" id="si2-UX-hMI"/>
-                                        <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="leading" id="xtx-lH-DNQ"/>
-                                        <constraint firstItem="ckm-R6-lGV" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="bottom" id="yDg-ee-kHl"/>
-                                        <constraint firstAttribute="topMargin" secondItem="Xfz-Au-yP6" secondAttribute="top" id="yGj-Xp-2xt"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="5" id="yPo-v3-Oef"/>
-                                        <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="trailing" constant="15" id="yrl-L0-QsS"/>
-                                        <constraint firstItem="hcU-36-SIt" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="10" id="zSf-ed-Sna"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="b2K-ad-3Ce"/>
-                                            <exclude reference="OJ4-tN-Icv"/>
-                                            <exclude reference="opO-ZC-F6e"/>
-                                            <exclude reference="658-lO-i1o"/>
-                                            <exclude reference="Iv1-hX-kn1"/>
-                                            <exclude reference="RSq-UE-ZnP"/>
-                                            <exclude reference="lQc-Md-cbp"/>
-                                            <exclude reference="xtx-lH-DNQ"/>
-                                            <exclude reference="yPo-v3-Oef"/>
-                                            <exclude reference="TEc-I5-LKd"/>
-                                            <exclude reference="zSf-ed-Sna"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="dayLabel" destination="Xfz-Au-yP6" id="ixN-Qs-TVI"/>
-                                    <outlet property="monthLabel" destination="ckm-R6-lGV" id="PsR-lP-Q3U"/>
-                                    <outlet property="summaryLabel" destination="wqF-c8-zbb" id="ZFE-2d-qf0"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="1vj-2m-lxX" id="KtY-TQ-1Sk"/>
                             <outlet property="delegate" destination="1vj-2m-lxX" id="RNT-fy-GTG"/>
@@ -1099,7 +1097,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="700"/>
                     <connections>
+                        <outlet property="dayLabel" destination="Xfz-Au-yP6" id="5ro-e1-ynt"/>
                         <outlet property="eventImageView" destination="l8U-YR-BkE" id="pYd-Lz-x3M"/>
+                        <outlet property="monthLabel" destination="ckm-R6-lGV" id="K5j-72-Pbp"/>
+                        <outlet property="summaryLabel" destination="wqF-c8-zbb" id="C5Z-kO-hG5"/>
                         <outlet property="titleLabel" destination="Gg8-IY-5Uh" id="ywg-Ak-V6H"/>
                     </connections>
                 </tableViewController>
