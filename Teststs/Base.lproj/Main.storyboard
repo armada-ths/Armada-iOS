@@ -2472,7 +2472,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="EricssonBackground" translatesAutoresizingMaskIntoConstraints="NO" id="o5W-m7-YaM">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="EricssonBackground" translatesAutoresizingMaskIntoConstraints="NO" id="o5W-m7-YaM">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tv-0r-O9O">
@@ -2512,6 +2512,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="o5W-m7-YaM" secondAttribute="bottom" id="DZT-ug-zG9"/>
+                                                <constraint firstAttribute="bottom" secondItem="o5W-m7-YaM" secondAttribute="bottom" id="Vya-T4-teE"/>
                                                 <constraint firstItem="o5W-m7-YaM" firstAttribute="leading" secondItem="LYR-qP-43t" secondAttribute="leading" id="Za2-Ry-gBw"/>
                                                 <constraint firstItem="6Tv-0r-O9O" firstAttribute="leading" secondItem="LYR-qP-43t" secondAttribute="leading" id="fEJ-IG-QAU"/>
                                                 <constraint firstItem="6Tv-0r-O9O" firstAttribute="bottom" secondItem="LYR-qP-43t" secondAttribute="bottom" id="mrI-qn-LH9"/>
@@ -2534,7 +2535,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="StromsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="svm-ph-rld">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="StromsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="svm-ph-rld">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGY-4g-s0l">
@@ -2585,6 +2586,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                                 <constraint firstAttribute="trailing" secondItem="svm-ph-rld" secondAttribute="trailing" id="UL7-Xl-9yT"/>
                                                 <constraint firstItem="svm-ph-rld" firstAttribute="leading" secondItem="TTO-0N-N1N" secondAttribute="leading" id="WKc-0l-xAP"/>
                                                 <constraint firstItem="oGY-4g-s0l" firstAttribute="bottom" secondItem="TTO-0N-N1N" secondAttribute="bottom" id="dKx-BV-imn"/>
+                                                <constraint firstAttribute="bottom" secondItem="svm-ph-rld" secondAttribute="bottom" id="zYb-DS-6UY"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
