@@ -17,11 +17,16 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
          self.clearsSelectionOnViewWillAppear = true
     }
+    
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

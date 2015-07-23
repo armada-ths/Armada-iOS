@@ -135,9 +135,7 @@ let DataDude = _DataDude()
 public class _DataDude {
     
     let companies: [Company]
-    
-    
-    
+
     var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
     
     func generateMap() {
