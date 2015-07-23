@@ -12,6 +12,11 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     override func viewDidLoad() {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
+        
+        if !selectedArmadaEvent!.signupLink.isEmpty {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Signup", style: .Plain, target: self, action: Selector("signup:"))
+        }
+        
         dayLabel.text = selectedArmadaEvent!.startDate.format("d")
         monthLabel.text = selectedArmadaEvent!.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
         let paragraphStyle = NSMutableParagraphStyle()
@@ -21,6 +26,13 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         summaryLabel.attributedText = attrString
         eventImageView.image = selectedArmadaEvent?.image
         titleLabel.text = selectedArmadaEvent?.title
+    }
+    
+    func signup(sender: AnyObject) {
+        if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

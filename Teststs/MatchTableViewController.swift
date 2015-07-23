@@ -106,10 +106,10 @@ class MatchTableViewController: UITableViewController {
         cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
         cell.descriptionLabel.text = company.name
         
-        cell.matchProgressView.setProgress(0, animated: false)
+//        cell.matchProgressView.setProgress(0, animated: false)
 //        cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         NSOperationQueue.mainQueue().addOperationWithBlock{
-            cell.matchProgressView.setProgress(0, animated: false)
+//            cell.matchProgressView.setProgress(0, animated: false)
             cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         }
         
