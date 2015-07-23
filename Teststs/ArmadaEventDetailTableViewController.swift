@@ -13,10 +13,6 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
         
-        
-        
-        
-        
         if !selectedArmadaEvent!.signupLink.isEmpty {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Signup", style: .Plain, target: self, action: Selector("signup:"))
         }
