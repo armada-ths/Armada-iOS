@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -402,7 +402,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-sQ-oaQ">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-sQ-oaQ">
                                                     <rect key="frame" x="16" y="11" width="111" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="Add to Favorites">
@@ -797,7 +797,7 @@
                                                     <rect key="frame" x="73" y="0.0" width="124" height="36"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDo-tz-PXa">
+                                                <view alpha="0.69999999999999996" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TDo-tz-PXa">
                                                     <rect key="frame" x="73" y="36" width="73" height="36"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -810,7 +810,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPh-xJ-9Ng">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPh-xJ-9Ng">
                                                     <rect key="frame" x="83" y="36" width="53" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="naT-qR-hlu"/>
@@ -2314,7 +2314,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-cA-ylL">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-cA-ylL">
                                             <rect key="frame" x="116" y="32" width="97" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
@@ -2459,7 +2459,7 @@
             <objects>
                 <tableViewController title="Sponsors" id="eqZ-ct-Sht" customClass="SponsorsTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dS8-Ea-4tF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -2472,7 +2472,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="EricssonBackground" translatesAutoresizingMaskIntoConstraints="NO" id="o5W-m7-YaM">
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="ericssonBackground" translatesAutoresizingMaskIntoConstraints="NO" id="o5W-m7-YaM">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tv-0r-O9O">
@@ -2484,7 +2484,7 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ericsson AB Template" translatesAutoresizingMaskIntoConstraints="NO" id="RE5-96-R8e">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericssonLogo" translatesAutoresizingMaskIntoConstraints="NO" id="RE5-96-R8e">
                                                             <rect key="frame" x="7" y="277" width="405" height="125"/>
                                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
@@ -2535,7 +2535,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="StromsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="svm-ph-rld">
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1" image="stromsBackground" translatesAutoresizingMaskIntoConstraints="NO" id="svm-ph-rld">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oGY-4g-s0l">
@@ -2605,6 +2605,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Sponsors" image="notepad" id="WpM-q5-TRK"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1200"/>
                     <connections>
                         <outlet property="ericssonLabel" destination="aQu-8w-xwn" id="Tji-wt-vxf"/>
                         <outlet property="strömsLabel" destination="bls-6Y-Y0e" id="oX0-87-M0c"/>
@@ -3059,9 +3061,6 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         </scene>
     </scenes>
     <resources>
-        <image name="Ericsson AB Template" width="1135" height="1024"/>
-        <image name="EricssonBackground" width="504" height="1244"/>
-        <image name="StromsBackground" width="792" height="743"/>
         <image name="The Thesis Proposal" width="2121" height="1414"/>
         <image name="adecco-logo" width="150" height="81"/>
         <image name="armadaRun" width="650" height="360"/>
@@ -3072,6 +3071,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
         <image name="ericsson-logo" width="280" height="248"/>
+        <image name="ericssonBackground" width="504" height="1244"/>
+        <image name="ericssonLogo" width="1135" height="1024"/>
         <image name="facebook" width="128" height="128"/>
         <image name="filter" width="128" height="128"/>
         <image name="globe-2" width="128" height="128"/>
@@ -3083,7 +3084,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="linkedin" width="128" height="128"/>
         <image name="newBackground" width="894" height="580"/>
         <image name="notepad" width="32" height="32"/>
-        <image name="stromsLogo" width="260" height="102"/>
+        <image name="stromsBackground" width="792" height="743"/>
+        <image name="stromsLogo" width="468" height="186"/>
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
