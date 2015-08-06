@@ -31,11 +31,12 @@
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
                         <segue destination="50M-7J-mNK" kind="relationship" relationship="viewControllers" id="vpP-Rx-VV9"/>
                         <segue destination="eqZ-ct-Sht" kind="relationship" relationship="viewControllers" id="N2c-hc-HSB"/>
+                        <segue destination="tbo-n8-YZf" kind="relationship" relationship="viewControllers" id="6y9-XO-pHp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="-472"/>
+            <point key="canvasLocation" x="385" y="-738"/>
         </scene>
         <!--Company Split View Controller-->
         <scene sceneID="bdt-Qc-oZt">
@@ -2797,6 +2798,47 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
             </objects>
             <point key="canvasLocation" x="2089" y="2641"/>
         </scene>
+        <!--About-->
+        <scene sceneID="tgN-Vr-YYU">
+            <objects>
+                <viewController id="Wcn-cK-16r" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SjJ-hU-yWu"/>
+                        <viewControllerLayoutGuide type="bottom" id="afn-uf-Emm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IJS-KP-EqX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVH-YQ-lIr">
+                                <rect key="frame" x="20" y="64" width="560" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">THS Armada is the largest student driven organisation at KTH. The project is led by a student who is taking a year of to work for the student union, THS. The organisation has three main groups, working with different areas, led by a project group consisting of 19 students. Along with them 49 team leaders, developers, creators and coordinators are taking the project forward, and will in October be joined by 230 hosts. Together we create one of the largest student projects at KTH. 
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RVH-YQ-lIr" firstAttribute="top" secondItem="SjJ-hU-yWu" secondAttribute="bottom" id="Hb1-Wb-SXf"/>
+                            <constraint firstItem="RVH-YQ-lIr" firstAttribute="leading" secondItem="IJS-KP-EqX" secondAttribute="leadingMargin" id="XOx-jM-VI5"/>
+                            <constraint firstItem="afn-uf-Emm" firstAttribute="top" secondItem="RVH-YQ-lIr" secondAttribute="bottom" id="pJk-Rl-TEE"/>
+                            <constraint firstItem="RVH-YQ-lIr" firstAttribute="trailing" secondItem="IJS-KP-EqX" secondAttribute="trailingMargin" id="rYK-i9-DRo"/>
+                            <constraint firstItem="afn-uf-Emm" firstAttribute="top" secondItem="RVH-YQ-lIr" secondAttribute="bottom" id="wxQ-Zx-7Ua"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="pJk-Rl-TEE"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="About" id="5FM-IW-aHe"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ueJ-X5-NNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2008" y="-779"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="YuK-od-cib">
             <objects>
@@ -3059,6 +3101,29 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
             </objects>
             <point key="canvasLocation" x="5064" y="2158"/>
         </scene>
+        <!--About-->
+        <scene sceneID="JKp-2v-AM0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tbo-n8-YZf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" image="happy_face" id="a7k-6i-AvR">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="happy_face-1"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1ts-Tm-Hx0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wcn-cK-16r" kind="relationship" relationship="rootViewController" id="TUO-kf-tsI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FMJ-X9-2T4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1196" y="-779"/>
+        </scene>
     </scenes>
     <resources>
         <image name="The Thesis Proposal" width="2121" height="1414"/>
@@ -3077,6 +3142,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="filter" width="128" height="128"/>
         <image name="globe-2" width="128" height="128"/>
         <image name="graduate_male" width="128" height="128"/>
+        <image name="happy_face" width="32" height="32"/>
+        <image name="happy_face-1" width="32" height="32"/>
         <image name="heart" width="32" height="32"/>
         <image name="heart-1" width="32" height="32"/>
         <image name="light_bulb" width="32" height="32"/>
@@ -3085,7 +3152,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="newBackground" width="894" height="580"/>
         <image name="notepad" width="32" height="32"/>
         <image name="stromsBackground" width="792" height="743"/>
-        <image name="stromsLogo" width="468" height="186"/>
+        <image name="stromsLogo" width="260" height="102"/>
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
