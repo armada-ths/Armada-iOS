@@ -25,7 +25,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="jtF-cB-Wfd" kind="relationship" relationship="viewControllers" id="Sqf-mZ-L72"/>
                         <segue destination="78t-xE-H8C" kind="relationship" relationship="viewControllers" id="See-X9-kSv"/>
                         <segue destination="Prx-39-3tm" kind="relationship" relationship="viewControllers" id="01p-Er-k9V"/>
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
@@ -36,7 +35,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="-738"/>
+            <point key="canvasLocation" x="-527" y="-1162"/>
         </scene>
         <!--Company Split View Controller-->
         <scene sceneID="bdt-Qc-oZt">
@@ -70,7 +69,7 @@
             </objects>
             <point key="canvasLocation" x="-1442" y="387"/>
         </scene>
-        <!--Catalogue-->
+        <!--Catalogue Table View Controller-->
         <scene sceneID="5gy-2q-Wgj">
             <objects>
                 <tableViewController id="7lO-dz-MqH" customClass="CatalogueTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
@@ -173,7 +172,19 @@
                             <outlet property="delegate" destination="7lO-dz-MqH" id="6LP-On-4E2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Catalogue" id="umj-5h-GAg">
+                    <navigationItem key="navigationItem" id="umj-5h-GAg">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dzO-lc-2gt">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Favorites"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlDidChange:" destination="7lO-dz-MqH" eventType="valueChanged" id="ysj-ZG-D3W"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="Vdg-vq-dY1">
                             <connections>
                                 <segue destination="Up7-GF-P9n" kind="show" id="HdS-L4-TYF"/>
@@ -182,6 +193,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="i0n-Ps-fpL" id="jiq-To-ls4"/>
+                        <outlet property="segmentedControl" destination="dzO-lc-2gt" id="iGs-xl-k5b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3168,9 +3180,9 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="r1R-7L-rO0"/>
         <segue reference="0Hm-Oo-SOc"/>
         <segue reference="mja-PR-QlL"/>
-        <segue reference="kvA-Bh-tNi"/>
-        <segue reference="Qf2-UD-66F"/>
+        <segue reference="HdS-L4-TYF"/>
     </inferredMetricsTieBreakers>
 </document>

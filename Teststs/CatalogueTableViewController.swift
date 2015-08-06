@@ -1,6 +1,7 @@
 import UIKit
 
 class CatalogueTableViewController: UITableViewController {
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -14,6 +15,16 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+    }
+    @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            companies = CompanyFilter.filteredCompanies
+        } else {
+            companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
+        }
+        updateCompaniesByLetters(companies)
+        updateFavoritesUI()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
