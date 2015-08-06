@@ -71,7 +71,8 @@ class NewsTableViewController: ScrollZoomTableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        selectedNewsItem = news[tableView.indexPathForSelectedRow!.row]
+        if let indexPath = tableView.indexPathForSelectedRow {
+        selectedNewsItem = news[indexPath.row]
         if !readArmadaNews.contains(selectedNewsItem!.title) {
             readArmadaNews.append(selectedNewsItem!.title)
         }
@@ -79,5 +80,6 @@ class NewsTableViewController: ScrollZoomTableViewController {
         let contentWithoutHtml = (try! NSAttributedString(data: selectedNewsItem.content.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)).string
         
         selectedArmadaEvent = ArmadaEvent(title: selectedNewsItem.title, summary: contentWithoutHtml, location: "", startDate: selectedNewsItem.publishedDate, endDate: selectedNewsItem.publishedDate, signupLink: "")
+    }
     }
 }
