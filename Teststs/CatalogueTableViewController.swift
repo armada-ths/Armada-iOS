@@ -29,15 +29,16 @@ class CatalogueTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let stopWatch = StopWatch()
-
-        companies = CompanyFilter.filteredCompanies
-        stopWatch.print("Filtering companies")
-        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
-        updateCompaniesByLetters(companies)
-        stopWatch.print("updating letters")
-        tableView.reloadData()
-        updateFavoritesUI()
+//        let stopWatch = StopWatch()
+//
+//        companies =  CompanyFilter.filteredCompanies
+//        stopWatch.print("Filtering companies")
+//        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
+//        updateCompaniesByLetters(companies)
+//        stopWatch.print("updating letters")
+//        tableView.reloadData()
+//        updateFavoritesUI()
+        segmentedControlDidChange(segmentedControl)
     }
     
     override func didReceiveMemoryWarning() {
