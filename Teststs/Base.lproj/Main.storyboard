@@ -29,8 +29,7 @@
                         <segue destination="Prx-39-3tm" kind="relationship" relationship="viewControllers" id="01p-Er-k9V"/>
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
                         <segue destination="50M-7J-mNK" kind="relationship" relationship="viewControllers" id="vpP-Rx-VV9"/>
-                        <segue destination="eqZ-ct-Sht" kind="relationship" relationship="viewControllers" id="N2c-hc-HSB"/>
-                        <segue destination="tbo-n8-YZf" kind="relationship" relationship="viewControllers" id="6y9-XO-pHp"/>
+                        <segue destination="I44-E6-5rF" kind="relationship" relationship="viewControllers" id="N2c-hc-HSB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1869,7 +1868,13 @@
                             <outlet property="delegate" destination="8lS-ZJ-p1Y" id="Bma-Q8-mi6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="5B8-iV-T56"/>
+                    <navigationItem key="navigationItem" title="News" id="5B8-iV-T56">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="eIK-Db-QWR">
+                            <connections>
+                                <segue destination="Wcn-cK-16r" kind="show" id="LAO-mR-fUa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nst-0h-vNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1937,7 +1942,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MMZ-3K-5hj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2987" y="840"/>
+            <point key="canvasLocation" x="3799" y="840"/>
         </scene>
         <!--Filter-->
         <scene sceneID="wrj-ox-j3d">
@@ -2479,7 +2484,7 @@
                             <tableViewSection id="7fD-Jx-dmD">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="433" id="usJ-Sl-ouf">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="433"/>
+                                        <rect key="frame" x="0.0" y="64" width="600" height="433"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="usJ-Sl-ouf" id="LYR-qP-43t">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
@@ -2542,7 +2547,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="433" id="XI4-gm-Jks">
-                                        <rect key="frame" x="0.0" y="433" width="600" height="433"/>
+                                        <rect key="frame" x="0.0" y="497" width="600" height="433"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XI4-gm-Jks" id="TTO-0N-N1N">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="432.5"/>
@@ -2617,7 +2622,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                             <outlet property="delegate" destination="eqZ-ct-Sht" id="fYl-y9-zE2"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Sponsors" image="notepad" id="WpM-q5-TRK"/>
+                    <navigationItem key="navigationItem" title="Sponsors" id="hL4-U9-3d5"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1200"/>
                     <connections>
@@ -2627,7 +2632,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fyf-ps-yA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1449" y="250"/>
+            <point key="canvasLocation" x="2261" y="250"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="csm-AD-y1y">
@@ -2860,7 +2865,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ueJ-X5-NNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2008" y="-779"/>
+            <point key="canvasLocation" x="4720" y="2851"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YuK-od-cib">
@@ -3124,28 +3129,24 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
             </objects>
             <point key="canvasLocation" x="5064" y="2158"/>
         </scene>
-        <!--About-->
-        <scene sceneID="JKp-2v-AM0">
+        <!--Sponsors-->
+        <scene sceneID="i8f-Xc-3ug">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tbo-n8-YZf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="About" image="happy_face" id="a7k-6i-AvR">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="happy_face-1"/>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I44-E6-5rF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Sponsors" image="notepad" id="WpM-q5-TRK"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1ts-Tm-Hx0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QeI-Ss-5P1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Wcn-cK-16r" kind="relationship" relationship="rootViewController" id="TUO-kf-tsI"/>
+                        <segue destination="eqZ-ct-Sht" kind="relationship" relationship="rootViewController" id="mDh-pe-bX4"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FMJ-X9-2T4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Xd-h8-RKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1196" y="-779"/>
+            <point key="canvasLocation" x="1449" y="250"/>
         </scene>
     </scenes>
     <resources>
@@ -3166,8 +3167,6 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="filter" width="128" height="128"/>
         <image name="globe-2" width="128" height="128"/>
         <image name="graduate_male" width="128" height="128"/>
-        <image name="happy_face" width="32" height="32"/>
-        <image name="happy_face-1" width="32" height="32"/>
         <image name="heart" width="32" height="32"/>
         <image name="heart-1" width="32" height="32"/>
         <image name="light_bulb" width="32" height="32"/>
