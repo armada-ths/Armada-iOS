@@ -80,7 +80,7 @@ class CatalogueTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTableViewCell", forIndexPath: indexPath) as! CompanyTableViewCell
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
-        cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
+        cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.workFields.first ?? "Other"
         if let image = company.image {

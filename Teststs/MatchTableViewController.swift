@@ -103,7 +103,7 @@ class MatchTableViewController: UITableViewController {
         let companyWithMatchPercentage = companiesWithMatchPercentages[indexPath.row]
         let matchPercentage = companyWithMatchPercentage.percentage
         let company = companyWithMatchPercentage.company
-        cell.descriptionLabel.text = company.description.substringToIndex(advance(company.description.endIndex,-1))
+        cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
         cell.descriptionLabel.text = company.name
         
 //        cell.matchProgressView.setProgress(0, animated: false)

@@ -74,8 +74,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
                 
             }
             aboutLabel.text = company.description
-            jobLabel.text = ", ".join(company.jobTypes ?? [])
-            fieldsLabel.text = ", ".join(company.workFields ?? [])
+            jobLabel.text = company.jobTypes.joinWithSeparator(", ")
+            fieldsLabel.text = company.workFields.joinWithSeparator(", ")
             websiteLabel.text = company.website
             countriesLabel.text = "\(company.countries)"
             employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"

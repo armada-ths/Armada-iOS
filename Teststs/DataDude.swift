@@ -206,7 +206,9 @@ public class _DataDude {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
         let b = string.componentsSeparatedByString(":")
-        return dateFormatter.dateFromString(":".join(b[0..<b.count-1]) + b[b.count-1])!
+        
+        
+        return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])!
     }
     
     class public func companiesFromJson(json: AnyObject) -> [Company] {
@@ -253,7 +255,7 @@ public class _DataDude {
     static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
     
     class func companiesFromFile() -> [Company]? {
-        if let data = NSData(contentsOfFile: dir.stringByAppendingPathComponent(companiesFileName)),
+        if let data = NSData(contentsOfFile: (dir as NSString).stringByAppendingPathComponent(companiesFileName)),
             let json: AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: []) {
                 return companiesFromJson(json)
         }

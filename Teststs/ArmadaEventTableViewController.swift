@@ -56,7 +56,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
         let armadaEvent = armadaEvents[indexPath.row]
         let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
-        let title = titleComponents.count > 1 ? " ".join(titleComponents[0..<titleComponents.count-1]) : titleComponents.last
+        let title = titleComponents.count > 1 ? titleComponents[0..<titleComponents.count-1].joinWithSeparator(" ") : titleComponents.last
         cell.titleLabel.text = title
         cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
         cell.dayLabel.text = armadaEvent.startDate.format("d")
