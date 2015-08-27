@@ -33,6 +33,7 @@ public class Company: NSManagedObject {
             let programmes = json["programmes"] as? [[String:AnyObject]],
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
+            let image = UIImage(named: name),
             let companyValues = json["company_values"] as? [[String:AnyObject]]{
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 
