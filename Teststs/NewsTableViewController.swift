@@ -76,6 +76,12 @@ class NewsTableViewController: ScrollZoomTableViewController {
         return cell
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeaderView()
+        
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let indexPath = tableView.indexPathForSelectedRow {
         selectedNewsItem = news[indexPath.row]
