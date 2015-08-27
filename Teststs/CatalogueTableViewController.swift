@@ -52,7 +52,7 @@ class CatalogueTableViewController: UITableViewController {
         if companies.isEmpty {
             let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
             label.font = UIFont.systemFontOfSize(30)
-            label.text = "No Company Matches\nYour Filter"
+            label.text = segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites"
             label.numberOfLines = 2
             label.textAlignment = .Center
             label.sizeToFit()
@@ -124,6 +124,33 @@ class CatalogueTableViewController: UITableViewController {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return segmentedControl.selectedSegmentIndex == 1
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+            if editingStyle == .Delete {
+                tableView.beginUpdates()
+                let company = companiesByLetters[indexPath.section].companies[indexPath.row]
+                FavoriteCompanies.remove(company.name)
+                companies = DataDude.companies.filter { FavoriteCompanies.contains($0.name) }
+                
+                updateCompaniesByLetters(companies)
+                
+                if tableView.numberOfRowsInSection(indexPath.section) == 1 {
+                    tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+                } else {
+                    tableView.deleteRowsAtIndexPaths([indexPath],
+                    withRowAnimation: .Fade)
+                }
+                
+                
+                updateFavoritesUI()
+                tableView.endUpdates()
+                
+            }
     }
 }
 
