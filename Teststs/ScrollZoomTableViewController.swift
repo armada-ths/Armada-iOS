@@ -13,9 +13,15 @@ class ScrollZoomTableViewController: UITableViewController {
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
         tableView.sendSubviewToBack(headerView)
-        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        
+        
+        tableView.contentInset = UIEdgeInsets(top: headerHeight-(64-navigationBarHeight), left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -headerHeight)
         updateHeaderView()
+    }
+    
+    var navigationBarHeight: CGFloat {
+        return (parentViewController as? UINavigationController == nil) ? 0 : 64
     }
     
     func updateHeaderView() {
@@ -25,12 +31,7 @@ class ScrollZoomTableViewController: UITableViewController {
         
         var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
         
-        let difference: CGFloat
-        if let _ = parentViewController as? UINavigationController {
-            difference =  -tableView.contentOffset.y - headerHeight - 64
-        } else {
-            difference =  -tableView.contentOffset.y - headerHeight
-        }
+        let difference = -tableView.contentOffset.y - headerHeight - navigationBarHeight
         
         if difference > 0  {
             headerRect.origin.y =  -headerHeight - difference
