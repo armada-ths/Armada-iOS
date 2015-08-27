@@ -113,7 +113,7 @@ class MatchTableViewController: UITableViewController {
             cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         }
         
-        cell.workFieldLabel.text = company.workFields.first ?? "Other"
+        cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
         
         //        cell.positionLabel.text = "\(indexPath.row+1)"
         //        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"

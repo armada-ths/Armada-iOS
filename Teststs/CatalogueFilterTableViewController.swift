@@ -29,11 +29,11 @@ enum CompanyProperty: CustomStringConvertible {
 extension Company {
     subscript(companyProperty: CompanyProperty) -> [String] {
         switch companyProperty {
-        case .Programmes: return programmes
-        case .JobTypes: return jobTypes
-        case .Continents: return continents
-        case .WorkFields: return workFields
-        case .CompanyValues: return companyValues
+        case .Programmes: return programmes.map {$0.programme}
+        case .JobTypes: return jobTypes.map {$0.jobType}
+        case .Continents: return continents.map {$0.continent}
+        case .WorkFields: return workFields.map {$0.workField}
+        case .CompanyValues: return companyValues.map {$0.companyValue}
         }
     }
 }
@@ -78,6 +78,9 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if DataDude.numberOfCompaniesForPropertyValueMap.isEmpty {
+            DataDude.generateMap()
+        }
     }
     
     override func didReceiveMemoryWarning() {

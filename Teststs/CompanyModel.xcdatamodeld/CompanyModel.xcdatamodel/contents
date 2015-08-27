@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+    <entity name="Company" representedClassName=".Company" syncable="YES">
+        <attribute name="companyDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contactPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countries" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="employeesSweden" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="employeesWorld" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="facebook" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="linkedin" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="primaryWorkField" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="companyValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompanyValue" inverseName="companies" inverseEntity="CompanyValue" syncable="YES"/>
+        <relationship name="continents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Continent" inverseName="companies" inverseEntity="Continent" syncable="YES"/>
+        <relationship name="jobTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobType" inverseName="companies" inverseEntity="JobType" syncable="YES"/>
+        <relationship name="programmes" toMany="YES" deletionRule="Nullify" destinationEntity="Programme" inverseName="companies" inverseEntity="Programme" syncable="YES"/>
+        <relationship name="workFields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkField" inverseName="companies" inverseEntity="WorkField" syncable="YES"/>
+    </entity>
+    <entity name="CompanyValue" representedClassName=".CompanyValue" syncable="YES">
+        <attribute name="companyValue" attributeType="String" syncable="YES"/>
+        <relationship name="companies" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="companyValues" inverseEntity="Company" syncable="YES"/>
+    </entity>
+    <entity name="Continent" representedClassName=".Continent" syncable="YES">
+        <attribute name="continent" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="continents" inverseEntity="Company" syncable="YES"/>
+    </entity>
+    <entity name="JobType" representedClassName=".JobType" syncable="YES">
+        <attribute name="jobType" attributeType="String" syncable="YES"/>
+        <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="jobTypes" inverseEntity="Company" syncable="YES"/>
+    </entity>
+    <entity name="Programme" representedClassName=".Programme" syncable="YES">
+        <attribute name="programme" attributeType="String" syncable="YES"/>
+        <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="programmes" inverseEntity="Company" syncable="YES"/>
+    </entity>
+    <entity name="WorkField" representedClassName=".WorkField" syncable="YES">
+        <attribute name="workField" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workFields" inverseEntity="Company" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
+        <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>
+        <element name="WorkField" positionX="-45" positionY="117" width="128" height="75"/>
+        <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
+        <element name="Programme" positionX="-18" positionY="144" width="128" height="75"/>
+    </elements>
+</model>

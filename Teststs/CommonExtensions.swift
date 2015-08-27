@@ -31,12 +31,13 @@ extension Int {
 }
 
 class StopWatch {
-    let start = NSDate()
+    var start = NSDate()
     
     init() {}
     
     func print(description: String) {
         Swift.print("\(description) \(Int(NSDate().timeIntervalSinceDate(start)*1000))ms")
+        start = NSDate()
     }
 }
 

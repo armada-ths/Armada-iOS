@@ -9,7 +9,9 @@ class CatalogueTableViewController: UITableViewController {
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
     func updateCompaniesByLetters(companies: [Company]) {
+        let stopWatch = StopWatch()
         companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sort(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+        stopWatch.print("Updating letters")
     }
     
     override func viewDidLoad() {
@@ -82,7 +84,7 @@ class CatalogueTableViewController: UITableViewController {
         let company = companiesByLetters[indexPath.section].companies[indexPath.row]
         cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
         cell.descriptionLabel.text = company.name
-        cell.workFieldLabel.text = company.workFields.first ?? "Other"
+        cell.workFieldLabel.text = company.primaryWorkField
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true

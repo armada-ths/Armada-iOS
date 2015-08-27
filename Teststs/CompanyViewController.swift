@@ -20,6 +20,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var mapWebView: UIWebView!
     
+    
+    
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +31,19 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.reloadData()
         positionLabel.alpha = 0
+        let continents = self.company!.continents.map { $0.continent }
         
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
-            let companyStyle = self.company!.continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
+            
+            let companyStyle = continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
             html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
             }
         }
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,11 +73,10 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
                         self.locationImageView.image = image
                         }, completion: nil)
                 }
-                
             }
-            aboutLabel.text = company.description
-            jobLabel.text = company.jobTypes.joinWithSeparator(", ")
-            fieldsLabel.text = company.workFields.joinWithSeparator(", ")
+            aboutLabel.text = company.companyDescription
+            jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
+            fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
             websiteLabel.text = company.website
             countriesLabel.text = "\(company.countries)"
             employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"
