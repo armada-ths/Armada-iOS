@@ -24,7 +24,14 @@ class ScrollZoomTableViewController: UITableViewController {
         }
         
         var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
-        let difference =  -tableView.contentOffset.y - headerHeight - 64
+        
+        let difference: CGFloat
+        if let _ = parentViewController as? UINavigationController {
+            difference =  -tableView.contentOffset.y - headerHeight - 64
+        } else {
+            difference =  -tableView.contentOffset.y - headerHeight
+        }
+        
         if difference > 0  {
             headerRect.origin.y =  -headerHeight - difference
             headerRect.size.height = headerHeight + difference
@@ -42,5 +49,7 @@ class ScrollZoomTableViewController: UITableViewController {
         self.clearsSelectionOnViewWillAppear = true
         initHeaderView()
     }
+    
+
     
 }

@@ -35,6 +35,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -51,6 +52,12 @@ class NewsTableViewController: ScrollZoomTableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+//        updateHeaderView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        updateHeaderView()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
