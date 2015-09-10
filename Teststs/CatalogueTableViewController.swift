@@ -24,7 +24,9 @@ class CatalogueTableViewController: UITableViewController {
         } else {
             companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
-        updateCompaniesByLetters(companies)
+        self.searchBar(searchBar, textDidChange: searchBar.text ?? "")
+//        searchBar(searchBar(searchBar, textDidChange: searchBar.text))
+//        updateCompaniesByLetters(companies)
         updateFavoritesUI()
         tableView.reloadData()
     }
