@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="Company" representedClassName=".Company" syncable="YES">
         <attribute name="companyDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactEmail" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,6 +9,10 @@
         <attribute name="employeesSweden" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="employeesWorld" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="facebook" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasClimateCompensated" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="isStartup" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="likesEnvironment" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="likesEquality" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="linkedin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -43,11 +47,11 @@
         <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workFields" inverseEntity="Company" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="405"/>
+        <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
         <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>
-        <element name="WorkField" positionX="-45" positionY="117" width="128" height="75"/>
-        <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Programme" positionX="-18" positionY="144" width="128" height="75"/>
+        <element name="WorkField" positionX="-45" positionY="117" width="128" height="75"/>
     </elements>
 </model>

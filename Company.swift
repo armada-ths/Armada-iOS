@@ -28,15 +28,18 @@ public class Company: NSManagedObject {
             let contactEmail = json["contact_email"] as? String,
             let contactPhone = json["contact_number"] as? String,
             let countries = json["countries_presence_count"] as? Int,
-            
             let workFields = json["work_fields"] as? [[String:AnyObject]],
             let programmes = json["programmes"] as? [[String:AnyObject]],
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
-            let image = UIImage(named: name),
-            let companyValues = json["company_values"] as? [[String:AnyObject]]{
+//            let image = UIImage(named: name),
+            let companyValues = json["company_values"] as? [[String:AnyObject]] {
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 
+                let isStartup = json["is_startup_exhibitor"] as? Bool ?? false
+                let likesEquality = json["is_diversity_exhibitor"] as? Bool ?? false
+                let likesEnvironment = json["is_sustainability_exhibitor"] as? Bool ?? false
+                let hasClimateCompensated = json["is_eco_friendly"] as? Bool ?? false
                 
                 company.name = name
                 company.companyDescription = description
@@ -52,9 +55,10 @@ public class Company: NSManagedObject {
                 company.contactEmail = contactEmail
                 company.contactPhone = contactPhone
                 company.countries = countries
-                
-
-
+                company.isStartup = isStartup
+                company.likesEquality = likesEquality
+                company.likesEnvironment = likesEnvironment
+                company.hasClimateCompensated = hasClimateCompensated
                 
                 _ = {
                     let fetchRequest = NSFetchRequest()

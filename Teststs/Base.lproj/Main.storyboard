@@ -95,8 +95,8 @@
                                                 <constraint firstAttribute="width" constant="80" id="wPX-OW-rMc"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
-                                            <rect key="frame" x="116" y="13" width="476" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
+                                            <rect key="frame" x="116" y="13" width="428" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="pMB-MH-EG6"/>
                                             </constraints>
@@ -114,12 +114,22 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
-                                            <rect key="frame" x="108" y="32" width="94" height="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
+                                            <rect key="frame" x="116" y="32" width="96" height="13.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaf" translatesAutoresizingMaskIntoConstraints="NO" id="lCy-gM-i4f">
+                                            <rect key="frame" x="572" y="8" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="gIp-h3-4A0"/>
+                                                <constraint firstAttribute="height" constant="20" id="kpq-jw-xKF"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tree" translatesAutoresizingMaskIntoConstraints="NO" id="aLJ-hu-1gD">
+                                            <rect key="frame" x="572" y="30" width="20" height="20"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" constant="2" id="2fe-Rz-U8S"/>
@@ -132,12 +142,18 @@
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="centerY" secondItem="F0R-UM-rOW" secondAttribute="centerY" id="QS8-ao-buE"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" id="TxU-bA-oE4"/>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="6dK-Mj-GQR" secondAttribute="leadingMargin" constant="3" id="VPC-U4-og8"/>
+                                        <constraint firstItem="aLJ-hu-1gD" firstAttribute="top" secondItem="lCy-gM-i4f" secondAttribute="bottom" constant="2" id="X8T-IN-zU1"/>
+                                        <constraint firstItem="aLJ-hu-1gD" firstAttribute="centerX" secondItem="lCy-gM-i4f" secondAttribute="centerX" id="YxB-ew-2RB"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="EQe-lC-rVo" secondAttribute="top" constant="-7" id="bwU-pa-3Ch"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="width" secondItem="F0R-UM-rOW" secondAttribute="width" id="cja-mz-JUw"/>
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="top" secondItem="EQe-lC-rVo" secondAttribute="bottom" constant="2" id="eoR-ko-nTf"/>
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="leading" secondItem="EQe-lC-rVo" secondAttribute="leading" id="fXd-CB-dfy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="EQe-lC-rVo" secondAttribute="trailing" id="gxu-Jl-aes"/>
+                                        <constraint firstItem="lCy-gM-i4f" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" id="iaR-8l-P1U"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="bottom" secondItem="6dK-Mj-GQR" secondAttribute="bottomMargin" id="jrX-sU-aeH"/>
+                                        <constraint firstItem="aLJ-hu-1gD" firstAttribute="width" secondItem="lCy-gM-i4f" secondAttribute="width" id="nWR-1f-eS1"/>
+                                        <constraint firstItem="aLJ-hu-1gD" firstAttribute="height" secondItem="lCy-gM-i4f" secondAttribute="height" id="pnn-ea-IGE"/>
+                                        <constraint firstItem="lCy-gM-i4f" firstAttribute="trailing" secondItem="6dK-Mj-GQR" secondAttribute="trailingMargin" id="qQ7-q0-NQ3"/>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="2EN-Vx-IFa" secondAttribute="bottom" constant="3" id="uP7-15-9EA"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="top" constant="6" id="xQc-RL-KNH"/>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="20" id="zsz-N0-e0h"/>
@@ -148,19 +164,22 @@
                                             <exclude reference="Ph8-k3-WyP"/>
                                             <exclude reference="TxU-bA-oE4"/>
                                             <exclude reference="jrX-sU-aeH"/>
-                                            <exclude reference="zxH-Y9-NhP"/>
                                             <exclude reference="2fe-Rz-U8S"/>
                                             <exclude reference="Hk0-12-e5e"/>
                                             <exclude reference="NKD-D1-YRI"/>
                                             <exclude reference="VPC-U4-og8"/>
+                                            <exclude reference="gxu-Jl-aes"/>
                                             <exclude reference="uP7-15-9EA"/>
+                                            <exclude reference="zxH-Y9-NhP"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="companyNameLabel" destination="F0R-UM-rOW" id="TqF-kD-FQq"/>
                                     <outlet property="descriptionLabel" destination="EQe-lC-rVo" id="05k-OG-qb0"/>
+                                    <outlet property="firstIcon" destination="lCy-gM-i4f" id="jdX-gE-VrC"/>
                                     <outlet property="logoImageView" destination="0mL-fA-3bL" id="CvE-dE-ROC"/>
+                                    <outlet property="secondIcon" destination="aLJ-hu-1gD" id="tJ0-r2-xzT"/>
                                     <outlet property="workFieldLabel" destination="2EN-Vx-IFa" id="rpm-iV-m1l"/>
                                     <segue destination="PxU-nO-Jqt" kind="showDetail" identifier="CatalogueSegue" id="mja-PR-QlL"/>
                                 </connections>
@@ -3196,7 +3215,9 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
     <resources>
         <image name="Armada-icon" width="30" height="30"/>
         <image name="Armada-icon-1" width="30" height="30"/>
+        <image name="Leaf" width="64" height="100"/>
         <image name="The Thesis Proposal" width="1920" height="1280"/>
+        <image name="Tree" width="78" height="100"/>
         <image name="adecco-logo" width="150" height="81"/>
         <image name="armadaLogo" width="300" height="300"/>
         <image name="armadaRun" width="650" height="360"/>
@@ -3223,9 +3244,9 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kvA-Bh-tNi"/>
-        <segue reference="Qf2-UD-66F"/>
         <segue reference="mja-PR-QlL"/>
         <segue reference="0Hm-Oo-SOc"/>
+        <segue reference="Qf2-UD-66F"/>
+        <segue reference="HdS-L4-TYF"/>
     </inferredMetricsTieBreakers>
 </document>

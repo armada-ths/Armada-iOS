@@ -21,9 +21,7 @@ public struct News {
     public let publishedDate: NSDate
 }
 
-
 let DataDude = _DataDude()
-
 
 public class _DataDude {
     
@@ -34,7 +32,6 @@ public class _DataDude {
     private let applicationDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        
         return NSManagedObjectModel(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("CompanyModel", withExtension: "momd")!)!
         }()
     
@@ -123,8 +120,6 @@ public class _DataDude {
     func numberOfCompaniesContainingValue(value: String, forProperty property: CompanyProperty) -> Int? {
         return numberOfCompaniesForPropertyValueMap[property]![value]
     }
-    
-    
     
     private init() {
         let stopWatch = StopWatch()

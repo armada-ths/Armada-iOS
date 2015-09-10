@@ -95,6 +95,20 @@ class CatalogueTableViewController: UITableViewController {
             cell.companyNameLabel.hidden = false
             cell.companyNameLabel.text = company.shortName
         }
+        
+        cell.firstIcon.hidden = true
+        cell.secondIcon.hidden = true
+        switch rand() % 3 {
+        case 0: break
+        case 1:
+            cell.firstIcon.hidden = false
+        case 2:
+            cell.secondIcon.hidden = false
+            cell.firstIcon.hidden = false
+            
+        default: break
+        }
+        
         return cell
     }
     

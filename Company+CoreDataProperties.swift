@@ -34,4 +34,8 @@ extension Company {
     @NSManaged var continents: Set<Continent>
     @NSManaged var companyValues: Set<CompanyValue>
     @NSManaged var programmes: Set<Programme>
+    @NSManaged var isStartup: Bool
+    @NSManaged var hasClimateCompensated: Bool
+    @NSManaged var likesEquality: Bool
+    @NSManaged var likesEnvironment: Bool
 }
