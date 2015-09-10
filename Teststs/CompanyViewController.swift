@@ -32,9 +32,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         tableView.reloadData()
         positionLabel.alpha = 0
         let continents = self.company!.continents.map { $0.continent }
-        
-
-        
+        logoImageView.hidden = true
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
@@ -120,7 +118,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
+        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 || indexPath.row == 1 {
             return 0.000001
         } else {
             return UITableViewAutomaticDimension

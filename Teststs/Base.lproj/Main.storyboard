@@ -68,6 +68,185 @@
             </objects>
             <point key="canvasLocation" x="-1442" y="387"/>
         </scene>
+        <!--Info-->
+        <scene sceneID="wCc-B2-LeX">
+            <objects>
+                <tableViewController title="Info" id="MIL-4h-oDf" customClass="CompanyInfoTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="116" sectionHeaderHeight="28" sectionFooterHeight="28" id="amI-Ow-lnY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompanyTypeTableViewCell" rowHeight="104" id="aaZ-vf-h80" customClass="CompanyTypeTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="104"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aaZ-vf-h80" id="WlO-J0-BV2">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="104"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaf" translatesAutoresizingMaskIntoConstraints="NO" id="6dC-mi-bso">
+                                            <rect key="frame" x="8" y="16" width="75" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="IBz-RL-0KO"/>
+                                                <constraint firstAttribute="width" constant="75" id="TtW-HV-o1u"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Climate Compensation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31t-Ef-B8u">
+                                            <rect key="frame" x="86" y="11" width="223.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This icon indicates that the company has donated money for climate compensation" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXR-qY-HzT">
+                                            <rect key="frame" x="86" y="45" width="496" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YXR-qY-HzT" secondAttribute="bottom" constant="3" id="4T8-IE-lbQ"/>
+                                        <constraint firstItem="YXR-qY-HzT" firstAttribute="leading" secondItem="31t-Ef-B8u" secondAttribute="leading" id="AO8-Pm-GKM"/>
+                                        <constraint firstItem="6dC-mi-bso" firstAttribute="centerY" secondItem="WlO-J0-BV2" secondAttribute="centerY" id="BkZ-ju-c24"/>
+                                        <constraint firstItem="6dC-mi-bso" firstAttribute="top" secondItem="WlO-J0-BV2" secondAttribute="topMargin" id="K1X-k0-UDs"/>
+                                        <constraint firstItem="31t-Ef-B8u" firstAttribute="centerY" secondItem="6dC-mi-bso" secondAttribute="centerY" id="Le7-iU-68a"/>
+                                        <constraint firstItem="31t-Ef-B8u" firstAttribute="leading" secondItem="6dC-mi-bso" secondAttribute="trailing" constant="3" id="SyX-q9-Zud"/>
+                                        <constraint firstItem="6dC-mi-bso" firstAttribute="top" secondItem="WlO-J0-BV2" secondAttribute="topMargin" constant="8" id="Ta1-xj-xjg"/>
+                                        <constraint firstItem="YXR-qY-HzT" firstAttribute="top" secondItem="31t-Ef-B8u" secondAttribute="bottom" constant="7.5" id="YBf-h3-HCK"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YXR-qY-HzT" secondAttribute="bottom" constant="3" id="ftB-Qr-EVx"/>
+                                        <constraint firstItem="YXR-qY-HzT" firstAttribute="top" secondItem="31t-Ef-B8u" secondAttribute="bottom" constant="3" id="jXW-3u-JF2"/>
+                                        <constraint firstItem="6dC-mi-bso" firstAttribute="leading" secondItem="WlO-J0-BV2" secondAttribute="leadingMargin" id="k7Z-nZ-Lpx"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="YXR-qY-HzT" secondAttribute="trailing" constant="10" id="oxq-nb-dDc"/>
+                                        <constraint firstItem="YXR-qY-HzT" firstAttribute="leading" secondItem="31t-Ef-B8u" secondAttribute="leading" id="qur-Ql-Wq4"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="YXR-qY-HzT" secondAttribute="bottom" constant="3" id="xUW-Ny-SlV"/>
+                                        <constraint firstItem="31t-Ef-B8u" firstAttribute="top" secondItem="6dC-mi-bso" secondAttribute="top" id="zjb-Jb-kRM"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="BkZ-ju-c24"/>
+                                            <exclude reference="K1X-k0-UDs"/>
+                                            <exclude reference="Le7-iU-68a"/>
+                                            <exclude reference="ftB-Qr-EVx"/>
+                                            <exclude reference="jXW-3u-JF2"/>
+                                            <exclude reference="qur-Ql-Wq4"/>
+                                            <exclude reference="xUW-Ny-SlV"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="YXR-qY-HzT" id="7Sa-9X-cdf"/>
+                                    <outlet property="icon" destination="6dC-mi-bso" id="EXP-Az-vjW"/>
+                                    <outlet property="titleLabel" destination="31t-Ef-B8u" id="Gbj-mo-ceG"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="xtD-AS-Zqc">
+                                <rect key="frame" x="0.0" y="196" width="600" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xtD-AS-Zqc" id="8fa-NR-FOR">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rocket" translatesAutoresizingMaskIntoConstraints="NO" id="jRg-6V-m7B">
+                                            <rect key="frame" x="8" y="11" width="58" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="58" id="6OM-hG-jkU"/>
+                                                <constraint firstAttribute="height" constant="37" id="pSr-ze-oIx"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Startup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKQ-rW-xqx">
+                                            <rect key="frame" x="69" y="11" width="204" height="27"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This icon indicates that the company is a company" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qt9-eV-xOT">
+                                            <rect key="frame" x="69" y="38.5" width="513" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="qt9-eV-xOT" firstAttribute="leading" secondItem="mKQ-rW-xqx" secondAttribute="leading" id="0zC-2R-fwK"/>
+                                        <constraint firstItem="mKQ-rW-xqx" firstAttribute="leading" secondItem="jRg-6V-m7B" secondAttribute="trailing" constant="3" id="5UB-ha-WOQ"/>
+                                        <constraint firstItem="mKQ-rW-xqx" firstAttribute="top" secondItem="jRg-6V-m7B" secondAttribute="top" id="9zh-dE-TBI"/>
+                                        <constraint firstItem="jRg-6V-m7B" firstAttribute="leading" secondItem="8fa-NR-FOR" secondAttribute="leadingMargin" id="EkR-JW-GeW"/>
+                                        <constraint firstItem="jRg-6V-m7B" firstAttribute="top" secondItem="8fa-NR-FOR" secondAttribute="topMargin" constant="3" id="GxV-mW-PgQ"/>
+                                        <constraint firstItem="jRg-6V-m7B" firstAttribute="top" secondItem="8fa-NR-FOR" secondAttribute="topMargin" id="ILq-hB-vv7"/>
+                                        <constraint firstItem="mKQ-rW-xqx" firstAttribute="centerY" secondItem="jRg-6V-m7B" secondAttribute="centerY" id="JJW-fz-zmD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="qt9-eV-xOT" secondAttribute="trailing" constant="10" id="ahF-RI-GAa"/>
+                                        <constraint firstItem="qt9-eV-xOT" firstAttribute="top" secondItem="mKQ-rW-xqx" secondAttribute="bottom" constant="3" id="joZ-JX-AWC"/>
+                                        <constraint firstItem="jRg-6V-m7B" firstAttribute="centerY" secondItem="8fa-NR-FOR" secondAttribute="centerY" id="lcR-br-xga"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="ILq-hB-vv7"/>
+                                            <exclude reference="lcR-br-xga"/>
+                                            <exclude reference="JJW-fz-zmD"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="7wP-rs-7Ue">
+                                <rect key="frame" x="0.0" y="276" width="600" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7wP-rs-7Ue" id="3s6-qY-8er">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaf" highlightedImage="Tree" translatesAutoresizingMaskIntoConstraints="NO" id="tTY-GZ-E87">
+                                            <rect key="frame" x="8" y="11" width="58" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="58" id="0cJ-Jd-haN"/>
+                                                <constraint firstAttribute="height" constant="37" id="E2f-69-Vxe"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environmental Exhibitor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvW-nY-TFg">
+                                            <rect key="frame" x="69" y="11" width="230.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This icon indicates that the company is a an environment exhibitor" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxy-wQ-xE1">
+                                            <rect key="frame" x="69" y="38.5" width="513" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="nvW-nY-TFg" firstAttribute="centerY" secondItem="tTY-GZ-E87" secondAttribute="centerY" id="36L-dp-5T8"/>
+                                        <constraint firstItem="fxy-wQ-xE1" firstAttribute="top" secondItem="nvW-nY-TFg" secondAttribute="bottom" constant="3" id="8Bj-hf-pDj"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fxy-wQ-xE1" secondAttribute="trailing" constant="10" id="9N0-TO-dwt"/>
+                                        <constraint firstItem="tTY-GZ-E87" firstAttribute="centerY" secondItem="3s6-qY-8er" secondAttribute="centerY" id="MEV-FV-zf1"/>
+                                        <constraint firstItem="nvW-nY-TFg" firstAttribute="leading" secondItem="tTY-GZ-E87" secondAttribute="trailing" constant="3" id="PYf-jR-a5Y"/>
+                                        <constraint firstItem="tTY-GZ-E87" firstAttribute="top" secondItem="3s6-qY-8er" secondAttribute="topMargin" constant="3" id="Tce-ob-21U"/>
+                                        <constraint firstItem="tTY-GZ-E87" firstAttribute="leading" secondItem="3s6-qY-8er" secondAttribute="leadingMargin" id="aB3-aW-gdd"/>
+                                        <constraint firstItem="tTY-GZ-E87" firstAttribute="top" secondItem="3s6-qY-8er" secondAttribute="topMargin" id="qvd-o9-stP"/>
+                                        <constraint firstItem="nvW-nY-TFg" firstAttribute="top" secondItem="tTY-GZ-E87" secondAttribute="top" id="tb9-az-a4P"/>
+                                        <constraint firstItem="fxy-wQ-xE1" firstAttribute="leading" secondItem="nvW-nY-TFg" secondAttribute="leading" id="ujX-eF-qjf"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="MEV-FV-zf1"/>
+                                            <exclude reference="qvd-o9-stP"/>
+                                            <exclude reference="36L-dp-5T8"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="MIL-4h-oDf" id="k1x-tJ-lHE"/>
+                            <outlet property="delegate" destination="MIL-4h-oDf" id="3a4-wr-1Gl"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tqj-bg-Rny" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2030" y="2053"/>
+        </scene>
         <!--Catalogue Table View Controller-->
         <scene sceneID="5gy-2q-Wgj">
             <objects>
@@ -194,6 +373,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="umj-5h-GAg">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Info" id="qkY-Om-cU2">
+                            <connections>
+                                <segue destination="MIL-4h-oDf" kind="show" id="ReS-La-4Iy"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dzO-lc-2gt">
                             <rect key="frame" x="180" y="7" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -218,7 +402,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1419" y="2454"/>
+            <point key="canvasLocation" x="-1407" y="2016"/>
         </scene>
         <!--Companies Page View Controller-->
         <scene sceneID="B3R-gX-zbo">
@@ -3233,6 +3417,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="Armada-icon-1" width="30" height="30"/>
         <image name="Ikea_ad" width="640" height="480"/>
         <image name="Leaf" width="64" height="100"/>
+        <image name="Rocket" width="66" height="100"/>
         <image name="The Thesis Proposal" width="1920" height="1280"/>
         <image name="Tree" width="78" height="100"/>
         <image name="adecco-logo" width="150" height="81"/>
