@@ -25,13 +25,15 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.reloadData()
         positionLabel.alpha = 0
         let continents = self.company!.continents.map { $0.continent }
+        
+
         
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
@@ -106,7 +108,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             tableView.endUpdates()
         }
         
-        if indexPath.row == 9 {
+        if indexPath.row == 8 {
             if let url = NSURL(string: "http://" + company.website) {
                 UIApplication.sharedApplication().openURL(url)
             }
@@ -118,12 +120,6 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            if let y = navigationController?.navigationBar.frame.maxY where y > 0 {
-                return y
-            }
-            return 64
-        }
         if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
             return 0.000001
         } else {
