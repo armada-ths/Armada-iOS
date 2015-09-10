@@ -98,7 +98,9 @@ class CatalogueTableViewController: UITableViewController {
         
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
-        switch rand() % 3 {
+        
+
+        switch rand() % 6 {
         case 0: break
         case 1:
             cell.firstIcon.hidden = false
