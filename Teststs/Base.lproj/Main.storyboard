@@ -242,10 +242,18 @@
                             <outlet property="delegate" destination="MIL-4h-oDf" id="3a4-wr-1Gl"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Info" id="cQd-ZW-lmM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Va9-3t-33O">
+                            <connections>
+                                <segue destination="VtA-Vi-gOe" kind="unwind" unwindAction="unwind:" id="dk2-6i-RO0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqj-bg-Rny" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="VtA-Vi-gOe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2030" y="2053"/>
+            <point key="canvasLocation" x="-1344" y="2305"/>
         </scene>
         <!--Catalogue Table View Controller-->
         <scene sceneID="5gy-2q-Wgj">
@@ -375,7 +383,7 @@
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Info" id="qkY-Om-cU2">
                             <connections>
-                                <segue destination="MIL-4h-oDf" kind="show" id="ReS-La-4Iy"/>
+                                <segue destination="BG5-9C-bK2" kind="presentation" id="ReS-La-4Iy"/>
                             </connections>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dzO-lc-2gt">
@@ -402,7 +410,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAV-wr-AqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1407" y="2016"/>
+            <point key="canvasLocation" x="-475" y="1920"/>
         </scene>
         <!--Companies Page View Controller-->
         <scene sceneID="B3R-gX-zbo">
@@ -1185,7 +1193,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSS-vh-xfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5930" y="2440"/>
+            <point key="canvasLocation" x="6742" y="2440"/>
         </scene>
         <!--Events-->
         <scene sceneID="QLj-c3-t3I">
@@ -1344,7 +1352,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JqX-MY-AES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6655" y="2285"/>
+            <point key="canvasLocation" x="7467" y="2285"/>
         </scene>
         <!--Events-->
         <scene sceneID="flN-3C-NOd">
@@ -1451,7 +1459,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqf-u0-XjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4342" y="1870"/>
+            <point key="canvasLocation" x="5154" y="1870"/>
         </scene>
         <!--Events-->
         <scene sceneID="fSP-FE-Z8u">
@@ -1744,7 +1752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdU-Uo-55v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3564" y="1633"/>
+            <point key="canvasLocation" x="4376" y="1633"/>
         </scene>
         <!--News Detail Table View Controller-->
         <scene sceneID="8Mn-qv-V1p">
@@ -2450,7 +2458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbV-2u-QMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-565" y="1870"/>
+            <point key="canvasLocation" x="247" y="1870"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="uRH-LS-D1g">
@@ -3066,7 +3074,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZL-uh-nDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="286" y="1692"/>
+            <point key="canvasLocation" x="1098" y="1692"/>
         </scene>
         <!--Companies Page View Controller-->
         <scene sceneID="URk-qy-MGJ">
@@ -3076,7 +3084,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9T-x7-cFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089" y="2641"/>
+            <point key="canvasLocation" x="2901" y="2641"/>
         </scene>
         <!--About-->
         <scene sceneID="tgN-Vr-YYU">
@@ -3146,7 +3154,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvh-uK-66e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1250" y="1659"/>
+            <point key="canvasLocation" x="2062" y="1659"/>
         </scene>
         <!--Filter-->
         <scene sceneID="LJe-VW-CCQ">
@@ -3390,7 +3398,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DHf-AQ-TWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5064" y="2158"/>
+            <point key="canvasLocation" x="5876" y="2158"/>
         </scene>
         <!--Sponsors-->
         <scene sceneID="i8f-Xc-3ug">
@@ -3410,6 +3418,24 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Xd-h8-RKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1449" y="250"/>
+        </scene>
+        <!--Info-->
+        <scene sceneID="hGF-zt-Z6V">
+            <objects>
+                <navigationController title="Info" automaticallyAdjustsScrollViewInsets="NO" id="BG5-9C-bK2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CdP-Hl-062">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MIL-4h-oDf" kind="relationship" relationship="rootViewController" id="J8e-Ce-2Jn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKI-rw-qzB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2030" y="2053"/>
         </scene>
     </scenes>
     <resources>

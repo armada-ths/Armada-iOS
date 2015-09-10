@@ -69,7 +69,7 @@ class CatalogueTableViewController: UITableViewController {
             searchBar.hidden = false
         }
     }
-    
+        @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     // MARK: - Table view data source
     
