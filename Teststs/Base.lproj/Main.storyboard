@@ -297,8 +297,8 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-UM-rOW">
                                             <rect key="frame" x="16" y="14" width="80" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
@@ -2459,7 +2459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbV-2u-QMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="247" y="1870"/>
+            <point key="canvasLocation" x="323" y="2696"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="uRH-LS-D1g">
@@ -3042,12 +3042,21 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                                 </mask>
                                             </variation>
                                         </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9n-7S-t0S">
+                                            <rect key="frame" x="32" y="21" width="49" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="TEo-N9-r5H" secondAttribute="trailing" id="0ZH-IB-Y0y"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="8" id="12B-L2-4bs"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dmS-rf-nX4" secondAttribute="trailing" constant="28" id="2cX-Wt-eFc"/>
+                                        <constraint firstItem="g9n-7S-t0S" firstAttribute="width" secondItem="AKf-ub-sCg" secondAttribute="width" id="3kY-WQ-I2Z"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="TEo-N9-r5H" secondAttribute="bottom" constant="2" id="7jS-jz-04E"/>
+                                        <constraint firstItem="g9n-7S-t0S" firstAttribute="centerX" secondItem="AKf-ub-sCg" secondAttribute="centerX" id="Afa-Lc-H1L"/>
+                                        <constraint firstItem="g9n-7S-t0S" firstAttribute="centerY" secondItem="AKf-ub-sCg" secondAttribute="centerY" id="EL3-35-1gi"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="top" secondItem="TEo-N9-r5H" secondAttribute="top" constant="-7" id="IO6-Ad-KfY"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="3" id="KEc-jk-NNg"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="bottom" secondItem="V0c-aY-eeW" secondAttribute="bottomMargin" id="MUq-76-tUi"/>
@@ -3086,6 +3095,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="companyNameLabel" destination="g9n-7S-t0S" id="RpL-aN-4qB"/>
                                     <outlet property="descriptionLabel" destination="TEo-N9-r5H" id="zea-rs-BNR"/>
                                     <outlet property="logoImageView" destination="AKf-ub-sCg" id="N1S-Yk-rY2"/>
                                     <outlet property="matchProgressView" destination="dmS-rf-nX4" id="wVs-Nd-LlB"/>
@@ -3116,7 +3126,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qco-Rr-yGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="3549"/>
+            <point key="canvasLocation" x="258" y="1990"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xYm-1i-tSQ">
@@ -3593,6 +3603,6 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <segue reference="mja-PR-QlL"/>
         <segue reference="0Hm-Oo-SOc"/>
         <segue reference="Qf2-UD-66F"/>
-        <segue reference="HdS-L4-TYF"/>
+        <segue reference="kvA-Bh-tNi"/>
     </inferredMetricsTieBreakers>
 </document>

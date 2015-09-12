@@ -15,8 +15,7 @@ class MatchTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         
-        
-        if companiesWithMatchPercentages.count >= 10 {
+        if DataDude.companies.count >= 10 {
             self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
         }
         self.updateFavoritesUI()
@@ -124,11 +123,11 @@ class MatchTableViewController: UITableViewController {
         //        cell.matchLabel.hidden = true
         if let image = company.image {
             cell.logoImageView.image = image
-            //            cell.companyNameLabel.hidden = true
+            cell.companyNameLabel.hidden = true
         } else {
             cell.logoImageView.image = nil
-            //            cell.companyNameLabel.hidden = false
-            //            cell.companyNameLabel.text = company.shortName
+            cell.companyNameLabel.hidden = false
+            cell.companyNameLabel.text = company.shortName
         }
         return cell
     }
@@ -160,17 +159,5 @@ class MatchTableViewController: UITableViewController {
             controller.CompanyFilter = MatchFilter
         }
     }
-}
-
-
-class MatchTableViewCell: UITableViewCell {
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var companyNameLabel: UILabel!
-    @IBOutlet weak var workFieldLabel: UILabel!
-    @IBOutlet weak var matchProgressView: UIProgressView!
-    @IBOutlet weak var positionLabel: UILabel!
-    @IBOutlet weak var matchLabel: UILabel!
-    
 }
 
