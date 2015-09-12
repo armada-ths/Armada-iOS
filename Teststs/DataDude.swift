@@ -208,21 +208,25 @@ public class _DataDude {
         return educationTypes.filter({$0.rangeOfString(" in ") != nil})
     }
     
-    public func eventsFromJson(json: AnyObject) -> [ArmadaEvent] {
+    public func eventsFromJson(var jsonOriginal: AnyObject) -> [ArmadaEvent] {
+        let json = jsonOriginal["events"]
+        
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
             if let title = json["title"] as? String,
-                let summary = json["summary"] as? String,
+                let summary = json["description"] as? String,
                 let location = json["location"] as? String,
                 let startDateString = json["starts_at"] as? String,
                 let endDateString = json["ends_at"] as? String,
-                let signupLink = json["signup_link"] as? String {
+                let signupLink = json["external_signup_link"] as? String {
                     return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink)
             }
             return nil
-            } ?? []).filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
+            } ?? [])//.filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
     }
     
-    public func newsFromJson(json: AnyObject) -> [News] {
+    public func newsFromJson(jsonOriginal: AnyObject) -> [News] {
+        let json = jsonOriginal["news"]
+
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
                 let content = json["content"] as? String,
@@ -230,6 +234,21 @@ public class _DataDude {
                     return News(title: title, content: content, publishedDate: self.dateFromString(date))
             }
             return nil
+            } ?? [])
+    }
+    
+    public func sponsorsFromJson(jsonOriginal: AnyObject) -> [Sponsor] {
+        let json = jsonOriginal["sponsors"]
+        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Sponsor? in
+            if let name = json["name"] as? String ?? json["title"] as? String,
+                let description = json["full_text"] as? String,
+                let imageUrlString = json["logo_url"] as? String,
+                let imageUrl = NSURL(string: ("http://staging.armada.nu" as NSString).stringByAppendingPathComponent(imageUrlString)) {
+                    return Sponsor(name: name, imageUrl: imageUrl, description: description)
+                        
+                }
+            return nil
+
             } ?? [])
     }
     
@@ -250,13 +269,22 @@ public class _DataDude {
     //        return companiesFromJson(json)
     //    }
     //
+    
+    
+    let apiUrl = "http://staging.armada.nu/api"
+    
     func eventsFromServer() throws -> [ArmadaEvent] {
-        let json = try jsonFromUrl("http://armada.nu/api/events.json")
+        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("events"))
         return eventsFromJson(json)
     }
     
+    func sponsorsFromServer() throws -> [Sponsor] {
+        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("sponsors"))
+        return sponsorsFromJson(json)
+    }
+    
     func newsFromServer() throws -> [News] {
-        let json = try jsonFromUrl("http://armada.nu/api/news.json")
+        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("news"))
         return newsFromJson(json)
     }
 }
