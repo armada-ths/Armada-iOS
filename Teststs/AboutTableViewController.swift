@@ -1,30 +1,25 @@
+//
+//  AboutTableViewController.swift
+//  Teststs
+//
+//  Created by Sami Purmonen on 13/09/15.
+//  Copyright © 2015 Sami Purmonen. All rights reserved.
+//
+
 import UIKit
 
-class CompanyInfoTableViewController: UITableViewController {
-    
-//    let companyTypes: [(image: UIImage, title: String, description: String)] = [
-//            (UIImage(named: "Leaf")!, title: "Climate Compensation", description: "This icon indicates that the company has donated money for climate compensation"),
-//            (UIImage(named: "Rocket")!, title: "Startup", description: "This icon indicates that the company is a company"),
-//            (UIImage(named: "Tree")!, title: "Environmental Exhibitor", description: "This icon indicates that the company is a an environment exhibitor"),
-//    ]
-    
-    let companyTypes: [(image: UIImage, slug: String)] = [
-        (UIImage(named: "Leaf")!, "icon_climate_compensation"),
-        (UIImage(named: "Rocket")!, "icon_startup"),
-        (UIImage(named: "Tree")!, "icon_sustainability"),
-        (UIImage(named: "Leaf")!, "icon_diversity"),
-    ]
+class AboutTableViewController: UITableViewController {
 
+    @IBOutlet weak var aboutLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        aboutLabel.text = armadaPages["about_ths_armada"]??["app_text"] as? String
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,24 +29,23 @@ class CompanyInfoTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return companyTypes.count
-    }
-
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTypeTableViewCell", forIndexPath: indexPath) as! CompanyTypeTableViewCell
-        
-        let companyType = companyTypes[indexPath.row]
-        cell.icon.image = companyType.image
-        cell.titleLabel.text = (armadaPages[companyType.slug]??["title"] as? String) ?? ""
-        cell.descriptionLabel.text = (armadaPages[companyType.slug]??["app_text"] as? String) ?? ""
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+
+        // Configure the cell...
+
         return cell
+    }
+    */
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 200
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 
     /*

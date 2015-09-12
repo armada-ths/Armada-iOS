@@ -287,7 +287,21 @@ public class _DataDude {
         let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("news"))
         return newsFromJson(json)
     }
+    
+    func pagesFromServer() throws -> AnyObject {
+        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("pages"))
+        
+        var armadaPages = [String: AnyObject]()
+        if let pages = json["pages"] as? [AnyObject] {
+            for page in pages {
+                armadaPages[page["slug"] as? String ?? ""] = page
+            }
+        }
+        return armadaPages
+    }
 }
+
+let armadaPages = ((try? DataDude.pagesFromServer()) ?? "wtf")!
 
 func jsonFromUrl(url: String) throws -> AnyObject {
     if let url = NSURL(string: url) {
