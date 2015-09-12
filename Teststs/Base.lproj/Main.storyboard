@@ -3531,7 +3531,11 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <scene sceneID="i8f-Xc-3ug">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I44-E6-5rF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sponsors" image="notepad" id="WpM-q5-TRK"/>
+                    <tabBarItem key="tabBarItem" title="Sponsors" image="notepad" id="WpM-q5-TRK">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="notepad-1"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QeI-Ss-5P1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3595,6 +3599,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="linkedin" width="128" height="128"/>
         <image name="newBackground" width="894" height="580"/>
         <image name="notepad" width="32" height="32"/>
+        <image name="notepad-1" width="32" height="32"/>
         <image name="stromsBackground" width="792" height="743"/>
         <image name="stromsLogo" width="260" height="102"/>
         <image name="twitter" width="128" height="128"/>
