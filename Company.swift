@@ -14,37 +14,40 @@ public class Company: NSManagedObject {
     
     class func companyFromJson(json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
-        if let name = json["name"] as? String,
+        if let name = json["name"] as? String where !name.isEmpty,
             let description = json["description"] as? String,
             let website = json["website_url"] as? String,
-            let facebook = json["facebook_url"] as? String,
-            let linkedin = json["linkedin_url"] as? String,
-            let twitter = json["twitter_url"] as? String,
-            let locationDescription = json["fair_location_description"] as? String,
+            
+            
             let locationUrl = json["map_url"] as? String,
             let employeesSweden = json["employees_sweden"] as? Int,
             let employeesWorld = json["employees_world"] as? Int,
-            let contactName = json["contact_name"] as? String,
-            let contactEmail = json["contact_email"] as? String,
-            let contactPhone = json["contact_number"] as? String,
-            let countries = json["countries_presence_count"] as? Int,
+
+            let countries = json["countries"] as? Int,
             let workFields = json["work_fields"] as? [[String:AnyObject]],
             let programmes = json["programmes"] as? [[String:AnyObject]],
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
-//            let image = UIImage(named: name),
+            //            let image = UIImage(named: name),
             let companyValues = json["company_values"] as? [[String:AnyObject]] {
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 
-                let isStartup = json["is_startup_exhibitor"] as? Bool ?? false
-                let likesEquality = json["is_diversity_exhibitor"] as? Bool ?? false
-                let likesEnvironment = json["is_sustainability_exhibitor"] as? Bool ?? false
-                let hasClimateCompensated = json["is_eco_friendly"] as? Bool ?? false
+                let contactName = json["contact_name"] as? String ?? ""
+                let contactEmail = json["contact_email"] as? String ?? ""
+                let contactPhone = json["contact_number"] as? String ?? ""
+                let isStartup = json["startup_exhibitor"] as? Bool ?? false
+                let likesEquality = json["diversity_exhibitor"] as? Bool ?? false
+                let likesEnvironment = json["green_room_exhibitor"] as? Bool ?? false
+                let hasClimateCompensated = json["has_climate_compensated"] as? Bool ?? false
+                let locationDescription = json["location"] as? String ?? ""
+                let facebook = json["facebook_url"] as? String ?? ""
+                let linkedin = json["linkedin_url"] as? String ?? ""
+                let twitter = json["twitter_url"] as? String ?? ""
                 
                 company.name = name
                 company.companyDescription = description
                 company.website = website
-                company.facebook=facebook
+                company.facebook = facebook
                 company.linkedin = linkedin
                 company.twitter = twitter
                 company.employeesSweden = employeesSweden
@@ -88,7 +91,7 @@ public class Company: NSManagedObject {
                         company.jobTypes.insert(managedObject)
                     }
                     }()
-
+                
                 _ = {
                     let fetchRequest = NSFetchRequest()
                     let entityName = "Continent"
@@ -130,7 +133,7 @@ public class Company: NSManagedObject {
                         company.programmes.insert(managedObject)
                     }
                     }()
-
+                
                 
                 return company
         }

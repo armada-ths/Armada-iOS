@@ -14,7 +14,11 @@ class MatchTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
+        
+        
+        if companiesWithMatchPercentages.count >= 10 {
+            self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
+        }
         self.updateFavoritesUI()
         self.tableView.reloadData()
     }

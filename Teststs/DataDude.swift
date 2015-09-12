@@ -136,15 +136,23 @@ public class _DataDude {
         let w =  try! managedObjectContext.executeFetchRequest(fetchRequest2) as! [WorkField]
         print("Work fields: \(w.count)")
         
+        
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        if companies.isEmpty {
+        
+        for company in companies {
+            managedObjectContext.deleteObject(company)
+        }
+        try! managedObjectContext.save()
+        companies = []
+        
+//        if companies.isEmpty {
             for json in companiesJson {
                 if let company = Company.companyFromJson(json, managedObjectContext: managedObjectContext) {
                     companies.append(company)
                 }
             }
             try! managedObjectContext.save()
-        }
+//        }
         
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
@@ -163,6 +171,8 @@ public class _DataDude {
     
     class func staticCompanies() -> [AnyObject] {
         do {
+            
+            return try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSURL(string: "http://staging.armada.nu/api/companies")!)!, options: [])["companies"] as! [AnyObject]
             return try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSBundle(forClass: self).URLForResource("companies", withExtension: "json")!)!, options: []) as! [AnyObject]
         } catch {
             print(error)
