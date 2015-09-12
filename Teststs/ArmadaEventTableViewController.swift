@@ -4,7 +4,6 @@ var selectedArmadaEvent: ArmadaEvent? = nil
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
-
     let armadaEvents: [ArmadaEvent] = {
         do {
             return try DataDude.eventsFromServer()
@@ -17,9 +16,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
-        
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
@@ -53,6 +49,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let imageNames = ["Armada Run", "The Thesis Proposal", "Theme Lectures", "Enova", "Practical Engineering", "The Internship Pitch", "Armada Talks"]
         let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
         let armadaEvent = armadaEvents[indexPath.row]
         let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
@@ -61,7 +58,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
         cell.dayLabel.text = armadaEvent.startDate.format("d")
         cell.monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
-        cell.eventImageView.image = UIImage(named: armadaEvent.title.stringByReplacingOccurrencesOfString("ä", withString: ""))
+        let imageName = imageNames[indexPath.row % imageNames.count]
+        cell.eventImageView.image = UIImage(named: imageName.stringByReplacingOccurrencesOfString("ä", withString: ""))
         return cell
     }
     
