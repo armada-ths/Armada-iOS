@@ -25,29 +25,13 @@ class CatalogueTableViewController: UITableViewController {
             companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
         self.searchBar(searchBar, textDidChange: searchBar.text ?? "")
-//        searchBar(searchBar(searchBar, textDidChange: searchBar.text))
-//        updateCompaniesByLetters(companies)
         updateFavoritesUI()
         tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-//        let stopWatch = StopWatch()
-//
-//        companies =  CompanyFilter.filteredCompanies
-//        stopWatch.print("Filtering companies")
-//        navigationItem.title = "\(companies.count) of \(DataDude.companies.count) Companies"
-//        updateCompaniesByLetters(companies)
-//        stopWatch.print("updating letters")
-//        tableView.reloadData()
-//        updateFavoritesUI()
         segmentedControlDidChange(segmentedControl)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func updateFavoritesUI() {
@@ -69,7 +53,7 @@ class CatalogueTableViewController: UITableViewController {
             searchBar.hidden = false
         }
     }
-        @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     // MARK: - Table view data source
     
@@ -99,18 +83,23 @@ class CatalogueTableViewController: UITableViewController {
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
         
-
-        switch rand() % 6 {
-        case 0: break
-        case 1:
-            cell.firstIcon.hidden = false
-        case 2:
-            cell.secondIcon.hidden = false
-            cell.firstIcon.hidden = false
-            
-        default: break
-        }
         
+        let icons = ["Rocket", "Tree", "Leaf"]
+        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
+        
+        cell.secondIcon.hidden = true
+        cell.firstIcon.hidden = true
+        for i in 0...2 {
+            if stuff[i] {
+                if cell.firstIcon.hidden {
+                    cell.firstIcon.image = UIImage(named: icons[i])
+                    cell.firstIcon.hidden = false
+                } else {
+                    cell.secondIcon.image = UIImage(named: icons[i])
+                    cell.secondIcon.hidden = false
+                }
+            }
+        }
         return cell
     }
     
@@ -149,26 +138,26 @@ class CatalogueTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-            if editingStyle == .Delete {
-                tableView.beginUpdates()
-                let company = companiesByLetters[indexPath.section].companies[indexPath.row]
-                FavoriteCompanies.remove(company.name)
-                companies = DataDude.companies.filter { FavoriteCompanies.contains($0.name) }
-                
-                updateCompaniesByLetters(companies)
-                
-                if tableView.numberOfRowsInSection(indexPath.section) == 1 {
-                    tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
-                } else {
-                    tableView.deleteRowsAtIndexPaths([indexPath],
+        if editingStyle == .Delete {
+            tableView.beginUpdates()
+            let company = companiesByLetters[indexPath.section].companies[indexPath.row]
+            FavoriteCompanies.remove(company.name)
+            companies = DataDude.companies.filter { FavoriteCompanies.contains($0.name) }
+            
+            updateCompaniesByLetters(companies)
+            
+            if tableView.numberOfRowsInSection(indexPath.section) == 1 {
+                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+            } else {
+                tableView.deleteRowsAtIndexPaths([indexPath],
                     withRowAnimation: .Fade)
-                }
-                
-                
-                updateFavoritesUI()
-                tableView.endUpdates()
-                
             }
+            
+            
+            updateFavoritesUI()
+            tableView.endUpdates()
+            
+        }
     }
 }
 
