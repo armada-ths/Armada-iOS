@@ -218,7 +218,7 @@ public class _DataDude {
         return educationTypes.filter({$0.rangeOfString(" in ") != nil})
     }
     
-    public func eventsFromJson(var jsonOriginal: AnyObject) -> [ArmadaEvent] {
+    public func eventsFromJson( jsonOriginal: AnyObject) -> [ArmadaEvent] {
         let json = jsonOriginal["events"]
         
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
