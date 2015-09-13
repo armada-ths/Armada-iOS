@@ -24,6 +24,17 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         let attrString = NSMutableAttributedString(string: selectedArmadaEvent!.summary)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         summaryLabel.attributedText = attrString
+
+        if let text = selectedArmadaEvent?.summary.attributedHtmlString{
+            summaryLabel.attributedText = text
+        }else{
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 3
+            let attrString = NSMutableAttributedString(string: selectedArmadaEvent!.summary)
+            attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+            summaryLabel.attributedText = attrString
+        }
+        
         eventImageView.image = selectedArmadaEvent?.image
         titleLabel.text = selectedArmadaEvent?.title
     }

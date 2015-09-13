@@ -38,7 +38,7 @@ class CompanyInfoTableViewController: UITableViewController {
         let armadaField = armadaFields[indexPath.row]
         cell.icon.image = armadaField.image
         cell.titleLabel.text = armadaField.name
-        cell.descriptionLabel.text = armadaField.description
+        cell.descriptionLabel.attributedText = armadaField.description.attributedHtmlString
         return cell
     }
 }

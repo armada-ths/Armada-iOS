@@ -14,14 +14,11 @@ class NewsDetailTableViewController: UITableViewController {
         titleLabel.text = selectedNewsItem!.title
         publicationDateLabel.text = selectedNewsItem!.publishedDate.formatWithStyle(.LongStyle)
 
-        let html = "<p>" + selectedNewsItem!.content + "</p>" + "<style>p { font-family: \"helvetica neue\"; font-weight: 300; font-size: 18px; padding: 0; margin: 0; color: #4c4c4c; line-height: 25px;  }</style>"
-        let attr = try! NSAttributedString(data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!, options: [
-            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType
-            ], documentAttributes: nil)
+        //let html = "<p>" + selectedNewsItem!.content + "</p>" + "<style>p { font-family: \"helvetica neue\"; font-weight: 300; font-size: 18px; padding: 0; margin: 0; color: #4c4c4c; line-height: 25px;  }</style>"
+        //let attr = try! NSAttributedString(data: html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
         
         
-        
-        contentTextView.attributedText = attr
+        contentTextView.attributedText = selectedNewsItem!.content.attributedHtmlString ?? NSAttributedString(string: selectedNewsItem!.content)
         
 //        contentTextView.text = selectedNewsItem!.content
 

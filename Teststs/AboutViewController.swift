@@ -12,7 +12,8 @@ class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        aboutTextView.text = armadaPages["about_ths_armada"]??["app_text"] as? String
+        //aboutTextView.text = armadaPages["about_ths_armada"]??["app_text"] as? String
+        aboutTextView.attributedText = (armadaPages["about_ths_armada"]??["app_text"] as? String)?.attributedHtmlString ?? NSAttributedString(string: (armadaPages["about_ths_armada"]??["app_text"] as? String) ?? "")
 
         // Do any additional setup after loading the view.
     }
