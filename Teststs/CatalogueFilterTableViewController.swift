@@ -96,25 +96,25 @@ class _CompanyFilter {
         return filteredCompanies.sort { $0.name < $1.name }
     }
     
-    var isStartup: Bool {
-        get { return Ω["\(userDefaultsKey)isStartup"] as? Bool ?? false }
-        set { Ω["\(userDefaultsKey)isStartup"] = newValue }
-    }
-    
-    var hasClimateCompensated: Bool {
-        get { return Ω["\(userDefaultsKey)hasClimateCompensated"] as? Bool ?? false }
-        set { Ω["\(userDefaultsKey)hasClimateCompensated"] = newValue }
-    }
-    
-    var likesEnvironment: Bool {
-        get { return Ω["\(userDefaultsKey)likesEnvironment"] as? Bool ?? false }
-        set { Ω["\(userDefaultsKey)likesEnvironment"] = newValue }
-    }
-    
-    var likesDiversity: Bool {
-        get { return Ω["\(userDefaultsKey)likesDiversity"] as? Bool ?? false }
-        set { Ω["\(userDefaultsKey)likesDiversity"] = newValue }
-    }
+//    var isStartup: Bool {
+//        get { return Ω["\(userDefaultsKey)isStartup"] as? Bool ?? false }
+//        set { Ω["\(userDefaultsKey)isStartup"] = newValue }
+//    }
+//    
+//    var hasClimateCompensated: Bool {
+//        get { return Ω["\(userDefaultsKey)hasClimateCompensated"] as? Bool ?? false }
+//        set { Ω["\(userDefaultsKey)hasClimateCompensated"] = newValue }
+//    }
+//    
+//    var likesEnvironment: Bool {
+//        get { return Ω["\(userDefaultsKey)likesEnvironment"] as? Bool ?? false }
+//        set { Ω["\(userDefaultsKey)likesEnvironment"] = newValue }
+//    }
+//    
+//    var likesDiversity: Bool {
+//        get { return Ω["\(userDefaultsKey)likesDiversity"] as? Bool ?? false }
+//        set { Ω["\(userDefaultsKey)likesDiversity"] = newValue }
+//    }
 }
 
 class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCellDelegate {
@@ -133,13 +133,15 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func resetFilter(sender: AnyObject) {
+    func resetFilter() {
         for property in CompanyProperty.All {
             CompanyFilter[property] = []
         }
-
+        CompanyFilter.armadaFieldTypes = []
         updateTitle()
-        tableView.reloadData()
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            self.tableView.reloadData()
+        }
         
     }
     // MARK: - Table view data source
@@ -153,19 +155,23 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return CompanyProperty.All.count + 1
+        return CompanyProperty.All.count + 1 + 1
     }
-
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == numberOfSectionsInTableView(tableView) - 1 {
+        if section == numberOfSectionsInTableView(tableView) - 2 {
             return armadaFields.count
         }
+        if section == numberOfSectionsInTableView(tableView) - 1 {
+            return 1
+        }
+        
         return max(1, CompanyFilter[CompanyProperty.All[section]].count + (section == 0 ? 0 : 1))
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", "I value ways of working", ""][section]
+        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", "I value ways of working", "", ""][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
@@ -186,7 +192,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes.filter { $0 != armadaFieldType }
         }
         updateTitle()
-
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -205,6 +211,10 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         }
         
         if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
+            return cellWithIdentifier("resetAllFiltersCell")
+        }
+        
+        if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
             let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
             
             let armadaField = armadaFields[indexPath.row]
@@ -243,7 +253,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             CompanyFilter[property] = CompanyFilter[property].filter { $0 != value }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             updateTitle()
-
+            
         }
     }
     
@@ -266,12 +276,27 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-                if tableView.cellForRowAtIndexPath(indexPath) as? AddCompanyPropertyTableViewCell != nil {
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                                self.performSegueWithIdentifier("AddPropertySegue", sender: self)
-                            }
-                    }
+        if tableView.cellForRowAtIndexPath(indexPath) as? AddCompanyPropertyTableViewCell != nil {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.performSegueWithIdentifier("AddPropertySegue", sender: self)
             }
+        }
+        if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
+            let alertController = UIAlertController(title: "This action can not be undone", message: nil, preferredStyle: .ActionSheet)
+            alertController.addAction(UIAlertAction(title: "Reset All Filters", style: .Destructive, handler: {
+                action in
+                self.resetFilter()
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                action in
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            }))
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+    }
 }
 
 class AddCompanyPropertyTableViewCell: UITableViewCell {

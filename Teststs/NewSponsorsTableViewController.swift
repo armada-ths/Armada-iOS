@@ -37,6 +37,7 @@ class NewSponsorsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
         let sponsor = sponsors[indexPath.row]
         cell.sponsorLabel.text = sponsor.description
+        cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
         cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString)
         return cell
     }

@@ -52,6 +52,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             locationLabel.text = company.locationDescription
             self.locationImageView.loadImageFromUrl(company.locationUrl)
             aboutLabel.text = company.companyDescription
+            aboutLabel.attributedText = company.companyDescription.attributedHtmlString
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
             websiteLabel.text = company.website
