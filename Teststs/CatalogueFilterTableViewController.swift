@@ -257,7 +257,17 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         if let viewController = segue.destinationViewController as? SelectProgrammeTableViewController {
             viewController.CompanyFilter = CompanyFilter
         }
+        
     }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+                if tableView.cellForRowAtIndexPath(indexPath) as? AddCompanyPropertyTableViewCell != nil {
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                                self.performSegueWithIdentifier("AddPropertySegue", sender: self)
+                            }
+                    }
+            }
 }
 
 class AddCompanyPropertyTableViewCell: UITableViewCell {

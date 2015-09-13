@@ -2315,7 +2315,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="addButton" destination="uaw-xF-Hgq" id="SzQ-gU-VLS"/>
-                                    <segue destination="oNX-Of-RAF" kind="presentation" identifier="" id="pjF-T2-zYK"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompanyBoolCell" rowHeight="64" id="J4s-fR-TGY" customClass="CompanyBoolCell" customModule="Teststs" customModuleProvider="target">
@@ -2389,10 +2388,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="oNX-Of-RAF" kind="presentation" identifier="AddPropertySegue" id="ByP-hg-71I"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dna-sh-dXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-630" y="4184"/>
+            <point key="canvasLocation" x="-842" y="4424"/>
         </scene>
         <!--Add Company Property Table View Controller-->
         <scene sceneID="n59-Tk-nOz">
