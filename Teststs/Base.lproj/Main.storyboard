@@ -884,38 +884,52 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="GAt-ZM-0d1">
-                                        <rect key="frame" x="0.0" y="882" width="600" height="58"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="GAt-ZM-0d1">
+                                        <rect key="frame" x="0.0" y="882" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GAt-ZM-0d1" id="RAb-8H-Cpf">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="http://www.volvo.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-YA-Ujc">
-                                                    <rect key="frame" x="8" y="27" width="125" height="16"/>
+                                                    <rect key="frame" x="16" y="33" width="143" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dc-y5-YuV">
-                                                    <rect key="frame" x="8" y="8" width="50" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="56.5" translatesAutoresizingMaskIntoConstraints="NO" id="9dc-y5-YuV">
+                                                    <rect key="frame" x="16" y="11" width="56.5" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="9dc-y5-YuV" firstAttribute="leading" secondItem="RAb-8H-Cpf" secondAttribute="leadingMargin" constant="8" id="F3j-M2-IJf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aPg-YA-Ujc" secondAttribute="bottom" constant="5.5" id="Hu1-D1-I1u"/>
                                                 <constraint firstItem="9dc-y5-YuV" firstAttribute="leading" secondItem="aPg-YA-Ujc" secondAttribute="leading" id="Slh-8d-Yd6"/>
                                                 <constraint firstItem="aPg-YA-Ujc" firstAttribute="top" secondItem="9dc-y5-YuV" secondAttribute="bottom" constant="3" id="fgf-Kq-Ftf"/>
+                                                <constraint firstItem="aPg-YA-Ujc" firstAttribute="top" secondItem="9dc-y5-YuV" secondAttribute="bottom" constant="3" id="j2F-IZ-kPd"/>
+                                                <constraint firstItem="9dc-y5-YuV" firstAttribute="top" secondItem="RAb-8H-Cpf" secondAttribute="topMargin" constant="3" id="jDU-Sv-JMX"/>
                                                 <constraint firstItem="9dc-y5-YuV" firstAttribute="top" secondItem="RAb-8H-Cpf" secondAttribute="topMargin" constant="3" id="ybh-kD-LYa"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ybh-kD-LYa"/>
+                                                    <exclude reference="fgf-Kq-Ftf"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="aPg-YA-Ujc" secondAttribute="bottom" constant="3" id="Vo7-wE-UMI"/>
+                                            <constraint firstAttribute="bottom" secondItem="aPg-YA-Ujc" secondAttribute="bottom" constant="7" id="Vo7-wE-UMI"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Vo7-wE-UMI"/>
+                                            </mask>
+                                        </variation>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="131" id="ba4-oD-xPZ">
-                                        <rect key="frame" x="0.0" y="940" width="600" height="131"/>
+                                        <rect key="frame" x="0.0" y="947" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ba4-oD-xPZ" id="GJc-27-i2h">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130.5"/>
