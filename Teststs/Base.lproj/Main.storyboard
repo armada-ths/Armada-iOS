@@ -41,20 +41,6 @@
             </objects>
             <point key="canvasLocation" x="-527" y="-1162"/>
         </scene>
-        <!--Company Split View Controller-->
-        <scene sceneID="bdt-Qc-oZt">
-            <objects>
-                <splitViewController id="jtF-cB-Wfd" customClass="CompanySplitViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="t0S-2Y-dcV"/>
-                    <connections>
-                        <segue destination="Xl5-nI-M3F" kind="relationship" relationship="masterViewController" id="Ryk-qA-CeC"/>
-                        <segue destination="MbH-cD-v5K" kind="relationship" relationship="detailViewController" id="yhH-Jd-8xB"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kt9-Ng-2sJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2544" y="273"/>
-        </scene>
         <!--Catalogue-->
         <scene sceneID="Jtk-fX-Rua">
             <objects>
@@ -90,15 +76,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaf" translatesAutoresizingMaskIntoConstraints="NO" id="6dC-mi-bso">
-                                            <rect key="frame" x="8" y="16" width="75" height="60"/>
+                                            <rect key="frame" x="8" y="16" width="70" height="55"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="IBz-RL-0KO"/>
-                                                <constraint firstAttribute="width" constant="75" id="TtW-HV-o1u"/>
+                                                <constraint firstAttribute="height" constant="55" id="IBz-RL-0KO"/>
+                                                <constraint firstAttribute="width" constant="70" id="TtW-HV-o1u"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Climate Compensation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31t-Ef-B8u">
                                             <rect key="frame" x="86" y="11" width="224" height="27"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -287,12 +273,12 @@
                                                 <constraint firstAttribute="width" constant="80" id="wPX-OW-rMc"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
                                             <rect key="frame" x="116" y="13" width="451" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="pMB-MH-EG6"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -306,9 +292,9 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
                                             <rect key="frame" x="116" y="32" width="96" height="14"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2466,39 +2452,6 @@
             </objects>
             <point key="canvasLocation" x="323" y="2696"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="uRH-LS-D1g">
-            <objects>
-                <viewController id="e3P-3x-OyT" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pdu-wY-OVF"/>
-                        <viewControllerLayoutGuide type="bottom" id="ewe-5r-2qi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xxG-kS-lAG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Company Selected" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFo-YX-zAc">
-                                <rect key="frame" x="16" y="20" width="568" height="580"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="RFo-YX-zAc" firstAttribute="top" secondItem="Pdu-wY-OVF" secondAttribute="bottom" id="6RO-vw-Jms"/>
-                            <constraint firstItem="ewe-5r-2qi" firstAttribute="top" secondItem="RFo-YX-zAc" secondAttribute="bottom" id="EfI-X3-bRn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RFo-YX-zAc" secondAttribute="trailing" id="kNG-vM-a0T"/>
-                            <constraint firstItem="RFo-YX-zAc" firstAttribute="leading" secondItem="xxG-kS-lAG" secondAttribute="leadingMargin" id="sI3-Ht-y4C"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Mz3-68-202"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NN9-n2-EHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3440" y="1906"/>
-        </scene>
         <!--Select Programme-->
         <scene sceneID="7qS-Q7-qvH">
             <objects>
@@ -2566,133 +2519,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bmf-Wu-eVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-752" y="3579"/>
-        </scene>
-        <!--Favorites-->
-        <scene sceneID="rZw-5g-N49">
-            <objects>
-                <tableViewController restorationIdentifier="Favorites" title="Favorites" id="XsM-DD-yqw" customClass="FavoritesTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="JxM-rR-8ye">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="52q-gC-2bj" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86" width="600" height="64"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="52q-gC-2bj" id="ptm-Ql-hda">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="VFo-74-sbP">
-                                            <rect key="frame" x="16" y="6" width="80" height="51"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="FA7-2Z-eJX"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-tH-1ZC">
-                                            <rect key="frame" x="116" y="13" width="476" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="64" id="2YF-tv-dwM"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="2YF-tv-dwM"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-Uv-lwD">
-                                            <rect key="frame" x="16" y="14" width="80" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-cA-ylL">
-                                            <rect key="frame" x="116" y="32" width="97" height="14"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="centerY" secondItem="9Nz-Uv-lwD" secondAttribute="centerY" id="35y-bp-aaa"/>
-                                        <constraint firstItem="sJn-tH-1ZC" firstAttribute="leading" secondItem="ptm-Ql-hda" secondAttribute="leadingMargin" constant="3" id="3r8-Cf-onZ"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="leading" secondItem="ptm-Ql-hda" secondAttribute="leadingMargin" constant="8" id="7R4-UD-LZ8"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="sJn-tH-1ZC" secondAttribute="trailing" id="GYo-4G-Cpr"/>
-                                        <constraint firstItem="sJn-tH-1ZC" firstAttribute="leading" secondItem="VFo-74-sbP" secondAttribute="trailing" constant="20" id="Hbw-8w-Wt3"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="leading" secondItem="ptm-Ql-hda" secondAttribute="leadingMargin" constant="2" id="Hql-ea-HR3"/>
-                                        <constraint firstItem="sJn-tH-1ZC" firstAttribute="top" secondItem="ptm-Ql-hda" secondAttribute="topMargin" constant="2" id="IDA-pL-IQf"/>
-                                        <constraint firstItem="x2r-cA-ylL" firstAttribute="top" secondItem="sJn-tH-1ZC" secondAttribute="bottom" constant="2" id="SIf-CS-HT6"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="sJn-tH-1ZC" secondAttribute="bottom" constant="2" id="SPj-zE-lcz"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="bottom" secondItem="ptm-Ql-hda" secondAttribute="bottomMargin" id="U9W-Hx-NcQ"/>
-                                        <constraint firstItem="x2r-cA-ylL" firstAttribute="top" secondItem="VFo-74-sbP" secondAttribute="top" constant="5" id="USO-zg-yg1"/>
-                                        <constraint firstItem="sJn-tH-1ZC" firstAttribute="centerY" secondItem="VFo-74-sbP" secondAttribute="centerY" id="VIG-9A-uiy"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="top" secondItem="ptm-Ql-hda" secondAttribute="top" constant="6" id="dp7-U4-Zln"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="top" secondItem="sJn-tH-1ZC" secondAttribute="top" constant="-7" id="fBL-xJ-Lyg"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="centerX" secondItem="9Nz-Uv-lwD" secondAttribute="centerX" id="g4R-jt-2mY"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="width" secondItem="9Nz-Uv-lwD" secondAttribute="width" id="gtU-yc-3Bi"/>
-                                        <constraint firstAttribute="bottom" secondItem="VFo-74-sbP" secondAttribute="bottom" constant="6" id="ke9-NC-NZr"/>
-                                        <constraint firstItem="sJn-tH-1ZC" firstAttribute="top" secondItem="x2r-cA-ylL" secondAttribute="bottom" constant="3" id="lz7-WG-e8z"/>
-                                        <constraint firstItem="x2r-cA-ylL" firstAttribute="leading" secondItem="sJn-tH-1ZC" secondAttribute="leading" id="uM3-C8-WoN"/>
-                                        <constraint firstItem="VFo-74-sbP" firstAttribute="top" secondItem="ptm-Ql-hda" secondAttribute="topMargin" id="wWC-wZ-dh4"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Hql-ea-HR3"/>
-                                            <exclude reference="U9W-Hx-NcQ"/>
-                                            <exclude reference="wWC-wZ-dh4"/>
-                                            <exclude reference="3r8-Cf-onZ"/>
-                                            <exclude reference="IDA-pL-IQf"/>
-                                            <exclude reference="SPj-zE-lcz"/>
-                                            <exclude reference="VIG-9A-uiy"/>
-                                            <exclude reference="lz7-WG-e8z"/>
-                                            <exclude reference="USO-zg-yg1"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="companyNameLabel" destination="9Nz-Uv-lwD" id="owm-0N-YOv"/>
-                                    <outlet property="descriptionLabel" destination="sJn-tH-1ZC" id="QcV-eH-8Wl"/>
-                                    <outlet property="logoImageView" destination="VFo-74-sbP" id="cRX-Ab-zxe"/>
-                                    <outlet property="workFieldLabel" destination="x2r-cA-ylL" id="SaV-Ru-rvA"/>
-                                    <segue destination="PxU-nO-Jqt" kind="showDetail" identifier="FavoritesSegue" id="EVK-AU-F8t"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="XsM-DD-yqw" id="V77-2c-kkQ"/>
-                            <outlet property="delegate" destination="XsM-DD-yqw" id="P44-CQ-0AL"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Favorites" id="TQr-1t-mQp"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F05-Dj-OFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2530" y="2478"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pdo-Zj-v9l">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xl5-nI-M3F" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="GUl-4V-JXZ">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="book-1"/>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0rC-Z0-Anm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="XsM-DD-yqw" kind="relationship" relationship="rootViewController" id="pib-hu-rdU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="di9-3F-42E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2553" y="1092"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="w2w-D8-Jfy">
@@ -2974,24 +2800,6 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
             </objects>
             <point key="canvasLocation" x="2544" y="-406"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="csm-AD-y1y">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MbH-cD-v5K" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GFK-I6-A3J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="e3P-3x-OyT" kind="relationship" relationship="rootViewController" id="FpQ-6h-y4u"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QHz-eK-IpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3448" y="1092"/>
-        </scene>
         <!--Favorites-->
         <scene sceneID="2cN-W6-XQq">
             <objects>
@@ -3014,12 +2822,12 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                                 <constraint firstAttribute="width" constant="80" id="yPT-Vh-ApA"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEo-N9-r5H">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEo-N9-r5H">
                                             <rect key="frame" x="116" y="13" width="476" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="GPl-iq-VrG"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -3027,13 +2835,13 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M5-Qp-M0y">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5M5-Qp-M0y">
                                             <rect key="frame" x="116" y="32" width="96" height="14"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dmS-rf-nX4">
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dmS-rf-nX4">
                                             <rect key="frame" x="116" y="54" width="448" height="2"/>
                                             <color key="tintColor" red="0.1137254902" green="0.70588235290000001" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -3610,9 +3418,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mja-PR-QlL"/>
+        <segue reference="kvA-Bh-tNi"/>
         <segue reference="0Hm-Oo-SOc"/>
         <segue reference="Qf2-UD-66F"/>
-        <segue reference="kvA-Bh-tNi"/>
     </inferredMetricsTieBreakers>
 </document>
