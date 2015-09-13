@@ -3,7 +3,18 @@ import UIKit
 var selectedNewsItem:News!
 
 class NewsTableViewController: ScrollZoomTableViewController {
-    var readArmadaNews = [String]()
+    var readArmadaNews: [String] {
+        get {
+            return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
+        }
+        set {
+            NSUserDefaults.standardUserDefaults()["readArmadaNews"] = newValue
+        }
+    }
+    
+    
+    
+    
     let news: [News] = {
         do {
             return try DataDude.newsFromServer()
