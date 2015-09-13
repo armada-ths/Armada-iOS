@@ -3,10 +3,8 @@ import UIKit
 class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var cell1: UITableViewCell!
-    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var companyNameLabel: UILabel!
-    @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var jobLabel: UILabel!
@@ -17,10 +15,9 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     var company: Company! = nil
     var companies = [Company]()
+    @IBOutlet weak var adImageView: UIImageView!
     
     @IBOutlet weak var mapWebView: UIWebView!
-    
-    
     
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
@@ -30,9 +27,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.reloadData()
-        positionLabel.alpha = 0
         let continents = self.company!.continents.map { $0.continent }
-        logoImageView.hidden = true
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
@@ -53,48 +48,25 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        
-            positionLabel.text = "\(companies.indexOf(company)!+1)/\(companies.count)"
-            logoImageView.image = company.image
-            
-            if let image = company.image {
-                logoImageView.image = image
-//                companyNameLabel.hidden = true
-            } else {
-                logoImageView.image = nil
-//                companyNameLabel.hidden = false
-//                companyNameLabel.text = company.shortName
-            }
             
             locationLabel.text = company.locationDescription
-            company.asyncLocationImage { image in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    UIView.transitionWithView(self.locationImageView, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                        self.locationImageView.image = image
-                        }, completion: nil)
-                }
-            }
+            self.locationImageView.loadImageFromUrl(company.locationUrl)
             aboutLabel.text = company.companyDescription
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
             websiteLabel.text = company.website
             countriesLabel.text = "\(company.countries)"
+            adImageView.loadImageFromUrl(company.adUrl)
             employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         parentViewController!.title = company!.shortName
-        UIView.animateWithDuration(0.1) {
-            self.positionLabel.alpha = 1
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        UIView.animateWithDuration(0.1) {
-            self.positionLabel.alpha = 0
-        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -118,7 +90,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 || indexPath.row == 1 {
+        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
             return 0.000001
         } else {
             return UITableViewAutomaticDimension

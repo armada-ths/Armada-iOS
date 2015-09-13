@@ -267,7 +267,7 @@ public class _DataDude {
             if let name = json["name"] as? String ?? json["title"] as? String,
                 let description = json["full_text"] as? String,
                 let imageUrlString = json["logo_url"] as? String,
-                let imageUrl = NSURL(string: ("http://staging.armada.nu" as NSString).stringByAppendingPathComponent(imageUrlString)) {
+                let imageUrl = NSURL(string: imageUrlString) {
                     return Sponsor(name: name, imageUrl: imageUrl, description: description)
                         
                 }

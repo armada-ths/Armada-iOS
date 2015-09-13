@@ -13,7 +13,6 @@ import Foundation
 import CoreData
 
 extension Company {
-
     @NSManaged var name: String
     @NSManaged var primaryWorkField: String
     @NSManaged var companyDescription: String
@@ -39,4 +38,7 @@ extension Company {
     @NSManaged var hasClimateCompensated: Bool
     @NSManaged var likesEquality: Bool
     @NSManaged var likesEnvironment: Bool
+    @NSManaged var adUrl: String
+    @NSManaged var logoUrl: String
+    
 }

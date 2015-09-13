@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
     <entity name="Company" representedClassName=".Company" syncable="YES">
+        <attribute name="adUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contactName" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,6 +17,7 @@
         <attribute name="linkedin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="logoUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="primaryWorkField" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,7 +54,7 @@
         <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workWays" inverseEntity="Company" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-63" positionY="-18" width="128" height="420"/>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="450"/>
         <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
         <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>

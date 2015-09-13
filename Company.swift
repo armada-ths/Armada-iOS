@@ -45,6 +45,9 @@ public class Company: NSManagedObject {
                 let linkedin = json["linkedin_url"] as? String ?? ""
                 let twitter = json["twitter_url"] as? String ?? ""
                 
+                let adUrl = json["ad_url"] as? String ?? ""
+                let logoUrl = json["logo_url"] as? String ?? ""
+                
                 company.name = name
                 company.companyDescription = description
                 company.website = website
@@ -63,6 +66,8 @@ public class Company: NSManagedObject {
                 company.likesEquality = likesEquality
                 company.likesEnvironment = likesEnvironment
                 company.hasClimateCompensated = hasClimateCompensated
+                company.logoUrl = logoUrl
+                company.adUrl = adUrl
                 
                 _ = {
                     let fetchRequest = NSFetchRequest()
@@ -173,18 +178,6 @@ public class Company: NSManagedObject {
         return ([" sverige", " ab", " sweden"].reduce(name) {
             $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
             }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
-    }
-    
-    func asyncLocationImage(callback: UIImage? -> Void) {
-        NSOperationQueue().addOperationWithBlock {
-            if let url = NSURL(string: "http://www.armada.nu"+self.locationUrl),
-                let data = NSData(contentsOfURL: url),
-                let image = UIImage(data: data){
-                    callback(image)
-            } else {
-                callback(nil)
-            }
-        }
     }
 }
 
