@@ -19,6 +19,16 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var mapWebView: UIWebView!
     
+    @IBOutlet weak var isStartupImageView: UIImageView!
+    
+    
+    @IBOutlet weak var likesEnvironmentImageView: UIImageView!
+    
+    @IBOutlet weak var hasClimateCompensatedImageView: UIImageView!
+    
+    
+    @IBOutlet weak var likesDiversityImageView: UIImageView!
+    
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +58,6 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-            
             locationLabel.text = company.locationDescription
             self.locationImageView.loadImageFromUrl(company.locationUrl)
             aboutLabel.text = company.companyDescription
@@ -59,6 +68,14 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             countriesLabel.text = "\(company.countries)"
             adImageView.loadImageFromUrl(company.adUrl)
             employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"
+        
+        let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
+        let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]
+
+        for (i, boolish) in companyArmadaFields.enumerate() {
+            armadaFieldsImageViews[i].alpha = boolish ? 1 : 0.1
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,7 +96,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             tableView.endUpdates()
         }
         
-        if indexPath.row == 8 {
+        if indexPath.row == 9 {
             if let url = NSURL(string: "http://" + company.website) {
                 UIApplication.sharedApplication().openURL(url)
             }

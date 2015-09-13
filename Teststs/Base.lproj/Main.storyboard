@@ -595,8 +595,52 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="53" id="TW3-2e-qr3">
+                                        <rect key="frame" x="0.0" y="486" width="600" height="53"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="TW3-2e-qr3" id="jEh-bp-ZiN">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Rocket" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-mv-KKS">
+                                                    <rect key="frame" x="8" y="8" width="146" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="3FP-jm-ozl"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Tree" translatesAutoresizingMaskIntoConstraints="NO" id="geE-lG-5C0">
+                                                    <rect key="frame" x="154" y="8" width="146" height="35"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Leaf" translatesAutoresizingMaskIntoConstraints="NO" id="Xgn-w6-dOZ">
+                                                    <rect key="frame" x="300" y="8" width="146" height="35"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="diversity" translatesAutoresizingMaskIntoConstraints="NO" id="536-mX-miU">
+                                                    <rect key="frame" x="446" y="8" width="146" height="35"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UsG-mv-KKS" firstAttribute="leading" secondItem="jEh-bp-ZiN" secondAttribute="leadingMargin" id="08k-ld-BjT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="536-mX-miU" secondAttribute="trailing" id="869-gh-XdQ"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="leading" secondItem="geE-lG-5C0" secondAttribute="trailing" id="Dhf-7a-QAJ"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="centerY" secondItem="jEh-bp-ZiN" secondAttribute="centerY" id="ELD-o6-M1S"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UsG-mv-KKS" secondAttribute="bottom" id="Q25-u0-6BB"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="height" secondItem="UsG-mv-KKS" secondAttribute="height" id="R2h-gZ-5iZ"/>
+                                                <constraint firstItem="geE-lG-5C0" firstAttribute="height" secondItem="UsG-mv-KKS" secondAttribute="height" id="XRh-99-hM5"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="width" secondItem="UsG-mv-KKS" secondAttribute="width" id="ctW-Vs-DxE"/>
+                                                <constraint firstItem="UsG-mv-KKS" firstAttribute="centerY" secondItem="jEh-bp-ZiN" secondAttribute="centerY" id="e8I-hf-AP9"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="centerY" secondItem="jEh-bp-ZiN" secondAttribute="centerY" id="ffk-0u-ehf"/>
+                                                <constraint firstItem="UsG-mv-KKS" firstAttribute="top" secondItem="jEh-bp-ZiN" secondAttribute="topMargin" id="i1H-DD-kIq"/>
+                                                <constraint firstItem="geE-lG-5C0" firstAttribute="width" secondItem="UsG-mv-KKS" secondAttribute="width" id="lD6-MD-3qR"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="leading" secondItem="Xgn-w6-dOZ" secondAttribute="trailing" id="meI-hl-ZLY"/>
+                                                <constraint firstItem="geE-lG-5C0" firstAttribute="centerY" secondItem="jEh-bp-ZiN" secondAttribute="centerY" id="nf1-lI-ux9"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="width" secondItem="UsG-mv-KKS" secondAttribute="width" id="qWl-4R-sRX"/>
+                                                <constraint firstItem="geE-lG-5C0" firstAttribute="leading" secondItem="UsG-mv-KKS" secondAttribute="trailing" id="uoH-hk-6tR"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="height" secondItem="UsG-mv-KKS" secondAttribute="height" id="xy7-Xt-oND"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="189" id="7xP-QG-h5r">
-                                        <rect key="frame" x="0.0" y="486" width="600" height="189"/>
+                                        <rect key="frame" x="0.0" y="539" width="600" height="189"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7xP-QG-h5r" id="fqY-wO-RmB">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="188"/>
@@ -666,7 +710,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="lTF-nS-ZAZ">
-                                        <rect key="frame" x="0.0" y="675" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="728" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lTF-nS-ZAZ" id="XsV-ul-sK2">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -725,7 +769,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="pin-34-M7K">
-                                        <rect key="frame" x="0.0" y="719" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="772" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pin-34-M7K" id="i9t-PR-vMx">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -784,7 +828,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="190" id="cJb-Fg-IJj">
-                                        <rect key="frame" x="0.0" y="763" width="600" height="190"/>
+                                        <rect key="frame" x="0.0" y="816" width="600" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJb-Fg-IJj" id="a9h-9D-xwx">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="189"/>
@@ -832,7 +876,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="GAt-ZM-0d1">
-                                        <rect key="frame" x="0.0" y="953" width="600" height="65"/>
+                                        <rect key="frame" x="0.0" y="1006" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GAt-ZM-0d1" id="RAb-8H-Cpf">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
@@ -876,7 +920,7 @@
                                         </variation>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="131" id="ba4-oD-xPZ">
-                                        <rect key="frame" x="0.0" y="1018" width="600" height="131"/>
+                                        <rect key="frame" x="0.0" y="1071" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ba4-oD-xPZ" id="GJc-27-i2h">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
@@ -951,7 +995,11 @@
                         <outlet property="employeeLabel" destination="GGJ-BC-oge" id="BsU-CC-4Q9"/>
                         <outlet property="favoritesButton" destination="mAg-sQ-oaQ" id="WXb-Gz-Y2O"/>
                         <outlet property="fieldsLabel" destination="Pvu-eY-r7g" id="SRH-pi-x5Z"/>
+                        <outlet property="hasClimateCompensatedImageView" destination="Xgn-w6-dOZ" id="aL0-MG-3UF"/>
+                        <outlet property="isStartupImageView" destination="UsG-mv-KKS" id="CuY-5Q-DdU"/>
                         <outlet property="jobLabel" destination="lqy-IJ-IgT" id="fbi-mi-btE"/>
+                        <outlet property="likesDiversityImageView" destination="536-mX-miU" id="61Y-1t-jK7"/>
+                        <outlet property="likesEnvironmentImageView" destination="geE-lG-5C0" id="gEG-fc-r1B"/>
                         <outlet property="locationImageView" destination="kR8-q3-Mkc" id="kiT-dx-vu8"/>
                         <outlet property="locationLabel" destination="TUQ-e7-XNJ" id="H46-qZ-4Yu"/>
                         <outlet property="mapWebView" destination="ZhN-hm-cDy" id="OqQ-9i-mXU"/>
@@ -3219,6 +3267,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
+        <image name="diversity" width="300" height="174"/>
         <image name="ericsson-logo" width="280" height="248"/>
         <image name="ericssonBackground" width="504" height="1244"/>
         <image name="ericssonLogo" width="1135" height="1024"/>
