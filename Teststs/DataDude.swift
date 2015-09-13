@@ -333,7 +333,7 @@ public class _DataDude {
             ("Leaf", "icon_climate_compensation"),
             ("Rocket", "icon_startup"),
             ("Tree", "icon_sustainability"),
-            ("Leaf", "icon_diversity"),
+            ("diversity", "icon_diversity"),
         ]
         
         func armadaFieldFromSlug(slug: (imageName: String, slug: String)) -> ArmadaField {

@@ -84,7 +84,7 @@ class CatalogueTableViewController: UITableViewController {
         cell.secondIcon.hidden = true
         
         
-        let icons = ["Rocket", "Tree", "Leaf"]
+        let icons = ["Rocket", "Tree", "diversity"]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.hidden = true
@@ -92,10 +92,10 @@ class CatalogueTableViewController: UITableViewController {
         for i in 0...2 {
             if stuff[i] {
                 if cell.firstIcon.hidden {
-                    cell.firstIcon.image = UIImage(named: icons[i])
+                    cell.firstIcon.image = UIImage(named: icons[i])!
                     cell.firstIcon.hidden = false
                 } else {
-                    cell.secondIcon.image = UIImage(named: icons[i])
+                    cell.secondIcon.image = UIImage(named: icons[i])!
                     cell.secondIcon.hidden = false
                 }
             }
