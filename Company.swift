@@ -29,7 +29,8 @@ public class Company: NSManagedObject {
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
             //            let image = UIImage(named: name),
-            let companyValues = json["company_values"] as? [[String:AnyObject]] {
+            let companyValues = json["company_values"] as? [[String:AnyObject]],
+            let workWays = json["ways_of_working"] as? [[String:AnyObject]] {
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 
                 let contactName = json["contact_name"] as? String ?? ""
@@ -134,6 +135,20 @@ public class Company: NSManagedObject {
                     }
                     }()
                 
+                
+                _ = {
+                    let fetchRequest = NSFetchRequest()
+                    let entityName = "WorkWay"
+                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkWay])
+                    let workWays = Array.removeNils(workWays.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    for workWay in workWays {
+                        let managedObject = existingObjects.filter({ $0.workWay == workWay }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! WorkWay
+                        managedObject.workWay = workWay
+                        existingObjects.insert(managedObject)
+                        company.workWays.insert(managedObject)
+                    }
+                    }()
                 
                 return company
         }

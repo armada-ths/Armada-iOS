@@ -25,6 +25,7 @@
         <relationship name="jobTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JobType" inverseName="companies" inverseEntity="JobType" syncable="YES"/>
         <relationship name="programmes" toMany="YES" deletionRule="Nullify" destinationEntity="Programme" inverseName="companies" inverseEntity="Programme" syncable="YES"/>
         <relationship name="workFields" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkField" inverseName="companies" inverseEntity="WorkField" syncable="YES"/>
+        <relationship name="workWays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WorkWay" inverseName="companies" inverseEntity="WorkWay" syncable="YES"/>
     </entity>
     <entity name="CompanyValue" representedClassName=".CompanyValue" syncable="YES">
         <attribute name="companyValue" attributeType="String" syncable="YES"/>
@@ -46,12 +47,17 @@
         <attribute name="workField" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workFields" inverseEntity="Company" syncable="YES"/>
     </entity>
+    <entity name="WorkWay" representedClassName=".WorkWay" syncable="YES">
+        <attribute name="workWay" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workWays" inverseEntity="Company" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Company" positionX="-63" positionY="-18" width="128" height="405"/>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="420"/>
         <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
         <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>
         <element name="Programme" positionX="-18" positionY="144" width="128" height="75"/>
         <element name="WorkField" positionX="-45" positionY="117" width="128" height="75"/>
+        <element name="WorkWay" positionX="-36" positionY="135" width="128" height="75"/>
     </elements>
 </model>

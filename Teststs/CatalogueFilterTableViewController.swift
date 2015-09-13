@@ -1,9 +1,9 @@
 import UIKit
 
 enum CompanyProperty: CustomStringConvertible {
-    case Programmes, JobTypes, Continents, WorkFields, CompanyValues
+    case Programmes, JobTypes, Continents, WorkFields, CompanyValues, WorkWays
     
-    static let All = [Programmes, JobTypes, Continents, WorkFields, CompanyValues]
+    static let All = [Programmes, JobTypes, Continents, WorkFields, CompanyValues, WorkWays]
     
     var values: [String] {
         switch self {
@@ -12,6 +12,7 @@ enum CompanyProperty: CustomStringConvertible {
         case .Continents: return DataDude.continents
         case .WorkFields: return DataDude.workFields
         case .CompanyValues: return DataDude.companyValues
+        case .WorkWays: return DataDude.workWays
         }
     }
     
@@ -22,6 +23,7 @@ enum CompanyProperty: CustomStringConvertible {
         case .Continents: return "Continent"
         case .WorkFields: return "Work Field"
         case .CompanyValues: return "Company Value"
+        case .WorkWays: return "Way of Working"
         }
     }
 }
@@ -34,6 +36,8 @@ extension Company {
         case .Continents: return continents.map {$0.continent}
         case .WorkFields: return workFields.map {$0.workField}
         case .CompanyValues: return companyValues.map {$0.companyValue}
+        case .WorkWays: return workWays.map {$0.workWay}
+            
         }
     }
     
@@ -161,7 +165,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", ""][section]
+        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", "I value ways of working", ""][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {

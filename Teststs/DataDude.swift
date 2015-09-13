@@ -113,6 +113,16 @@ public class _DataDude {
             }
             }()
         
+        _ = {
+            numberOfCompaniesForPropertyValueMap[.WorkWays] = [:]
+            let fetchRequest = NSFetchRequest()
+            fetchRequest.entity = NSEntityDescription.entityForName("WorkWay", inManagedObjectContext: managedObjectContext)!
+            let workWays =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkWay]
+            for workWay in workWays {
+                numberOfCompaniesForPropertyValueMap[.WorkWays]![workWay.workWay] = workWay.companies.count
+            }
+            }()
+        
 
         self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
     }
@@ -190,6 +200,10 @@ public class _DataDude {
     
     var companyValues: [String] {
         return Array(Set(companies.flatMap({ $0.companyValues }).map { $0.companyValue })).sort(<)
+    }
+    
+    var workWays: [String] {
+        return Array(Set(companies.flatMap({ $0.workWays }).map { $0.workWay })).sort(<)
     }
     
     var continents: [String] {
