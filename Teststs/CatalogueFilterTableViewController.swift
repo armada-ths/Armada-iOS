@@ -36,6 +36,19 @@ extension Company {
         case .CompanyValues: return companyValues.map {$0.companyValue}
         }
     }
+    
+    func hasArmadaFieldType(armadaFieldType: _DataDude.ArmadaFieldType) -> Bool {
+        switch armadaFieldType {
+        case .Startup:
+            return isStartup
+        case .ClimateCompensation:
+            return hasClimateCompensated
+        case .Diversity:
+            return likesEquality
+        case .Sustainability:
+            return likesEnvironment
+        }
+    }
 }
 
 func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
@@ -58,8 +71,16 @@ class _CompanyFilter {
         set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
+    var armadaFieldTypes: [_DataDude.ArmadaFieldType] {
+        get { return (Ω["\(userDefaultsKey)armadaFieldTypes"] as? [String] ?? []).map { _DataDude.ArmadaFieldType(rawValue: $0)! } }
+        set { Ω["\(userDefaultsKey)armadaFieldTypes"] = newValue.map { $0.rawValue } }
+    }
+    
     var filteredCompanies: [Company] {
         var filteredCompanies = DataDude.companies
+        for armadaFieldType in armadaFieldTypes {
+            filteredCompanies = filteredCompanies.filter { $0.hasArmadaFieldType(armadaFieldType) }
+        }
         for property in CompanyProperty.All {
             let filterValues = self[property]
             if !filterValues.isEmpty {
@@ -70,9 +91,29 @@ class _CompanyFilter {
         }
         return filteredCompanies.sort { $0.name < $1.name }
     }
+    
+    var isStartup: Bool {
+        get { return Ω["\(userDefaultsKey)isStartup"] as? Bool ?? false }
+        set { Ω["\(userDefaultsKey)isStartup"] = newValue }
+    }
+    
+    var hasClimateCompensated: Bool {
+        get { return Ω["\(userDefaultsKey)hasClimateCompensated"] as? Bool ?? false }
+        set { Ω["\(userDefaultsKey)hasClimateCompensated"] = newValue }
+    }
+    
+    var likesEnvironment: Bool {
+        get { return Ω["\(userDefaultsKey)likesEnvironment"] as? Bool ?? false }
+        set { Ω["\(userDefaultsKey)likesEnvironment"] = newValue }
+    }
+    
+    var likesDiversity: Bool {
+        get { return Ω["\(userDefaultsKey)likesDiversity"] as? Bool ?? false }
+        set { Ω["\(userDefaultsKey)likesDiversity"] = newValue }
+    }
 }
 
-class CatalogueFilterTableViewController: UITableViewController {
+class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCellDelegate {
     
     var CompanyFilter: _CompanyFilter! = nil
     
@@ -108,16 +149,19 @@ class CatalogueFilterTableViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return CompanyProperty.All.count
+        return CompanyProperty.All.count + 1
     }
 
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == numberOfSectionsInTableView(tableView) - 1 {
+            return armadaFields.count
+        }
         return max(1, CompanyFilter[CompanyProperty.All[section]].count + (section == 0 ? 0 : 1))
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value"][section]
+        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", ""][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
@@ -126,6 +170,19 @@ class CatalogueFilterTableViewController: UITableViewController {
     
     func updateTitle() {
         navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) Companies"
+    }
+    
+    let armadaFields = DataDude.armadaFields
+    
+    
+    func armadaFieldType(armadaFieldType: _DataDude.ArmadaFieldType, isOn: Bool) {
+        if isOn {
+            CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes + [armadaFieldType]
+        } else {
+            CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes.filter { $0 != armadaFieldType }
+        }
+        updateTitle()
+
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -141,6 +198,21 @@ class CatalogueFilterTableViewController: UITableViewController {
             
             specialCell.textLabel?.font = UIFont.systemFontOfSize(12)
             return specialCell
+        }
+        
+        if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
+            let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
+            
+            let armadaField = armadaFields[indexPath.row]
+            cell.titleLabel.text = armadaField.name
+            cell.iconImageView.image = armadaField.image
+            cell.valueSwitch.on = CompanyFilter.armadaFieldTypes.contains(armadaField.type)
+            cell.armadaFieldType = armadaField.type
+            cell.delegate = self
+            let companies = DataDude.companies.filter { $0.hasArmadaFieldType(armadaField.type) }
+            cell.numberOfJobsLabel.text = "\(companies.count)"
+            
+            return cell
         }
         
         let property = CompanyProperty.All[indexPath.section]

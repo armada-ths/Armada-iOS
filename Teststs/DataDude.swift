@@ -309,6 +309,42 @@ public class _DataDude {
         }
         return armadaPages
     }
+    
+    struct ArmadaField {
+        let image: UIImage
+        let name: String
+        let description: String
+        
+
+        let type: ArmadaFieldType
+        
+    }
+    
+    enum ArmadaFieldType: String {
+        case Startup = "icon_startup"
+        case ClimateCompensation = "icon_climate_compensation"
+        case Diversity = "icon_diversity"
+        case Sustainability = "icon_sustainability"
+    }
+    
+    
+    var armadaFields: [ArmadaField] {
+        let slugs: [(imageName: String, slug: String)] = [
+            ("Leaf", "icon_climate_compensation"),
+            ("Rocket", "icon_startup"),
+            ("Tree", "icon_sustainability"),
+            ("Leaf", "icon_diversity"),
+        ]
+        
+        func armadaFieldFromSlug(slug: (imageName: String, slug: String)) -> ArmadaField {
+            let name = (armadaPages[slug.slug]??["title"] as? String) ?? ""
+            let description = (armadaPages[slug.slug]??["app_text"] as? String) ?? ""
+            let armadaType = ArmadaFieldType(rawValue: slug.slug)!
+            return ArmadaField(image: UIImage(named: slug.imageName)!, name: name, description: description, type: armadaType)
+        }
+        
+        return slugs.map(armadaFieldFromSlug)
+    }
 }
 
 let armadaPages = ((try? DataDude.pagesFromServer()) ?? "wtf")!
