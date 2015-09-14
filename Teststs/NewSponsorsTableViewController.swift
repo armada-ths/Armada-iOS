@@ -17,11 +17,12 @@ class NewSponsorsTableViewController: UITableViewController {
             if let sponsors = try? DataDude.sponsorsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.sponsors = sponsors
+                    self.tableView.reloadData()
                 }
             }
+            
         }
 
-        tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

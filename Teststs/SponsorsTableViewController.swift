@@ -28,8 +28,6 @@ class SponsorsTableViewController: UITableViewController {
         ericssonText.appendAttributedString(NSAttributedString(string: " our vision is to be the prime driver in an all-communicating world.", attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()]))
         
         ericssonLabel.attributedText = ericssonText
-        
-        
         let strömsText = NSMutableAttributedString()
         
         strömsText.appendAttributedString(NSAttributedString(string: "Ströms", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()]))

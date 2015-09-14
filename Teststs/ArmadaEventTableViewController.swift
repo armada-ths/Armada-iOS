@@ -15,6 +15,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             if let armadaEvents = try? DataDude.eventsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.armadaEvents = armadaEvents
+                    self.tableView.reloadData()
                 }
             }
         }

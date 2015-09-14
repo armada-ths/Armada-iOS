@@ -35,6 +35,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
             if let news = try? DataDude.newsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.news = news
+                    self.tableView.reloadData()
                 }
             }
         }
