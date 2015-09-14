@@ -26,12 +26,13 @@ class CatalogueTableViewController: UITableViewController {
         NSOperationQueue().addOperationWithBlock {
             DataDude.updateCompanies {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                refreshControl?.endRefreshing()
-                self.companies = DataDude.companies
-                self.updateCompaniesByLetters(self.companies)
-                self.tableView.reloadData()
+                    refreshControl?.endRefreshing()
+                    self.companies = DataDude.companies
+                    self.updateCompaniesByLetters(self.companies)
+                    self.updateFavoritesUI()
+                    self.tableView.reloadData()
                     print("Refreshed")
-
+                    
                 }
             }
         }
@@ -44,8 +45,8 @@ class CatalogueTableViewController: UITableViewController {
             companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
         self.searchBar(searchBar, textDidChange: searchBar.text ?? "")
-        updateFavoritesUI()
         tableView.reloadData()
+        updateFavoritesUI()
     }
     
     override func viewWillAppear(animated: Bool) {
