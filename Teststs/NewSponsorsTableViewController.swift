@@ -13,7 +13,14 @@ class NewSponsorsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sponsors = (try? DataDude.sponsorsFromServer()) ?? []
+        NSOperationQueue().addOperationWithBlock {
+            if let sponsors = try? DataDude.sponsorsFromServer() {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.sponsors = sponsors
+                }
+            }
+        }
+
         tableView.reloadData()
     }
     

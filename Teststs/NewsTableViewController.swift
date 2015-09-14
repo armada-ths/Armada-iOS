@@ -15,14 +15,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     
     
-    let news: [News] = {
-        do {
-            return try DataDude.newsFromServer()
-        } catch {
-            print(error)
-            return []
-        }
-        }()
+    var news: [News] = []
     
     
     override func updateHeaderView() {
@@ -38,6 +31,13 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSOperationQueue().addOperationWithBlock {
+            if let news = try? DataDude.newsFromServer() {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.news = news
+                }
+            }
+        }
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer

@@ -126,7 +126,7 @@ public class _DataDude {
             }
             }()
         
-
+        
         self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
     }
     
@@ -136,7 +136,8 @@ public class _DataDude {
     
     private init() {
         let stopWatch = StopWatch()
-        let companiesJson = _DataDude.staticCompanies()
+        
+        
         //        stopWatch.print("Reading companies")
         
         
@@ -151,30 +152,37 @@ public class _DataDude {
         
         
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        
-        for company in companies {
-            managedObjectContext.deleteObject(company)
-        }
-        try! managedObjectContext.save()
-        companies = []
-        
-//        if companies.isEmpty {
-            for json in companiesJson {
-                if let company = Company.companyFromJson(json, managedObjectContext: managedObjectContext) {
-                    companies.append(company)
+        NSOperationQueue().addOperationWithBlock {
+            let companiesJson = _DataDude.staticCompanies()
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                if companiesJson.count > 0 {
+                    for company in self.companies {
+                        self.managedObjectContext.deleteObject(company)
+                    }
+                    try! self.managedObjectContext.save()
+                    self.companies = []
+                    
+                    //        if companies.isEmpty {
+                    for json in companiesJson {
+                        if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
+                            self.companies.append(company)
+                        }
+                    }
+                    try! self.managedObjectContext.save()
+                    //        }
+                    
                 }
             }
-            try! managedObjectContext.save()
-//        }
+        }
         
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
         
-//        NSOperationQueue.mainQueue().addOperationWithBlock {
-//            let stopWatch = StopWatch()
-//            self.generateMap()
-//            stopWatch.print("Making map")
-//        }
+        //        NSOperationQueue.mainQueue().addOperationWithBlock {
+        //            let stopWatch = StopWatch()
+        //            self.generateMap()
+        //            stopWatch.print("Making map")
+        //        }
     }
     
     
@@ -185,11 +193,13 @@ public class _DataDude {
     class func staticCompanies() -> [AnyObject] {
         do {
             
-            return try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSURL(string: "http://staging.armada.nu/api/companies")!)!, options: [])["companies"] as! [AnyObject]
-            return try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSBundle(forClass: self).URLForResource("companies", withExtension: "json")!)!, options: []) as! [AnyObject]
+            if let url = NSURL(string: "http://staging.armada.nu/api/companies"),
+                let data = NSData(contentsOfURL: url) {
+                    return try NSJSONSerialization.JSONObjectWithData(data, options: [])["companies"] as? [AnyObject] ?? []
+            }
+            return []
         } catch {
             print(error)
-            assert(false)
             return []
         }
         
@@ -260,7 +270,7 @@ public class _DataDude {
     
     public func newsFromJson(jsonOriginal: AnyObject) -> [News] {
         let json = jsonOriginal["news"]
-
+        
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
                 let content = json["content"] as? String,
@@ -279,10 +289,10 @@ public class _DataDude {
                 let imageUrlString = json["logo_url"] as? String,
                 let imageUrl = NSURL(string: imageUrlString) {
                     return Sponsor(name: name, imageUrl: imageUrl, description: description)
-                        
-                }
+                    
+            }
             return nil
-
+            
             } ?? [])
     }
     
@@ -339,7 +349,7 @@ public class _DataDude {
         let name: String
         let description: String
         
-
+        
         let type: ArmadaFieldType
         
     }
