@@ -12,27 +12,29 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl!.beginRefreshing()
-        refresh(refreshControl!)
-
+        refresh()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    func refresh(refreshControl: UIRefreshControl) {
+    func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
             if let armadaEvents = try? DataDude.eventsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.armadaEvents = armadaEvents
                     self.tableView.reloadData()
-                    refreshControl.endRefreshing()
+                    refreshControl?.endRefreshing()
+                    self.showEmptyMessage(self.armadaEvents.isEmpty, message: "No events")
+                    self.tableView.separatorStyle = .None
                     print("Refreshed")
                 }
             } else {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                    refreshControl.endRefreshing()
+                    refreshControl?.endRefreshing()
+                    self.showEmptyMessage(self.armadaEvents.isEmpty, message: "Could not load events")
+                    self.tableView.separatorStyle = .None
                     print("Refreshed")
                 }
             }

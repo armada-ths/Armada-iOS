@@ -134,23 +134,13 @@ public class _DataDude {
         return numberOfCompaniesForPropertyValueMap[property]![value]
     }
     
+    
+    
+    
     private init() {
         let stopWatch = StopWatch()
-        
-        
-        //        stopWatch.print("Reading companies")
-        
-        
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
-        
-        
-        let fetchRequest2 = NSFetchRequest()
-        fetchRequest2.entity = NSEntityDescription.entityForName("WorkField", inManagedObjectContext: managedObjectContext)!
-        let w =  try! managedObjectContext.executeFetchRequest(fetchRequest2) as! [WorkField]
-        print("Work fields: \(w.count)")
-        
-        
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         NSOperationQueue().addOperationWithBlock {
             let companiesJson = _DataDude.staticCompanies()
@@ -186,6 +176,36 @@ public class _DataDude {
     }
     
     
+    func updateCompanies(callback: () -> ()) {
+        let stopWatch = StopWatch()
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
+        companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
+        NSOperationQueue().addOperationWithBlock {
+            let companiesJson = _DataDude.staticCompanies()
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                if companiesJson.count > 0 {
+                    for company in self.companies {
+                        self.managedObjectContext.deleteObject(company)
+                    }
+                    try! self.managedObjectContext.save()
+                    self.companies = []
+                    
+                    //        if companies.isEmpty {
+                    for json in companiesJson {
+                        if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
+                            self.companies.append(company)
+                        }
+                    }
+                    try! self.managedObjectContext.save()
+                    //        }
+                }
+                callback()
+            }
+        }
+        print("Result: \(companies.count)")
+        stopWatch.print("Fetching managed companies ")
+    }
     
     
     

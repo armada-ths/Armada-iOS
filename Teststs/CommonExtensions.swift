@@ -11,6 +11,27 @@ extension NSUserDefaults {
     }
 }
 
+
+extension UITableViewController {
+    
+    func showEmptyMessage(show: Bool, message: String) {
+        if show {
+            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+            label.font = UIFont.systemFontOfSize(30)
+            label.text = message
+            label.numberOfLines = 2
+            label.textAlignment = .Center
+            label.sizeToFit()
+            label.textColor = UIColor.lightGrayColor()
+            tableView.backgroundView = label
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        }
+    }
+}
+
 extension UIColor {
     convenience init(hex: Int) {
         let red = CGFloat((hex >> 16) & 0xff) / 255.0

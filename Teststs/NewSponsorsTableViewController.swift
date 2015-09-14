@@ -15,28 +15,28 @@ class NewSponsorsTableViewController: UITableViewController {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl!.beginRefreshing()
-        refresh(refreshControl!)
+        refresh()
     }
     
     
-    func refresh(refreshControl: UIRefreshControl) {
+    func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
             if let sponsors = try? DataDude.sponsorsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.sponsors = sponsors
                     self.tableView.reloadData()
-                    refreshControl.endRefreshing()
+                    self.showEmptyMessage(self.sponsors.isEmpty, message: "No Sponsors")
+                    refreshControl?.endRefreshing()
                     print("Refreshed")
                 }
             } else {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                    refreshControl.endRefreshing()
+                    refreshControl?.endRefreshing()
+                    self.showEmptyMessage(self.sponsors.isEmpty, message: "Could not load sponsors")
                     print("Refreshed")
                 }
             }
         }
-        
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

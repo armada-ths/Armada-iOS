@@ -17,7 +17,26 @@ class CatalogueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refresh()
     }
+    
+    func refresh(refreshControl: UIRefreshControl? = nil) {
+        NSOperationQueue().addOperationWithBlock {
+            DataDude.updateCompanies {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                refreshControl?.endRefreshing()
+                self.companies = DataDude.companies
+                self.updateCompaniesByLetters(self.companies)
+                self.tableView.reloadData()
+                    print("Refreshed")
+
+                }
+            }
+        }
+    }
+    
     @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             companies = CompanyFilter.filteredCompanies

@@ -33,8 +33,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl!.beginRefreshing()
-        refresh(refreshControl!)
+        refresh()
 
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
@@ -44,18 +43,20 @@ class NewsTableViewController: ScrollZoomTableViewController {
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    func refresh(refreshControl: UIRefreshControl) {
+    func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
             if let news = try? DataDude.newsFromServer() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.news = news
                     self.tableView.reloadData()
-                    refreshControl.endRefreshing()
+                    refreshControl?.endRefreshing()
+                    self.showEmptyMessage(self.news.isEmpty, message: "No news")
                     print("Refreshed")
                 }
             } else {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                    refreshControl.endRefreshing()
+                    refreshControl?.endRefreshing()
+                    self.showEmptyMessage(self.news.isEmpty, message: "Could not load news")
                     print("Refreshed")
                 }
             }
