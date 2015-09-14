@@ -11,6 +11,7 @@ public struct ArmadaEvent {
     public let signupLink: String
     public let signupStartDate: NSDate?
     public let signupEndDate: NSDate?
+    public let imageUrl: NSURL?
     
     var image: UIImage? {
         return UIImage(named: title.stringByReplacingOccurrencesOfString("ä", withString: ""))
@@ -247,8 +248,11 @@ public class _DataDude {
                     let signupStartDate: NSDate? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
                     let signupEndDate: NSDate? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
                     let title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    
+                    let imageUrlString = json["picture_url"] as? String
+                    let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
                     let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
-                    return ArmadaEvent(title: title, summary: summary, location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate)
+                    return ArmadaEvent(title: title, summary: summary, location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
             }
             return nil
             } ?? [])//.filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }

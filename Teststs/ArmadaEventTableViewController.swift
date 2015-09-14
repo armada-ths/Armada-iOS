@@ -58,8 +58,11 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
         cell.dayLabel.text = armadaEvent.startDate.format("d")
         cell.monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
-        let imageName = imageNames[indexPath.row % imageNames.count]
-        cell.eventImageView.image = UIImage(named: imageName.stringByReplacingOccurrencesOfString("ä", withString: ""))
+//        let imageName = imageNames[indexPath.row % imageNames.count]
+//        cell.eventImageView.image = UIImage(named: imageName.stringByReplacingOccurrencesOfString("ä", withString: ""))
+        if let imageUrl = armadaEvent.imageUrl {
+            cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+        }
         return cell
     }
     

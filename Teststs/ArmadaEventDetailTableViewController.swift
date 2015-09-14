@@ -39,10 +39,14 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         }
         
         eventImageView.image = selectedArmadaEvent?.image
+        
+        if let imageUrl =  selectedArmadaEvent!.imageUrl {
+            eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+        }
         titleLabel.text = selectedArmadaEvent?.title
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
-                
+        
         if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
             signupLabel.text = "Registration for this event is over"
         } else {

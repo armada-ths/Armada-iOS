@@ -60,14 +60,22 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         tableView.reloadData()
             locationLabel.text = company.locationDescription
             self.locationImageView.loadImageFromUrl(company.locationUrl)
-            aboutLabel.text = company.companyDescription
+        
+
             aboutLabel.attributedText = company.companyDescription.attributedHtmlString
+        
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
+            jobLabel.attributedText = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
+        
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
+            fieldsLabel.attributedText = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
+        
             websiteLabel.text = company.website
-            countriesLabel.text = "\(company.countries)"
+            websiteLabel.attributedText = company.website.attributedHtmlString
+        
+            countriesLabel.attributedText = "\(company.countries) Countries".attributedHtmlString
             adImageView.loadImageFromUrl(company.adUrl)
-            employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString)"
+            employeeLabel.attributedText = "\(company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
         let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]
