@@ -1213,7 +1213,7 @@
         <scene sceneID="QLj-c3-t3I">
             <objects>
                 <tableViewController id="1vj-2m-lxX" customClass="ArmadaEventDetailTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="296" sectionHeaderHeight="22" sectionFooterHeight="22" id="bS9-VI-oFT">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="296" sectionHeaderHeight="22" sectionFooterHeight="22" id="bS9-VI-oFT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1251,11 +1251,31 @@
                         <sections>
                             <tableViewSection id="Mhc-hr-LGk">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="P6d-Ny-zoz">
+                                        <rect key="frame" x="0.0" y="280" width="600" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P6d-Ny-zoz" id="yGB-tG-zht">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sign up opens 19th September" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uyw-1G-Voy">
+                                                    <rect key="frame" x="95" y="19" width="236" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="uyw-1G-Voy" firstAttribute="centerY" secondItem="yGB-tG-zht" secondAttribute="centerY" id="neC-Ej-CgX"/>
+                                                <constraint firstItem="uyw-1G-Voy" firstAttribute="centerX" secondItem="yGB-tG-zht" secondAttribute="centerX" id="yPH-SX-Q7W"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fZ5-Aq-5QZ">
-                                        <rect key="frame" x="0.0" y="280" width="600" height="296"/>
+                                        <rect key="frame" x="0.0" y="345" width="600" height="296"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ5-Aq-5QZ" id="3Y1-U0-NBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="296"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="295"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-Au-yP6">
@@ -1360,6 +1380,7 @@
                         <outlet property="dayLabel" destination="Xfz-Au-yP6" id="5ro-e1-ynt"/>
                         <outlet property="eventImageView" destination="l8U-YR-BkE" id="pYd-Lz-x3M"/>
                         <outlet property="monthLabel" destination="ckm-R6-lGV" id="K5j-72-Pbp"/>
+                        <outlet property="signupLabel" destination="uyw-1G-Voy" id="oi1-EZ-Jis"/>
                         <outlet property="summaryLabel" destination="wqF-c8-zbb" id="C5Z-kO-hG5"/>
                         <outlet property="titleLabel" destination="Gg8-IY-5Uh" id="ywg-Ak-V6H"/>
                     </connections>
@@ -3287,8 +3308,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HdS-L4-TYF"/>
-        <segue reference="Qf2-UD-66F"/>
         <segue reference="0Hm-Oo-SOc"/>
+        <segue reference="HdS-L4-TYF"/>
+        <segue reference="r1R-7L-rO0"/>
     </inferredMetricsTieBreakers>
 </document>

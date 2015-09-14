@@ -1,5 +1,10 @@
 import UIKit
 
+
+public func <(x: NSDate, y: NSDate) -> Bool {
+    return x.timeIntervalSince1970 < y.timeIntervalSince1970
+}
+
 class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     @IBOutlet weak var eventImageView: UIImageView!
@@ -8,14 +13,12 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var signupLabel: UILabel!
     
     override func viewDidLoad() {
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        //        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
-        
-        if !selectedArmadaEvent!.signupLink.isEmpty {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Signup", style: .Plain, target: self, action: Selector("signup:"))
-        }
+        let armadaEvent = selectedArmadaEvent!
         
         dayLabel.text = selectedArmadaEvent!.startDate.format("d")
         monthLabel.text = selectedArmadaEvent!.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
@@ -24,7 +27,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         let attrString = NSMutableAttributedString(string: selectedArmadaEvent!.summary)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         summaryLabel.attributedText = attrString
-
+        
         if let text = selectedArmadaEvent?.summary.attributedHtmlString{
             summaryLabel.attributedText = text
         }else{
@@ -37,13 +40,34 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         
         eventImageView.image = selectedArmadaEvent?.image
         titleLabel.text = selectedArmadaEvent?.title
-    }
-    
-    func signup(sender: AnyObject) {
-        if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
-            UIApplication.sharedApplication().openURL(url)
+        signupLabel.textColor = UIColor.lightGrayColor()
+        tableView.allowsSelection = false
+                
+        if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
+            signupLabel.text = "Registration for this event is over"
+        } else {
+            if let signupStartDate =  armadaEvent.signupStartDate {
+                if signupStartDate < NSDate() {
+                    signupLabel.text = "Sign Up"
+                    signupLabel.textColor = ColorScheme.armadaGreen
+                    tableView.allowsSelection = true
+                    
+                } else {
+                    signupLabel.text = "Registration starts at \(signupStartDate.readableString)"
+                }
+            } else {
+                signupLabel.text = "Registration TBA"
+            }
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0 && tableView.allowsSelection {
+            if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -52,12 +76,6 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-    }
-    
-    @IBAction func signupButtonClicked(sender: UIButton) {
-        if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
-            UIApplication.sharedApplication().openURL(url)
-        }
     }
     
     override func didReceiveMemoryWarning() {

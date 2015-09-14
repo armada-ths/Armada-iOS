@@ -9,6 +9,8 @@ public struct ArmadaEvent {
     public let startDate: NSDate
     public let endDate: NSDate
     public let signupLink: String
+    public let signupStartDate: NSDate?
+    public let signupEndDate: NSDate?
     
     var image: UIImage? {
         return UIImage(named: title.stringByReplacingOccurrencesOfString("ä", withString: ""))
@@ -222,8 +224,6 @@ public class _DataDude {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
         let b = string.componentsSeparatedByString(":")
-        
-        
         return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])!
     }
     
@@ -242,7 +242,13 @@ public class _DataDude {
                 let startDateString = json["starts_at"] as? String,
                 let endDateString = json["ends_at"] as? String,
                 let signupLink = json["external_signup_link"] as? String {
-                    return ArmadaEvent(title: title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()), summary: summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil), location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink)
+                    let signupStartDateString = json["signup_starts_at"] as? String
+                    let signupEndDateString = json["signup_ends_at"] as? String
+                    let signupStartDate: NSDate? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
+                    let signupEndDate: NSDate? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
+                    let title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
+                    return ArmadaEvent(title: title, summary: summary, location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate)
             }
             return nil
             } ?? [])//.filter { $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }
