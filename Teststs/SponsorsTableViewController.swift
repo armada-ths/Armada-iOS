@@ -15,6 +15,7 @@ class SponsorsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.separatorStyle = .None
         
         let ericssonText = NSMutableAttributedString()

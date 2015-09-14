@@ -10,23 +10,35 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSOperationQueue().addOperationWithBlock {
-            if let armadaEvents = try? DataDude.eventsFromServer() {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.armadaEvents = armadaEvents
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        
-        
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl!.beginRefreshing()
+        refresh(refreshControl!)
+
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    func refresh(refreshControl: UIRefreshControl) {
+        NSOperationQueue().addOperationWithBlock {
+            if let armadaEvents = try? DataDude.eventsFromServer() {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.armadaEvents = armadaEvents
+                    self.tableView.reloadData()
+                    refreshControl.endRefreshing()
+                    print("Refreshed")
+                }
+            } else {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    refreshControl.endRefreshing()
+                    print("Refreshed")
+                }
+            }
+        }
+        
+    }
     
     
     override func viewDidAppear(animated: Bool) {

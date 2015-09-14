@@ -31,14 +31,11 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSOperationQueue().addOperationWithBlock {
-            if let news = try? DataDude.newsFromServer() {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.news = news
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl!.beginRefreshing()
+        refresh(refreshControl!)
+
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
@@ -47,6 +44,24 @@ class NewsTableViewController: ScrollZoomTableViewController {
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    func refresh(refreshControl: UIRefreshControl) {
+        NSOperationQueue().addOperationWithBlock {
+            if let news = try? DataDude.newsFromServer() {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.news = news
+                    self.tableView.reloadData()
+                    refreshControl.endRefreshing()
+                    print("Refreshed")
+                }
+            } else {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    refreshControl.endRefreshing()
+                    print("Refreshed")
+                }
+            }
+        }
+        
+    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
