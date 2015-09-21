@@ -360,8 +360,10 @@ public class _DataDude {
             if let name = json["name"] as? String ?? json["title"] as? String,
                 let description = json["full_text"] as? String,
                 let imageUrlString = json["logo_url"] as? String,
-                let imageUrl = NSURL(string: imageUrlString) {
-                    return Sponsor(name: name, imageUrl: imageUrl, description: description)
+                let imageUrl = NSURL(string: imageUrlString),
+                let websiteUrlString = json["website_url"] as? String,
+                let websiteUrl = NSURL(string: websiteUrlString) {
+                    return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl)
                     
             }
             return nil

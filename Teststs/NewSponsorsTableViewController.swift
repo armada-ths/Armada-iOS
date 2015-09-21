@@ -4,7 +4,7 @@ public struct Sponsor {
     let name: String
     let imageUrl: NSURL
     let description: String
-    
+    let websiteUrl: NSURL
 }
 
 class NewSponsorsTableViewController: UITableViewController {
@@ -39,6 +39,13 @@ class NewSponsorsTableViewController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
+    
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 120
     }
@@ -55,11 +62,22 @@ class NewSponsorsTableViewController: UITableViewController {
         return sponsors.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sponsor = sponsors[indexPath.row]
-        cell.sponsorLabel.text = sponsor.description
-        cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
+        if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
+            UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let sponsor = sponsors[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "NewSponsorsTableViewCellNoText" : "NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
+        if !sponsor.description.isEmpty {
+            cell.sponsorLabel.text = sponsor.description
+            cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
+        }
+        
         cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString)
         return cell
     }

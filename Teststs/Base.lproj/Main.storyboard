@@ -2809,16 +2809,16 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <scene sceneID="JdA-hg-cLc">
             <objects>
                 <tableViewController id="z1U-qK-Dnt" customClass="NewSponsorsTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="359" sectionHeaderHeight="28" sectionFooterHeight="28" id="QJW-Jm-qbu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="260" sectionHeaderHeight="28" sectionFooterHeight="28" id="QJW-Jm-qbu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" rowHeight="359" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Teststs" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="359"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" rowHeight="260" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8YJ-Hh-mEj" id="bxy-tb-5G2">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="358"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ericsson AB" translatesAutoresizingMaskIntoConstraints="NO" id="z0I-bU-sE1">
@@ -2828,7 +2828,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                                 <constraint firstAttribute="width" constant="300" id="Y13-2H-54I"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC4-OD-TJi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SC4-OD-TJi">
                                             <rect key="frame" x="16" y="156" width="568" height="191"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2855,6 +2855,31 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                 <connections>
                                     <outlet property="sponsorImageView" destination="z0I-bU-sE1" id="GZ2-cK-VjA"/>
                                     <outlet property="sponsorLabel" destination="SC4-OD-TJi" id="al7-eL-p1e"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="352" width="600" height="260"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pk2-DK-S4r">
+                                            <rect key="frame" x="175" y="32" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="0NB-Mj-mdI"/>
+                                                <constraint firstAttribute="height" constant="128" id="CBR-WW-Nig"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Pk2-DK-S4r" secondAttribute="bottom" constant="8" id="T7J-ar-Jiy"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="top" secondItem="VXJ-XI-HFh" secondAttribute="topMargin" constant="8" id="Tsq-vP-NBU"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="centerX" secondItem="VXJ-XI-HFh" secondAttribute="centerX" id="zOD-Fk-46h"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="sponsorImageView" destination="Pk2-DK-S4r" id="QUi-hM-yAh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
