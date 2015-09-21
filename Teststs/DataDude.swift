@@ -66,8 +66,6 @@ public class _DataDude {
     func generateMap() {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
         
-        
-        
         _ = {
             numberOfCompaniesForPropertyValueMap[.WorkFields] = [:]
             let fetchRequest = NSFetchRequest()
