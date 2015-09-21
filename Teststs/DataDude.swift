@@ -24,6 +24,11 @@ public struct News {
     public let publishedDate: NSDate
 }
 
+enum Response<T> {
+    case Success(T)
+    case Error(ErrorType)
+}
+
 let DataDude = _DataDude()
 
 public class _DataDude {
@@ -142,28 +147,6 @@ public class _DataDude {
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        NSOperationQueue().addOperationWithBlock {
-            let companiesJson = _DataDude.staticCompanies()
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                if companiesJson.count > 0 {
-                    for company in self.companies {
-                        self.managedObjectContext.deleteObject(company)
-                    }
-                    try! self.managedObjectContext.save()
-                    self.companies = []
-                    
-                    //        if companies.isEmpty {
-                    for json in companiesJson {
-                        if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
-                            self.companies.append(company)
-                        }
-                    }
-                    try! self.managedObjectContext.save()
-                    //        }
-                    
-                }
-            }
-        }
         
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
@@ -181,28 +164,45 @@ public class _DataDude {
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        NSOperationQueue().addOperationWithBlock {
-            let companiesJson = _DataDude.staticCompanies()
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                if companiesJson.count > 0 {
-                    for company in self.companies {
-                        self.managedObjectContext.deleteObject(company)
-                    }
-                    try! self.managedObjectContext.save()
-                    self.companies = []
-                    
-                    //        if companies.isEmpty {
-                    for json in companiesJson {
-                        if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
-                            self.companies.append(company)
+        
+        
+        _DataDude.getUrlRespectingEtag(NSURL(string: "http://staging.armada.nu/api/companies")!) {
+            switch $0 {
+            case .Success(let (_, usedCache)):
+                if !usedCache {
+                    NSOperationQueue().addOperationWithBlock {
+                        let companiesJson = _DataDude.staticCompanies()
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            print("DESTROYING THE DATABASE!!!!!")
+                            if companiesJson.count > 0 {
+                                for company in self.companies {
+                                    self.managedObjectContext.deleteObject(company)
+                                }
+                                try! self.managedObjectContext.save()
+                                self.companies = []
+                                
+                                //        if companies.isEmpty {
+                                for json in companiesJson {
+                                    if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
+                                        self.companies.append(company)
+                                    }
+                                }
+                                try! self.managedObjectContext.save()
+                                //        }
+                            }
+                            callback()
                         }
                     }
-                    try! self.managedObjectContext.save()
-                    //        }
+                } else {
+                    callback()
                 }
-                callback()
+                break
+            case .Error(let error):
+                print(error)
             }
         }
+        
+        
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
     }
@@ -224,6 +224,61 @@ public class _DataDude {
         }
         
         //        let companies = DataDude.companiesFromJson(json)
+    }
+    
+    class func getUrlRespectingEtag(url: NSURL, callback: Response<(NSData, Bool)> -> Void) {
+        let session = NSURLSession.sharedSession()
+        let request = NSURLRequest(URL: url)
+        let httpCachedResponse = NSURLCache.sharedURLCache().cachedResponseForRequest(request)?.response as? NSHTTPURLResponse
+        var usedCache = false
+        let dataTask = session.dataTaskWithRequest(request) {
+            (data, response, error) in
+            if let httpResponse = response as? NSHTTPURLResponse {
+                usedCache = httpResponse.etag == httpCachedResponse?.etag
+            }
+            if let data = data {
+                let zebra = (data, usedCache)
+                print("Url: \(url.absoluteString), cached: \(usedCache)")
+                callback(.Success(zebra))
+            } else if let error = error {
+                callback(.Error(error))
+            } else {
+                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+            }
+        }
+        dataTask.resume()
+    }
+    
+    class func getData(url: NSURL, callback: Response<NSData> -> Void) {
+        let session = NSURLSession.sharedSession()
+        let request = NSURLRequest(URL: url)
+        let dataTask = session.dataTaskWithRequest(request) {
+            (data, response, error) in
+            if let data = data {
+                callback(.Success(data))
+            } else if let error = error {
+                callback(.Error(error))
+            } else {
+                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+            }
+        }
+        dataTask.resume()
+    }
+    
+    class func getJson(url: NSURL, callback: Response<AnyObject> -> Void) {
+        getData(url) {
+            switch $0 {
+            case .Success(let data):
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+                    callback(.Success(json))
+                } catch {
+                    callback(.Error(error))
+                }
+            case .Error(let error):
+                callback(.Error(error))
+            }
+        }
     }
     
     
@@ -337,6 +392,9 @@ public class _DataDude {
     
     let apiUrl = "http://staging.armada.nu/api"
     
+    
+    
+    
     func eventsFromServer() throws -> [ArmadaEvent] {
         let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("events"))
         return eventsFromJson(json)
@@ -415,5 +473,11 @@ func jsonFromUrl(url: String) throws -> AnyObject {
 extension Array {
     static func removeNils(array: [Element?]) -> [Element] {
         return array.filter { $0 != nil }.map { $0! }
+    }
+}
+
+extension NSHTTPURLResponse {
+    var etag: String? {
+        return allHeaderFields["Etag"] as? String
     }
 }
