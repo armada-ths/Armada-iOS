@@ -161,7 +161,11 @@ public class Company: NSManagedObject {
     }
     
     public var image: UIImage? {
-        return UIImage(named: name.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch))// ?? UIImage(named: "cheeseburger")
+        var imageName = name
+        imageName = imageName.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)
+        imageName = imageName.stringByReplacingOccurrencesOfString("( ab$)|(^ab )", withString: " ", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
+        imageName = imageName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return UIImage(named: imageName)
     }
     
     public var map: UIImage {
