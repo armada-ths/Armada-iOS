@@ -166,7 +166,7 @@ public class _DataDude {
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         
         
-        _DataDude.getUrlRespectingEtag(NSURL(string: "http://staging.armada.nu/api/companies")!) {
+        _DataDude.getCompaniesRespectingEtag() {
             switch $0 {
             case .Success(let (_, usedCache)):
                 if !usedCache {
@@ -226,15 +226,16 @@ public class _DataDude {
         //        let companies = DataDude.companiesFromJson(json)
     }
     
-    class func getUrlRespectingEtag(url: NSURL, callback: Response<(NSData, Bool)> -> Void) {
+    class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool)> -> Void) {
+        let url = NSURL(string: "http://staging.armada.nu/api/companies")!
         let session = NSURLSession.sharedSession()
         let request = NSURLRequest(URL: url)
-        let httpCachedResponse = NSURLCache.sharedURLCache().cachedResponseForRequest(request)?.response as? NSHTTPURLResponse
         var usedCache = false
         let dataTask = session.dataTaskWithRequest(request) {
             (data, response, error) in
             if let httpResponse = response as? NSHTTPURLResponse {
-                usedCache = httpResponse.etag == httpCachedResponse?.etag
+                usedCache = httpResponse.etag == SettingsManager.companiesEtag
+                SettingsManager.companiesEtag = httpResponse.etag
             }
             if let data = data {
                 let zebra = (data, usedCache)
