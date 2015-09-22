@@ -70,23 +70,28 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         
         
             adImageView.loadImageFromUrl(company.adUrl)
+        
+        self.countriesLabel.attributedText = "\(self.company.countries) Countries".attributedHtmlString
+        self.employeeLabel.attributedText = "\(self.company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
+        self.websiteLabel.attributedText = self.company.website.attributedHtmlString
+        
+        self.aboutLabel.text = self.company.companyDescription
+        self.jobLabel.text = Array(self.company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
+        self.fieldsLabel.text = Array(self.company.workFields.map { $0.workField }).joinWithSeparator(", ")
+        
         NSOperationQueue().addOperationWithBlock{
-            let a1 = "\(self.company.countries) Countries".attributedHtmlString
-            let a2 = "\(self.company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
-            let a3 = self.company.website.attributedHtmlString
-            let a4 = self.company.companyDescription.attributedHtmlString
-            let a5 = Array(self.company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
-            let a6 = Array(self.company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
+
+
+            let companyDescription = self.company.companyDescription.attributedHtmlString
+            let jobTypes = Array(self.company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
+            let workFields = Array(self.company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
 
             
             let block = NSBlockOperation(block: {
-                self.countriesLabel.attributedText = a1
-                self.employeeLabel.attributedText = a2
-                self.websiteLabel.attributedText = a3
-                self.aboutLabel.attributedText = a4
-                self.jobLabel.attributedText = a5
-                self.fieldsLabel.attributedText = a6
-                
+                self.aboutLabel.attributedText = companyDescription
+                self.jobLabel.attributedText = jobTypes
+                self.fieldsLabel.attributedText = workFields
+                self.tableView.reloadData()
             })
             
             block.queuePriority = NSOperationQueuePriority.Low
