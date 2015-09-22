@@ -282,7 +282,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             }
         }
         if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
-            let alertController = UIAlertController(title: "This action can not be undone", message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             alertController.addAction(UIAlertAction(title: "Reset All Filters", style: .Destructive, handler: {
                 action in
                 self.resetFilter()

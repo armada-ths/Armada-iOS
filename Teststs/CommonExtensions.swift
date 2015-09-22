@@ -43,14 +43,19 @@ extension UIColor {
 
 extension UIImageView {
     func loadImageFromUrl(url: String) {
-        NSOperationQueue().addOperationWithBlock {
-            if let url = NSURL(string: url),
-                let data = NSData(contentsOfURL: url),
-                let image = UIImage(data: data) {
+        if let url = NSURL(string: url) {
+            _DataDude.getData(url) {
+                switch $0 {
+                case .Success(let data):
+                    let image = UIImage(data: data)
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
                         }, completion: nil)
+                    }
+                case .Error(let error):
+                    self.image = nil
+                    print(error)
                 }
             }
         }
