@@ -41,7 +41,6 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         mapWebView.delegate = self
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
-            
             let companyStyle = continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
             html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
             NSOperationQueue.mainQueue().addOperationWithBlock {
