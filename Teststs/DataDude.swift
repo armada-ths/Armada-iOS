@@ -315,7 +315,7 @@ public class _DataDude {
     
     
     var programmes: [String] {
-        return educationTypes.filter({$0.rangeOfString(" in ") != nil})
+        return educationTypes
     }
     
     public func eventsFromJson( jsonOriginal: AnyObject) -> [ArmadaEvent] {

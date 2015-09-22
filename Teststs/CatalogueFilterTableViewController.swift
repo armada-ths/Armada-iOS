@@ -96,25 +96,16 @@ class _CompanyFilter {
         return filteredCompanies.sort { $0.name < $1.name }
     }
     
-//    var isStartup: Bool {
-//        get { return Ω["\(userDefaultsKey)isStartup"] as? Bool ?? false }
-//        set { Ω["\(userDefaultsKey)isStartup"] = newValue }
-//    }
-//    
-//    var hasClimateCompensated: Bool {
-//        get { return Ω["\(userDefaultsKey)hasClimateCompensated"] as? Bool ?? false }
-//        set { Ω["\(userDefaultsKey)hasClimateCompensated"] = newValue }
-//    }
-//    
-//    var likesEnvironment: Bool {
-//        get { return Ω["\(userDefaultsKey)likesEnvironment"] as? Bool ?? false }
-//        set { Ω["\(userDefaultsKey)likesEnvironment"] = newValue }
-//    }
-//    
-//    var likesDiversity: Bool {
-//        get { return Ω["\(userDefaultsKey)likesDiversity"] as? Bool ?? false }
-//        set { Ω["\(userDefaultsKey)likesDiversity"] = newValue }
-//    }
+    
+    var description: String {
+        var string = ""
+        for property in CompanyProperty.All {
+            string += "\(property): \(self[property])\n"
+        }
+        return string
+        
+    }
+
 }
 
 class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCellDelegate {
@@ -149,6 +140,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print(CompanyFilter.description)
         print("VIEW WILL APPEAR")
         updateTitle()
         tableView.reloadData()
@@ -158,16 +150,10 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         return CompanyProperty.All.count + 1 + 1
     }
     
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == numberOfSectionsInTableView(tableView) - 2 {
-            return armadaFields.count
-        }
-        if section == numberOfSectionsInTableView(tableView) - 1 {
-            return 1
-        }
-        
-        return max(1, CompanyFilter[CompanyProperty.All[section]].count + (section == 0 ? 0 : 1))
+        if section == numberOfSectionsInTableView(tableView) - 2 { return armadaFields.count }
+        if section == numberOfSectionsInTableView(tableView) - 1 { return 1 }
+        return CompanyFilter[CompanyProperty.All[section]].count + 1
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -192,31 +178,15 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes.filter { $0 != armadaFieldType }
         }
         updateTitle()
-        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let specialCell = cellWithIdentifier("SelectedEducationTableViewCell") as! SelectedEducationTableViewCell
-            if let zebra = CompanyFilter[.Programmes].first?.componentsSeparatedByString(" in ") where zebra.count == 2 {
-                specialCell.fieldLabel.text = zebra[1]
-                specialCell.degreeLabel.text = zebra[0]
-            } else {
-                specialCell.fieldLabel.text = "Unspecified"
-                specialCell.degreeLabel.text = "All Programmes"
-            }
-            
-            specialCell.textLabel?.font = UIFont.systemFontOfSize(12)
-            return specialCell
-        }
-        
         if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
             return cellWithIdentifier("resetAllFiltersCell")
         }
         
         if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
             let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
-            
             let armadaField = armadaFields[indexPath.row]
             cell.titleLabel.text = armadaField.name
             cell.iconImageView.image = armadaField.image
@@ -243,7 +213,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.section > 0 && indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1
+        return indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -268,10 +238,6 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
                 viewController.property = CompanyProperty.All[indexPath.section]
                 viewController.companyFilter = CompanyFilter
         }
-        if let viewController = segue.destinationViewController as? SelectProgrammeTableViewController {
-            viewController.CompanyFilter = CompanyFilter
-        }
-        
     }
     
     
