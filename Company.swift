@@ -15,7 +15,6 @@ public class Company: NSManagedObject {
     class func companyFromJson(json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
         if let name = json["name"] as? String where !name.isEmpty,
-            let description = json["description"] as? String,
             let website = json["website_url"] as? String,
             
             
@@ -32,7 +31,7 @@ public class Company: NSManagedObject {
             let companyValues = json["company_values"] as? [[String:AnyObject]],
             let workWays = json["ways_of_working"] as? [[String:AnyObject]] {
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
-                
+                let description = json["description"] as? String ?? ""
                 let contactName = json["contact_name"] as? String ?? ""
                 let contactEmail = json["contact_email"] as? String ?? ""
                 let contactPhone = json["contact_number"] as? String ?? ""
