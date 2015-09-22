@@ -44,14 +44,18 @@ extension UIColor {
 extension UIImageView {
     func loadImageFromUrl(url: String) {
         NSOperationQueue().addOperationWithBlock {
+//            NSThread.sleepForTimeInterval(0.2)
             if let url = NSURL(string: url),
                 let data = NSData(contentsOfURL: url),
                 let image = UIImage(data: data) {
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
+
+                    let block = NSBlockOperation(block: {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
-                        }, completion: nil)
-                }
+                            }, completion: nil)
+                    })
+                    block.queuePriority = NSOperationQueuePriority.Low
+                    NSOperationQueue.mainQueue().addOperation(block)
             }
         }
     }

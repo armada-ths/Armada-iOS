@@ -62,20 +62,37 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             self.locationImageView.loadImageFromUrl(company.locationUrl)
         
 
-            aboutLabel.attributedText = company.companyDescription.attributedHtmlString
         
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
-            jobLabel.attributedText = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
         
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
             fieldsLabel.attributedText = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
         
             websiteLabel.text = company.website
-            websiteLabel.attributedText = company.website.attributedHtmlString
         
-            countriesLabel.attributedText = "\(company.countries) Countries".attributedHtmlString
+        
             adImageView.loadImageFromUrl(company.adUrl)
-            employeeLabel.attributedText = "\(company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
+        NSOperationQueue().addOperationWithBlock{
+            let a1 = "\(self.company.countries) Countries".attributedHtmlString
+            let a2 = "\(self.company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
+            let a3 = self.company.website.attributedHtmlString
+            let a4 = self.company.companyDescription.attributedHtmlString
+            let a5 = Array(self.company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
+            
+            let block = NSBlockOperation(block: {
+                self.countriesLabel.attributedText = a1
+                self.employeeLabel.attributedText = a2
+                self.websiteLabel.attributedText = a3
+                self.aboutLabel.attributedText = a4
+                self.jobLabel.attributedText = a5
+                
+            })
+            
+            block.queuePriority = NSOperationQueuePriority.Low
+            NSOperationQueue.mainQueue().addOperation(block)
+
+        }
+        
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
         let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]

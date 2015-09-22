@@ -250,19 +250,21 @@ public class _DataDude {
     }
     
     class func getData(url: NSURL, callback: Response<NSData> -> Void) {
-        let session = NSURLSession.sharedSession()
-        let request = NSURLRequest(URL: url)
-        let dataTask = session.dataTaskWithRequest(request) {
-            (data, response, error) in
-            if let data = data {
-                callback(.Success(data))
-            } else if let error = error {
-                callback(.Error(error))
-            } else {
-                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+        NSOperationQueue().addOperationWithBlock{
+            let session = NSURLSession.sharedSession()
+            let request = NSURLRequest(URL: url)
+            let dataTask = session.dataTaskWithRequest(request) {
+                (data, response, error) in
+                if let data = data {
+                    callback(.Success(data))
+                } else if let error = error {
+                    callback(.Error(error))
+                } else {
+                    callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+                }
             }
+            dataTask.resume()
         }
-        dataTask.resume()
     }
     
     class func getJson(url: NSURL, callback: Response<AnyObject> -> Void) {
