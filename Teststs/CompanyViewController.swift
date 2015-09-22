@@ -66,7 +66,6 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
         
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
-            fieldsLabel.attributedText = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
         
             websiteLabel.text = company.website
         
@@ -78,6 +77,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             let a3 = self.company.website.attributedHtmlString
             let a4 = self.company.companyDescription.attributedHtmlString
             let a5 = Array(self.company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
+            let a6 = Array(self.company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
+
             
             let block = NSBlockOperation(block: {
                 self.countriesLabel.attributedText = a1
@@ -85,6 +86,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
                 self.websiteLabel.attributedText = a3
                 self.aboutLabel.attributedText = a4
                 self.jobLabel.attributedText = a5
+                self.fieldsLabel.attributedText = a6
                 
             })
             
