@@ -96,8 +96,11 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         super.viewWillDisappear(animated)
     }
     
+    let favoriteCellRow = 1
+    let websiteRow = 9
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 3 {
+        if indexPath.row == favoriteCellRow {
             FavoriteCompanies.append(company!.name)
             let cell = tableView.cellForRowAtIndexPath(indexPath)!
             cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
@@ -105,7 +108,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             tableView.endUpdates()
         }
         
-        if indexPath.row == 9 {
+        if indexPath.row == websiteRow {
             if let url = NSURL(string: "http://" + company.website) {
                 UIApplication.sharedApplication().openURL(url)
             }
@@ -117,7 +120,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if FavoriteCompanies.contains(company!.name) && indexPath.row == 3 {
+        if FavoriteCompanies.contains(company!.name) && indexPath.row == favoriteCellRow {
             return 0.000001
         } else {
             return UITableViewAutomaticDimension
