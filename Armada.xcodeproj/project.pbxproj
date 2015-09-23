@@ -102,13 +102,13 @@
 		26402E5C1B8F987700EC84E4 /* ArmadaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaViewController.swift; sourceTree = "<group>"; };
 		26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = armadaEvents.sketch; sourceTree = "<group>"; };
 		2649BCF01B1C8B9400F15B2B /* CompanySplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanySplitViewController.swift; sourceTree = "<group>"; };
-		265B7DDC1B053A080074450B /* Teststs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Teststs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		265B7DDC1B053A080074450B /* Armada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		265B7DE01B053A080074450B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		265B7DE11B053A080074450B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		265B7DE81B053A080074450B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		265B7DEA1B053A080074450B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		265B7DED1B053A080074450B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		265B7DF31B053A080074450B /* TeststsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeststsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		265B7DF31B053A080074450B /* Armada.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Armada.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		265B7DF81B053A080074450B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		265B7DF91B053A080074450B /* TeststsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TeststsTests.swift; path = TeststsTests/TeststsTests.swift; sourceTree = SOURCE_ROOT; };
 		265B7E031B0543690074450B /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 		265B7DDD1B053A080074450B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				265B7DDC1B053A080074450B /* Teststs.app */,
-				265B7DF31B053A080074450B /* TeststsTests.xctest */,
+				265B7DDC1B053A080074450B /* Armada.app */,
+				265B7DF31B053A080074450B /* Armada.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,9 +294,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		265B7DDB1B053A080074450B /* Teststs */ = {
+		265B7DDB1B053A080074450B /* Armada */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 265B7DFD1B053A080074450B /* Build configuration list for PBXNativeTarget "Teststs" */;
+			buildConfigurationList = 265B7DFD1B053A080074450B /* Build configuration list for PBXNativeTarget "Armada" */;
 			buildPhases = (
 				265B7DD81B053A080074450B /* Sources */,
 				265B7DD91B053A080074450B /* Frameworks */,
@@ -306,14 +306,14 @@
 			);
 			dependencies = (
 			);
-			name = Teststs;
+			name = Armada;
 			productName = Teststs;
-			productReference = 265B7DDC1B053A080074450B /* Teststs.app */;
+			productReference = 265B7DDC1B053A080074450B /* Armada.app */;
 			productType = "com.apple.product-type.application";
 		};
-		265B7DF21B053A080074450B /* TeststsTests */ = {
+		265B7DF21B053A080074450B /* ArmadaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 265B7E001B053A080074450B /* Build configuration list for PBXNativeTarget "TeststsTests" */;
+			buildConfigurationList = 265B7E001B053A080074450B /* Build configuration list for PBXNativeTarget "ArmadaTests" */;
 			buildPhases = (
 				265B7DEF1B053A080074450B /* Sources */,
 				265B7DF01B053A080074450B /* Frameworks */,
@@ -324,9 +324,9 @@
 			dependencies = (
 				265B7DF51B053A080074450B /* PBXTargetDependency */,
 			);
-			name = TeststsTests;
+			name = ArmadaTests;
 			productName = TeststsTests;
-			productReference = 265B7DF31B053A080074450B /* TeststsTests.xctest */;
+			productReference = 265B7DF31B053A080074450B /* Armada.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -349,7 +349,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 265B7DD71B053A080074450B /* Build configuration list for PBXProject "Teststs" */;
+			buildConfigurationList = 265B7DD71B053A080074450B /* Build configuration list for PBXProject "Armada" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -362,8 +362,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				265B7DDB1B053A080074450B /* Teststs */,
-				265B7DF21B053A080074450B /* TeststsTests */,
+				265B7DDB1B053A080074450B /* Armada */,
+				265B7DF21B053A080074450B /* ArmadaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -470,7 +470,7 @@
 /* Begin PBXTargetDependency section */
 		265B7DF51B053A080074450B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 265B7DDB1B053A080074450B /* Teststs */;
+			target = 265B7DDB1B053A080074450B /* Armada */;
 			targetProxy = 265B7DF41B053A080074450B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -587,7 +587,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -603,7 +603,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -624,8 +624,8 @@
 				INFOPLIST_FILE = TeststsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Monafide.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Teststs.app/Teststs";
+				PRODUCT_NAME = Armada;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armada.app/Armada";
 			};
 			name = Debug;
 		};
@@ -640,15 +640,15 @@
 				INFOPLIST_FILE = TeststsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Monafide.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Teststs.app/Teststs";
+				PRODUCT_NAME = Armada;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Armada.app/Armada";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		265B7DD71B053A080074450B /* Build configuration list for PBXProject "Teststs" */ = {
+		265B7DD71B053A080074450B /* Build configuration list for PBXProject "Armada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				265B7DFB1B053A080074450B /* Debug */,
@@ -657,7 +657,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		265B7DFD1B053A080074450B /* Build configuration list for PBXNativeTarget "Teststs" */ = {
+		265B7DFD1B053A080074450B /* Build configuration list for PBXNativeTarget "Armada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				265B7DFE1B053A080074450B /* Debug */,
@@ -666,7 +666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		265B7E001B053A080074450B /* Build configuration list for PBXNativeTarget "TeststsTests" */ = {
+		265B7E001B053A080074450B /* Build configuration list for PBXNativeTarget "ArmadaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				265B7E011B053A080074450B /* Debug */,
