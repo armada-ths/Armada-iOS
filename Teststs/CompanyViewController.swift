@@ -65,6 +65,9 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         
 
             aboutLabel.attributedText = company.companyDescription.attributedHtmlString
+            if company.companyDescription.isEmpty {
+                aboutLabel.attributedText = "To be announced".attributedHtmlString
+            }
         
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
             jobLabel.attributedText = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
@@ -83,7 +86,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         
         if company.locationDescription.isEmpty {
             locationImageView.removeFromSuperview()
-            locationLabel.text = "To be announced"
+            locationLabel.attributedText = "To be announced".attributedHtmlString
         }
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
