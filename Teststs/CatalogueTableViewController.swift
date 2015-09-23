@@ -10,7 +10,7 @@ class CatalogueTableViewController: UITableViewController {
     
     func updateCompaniesByLetters(companies: [Company]) {
         let stopWatch = StopWatch()
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]) })).sort(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.hasPrefix(letter) })) }
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercaseString })).sort(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercaseString.hasPrefix(letter) })) }
         stopWatch.print("Updating letters")
     }
     
