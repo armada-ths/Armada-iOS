@@ -149,7 +149,7 @@ public class _DataDude {
         let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
         let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
         
-        
+        /*
         
         if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
             do {
@@ -163,6 +163,7 @@ public class _DataDude {
                 assert(false)
             }
         }
+*/
 
         
         let fetchRequest = NSFetchRequest()

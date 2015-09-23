@@ -40,5 +40,6 @@ extension Company {
     @NSManaged var likesEnvironment: Bool
     @NSManaged var adUrl: String
     @NSManaged var logoUrl: String
+    @NSManaged var keywords: String
     
 }

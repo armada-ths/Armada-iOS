@@ -32,6 +32,7 @@ public class Company: NSManagedObject {
             let workWays = json["ways_of_working"] as? [[String:AnyObject]] {
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 let description = json["description"] as? String ?? ""
+                let keywords = json["keywords"] as? String ?? ""
                 let contactName = json["contact_name"] as? String ?? ""
                 let contactEmail = json["contact_email"] as? String ?? ""
                 let contactPhone = json["contact_number"] as? String ?? ""
@@ -67,6 +68,8 @@ public class Company: NSManagedObject {
                 company.hasClimateCompensated = hasClimateCompensated
                 company.logoUrl = logoUrl
                 company.adUrl = adUrl
+                company.keywords = keywords
+                company.primaryWorkField = keywords
                 
                 _ = {
                     let fetchRequest = NSFetchRequest()
@@ -74,7 +77,6 @@ public class Company: NSManagedObject {
                     fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
                     var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkField])
                     let workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
-                    company.primaryWorkField = workFields.first ?? ""
                     for workField in workFields {
                         let managedObject = existingObjects.filter({ $0.workField == workField }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! WorkField
                         managedObject.workField = workField

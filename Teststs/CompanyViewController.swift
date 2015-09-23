@@ -73,6 +73,8 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             websiteLabel.attributedText = company.website.attributedHtmlString
         
             countriesLabel.attributedText = "\(company.countries) Countries".attributedHtmlString
+            //adImageView.layer.minificationFilter = kCAFilterTrilinear
+
             adImageView.loadImageFromUrl(company.adUrl)
             employeeLabel.attributedText = "\(company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
         
