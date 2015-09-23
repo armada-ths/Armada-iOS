@@ -250,7 +250,7 @@
         <scene sceneID="5gy-2q-Wgj">
             <objects>
                 <tableViewController id="7lO-dz-MqH" customClass="CatalogueTableViewController" customModule="Teststs" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="KwH-dk-6I0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="KwH-dk-6I0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -260,11 +260,11 @@
                             <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" id="Anm-UY-6fv" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="130" width="600" height="64"/>
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompanyTableViewCell" rowHeight="69" id="Anm-UY-6fv" customClass="CompanyTableViewCell" customModule="Teststs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="130" width="600" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="Anm-UY-6fv" id="6dK-Mj-GQR">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-fA-3bL">
@@ -351,7 +351,7 @@
                                         <constraint firstItem="uQl-fn-ZcR" firstAttribute="centerY" secondItem="0mL-fA-3bL" secondAttribute="centerY" id="igY-4d-Yjj"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="bottom" secondItem="6dK-Mj-GQR" secondAttribute="bottomMargin" id="jrX-sU-aeH"/>
                                         <constraint firstItem="aLJ-hu-1gD" firstAttribute="width" secondItem="lCy-gM-i4f" secondAttribute="width" id="nWR-1f-eS1"/>
-                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="-4" id="p2v-xm-odl"/>
+                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" id="p2v-xm-odl"/>
                                         <constraint firstItem="aLJ-hu-1gD" firstAttribute="height" secondItem="lCy-gM-i4f" secondAttribute="height" id="pnn-ea-IGE"/>
                                         <constraint firstItem="lCy-gM-i4f" firstAttribute="trailing" secondItem="6dK-Mj-GQR" secondAttribute="trailingMargin" id="qQ7-q0-NQ3"/>
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="width" secondItem="EQe-lC-rVo" secondAttribute="width" id="srY-eH-LRK"/>
@@ -392,10 +392,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zVY-Ac-emy">
-                                <rect key="frame" x="0.0" y="194" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="199" width="600" height="67"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zVY-Ac-emy" id="7fB-oj-17I">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -2999,6 +2999,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                         <constraint firstItem="g9n-7S-t0S" firstAttribute="centerX" secondItem="AKf-ub-sCg" secondAttribute="centerX" id="Afa-Lc-H1L"/>
                                         <constraint firstItem="g9n-7S-t0S" firstAttribute="centerY" secondItem="AKf-ub-sCg" secondAttribute="centerY" id="EL3-35-1gi"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="top" secondItem="TEo-N9-r5H" secondAttribute="top" constant="-7" id="IO6-Ad-KfY"/>
+                                        <constraint firstItem="5M5-Qp-M0y" firstAttribute="width" secondItem="TEo-N9-r5H" secondAttribute="width" id="JDb-RR-lHG"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="3" id="KEc-jk-NNg"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="bottom" secondItem="V0c-aY-eeW" secondAttribute="bottomMargin" id="MUq-76-tUi"/>
                                         <constraint firstItem="dmS-rf-nX4" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="100" id="PDP-cs-NJK"/>

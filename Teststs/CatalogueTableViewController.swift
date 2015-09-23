@@ -102,9 +102,9 @@ class CatalogueTableViewController: UITableViewController {
         
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
-        
+        /*
         cell.serverLogoImageView.loadImageFromUrl(company.logoUrl)
-        
+        */
         
         let icons = ["Rocket", "Tree", "diversity"]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
