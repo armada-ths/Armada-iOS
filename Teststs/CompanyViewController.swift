@@ -26,7 +26,10 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var hasClimateCompensatedImageView: UIImageView!
     
+    @IBOutlet weak var twitterButton: UIButton!
+    @IBOutlet weak var facebookButton: UIButton!
     
+    @IBOutlet weak var linkedinButton: UIButton!
     @IBOutlet weak var likesDiversityImageView: UIImageView!
     
     @IBOutlet weak var employeeLabel: UILabel!
@@ -77,6 +80,18 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
 
             adImageView.loadImageFromUrl(company.adUrl)
             employeeLabel.attributedText = "\(company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
+        
+        if company.locationDescription.isEmpty {
+            locationImageView.removeFromSuperview()
+            locationLabel.text = "To be announced"
+        }
+        
+        let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
+        let socialMediaUrls = [company.facebook, company.linkedin, company.twitter]
+        let dummyUrl = NSURL(string: "")!
+        for (index, url) in socialMediaUrls.enumerate() {
+            socialMediaButtons[index].enabled = UIApplication.sharedApplication().canOpenURL(NSURL(string: url) ?? dummyUrl)        
+        }
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
         let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]

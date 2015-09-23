@@ -127,7 +127,7 @@ class MatchTableViewController: UITableViewController {
         } else {
             cell.logoImageView.image = nil
             cell.companyNameLabel.hidden = false
-            cell.companyNameLabel.text = company.shortName
+            cell.companyNameLabel.text = company.name
         }
         return cell
     }
