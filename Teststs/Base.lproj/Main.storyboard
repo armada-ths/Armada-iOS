@@ -268,13 +268,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0mL-fA-3bL">
-                                            <rect key="frame" x="16" y="6" width="80" height="51"/>
+                                            <rect key="frame" x="16" y="6" width="90" height="51"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="wPX-OW-rMc"/>
+                                                <constraint firstAttribute="width" constant="90" id="wPX-OW-rMc"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="The best car makers ever" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQe-lC-rVo">
-                                            <rect key="frame" x="116" y="13" width="451" height="17"/>
+                                            <rect key="frame" x="166" y="8" width="401" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="pMB-MH-EG6"/>
                                             </constraints>
@@ -286,14 +286,14 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-UM-rOW">
-                                            <rect key="frame" x="16" y="14" width="80" height="36"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0R-UM-rOW">
+                                            <rect key="frame" x="16" y="21" width="90" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Interaction Design" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EN-Vx-IFa">
-                                            <rect key="frame" x="116" y="32" width="96" height="17"/>
+                                            <rect key="frame" x="166" y="28" width="401" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -310,9 +310,24 @@
                                             <rect key="frame" x="572" y="30" width="20" height="20"/>
                                             <color key="tintColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQl-fn-ZcR">
+                                            <rect key="frame" x="102" y="8" width="41" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Q0q-W2-eUR"/>
+                                                <constraint firstAttribute="width" constant="41" id="YwL-Ph-E3B"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Q0q-W2-eUR"/>
+                                                    <exclude reference="YwL-Ph-E3B"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" constant="2" id="2fe-Rz-U8S"/>
+                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="height" secondItem="0mL-fA-3bL" secondAttribute="height" id="5U8-0L-6Zg"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="uQl-fn-ZcR" secondAttribute="trailing" constant="23" id="7oC-dk-63g"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="EQe-lC-rVo" secondAttribute="bottom" constant="2" id="Hk0-12-e5e"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="centerX" secondItem="F0R-UM-rOW" secondAttribute="centerX" id="IN5-ME-MGu"/>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="centerY" secondItem="0mL-fA-3bL" secondAttribute="centerY" id="NKD-D1-YRI"/>
@@ -331,15 +346,18 @@
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="leading" secondItem="EQe-lC-rVo" secondAttribute="leading" id="fXd-CB-dfy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="EQe-lC-rVo" secondAttribute="trailing" id="gxu-Jl-aes"/>
                                         <constraint firstItem="lCy-gM-i4f" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="topMargin" id="iaR-8l-P1U"/>
+                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="centerY" secondItem="0mL-fA-3bL" secondAttribute="centerY" id="igY-4d-Yjj"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="bottom" secondItem="6dK-Mj-GQR" secondAttribute="bottomMargin" id="jrX-sU-aeH"/>
                                         <constraint firstItem="aLJ-hu-1gD" firstAttribute="width" secondItem="lCy-gM-i4f" secondAttribute="width" id="nWR-1f-eS1"/>
+                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="-4" id="p2v-xm-odl"/>
                                         <constraint firstItem="aLJ-hu-1gD" firstAttribute="height" secondItem="lCy-gM-i4f" secondAttribute="height" id="pnn-ea-IGE"/>
                                         <constraint firstItem="lCy-gM-i4f" firstAttribute="trailing" secondItem="6dK-Mj-GQR" secondAttribute="trailingMargin" id="qQ7-q0-NQ3"/>
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="width" secondItem="EQe-lC-rVo" secondAttribute="width" id="srY-eH-LRK"/>
                                         <constraint firstItem="EQe-lC-rVo" firstAttribute="top" secondItem="2EN-Vx-IFa" secondAttribute="bottom" constant="3" id="uP7-15-9EA"/>
+                                        <constraint firstItem="uQl-fn-ZcR" firstAttribute="width" secondItem="0mL-fA-3bL" secondAttribute="width" id="wIm-Jj-FOZ"/>
                                         <constraint firstItem="0mL-fA-3bL" firstAttribute="top" secondItem="6dK-Mj-GQR" secondAttribute="top" constant="6" id="xQc-RL-KNH"/>
                                         <constraint firstItem="lCy-gM-i4f" firstAttribute="leading" secondItem="EQe-lC-rVo" secondAttribute="trailing" constant="5" id="xYX-4j-Xmb"/>
-                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="20" id="zsz-N0-e0h"/>
+                                        <constraint firstItem="EQe-lC-rVo" firstAttribute="leading" secondItem="0mL-fA-3bL" secondAttribute="trailing" constant="60" id="zsz-N0-e0h"/>
                                         <constraint firstItem="2EN-Vx-IFa" firstAttribute="top" secondItem="0mL-fA-3bL" secondAttribute="top" constant="5" id="zxH-Y9-NhP"/>
                                     </constraints>
                                     <variation key="default">
@@ -354,6 +372,7 @@
                                             <exclude reference="VPC-U4-og8"/>
                                             <exclude reference="gxu-Jl-aes"/>
                                             <exclude reference="uP7-15-9EA"/>
+                                            <exclude reference="zsz-N0-e0h"/>
                                             <exclude reference="zxH-Y9-NhP"/>
                                         </mask>
                                     </variation>
@@ -364,6 +383,7 @@
                                     <outlet property="firstIcon" destination="lCy-gM-i4f" id="jdX-gE-VrC"/>
                                     <outlet property="logoImageView" destination="0mL-fA-3bL" id="CvE-dE-ROC"/>
                                     <outlet property="secondIcon" destination="aLJ-hu-1gD" id="tJ0-r2-xzT"/>
+                                    <outlet property="serverLogoImageView" destination="uQl-fn-ZcR" id="niN-gX-Yi6"/>
                                     <outlet property="workFieldLabel" destination="2EN-Vx-IFa" id="rpm-iV-m1l"/>
                                     <segue destination="PxU-nO-Jqt" kind="showDetail" identifier="CatalogueSegue" id="mja-PR-QlL"/>
                                 </connections>
@@ -3328,8 +3348,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Hm-Oo-SOc"/>
         <segue reference="HdS-L4-TYF"/>
-        <segue reference="r1R-7L-rO0"/>
+        <segue reference="0Hm-Oo-SOc"/>
+        <segue reference="Qf2-UD-66F"/>
     </inferredMetricsTieBreakers>
 </document>

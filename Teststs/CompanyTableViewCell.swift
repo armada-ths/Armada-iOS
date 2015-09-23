@@ -6,6 +6,7 @@ class CompanyTableViewCell: UITableViewCell {
     @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var workFieldLabel: UILabel!
     
+    @IBOutlet weak var serverLogoImageView: UIImageView!
     
     @IBOutlet weak var firstIcon: UIImageView!
     @IBOutlet weak var secondIcon: UIImageView!

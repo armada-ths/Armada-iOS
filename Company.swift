@@ -162,11 +162,15 @@ public class Company: NSManagedObject {
         return nil
     }
     
-    public var image: UIImage? {
+    public var imageName: String {
         var imageName = name
         imageName = imageName.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)
         imageName = imageName.stringByReplacingOccurrencesOfString("( ab$)|(^ab )", withString: " ", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
         imageName = imageName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return imageName
+    }
+    
+    public var image: UIImage? {
         return UIImage(named: imageName)
     }
     

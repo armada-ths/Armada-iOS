@@ -143,7 +143,7 @@ public class _DataDude {
     
     private init() {
         let stopWatch = StopWatch()
-        
+
         print(persistentStoreUrl)
         let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
         let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
@@ -170,7 +170,7 @@ public class _DataDude {
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        
+//                storeLogos()
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
         
@@ -232,7 +232,20 @@ public class _DataDude {
     }
     
     
-    
+    func storeLogos() {
+        let imageDirectory = applicationDocumentsDirectory.URLByAppendingPathComponent("logos")
+        for company in companies {
+            
+            try! NSFileManager.defaultManager().createDirectoryAtURL(imageDirectory, withIntermediateDirectories: true, attributes: nil)
+            if let url = NSURL(string: company.logoUrl) {
+                _DataDude.getData(url) {
+                    if case .Success(let data) = $0 {
+                        data.writeToURL(imageDirectory.URLByAppendingPathComponent(company.imageName + ".png"), atomically: true)
+                    }
+                }
+            }
+        }
+    }
     
     class func staticCompanies() -> [AnyObject] {
         do {
