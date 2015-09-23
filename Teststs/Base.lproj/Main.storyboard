@@ -904,15 +904,15 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="65" id="GAt-ZM-0d1">
-                                        <rect key="frame" x="0.0" y="1055" width="600" height="65"/>
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GAt-ZM-0d1">
+                                        <rect key="frame" x="0.0" y="1055" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="GAt-ZM-0d1" id="RAb-8H-Cpf">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="http://www.volvo.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-YA-Ujc">
-                                                    <rect key="frame" x="16" y="33" width="143" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="http://www.volvo.com" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-YA-Ujc">
+                                                    <rect key="frame" x="15" y="32" width="565" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -924,8 +924,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="aPg-YA-Ujc" secondAttribute="trailing" constant="5" id="0X9-A9-Xfq"/>
                                                 <constraint firstItem="9dc-y5-YuV" firstAttribute="leading" secondItem="RAb-8H-Cpf" secondAttribute="leadingMargin" id="F3j-M2-IJf"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="aPg-YA-Ujc" secondAttribute="bottom" constant="5.5" id="Hu1-D1-I1u"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aPg-YA-Ujc" secondAttribute="bottom" id="Hu1-D1-I1u"/>
                                                 <constraint firstItem="9dc-y5-YuV" firstAttribute="leading" secondItem="aPg-YA-Ujc" secondAttribute="leading" id="Slh-8d-Yd6"/>
                                                 <constraint firstItem="aPg-YA-Ujc" firstAttribute="top" secondItem="9dc-y5-YuV" secondAttribute="bottom" constant="3" id="fgf-Kq-Ftf"/>
                                                 <constraint firstItem="aPg-YA-Ujc" firstAttribute="top" secondItem="9dc-y5-YuV" secondAttribute="bottom" constant="3" id="j2F-IZ-kPd"/>
@@ -949,7 +950,7 @@
                                         </variation>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="131" id="ba4-oD-xPZ">
-                                        <rect key="frame" x="0.0" y="1120" width="600" height="131"/>
+                                        <rect key="frame" x="0.0" y="1099" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ba4-oD-xPZ" id="GJc-27-i2h">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
@@ -2357,21 +2358,21 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPropertyCell" id="u6Z-fE-HNp" customClass="AddCompanyPropertyTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPropertyCell" id="u6Z-fE-HNp" customClass="AddCompanyPropertyTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="232" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u6Z-fE-HNp" id="NOE-UZ-FUX">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="u6Z-fE-HNp" id="NOE-UZ-FUX">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaw-xF-Hgq">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaw-xF-Hgq">
                                             <rect key="frame" x="16" y="12" width="30" height="30"/>
                                             <state key="normal" title="Add"/>
                                         </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="uaw-xF-Hgq" secondAttribute="centerY" id="WXk-Ze-cCB"/>
-                                        <constraint firstItem="uaw-xF-Hgq" firstAttribute="leading" secondItem="NOE-UZ-FUX" secondAttribute="leadingMargin" constant="8" id="qRb-4G-6n7"/>
+                                        <constraint firstItem="uaw-xF-Hgq" firstAttribute="leading" secondItem="NOE-UZ-FUX" secondAttribute="leadingMargin" id="qRb-4G-6n7"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -2852,14 +2853,14 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" rowHeight="260" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" rowHeight="260" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8YJ-Hh-mEj" id="bxy-tb-5G2">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="8YJ-Hh-mEj" id="bxy-tb-5G2">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ericsson AB" translatesAutoresizingMaskIntoConstraints="NO" id="z0I-bU-sE1">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Ericsson AB" translatesAutoresizingMaskIntoConstraints="NO" id="z0I-bU-sE1">
                                             <rect key="frame" x="150" y="8" width="300" height="140"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="140" id="HP5-RT-Mbm"/>
@@ -2881,7 +2882,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                         <constraint firstItem="z0I-bU-sE1" firstAttribute="top" secondItem="bxy-tb-5G2" secondAttribute="topMargin" id="WQj-po-CAJ"/>
                                         <constraint firstItem="SC4-OD-TJi" firstAttribute="centerX" secondItem="bxy-tb-5G2" secondAttribute="centerX" id="ZFL-BK-bFV"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="SC4-OD-TJi" secondAttribute="bottom" constant="3" id="lxT-ff-H69"/>
-                                        <constraint firstItem="SC4-OD-TJi" firstAttribute="leading" secondItem="bxy-tb-5G2" secondAttribute="leadingMargin" constant="8" id="ynu-76-iFg"/>
+                                        <constraint firstItem="SC4-OD-TJi" firstAttribute="leading" secondItem="bxy-tb-5G2" secondAttribute="leadingMargin" id="ynu-76-iFg"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">

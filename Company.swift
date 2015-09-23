@@ -15,14 +15,9 @@ public class Company: NSManagedObject {
     class func companyFromJson(json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
         if let name = json["name"] as? String where !name.isEmpty,
-            let website = json["website_url"] as? String,
             
-            
-            let locationUrl = json["map_url"] as? String,
-            let employeesSweden = json["employees_sweden"] as? Int,
-            let employeesWorld = json["employees_world"] as? Int,
 
-            let countries = json["countries"] as? Int,
+            
             let workFields = json["work_fields"] as? [[String:AnyObject]],
             let programmes = json["programmes"] as? [[String:AnyObject]],
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
@@ -30,6 +25,12 @@ public class Company: NSManagedObject {
             //            let image = UIImage(named: name),
             let companyValues = json["company_values"] as? [[String:AnyObject]],
             let workWays = json["ways_of_working"] as? [[String:AnyObject]] {
+                let website = json["website_url"] as? String ?? ""
+                
+                let countries = json["countries"] as? Int ?? 0
+                let locationUrl = json["map_url"] as? String ?? ""
+                let employeesSweden = json["employees_sweden"] as? Int ?? 0
+                let employeesWorld = json["employees_world"] as? Int ?? 0
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
                 let description = json["description"] as? String ?? ""
                 let keywords = json["keywords"] as? String ?? ""
@@ -157,6 +158,8 @@ public class Company: NSManagedObject {
                     }()
                 
                 return company
+        } else {
+            print("Failed to parse company")
         }
         
         return nil

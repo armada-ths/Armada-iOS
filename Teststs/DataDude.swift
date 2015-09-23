@@ -170,7 +170,7 @@ public class _DataDude {
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-//                storeLogos()
+          storeLogos()
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
         
