@@ -2941,14 +2941,14 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MatchTableViewCell" id="oQP-te-Nu6" customClass="MatchTableViewCell" customModule="Teststs" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MatchTableViewCell" id="oQP-te-Nu6" customClass="MatchTableViewCell" customModule="Teststs" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="86" width="600" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oQP-te-Nu6" id="V0c-aY-eeW">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="oQP-te-Nu6" id="V0c-aY-eeW">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-ub-sCg">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ericsson-logo" translatesAutoresizingMaskIntoConstraints="NO" id="AKf-ub-sCg">
                                             <rect key="frame" x="16" y="6" width="80" height="53"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="yPT-Vh-ApA"/>
@@ -2996,7 +2996,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="TEo-N9-r5H" secondAttribute="trailing" id="0ZH-IB-Y0y"/>
-                                        <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="8" id="12B-L2-4bs"/>
+                                        <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" id="12B-L2-4bs"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dmS-rf-nX4" secondAttribute="trailing" constant="28" id="2cX-Wt-eFc"/>
                                         <constraint firstItem="g9n-7S-t0S" firstAttribute="width" secondItem="AKf-ub-sCg" secondAttribute="width" id="3kY-WQ-I2Z"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="TEo-N9-r5H" secondAttribute="bottom" constant="2" id="7jS-jz-04E"/>
@@ -3364,8 +3364,8 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HdS-L4-TYF"/>
         <segue reference="0Hm-Oo-SOc"/>
+        <segue reference="kvA-Bh-tNi"/>
         <segue reference="Qf2-UD-66F"/>
     </inferredMetricsTieBreakers>
 </document>
