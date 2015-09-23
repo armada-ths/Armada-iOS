@@ -87,7 +87,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        parentViewController!.title = company!.shortName
+        parentViewController!.title = company!.name
     }
     
     override func viewWillDisappear(animated: Bool) {

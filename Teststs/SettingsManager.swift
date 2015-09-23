@@ -17,7 +17,7 @@ class _SettingsManager {
     
     
     var companiesEtag: String? {
-        get { return Ω["companiesEtag"] as? String }
+        get { return Ω["companiesEtag"] as? String ?? "72f197da9005d9d3b0353e8f1c00c7e8" }
         set { Ω["companiesEtag"] = newValue }
     }
 }

@@ -43,13 +43,14 @@ public class _DataDude {
         return NSManagedObjectModel(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("CompanyModel", withExtension: "momd")!)!
         }()
     
-    let persistentStoreUrl = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("SingleViewCoreData.sqlite")
+    let persistentStoreUrl = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("Companies.sqlite")
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         print("Persisten store: \(self.persistentStoreUrl)")
         do {
             try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+
         } catch {
             print(error)
             abort()
@@ -142,6 +143,28 @@ public class _DataDude {
     
     private init() {
         let stopWatch = StopWatch()
+        
+        print(persistentStoreUrl)
+        let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
+        let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
+        let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
+        
+        
+        
+        if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
+            do {
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: NSURL(string: persistentStoreUrl.absoluteString + "-shm")!)
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: NSURL(string: persistentStoreUrl.absoluteString + "-wal")!)
+                print("Copied companies from bundle")
+            } catch {
+                print("Failed copying file!!?#")
+                print(error)
+                assert(false)
+            }
+        }
+
+        
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
