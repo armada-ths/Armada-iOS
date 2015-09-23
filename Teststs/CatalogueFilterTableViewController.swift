@@ -41,8 +41,8 @@ extension Company {
         }
     }
     
-    func hasArmadaFieldType(armadaFieldType: _DataDude.ArmadaFieldType) -> Bool {
-        switch armadaFieldType {
+    func hasArmadaFieldType(armadaField: _DataDude.ArmadaField) -> Bool {
+        switch armadaField {
         case .Startup:
             return isStartup
         case .ClimateCompensation:
@@ -75,14 +75,14 @@ class _CompanyFilter {
         set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
-    var armadaFieldTypes: [_DataDude.ArmadaFieldType] {
-        get { return (Ω["\(userDefaultsKey)armadaFieldTypes"] as? [String] ?? []).map { _DataDude.ArmadaFieldType(rawValue: $0)! } }
-        set { Ω["\(userDefaultsKey)armadaFieldTypes"] = newValue.map { $0.rawValue } }
+    var armadaFields: [_DataDude.ArmadaField] {
+        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _DataDude.ArmadaField(rawValue: $0)! } }
+        set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue } }
     }
     
     var filteredCompanies: [Company] {
         var filteredCompanies = DataDude.companies
-        for armadaFieldType in armadaFieldTypes {
+        for armadaFieldType in armadaFields {
             filteredCompanies = filteredCompanies.filter { $0.hasArmadaFieldType(armadaFieldType) }
         }
         for property in CompanyProperty.All {
@@ -128,7 +128,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         for property in CompanyProperty.All {
             CompanyFilter[property] = []
         }
-        CompanyFilter.armadaFieldTypes = []
+        CompanyFilter.armadaFields = []
         updateTitle()
         NSOperationQueue.mainQueue().addOperationWithBlock {
             self.tableView.reloadData()
@@ -168,14 +168,14 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) Companies"
     }
     
-    let armadaFields = DataDude.armadaFields
+    let armadaFields = _DataDude.ArmadaField.All
     
     
-    func armadaFieldType(armadaFieldType: _DataDude.ArmadaFieldType, isOn: Bool) {
+    func armadaField(armadaField: _DataDude.ArmadaField, isOn: Bool) {
         if isOn {
-            CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes + [armadaFieldType]
+            CompanyFilter.armadaFields = CompanyFilter.armadaFields + [armadaField]
         } else {
-            CompanyFilter.armadaFieldTypes = CompanyFilter.armadaFieldTypes.filter { $0 != armadaFieldType }
+            CompanyFilter.armadaFields = CompanyFilter.armadaFields.filter { $0 != armadaField }
         }
         updateTitle()
     }
@@ -190,10 +190,10 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             let armadaField = armadaFields[indexPath.row]
             cell.titleLabel.text = armadaField.name
             cell.iconImageView.image = armadaField.image
-            cell.valueSwitch.on = CompanyFilter.armadaFieldTypes.contains(armadaField.type)
-            cell.armadaFieldType = armadaField.type
+            cell.valueSwitch.on = CompanyFilter.armadaFields.contains(armadaField)
+            cell.armadaField = armadaField
             cell.delegate = self
-            let companies = DataDude.companies.filter { $0.hasArmadaFieldType(armadaField.type) }
+            let companies = DataDude.companies.filter { $0.hasArmadaFieldType(armadaField) }
             cell.numberOfJobsLabel.text = "\(companies.count)"
             
             return cell

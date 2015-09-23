@@ -106,7 +106,7 @@ class CatalogueTableViewController: UITableViewController {
         cell.serverLogoImageView.loadImageFromUrl(company.logoUrl)
         */
         
-        let icons = ["Rocket", "Tree", "diversity"]
+        let icons = [_DataDude.ArmadaField.Startup, _DataDude.ArmadaField.Sustainability, _DataDude.ArmadaField.Diversity]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.hidden = true
@@ -114,10 +114,10 @@ class CatalogueTableViewController: UITableViewController {
         for i in 0...2 {
             if stuff[i] {
                 if cell.firstIcon.hidden {
-                    cell.firstIcon.image = UIImage(named: icons[i])!
+                    cell.firstIcon.image = icons[i].image
                     cell.firstIcon.hidden = false
                 } else {
-                    cell.secondIcon.image = UIImage(named: icons[i])!
+                    cell.secondIcon.image = icons[i].image
                     cell.secondIcon.hidden = false
                 }
             }

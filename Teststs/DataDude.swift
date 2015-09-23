@@ -460,40 +460,32 @@ public class _DataDude {
         return armadaPages
     }
     
-    struct ArmadaField {
-        let image: UIImage
-        let name: String
-        let description: String
-        
-        
-        let type: ArmadaFieldType
-        
-    }
-    
-    enum ArmadaFieldType: String {
+    enum ArmadaField: String {
         case Startup = "icon_startup"
         case ClimateCompensation = "icon_climate_compensation"
         case Diversity = "icon_diversity"
         case Sustainability = "icon_sustainability"
-    }
-    
-    
-    var armadaFields: [ArmadaField] {
-        let slugs: [(imageName: String, slug: String)] = [
-            ("Leaf", "icon_climate_compensation"),
-            ("Rocket", "icon_startup"),
-            ("Tree", "icon_sustainability"),
-            ("diversity", "icon_diversity"),
-        ]
         
-        func armadaFieldFromSlug(slug: (imageName: String, slug: String)) -> ArmadaField {
-            let name = (armadaPages[slug.slug]??["title"] as? String) ?? ""
-            let description = (armadaPages[slug.slug]??["app_text"] as? String) ?? ""
-            let armadaType = ArmadaFieldType(rawValue: slug.slug)!
-            return ArmadaField(image: UIImage(named: slug.imageName)!, name: name, description: description, type: armadaType)
+        static var All: [ArmadaField] {
+            return [.Startup, .ClimateCompensation, .Diversity, .Sustainability]
         }
         
-        return slugs.map(armadaFieldFromSlug)
+        var image: UIImage {
+            switch self {
+            case .Startup: return UIImage(named: "Rocket")!
+            case .ClimateCompensation: return UIImage(named: "Tree")!
+            case .Diversity: return UIImage(named: "diversity")!
+            case .Sustainability: return UIImage(named: "Leaf")!
+            }
+        }
+        
+        var description: String {
+            return (armadaPages[self.rawValue]??["app_text"] as? String) ?? ""
+        }
+        
+        var name: String {
+            return (armadaPages[self.rawValue]??["title"] as? String) ?? ""
+        }
     }
 }
 
