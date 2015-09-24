@@ -21,6 +21,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var isStartupImageView: UIImageView!
     
+    @IBOutlet weak var companyValuesLabel: UILabel!
     
     @IBOutlet weak var likesEnvironmentImageView: UIImageView!
     
@@ -32,6 +33,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var linkedinButton: UIButton!
     @IBOutlet weak var likesDiversityImageView: UIImageView!
     
+    @IBOutlet weak var waysOfWorkingLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,9 +77,15 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
             fieldsLabel.attributedText = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
         
+        
+            companyValuesLabel.attributedText = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ").attributedHtmlString
+        
+        
+            waysOfWorkingLabel.attributedText = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ").attributedHtmlString
+        
             websiteLabel.text = company.website
             websiteLabel.attributedText = company.website.attributedHtmlString
-        
+
             countriesLabel.attributedText = "\(company.countries) Countries".attributedHtmlString
             //adImageView.layer.minificationFilter = kCAFilterTrilinear
 
@@ -115,7 +123,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     }
     
     let favoriteCellRow = 1
-    let websiteRow = 9
+    let websiteRow = 10
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == favoriteCellRow {
