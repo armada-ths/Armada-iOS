@@ -35,7 +35,7 @@ class MatchTableViewController: UITableViewController {
             }
             for armadaField in MatchFilter.armadaFields {
                 if !company.hasArmadaFieldType(armadaField) {
-                    percentage *= 0.2
+                    percentage *= 0.8
                 }
             }
             let zebra = (company: company, percentage: percentage)

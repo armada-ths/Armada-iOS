@@ -48,11 +48,13 @@ extension UIImageView {
                 switch $0 {
                 case .Success(let data):
                     let image = UIImage(data: data)
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                    let operation = NSBlockOperation() {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
                         }, completion: nil)
                     }
+                    operation.queuePriority = .VeryLow
+                    NSOperationQueue.mainQueue().addOperation(operation)
                 case .Error(let error):
                     self.image = nil
                     print(error)
