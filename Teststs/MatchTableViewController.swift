@@ -26,19 +26,17 @@ class MatchTableViewController: UITableViewController {
         var matches = [(company: Company, percentage: Double)]()
         for company in DataDude.companies {
             var percentage = 1.0
-            let penalty = 0.9
             for companyProperty in CompanyProperty.All {
                 for value in MatchFilter[companyProperty] {
                     if !company[companyProperty].contains(value) {
-                        percentage *= penalty
+                        percentage *= companyProperty.penalty
                     }
                 }
             }
-            percentage -= Double(company.employeesWorld)/1000000.0
             let zebra = (company: company, percentage: percentage)
             matches.append(zebra)
         }
-        return matches.sort { $0.percentage > $1.percentage }
+        return matches.sort { ($0.percentage == $1.percentage && $0.company.employeesWorld < $1.company.employeesWorld) || $0.percentage > $1.percentage }
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -102,7 +100,7 @@ class MatchTableViewController: UITableViewController {
         cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
         
         //        cell.positionLabel.text = "\(indexPath.row+1)"
-        //        cell.matchLabel.text = "\(Int(matchPercentage * 100))%"
+                cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
         //        cell.matchLabel.hidden = true
         if let image = company.image {
             cell.logoImageView.image = image

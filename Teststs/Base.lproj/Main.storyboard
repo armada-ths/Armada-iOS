@@ -856,19 +856,19 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="6hn-gk-Irg"/>
+                                                    <exclude reference="KvI-fR-VSI"/>
                                                     <exclude reference="TCM-yL-MFD"/>
                                                     <exclude reference="Tn0-Yn-2bG"/>
-                                                    <exclude reference="KvI-fR-VSI"/>
                                                     <exclude reference="qDC-so-WY9"/>
-                                                    <exclude reference="6hn-gk-Irg"/>
-                                                    <exclude reference="wPm-dn-gNt"/>
+                                                    <exclude reference="GjL-5P-QF6"/>
                                                     <exclude reference="RF4-1B-uk7"/>
-                                                    <exclude reference="mGF-ee-RjA"/>
                                                     <exclude reference="cuu-Of-20K"/>
                                                     <exclude reference="kfu-IE-erI"/>
-                                                    <exclude reference="GjL-5P-QF6"/>
                                                     <exclude reference="mAB-ap-bJd"/>
+                                                    <exclude reference="mGF-ee-RjA"/>
                                                     <exclude reference="mMV-OL-0lO"/>
+                                                    <exclude reference="wPm-dn-gNt"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -915,19 +915,19 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="P8c-Ta-Qgw"/>
                                                     <exclude reference="Dxq-7k-cMe"/>
-                                                    <exclude reference="d3C-Zo-ipj"/>
                                                     <exclude reference="H0S-vA-bVa"/>
+                                                    <exclude reference="P8c-Ta-Qgw"/>
                                                     <exclude reference="Zxw-VQ-9Yf"/>
-                                                    <exclude reference="KRp-Ac-Yhb"/>
-                                                    <exclude reference="KED-be-V3q"/>
-                                                    <exclude reference="TYc-QS-DHz"/>
-                                                    <exclude reference="kP2-Te-r9G"/>
-                                                    <exclude reference="AAa-21-ISH"/>
-                                                    <exclude reference="JRX-xK-ytB"/>
+                                                    <exclude reference="d3C-Zo-ipj"/>
                                                     <exclude reference="0jM-8Y-xYQ"/>
                                                     <exclude reference="1Bu-Z0-byg"/>
+                                                    <exclude reference="AAa-21-ISH"/>
+                                                    <exclude reference="JRX-xK-ytB"/>
+                                                    <exclude reference="KED-be-V3q"/>
+                                                    <exclude reference="KRp-Ac-Yhb"/>
+                                                    <exclude reference="TYc-QS-DHz"/>
+                                                    <exclude reference="kP2-Te-r9G"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -3116,8 +3116,15 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyE-oS-b6t">
+                                            <rect key="frame" x="565" y="38" width="27" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="UyE-oS-b6t" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dmS-rf-nX4" secondAttribute="trailing" id="02g-vP-AD7"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="TEo-N9-r5H" secondAttribute="trailing" id="0ZH-IB-Y0y"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" id="12B-L2-4bs"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="dmS-rf-nX4" secondAttribute="trailing" constant="28" id="2cX-Wt-eFc"/>
@@ -3133,18 +3140,22 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="top" secondItem="5M5-Qp-M0y" secondAttribute="bottom" constant="3" id="QJM-go-2aJ"/>
                                         <constraint firstAttribute="bottom" secondItem="AKf-ub-sCg" secondAttribute="bottom" constant="6" id="S9Y-6n-ly8"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="leading" secondItem="dmS-rf-nX4" secondAttribute="leading" id="VBj-nW-YiM"/>
+                                        <constraint firstItem="UyE-oS-b6t" firstAttribute="trailing" secondItem="V0c-aY-eeW" secondAttribute="trailingMargin" id="WP3-3L-5gD"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="100" id="aHU-zO-YRX"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="top" secondItem="V0c-aY-eeW" secondAttribute="topMargin" id="aZj-qM-jFk"/>
                                         <constraint firstItem="5M5-Qp-M0y" firstAttribute="leading" secondItem="TEo-N9-r5H" secondAttribute="leading" id="bSZ-hy-vMD"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="top" secondItem="V0c-aY-eeW" secondAttribute="topMargin" constant="2" id="gie-Dy-SWN"/>
                                         <constraint firstItem="5M5-Qp-M0y" firstAttribute="top" secondItem="AKf-ub-sCg" secondAttribute="top" constant="5" id="iLM-kA-Zw3"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="leading" secondItem="5M5-Qp-M0y" secondAttribute="trailing" constant="-97" id="iq5-7w-64B"/>
+                                        <constraint firstItem="5M5-Qp-M0y" firstAttribute="width" secondItem="dmS-rf-nX4" secondAttribute="width" id="laO-H9-H13"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="leading" secondItem="AKf-ub-sCg" secondAttribute="trailing" constant="20" id="pxd-BI-e1X"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="top" secondItem="V0c-aY-eeW" secondAttribute="top" constant="6" id="qI8-Gn-5Cu"/>
+                                        <constraint firstItem="UyE-oS-b6t" firstAttribute="bottom" secondItem="dmS-rf-nX4" secondAttribute="bottom" id="qND-vy-vO6"/>
                                         <constraint firstItem="5M5-Qp-M0y" firstAttribute="top" secondItem="TEo-N9-r5H" secondAttribute="bottom" constant="2" id="spF-5x-aXB"/>
                                         <constraint firstItem="dmS-rf-nX4" firstAttribute="top" secondItem="5M5-Qp-M0y" secondAttribute="bottom" constant="8" id="vMq-Fy-uPI"/>
                                         <constraint firstItem="TEo-N9-r5H" firstAttribute="centerY" secondItem="AKf-ub-sCg" secondAttribute="centerY" id="veO-OZ-Yj5"/>
                                         <constraint firstItem="AKf-ub-sCg" firstAttribute="leading" secondItem="V0c-aY-eeW" secondAttribute="leadingMargin" constant="2" id="wFT-2J-3WR"/>
+                                        <constraint firstItem="TEo-N9-r5H" firstAttribute="width" secondItem="dmS-rf-nX4" secondAttribute="width" id="wex-cA-J2p"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -3152,12 +3163,14 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                             <exclude reference="aHU-zO-YRX"/>
                                             <exclude reference="aZj-qM-jFk"/>
                                             <exclude reference="wFT-2J-3WR"/>
+                                            <exclude reference="0ZH-IB-Y0y"/>
                                             <exclude reference="7jS-jz-04E"/>
                                             <exclude reference="KEc-jk-NNg"/>
                                             <exclude reference="QJM-go-2aJ"/>
                                             <exclude reference="gie-Dy-SWN"/>
                                             <exclude reference="iq5-7w-64B"/>
                                             <exclude reference="veO-OZ-Yj5"/>
+                                            <exclude reference="JDb-RR-lHG"/>
                                             <exclude reference="iLM-kA-Zw3"/>
                                             <exclude reference="PDP-cs-NJK"/>
                                         </mask>
@@ -3167,6 +3180,7 @@ Some 40 percent of global mobile traffic runs through networks we have supplied.
                                     <outlet property="companyNameLabel" destination="g9n-7S-t0S" id="RpL-aN-4qB"/>
                                     <outlet property="descriptionLabel" destination="TEo-N9-r5H" id="zea-rs-BNR"/>
                                     <outlet property="logoImageView" destination="AKf-ub-sCg" id="N1S-Yk-rY2"/>
+                                    <outlet property="matchLabel" destination="UyE-oS-b6t" id="gsQ-Of-uVt"/>
                                     <outlet property="matchProgressView" destination="dmS-rf-nX4" id="wVs-Nd-LlB"/>
                                     <outlet property="workFieldLabel" destination="5M5-Qp-M0y" id="smE-Pp-czo"/>
                                     <segue destination="dtQ-YS-qml" kind="showDetail" id="Qf2-UD-66F"/>
