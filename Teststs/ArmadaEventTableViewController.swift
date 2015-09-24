@@ -1,6 +1,5 @@
 import UIKit
 
-var selectedArmadaEvent: ArmadaEvent? = nil
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
@@ -39,7 +38,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 }
             }
         }
-        
     }
     
     
@@ -87,9 +85,15 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        selectedArmadaEvent = armadaEvents[tableView.indexPathForSelectedRow!.row]
-        if !readArmadaEvents.contains(selectedArmadaEvent!.title) {
-            readArmadaEvents.append(selectedArmadaEvent!.title)
+        
+        let armadaEvent = armadaEvents[tableView.indexPathForSelectedRow!.row]
+        if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController {
+            controller.armadaEvent = armadaEvent
+        }
+        
+        
+        if !readArmadaEvents.contains(armadaEvent.title) {
+            readArmadaEvents.append(armadaEvent.title)
         }
         
     }

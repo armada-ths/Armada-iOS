@@ -5,10 +5,10 @@ import CoreData
 public struct ArmadaEvent {
     public let title: String
     public let summary: String
-    public let location: String
+    public let location: String?
     public let startDate: NSDate
     public let endDate: NSDate
-    public let signupLink: String
+    public let signupLink: String?
     public let signupStartDate: NSDate?
     public let signupEndDate: NSDate?
     public let imageUrl: NSURL?
@@ -360,10 +360,10 @@ public class _DataDude {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
             if let title = json["title"] as? String,
                 let summary = json["description"] as? String,
-                let location = json["location"] as? String,
                 let startDateString = json["starts_at"] as? String,
-                let endDateString = json["ends_at"] as? String,
-                let signupLink = json["external_signup_link"] as? String {
+                let endDateString = json["ends_at"] as? String {
+                    let location = json["location"] as? String
+                    let signupLink = json["external_signup_link"] as? String
                     let signupStartDateString = json["signup_starts_at"] as? String
                     let signupEndDateString = json["signup_ends_at"] as? String
                     let signupStartDate: NSDate? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
@@ -373,7 +373,7 @@ public class _DataDude {
                     let imageUrlString = json["picture_url"] as? String
                     let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
                     let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
-                    return ArmadaEvent(title: title, summary: summary, location: location.isEmpty ? "Valhallavägen" : location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
+                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
             }
             return nil
             } ?? []).filter({ $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })

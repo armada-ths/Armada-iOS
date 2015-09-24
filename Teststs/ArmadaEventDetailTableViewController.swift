@@ -13,37 +13,39 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
+    
     @IBOutlet weak var signupLabel: UILabel!
+    
+    var armadaEvent: ArmadaEvent!
     
     override func viewDidLoad() {
         //        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
-        let armadaEvent = selectedArmadaEvent!
         
-        dayLabel.text = selectedArmadaEvent!.startDate.format("d")
-        monthLabel.text = selectedArmadaEvent!.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
+        dayLabel.text = armadaEvent.startDate.format("d")
+        monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 3
-        let attrString = NSMutableAttributedString(string: selectedArmadaEvent!.summary)
+        let attrString = NSMutableAttributedString(string: armadaEvent.summary)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         summaryLabel.attributedText = attrString
         
-        if let text = selectedArmadaEvent?.summary.attributedHtmlString{
+        if let text = armadaEvent.summary.attributedHtmlString{
             summaryLabel.attributedText = text
         }else{
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 3
-            let attrString = NSMutableAttributedString(string: selectedArmadaEvent!.summary)
+            let attrString = NSMutableAttributedString(string: armadaEvent.summary)
             attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
             summaryLabel.attributedText = attrString
         }
         
-        eventImageView.image = selectedArmadaEvent?.image
+        eventImageView.image = armadaEvent.image
         
-        if let imageUrl =  selectedArmadaEvent!.imageUrl {
+        if let imageUrl =  armadaEvent.imageUrl {
             eventImageView.loadImageFromUrl(imageUrl.absoluteString)
         }
-        titleLabel.text = selectedArmadaEvent?.title
+        titleLabel.text = armadaEvent.title
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
         
@@ -68,8 +70,9 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 && tableView.allowsSelection {
-            if let url = NSURL(string: selectedArmadaEvent!.signupLink) {
-                UIApplication.sharedApplication().openURL(url)
+            if let signupUrl = armadaEvent.signupLink,
+                let url = NSURL(string: signupUrl) {
+                    UIApplication.sharedApplication().openURL(url)
             }
         }
     }
