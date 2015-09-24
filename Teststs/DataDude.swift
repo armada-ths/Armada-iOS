@@ -142,6 +142,10 @@ public class _DataDude {
     
     
     private init() {
+        let cacheSizeMemory = 64*1024*1024
+        let cacheSizeDisk = 64*1024*1024
+        let sharedCache = NSURLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).stringByAppendingPathComponent("nsurlcache"))
+        NSURLCache.setSharedURLCache(sharedCache)
         let stopWatch = StopWatch()
 
         print(persistentStoreUrl)
