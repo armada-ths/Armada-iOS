@@ -66,35 +66,32 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
             self.locationImageView.loadImageFromUrl(company.locationUrl)
         
 
-            aboutLabel.attributedText = company.companyDescription.attributedHtmlString
+            aboutLabel.text = company.companyDescription
             if company.companyDescription.isEmpty {
-                aboutLabel.attributedText = "To be announced".attributedHtmlString
+                aboutLabel.text = "To be announced"
             }
         
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
-            jobLabel.attributedText = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ").attributedHtmlString
         
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
-            fieldsLabel.attributedText = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ").attributedHtmlString
         
         
-            companyValuesLabel.attributedText = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ").attributedHtmlString
+            companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
         
         
-            waysOfWorkingLabel.attributedText = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ").attributedHtmlString
+            waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
         
             websiteLabel.text = company.website
-            websiteLabel.attributedText = company.website.attributedHtmlString
 
-            countriesLabel.attributedText = "\(company.countries) Countries".attributedHtmlString
+            countriesLabel.text = "\(company.countries) Countries"
             //adImageView.layer.minificationFilter = kCAFilterTrilinear
 
             adImageView.loadImageFromUrl(company.adUrl)
-            employeeLabel.attributedText = "\(company.employeesWorld.thousandsSeparatedString) Employees".attributedHtmlString
+            employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
         if company.locationDescription.isEmpty {
             locationImageView.removeFromSuperview()
-            locationLabel.attributedText = "To be announced".attributedHtmlString
+            locationLabel.text = "To be announced"
         }
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
