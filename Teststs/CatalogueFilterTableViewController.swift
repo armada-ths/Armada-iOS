@@ -7,7 +7,7 @@ enum CompanyProperty: CustomStringConvertible {
     
     var penalty: Double {
         switch self {
-        case .Programmes: return 0.1
+        case .Programmes: return 0.2
         case .JobTypes: return 0.6
         case .Continents: return 0.9
         case .WorkFields: return 0.4
