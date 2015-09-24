@@ -19,8 +19,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
-        NSOperationQueue().addOperationWithBlock {
-            if let armadaEvents = try? DataDude.eventsFromServer() {
+        DataDude.eventsFromServer {
+            switch $0 {
+            case .Success(let armadaEvents):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.armadaEvents = armadaEvents
                     self.tableView.reloadData()
@@ -29,17 +30,16 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     self.tableView.separatorStyle = .None
                     print("Refreshed")
                 }
-            } else {
+            case .Error(let error):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     refreshControl?.endRefreshing()
-                    self.showEmptyMessage(self.armadaEvents.isEmpty, message: "Could not load events")
+                    self.showEmptyMessage(self.armadaEvents.isEmpty, message: (error as NSError).localizedDescription)
                     self.tableView.separatorStyle = .None
                     print("Refreshed")
                 }
             }
         }
     }
-    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

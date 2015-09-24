@@ -20,8 +20,9 @@ class NewSponsorsTableViewController: UITableViewController {
     
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
-        NSOperationQueue().addOperationWithBlock {
-            if let sponsors = try? DataDude.sponsorsFromServer() {
+        DataDude.sponsorsFromServer {
+            switch $0 {
+            case .Success(let sponsors):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.sponsors = sponsors
                     self.tableView.reloadData()
@@ -29,7 +30,7 @@ class NewSponsorsTableViewController: UITableViewController {
                     refreshControl?.endRefreshing()
                     print("Refreshed")
                 }
-            } else {
+            case .Error(let error):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     refreshControl?.endRefreshing()
                     self.showEmptyMessage(self.sponsors.isEmpty, message: "Could not load sponsors")

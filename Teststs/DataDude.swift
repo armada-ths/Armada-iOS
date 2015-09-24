@@ -27,6 +27,16 @@ public struct News {
 enum Response<T> {
     case Success(T)
     case Error(ErrorType)
+    
+    func map<G>(transform: T -> G) -> Response<G> {
+        switch self {
+        case .Success(let value):
+            return .Success(transform(value))
+        case .Error(let error):
+            return .Error(error)
+        }
+        
+    }
 }
 
 let DataDude = _DataDude()
@@ -373,7 +383,6 @@ public class _DataDude {
                     let signupStartDate: NSDate? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
                     let signupEndDate: NSDate? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
                     let title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                    
                     let imageUrlString = json["picture_url"] as? String
                     let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
                     let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
@@ -409,7 +418,6 @@ public class _DataDude {
                     
             }
             return nil
-            
             } ?? [])
     }
     
@@ -435,21 +443,25 @@ public class _DataDude {
     let apiUrl = "http://staging.armada.nu/api"
     
     
-    
-    
-    func eventsFromServer() throws -> [ArmadaEvent] {
-        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("events"))
-        return eventsFromJson(json)
+    func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
+        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("events"))!
+        _DataDude.getJson(url) {
+            callback($0.map(self.eventsFromJson))
+        }
     }
     
-    func sponsorsFromServer() throws -> [Sponsor] {
-        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("sponsors"))
-        return sponsorsFromJson(json)
+    func newsFromServer(callback: Response<[News]> -> Void) {
+        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("news"))!
+        _DataDude.getJson(url) {
+            callback($0.map(self.newsFromJson))
+        }
     }
     
-    func newsFromServer() throws -> [News] {
-        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("news"))
-        return newsFromJson(json)
+    func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
+        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("sponsors"))!
+        _DataDude.getJson(url) {
+            callback($0.map(self.sponsorsFromJson))
+        }
     }
     
     func pagesFromServer() throws -> AnyObject {

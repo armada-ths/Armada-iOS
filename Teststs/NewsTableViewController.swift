@@ -44,8 +44,9 @@ class NewsTableViewController: ScrollZoomTableViewController {
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
-        NSOperationQueue().addOperationWithBlock {
-            if let news = try? DataDude.newsFromServer() {
+        DataDude.newsFromServer {
+            switch $0 {
+            case .Success(let news):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.news = news
                     self.tableView.reloadData()
@@ -53,15 +54,14 @@ class NewsTableViewController: ScrollZoomTableViewController {
                     self.showEmptyMessage(self.news.isEmpty, message: "No news")
                     print("Refreshed")
                 }
-            } else {
+            case .Error(let error):
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     refreshControl?.endRefreshing()
                     self.showEmptyMessage(self.news.isEmpty, message: "Could not load news")
                     print("Refreshed")
                 }
-            }
+            }   
         }
-        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
