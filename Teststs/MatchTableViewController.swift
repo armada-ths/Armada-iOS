@@ -25,33 +25,16 @@ class MatchTableViewController: UITableViewController {
     func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
         var matches = [(company: Company, percentage: Double)]()
         for company in DataDude.companies {
-            var percentage = 0.0
-            if let programme = MatchFilter[.Programmes].first {
-                if company[.Programmes].contains(programme) {
-                    percentage = 1
+            var percentage = 1.0
+            let penalty = 0.9
+            for companyProperty in CompanyProperty.All {
+                for value in MatchFilter[companyProperty] {
+                    if !company[companyProperty].contains(value) {
+                        percentage *= penalty
+                    }
                 }
-
-                let numMatchingJobTypes = Set(company[.JobTypes]).intersect(MatchFilter[.JobTypes]).count
-                if numMatchingJobTypes == 0 && MatchFilter[.JobTypes].count != 0 {
-                    percentage *= 0.5
-                }
-                
-                if Set(company[.Continents]).intersect(MatchFilter[.Continents]).isEmpty && MatchFilter[.Continents].count != 0 {
-                    percentage *= 0.5
-                }
-                
-                let workFieldsMatches = Set(company[.WorkFields]).intersect(MatchFilter[.WorkFields]).count
-                if MatchFilter[.WorkFields].count > 0 {
-                    percentage *= Double(workFieldsMatches+1) / Double(MatchFilter[.WorkFields].count+1)
-                }
-                
-                let valueFieldsMatches = Set(company[.CompanyValues]).intersect(MatchFilter[.CompanyValues]).count
-                if MatchFilter[.CompanyValues].count > 0 {
-                    percentage *= Double(valueFieldsMatches+1) / Double(MatchFilter[.CompanyValues].count+1)
-                }
-                
-                percentage -= Double(company.employeesWorld)/1000000.0
             }
+            percentage -= Double(company.employeesWorld)/1000000.0
             let zebra = (company: company, percentage: percentage)
             matches.append(zebra)
         }

@@ -5,6 +5,17 @@ enum CompanyProperty: CustomStringConvertible {
     
     static let All = [Programmes, JobTypes, Continents, WorkFields, CompanyValues, WorkWays]
     
+    var penalty: Double {
+        switch self {
+        case .Programmes: return 0.1
+        case .JobTypes: return 0.6
+        case .Continents: return 0.9
+        case .WorkFields: return 0.4
+        case .CompanyValues: return 0.9
+        case .WorkWays: return 0.9
+        }
+    }
+    
     var values: [String] {
         switch self {
         case .Programmes: return DataDude.programmes
