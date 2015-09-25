@@ -9,35 +9,34 @@ public struct Sponsor {
 
 class NewSponsorsTableViewController: UITableViewController {
     
-    var sponsors = [Sponsor]()
+    class ArmadaSponsorTableViewDataSource: ArmadaTableViewDataSource<Sponsor> {
+        
+        override init(tableViewController: UITableViewController) {
+            super.init(tableViewController: tableViewController)
+        }
+        
+        override func updateFunc(callback: Response<[Sponsor]> -> Void) {
+            DataDude.sponsorsFromServer(callback)
+        }
+        
+        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            let sponsor = values[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "NewSponsorsTableViewCellNoText" : "NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
+            if !sponsor.description.isEmpty {
+                cell.sponsorLabel.text = sponsor.description
+                cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
+            }
+            cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString)
+            return cell
+        }
+    }
+    
+    var dataSource: ArmadaSponsorTableViewDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refresh()
-    }
-    
-    
-    func refresh(refreshControl: UIRefreshControl? = nil) {
-        DataDude.sponsorsFromServer {
-            switch $0 {
-            case .Success(let sponsors):
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.sponsors = sponsors
-                    self.tableView.reloadData()
-                    self.showEmptyMessage(self.sponsors.isEmpty, message: "No Sponsors")
-                    refreshControl?.endRefreshing()
-                    print("Refreshed")
-                }
-            case .Error(let error):
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    refreshControl?.endRefreshing()
-                    self.showEmptyMessage(self.sponsors.isEmpty, message: "Could not load sponsors")
-                    print("Refreshed")
-                }
-            }
-        }
+        dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
+        tableView.dataSource = dataSource
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,33 +53,14 @@ class NewSponsorsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sponsors.count
-    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let sponsor = sponsors[indexPath.row]
+        let sponsor = dataSource.values[indexPath.row]
         if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
             UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let sponsor = sponsors[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "NewSponsorsTableViewCellNoText" : "NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
-        if !sponsor.description.isEmpty {
-            cell.sponsorLabel.text = sponsor.description
-            cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
-        }
-        
-        cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString)
-        return cell
-    }
-
 }
+
