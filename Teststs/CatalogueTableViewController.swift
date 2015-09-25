@@ -22,8 +22,6 @@ class CatalogueTableViewController: UITableViewController {
         refresh()
     }
     
-    
-    
     func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
             DataDude.updateCompanies {
@@ -144,11 +142,11 @@ class CatalogueTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
+        if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany
         }
-        if let controller = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CatalogueFilterTableViewController) {
+        if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = CompanyFilter
         }
     }

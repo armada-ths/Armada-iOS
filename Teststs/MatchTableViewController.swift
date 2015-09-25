@@ -94,19 +94,11 @@ class MatchTableViewController: UITableViewController {
         let company = companyWithMatchPercentage.company
         cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
         cell.descriptionLabel.text = company.name
-        
-//        cell.matchProgressView.setProgress(0, animated: false)
-//        cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         NSOperationQueue.mainQueue().addOperationWithBlock{
-//            cell.matchProgressView.setProgress(0, animated: false)
             cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
         }
-        
         cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
-        
-        //        cell.positionLabel.text = "\(indexPath.row+1)"
-                cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
-        //        cell.matchLabel.hidden = true
+        cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.hidden = true
@@ -131,17 +123,14 @@ class MatchTableViewController: UITableViewController {
     }
     
     
-    
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("Segue to CompaniesPageViewController")
         let companies = companiesWithMatchPercentages.map { $0.company }
-        if let companiesPageViewController = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CompaniesPageViewController) {
+        if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany
         }
-        if let controller = ((segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? CatalogueFilterTableViewController) {
+        if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = MatchFilter
         }
     }

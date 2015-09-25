@@ -14,7 +14,6 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        (splitViewController as? CompanySplitViewController)?.shouldCollapse = false
         print("CompaniesPageViewController did load")
 //        selectedCompany = (splitViewController as? CompanySplitViewController)!.company
         navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
@@ -24,7 +23,6 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         if let company = selectedCompany {
             setViewControllers([viewControllerForCompany(company)], direction: .Forward, animated: true, completion: {done in })
         } else {
-            (splitViewController as? CompanySplitViewController)?.shouldCollapse = true
             self.view.userInteractionEnabled = false
             setViewControllers([self.storyboard!.instantiateViewControllerWithIdentifier("NoCompanySelectedViewController")], direction: .Forward, animated: true, completion: { done in })
         }
