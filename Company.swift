@@ -169,6 +169,7 @@ public class Company: NSManagedObject {
         var imageName = name
         imageName = imageName.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)
         imageName = imageName.stringByReplacingOccurrencesOfString("( ab$)|(^ab )", withString: " ", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
+        imageName = imageName.stringByReplacingOccurrencesOfString("(international|group|consulting|partner|foods|technology|technologies|financial|industrial|technique|services|systems|swedish|defence|materiel|administration|sweden|healthcare|manufacturing|advisory)", withString: "", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
         imageName = imageName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         return imageName
     }

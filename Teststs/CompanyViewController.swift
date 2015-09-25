@@ -64,23 +64,15 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         tableView.reloadData()
             locationLabel.text = company.locationDescription
             self.locationImageView.loadImageFromUrl(company.locationUrl)
-        
-
             aboutLabel.text = company.companyDescription
             if company.companyDescription.isEmpty {
                 aboutLabel.text = "To be announced"
             }
         
             jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
-        
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
-        
-        
             companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
-        
-        
             waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
-        
             websiteLabel.text = company.website
 
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ? "Countries" : "Country")
