@@ -5,7 +5,6 @@ class CatalogueTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var companies = DataDude.companies
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
     func updateCompaniesByLetters(companies: [Company]) {
@@ -19,7 +18,7 @@ class CatalogueTableViewController: UITableViewController {
         searchBar.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refresh()
+//        refresh()
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
@@ -27,9 +26,7 @@ class CatalogueTableViewController: UITableViewController {
             DataDude.updateCompanies {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     refreshControl?.endRefreshing()
-                    self.companies = DataDude.companies
-                    self.updateCompaniesByLetters(self.companies)
-                    self.updateFavoritesUI()
+                    self.updateCompanies()
                     self.tableView.reloadData()
                     print("Refreshed")
                     
@@ -38,23 +35,17 @@ class CatalogueTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+    func updateCompanies() {
+        var companies = [Company]()
+        if segmentedControl.selectedSegmentIndex == 0 {
             companies = CompanyFilter.filteredCompanies
         } else {
             companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
-        self.searchBar(searchBar, textDidChange: searchBar.text ?? "")
-        tableView.reloadData()
-        updateFavoritesUI()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        segmentedControlDidChange(segmentedControl)
-    }
-    
-    func updateFavoritesUI() {
+        if let searchText = searchBar.text where !searchText.isEmpty {
+            companies = companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)})
+        }
+        updateCompaniesByLetters(companies)
         if companies.isEmpty {
             let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
             label.font = UIFont.systemFontOfSize(30)
@@ -72,7 +63,20 @@ class CatalogueTableViewController: UITableViewController {
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             searchBar.hidden = false
         }
+
     }
+    
+    @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
+        updateCompanies()
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        updateCompanies()
+        tableView.reloadData()
+    }
+    
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     // MARK: - Table view data source
@@ -102,10 +106,7 @@ class CatalogueTableViewController: UITableViewController {
         
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
-        /*
-        cell.serverLogoImageView.loadImageFromUrl(company.logoUrl)
-        */
-        
+
         let icons = [_DataDude.ArmadaField.Startup, _DataDude.ArmadaField.Sustainability, _DataDude.ArmadaField.Diversity]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
@@ -143,7 +144,7 @@ class CatalogueTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
-            companiesPageViewController.companies = companies
+            companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
             companiesPageViewController.selectedCompany = selectedCompany
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
@@ -164,21 +165,14 @@ class CatalogueTableViewController: UITableViewController {
             tableView.beginUpdates()
             let company = companiesByLetters[indexPath.section].companies[indexPath.row]
             FavoriteCompanies.remove(company.name)
-            companies = DataDude.companies.filter { FavoriteCompanies.contains($0.name) }
-            
-            updateCompaniesByLetters(companies)
-            
+            updateCompanies()
             if tableView.numberOfRowsInSection(indexPath.section) == 1 {
                 tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
             } else {
                 tableView.deleteRowsAtIndexPaths([indexPath],
                     withRowAnimation: .Fade)
             }
-            
-            
-            updateFavoritesUI()
             tableView.endUpdates()
-            
         }
     }
 }
@@ -186,11 +180,7 @@ class CatalogueTableViewController: UITableViewController {
 extension CatalogueTableViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            updateCompaniesByLetters(companies)
-        } else {
-            updateCompaniesByLetters(companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)}))
-        }
+        updateCompanies()
         tableView.reloadData()
     }
     
