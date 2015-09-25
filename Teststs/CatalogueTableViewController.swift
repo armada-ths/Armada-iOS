@@ -22,6 +22,8 @@ class CatalogueTableViewController: UITableViewController {
         refresh()
     }
     
+    
+    
     func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
             DataDude.updateCompanies {
