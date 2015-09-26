@@ -81,7 +81,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         
             websiteLabel.text = company.website
 
-        countriesLabel.text = "\(company.countries) " + (company.countries == 1 ? "Countries" : "Country")
+        countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
             //adImageView.layer.minificationFilter = kCAFilterTrilinear
 
             adImageView.loadImageFromUrl(company.adUrl)

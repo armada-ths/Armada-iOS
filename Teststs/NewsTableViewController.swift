@@ -62,6 +62,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        tableView.reloadData()
         updateHeaderView()
     }
     
