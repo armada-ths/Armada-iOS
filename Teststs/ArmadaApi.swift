@@ -425,41 +425,22 @@ public class _ArmadaApi {
     
     static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
     
-    //    class func companiesFromFile() -> [Company]? {
-    //        if let data = NSData(contentsOfFile: (dir as NSString).stringByAppendingPathComponent(companiesFileName)),
-    //            let json: AnyObject = try! NSJSONSerialization.JSONObjectWithData(data, options: []) {
-    //                return companiesFromJson(json)
-    //        }
-    //        return nil
-    //    }
-    //
-    //    class func companiesFromServer() throws -> [Company] {
-    //        let json = try jsonFromUrl("http://armada.nu/api/companies.json?include=relations")
-    //        return companiesFromJson(json)
-    //    }
-    //
-    
-    
     let apiUrl = "http://staging.armada.nu/api"
     
-    
     func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
-        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("events"))!
-        _ArmadaApi.getJson(url) {
+        _ArmadaApi.getJson(armadaUrlWithPath("events")) {
             callback($0.map(self.eventsFromJson))
         }
     }
     
     func newsFromServer(callback: Response<[News]> -> Void) {
-        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("news"))!
-        _ArmadaApi.getJson(url) {
+        _ArmadaApi.getJson(armadaUrlWithPath("news")) {
             callback($0.map(self.newsFromJson))
         }
     }
     
     func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
-        let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("sponsors"))!
-        _ArmadaApi.getJson(url) {
+        _ArmadaApi.getJson(armadaUrlWithPath("sponsors")) {
             callback($0.map(self.sponsorsFromJson))
         }
     }

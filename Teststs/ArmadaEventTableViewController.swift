@@ -44,13 +44,10 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
         let armadaEvent = dataSource.values[tableView.indexPathForSelectedRow!.row]
         if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController {
             controller.armadaEvent = armadaEvent
         }
-        
-        
         if !readArmadaEvents.contains(armadaEvent.title) {
             readArmadaEvents.append(armadaEvent.title)
         }

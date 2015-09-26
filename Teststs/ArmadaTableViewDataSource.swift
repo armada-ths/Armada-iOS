@@ -5,7 +5,10 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
     var values = [T]()
     weak var tableViewController: UITableViewController?
     
+    let separatorStyle: UITableViewCellSeparatorStyle
+    
     init(tableViewController: UITableViewController) {
+        self.separatorStyle = tableViewController.tableView.separatorStyle
         super.init()
         self.tableViewController = tableViewController
         self.tableViewController!.refreshControl = UIRefreshControl()
@@ -15,24 +18,24 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
-        updateFunc {
-            switch $0 {
-            case .Success(let values):
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.tableViewController!.refreshControl!.endRefreshing()
+        updateFunc { response in
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                switch response {
+                case .Success(let values):
                     self.values = values
-                    if self.values.isEmpty {
-                        self.tableViewController?.showEmptyMessage(true, message: "No Values")
-                    }
-                    self.tableViewController!.tableView.reloadData()
+                    self.tableViewController?.showEmptyMessage(self.values.isEmpty, message: "Nothing to be seen")
                     print("Refreshed")
+                case .Error(let error):
+                    self.tableViewController?.showEmptyMessage(self.values.isEmpty, message: (error as NSError).localizedDescription)
+                    if !self.values.isEmpty {
+                        let alertController = UIAlertController(title: nil, message: (error as NSError).localizedDescription, preferredStyle: .Alert)
+                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                        self.tableViewController?.presentViewController(alertController, animated: true, completion: nil)
+                    }
                 }
-            case .Error(let error):
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.tableViewController!.refreshControl?.endRefreshing()
-                    let alertController = UIAlertController(title: nil, message: (error as NSError).localizedDescription, preferredStyle: .Alert)
-                    self.tableViewController!.presentViewController(alertController, animated: true, completion: nil)
-                }
+                self.tableViewController?.refreshControl?.endRefreshing()
+                self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .None : self.separatorStyle
+                self.tableViewController?.tableView.reloadData()
             }
         }
     }
