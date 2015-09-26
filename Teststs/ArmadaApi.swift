@@ -464,16 +464,23 @@ public class _ArmadaApi {
         }
     }
     
-    func pagesFromServer() throws -> AnyObject {
-        let json = try jsonFromUrl((apiUrl as NSString).stringByAppendingPathComponent("pages"))
-        
-        var armadaPages = [String: AnyObject]()
-        if let pages = json["pages"] as? [AnyObject] {
-            for page in pages {
-                armadaPages[page["slug"] as? String ?? ""] = page
-            }
+    func armadaUrlWithPath(path: String) -> NSURL {
+        return NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent(path))!
+    }
+    
+    func pagesFromServer(callback: Response<AnyObject> -> Void) {
+        _ArmadaApi.getJson(armadaUrlWithPath("pages")) {
+            callback($0.map {
+                json in
+                var armadaPages = [String: AnyObject]()
+                if let pages = json["pages"] as? [AnyObject] {
+                    for page in pages {
+                        armadaPages[page["slug"] as? String ?? ""] = page
+                    }
+                }
+                return armadaPages as AnyObject
+            })
         }
-        return armadaPages
     }
     
     enum ArmadaField: String {
@@ -495,25 +502,7 @@ public class _ArmadaApi {
             }
         }
         
-        var description: String {
-            return (armadaPages[self.rawValue]??["app_text"] as? String) ?? ""
-        }
-        
-        var name: String {
-            return (armadaPages[self.rawValue]??["title"] as? String) ?? ""
-        }
     }
-}
-
-let armadaPages = ((try? ArmadaApi.pagesFromServer()) ?? "wtf")!
-
-func jsonFromUrl(url: String) throws -> AnyObject {
-    if let url = NSURL(string: url) {
-        let data = try NSData(contentsOfURL: url, options: [])
-        return try NSJSONSerialization.JSONObjectWithData(data, options: [])
-    }
-    
-    throw NSError(domain: "banan", code: 1337, userInfo: [:])
 }
 
 extension Array {

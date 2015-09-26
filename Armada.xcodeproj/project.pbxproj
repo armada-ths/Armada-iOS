@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2601191C1BA600D500540ED5 /* WorkWay+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2601191A1BA600D400540ED5 /* WorkWay+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		2601191D1BA600D500540ED5 /* WorkWay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2601191B1BA600D400540ED5 /* WorkWay.swift */; settings = {ASSET_TAGS = (); }; };
-		2602AD551B14F2A100B0DB32 /* DataDude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2602AD541B14F2A100B0DB32 /* DataDude.swift */; };
+		2602AD551B14F2A100B0DB32 /* ArmadaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2602AD541B14F2A100B0DB32 /* ArmadaApi.swift */; };
 		2602AD5A1B14F4D500B0DB32 /* companies.json in Resources */ = {isa = PBXBuildFile; fileRef = 2602AD591B14F4D500B0DB32 /* companies.json */; };
 		2602AD5E1B1511A000B0DB32 /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = 2602AD5D1B1511A000B0DB32 /* events.json */; };
 		2602AD601B15133D00B0DB32 /* ArmadaEventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2602AD5F1B15133D00B0DB32 /* ArmadaEventTableViewController.swift */; };
@@ -84,7 +84,7 @@
 /* Begin PBXFileReference section */
 		2601191A1BA600D400540ED5 /* WorkWay+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WorkWay+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2601191B1BA600D400540ED5 /* WorkWay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkWay.swift; sourceTree = "<group>"; };
-		2602AD541B14F2A100B0DB32 /* DataDude.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDude.swift; sourceTree = "<group>"; };
+		2602AD541B14F2A100B0DB32 /* ArmadaApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaApi.swift; sourceTree = "<group>"; };
 		2602AD591B14F4D500B0DB32 /* companies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = companies.json; sourceTree = "<group>"; };
 		2602AD5D1B1511A000B0DB32 /* events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = events.json; sourceTree = "<group>"; };
 		2602AD5F1B15133D00B0DB32 /* ArmadaEventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaEventTableViewController.swift; sourceTree = "<group>"; };
@@ -186,8 +186,8 @@
 				269C0D001B8E9BDE008FB633 /* WorkField.swift */,
 				269C0CFB1B8E8D9F008FB633 /* Company+CoreDataProperties.swift */,
 				269C0CFC1B8E8D9F008FB633 /* Company.swift */,
-				265B7DDE1B053A080074450B /* Teststs */,
-				265B7DF61B053A080074450B /* TeststsTests */,
+				265B7DDE1B053A080074450B /* Armada */,
+				265B7DF61B053A080074450B /* ArmadaTests */,
 				265B7DDD1B053A080074450B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		265B7DDE1B053A080074450B /* Teststs */ = {
+		265B7DDE1B053A080074450B /* Armada */ = {
 			isa = PBXGroup;
 			children = (
 				265B7DE11B053A080074450B /* AppDelegate.swift */,
@@ -245,6 +245,7 @@
 				DA69CDDC1B1DFB3600290D11 /* ArmadaEventSplitViewController.swift */,
 				DAF310771B1F243100D3947D /* MatchTableViewController.swift */,
 			);
+			name = Armada;
 			path = Teststs;
 			sourceTree = "<group>";
 		};
@@ -257,7 +258,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		265B7DF61B053A080074450B /* TeststsTests */ = {
+		265B7DF61B053A080074450B /* ArmadaTests */ = {
 			isa = PBXGroup;
 			children = (
 				26FEE7481B1549BF00B7332C /* news.json */,
@@ -265,6 +266,7 @@
 				2602AD591B14F4D500B0DB32 /* companies.json */,
 				265B7DF71B053A080074450B /* Supporting Files */,
 			);
+			name = ArmadaTests;
 			path = TeststsTests;
 			sourceTree = "<group>";
 		};
@@ -280,7 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				26BD3D3A1B1607AF00CD0572 /* FavoriteCompanies.swift */,
-				2602AD541B14F2A100B0DB32 /* DataDude.swift */,
+				2602AD541B14F2A100B0DB32 /* ArmadaApi.swift */,
 				2685FD651BB21AD40049FEE2 /* SettingsManager.swift */,
 				269C0CF81B8E8D18008FB633 /* CompanyModel.xcdatamodeld */,
 				2692DFDF1BB276DA008400A0 /* Companies.sqlite */,
@@ -416,7 +418,7 @@
 				26CDD0D51BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift in Sources */,
 				2649BCF11B1C8B9400F15B2B /* CompanySplitViewController.swift in Sources */,
 				2602AD601B15133D00B0DB32 /* ArmadaEventTableViewController.swift in Sources */,
-				2602AD551B14F2A100B0DB32 /* DataDude.swift in Sources */,
+				2602AD551B14F2A100B0DB32 /* ArmadaApi.swift in Sources */,
 				2671038C1B06B81D00C79164 /* CompanyViewController.swift in Sources */,
 				26D45D091BA4FBD7004A786B /* CompanyBoolCell.swift in Sources */,
 				DA0006961B153C54006BFDBD /* NewsTableViewController.swift in Sources */,

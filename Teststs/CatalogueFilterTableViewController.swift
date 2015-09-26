@@ -123,8 +123,20 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     var CompanyFilter: _CompanyFilter! = nil
     
+    var armadaPages: AnyObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ArmadaApi.pagesFromServer {
+            if case .Success(let armadaPages) = $0 {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                	self.armadaPages = armadaPages
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
         if ArmadaApi.numberOfCompaniesForPropertyValueMap.isEmpty {
             ArmadaApi.generateMap()
         }
@@ -199,7 +211,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
             let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
             let armadaField = armadaFields[indexPath.row]
-            cell.titleLabel.text = armadaField.name
+            cell.titleLabel.text = armadaPages?[armadaField.rawValue]??["title"] as? String
             cell.iconImageView.image = armadaField.image
             cell.valueSwitch.on = CompanyFilter.armadaFields.contains(armadaField)
             cell.armadaField = armadaField
