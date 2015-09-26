@@ -69,10 +69,16 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
                 aboutLabel.text = "To be announced"
             }
         
-            jobLabel.text = Array(company.jobTypes.map({$0.jobType})).joinWithSeparator(", ")
+            jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).joinWithSeparator("\n")
             fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
+            fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).joinWithSeparator("\n")
+        
             companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
+            companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).joinWithSeparator("\n")
+        
             waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
+            waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).joinWithSeparator("\n")
+        
             websiteLabel.text = company.website
 
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ? "Countries" : "Country")
