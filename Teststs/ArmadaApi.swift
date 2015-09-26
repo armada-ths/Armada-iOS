@@ -36,6 +36,24 @@ enum Response<T> {
         }
         
     }
+    
+    static func flatten<T>(response: Response<Response<T>>) -> Response<T> {
+        switch response {
+        case .Success(let innerResponse):
+            return innerResponse
+        case .Error(let error):
+            return .Error(error)
+        }
+    }
+    
+    func flatMap<G>(transform: T -> Response<G>) -> Response<G> {
+        return Response.flatten(map(transform))
+    }
+}
+
+infix operator >>= {}
+func >>=<T, G>(response: Response<T>, transform: T -> Response<G>) -> Response<G> {
+    return response.flatMap(transform)
 }
 
 let ArmadaApi = _ArmadaApi()
@@ -147,8 +165,6 @@ public class _ArmadaApi {
     func numberOfCompaniesContainingValue(value: String, forProperty property: CompanyProperty) -> Int? {
         return numberOfCompaniesForPropertyValueMap[property]![value]
     }
-    
-    
     
     
     private init() {
@@ -299,17 +315,14 @@ public class _ArmadaApi {
     
     class func getJson(url: NSURL, callback: Response<AnyObject> -> Void) {
         getData(url) {
-            switch $0 {
-            case .Success(let data):
+            callback($0 >>= { data in
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    callback(.Success(json))
+                    return .Success(json)
                 } catch {
-                    callback(.Error(error))
+                    return .Error(error)
                 }
-            case .Error(let error):
-                callback(.Error(error))
-            }
+            })
         }
     }
     
