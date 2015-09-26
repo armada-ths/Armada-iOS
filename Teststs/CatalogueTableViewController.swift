@@ -18,18 +18,17 @@ class CatalogueTableViewController: UITableViewController {
         searchBar.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refresh()
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
-        NSOperationQueue().addOperationWithBlock {
-            ArmadaApi.updateCompanies {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    refreshControl?.endRefreshing()
-                    self.updateCompanies()
-                    self.tableView.reloadData()
-                    print("Refreshed")
-                    
-                }
+        ArmadaApi.updateCompanies {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                refreshControl?.endRefreshing()
+                self.updateCompanies()
+                self.tableView.reloadData()
+                print("Refreshed")
+                
             }
         }
     }
@@ -89,7 +88,7 @@ class CatalogueTableViewController: UITableViewController {
         
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
-
+        
         let icons = [_ArmadaApi.ArmadaField.Startup, _ArmadaApi.ArmadaField.Sustainability, _ArmadaApi.ArmadaField.Diversity]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         

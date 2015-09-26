@@ -1,7 +1,6 @@
 import UIKit
 import CoreData
 
-
 public struct ArmadaEvent {
     public let title: String
     public let summary: String
@@ -60,7 +59,7 @@ public class _ArmadaApi {
         print("Persisten store: \(self.persistentStoreUrl)")
         do {
             try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
-
+            
         } catch {
             print(error)
             abort()
@@ -82,6 +81,7 @@ public class _ArmadaApi {
             let fetchRequest = NSFetchRequest()
             fetchRequest.entity = NSEntityDescription.entityForName("WorkField", inManagedObjectContext: managedObjectContext)!
             let workFields =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkField]
+            workFields[0]
             for workField in workFields {
                 numberOfCompaniesForPropertyValueMap[.WorkFields]![workField.workField] = workField.companies.count
             }
@@ -157,7 +157,7 @@ public class _ArmadaApi {
         let sharedCache = NSURLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).stringByAppendingPathComponent("nsurlcache"))
         NSURLCache.setSharedURLCache(sharedCache)
         let stopWatch = StopWatch()
-
+        
         print(persistentStoreUrl)
         let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
         let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
@@ -176,21 +176,15 @@ public class _ArmadaApi {
                 assert(false)
             }
         }
-
         
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-          storeLogos()
+        //          storeLogos()
+
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
-        
-        //        NSOperationQueue.mainQueue().addOperationWithBlock {
-        //            let stopWatch = StopWatch()
-        //            self.generateMap()
-        //            stopWatch.print("Making map")
-        //        }
     }
     
     
@@ -201,43 +195,47 @@ public class _ArmadaApi {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         
-        
         _ArmadaApi.getCompaniesRespectingEtag() {
             switch $0 {
             case .Success(let (_, usedCache)):
                 if !usedCache {
-                    NSOperationQueue().addOperationWithBlock {
-                        let companiesJson = _ArmadaApi.staticCompanies()
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            print("DESTROYING THE DATABASE!!!!!")
-                            if companiesJson.count > 0 {
-                                for company in self.companies {
-                                    self.managedObjectContext.deleteObject(company)
-                                }
-                                try! self.managedObjectContext.save()
-                                self.companies = []
-                                
-                                //        if companies.isEmpty {
-                                for json in companiesJson {
-                                    if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
-                                        self.companies.append(company)
+                    _ArmadaApi.getJson(self.armadaUrlWithPath("companies")) {
+                        switch $0 {
+                        case .Success(let json):
+                            if let companiesJson = json["companies"] as? [AnyObject] {
+                                NSOperationQueue.mainQueue().addOperationWithBlock {
+                                    print("DESTROYING THE DATABASE!!!!!")
+                                    if companiesJson.count > 0 {
+                                        for company in self.companies {
+                                            self.managedObjectContext.deleteObject(company)
+                                        }
+                                        try! self.managedObjectContext.save()
+                                        self.companies = []
+                                        for json in companiesJson {
+                                            if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
+                                                self.companies.append(company)
+                                            }
+                                        }
+                                        try! self.managedObjectContext.save()
                                     }
+                                    callback()
                                 }
-                                try! self.managedObjectContext.save()
-                                //        }
+                            } else {
+                                callback()
                             }
+                            
+                        case .Error:
                             callback()
                         }
                     }
                 } else {
                     callback()
                 }
-                break
             case .Error(let error):
                 print(error)
+                callback()
             }
         }
-        
         
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
@@ -257,22 +255,6 @@ public class _ArmadaApi {
                 }
             }
         }
-    }
-    
-    class func staticCompanies() -> [AnyObject] {
-        do {
-            
-            if let url = NSURL(string: "http://staging.armada.nu/api/companies"),
-                let data = NSData(contentsOfURL: url) {
-                    return try NSJSONSerialization.JSONObjectWithData(data, options: [])["companies"] as? [AnyObject] ?? []
-            }
-            return []
-        } catch {
-            print(error)
-            return []
-        }
-        
-        //        let companies = ArmadaApi.companiesFromJson(json)
     }
     
     class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool)> -> Void) {
@@ -460,7 +442,7 @@ public class _ArmadaApi {
                     }
                 }
                 return armadaPages as AnyObject
-            })
+                })
         }
     }
     
