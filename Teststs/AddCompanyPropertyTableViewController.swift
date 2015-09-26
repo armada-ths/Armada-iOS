@@ -35,7 +35,7 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AddCompanyPropertyTableViewCell", forIndexPath: indexPath) as UITableViewCell
         cell.textLabel?.text = values[indexPath.row]
-        cell.detailTextLabel?.text = "\(DataDude.numberOfCompaniesContainingValue(values[indexPath.row], forProperty: property) ?? 0)"
+        cell.detailTextLabel?.text = "\(ArmadaApi.numberOfCompaniesContainingValue(values[indexPath.row], forProperty: property) ?? 0)"
         return cell
     }
 

@@ -2,7 +2,7 @@ import UIKit
 
 class CompanyInfoTableViewController: UITableViewController {
     
-    let armadaFields = _DataDude.ArmadaField.All
+    let armadaFields = _ArmadaApi.ArmadaField.All
     
     override func viewDidLoad() {
         super.viewDidLoad()

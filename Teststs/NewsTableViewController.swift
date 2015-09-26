@@ -9,7 +9,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
         }
         
         override func updateFunc(callback: Response<[News]> -> Void) {
-            DataDude.newsFromServer(callback)
+            ArmadaApi.newsFromServer(callback)
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

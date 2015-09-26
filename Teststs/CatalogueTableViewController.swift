@@ -18,12 +18,11 @@ class CatalogueTableViewController: UITableViewController {
         searchBar.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-//        refresh()
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
         NSOperationQueue().addOperationWithBlock {
-            DataDude.updateCompanies {
+            ArmadaApi.updateCompanies {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     refreshControl?.endRefreshing()
                     self.updateCompanies()
@@ -40,30 +39,14 @@ class CatalogueTableViewController: UITableViewController {
         if segmentedControl.selectedSegmentIndex == 0 {
             companies = CompanyFilter.filteredCompanies
         } else {
-            companies = DataDude.companies.filter({ FavoriteCompanies.contains($0.name) })
+            companies = ArmadaApi.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
         if let searchText = searchBar.text where !searchText.isEmpty {
             companies = companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)})
         }
         updateCompaniesByLetters(companies)
-        if companies.isEmpty {
-            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
-            label.font = UIFont.systemFontOfSize(30)
-            label.text = segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites"
-            label.numberOfLines = 2
-            label.textAlignment = .Center
-            label.sizeToFit()
-            label.textColor = UIColor.lightGrayColor()
-            
-            tableView.backgroundView = label
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-            searchBar.hidden = true
-        } else {
-            tableView.backgroundView = nil
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            searchBar.hidden = false
-        }
-
+        showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites")
+        searchBar.hidden = companies.isEmpty
     }
     
     @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
@@ -107,7 +90,7 @@ class CatalogueTableViewController: UITableViewController {
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
 
-        let icons = [_DataDude.ArmadaField.Startup, _DataDude.ArmadaField.Sustainability, _DataDude.ArmadaField.Diversity]
+        let icons = [_ArmadaApi.ArmadaField.Startup, _ArmadaApi.ArmadaField.Sustainability, _ArmadaApi.ArmadaField.Diversity]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.hidden = true

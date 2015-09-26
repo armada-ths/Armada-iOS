@@ -15,7 +15,7 @@ class MatchTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         
-        if DataDude.companies.count >= 10 {
+        if ArmadaApi.companies.count >= 10 {
             self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
         }
         self.updateFavoritesUI()
@@ -24,7 +24,7 @@ class MatchTableViewController: UITableViewController {
     
     func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
         var matches = [(company: Company, percentage: Double)]()
-        for company in DataDude.companies {
+        for company in ArmadaApi.companies {
             var percentage = 1.0
             for companyProperty in CompanyProperty.All {
                 for value in MatchFilter[companyProperty] {

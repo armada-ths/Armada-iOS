@@ -44,7 +44,7 @@ extension UIColor {
 extension UIImageView {
     func loadImageFromUrl(url: String) {
         if let url = NSURL(string: url) {
-            _DataDude.getData(url) {
+            _ArmadaApi.getData(url) {
                 switch $0 {
                 case .Success(let data):
                     let image = UIImage(data: data)

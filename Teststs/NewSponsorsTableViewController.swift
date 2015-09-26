@@ -16,7 +16,7 @@ class NewSponsorsTableViewController: UITableViewController {
         }
         
         override func updateFunc(callback: Response<[Sponsor]> -> Void) {
-            DataDude.sponsorsFromServer(callback)
+            ArmadaApi.sponsorsFromServer(callback)
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

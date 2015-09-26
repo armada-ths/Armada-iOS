@@ -39,9 +39,9 @@ enum Response<T> {
     }
 }
 
-let DataDude = _DataDude()
+let ArmadaApi = _ArmadaApi()
 
-public class _DataDude {
+public class _ArmadaApi {
     
     var companies = [Company]()
     
@@ -202,12 +202,12 @@ public class _DataDude {
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         
         
-        _DataDude.getCompaniesRespectingEtag() {
+        _ArmadaApi.getCompaniesRespectingEtag() {
             switch $0 {
             case .Success(let (_, usedCache)):
                 if !usedCache {
                     NSOperationQueue().addOperationWithBlock {
-                        let companiesJson = _DataDude.staticCompanies()
+                        let companiesJson = _ArmadaApi.staticCompanies()
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             print("DESTROYING THE DATABASE!!!!!")
                             if companiesJson.count > 0 {
@@ -250,7 +250,7 @@ public class _DataDude {
             
             try! NSFileManager.defaultManager().createDirectoryAtURL(imageDirectory, withIntermediateDirectories: true, attributes: nil)
             if let url = NSURL(string: company.logoUrl) {
-                _DataDude.getData(url) {
+                _ArmadaApi.getData(url) {
                     if case .Success(let data) = $0 {
                         data.writeToURL(imageDirectory.URLByAppendingPathComponent(company.imageName + ".png"), atomically: true)
                     }
@@ -272,7 +272,7 @@ public class _DataDude {
             return []
         }
         
-        //        let companies = DataDude.companiesFromJson(json)
+        //        let companies = ArmadaApi.companiesFromJson(json)
     }
     
     class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool)> -> Void) {
@@ -445,21 +445,21 @@ public class _DataDude {
     
     func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
         let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("events"))!
-        _DataDude.getJson(url) {
+        _ArmadaApi.getJson(url) {
             callback($0.map(self.eventsFromJson))
         }
     }
     
     func newsFromServer(callback: Response<[News]> -> Void) {
         let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("news"))!
-        _DataDude.getJson(url) {
+        _ArmadaApi.getJson(url) {
             callback($0.map(self.newsFromJson))
         }
     }
     
     func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
         let url = NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent("sponsors"))!
-        _DataDude.getJson(url) {
+        _ArmadaApi.getJson(url) {
             callback($0.map(self.sponsorsFromJson))
         }
     }
@@ -505,7 +505,7 @@ public class _DataDude {
     }
 }
 
-let armadaPages = ((try? DataDude.pagesFromServer()) ?? "wtf")!
+let armadaPages = ((try? ArmadaApi.pagesFromServer()) ?? "wtf")!
 
 func jsonFromUrl(url: String) throws -> AnyObject {
     if let url = NSURL(string: url) {

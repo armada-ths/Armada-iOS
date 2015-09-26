@@ -18,12 +18,12 @@ enum CompanyProperty: CustomStringConvertible {
     
     var values: [String] {
         switch self {
-        case .Programmes: return DataDude.programmes
-        case .JobTypes: return DataDude.jobTypes
-        case .Continents: return DataDude.continents
-        case .WorkFields: return DataDude.workFields
-        case .CompanyValues: return DataDude.companyValues
-        case .WorkWays: return DataDude.workWays
+        case .Programmes: return ArmadaApi.programmes
+        case .JobTypes: return ArmadaApi.jobTypes
+        case .Continents: return ArmadaApi.continents
+        case .WorkFields: return ArmadaApi.workFields
+        case .CompanyValues: return ArmadaApi.companyValues
+        case .WorkWays: return ArmadaApi.workWays
         }
     }
     
@@ -52,7 +52,7 @@ extension Company {
         }
     }
     
-    func hasArmadaFieldType(armadaField: _DataDude.ArmadaField) -> Bool {
+    func hasArmadaFieldType(armadaField: _ArmadaApi.ArmadaField) -> Bool {
         switch armadaField {
         case .Startup:
             return isStartup
@@ -67,7 +67,7 @@ extension Company {
 }
 
 func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
-    return DataDude.companies.filter({ ($0[property]).contains(value) }).count
+    return ArmadaApi.companies.filter({ ($0[property]).contains(value) }).count
 }
 
 let CompanyFilter = _CompanyFilter(userDefaultsKey: "CompanyFilter")
@@ -86,13 +86,13 @@ class _CompanyFilter {
         set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
-    var armadaFields: [_DataDude.ArmadaField] {
-        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _DataDude.ArmadaField(rawValue: $0)! } }
+    var armadaFields: [_ArmadaApi.ArmadaField] {
+        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _ArmadaApi.ArmadaField(rawValue: $0)! } }
         set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue } }
     }
     
     var filteredCompanies: [Company] {
-        var filteredCompanies = DataDude.companies
+        var filteredCompanies = ArmadaApi.companies
         for armadaFieldType in armadaFields {
             filteredCompanies = filteredCompanies.filter { $0.hasArmadaFieldType(armadaFieldType) }
         }
@@ -125,8 +125,8 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if DataDude.numberOfCompaniesForPropertyValueMap.isEmpty {
-            DataDude.generateMap()
+        if ArmadaApi.numberOfCompaniesForPropertyValueMap.isEmpty {
+            ArmadaApi.generateMap()
         }
     }
     
@@ -176,13 +176,13 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     func updateTitle() {
-        navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(DataDude.companies.count) Companies"
+        navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(ArmadaApi.companies.count) Companies"
     }
     
-    let armadaFields = _DataDude.ArmadaField.All
+    let armadaFields = _ArmadaApi.ArmadaField.All
     
     
-    func armadaField(armadaField: _DataDude.ArmadaField, isOn: Bool) {
+    func armadaField(armadaField: _ArmadaApi.ArmadaField, isOn: Bool) {
         if isOn {
             CompanyFilter.armadaFields = CompanyFilter.armadaFields + [armadaField]
         } else {
@@ -204,7 +204,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             cell.valueSwitch.on = CompanyFilter.armadaFields.contains(armadaField)
             cell.armadaField = armadaField
             cell.delegate = self
-            let companies = DataDude.companies.filter { $0.hasArmadaFieldType(armadaField) }
+            let companies = ArmadaApi.companies.filter { $0.hasArmadaFieldType(armadaField) }
             cell.numberOfJobsLabel.text = "\(companies.count)"
             
             return cell

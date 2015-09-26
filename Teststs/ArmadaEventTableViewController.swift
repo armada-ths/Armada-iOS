@@ -9,7 +9,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         }
         
         override func updateFunc(callback: Response<[ArmadaEvent]> -> Void) {
-            DataDude.eventsFromServer(callback)
+            ArmadaApi.eventsFromServer(callback)
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
