@@ -13,9 +13,22 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+            let armadaEvent = values[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventNewTableViewCell", forIndexPath: indexPath) as!
+            ArmadaEventNewTableViewCell
+            
+            cell.titleLabel.text = armadaEvent.title
+            if let imageUrl = armadaEvent.imageUrl {
+                cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+            }
+            cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
+            cell.descriptionLabel.text = armadaEvent.summary
+
+            
+            /*
             let imageNames = ["Armada Run", "The Thesis Proposal", "Theme Lectures", "Enova", "Practical Engineering", "The Internship Pitch", "Armada Talks"]
             let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
-            let armadaEvent = values[indexPath.row]
+            
             let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
             let title = titleComponents.count > 1 ? titleComponents[0..<titleComponents.count-1].joinWithSeparator(" ") : titleComponents.last
             cell.titleLabel.text = title
@@ -25,6 +38,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             if let imageUrl = armadaEvent.imageUrl {
                 cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
             }
+*/
             return cell
         }
     }
