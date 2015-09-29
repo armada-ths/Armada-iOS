@@ -74,6 +74,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
             if let signupUrl = armadaEvent.signupLink,
                 let url = NSURL(string: signupUrl) {
                     UIApplication.sharedApplication().openURL(url)
+                    deselectSelectedCell()
             }
         }
     }
