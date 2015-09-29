@@ -1,6 +1,6 @@
 import UIKit
 
-class CompanyViewController: UITableViewController, UIWebViewDelegate {
+class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var favoritesButton: UIButton!
@@ -15,7 +15,6 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var locationLabel: UILabel!
     var company: Company! = nil
     var companies = [Company]()
-    @IBOutlet weak var adImageView: UIImageView!
     
     @IBOutlet weak var mapWebView: UIWebView!
     
@@ -27,6 +26,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var hasClimateCompensatedImageView: UIImageView!
     
+    @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
     
@@ -36,14 +36,15 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
     @IBOutlet weak var waysOfWorkingLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
     override func viewDidLoad() {
+        headerHeight = UIScreen.mainScreen().bounds.width * 3 / 4
         super.viewDidLoad()
-        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        //        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.reloadData()
         let continents = self.company!.continents.map { $0.continent }
         mapWebView.delegate = self
+
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
             let companyStyle = continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
@@ -54,41 +55,39 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
-            locationLabel.text = company.locationDescription
-            self.locationImageView.loadImageFromUrl(company.locationUrl)
-            aboutLabel.text = company.companyDescription
-            if company.companyDescription.isEmpty {
-                aboutLabel.text = "To be announced"
-            }
+        locationLabel.text = company.locationDescription
+        self.locationImageView.loadImageFromUrl(company.locationUrl)
+        aboutLabel.text = company.companyDescription
+        if company.companyDescription.isEmpty {
+            aboutLabel.text = "To be announced"
+        }
         
-            jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).joinWithSeparator("\n")
-            fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
-            fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).joinWithSeparator("\n")
+        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).joinWithSeparator("\n")
+        fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
+        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).joinWithSeparator("\n")
         
-            companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
-            companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).joinWithSeparator("\n")
+        companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
+        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).joinWithSeparator("\n")
         
-            waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
-            waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).joinWithSeparator("\n")
+        waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
+        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).joinWithSeparator("\n")
         
-            websiteLabel.text = company.website
-
+        websiteLabel.text = company.website
+        
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
-            //adImageView.layer.minificationFilter = kCAFilterTrilinear
+        //adImageView.layer.minificationFilter = kCAFilterTrilinear
+        
 
-            adImageView.loadImageFromUrl(company.adUrl)
-            employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
+        headerImageView.loadImageFromUrl(company.adUrl)
+        employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
         if company.locationDescription.isEmpty {
             locationImageView.removeFromSuperview()
@@ -99,12 +98,12 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         let socialMediaUrls = [company.facebook, company.linkedin, company.twitter]
         let dummyUrl = NSURL(string: "")!
         for (index, url) in socialMediaUrls.enumerate() {
-            socialMediaButtons[index].enabled = UIApplication.sharedApplication().canOpenURL(NSURL(string: url) ?? dummyUrl)        
+            socialMediaButtons[index].enabled = UIApplication.sharedApplication().canOpenURL(NSURL(string: url) ?? dummyUrl)
         }
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
         let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]
-
+        
         for (i, boolish) in companyArmadaFields.enumerate() {
             armadaFieldsImageViews[i].alpha = boolish ? 1 : 0.1
         }
