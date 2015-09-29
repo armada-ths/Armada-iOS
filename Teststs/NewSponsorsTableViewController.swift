@@ -59,7 +59,7 @@ class NewSponsorsTableViewController: UITableViewController {
         if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
             UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        deselectSelectedCell()
     }
     
 }

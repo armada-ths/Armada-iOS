@@ -51,7 +51,9 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
             signupLabel.text = "Registration is over"
         } else {
-            if let signupStartDate =  armadaEvent.signupStartDate {
+            if let signupStartDate =  armadaEvent.signupStartDate,
+                let signupLink = armadaEvent.signupLink where !signupLink.isEmpty,
+                let _ = NSURL(string: signupLink) {
                 if signupStartDate < NSDate() {
                     signupLabel.text = "Sign Up"
                     signupLabel.textColor = ColorScheme.armadaGreen
