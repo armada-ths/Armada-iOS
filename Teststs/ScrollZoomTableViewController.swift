@@ -44,7 +44,7 @@ class ScrollZoomTableViewController: UITableViewController {
         let difference = -tableView.contentOffset.y - headerHeight - max(navigationBarHeight,0)
         
         if difference > 0  {
-            print("Difference: \(difference), tableView.contentOffset.y: \(tableView.contentOffset.y)")
+//            print("Difference: \(difference), tableView.contentOffset.y: \(tableView.contentOffset.y)")
             headerRect.origin.y =  -headerHeight - difference
 //            headerRect.size.height = headerHeight + difference
         }

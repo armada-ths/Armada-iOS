@@ -67,4 +67,10 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         }
         
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        deselectSelectedCell()
+    }
 }

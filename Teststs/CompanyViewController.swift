@@ -119,8 +119,8 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         super.viewWillDisappear(animated)
     }
     
-    let favoriteCellRow = 1
-    let websiteRow = 10
+    let favoriteCellRow = 0
+    let websiteRow = 9
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == favoriteCellRow {
