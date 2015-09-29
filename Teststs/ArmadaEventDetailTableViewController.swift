@@ -8,7 +8,6 @@ public func <(x: NSDate, y: NSDate) -> Bool {
 class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     @IBOutlet weak var eventImageView: UIImageView!
-    
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -50,7 +49,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         tableView.allowsSelection = false
         
         if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
-            signupLabel.text = "Registration for this event is over"
+            signupLabel.text = "Registration is over"
         } else {
             if let signupStartDate =  armadaEvent.signupStartDate {
                 if signupStartDate < NSDate() {

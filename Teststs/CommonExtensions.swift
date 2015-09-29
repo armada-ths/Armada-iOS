@@ -30,6 +30,12 @@ extension UITableViewController {
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         }
     }
+    
+    func deselectSelectedCell() {
+        if let indexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
 }
 
 extension UIColor {

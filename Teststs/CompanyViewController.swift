@@ -59,8 +59,11 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         tableView.reloadData()
             locationLabel.text = company.locationDescription
             self.locationImageView.loadImageFromUrl(company.locationUrl)
@@ -132,6 +135,7 @@ class CompanyViewController: UITableViewController, UIWebViewDelegate {
         if indexPath.row == websiteRow {
             if let url = NSURL(string: "http://" + company.website) {
                 UIApplication.sharedApplication().openURL(url)
+                deselectSelectedCell()
             }
         }
     }
