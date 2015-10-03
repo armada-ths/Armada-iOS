@@ -7,9 +7,36 @@ class CatalogueTableViewController: UITableViewController {
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
+    func swedishOrdering(x: String, y: String) -> Bool {
+        
+        let firstNum = Int(String(x.substringToIndex(x.startIndex.successor())))
+        let secondNum = Int(String(y.substringToIndex(y.startIndex.successor())))
+            
+        if firstNum != nil && secondNum != nil {
+            return firstNum < secondNum
+        } else if firstNum != nil {
+            return false
+        } else if secondNum != nil {
+            return true
+        }
+        
+        
+        let result = x.compare(y, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: NSLocale(localeIdentifier: "se"))
+        
+        
+        
+        switch result {
+        case .OrderedAscending, .OrderedSame:
+            return true
+        case .OrderedDescending:
+            return false
+        }
+    }
+    
+    
     func updateCompaniesByLetters(companies: [Company]) {
         let stopWatch = StopWatch()
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercaseString })).sort(<).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercaseString.hasPrefix(letter) })) }
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercaseString })).sort(swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercaseString.hasPrefix(letter) })) }
         stopWatch.print("Updating letters")
     }
     
