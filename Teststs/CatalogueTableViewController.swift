@@ -8,10 +8,8 @@ class CatalogueTableViewController: UITableViewController {
     var companiesByLetters: [(letter: String, companies: [Company])] = []
     
     func swedishOrdering(x: String, y: String) -> Bool {
-        
         let firstNum = Int(String(x.substringToIndex(x.startIndex.successor())))
         let secondNum = Int(String(y.substringToIndex(y.startIndex.successor())))
-            
         if firstNum != nil && secondNum != nil {
             return firstNum < secondNum
         } else if firstNum != nil {
@@ -20,11 +18,7 @@ class CatalogueTableViewController: UITableViewController {
             return true
         }
         
-        
         let result = x.compare(y, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: NSLocale(localeIdentifier: "se"))
-        
-        
-        
         switch result {
         case .OrderedAscending, .OrderedSame:
             return true

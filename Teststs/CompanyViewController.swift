@@ -132,7 +132,9 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         }
         
         if indexPath.row == websiteRow {
-            if let url = NSURL(string: "http://" + company.website) {
+            let httpPrefix = "http://"
+            let urlString = (company.website.hasPrefix(httpPrefix) ? "" : httpPrefix) + company.website.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            if let url = NSURL(string: urlString) {
                 UIApplication.sharedApplication().openURL(url)
                 deselectSelectedCell()
             }
