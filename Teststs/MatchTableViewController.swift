@@ -118,7 +118,6 @@ class MatchTableViewController: UITableViewController {
         return indexPath
     }
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("Segue to CompaniesPageViewController")
         let companies = companiesWithMatchPercentages.map { $0.company }
