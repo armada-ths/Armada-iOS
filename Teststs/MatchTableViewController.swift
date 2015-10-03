@@ -110,10 +110,6 @@ class MatchTableViewController: UITableViewController {
         return cell
     }
     
-    var companySplitViewController: CompanySplitViewController {
-        return (self.splitViewController as? CompanySplitViewController)!
-    }
-    
     var selectedCompany: Company? = nil
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
