@@ -196,6 +196,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+                return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "Ways of working", "", ""][section]
         return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", "I value ways of working", "", ""][section]
     }
     
