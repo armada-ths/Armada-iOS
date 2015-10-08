@@ -2765,7 +2765,7 @@
                                         <constraint firstItem="z0I-bU-sE1" firstAttribute="leading" secondItem="bxy-tb-5G2" secondAttribute="leadingMargin" id="V9c-wu-71m"/>
                                         <constraint firstItem="z0I-bU-sE1" firstAttribute="top" secondItem="bxy-tb-5G2" secondAttribute="topMargin" id="WQj-po-CAJ"/>
                                         <constraint firstItem="SC4-OD-TJi" firstAttribute="centerX" secondItem="bxy-tb-5G2" secondAttribute="centerX" id="ZFL-BK-bFV"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="SC4-OD-TJi" secondAttribute="bottom" constant="3" id="lxT-ff-H69"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="SC4-OD-TJi" secondAttribute="bottom" id="lxT-ff-H69"/>
                                         <constraint firstItem="SC4-OD-TJi" firstAttribute="leading" secondItem="bxy-tb-5G2" secondAttribute="leadingMargin" id="ynu-76-iFg"/>
                                     </constraints>
                                     <variation key="default">
@@ -2781,10 +2781,10 @@
                                     <outlet property="sponsorLabel" destination="SC4-OD-TJi" id="al7-eL-p1e"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="352" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="259.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -2793,16 +2793,30 @@
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="240" id="0NB-Mj-mdI"/>
-                                                <constraint firstAttribute="height" constant="128" id="CBR-WW-Nig"/>
+                                                <constraint firstAttribute="height" constant="90" id="CBR-WW-Nig"/>
+                                                <constraint firstAttribute="width" constant="240" id="Iaq-21-8cT"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="0NB-Mj-mdI"/>
+                                                </mask>
+                                            </variation>
                                         </imageView>
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Pk2-DK-S4r" secondAttribute="bottom" constant="8" id="T7J-ar-Jiy"/>
-                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="top" secondItem="VXJ-XI-HFh" secondAttribute="topMargin" constant="8" id="Tsq-vP-NBU"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="leading" secondItem="VXJ-XI-HFh" secondAttribute="leadingMargin" id="PzN-Pf-Joq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Pk2-DK-S4r" secondAttribute="bottom" id="T7J-ar-Jiy"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="top" secondItem="VXJ-XI-HFh" secondAttribute="topMargin" id="Tsq-vP-NBU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Pk2-DK-S4r" secondAttribute="trailing" id="bes-Gu-bzI"/>
                                         <constraint firstItem="Pk2-DK-S4r" firstAttribute="centerX" secondItem="VXJ-XI-HFh" secondAttribute="centerX" id="zOD-Fk-46h"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="PzN-Pf-Joq"/>
+                                            <exclude reference="bes-Gu-bzI"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
