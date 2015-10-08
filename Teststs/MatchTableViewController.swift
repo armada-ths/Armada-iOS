@@ -50,7 +50,6 @@ class MatchTableViewController: UITableViewController {
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0))
-            view.backgroundColor = UIColor.blackColor()
             
             let label = UIButton(frame: view.frame)
             label.setTitle("Start Matching", forState: .Normal)
