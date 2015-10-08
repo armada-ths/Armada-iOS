@@ -13,16 +13,16 @@ class MatchTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        
-        if ArmadaApi.companies.count >= 10 {
-            self.companiesWithMatchPercentages = Array(self.calculateCompaniesWithMatchPercentages()[0..<10]).filter { $0.percentage > 0 }
-        }
+        let companiesWithMatchPercentages = calculateCompaniesWithMatchPercentages().filter { $0.percentage > 0 }
+        self.companiesWithMatchPercentages = Array(companiesWithMatchPercentages[0..<min(10, companiesWithMatchPercentages.count)])
         self.updateFavoritesUI()
         self.tableView.reloadData()
     }
     
     func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
+        if MatchFilter.isEmpty {
+            return []
+        }
         var matches = [(company: Company, percentage: Double)]()
         for company in ArmadaApi.companies {
             var percentage = 1.0

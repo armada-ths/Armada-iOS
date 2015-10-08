@@ -64,6 +64,8 @@ extension Company {
             return likesEnvironment
         }
     }
+    
+
 }
 
 func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
@@ -81,13 +83,27 @@ class _CompanyFilter {
     
     let Ω = NSUserDefaults.standardUserDefaults()
     
+    var isEmpty: Bool {
+        for property in CompanyProperty.All {
+            if !self[property].isEmpty {
+                return false
+            }
+        }
+        for field in _ArmadaApi.ArmadaField.All {
+            if armadaFields.contains(field) {
+                return false
+            }
+        }
+        return true
+    }
+    
     subscript(companyProperty: CompanyProperty) -> [String] {
         get { return Ω["\(userDefaultsKey)\(companyProperty)"] as? [String] ?? [] }
         set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
     var armadaFields: [_ArmadaApi.ArmadaField] {
-        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _ArmadaApi.ArmadaField(rawValue: $0)! } }
+        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _ArmadaApi.ArmadaField(rawValue: $0) ?? .Startup } }
         set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue } }
     }
     
