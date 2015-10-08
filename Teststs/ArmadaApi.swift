@@ -75,22 +75,37 @@ public class _ArmadaApi {
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         print("Persisten store: \(self.persistentStoreUrl)")
+    
+        let databaseExists = NSFileManager.defaultManager().fileExistsAtPath(self.persistentStoreUrl.path!)
         do {
+            if !databaseExists {
+                print("persistentStoreCoordinator does exist - copying from bundle")
+                try self.copyDatabaseFromBundle()
+            } else {
+                print("persistentStoreCoordinator exists")
+            }
+            
             try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
         } catch {
-            self.copyDatabaseFromBundle()
             do {
+                print("persistentStoreCoordinator fucked up - deleting database")
+                try self.deleteDatabase()
+                if databaseExists {
+                    print("persistentStoreCoordinator old database sucked - testing bundle")
+                    try self.copyDatabaseFromBundle()
+                }
                 try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
             } catch {
+                print("persistentStoreCoordinator - the bundle sucked too")
                 do {
                     try self.deleteDatabase()
                     try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
-
                 } catch {
+                    print("persistentStoreCoordinator oh god - we messed up - goodbye")
                     print(error)
                     abort()
                 }
-//
+
             }
         }
         return persistentStoreCoordinator
@@ -99,42 +114,30 @@ public class _ArmadaApi {
     func deleteDatabase() throws {
         let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
         let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
-
-            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
-            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
-            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
-
+        
+        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
+        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
+        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
+        
     }
     
-    func copyDatabaseFromBundle() {
+    var persistentStoreUrlShm: NSURL {
+        return NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
+    }
+    var persistentStoreUrlWal: NSURL {
+        return NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+    }
+    
+    func copyDatabaseFromBundle() throws {
         let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
         let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
         let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
         
-        let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
-        let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
+        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: persistentStoreUrlShm)
+        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: persistentStoreUrlWal)
+        print("Copied companies from bundle")
         
-            do {
-                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
-                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
-                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
-            } catch {
-                print(error)
-                
-            }
-        
-        if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
-            do {
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: persistentStoreUrlShm)
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: persistentStoreUrlWal)
-                print("Copied companies from bundle")
-            } catch {
-                print("Failed copying file!!?#")
-                print(error)
-                assert(false)
-            }
-        }
     }
     
     private lazy var managedObjectContext: NSManagedObjectContext = {
@@ -227,18 +230,14 @@ public class _ArmadaApi {
         let stopWatch = StopWatch()
         
         print(persistentStoreUrl)
-
         
-        if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
-            copyDatabaseFromBundle()
-        }
         
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-                  storeLogos()
-
+        storeLogos()
+        
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
     }
@@ -328,9 +327,9 @@ public class _ArmadaApi {
             }
             if let data = data,
                 let etag = etag {
-                let zebra = (data, usedCache, etag)
-                print("Url: \(url.absoluteString), cached: \(usedCache)")
-                callback(.Success(zebra))
+                    let zebra = (data, usedCache, etag)
+                    print("Url: \(url.absoluteString), cached: \(usedCache)")
+                    callback(.Success(zebra))
             } else if let error = error {
                 callback(.Error(error))
             } else {
@@ -365,7 +364,7 @@ public class _ArmadaApi {
                 } catch {
                     return .Error(error)
                 }
-            })
+                })
         }
     }
     
