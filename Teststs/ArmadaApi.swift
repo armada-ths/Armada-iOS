@@ -15,6 +15,7 @@ public struct ArmadaEvent {
     var image: UIImage? {
         return UIImage(named: title.stringByReplacingOccurrencesOfString("ä", withString: ""))
     }
+    
 }
 
 public struct News {
@@ -509,6 +510,15 @@ public class _ArmadaApi {
         
         static var All: [ArmadaField] {
             return [.Startup, .ClimateCompensation, .Diversity, .Sustainability]
+        }
+        
+        var title: String {
+            switch self {
+            case .Startup: return "Startup"
+            case .Diversity: return "Diversity"
+            case .ClimateCompensation: return "Climate Compensation"
+            case .Sustainability: return "Sustainability"
+            }
         }
         
         var image: UIImage {

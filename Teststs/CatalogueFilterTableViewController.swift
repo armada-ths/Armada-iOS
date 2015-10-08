@@ -227,7 +227,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
             let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
             let armadaField = armadaFields[indexPath.row]
-            cell.titleLabel.text = armadaPages?[armadaField.rawValue]??["title"] as? String
+            cell.titleLabel.text = armadaPages?[armadaField.rawValue]??["title"] as? String ?? armadaField.title
             cell.iconImageView.image = armadaField.image
             cell.valueSwitch.on = CompanyFilter.armadaFields.contains(armadaField)
             cell.armadaField = armadaField

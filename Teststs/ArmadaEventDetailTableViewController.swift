@@ -58,7 +58,6 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
                     signupLabel.text = "Sign Up"
                     signupLabel.textColor = ColorScheme.armadaGreen
                     tableView.allowsSelection = true
-                    
                 } else {
                     signupLabel.text = "Registration starts at \(signupStartDate.readableString)"
                 }
