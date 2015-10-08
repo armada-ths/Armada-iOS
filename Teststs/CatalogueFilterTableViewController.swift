@@ -240,9 +240,9 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         
         let property = CompanyProperty.All[indexPath.section]
         if indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1 {
-            let cell = cellWithIdentifier("CompanyPropertyCell")
-            cell.textLabel?.text = CompanyFilter[property][indexPath.row]
-            cell.detailTextLabel?.text = "\(numberOfCompaniesForPropertyValue(property, value: CompanyFilter[property][indexPath.row]))"
+            let cell = cellWithIdentifier("TitleDetailTableViewCell") as! TitleDetailTableViewCell
+            cell.titleLabel?.text = CompanyFilter[property][indexPath.row]
+            cell.detailLabel?.text = "\(numberOfCompaniesForPropertyValue(property, value: CompanyFilter[property][indexPath.row]))"
             return cell
         } else {
             let cell = cellWithIdentifier("AddPropertyCell") as! AddCompanyPropertyTableViewCell
