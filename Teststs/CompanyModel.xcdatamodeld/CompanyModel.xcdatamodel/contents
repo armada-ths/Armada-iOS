@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
     <entity name="Company" representedClassName=".Company" syncable="YES">
         <attribute name="adUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,6 +9,7 @@
         <attribute name="countries" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="employeesSweden" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="employeesWorld" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="etag" attributeType="String" syncable="YES"/>
         <attribute name="facebook" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hasClimateCompensated" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isStartup" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -55,7 +56,7 @@
         <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workWays" inverseEntity="Company" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-63" positionY="-18" width="128" height="465"/>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="480"/>
         <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
         <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>

@@ -77,13 +77,65 @@ public class _ArmadaApi {
         print("Persisten store: \(self.persistentStoreUrl)")
         do {
             try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
-            
         } catch {
-            print(error)
-            abort()
+            self.copyDatabaseFromBundle()
+            do {
+                try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+            } catch {
+                do {
+                    try self.deleteDatabase()
+                    try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+
+                } catch {
+                    print(error)
+                    abort()
+                }
+//
+            }
         }
         return persistentStoreCoordinator
         }()
+    
+    func deleteDatabase() throws {
+        let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
+        let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+
+            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
+            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
+            try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
+
+    }
+    
+    func copyDatabaseFromBundle() {
+        let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
+        let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
+        let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
+        
+        let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
+        let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+        
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
+                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
+                try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
+            } catch {
+                print(error)
+                
+            }
+        
+        if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
+            do {
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: persistentStoreUrlShm)
+                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: persistentStoreUrlWal)
+                print("Copied companies from bundle")
+            } catch {
+                print("Failed copying file!!?#")
+                print(error)
+                assert(false)
+            }
+        }
+    }
     
     private lazy var managedObjectContext: NSManagedObjectContext = {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
@@ -175,22 +227,10 @@ public class _ArmadaApi {
         let stopWatch = StopWatch()
         
         print(persistentStoreUrl)
-        let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
-        let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
-        let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
-        
+
         
         if !NSFileManager.defaultManager().fileExistsAtPath(persistentStoreUrl.path!) {
-            do {
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: NSURL(string: persistentStoreUrl.absoluteString + "-shm")!)
-                try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: NSURL(string: persistentStoreUrl.absoluteString + "-wal")!)
-                print("Copied companies from bundle")
-            } catch {
-                print("Failed copying file!!?#")
-                print(error)
-                assert(false)
-            }
+            copyDatabaseFromBundle()
         }
         
         let fetchRequest = NSFetchRequest()
@@ -213,7 +253,7 @@ public class _ArmadaApi {
         
         _ArmadaApi.getCompaniesRespectingEtag() {
             switch $0 {
-            case .Success(let (_, usedCache)):
+            case .Success(let (_, usedCache, etag)):
                 if !usedCache {
                     _ArmadaApi.getJson(self.armadaUrlWithPath("companies")) {
                         switch $0 {
@@ -229,6 +269,7 @@ public class _ArmadaApi {
                                         self.companies = []
                                         for json in companiesJson {
                                             if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
+                                                company.etag = etag
                                                 self.companies.append(company)
                                             }
                                         }
@@ -273,19 +314,21 @@ public class _ArmadaApi {
         }
     }
     
-    class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool)> -> Void) {
+    class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool, String)> -> Void) {
         let url = NSURL(string: "http://staging.armada.nu/api/companies")!
         let session = NSURLSession.sharedSession()
         let request = NSURLRequest(URL: url)
         var usedCache = false
         let dataTask = session.dataTaskWithRequest(request) {
             (data, response, error) in
+            var etag: String?
             if let httpResponse = response as? NSHTTPURLResponse {
-                usedCache = httpResponse.etag == SettingsManager.companiesEtag
-                SettingsManager.companiesEtag = httpResponse.etag
+                etag = httpResponse.etag
+                usedCache = httpResponse.etag == ArmadaApi.companies.first?.etag
             }
-            if let data = data {
-                let zebra = (data, usedCache)
+            if let data = data,
+                let etag = etag {
+                let zebra = (data, usedCache, etag)
                 print("Url: \(url.absoluteString), cached: \(usedCache)")
                 callback(.Success(zebra))
             } else if let error = error {

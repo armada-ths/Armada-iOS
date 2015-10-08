@@ -42,4 +42,6 @@ extension Company {
     @NSManaged var logoUrl: String
     @NSManaged var keywords: String
     
+    @NSManaged var etag: String
+    
 }
