@@ -992,7 +992,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="189.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Locations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pI-BP-EBK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Continents" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pI-BP-EBK">
                                                     <rect key="frame" x="16" y="11" width="108" height="18"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
@@ -1699,7 +1699,7 @@
             </objects>
             <point key="canvasLocation" x="4123" y="2012"/>
         </scene>
-        <!--Events-->
+        <!--Armada Event Detail Table View Controller-->
         <scene sceneID="QLj-c3-t3I">
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="1vj-2m-lxX" customClass="ArmadaEventDetailTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
@@ -1875,7 +1875,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Events" id="KnS-hz-SUQ"/>
+                    <navigationItem key="navigationItem" id="KnS-hz-SUQ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="700"/>
                     <connections>
@@ -2661,7 +2661,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dna-sh-dXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="894" y="2798"/>
+            <point key="canvasLocation" x="872" y="3014"/>
         </scene>
         <!--Add Company Property Table View Controller-->
         <scene sceneID="n59-Tk-nOz">
@@ -3023,11 +3023,14 @@
                         <barButtonItem key="leftBarButtonItem" id="qbP-YK-V2U"/>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="4IA-8e-Yng">
                             <connections>
-                                <segue destination="Af4-R1-YXy" kind="show" id="NVI-Nj-Wn8"/>
+                                <segue destination="Af4-R1-YXy" kind="show" identifier="FilterSegue" id="NVI-Nj-Wn8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="filterButton" destination="4IA-8e-Yng" id="hx0-lh-dKa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qco-Rr-yGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3263,7 +3266,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ip2-jl-9zb"/>
-        <segue reference="HBS-08-1M2"/>
-        <segue reference="bli-j8-CSx"/>
+        <segue reference="NVI-Nj-Wn8"/>
+        <segue reference="HmL-IU-78Y"/>
     </inferredMetricsTieBreakers>
 </document>
