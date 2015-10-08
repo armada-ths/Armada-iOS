@@ -53,16 +53,8 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
             }
         }
-    }
-    
-    
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
-        tableView.reloadData()
+        
         locationLabel.text = company.locationDescription
         self.locationImageView.loadImageFromUrl(company.locationUrl)
         aboutLabel.text = company.companyDescription
@@ -85,7 +77,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
         //adImageView.layer.minificationFilter = kCAFilterTrilinear
         
-
+        
         headerImageView.loadImageFromUrl(company.adUrl)
         employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
@@ -107,8 +99,10 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         for (i, boolish) in companyArmadaFields.enumerate() {
             armadaFieldsImageViews[i].alpha = boolish ? 1 : 0.1
         }
-        
     }
+    
+    
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
