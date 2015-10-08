@@ -40,6 +40,8 @@ class MatchTableViewController: UITableViewController {
         filterButton.enabled = !MatchFilter.isEmpty
         filterButton.title = MatchFilter.isEmpty ? nil : "Filter"
         
+        tableView.scrollEnabled = !MatchFilter.isEmpty
+        
         if MatchFilter.isEmpty {
             let overlay = UIView(frame: view.frame)
             overlay.alpha = 0.4
@@ -56,12 +58,12 @@ class MatchTableViewController: UITableViewController {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.backgroundColor = ColorScheme.armadaGreen
             
-            label.titleLabel?.font = UIFont.systemFontOfSize(30)
+            label.titleLabel?.font = UIFont.systemFontOfSize(25)
             
             let layer = label.layer
             layer.cornerRadius = 10
-            let topPadding: CGFloat = 20
-            let leadingPadding: CGFloat = 20
+            let topPadding: CGFloat = 25
+            let leadingPadding: CGFloat = 25
             label.contentEdgeInsets = UIEdgeInsets(top: topPadding, left: leadingPadding, bottom: topPadding, right: leadingPadding)
             
             
