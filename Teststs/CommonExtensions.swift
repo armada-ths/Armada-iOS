@@ -99,6 +99,11 @@ extension String{
         }
         return nil
     }
+    
+    var httpUrl: NSURL? {
+        let httpPrefix = "http"
+        return NSURL(string: (hasPrefix(httpPrefix) ? "" : httpPrefix + "://") + stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))
+    }
 }
 
 

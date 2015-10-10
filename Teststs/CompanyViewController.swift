@@ -63,14 +63,14 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         }
         
         jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).joinWithSeparator("\n")
-        fieldsLabel.text = Array(company.workFields.map { $0.workField }).joinWithSeparator(", ")
         fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).joinWithSeparator("\n")
-        
-        companyValuesLabel.text = Array(company.companyValues.map { $0.companyValue }).joinWithSeparator(", ")
         companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).joinWithSeparator("\n")
-        
-        waysOfWorkingLabel.text = Array(company.workWays.map { $0.workWay }).joinWithSeparator(", ")
         waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).joinWithSeparator("\n")
+        
+//        jobLabel.text = Array(company.jobTypes.map({"- " + $0.jobType})).joinWithSeparator("\n")
+//        fieldsLabel.text = Array(company.workFields.map { "- " + $0.workField }).joinWithSeparator("\n")
+//        companyValuesLabel.text = Array(company.companyValues.map { "- " + $0.companyValue }).joinWithSeparator("\n")
+//        waysOfWorkingLabel.text = Array(company.workWays.map { "- " + $0.workWay }).joinWithSeparator("\n")
         
         websiteLabel.text = company.website
         
@@ -125,10 +125,9 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
             tableView.endUpdates()
         }
         
+        
         if indexPath.row == websiteRow {
-            let httpPrefix = "http://"
-            let urlString = (company.website.hasPrefix(httpPrefix) ? "" : httpPrefix) + company.website.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            if let url = NSURL(string: urlString) {
+            if let url = company.website.httpUrl {
                 UIApplication.sharedApplication().openURL(url)
                 deselectSelectedCell()
             }
@@ -149,18 +148,22 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     
     @IBAction func facebookButtonClicked(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: company!.facebook)!)
+        if let url = company.facebook.httpUrl {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     @IBAction func linkedinButtonClicked(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: company!.linkedin)!)
+        if let url = company.linkedin.httpUrl {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     @IBAction func twitterButtonClicked(sender: AnyObject) {
         if let twitterAppUrl = NSURL(string: "twitter:///user?screen_name=" + company!.twitter.componentsSeparatedByString("/").last!) where  UIApplication.sharedApplication().canOpenURL(twitterAppUrl) {
             UIApplication.sharedApplication().openURL(twitterAppUrl)
         } else {
-            if let url = NSURL(string: company.twitter) {
+            if let url = company.twitter.httpUrl {
                 UIApplication.sharedApplication().openURL(url)
             }
         }
