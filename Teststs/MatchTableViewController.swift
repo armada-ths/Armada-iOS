@@ -47,6 +47,7 @@ class MatchTableViewController: UITableViewController {
             overlay.alpha = 0.4
             overlay.tag = overlayTag
             overlay.backgroundColor = UIColor.blackColor()
+            overlay.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(overlay)
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
@@ -57,6 +58,7 @@ class MatchTableViewController: UITableViewController {
             label.setTitle("Start Matching", forState: .Normal)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.backgroundColor = ColorScheme.armadaGreen
+            label.showsTouchWhenHighlighted = true
             
             label.titleLabel?.font = UIFont.systemFontOfSize(25)
             
