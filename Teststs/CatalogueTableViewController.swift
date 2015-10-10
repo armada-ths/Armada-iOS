@@ -66,7 +66,7 @@ class CatalogueTableViewController: UITableViewController {
         }
         updateCompaniesByLetters(companies)
         showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites")
-        searchBar.hidden = companies.isEmpty
+        searchBar.hidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
     }
     
     @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
