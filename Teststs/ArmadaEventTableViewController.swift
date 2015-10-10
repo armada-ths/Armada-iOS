@@ -4,6 +4,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
+        var images:[String:UIImage] = [:]
+        
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
@@ -19,7 +21,17 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             
             cell.titleLabel.text = armadaEvent.title
             if let imageUrl = armadaEvent.imageUrl {
-                cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+                //cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+                if let image = images[imageUrl.absoluteString]{
+                    cell.eventImageView.image = image
+                } else{
+                    cell.eventImageView.image = nil
+                    cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString){
+                        if let image = $0{
+                            self.images[imageUrl.absoluteString] = image
+                        }
+                    }
+                }
             }
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
             cell.descriptionLabel.text = armadaEvent.summary
