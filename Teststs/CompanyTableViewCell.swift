@@ -10,4 +10,5 @@ class CompanyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var firstIcon: UIImageView!
     @IBOutlet weak var secondIcon: UIImageView!
+    @IBOutlet weak var thirdIcon: UIImageView!
 }

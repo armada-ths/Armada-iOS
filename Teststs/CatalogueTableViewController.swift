@@ -110,19 +110,23 @@ class CatalogueTableViewController: UITableViewController {
         cell.firstIcon.hidden = true
         cell.secondIcon.hidden = true
         
-        let icons = [_ArmadaApi.ArmadaField.Startup, _ArmadaApi.ArmadaField.Sustainability, _ArmadaApi.ArmadaField.Diversity]
-        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
+        let icons = [_ArmadaApi.ArmadaField.Startup, _ArmadaApi.ArmadaField.Sustainability, _ArmadaApi.ArmadaField.Diversity, _ArmadaApi.ArmadaField.ClimateCompensation]
+        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality, company.hasClimateCompensated]
         
         cell.secondIcon.hidden = true
         cell.firstIcon.hidden = true
-        for i in 0...2 {
+        cell.thirdIcon.hidden = true
+        for i in 0..<stuff.count {
             if stuff[i] {
                 if cell.firstIcon.hidden {
                     cell.firstIcon.image = icons[i].image
                     cell.firstIcon.hidden = false
-                } else {
+                } else if cell.secondIcon.hidden {
                     cell.secondIcon.image = icons[i].image
                     cell.secondIcon.hidden = false
+                } else {
+                    cell.thirdIcon.image = icons[i].image
+                    cell.thirdIcon.hidden = false
                 }
             }
         }

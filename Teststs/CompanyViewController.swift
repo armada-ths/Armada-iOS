@@ -55,35 +55,34 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         }
         
         
-        locationLabel.text = company.locationDescription
-        self.locationImageView.loadImageFromUrl(company.locationUrl)
+
         aboutLabel.text = company.companyDescription
         if company.companyDescription.isEmpty {
             aboutLabel.text = "To be announced"
         }
         
-        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).joinWithSeparator("\n")
-        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).joinWithSeparator("\n")
-        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).joinWithSeparator("\n")
-        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).joinWithSeparator("\n")
-        
-//        jobLabel.text = Array(company.jobTypes.map({"- " + $0.jobType})).joinWithSeparator("\n")
-//        fieldsLabel.text = Array(company.workFields.map { "- " + $0.workField }).joinWithSeparator("\n")
-//        companyValuesLabel.text = Array(company.companyValues.map { "- " + $0.companyValue }).joinWithSeparator("\n")
-//        waysOfWorkingLabel.text = Array(company.workWays.map { "- " + $0.workWay }).joinWithSeparator("\n")
+        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).sort().joinWithSeparator("\n")
+        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sort().joinWithSeparator("\n")
+        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sort().joinWithSeparator("\n")
+        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sort().joinWithSeparator("\n")
         
         websiteLabel.text = company.website
         
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
-        //adImageView.layer.minificationFilter = kCAFilterTrilinear
         
         
         headerImageView.loadImageFromUrl(company.adUrl)
         employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
+        
+        
+        
+        locationLabel.text = company.locationDescription
         if company.locationDescription.isEmpty {
             locationImageView.removeFromSuperview()
             locationLabel.text = "To be announced"
+        } else {
+            locationImageView.loadImageFromUrl(company.locationUrl)
         }
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
