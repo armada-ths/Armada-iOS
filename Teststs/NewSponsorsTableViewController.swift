@@ -16,6 +16,8 @@ class NewSponsorsTableViewController: UITableViewController {
     
     class ArmadaSponsorTableViewDataSource: ArmadaTableViewDataSource<Sponsor> {
         
+        var images:[String:UIImage] = [:]
+        
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
@@ -47,7 +49,16 @@ class NewSponsorsTableViewController: UITableViewController {
                 cell.sponsorLabel.text = sponsor.description
                 cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
             }
-            cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString)
+            if let image = images[sponsor.imageUrl.absoluteString]{
+                cell.sponsorImageView.image = image
+            } else{
+                cell.sponsorImageView.image = nil
+                cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString){
+                    if let image = $0{
+                        self.images[sponsor.imageUrl.absoluteString]=image
+                    }
+                }
+            }
             return cell
         }
     }

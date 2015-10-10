@@ -48,7 +48,7 @@ extension UIColor {
 }
 
 extension UIImageView {
-    func loadImageFromUrl(url: String) {
+    func loadImageFromUrl(url: String, callback:(UIImage? -> ())? = nil) {
         if let url = NSURL(string: url) {
             _ArmadaApi.getData(url) {
                 switch $0 {
@@ -58,11 +58,13 @@ extension UIImageView {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
                         }, completion: nil)
+                        callback?(image)
                     }
                     operation.queuePriority = .VeryLow
                     NSOperationQueue.mainQueue().addOperation(operation)
                 case .Error(let error):
                     self.image = nil
+                    callback?(nil)
                     print(error)
                 }
             }
