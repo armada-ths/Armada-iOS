@@ -80,7 +80,7 @@ public class _ArmadaApi {
         let databaseExists = NSFileManager.defaultManager().fileExistsAtPath(self.persistentStoreUrl.path!)
         do {
             if !databaseExists {
-                print("persistentStoreCoordinator does exist - copying from bundle")
+                print("persistentStoreCoordinator does not exist - copying from bundle")
                 try self.copyDatabaseFromBundle()
             } else {
                 print("persistentStoreCoordinator exists")
@@ -237,10 +237,11 @@ public class _ArmadaApi {
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        storeLogos()
         
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
+        
+        
     }
     
     

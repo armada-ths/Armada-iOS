@@ -20,6 +20,9 @@
 		262CFC831B2CB58C00834D5C /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262CFC821B2CB58C00834D5C /* TriangleView.swift */; };
 		2633574A1BC69DA30046D05E /* TitleDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		26402E5D1B8F987700EC84E4 /* ArmadaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26402E5C1B8F987700EC84E4 /* ArmadaViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		26431A201BC9C3F8002A2734 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 26431A1D1BC9C3F8002A2734 /* Companies.sqlite */; settings = {ASSET_TAGS = (); }; };
+		26431A211BC9C3F8002A2734 /* Companies.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 26431A1E1BC9C3F8002A2734 /* Companies.sqlite-shm */; settings = {ASSET_TAGS = (); }; };
+		26431A221BC9C3F8002A2734 /* Companies.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 26431A1F1BC9C3F8002A2734 /* Companies.sqlite-wal */; settings = {ASSET_TAGS = (); }; };
 		265B7DE21B053A080074450B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265B7DE11B053A080074450B /* AppDelegate.swift */; };
 		265B7DE91B053A080074450B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 265B7DE71B053A080074450B /* Main.storyboard */; };
 		265B7DEB1B053A080074450B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 265B7DEA1B053A080074450B /* Images.xcassets */; };
@@ -33,9 +36,6 @@
 		267C08C91B57EB0600E79C37 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267C08C81B57EB0600E79C37 /* Launch.storyboard */; };
 		267E6E6D1B5FDE40008564AD /* ArmadaEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267E6E6C1B5FDE40008564AD /* ArmadaEventTableViewCell.swift */; };
 		2685FD661BB21AD40049FEE2 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2685FD651BB21AD40049FEE2 /* SettingsManager.swift */; settings = {ASSET_TAGS = (); }; };
-		2692DFE21BB27724008400A0 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2692DFDF1BB276DA008400A0 /* Companies.sqlite */; settings = {ASSET_TAGS = (); }; };
-		2692DFE31BB27724008400A0 /* Companies.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 2692DFE01BB276DA008400A0 /* Companies.sqlite-shm */; settings = {ASSET_TAGS = (); }; };
-		2692DFE41BB27724008400A0 /* Companies.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2692DFE11BB276DA008400A0 /* Companies.sqlite-wal */; settings = {ASSET_TAGS = (); }; };
 		269A223C1B1CF45B00023BE8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269A223B1B1CF45B00023BE8 /* TabBarController.swift */; };
 		269C0CFA1B8E8D18008FB633 /* CompanyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 269C0CF81B8E8D18008FB633 /* CompanyModel.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		269C0CFD1B8E8D9F008FB633 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269C0CFB1B8E8D9F008FB633 /* Company+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
@@ -93,6 +93,9 @@
 		263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleDetailTableViewCell.swift; sourceTree = "<group>"; };
 		26402E5C1B8F987700EC84E4 /* ArmadaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaViewController.swift; sourceTree = "<group>"; };
 		26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = armadaEvents.sketch; sourceTree = "<group>"; };
+		26431A1D1BC9C3F8002A2734 /* Companies.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Companies.sqlite; sourceTree = "<group>"; };
+		26431A1E1BC9C3F8002A2734 /* Companies.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-shm"; sourceTree = "<group>"; };
+		26431A1F1BC9C3F8002A2734 /* Companies.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-wal"; sourceTree = "<group>"; };
 		265B7DDC1B053A080074450B /* Armada.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Armada.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		265B7DE01B053A080074450B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		265B7DE11B053A080074450B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,9 +113,6 @@
 		267C08C81B57EB0600E79C37 /* Launch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Launch.storyboard; path = ../Launch.storyboard; sourceTree = "<group>"; };
 		267E6E6C1B5FDE40008564AD /* ArmadaEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaEventTableViewCell.swift; sourceTree = "<group>"; };
 		2685FD651BB21AD40049FEE2 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
-		2692DFDF1BB276DA008400A0 /* Companies.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Companies.sqlite; sourceTree = "<group>"; };
-		2692DFE01BB276DA008400A0 /* Companies.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-shm"; sourceTree = "<group>"; };
-		2692DFE11BB276DA008400A0 /* Companies.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-wal"; sourceTree = "<group>"; };
 		269A223B1B1CF45B00023BE8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		269C0CF91B8E8D18008FB633 /* CompanyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyModel.xcdatamodel; sourceTree = "<group>"; };
 		269C0CFB1B8E8D9F008FB633 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -275,10 +275,10 @@
 				26BD3D3A1B1607AF00CD0572 /* FavoriteCompanies.swift */,
 				2602AD541B14F2A100B0DB32 /* ArmadaApi.swift */,
 				2685FD651BB21AD40049FEE2 /* SettingsManager.swift */,
+				26431A1D1BC9C3F8002A2734 /* Companies.sqlite */,
+				26431A1E1BC9C3F8002A2734 /* Companies.sqlite-shm */,
+				26431A1F1BC9C3F8002A2734 /* Companies.sqlite-wal */,
 				269C0CF81B8E8D18008FB633 /* CompanyModel.xcdatamodeld */,
-				2692DFDF1BB276DA008400A0 /* Companies.sqlite */,
-				2692DFE01BB276DA008400A0 /* Companies.sqlite-shm */,
-				2692DFE11BB276DA008400A0 /* Companies.sqlite-wal */,
 			);
 			name = ArmadaApi;
 			sourceTree = "<group>";
@@ -365,15 +365,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26431A211BC9C3F8002A2734 /* Companies.sqlite-shm in Resources */,
 				265B7DE91B053A080074450B /* Main.storyboard in Resources */,
+				26431A221BC9C3F8002A2734 /* Companies.sqlite-wal in Resources */,
 				265BE5311B1BB1B90097F245 /* worldMap.html in Resources */,
-				2692DFE41BB27724008400A0 /* Companies.sqlite-wal in Resources */,
 				265B7E041B0543820074450B /* fontawesome-webfont.ttf in Resources */,
+				26431A201BC9C3F8002A2734 /* Companies.sqlite in Resources */,
 				265B7DEE1B053A080074450B /* LaunchScreen.xib in Resources */,
 				265B7DEB1B053A080074450B /* Images.xcassets in Resources */,
-				2692DFE31BB27724008400A0 /* Companies.sqlite-shm in Resources */,
 				267C08C91B57EB0600E79C37 /* Launch.storyboard in Resources */,
-				2692DFE21BB27724008400A0 /* Companies.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
