@@ -51,11 +51,15 @@ class NewSponsorsTableViewController: UITableViewController {
             }
             if let image = images[sponsor.imageUrl.absoluteString]{
                 cell.sponsorImageView.image = image
+                cell.sponsorImageUrl = sponsor.imageUrl.absoluteString
             } else{
                 cell.sponsorImageView.image = nil
+                cell.sponsorImageUrl = sponsor.imageUrl.absoluteString
                 cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString){
                     if let image = $0{
-                        self.images[sponsor.imageUrl.absoluteString]=image
+                        if cell.sponsorImageUrl == sponsor.imageUrl.absoluteString{
+                            self.images[sponsor.imageUrl.absoluteString]=image
+                        }
                     }
                 }
             }

@@ -16,4 +16,5 @@ class ArmadaEventNewTableViewCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var eventImageView: UIImageView!
+    var eventImageUrl:String = ""
 }
