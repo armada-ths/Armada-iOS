@@ -8,12 +8,12 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             super.init(tableViewController: tableViewController)
         }
         
-        override func updateFunc(callback: Response<[ArmadaEvent]> -> Void) {
-            ArmadaApi.eventsFromServer(callback)
+        override func updateFunc(callback: Response<[[ArmadaEvent]]> -> Void) {
+            ArmadaApi.eventsFromServer { callback($0.map { [$0] }) }
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let armadaEvent = values[indexPath.row]
+            let armadaEvent = values[indexPath.section][indexPath.row]
             let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventNewTableViewCell", forIndexPath: indexPath) as!
             ArmadaEventNewTableViewCell
             
@@ -58,7 +58,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let armadaEvent = dataSource.values[tableView.indexPathForSelectedRow!.row]
+
+        let armadaEvent = dataSource.values[tableView.indexPathForSelectedRow!.section][tableView.indexPathForSelectedRow!.row]
         if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController {
             controller.armadaEvent = armadaEvent
         }

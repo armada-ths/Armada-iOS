@@ -8,12 +8,12 @@ class NewsTableViewController: ScrollZoomTableViewController {
             super.init(tableViewController: tableViewController)
         }
         
-        override func updateFunc(callback: Response<[News]> -> Void) {
-            ArmadaApi.newsFromServer(callback)
+        override func updateFunc(callback: Response<[[News]]> -> Void) {
+            ArmadaApi.newsFromServer { callback($0.map { [$0] }) }
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let newsItem = values[indexPath.row]
+            let newsItem = values[indexPath.section][indexPath.row]
             let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell
             cell.titleLabel.text = newsItem.title
             cell.descriptionLabel.text = newsItem.publishedDate.formatWithStyle(.LongStyle)
@@ -83,7 +83,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? NewsDetailTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-                let news = dataSource.values[indexPath.row]
+                let news = dataSource.values[indexPath.section][indexPath.row]
                 controller.news = news
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {
                     NewsTableViewController.readArmadaNews.append(news.title)

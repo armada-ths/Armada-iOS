@@ -5,7 +5,12 @@ public struct Sponsor {
     let imageUrl: NSURL
     let description: String
     let websiteUrl: NSURL
+    
+    let isMainPartner: Bool
+    let isMainSponsor: Bool
+    let isGreenPartner: Bool
 }
+
 
 class NewSponsorsTableViewController: UITableViewController {
     
@@ -15,12 +20,28 @@ class NewSponsorsTableViewController: UITableViewController {
             super.init(tableViewController: tableViewController)
         }
         
-        override func updateFunc(callback: Response<[Sponsor]> -> Void) {
-            ArmadaApi.sponsorsFromServer(callback)
+        override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
+            ArmadaApi.sponsorsFromServer { callback($0.map {
+                sponsors in
+                let sponsorGroups: [[Sponsor]] = [
+                    sponsors.filter { $0.isMainPartner },
+                    sponsors.filter { $0.isMainSponsor },
+                    sponsors.filter { $0.isGreenPartner },
+                    sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
+                ]
+                return sponsorGroups
+                })
+            }
+
         }
         
+        func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            return ["Main Partners", "Main Sponsors", "Green Partners", "Other Sponsors"][section]
+        }
+        
+        
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let sponsor = values[indexPath.row]
+            let sponsor = values[indexPath.section][indexPath.row]
             let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "NewSponsorsTableViewCellNoText" : "NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
             if !sponsor.description.isEmpty {
                 cell.sponsorLabel.text = sponsor.description
@@ -39,6 +60,8 @@ class NewSponsorsTableViewController: UITableViewController {
         tableView.dataSource = dataSource
     }
     
+
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -55,7 +78,7 @@ class NewSponsorsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let sponsor = dataSource.values[indexPath.row]
+        let sponsor = dataSource.values[indexPath.section][indexPath.row]
         if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
             UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
         }

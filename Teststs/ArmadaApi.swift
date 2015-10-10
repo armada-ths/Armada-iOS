@@ -452,7 +452,11 @@ public class _ArmadaApi {
                 let imageUrl = NSURL(string: imageUrlString),
                 let websiteUrlString = json["website_url"] as? String,
                 let websiteUrl = NSURL(string: websiteUrlString) {
-                    return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl)
+
+                    let isMainPartner = json["main_partner"] as? Bool ?? false
+                    let isMainSponsor = json["main_sponsor"] as? Bool ?? false
+                    let isGreenPartner = json["green_partner"] as? Bool ?? false
+                    return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl, isMainPartner: isMainPartner, isMainSponsor: isMainSponsor, isGreenPartner: isGreenPartner)
                     
             }
             return nil

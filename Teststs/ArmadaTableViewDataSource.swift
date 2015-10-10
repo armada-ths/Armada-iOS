@@ -2,7 +2,7 @@ import UIKit
 
 class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
     
-    var values = [T]()
+    var values = [[T]]()
     weak var tableViewController: UITableViewController?
     
     let separatorStyle: UITableViewCellSeparatorStyle
@@ -40,7 +40,7 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         }
     }
     
-    func updateFunc(callback: Response<[T]> -> Void) {
+    func updateFunc(callback: Response<[[T]]> -> Void) {
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -52,11 +52,11 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return values.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return values.count
+        return values[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
