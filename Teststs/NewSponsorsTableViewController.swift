@@ -12,7 +12,7 @@ public struct Sponsor {
 }
 
 
-class NewSponsorsTableViewController: UITableViewController {
+class NewSponsorsTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     class ArmadaSponsorTableViewDataSource: ArmadaTableViewDataSource<Sponsor> {
         
@@ -34,7 +34,7 @@ class NewSponsorsTableViewController: UITableViewController {
                 return sponsorGroups
                 })
             }
-
+            
         }
         
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -73,9 +73,42 @@ class NewSponsorsTableViewController: UITableViewController {
         super.viewDidLoad()
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
+        if #available(iOS 9.0, *) {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
     }
     
-
+    
+    var highlightedSponsor: Sponsor?
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing,
+        viewControllerForLocation location: CGPoint) -> UIViewController? {
+            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
+                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
+            
+            
+            let sponsor = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
+            highlightedSponsor = sponsor
+            let viewController = storyboard!.instantiateViewControllerWithIdentifier("SponsorsWebViewController") as! SponsorsWebViewController
+            viewController.url = sponsor.websiteUrl
+            if #available(iOS 9.0, *) {
+                previewingContext.sourceRect = cell.frame
+            }
+            return viewController
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        self.performSegueWithIdentifier("SponsorsWebViewSegue", sender: self)
+    }
+    
+    
+    var selectedSponsor: Sponsor? {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            return dataSource.values[indexPath.section][indexPath.row]
+        }
+        return nil
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -93,11 +126,12 @@ class NewSponsorsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let sponsor = dataSource.values[indexPath.section][indexPath.row]
-        if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
-            UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
+        if let sponsor = selectedSponsor ?? highlightedSponsor {
+            if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
+                UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
+            }
+            deselectSelectedCell()
         }
-        deselectSelectedCell()
     }
     
 }

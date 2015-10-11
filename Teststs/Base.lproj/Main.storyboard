@@ -1913,7 +1913,42 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JqX-MY-AES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4223" y="3061"/>
+            <point key="canvasLocation" x="3995" y="3037"/>
+        </scene>
+        <!--Sponsors Web View Controller-->
+        <scene sceneID="wL0-qX-DeG">
+            <objects>
+                <viewController storyboardIdentifier="SponsorsWebViewController" id="uKU-Z2-JeA" customClass="SponsorsWebViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t1Q-90-wWE"/>
+                        <viewControllerLayoutGuide type="bottom" id="stR-5E-gfg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pzo-EY-Wj2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oEN-gO-yk9">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oEN-gO-yk9" firstAttribute="top" secondItem="t1Q-90-wWE" secondAttribute="bottom" id="0jx-98-7vk"/>
+                            <constraint firstAttribute="trailing" secondItem="oEN-gO-yk9" secondAttribute="trailing" id="FN8-d6-Jec"/>
+                            <constraint firstItem="oEN-gO-yk9" firstAttribute="leading" secondItem="Pzo-EY-Wj2" secondAttribute="leading" id="eou-gg-BZd"/>
+                            <constraint firstItem="stR-5E-gfg" firstAttribute="top" secondItem="oEN-gO-yk9" secondAttribute="bottom" id="jch-hW-zIb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="oEN-gO-yk9" id="2j6-ec-6IF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdY-K0-FjQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5216" y="2859"/>
         </scene>
         <!--Armada View Controller-->
         <scene sceneID="qAT-ua-a1w">
@@ -2795,8 +2830,50 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="260"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pk2-DK-S4r">
+                                            <rect key="frame" x="175" y="32" width="240" height="128"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="0NB-Mj-mdI"/>
+                                                <constraint firstAttribute="height" constant="90" id="CBR-WW-Nig"/>
+                                                <constraint firstAttribute="width" constant="240" id="Iaq-21-8cT"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="0NB-Mj-mdI"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="leading" secondItem="VXJ-XI-HFh" secondAttribute="leadingMargin" id="PzN-Pf-Joq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Pk2-DK-S4r" secondAttribute="bottom" id="T7J-ar-Jiy"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="top" secondItem="VXJ-XI-HFh" secondAttribute="topMargin" id="Tsq-vP-NBU"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Pk2-DK-S4r" secondAttribute="trailing" id="bes-Gu-bzI"/>
+                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="centerX" secondItem="VXJ-XI-HFh" secondAttribute="centerX" id="zOD-Fk-46h"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="PzN-Pf-Joq"/>
+                                            <exclude reference="bes-Gu-bzI"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="sponsorImageView" destination="Pk2-DK-S4r" id="QUi-hM-yAh"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="352" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="8YJ-Hh-mEj" id="bxy-tb-5G2">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
@@ -2842,48 +2919,6 @@
                                     <outlet property="sponsorLabel" destination="SC4-OD-TJi" id="al7-eL-p1e"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="352" width="600" height="260"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="259"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pk2-DK-S4r">
-                                            <rect key="frame" x="175" y="32" width="240" height="128"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="240" id="0NB-Mj-mdI"/>
-                                                <constraint firstAttribute="height" constant="90" id="CBR-WW-Nig"/>
-                                                <constraint firstAttribute="width" constant="240" id="Iaq-21-8cT"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="0NB-Mj-mdI"/>
-                                                </mask>
-                                            </variation>
-                                        </imageView>
-                                    </subviews>
-                                    <animations/>
-                                    <constraints>
-                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="leading" secondItem="VXJ-XI-HFh" secondAttribute="leadingMargin" id="PzN-Pf-Joq"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Pk2-DK-S4r" secondAttribute="bottom" id="T7J-ar-Jiy"/>
-                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="top" secondItem="VXJ-XI-HFh" secondAttribute="topMargin" id="Tsq-vP-NBU"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Pk2-DK-S4r" secondAttribute="trailing" id="bes-Gu-bzI"/>
-                                        <constraint firstItem="Pk2-DK-S4r" firstAttribute="centerX" secondItem="VXJ-XI-HFh" secondAttribute="centerX" id="zOD-Fk-46h"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="PzN-Pf-Joq"/>
-                                            <exclude reference="bes-Gu-bzI"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <animations/>
-                                <connections>
-                                    <outlet property="sponsorImageView" destination="Pk2-DK-S4r" id="QUi-hM-yAh"/>
-                                </connections>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="z1U-qK-Dnt" id="JIs-wx-wpf"/>
@@ -2891,10 +2926,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sponsors" id="h1L-vd-s2G"/>
+                    <connections>
+                        <segue destination="uKU-Z2-JeA" kind="show" identifier="SponsorsWebViewSegue" id="upn-8d-51c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iO8-95-c3q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4964" y="1788"/>
+            <point key="canvasLocation" x="5642" y="2080"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="2cN-W6-XQq">
