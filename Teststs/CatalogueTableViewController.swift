@@ -26,6 +26,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             return false
         }
     }
+
+    
     
     
     func updateCompaniesByLetters(companies: [Company]) {
@@ -36,6 +38,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         searchBar.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -53,6 +57,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
         highlightedIndexPath = indexPath
+        
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
@@ -62,10 +67,20 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         let company = companiesByLetters[highlightedIndexPath.section].companies[highlightedIndexPath.row]
         let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
         companyViewController.company = company
+        if #available(iOS 9.0, *) {
+            previewingContext.sourceRect = tableView.cellForRowAtIndexPath(highlightedIndexPath)!.frame
+        } else {
+            // Fallback on earlier versions
+        }
+//        previewingContext.sourceRect = tableView.cellForRowAtIndexPath(highlightedIndexPath)!.frame
         
         return companyViewController
         
     }
+    
+    
+    
+    
     
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
