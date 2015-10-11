@@ -21,7 +21,8 @@ class ScrollZoomTableViewController: UITableViewController {
         updateHeaderView()
     }
     
-    var navigationBarHeight: CGFloat {   
+    var navigationBarHeight: CGFloat {
+        if parentViewController == nil { return 0 }
         return (parentViewController as? ArmadaViewController != nil) ? -64 : 64
     }
     

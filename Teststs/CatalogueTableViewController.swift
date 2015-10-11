@@ -67,6 +67,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         let company = companiesByLetters[highlightedIndexPath.section].companies[highlightedIndexPath.row]
         let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
         companyViewController.company = company
+
         if #available(iOS 9.0, *) {
             previewingContext.sourceRect = tableView.cellForRowAtIndexPath(highlightedIndexPath)!.frame
         } else {
