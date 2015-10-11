@@ -1968,7 +1968,7 @@
         <!--News Detail Table View Controller-->
         <scene sceneID="8Mn-qv-V1p">
             <objects>
-                <tableViewController id="67Z-fa-cwa" customClass="NewsDetailTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewsDetailTableViewController" id="67Z-fa-cwa" customClass="NewsDetailTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="229" sectionHeaderHeight="22" sectionFooterHeight="22" id="0us-aT-ow7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2224,7 +2224,7 @@
                                     <outlet property="descriptionLabel" destination="J46-C6-eLz" id="KDl-xf-Kbb"/>
                                     <outlet property="isReadLabel" destination="aLV-XF-mYu" id="Rrc-c4-gYx"/>
                                     <outlet property="titleLabel" destination="f1j-mq-Ob6" id="KcF-sj-RbM"/>
-                                    <segue destination="67Z-fa-cwa" kind="show" id="rqO-4i-A8F"/>
+                                    <segue destination="67Z-fa-cwa" kind="show" identifier="ArmadaNewsDetailSegue" id="rqO-4i-A8F"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JUt-pl-71U">

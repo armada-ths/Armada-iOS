@@ -39,7 +39,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             }
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
             cell.descriptionLabel.text = armadaEvent.summary
-
+            
             
             /*
             let imageNames = ["Armada Run", "The Thesis Proposal", "Theme Lectures", "Enova", "Practical Engineering", "The Internship Pitch", "Armada Talks"]
@@ -52,9 +52,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             cell.dayLabel.text = armadaEvent.startDate.format("d")
             cell.monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
             if let imageUrl = armadaEvent.imageUrl {
-                cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
+            cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
             }
-*/
+            */
             return cell
         }
     }
@@ -109,14 +109,14 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController,
-             let armadaEvent = selectedEvent ?? highlightedEvent {
-            controller.armadaEvent = armadaEvent
-            if !readArmadaEvents.contains(armadaEvent.title) {
-                readArmadaEvents.append(armadaEvent.title)
+            let armadaEvent = selectedEvent ?? highlightedEvent {
+                controller.armadaEvent = armadaEvent
+                if !readArmadaEvents.contains(armadaEvent.title) {
+                    readArmadaEvents.append(armadaEvent.title)
                 }
         }
-
-    
+        
+        
     }
     
     
