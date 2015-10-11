@@ -13,14 +13,9 @@ class ScrollZoomTableViewController: UITableViewController {
         if headerHeight == 0 {
             headerHeight = headerView.frame.height
         }
-        
-        
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
         tableView.sendSubviewToBack(headerView)
-
-        
-        
         tableView.contentInset = UIEdgeInsets(top: headerHeight+navigationBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -(headerHeight+navigationBarHeight))
         updateHeaderView()

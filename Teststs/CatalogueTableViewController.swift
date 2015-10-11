@@ -1,6 +1,6 @@
 import UIKit
 
-class CatalogueTableViewController: UITableViewController {
+class CatalogueTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -40,7 +40,42 @@ class CatalogueTableViewController: UITableViewController {
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
+        
+            if #available(iOS 9.0, *) {
+                registerForPreviewingWithDelegate(self, sourceView: view)
+            } else {
+                // Fallback on earlier versions
+            }
     }
+    
+    
+    var highlightedIndexPath: NSIndexPath?
+    
+    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        highlightedIndexPath = indexPath
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing,
+        viewControllerForLocation location: CGPoint) -> UIViewController?
+    {
+        guard let highlightedIndexPath = highlightedIndexPath else  { return nil }
+        let company = companiesByLetters[highlightedIndexPath.section].companies[highlightedIndexPath.row]
+        let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+        companyViewController.company = company
+        
+        return companyViewController
+        
+    }
+    
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        print("Hey baberiba")
+        dismissViewControllerAnimated(true) {}
+        self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
+    }
+
+    
+    
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
         ArmadaApi.updateCompanies {
@@ -152,7 +187,7 @@ class CatalogueTableViewController: UITableViewController {
         
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
-            companiesPageViewController.selectedCompany = selectedCompany
+            companiesPageViewController.selectedCompany = selectedCompany ?? companiesByLetters[highlightedIndexPath!.section].companies[highlightedIndexPath!.row]
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = CompanyFilter
