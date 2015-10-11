@@ -1,6 +1,6 @@
 import UIKit
 
-class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
+class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate, UIViewControllerPreviewingDelegate {
     
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
@@ -71,18 +71,52 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
         self.clearsSelectionOnViewWillAppear = true
+        
+        if #available(iOS 9.0, *) {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
+    
+    var highlightedEvent: ArmadaEvent?
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing,
+        viewControllerForLocation location: CGPoint) -> UIViewController? {
+            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
+                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
+            
+            
+            let armadaEvent = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
+            highlightedEvent = armadaEvent
+            let viewController = storyboard!.instantiateViewControllerWithIdentifier("ArmadaEventDetailTableViewController") as! ArmadaEventDetailTableViewController
+            viewController.armadaEvent = armadaEvent
+            if #available(iOS 9.0, *) {
+                previewingContext.sourceRect = cell.frame
+            }
+            return viewController
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        self.performSegueWithIdentifier("ArmadaEventDetailSegue", sender: self)
+    }
+    
+    
+    var selectedEvent: ArmadaEvent? {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            return dataSource.values[indexPath.section][indexPath.row]
+        }
+        return nil
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-
-        let armadaEvent = dataSource.values[tableView.indexPathForSelectedRow!.section][tableView.indexPathForSelectedRow!.row]
-        if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController {
+        if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController,
+             let armadaEvent = selectedEvent ?? highlightedEvent {
             controller.armadaEvent = armadaEvent
+            if !readArmadaEvents.contains(armadaEvent.title) {
+                readArmadaEvents.append(armadaEvent.title)
+                }
         }
-        if !readArmadaEvents.contains(armadaEvent.title) {
-            readArmadaEvents.append(armadaEvent.title)
-        }
-        
+
+    
     }
     
     

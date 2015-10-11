@@ -1703,7 +1703,7 @@
                                     <outlet property="descriptionLabel" destination="tfh-4o-0hC" id="xq8-NT-gwa"/>
                                     <outlet property="eventImageView" destination="RkC-uR-jlD" id="nu2-ng-eY3"/>
                                     <outlet property="titleLabel" destination="nQQ-SJ-zD3" id="74c-IC-zIc"/>
-                                    <segue destination="1vj-2m-lxX" kind="show" id="TRA-nv-BBS"/>
+                                    <segue destination="1vj-2m-lxX" kind="show" identifier="ArmadaEventDetailSegue" id="TRA-nv-BBS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1726,7 +1726,7 @@
         <!--Armada Event Detail Table View Controller-->
         <scene sceneID="QLj-c3-t3I">
             <objects>
-                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="1vj-2m-lxX" customClass="ArmadaEventDetailTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ArmadaEventDetailTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="1vj-2m-lxX" customClass="ArmadaEventDetailTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="296" sectionHeaderHeight="22" sectionFooterHeight="22" id="bS9-VI-oFT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1913,7 +1913,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JqX-MY-AES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4123" y="2917"/>
+            <point key="canvasLocation" x="4223" y="3061"/>
         </scene>
         <!--Armada View Controller-->
         <scene sceneID="qAT-ua-a1w">
@@ -3304,6 +3304,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="HmL-IU-78Y"/>
         <segue reference="HBS-08-1M2"/>
-        <segue reference="ip2-jl-9zb"/>
+        <segue reference="TRA-nv-BBS"/>
     </inferredMetricsTieBreakers>
 </document>
