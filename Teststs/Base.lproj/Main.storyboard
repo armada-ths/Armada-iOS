@@ -3046,7 +3046,7 @@
                                     <outlet property="matchLabel" destination="UyE-oS-b6t" id="gsQ-Of-uVt"/>
                                     <outlet property="matchProgressView" destination="dmS-rf-nX4" id="wVs-Nd-LlB"/>
                                     <outlet property="workFieldLabel" destination="5M5-Qp-M0y" id="smE-Pp-czo"/>
-                                    <segue destination="bEp-MO-iUH" kind="show" id="HmL-IU-78Y"/>
+                                    <segue destination="bEp-MO-iUH" kind="show" identifier="CompanyPageViewControllerSegue" id="HmL-IU-78Y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3302,8 +3302,8 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="HmL-IU-78Y"/>
         <segue reference="HBS-08-1M2"/>
-        <segue reference="bli-j8-CSx"/>
         <segue reference="ip2-jl-9zb"/>
     </inferredMetricsTieBreakers>
 </document>

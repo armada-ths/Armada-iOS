@@ -38,60 +38,35 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         searchBar.delegate = self
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
-        
             if #available(iOS 9.0, *) {
                 registerForPreviewingWithDelegate(self, sourceView: view)
-            } else {
-                // Fallback on earlier versions
             }
     }
     
     
-    var highlightedIndexPath: NSIndexPath?
-    
-    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-        highlightedIndexPath = indexPath
-        
-    }
+    var highlightedCompany: Company?
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
-        viewControllerForLocation location: CGPoint) -> UIViewController?
-    {
-        guard let highlightedIndexPath = highlightedIndexPath else  { return nil }
+        viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
+            let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
         let company = companiesByLetters[highlightedIndexPath.section].companies[highlightedIndexPath.row]
+        highlightedCompany = company
         let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
         companyViewController.company = company
-
         if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = tableView.cellForRowAtIndexPath(highlightedIndexPath)!.frame
-        } else {
-            // Fallback on earlier versions
+            previewingContext.sourceRect = cell.frame
         }
-//        previewingContext.sourceRect = tableView.cellForRowAtIndexPath(highlightedIndexPath)!.frame
-        
         return companyViewController
-        
     }
-    
-    
-    
-    
-    
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        print("Hey baberiba")
-        dismissViewControllerAnimated(true) {}
         self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
     }
-
-    
-    
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
         ArmadaApi.updateCompanies {
@@ -203,7 +178,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
-            companiesPageViewController.selectedCompany = selectedCompany ?? companiesByLetters[highlightedIndexPath!.section].companies[highlightedIndexPath!.row]
+            companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = CompanyFilter

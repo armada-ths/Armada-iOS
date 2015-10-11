@@ -4,19 +4,44 @@ import UIKit
 private let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
 private let FakeMatchFilter = _CompanyFilter(userDefaultsKey: "FakeMatchFilter")
 
-class MatchTableViewController: UITableViewController {
+class MatchTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
     var companiesWithMatchPercentages = [(company: Company, percentage: Double)]()
     var matchPercentages = [Double]()
+    var highlightedCompany: Company?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 9.0, *) {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
         if FakeMatchFilter.isEmpty {
             FakeMatchFilter[CompanyProperty.WorkFields] = Array(ArmadaApi.workFields[0...3])
             FakeMatchFilter[CompanyProperty.CompanyValues] = Array(ArmadaApi.companyValues[0...2])
             FakeMatchFilter[CompanyProperty.WorkWays] = Array(ArmadaApi.workWays[0...2])
         }
+    }
+    
+    var highlightedIndexPath: NSIndexPath?
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing,
+        viewControllerForLocation location: CGPoint) -> UIViewController? {
+            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
+                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
+            self.highlightedIndexPath = highlightedIndexPath
+            let companyWithPercentage = companiesWithMatchPercentages[highlightedIndexPath.row]
+            highlightedCompany = companyWithPercentage.company
+            let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+            companyViewController.company = companyWithPercentage.company
+            if #available(iOS 9.0, *) {
+                previewingContext.sourceRect = cell.frame
+            }
+            return companyViewController
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
     }
     
     var label: UILabel?
@@ -192,7 +217,7 @@ class MatchTableViewController: UITableViewController {
         let companies = companiesWithMatchPercentages.map { $0.company }
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies
-            companiesPageViewController.selectedCompany = selectedCompany
+            companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = MatchFilter

@@ -27,10 +27,6 @@ class ScrollZoomTableViewController: UITableViewController {
     }
     
     func updateHeaderView() {
-
-        
-        
-
         if headerView == nil {
             return
         }
