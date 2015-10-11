@@ -29,11 +29,10 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         viewControllerForLocation location: CGPoint) -> UIViewController? {
             guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
                 let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            self.highlightedIndexPath = highlightedIndexPath
             let companyWithPercentage = companiesWithMatchPercentages[highlightedIndexPath.row]
             highlightedCompany = companyWithPercentage.company
             let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
-            companyViewController.company = companyWithPercentage.company
+            companyViewController.company = highlightedCompany
             if #available(iOS 9.0, *) {
                 previewingContext.sourceRect = cell.frame
             }
@@ -204,12 +203,11 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         return cell
     }
     
-    var selectedCompany: Company? = nil
-    
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        print("will select row")
-        selectedCompany = companiesWithMatchPercentages[indexPath.row].company
-        return indexPath
+    var selectedCompany: Company? {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            return companiesWithMatchPercentages[indexPath.row].company
+        }
+        return nil
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
