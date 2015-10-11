@@ -98,9 +98,19 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier("SponsorsWebViewSegue", sender: self)
+        openWebsite()
+        
     }
     
+    
+    func openWebsite() {
+        if let sponsor = selectedSponsor ?? highlightedSponsor {
+            if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
+                UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
+            }
+            deselectSelectedCell()
+        }
+    }
     
     var selectedSponsor: Sponsor? {
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -126,12 +136,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let sponsor = selectedSponsor ?? highlightedSponsor {
-            if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
-                UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
-            }
-            deselectSelectedCell()
-        }
+        openWebsite()
     }
     
 }
