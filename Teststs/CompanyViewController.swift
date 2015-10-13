@@ -33,8 +33,10 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     @IBOutlet weak var linkedinButton: UIButton!
     @IBOutlet weak var likesDiversityImageView: UIImageView!
     
+    @IBOutlet weak var videoLabel: UILabel!
     @IBOutlet weak var waysOfWorkingLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
+    
     override func viewDidLoad() {
         headerHeight = UIScreen.mainScreen().bounds.width * 3 / 4
         super.viewDidLoad()
@@ -67,6 +69,8 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sort().joinWithSeparator("\n")
         
         websiteLabel.text = company.website
+        videoLabel.text = company.videoUrl
+        
         
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
         
@@ -114,6 +118,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     let favoriteCellRow = 0
     let websiteRow = 9
+    let videoRow = 10
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == favoriteCellRow {
@@ -131,6 +136,13 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
                 deselectSelectedCell()
             }
         }
+        
+        if indexPath.row == videoRow {
+            if let url = company.videoUrl.httpUrl {
+                UIApplication.sharedApplication().openURL(url)
+                deselectSelectedCell()
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -138,10 +150,12 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if FavoriteCompanies.contains(company!.name) && indexPath.row == favoriteCellRow {
-            return 0.000001
-        } else {
-            return UITableViewAutomaticDimension
+        let zeroHeight: CGFloat = 0.000001
+        switch indexPath.row {
+        case videoRow where company.videoUrl.isEmpty: return zeroHeight
+        case websiteRow where company.website.isEmpty: return zeroHeight
+        case favoriteCellRow where FavoriteCompanies.contains(company!.name): return zeroHeight
+        default: return UITableViewAutomaticDimension
         }
     }
     

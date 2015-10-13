@@ -17,6 +17,7 @@
             <string>HelveticaNeue-Light</string>
             <string>HelveticaNeue-Light</string>
             <string>HelveticaNeue-Light</string>
+            <string>HelveticaNeue-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1110,8 +1111,57 @@
                                             </mask>
                                         </variation>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bOt-CC-8EV">
+                                        <rect key="frame" x="0.0" y="1033" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="bOt-CC-8EV" id="1un-9i-ek2">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="http://www.volvo.com" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-Oe-Hw8">
+                                                    <rect key="frame" x="15" y="32" width="565" height="18"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" red="0.10980392160000001" green="0.41176470590000003" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Video" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEs-qS-N4e">
+                                                    <rect key="frame" x="16" y="11" width="57" height="19"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="H3k-Oe-Hw8" secondAttribute="trailing" constant="5" id="2uw-Cl-DAy"/>
+                                                <constraint firstItem="MEs-qS-N4e" firstAttribute="top" secondItem="1un-9i-ek2" secondAttribute="topMargin" constant="3" id="918-8b-1WE"/>
+                                                <constraint firstItem="MEs-qS-N4e" firstAttribute="top" secondItem="1un-9i-ek2" secondAttribute="topMargin" id="A1j-Y0-Jec"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="H3k-Oe-Hw8" secondAttribute="bottom" id="Apd-YH-QN1"/>
+                                                <constraint firstItem="H3k-Oe-Hw8" firstAttribute="top" secondItem="MEs-qS-N4e" secondAttribute="bottom" constant="3" id="DFX-wK-9AE"/>
+                                                <constraint firstItem="H3k-Oe-Hw8" firstAttribute="top" secondItem="MEs-qS-N4e" secondAttribute="bottom" constant="3" id="K5Z-Fn-LNv"/>
+                                                <constraint firstItem="MEs-qS-N4e" firstAttribute="leading" secondItem="1un-9i-ek2" secondAttribute="leadingMargin" id="cHj-zh-BXU"/>
+                                                <constraint firstItem="MEs-qS-N4e" firstAttribute="leading" secondItem="H3k-Oe-Hw8" secondAttribute="leading" id="yhH-cM-BhV"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="918-8b-1WE"/>
+                                                    <exclude reference="DFX-wK-9AE"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="H3k-Oe-Hw8" secondAttribute="bottom" constant="7" id="Or3-dn-Cqz"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Or3-dn-Cqz"/>
+                                            </mask>
+                                        </variation>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="53" id="TW3-2e-qr3">
-                                        <rect key="frame" x="0.0" y="1033" width="600" height="53"/>
+                                        <rect key="frame" x="0.0" y="1077" width="600" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="TW3-2e-qr3" id="jEh-bp-ZiN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
@@ -1161,7 +1211,7 @@
                                         <animations/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="131" id="ba4-oD-xPZ">
-                                        <rect key="frame" x="0.0" y="1086" width="600" height="131"/>
+                                        <rect key="frame" x="0.0" y="1130" width="600" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="ba4-oD-xPZ" id="GJc-27-i2h">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
@@ -1252,6 +1302,7 @@
                         <outlet property="locationLabel" destination="TUQ-e7-XNJ" id="H46-qZ-4Yu"/>
                         <outlet property="mapWebView" destination="ZhN-hm-cDy" id="OqQ-9i-mXU"/>
                         <outlet property="twitterButton" destination="WpO-f8-7Al" id="Wr0-bf-U5s"/>
+                        <outlet property="videoLabel" destination="H3k-Oe-Hw8" id="dCV-6i-hVw"/>
                         <outlet property="waysOfWorkingLabel" destination="qCc-Ol-hTZ" id="UaO-Ed-5GW"/>
                         <outlet property="websiteLabel" destination="aPg-YA-Ujc" id="eqf-An-o9x"/>
                     </connections>
@@ -2681,14 +2732,14 @@
                                             <rect key="frame" x="15" y="13" width="36" height="17"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOe-PU-Rp9">
                                             <rect key="frame" x="549" y="13" width="36" height="17"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -2774,14 +2825,14 @@
                                             <rect key="frame" x="15" y="13" width="36" height="17"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lF-dh-qy9">
                                             <rect key="frame" x="549" y="13" width="36" height="17"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

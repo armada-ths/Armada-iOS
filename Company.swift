@@ -29,6 +29,7 @@ public class Company: NSManagedObject {
                 
                 let countries = json["countries"] as? Int ?? 0
                 let locationUrl = json["map_url"] as? String ?? ""
+                let videoUrl = json["video_url"] as? String ?? ""
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
                 let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
@@ -71,6 +72,7 @@ public class Company: NSManagedObject {
                 company.adUrl = adUrl
                 company.keywords = keywords
                 company.primaryWorkField = keywords
+                company.videoUrl = videoUrl
                 
                 _ = {
                     let fetchRequest = NSFetchRequest()

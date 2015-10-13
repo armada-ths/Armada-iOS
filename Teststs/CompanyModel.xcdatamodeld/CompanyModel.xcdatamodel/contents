@@ -23,6 +23,7 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="primaryWorkField" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="companyValues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompanyValue" inverseName="companies" inverseEntity="CompanyValue" syncable="YES"/>
         <relationship name="continents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Continent" inverseName="companies" inverseEntity="Continent" syncable="YES"/>
@@ -56,7 +57,7 @@
         <relationship name="companies" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Company" inverseName="workWays" inverseEntity="Company" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Company" positionX="-63" positionY="-18" width="128" height="480"/>
+        <element name="Company" positionX="-63" positionY="-18" width="128" height="495"/>
         <element name="CompanyValue" positionX="-27" positionY="126" width="128" height="75"/>
         <element name="Continent" positionX="0" positionY="162" width="128" height="75"/>
         <element name="JobType" positionX="-27" positionY="135" width="128" height="75"/>
