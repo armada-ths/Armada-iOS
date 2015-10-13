@@ -27,8 +27,8 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
                 sponsors in
                 let sponsorGroups: [[Sponsor]] = [
                     sponsors.filter { $0.isMainPartner },
-                    sponsors.filter { $0.isMainSponsor },
                     sponsors.filter { $0.isGreenPartner },
+                    sponsors.filter { $0.isMainSponsor },
                     sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
                 ]
                 return sponsorGroups
@@ -38,7 +38,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         }
         
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return ["Main Partners", "Main Sponsors", "Green Partners", "Other Sponsors"][section]
+            return ["Main Partners", "Green Partners", "Main Sponsors", "Other Sponsors"][section]
         }
         
         
