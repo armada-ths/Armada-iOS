@@ -117,6 +117,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     }
     
     let favoriteCellRow = 0
+    let infoRow = 11
     let websiteRow = 9
     let videoRow = 10
     
@@ -143,7 +144,19 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
                 deselectSelectedCell()
             }
         }
+        
+        if indexPath.row == infoRow {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+            self.performSegueWithIdentifier("InfoSegue", sender: self)
+            }
+        }
     }
+    
+    
+    @IBAction func unwind(segue: UIStoryboardSegue) {
+        
+    }
+    
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension

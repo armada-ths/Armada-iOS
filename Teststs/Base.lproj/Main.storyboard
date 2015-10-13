@@ -238,7 +238,7 @@
                     <navigationItem key="navigationItem" title="Info" id="cQd-ZW-lmM">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="Va9-3t-33O">
                             <connections>
-                                <segue destination="VtA-Vi-gOe" kind="unwind" unwindAction="unwind:" id="dk2-6i-RO0"/>
+                                <segue destination="VtA-Vi-gOe" kind="unwind" unwindAction="unwind:" id="5Nv-8P-2zf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -246,7 +246,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqj-bg-Rny" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="VtA-Vi-gOe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1234" y="3861"/>
+            <point key="canvasLocation" x="-730" y="5227"/>
         </scene>
         <!--Catalogue Table View Controller-->
         <scene sceneID="5gy-2q-Wgj">
@@ -1160,7 +1160,7 @@
                                             </mask>
                                         </variation>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="53" id="TW3-2e-qr3">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="53" id="TW3-2e-qr3">
                                         <rect key="frame" x="0.0" y="1077" width="600" height="53"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="TW3-2e-qr3" id="jEh-bp-ZiN">
@@ -1305,11 +1305,12 @@
                         <outlet property="videoLabel" destination="H3k-Oe-Hw8" id="dCV-6i-hVw"/>
                         <outlet property="waysOfWorkingLabel" destination="qCc-Ol-hTZ" id="UaO-Ed-5GW"/>
                         <outlet property="websiteLabel" destination="aPg-YA-Ujc" id="eqf-An-o9x"/>
+                        <segue destination="BG5-9C-bK2" kind="presentation" identifier="InfoSegue" id="vNm-TG-1NB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SnR-vx-p8v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="4079"/>
+            <point key="canvasLocation" x="-207" y="4033"/>
         </scene>
         <!--Events-->
         <scene sceneID="gDB-UP-Dea">
@@ -3357,7 +3358,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKI-rw-qzB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1234" y="3061"/>
+            <point key="canvasLocation" x="-976" y="3545"/>
         </scene>
     </scenes>
     <resources>
@@ -3391,8 +3392,9 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HmL-IU-78Y"/>
-        <segue reference="HBS-08-1M2"/>
         <segue reference="TRA-nv-BBS"/>
+        <segue reference="HBS-08-1M2"/>
+        <segue reference="bli-j8-CSx"/>
+        <segue reference="vNm-TG-1NB"/>
     </inferredMetricsTieBreakers>
 </document>
