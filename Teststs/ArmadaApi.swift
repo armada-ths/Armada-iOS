@@ -428,7 +428,7 @@ public class _ArmadaApi {
                     return ArmadaEvent(title: title, summary: summary, location: location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
             }
             return nil
-            } ?? []).filter({ $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 }).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
+            } ?? []).filter({ $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 - 60*60*24*30 }).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
     }
     
     public func newsFromJson(jsonOriginal: AnyObject) -> [News] {

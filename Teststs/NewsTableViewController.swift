@@ -1,6 +1,6 @@
 import UIKit
 
-class NewsTableViewController: ScrollZoomTableViewController, UIViewControllerPreviewingDelegate {
+class NewsTableViewController: ScrollZoomTableViewController {
     
     class ArmadaNewsTableViewDataSource: ArmadaTableViewDataSource<News> {
         
@@ -58,42 +58,10 @@ class NewsTableViewController: ScrollZoomTableViewController, UIViewControllerPr
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         self.clearsSelectionOnViewWillAppear = true
-        
-        if #available(iOS 9.0, *) {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
-    }
-    
-    var highlightedNews: News?
-    
-    func previewingContext(previewingContext: UIViewControllerPreviewing,
-        viewControllerForLocation location: CGPoint) -> UIViewController? {
-            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
-                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            
-            
-            let news = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
-            highlightedNews = news
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("NewsDetailTableViewController") as! NewsDetailTableViewController
-            viewController.news = news
-            if #available(iOS 9.0, *) {
-                previewingContext.sourceRect = cell.frame
-            }
-            return viewController
-    }
-    
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier("ArmadaNewsDetailSegue", sender: self)
     }
     
     
-    var selectedNews: News? {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            return dataSource.values[indexPath.section][indexPath.row]
-        }
-        return nil
-    }
-    
+    var highLightedIndexPath: NSIndexPath?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -114,10 +82,14 @@ class NewsTableViewController: ScrollZoomTableViewController, UIViewControllerPr
         return UITableViewAutomaticDimension
     }
     
+    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        highLightedIndexPath = indexPath
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? NewsDetailTableViewController,
-            let news = selectedNews ?? highlightedNews {
+            let indexPath = tableView.indexPathForSelectedRow ?? highLightedIndexPath {
+                let news = dataSource.values[indexPath.section][indexPath.row]
                 controller.news = news
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {
                     NewsTableViewController.readArmadaNews.append(news.title)

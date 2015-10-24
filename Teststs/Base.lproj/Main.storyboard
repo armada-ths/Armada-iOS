@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeueLights.ttc">
@@ -2311,7 +2312,10 @@
                                     <outlet property="descriptionLabel" destination="J46-C6-eLz" id="KDl-xf-Kbb"/>
                                     <outlet property="isReadLabel" destination="aLV-XF-mYu" id="Rrc-c4-gYx"/>
                                     <outlet property="titleLabel" destination="f1j-mq-Ob6" id="KcF-sj-RbM"/>
-                                    <segue destination="67Z-fa-cwa" kind="show" identifier="ArmadaNewsDetailSegue" id="rqO-4i-A8F"/>
+                                    <segue destination="67Z-fa-cwa" kind="show" identifier="ArmadaNewsDetailSegue" id="rqO-4i-A8F">
+                                        <segue key="commit" inheritsFrom="parent" id="jga-Sl-UJL"/>
+                                        <segue key="preview" inheritsFrom="commit" id="PQz-v2-pgy"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JUt-pl-71U">
@@ -3393,8 +3397,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TRA-nv-BBS"/>
-        <segue reference="HBS-08-1M2"/>
         <segue reference="bli-j8-CSx"/>
-        <segue reference="vNm-TG-1NB"/>
+        <segue reference="HBS-08-1M2"/>
+        <segue reference="ReS-La-4Iy"/>
+        <segue reference="rqO-4i-A8F"/>
     </inferredMetricsTieBreakers>
 </document>
