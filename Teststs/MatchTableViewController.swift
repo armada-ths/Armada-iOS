@@ -112,8 +112,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     
     func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
         
-        
-        
         let Filter = MatchFilter.isEmpty ? FakeMatchFilter : MatchFilter
         
         var matches = [(company: Company, percentage: Double)]()
