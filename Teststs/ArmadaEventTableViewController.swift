@@ -2,16 +2,40 @@ import UIKit
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate, UIViewControllerPreviewingDelegate {
     
+    
+    
+    
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
         var images:[String:UIImage] = [:]
+        
+        
         
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
         
         override func updateFunc(callback: Response<[[ArmadaEvent]]> -> Void) {
-            ArmadaApi.eventsFromServer { callback($0.map { [$0] }) }
+            ArmadaApi.eventsFromServer {
+                callback($0.map { [$0] })
+                
+                var row = 0
+                
+                let dateFormat = "yyyy-MM-dd"
+                let now = NSDate().format(dateFormat)
+                if case .Success(let events) = $0 {
+                    for (i, event) in events.enumerate() {
+                        if event.startDate.format(dateFormat) >= now {
+                            row = i
+                            break
+                        }
+                    }
+                }
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
+                }
+            }
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

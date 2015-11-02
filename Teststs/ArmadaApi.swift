@@ -6,7 +6,7 @@ public struct ArmadaEvent {
     public let summary: String
     public let location: String?
     public let startDate: NSDate
-    public let endDate: NSDate
+    public let endDate: NSDate?
     public let signupLink: String?
     public let signupStartDate: NSDate?
     public let signupEndDate: NSDate?
@@ -237,7 +237,6 @@ public class _ArmadaApi {
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
-        storeLogos()
     }
     
     
@@ -391,11 +390,11 @@ public class _ArmadaApi {
         return Array(Set(companies.flatMap({ $0.programmes }).map { $0.programme })).sort(<)
     }
     
-    func dateFromString(string: String) -> NSDate {
+    func dateFromString(string: String) -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
         let b = string.componentsSeparatedByString(":")
-        return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])!
+        return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])
     }
     
     
@@ -406,10 +405,11 @@ public class _ArmadaApi {
     public func eventsFromJson( jsonOriginal: AnyObject) -> [ArmadaEvent] {
         let json = jsonOriginal["events"]
         
-        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
+        let events =  Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
             if let title = json["title"] as? String,
                 let summary = json["description"] as? String,
                 let startDateString = json["starts_at"] as? String,
+                let startDate = self.dateFromString(startDateString),
                 let endDateString = json["ends_at"] as? String {
                     let location = json["location"] as? String
                     let signupLink = json["external_signup_link"] as? String
@@ -421,10 +421,12 @@ public class _ArmadaApi {
                     let imageUrlString = json["picture_url"] as? String
                     let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
                     let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
-                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: self.dateFromString(startDateString), endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
+                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
             }
             return nil
-            } ?? []).filter({ $0.startDate.timeIntervalSince1970 >=  NSDate().timeIntervalSince1970 - 60*60*24*30 }).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
+            } ?? []).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
+            let lastDate = events.last?.startDate ?? NSDate()
+            return events.filter { $0.startDate.format("yyyy") == lastDate.format("yyyy") }
     }
     
     public func newsFromJson(jsonOriginal: AnyObject) -> [News] {
@@ -433,8 +435,9 @@ public class _ArmadaApi {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
                 let content = json["content"] as? String,
-                let date = json["date_published"] as? String{
-                    return News(title: title, content: content, publishedDate: self.dateFromString(date))
+                let dateString = json["date_published"] as? String,
+                let date = self.dateFromString(dateString) {
+                    return News(title: title, content: content, publishedDate: date)
             }
             return nil
             } ?? [])
