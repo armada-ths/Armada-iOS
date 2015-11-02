@@ -38,23 +38,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 }
             }
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
-            cell.descriptionLabel.text = armadaEvent.summary
-            
-            
-            /*
-            let imageNames = ["Armada Run", "The Thesis Proposal", "Theme Lectures", "Enova", "Practical Engineering", "The Internship Pitch", "Armada Talks"]
-            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
-            
-            let titleComponents = armadaEvent.title.componentsSeparatedByString(" ")
-            let title = titleComponents.count > 1 ? titleComponents[0..<titleComponents.count-1].joinWithSeparator(" ") : titleComponents.last
-            cell.titleLabel.text = title
-            cell.title2Label.text = title != titleComponents.last ?titleComponents.last : "Event"
-            cell.dayLabel.text = armadaEvent.startDate.format("d")
-            cell.monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
-            if let imageUrl = armadaEvent.imageUrl {
-            cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
-            }
-            */
+            cell.descriptionLabel.text = armadaEvent.summary.attributedHtmlString?.string
             return cell
         }
     }
