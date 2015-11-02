@@ -38,7 +38,8 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         }
         
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return ["Main Partners", "Green Partners", "Main Sponsors", "Other Sponsors"][section]
+            let sponsorName = ["Main Partner", "Green Partner", "Main Sponsor", "Other Sponsor"][section]
+            return sponsorName + (values[section].count > 1 ? "s" : "")
         }
         
         

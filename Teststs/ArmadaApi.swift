@@ -449,7 +449,6 @@ public class _ArmadaApi {
                 let imageUrl = NSURL(string: imageUrlString),
                 let websiteUrlString = json["website_url"] as? String,
                 let websiteUrl = NSURL(string: websiteUrlString) {
-
                     let isMainPartner = json["main_partner"] as? Bool ?? false
                     let isMainSponsor = json["main_sponsor"] as? Bool ?? false
                     let isGreenPartner = json["green_partner"] as? Bool ?? false
@@ -464,7 +463,7 @@ public class _ArmadaApi {
     
     static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
     
-    let apiUrl = "http://staging.armada.nu/api"
+    let apiUrl = "http://armada.nu/api"
     
     func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
         _ArmadaApi.getJson(armadaUrlWithPath("events")) {
