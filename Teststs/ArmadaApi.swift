@@ -229,19 +229,15 @@ public class _ArmadaApi {
         let sharedCache = NSURLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).stringByAppendingPathComponent("nsurlcache"))
         NSURLCache.setSharedURLCache(sharedCache)
         let stopWatch = StopWatch()
-        
         print(persistentStoreUrl)
-        
         
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
-        
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
-        
-        
+        storeLogos()
     }
     
     
