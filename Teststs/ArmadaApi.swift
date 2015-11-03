@@ -233,7 +233,7 @@ public class _ArmadaApi {
         
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "localizedCaseInsensitiveCompare:")]
         companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")

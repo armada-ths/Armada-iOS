@@ -120,7 +120,7 @@ class _CompanyFilter {
                 }
             }
         }
-        return filteredCompanies.sort { $0.name < $1.name }
+        return filteredCompanies
     }
     
     
