@@ -3,9 +3,10 @@ import UIKit
 
 extension String {
     func containsWordPrefix(prefix: String) -> Bool {
-        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        for searchPrefix in prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}) {
-            if words.filter({ $0.lowercaseString.hasPrefix(searchPrefix.lowercaseString) }).isEmpty {
+        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).map { $0.lowercaseString }
+        let searchWords = prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}).map { $0.lowercaseString }
+        for searchPrefix in searchWords {
+            if words.filter({ $0.hasPrefix(searchPrefix) }).isEmpty {
                 return false
             }
         }
@@ -22,9 +23,16 @@ class OrganisationGroupsTableViewController: UITableViewController {
             super.init(tableViewController: tableViewController)
         }
         
-        var allOrganisationGroups = [ArmadaGroup]()
+        var allOrganisationGroups = [ArmadaGroup]() {
+            didSet {
+                updateFilter()
+            }
+        }
         
-        var filteredOrganisationGroups: [ArmadaGroup] {
+        var filteredOrganisationGroups = [ArmadaGroup]()
+        
+        func updateFilter() {
+            let stopWatch = StopWatch()
             var matchingOrganisationGroups = [ArmadaGroup]()
             for group in allOrganisationGroups {
                 let searchText = (tableViewController as! OrganisationGroupsTableViewController).searchBar.text ?? ""
@@ -39,7 +47,9 @@ class OrganisationGroupsTableViewController: UITableViewController {
                 }
                 matchingOrganisationGroups += [group]
             }
-            return matchingOrganisationGroups
+            stopWatch.print("Filtered organisations")
+            filteredOrganisationGroups = matchingOrganisationGroups
+            tableViewController?.tableView.reloadData()
         }
         
         override func updateFunc(callback: Response<[[ArmadaMember]]> -> Void) {
@@ -106,6 +116,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
 
 extension OrganisationGroupsTableViewController: UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        tableView.reloadData()
+        dataSource.updateFilter()
     }
 }
