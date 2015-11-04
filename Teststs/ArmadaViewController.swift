@@ -17,7 +17,7 @@ class ArmadaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        containedViewControllers = ["NewsTableViewController", "AboutViewController"].map { self.storyboard!.instantiateViewControllerWithIdentifier($0) }
+        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { self.storyboard!.instantiateViewControllerWithIdentifier($0) }
         segmentedControlChanged(segmentedControl)
 
         // Do any additional setup after loading the view.
