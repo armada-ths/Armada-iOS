@@ -5,8 +5,12 @@ class CompanyInfoTableViewController: UITableViewController {
     let armadaFields = _ArmadaApi.ArmadaField.All
     var armadaPages: AnyObject?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         ArmadaApi.pagesFromServer { response in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 switch response {

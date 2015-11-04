@@ -24,6 +24,17 @@ public struct News {
     public let publishedDate: NSDate
 }
 
+public struct ArmadaMember {
+    let name: String
+    let imageUrl: NSURL
+    let role: String
+}
+
+public struct ArmadaGroup {
+    let name: String
+    let members: [ArmadaMember]
+}
+
 enum Response<T> {
     case Success(T)
     case Error(ErrorType)
@@ -69,14 +80,14 @@ public class _ArmadaApi {
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
         return NSManagedObjectModel(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("CompanyModel", withExtension: "momd")!)!
-        }()
+    }()
     
     let persistentStoreUrl = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("Companies.sqlite")
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         print("Persisten store: \(self.persistentStoreUrl)")
-    
+        
         let databaseExists = NSFileManager.defaultManager().fileExistsAtPath(self.persistentStoreUrl.path!)
         do {
             if !databaseExists {
@@ -106,11 +117,11 @@ public class _ArmadaApi {
                     print(error)
                     abort()
                 }
-
+                
             }
         }
         return persistentStoreCoordinator
-        }()
+    }()
     
     func deleteDatabase() throws {
         let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -145,7 +156,7 @@ public class _ArmadaApi {
         let managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
-        }()
+    }()
     
     func generateMap() {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
@@ -395,8 +406,8 @@ public class _ArmadaApi {
             }
             return nil
             } ?? []).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
-            let lastDate = events.last?.startDate ?? NSDate()
-            return events.filter { $0.startDate.format("yyyy") == lastDate.format("yyyy") }
+        let lastDate = events.last?.startDate ?? NSDate()
+        return events.filter { $0.startDate.format("yyyy") == lastDate.format("yyyy") }
     }
     
     public func newsFromJson(jsonOriginal: AnyObject) -> [News] {
@@ -455,6 +466,37 @@ public class _ArmadaApi {
     func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
         armadaUrlWithPath("sponsors").getJson() {
             callback($0.map(self.sponsorsFromJson))
+        }
+    }
+    
+
+    
+    
+    public func organisationGroupsFromJson(jsonOriginal: AnyObject) -> [ArmadaGroup] {
+        var organisationGroups = [ArmadaGroup]()
+        if let json = jsonOriginal["organisation_groups"] as? [AnyObject] {
+            for object in json {
+                var members = [ArmadaMember]()
+                if let name = object["name"] as? String,
+                    let jsonMembers = object["members"] as? [AnyObject] {
+                        for member in jsonMembers {
+                            if let name = member["name"] as? String,
+                                let role = member["role"] as? String,
+                                let imageUrlString = member["picture_url"] as? String,
+                                let imageUrl = NSURL(string: imageUrlString) {
+                                    members += [ArmadaMember(name: name, imageUrl: imageUrl, role: role)]
+                            }
+                        }
+                        organisationGroups += [ArmadaGroup(name: name, members: members)]
+                }
+            }
+        }
+        return organisationGroups
+    }
+    
+    func organisationGroupsFromServer(callback: Response<[ArmadaGroup]> -> Void) {
+        armadaUrlWithPath("organisation_groups").getJson() {
+            callback($0.map(self.organisationGroupsFromJson))
         }
     }
     
