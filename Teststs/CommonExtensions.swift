@@ -11,6 +11,38 @@ extension NSUserDefaults {
     }
 }
 
+extension NSURL {
+    func getData(callback: Response<NSData> -> Void) {
+        let url = self
+        let session = NSURLSession.sharedSession()
+        let request = NSURLRequest(URL: url)
+        let dataTask = session.dataTaskWithRequest(request) {
+            (data, response, error) in
+            if let data = data {
+                callback(.Success(data))
+            } else if let error = error {
+                callback(.Error(error))
+            } else {
+                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getJson(callback: Response<AnyObject> -> Void) {
+        getData() {
+            callback($0 >>= { data in
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
+                    return .Success(json)
+                } catch {
+                    return .Error(error)
+                }
+            })
+        }
+    }
+}
+
 
 extension UITableViewController {
     
@@ -33,7 +65,7 @@ extension UITableViewController {
     
     func deselectSelectedCell() {
         if let indexPath = tableView.indexPathForSelectedRow {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
 }
@@ -50,14 +82,14 @@ extension UIColor {
 extension UIImageView {
     func loadImageFromUrl(url: String, callback:(UIImage? -> ())? = nil) {
         if let url = NSURL(string: url) {
-            _ArmadaApi.getData(url) {
+            url.getData() {
                 switch $0 {
                 case .Success(let data):
                     let image = UIImage(data: data)
                     let operation = NSBlockOperation() {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
-                        }, completion: nil)
+                            }, completion: nil)
                         callback?(image)
                     }
                     operation.queuePriority = .VeryLow

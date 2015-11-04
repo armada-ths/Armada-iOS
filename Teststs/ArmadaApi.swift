@@ -251,7 +251,7 @@ public class _ArmadaApi {
             switch $0 {
             case .Success(let (_, usedCache, etag)):
                 if !usedCache {
-                    _ArmadaApi.getJson(self.armadaUrlWithPath("companies")) {
+                    self.armadaUrlWithPath("companies").getJson() {
                         switch $0 {
                         case .Success(let json):
                             if let companiesJson = json["companies"] as? [AnyObject] {
@@ -301,7 +301,7 @@ public class _ArmadaApi {
             
             try! NSFileManager.defaultManager().createDirectoryAtURL(imageDirectory, withIntermediateDirectories: true, attributes: nil)
             if let url = NSURL(string: company.logoUrl) {
-                _ArmadaApi.getData(url) {
+                url.getData() {
                     if case .Success(let data) = $0 {
                         data.writeToURL(imageDirectory.URLByAppendingPathComponent(company.imageName + ".png"), atomically: true)
                     }
@@ -335,36 +335,6 @@ public class _ArmadaApi {
         }
         dataTask.resume()
     }
-    
-    class func getData(url: NSURL, callback: Response<NSData> -> Void) {
-        let session = NSURLSession.sharedSession()
-        let request = NSURLRequest(URL: url)
-        let dataTask = session.dataTaskWithRequest(request) {
-            (data, response, error) in
-            if let data = data {
-                callback(.Success(data))
-            } else if let error = error {
-                callback(.Error(error))
-            } else {
-                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
-            }
-        }
-        dataTask.resume()
-    }
-    
-    class func getJson(url: NSURL, callback: Response<AnyObject> -> Void) {
-        getData(url) {
-            callback($0 >>= { data in
-                do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    return .Success(json)
-                } catch {
-                    return .Error(error)
-                }
-                })
-        }
-    }
-    
     
     var jobTypes: [String] {
         return Array(Set(companies.flatMap({ $0.jobTypes }).map { $0.jobType })).sort(<)
@@ -462,6 +432,8 @@ public class _ArmadaApi {
             } ?? [])
     }
     
+    
+    
     static let companiesFileName = "companies.json"
     
     static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
@@ -469,19 +441,19 @@ public class _ArmadaApi {
     let apiUrl = "http://armada.nu/api"
     
     func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
-        _ArmadaApi.getJson(armadaUrlWithPath("events")) {
+        armadaUrlWithPath("events").getJson() {
             callback($0.map(self.eventsFromJson))
         }
     }
     
     func newsFromServer(callback: Response<[News]> -> Void) {
-        _ArmadaApi.getJson(armadaUrlWithPath("news")) {
+        armadaUrlWithPath("news").getJson() {
             callback($0.map(self.newsFromJson))
         }
     }
     
     func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
-        _ArmadaApi.getJson(armadaUrlWithPath("sponsors")) {
+        armadaUrlWithPath("sponsors").getJson() {
             callback($0.map(self.sponsorsFromJson))
         }
     }
@@ -491,7 +463,7 @@ public class _ArmadaApi {
     }
     
     func pagesFromServer(callback: Response<AnyObject> -> Void) {
-        _ArmadaApi.getJson(armadaUrlWithPath("pages")) {
+        armadaUrlWithPath("pages").getJson() {
             callback($0.map {
                 json in
                 var armadaPages = [String: AnyObject]()
