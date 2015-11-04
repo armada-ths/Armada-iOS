@@ -3,12 +3,13 @@ import UIKit
 
 extension String {
     func containsWordPrefix(prefix: String) -> Bool {
-        for word in self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) {
-            if word.lowercaseString.hasPrefix(prefix.lowercaseString) {
-                return true
+        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        for searchPrefix in prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}) {
+            if words.filter({ $0.lowercaseString.hasPrefix(searchPrefix.lowercaseString) }).isEmpty {
+                return false
             }
         }
-        return false
+        return true
     }
 }
 
@@ -86,21 +87,18 @@ class OrganisationGroupsTableViewController: UITableViewController {
         let dataSource = ArmadaOrganisationGroupsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         self.dataSource = dataSource
-        
         searchBar.delegate = self
-        
-
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        deselectSelectedCell()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let viewController = segue.destinationViewController as? ArmadaMemberTableViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
             viewController.member = dataSource.filteredOrganisationGroups[indexPath.section].members[indexPath.row]
+            deselectSelectedCell()
         }
     }
 
