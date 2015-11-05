@@ -1,15 +1,10 @@
 import UIKit
 
-class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate, UIViewControllerPreviewingDelegate {
-    
-    
-    
+class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
         var images:[String:UIImage] = [:]
-        
-        
         
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
@@ -20,7 +15,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 callback($0.map { [$0] })
                 
                 var row = 0
-                
                 let dateFormat = "yyyy-MM-dd"
                 let now = NSDate().format(dateFormat)
                 if case .Success(let events) = $0 {
@@ -31,7 +25,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                         }
                     }
                 }
-                
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     if row != 0 {
@@ -48,7 +41,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             
             cell.titleLabel.text = armadaEvent.title
             if let imageUrl = armadaEvent.imageUrl {
-                //cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString)
                 if let image = images[imageUrl.absoluteString]{
                     cell.eventImageView.image = image
                     cell.eventImageUrl = imageUrl.absoluteString
@@ -71,7 +63,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
     
     var readArmadaEvents = [String]()
-    
     var dataSource: ArmadaEventTableViewDataSource!
     
     override func viewDidLoad() {
@@ -82,52 +73,17 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
         self.clearsSelectionOnViewWillAppear = true
-        
-        if #available(iOS 9.0, *) {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
-    }
-    
-    var highlightedEvent: ArmadaEvent?
-    
-    func previewingContext(previewingContext: UIViewControllerPreviewing,
-        viewControllerForLocation location: CGPoint) -> UIViewController? {
-            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
-                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            
-            
-            let armadaEvent = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
-            highlightedEvent = armadaEvent
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("ArmadaEventDetailTableViewController") as! ArmadaEventDetailTableViewController
-            viewController.armadaEvent = armadaEvent
-            if #available(iOS 9.0, *) {
-                previewingContext.sourceRect = cell.frame
-            }
-            return viewController
-    }
-    
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier("ArmadaEventDetailSegue", sender: self)
-    }
-    
-    
-    var selectedEvent: ArmadaEvent? {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            return dataSource.values[indexPath.section][indexPath.row]
-        }
-        return nil
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController,
-            let armadaEvent = selectedEvent ?? highlightedEvent {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+                let armadaEvent = dataSource.values[indexPath.section][indexPath.row]
                 controller.armadaEvent = armadaEvent
                 if !readArmadaEvents.contains(armadaEvent.title) {
                     readArmadaEvents.append(armadaEvent.title)
                 }
         }
-        
-        
     }
     
     

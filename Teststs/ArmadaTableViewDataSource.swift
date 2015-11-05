@@ -13,9 +13,10 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         self.tableViewController = tableViewController
         self.tableViewController!.refreshControl = UIRefreshControl()
         self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        refresh()
         tableViewController.tableView.separatorStyle = .None
         tableViewController.tableView.startActivityIndicator()
+        refresh()
+
         
     }
     

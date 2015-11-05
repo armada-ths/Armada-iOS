@@ -9,7 +9,9 @@ class NewsTableViewController: ScrollZoomTableViewController {
         }
         
         override func updateFunc(callback: Response<[[News]]> -> Void) {
-            ArmadaApi.newsFromServer { callback($0.map { [$0] }) }
+            ArmadaApi.newsFromServer {
+                callback($0.map { [$0] })
+            }
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -55,17 +57,12 @@ class NewsTableViewController: ScrollZoomTableViewController {
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
-        
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    
-    var highLightedIndexPath: NSIndexPath?
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
         updateHeaderView()
     }
     
@@ -82,13 +79,10 @@ class NewsTableViewController: ScrollZoomTableViewController {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-        highLightedIndexPath = indexPath
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? NewsDetailTableViewController,
-            let indexPath = tableView.indexPathForSelectedRow ?? highLightedIndexPath {
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
                 let news = dataSource.values[indexPath.section][indexPath.row]
                 controller.news = news
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {
