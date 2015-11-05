@@ -24,10 +24,14 @@ public struct News {
     public let publishedDate: NSDate
 }
 
-public struct ArmadaMember {
+public struct ArmadaMember: Equatable {
     let name: String
     let imageUrl: NSURL
     let role: String
+}
+
+public func ==(x: ArmadaMember, y: ArmadaMember) -> Bool {
+    return x.name == y.name && x.role == y.role
 }
 
 public struct ArmadaGroup {

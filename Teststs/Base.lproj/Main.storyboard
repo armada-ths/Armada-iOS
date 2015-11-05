@@ -97,9 +97,9 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="Hbd-Aw-eiq" id="pOv-l0-5iu"/>
                                     <outlet property="roleLabel" destination="vkF-oe-Cd3" id="V1c-Gq-agX"/>
-                                    <segue destination="b4m-m2-JDN" kind="show" id="yRD-yq-24P">
-                                        <segue key="commit" inheritsFrom="parent" id="BZb-MW-DZn"/>
-                                        <segue key="preview" inheritsFrom="commit" id="78w-eS-UzB"/>
+                                    <segue destination="k55-ic-tt7" kind="show" id="WlV-f9-SYd">
+                                        <segue key="commit" inheritsFrom="parent" id="MKc-IK-meO"/>
+                                        <segue key="preview" inheritsFrom="commit" id="bu8-nO-lKJ"/>
                                     </segue>
                                 </connections>
                             </tableViewCell>
@@ -118,10 +118,18 @@
             </objects>
             <point key="canvasLocation" x="3960" y="15"/>
         </scene>
+        <!--Armada Members Page View Controller-->
+        <scene sceneID="O1t-41-Ppd">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="k55-ic-tt7" customClass="ArmadaMembersPageViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l8E-SR-O3y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4709" y="-333"/>
+        </scene>
         <!--Armada Member View Controller-->
         <scene sceneID="Aav-Sz-NdO">
             <objects>
-                <viewController id="b4m-m2-JDN" customClass="ArmadaMemberViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArmadaMemberViewController" id="b4m-m2-JDN" customClass="ArmadaMemberViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z9U-sF-GNL"/>
                         <viewControllerLayoutGuide type="bottom" id="WLa-GG-yMF"/>
@@ -197,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpt-z1-8bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4712" y="95"/>
+            <point key="canvasLocation" x="5404" y="55"/>
         </scene>
         <!--Members-->
         <scene sceneID="x0t-wI-S8a">
@@ -3723,7 +3731,7 @@
         <segue reference="TRA-nv-BBS"/>
         <segue reference="HBS-08-1M2"/>
         <segue reference="bli-j8-CSx"/>
-        <segue reference="yRD-yq-24P"/>
+        <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
         <segue reference="vNm-TG-1NB"/>
     </inferredMetricsTieBreakers>
