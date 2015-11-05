@@ -138,7 +138,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Uv-pt-Qai">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Uv-pt-Qai">
                                 <rect key="frame" x="0.0" y="64" width="600" height="900"/>
                                 <animations/>
                                 <constraints>
@@ -518,7 +518,7 @@
         <scene sceneID="5gy-2q-Wgj">
             <objects>
                 <tableViewController id="7lO-dz-MqH" customClass="CatalogueTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="KwH-dk-6I0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="KwH-dk-6I0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -2312,7 +2312,7 @@
         <!--Armada View Controller-->
         <scene sceneID="qAT-ua-a1w">
             <objects>
-                <viewController id="uhV-zT-dVe" customClass="ArmadaViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="uhV-zT-dVe" customClass="ArmadaViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JBn-bd-tkz"/>
                         <viewControllerLayoutGuide type="bottom" id="dqe-cr-M0S"/>
@@ -3519,12 +3519,10 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sk6-ns-R81">
                                 <rect key="frame" x="0.0" y="20" width="600" height="880"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVH-YQ-lIr">
-                                        <rect key="frame" x="16" y="310" width="568" height="179"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVH-YQ-lIr">
+                                        <rect key="frame" x="16" y="310" width="10" height="37"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <string key="text">THS Armada is the largest student driven organisation at KTH. The project is led by a student who is taking a year of to work for the student union, THS. The organisation has three main groups, working with different areas, led by a project group consisting of 19 students. Along with them 49 team leaders, developers, creators and coordinators are taking the project forward, and will in October be joined by 230 hosts. Together we create one of the largest student projects at KTH. 
-</string>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -3532,12 +3530,12 @@
                                         <rect key="frame" x="150" y="10" width="300" height="300"/>
                                         <animations/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ericsson_white" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-ks-bdN">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ericsson_white" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-ks-bdN">
                                         <rect key="frame" x="319" y="489" width="251" height="200"/>
                                         <animations/>
                                         <color key="tintColor" red="0.13725490200000001" green="0.36862745099999999" blue="0.3411764706" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ths_white" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-7c-yyf">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ths_white" translatesAutoresizingMaskIntoConstraints="NO" id="jqQ-7c-yyf">
                                         <rect key="frame" x="38" y="489" width="251" height="200"/>
                                         <animations/>
                                         <color key="tintColor" red="0.13725490196078433" green="0.36862745098039218" blue="0.3411764705882353" alpha="1" colorSpace="calibratedRGB"/>
@@ -3729,10 +3727,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TRA-nv-BBS"/>
+        <segue reference="ReS-La-4Iy"/>
         <segue reference="HBS-08-1M2"/>
         <segue reference="bli-j8-CSx"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
-        <segue reference="vNm-TG-1NB"/>
     </inferredMetricsTieBreakers>
 </document>

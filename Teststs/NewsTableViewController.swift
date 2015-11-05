@@ -8,9 +8,25 @@ class NewsTableViewController: ScrollZoomTableViewController {
             super.init(tableViewController: tableViewController)
         }
         
+        
+        var shit: CGFloat = 0
+        
         override func updateFunc(callback: Response<[[News]]> -> Void) {
             ArmadaApi.newsFromServer {
+                switch $0 {
+                case .Success:
+                    if self.values.isEmpty {
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            let tableViewController = (self.tableViewController as! ScrollZoomTableViewController)
+                            tableViewController.headerView.hidden = false
+                            tableViewController.tableView.contentInset = UIEdgeInsets(top: tableViewController.headerHeight + self.shit, left: 0, bottom: 0, right: 0)
+                            tableViewController.tableView.contentOffset = CGPoint(x: 0, y: -(tableViewController.headerHeight))
+                        }
+                    }
+                case .Error: self.shit = 64
+                }
                 callback($0.map { [$0] })
+                
             }
         }
         
@@ -26,7 +42,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     static var readArmadaNews: [String] {
         get {
-            return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
+        return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
         }
         set {
             NSUserDefaults.standardUserDefaults()["readArmadaNews"] = newValue
@@ -51,17 +67,19 @@ class NewsTableViewController: ScrollZoomTableViewController {
         super.viewDidLoad()
         self.dataSource = ArmadaNewsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
         headerView.layer.mask = headerMaskLayer
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
-        self.clearsSelectionOnViewWillAppear = true
+        headerView.hidden = true
+        tableView.contentOffset = CGPoint(x: 0, y: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         updateHeaderView()
+        
     }
     
     override func viewDidLayoutSubviews() {
