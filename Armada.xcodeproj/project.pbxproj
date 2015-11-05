@@ -17,7 +17,6 @@
 		260376841B8EB9EB0031F92F /* Programme+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260376821B8EB9EB0031F92F /* Programme+CoreDataProperties.swift */; };
 		260376851B8EB9EB0031F92F /* Programme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260376831B8EB9EB0031F92F /* Programme.swift */; };
 		261B58BB1B1641ED006F3968 /* CompaniesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B58BA1B1641ED006F3968 /* CompaniesPageViewController.swift */; };
-		262CFC831B2CB58C00834D5C /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262CFC821B2CB58C00834D5C /* TriangleView.swift */; };
 		2633574A1BC69DA30046D05E /* TitleDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */; };
 		26402E5D1B8F987700EC84E4 /* ArmadaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26402E5C1B8F987700EC84E4 /* ArmadaViewController.swift */; };
 		26431A201BC9C3F8002A2734 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 26431A1D1BC9C3F8002A2734 /* Companies.sqlite */; };
@@ -94,8 +93,7 @@
 		260376821B8EB9EB0031F92F /* Programme+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Programme+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		260376831B8EB9EB0031F92F /* Programme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Programme.swift; sourceTree = "<group>"; };
 		261B58BA1B1641ED006F3968 /* CompaniesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesPageViewController.swift; sourceTree = "<group>"; };
-		262CFC821B2CB58C00834D5C /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
-		263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleDetailTableViewCell.swift; sourceTree = "<group>"; };
+		263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitleDetailTableViewCell.swift; path = ../TitleDetailTableViewCell.swift; sourceTree = "<group>"; };
 		26402E5C1B8F987700EC84E4 /* ArmadaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaViewController.swift; sourceTree = "<group>"; };
 		26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = armadaEvents.sketch; sourceTree = "<group>"; };
 		26431A1D1BC9C3F8002A2734 /* Companies.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Companies.sqlite; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				265EABFF1BEC143F009CEDCD /* Core Data */,
-				263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */,
 				265B7DDE1B053A080074450B /* Armada */,
 				265B7DF61B053A080074450B /* ArmadaTests */,
 				265B7DDD1B053A080074450B /* Products */,
@@ -197,21 +194,19 @@
 			isa = PBXGroup;
 			children = (
 				265B7DE11B053A080074450B /* AppDelegate.swift */,
-				26C6526A1BB5FF7700798FBE /* ArmadaApi */,
-				265EABFE1BEC13AB009CEDCD /* Catalogue + Match */,
 				26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */,
 				26BD3D3C1B1607D800CD0572 /* CommonExtensions.swift */,
 				269A223B1B1CF45B00023BE8 /* TabBarController.swift */,
-				262CFC821B2CB58C00834D5C /* TriangleView.swift */,
+				26C652681BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift */,
+				26B469791B5E858D00AE75E3 /* ScrollZoomTableViewController.swift */,
+				26C6526A1BB5FF7700798FBE /* ArmadaApi */,
+				265EABFE1BEC13AB009CEDCD /* Catalogue + Match */,
 				265EABFC1BEC1357009CEDCD /* Events */,
 				265EABFB1BEC132A009CEDCD /* News */,
 				265EABFA1BEC12EC009CEDCD /* About Armada */,
 				265EABFD1BEC138F009CEDCD /* Sponsors */,
-				26C652681BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift */,
-				26B469791B5E858D00AE75E3 /* ScrollZoomTableViewController.swift */,
 				265B7DE71B053A080074450B /* Main.storyboard */,
 				267C08C81B57EB0600E79C37 /* Launch.storyboard */,
-				265BE5301B1BB1B90097F245 /* worldMap.html */,
 				265B7DEA1B053A080074450B /* Images.xcassets */,
 				265B7DEC1B053A080074450B /* LaunchScreen.xib */,
 				265B7DDF1B053A080074450B /* Supporting Files */,
@@ -275,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				2602AD631B152E6C00B0DB32 /* ArmadaEventDetailTableViewController.swift */,
+				2602AD5F1B15133D00B0DB32 /* ArmadaEventTableViewController.swift */,
 				267E6E6C1B5FDE40008564AD /* ArmadaEventTableViewCell.swift */,
 				267897591BB7B9A00013E8FC /* ArmadaEventNewTableViewCell.swift */,
 			);
@@ -295,18 +291,15 @@
 			isa = PBXGroup;
 			children = (
 				26C9607D1B06A61A005A13E7 /* CompanyTableViewCell.swift */,
-				26C2EF931BA211FE00D125D8 /* CompanyTypeTableViewCell.swift */,
 				261B58BA1B1641ED006F3968 /* CompaniesPageViewController.swift */,
-				26A15D3F1B07C5F500793724 /* CatalogueFilterTableViewController.swift */,
+				265EAC001BEC1495009CEDCD /* Filter */,
 				26A28A861BA212EA0044F183 /* CompanyInfoTableViewController.swift */,
-				26D45D081BA4FBD7004A786B /* CompanyBoolCell.swift */,
-				26CE1F551B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift */,
 				265EABF61BEBCA4B009CEDCD /* LocationViewController.swift */,
-				2602AD5F1B15133D00B0DB32 /* ArmadaEventTableViewController.swift */,
 				26CDD0DA1BA4EC8900CC2C1D /* MatchTableViewCell.swift */,
 				DAF310771B1F243100D3947D /* MatchTableViewController.swift */,
 				2671038B1B06B81D00C79164 /* CompanyViewController.swift */,
 				26C9607B1B06A434005A13E7 /* CatalogueTableViewController.swift */,
+				265BE5301B1BB1B90097F245 /* worldMap.html */,
 			);
 			name = "Catalogue + Match";
 			sourceTree = "<group>";
@@ -330,6 +323,18 @@
 				269C0CFC1B8E8D9F008FB633 /* Company.swift */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		265EAC001BEC1495009CEDCD /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				26A15D3F1B07C5F500793724 /* CatalogueFilterTableViewController.swift */,
+				26D45D081BA4FBD7004A786B /* CompanyBoolCell.swift */,
+				26C2EF931BA211FE00D125D8 /* CompanyTypeTableViewCell.swift */,
+				263357491BC69DA30046D05E /* TitleDetailTableViewCell.swift */,
+				26CE1F551B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift */,
+			);
+			name = Filter;
 			sourceTree = "<group>";
 		};
 		26C6526A1BB5FF7700798FBE /* ArmadaApi */ = {
@@ -493,7 +498,6 @@
 				269A223C1B1CF45B00023BE8 /* TabBarController.swift in Sources */,
 				DA0006941B153B6A006BFDBD /* NewsTableViewCell.swift in Sources */,
 				26CE1F561B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift in Sources */,
-				262CFC831B2CB58C00834D5C /* TriangleView.swift in Sources */,
 				26F2564A1BEAB266002D9AAB /* ArmadaMemberTableViewController.swift in Sources */,
 				269C0D0A1B8EB33D008FB633 /* Continent.swift in Sources */,
 				2602AD641B152E6C00B0DB32 /* ArmadaEventDetailTableViewController.swift in Sources */,

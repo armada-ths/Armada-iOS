@@ -79,10 +79,10 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0))
             
             let label = UIButton(frame: view.frame)
+            label.setTitleColor(UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.5), forState: .Highlighted)
             label.setTitle("Start Matching", forState: .Normal)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.backgroundColor = ColorScheme.armadaGreen
-            label.showsTouchWhenHighlighted = true
             
             label.titleLabel?.font = UIFont.systemFontOfSize(25)
             
@@ -157,29 +157,16 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         navigationItem.title = "Top 10 Matches"
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Table view data source
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return companiesWithMatchPercentages.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MatchTableViewCell", forIndexPath: indexPath) as! MatchTableViewCell
-        
-        
         let companyWithMatchPercentage = companiesWithMatchPercentages[indexPath.row]
         let matchPercentage = companyWithMatchPercentage.percentage
         let company = companyWithMatchPercentage.company
