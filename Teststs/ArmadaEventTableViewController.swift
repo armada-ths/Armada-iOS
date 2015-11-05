@@ -47,10 +47,12 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 } else{
                     cell.eventImageView.image = nil
                     cell.eventImageUrl = imageUrl.absoluteString
-                    cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString){
-                        if case .Success(let image) = $0 {
-                            if cell.eventImageUrl == imageUrl.absoluteString{
-                                self.images[imageUrl.absoluteString] = image
+                    cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString) { response in
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            if case .Success(let image) = response {
+                                if cell.eventImageUrl == imageUrl.absoluteString{
+                                    self.images[imageUrl.absoluteString] = image
+                                }
                             }
                         }
                     }

@@ -11,8 +11,6 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         self.separatorStyle = tableViewController.tableView.separatorStyle
         super.init()
         self.tableViewController = tableViewController
-        self.tableViewController!.refreshControl = UIRefreshControl()
-        self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         tableViewController.tableView.separatorStyle = .None
         tableViewController.tableView.startActivityIndicator()
         refresh()
@@ -38,12 +36,13 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
                 self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .None : self.separatorStyle
                 self.tableViewController?.tableView.reloadData()
                 self.tableViewController?.tableView.stopActivityIndicator()
+                self.tableViewController!.refreshControl = UIRefreshControl()
+                self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
             }
         }
     }
     
-    func updateFunc(callback: Response<[[T]]> -> Void) {
-    }
+    func updateFunc(callback: Response<[[T]]> -> Void) {}
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 120

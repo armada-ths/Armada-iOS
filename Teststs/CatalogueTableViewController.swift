@@ -26,8 +26,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             return false
         }
     }
-
-    
     
     
     func updateCompaniesByLetters(companies: [Company]) {
