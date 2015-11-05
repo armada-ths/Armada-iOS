@@ -32,8 +32,11 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     }
                 }
                 
+                
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
+                    if row != 0 {
+                        self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
+                    }
                 }
             }
         }

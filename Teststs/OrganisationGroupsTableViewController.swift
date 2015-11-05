@@ -25,7 +25,10 @@ class OrganisationGroupsTableViewController: UITableViewController {
         
         var allOrganisationGroups = [ArmadaGroup]() {
             didSet {
-                updateFilter()
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.updateFilter()
+                }
+
             }
         }
         
@@ -50,6 +53,7 @@ class OrganisationGroupsTableViewController: UITableViewController {
             stopWatch.print("Filtered organisations")
             filteredOrganisationGroups = matchingOrganisationGroups
             tableViewController?.tableView.reloadData()
+            (tableViewController as! OrganisationGroupsTableViewController).searchBar.hidden = allOrganisationGroups.isEmpty
         }
         
         override func updateFunc(callback: Response<[[ArmadaMember]]> -> Void) {
@@ -94,6 +98,7 @@ class OrganisationGroupsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.hidden = true
         let dataSource = ArmadaOrganisationGroupsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         self.dataSource = dataSource
