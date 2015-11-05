@@ -27,6 +27,10 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
+            if MatchFilter.isEmpty {
+                return nil
+            }
+            
             guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
                 let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
             let companyWithPercentage = companiesWithMatchPercentages[highlightedIndexPath.row]
@@ -91,9 +95,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             let topPadding: CGFloat = 25
             let leadingPadding: CGFloat = 25
             label.contentEdgeInsets = UIEdgeInsets(top: topPadding, left: leadingPadding, bottom: topPadding, right: leadingPadding)
-            
-            
-            
             
             label.tag = labelTag
             label.addTarget(self, action: "openFilter:", forControlEvents: UIControlEvents.TouchUpInside)
