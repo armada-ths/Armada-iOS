@@ -93,6 +93,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
             locationLabel.text = "To be announced"
         } else {
             locationImageView.loadImageFromUrl(company.locationUrl)
+            locationCell.selectionStyle = .Default
             locationCell.accessoryType = .DisclosureIndicator
         }
         
@@ -166,6 +167,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let viewController = segue.destinationViewController as? LocationViewController {
             viewController.company = company
+            deselectSelectedCell()
         }
     }
     

@@ -85,6 +85,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {
                     NewsTableViewController.readArmadaNews.append(news.title)
                 }
+                deselectSelectedCell()
         }
     }
 }
