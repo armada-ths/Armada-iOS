@@ -110,7 +110,7 @@ class OrganisationGroupsTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let viewController = segue.destinationViewController as? ArmadaMemberTableViewController,
+        if let viewController = segue.destinationViewController as? ArmadaMemberViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
             viewController.member = dataSource.filteredOrganisationGroups[indexPath.section].members[indexPath.row]
             deselectSelectedCell()
