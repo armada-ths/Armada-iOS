@@ -39,11 +39,9 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     
     @IBOutlet weak var locationCell: UITableViewCell!
-    @IBOutlet weak var websiteCell: UITableViewCell!
-    @IBOutlet weak var infoCell: UITableViewCell!
+
     
-    @IBOutlet weak var favoriteCell: UITableViewCell!
-    @IBOutlet weak var videoCell: UITableViewCell!
+    
     
     override func viewDidLoad() {
         headerHeight = UIScreen.mainScreen().bounds.width * 3 / 4
@@ -118,45 +116,42 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         parentViewController?.title = company!.name
-        NSOperationQueue().addOperationWithBlock {
-            NSThread.sleepForTimeInterval(3)
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
+    let favoriteRow = 0
+    let websiteRow = 9
+    let videoRow = 10
+    let infoRow = 11
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            switch cell {
-            case favoriteCell:
+            switch indexPath.row {
+            case favoriteRow:
                 FavoriteCompanies.append(company!.name)
-                cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
+//                cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
                 tableView.beginUpdates()
                 tableView.endUpdates()
-            case websiteCell:
+            case websiteRow:
                 if let url = company.website.httpUrl {
                     UIApplication.sharedApplication().openURL(url)
                     deselectSelectedCell()
                 }
-            case videoCell:
+            case videoRow:
                 if let url = company.videoUrl.httpUrl {
                     UIApplication.sharedApplication().openURL(url)
                     deselectSelectedCell()
                 }
                 
-            case infoCell:
+            case infoRow:
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.performSegueWithIdentifier("InfoSegue", sender: self)
                 }
             default:
                 break
             }
-        }
     }
     
     
@@ -177,14 +172,12 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             let zeroHeight: CGFloat = 0.000001
-            switch cell {
-            case videoCell where company.videoUrl.isEmpty: return zeroHeight
-            case websiteCell where company.website.isEmpty: return zeroHeight
-            case favoriteCell where FavoriteCompanies.contains(company.name): return zeroHeight
+            switch indexPath.row {
+            case videoRow where company.videoUrl.isEmpty: return zeroHeight
+            case websiteRow where company.website.isEmpty: return zeroHeight
+            case favoriteRow where FavoriteCompanies.contains(company.name): return zeroHeight
             default: return UITableViewAutomaticDimension
-            }
         }
         return UITableViewAutomaticDimension
     }
