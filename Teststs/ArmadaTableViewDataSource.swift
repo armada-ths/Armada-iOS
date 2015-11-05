@@ -14,6 +14,8 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         self.tableViewController!.refreshControl = UIRefreshControl()
         self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
+        tableViewController.tableView.separatorStyle = .None
+        tableViewController.tableView.startActivityIndicator()
         
     }
     
@@ -36,6 +38,7 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
                 self.tableViewController?.refreshControl?.endRefreshing()
                 self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .None : self.separatorStyle
                 self.tableViewController?.tableView.reloadData()
+                self.tableViewController?.tableView.stopActivityIndicator()
             }
         }
     }

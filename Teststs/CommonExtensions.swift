@@ -11,6 +11,33 @@ extension NSUserDefaults {
     }
 }
 
+
+extension UIView {
+    
+    func startActivityIndicator() {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityIndicator.center = center
+        activityIndicator.startAnimating()
+        addSubview(activityIndicator)
+        activityIndicator.didMoveToSuperview()
+//        self.addConstraints([
+//            NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 64),
+//            NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0),
+//        ])
+    }
+    
+    func stopActivityIndicator() {
+        for subview in subviews {
+            if let activityIndicator = subview as? UIActivityIndicatorView {
+                activityIndicator.stopAnimating()
+                activityIndicator.removeFromSuperview()
+            }
+        }
+    }
+}
+
+
+
 extension NSURL {
     func getData(callback: Response<NSData> -> Void) {
         let url = self

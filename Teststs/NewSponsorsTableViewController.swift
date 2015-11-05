@@ -23,7 +23,8 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         }
         
         override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
-            ArmadaApi.sponsorsFromServer { callback($0.map {
+            ArmadaApi.sponsorsFromServer {
+                callback($0.map {
                 sponsors in
                 let sponsorGroups: [[Sponsor]] = [
                     sponsors.filter { $0.isMainPartner },
@@ -74,6 +75,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         super.viewDidLoad()
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
+
         if #available(iOS 9.0, *) {
             registerForPreviewingWithDelegate(self, sourceView: view)
         }
