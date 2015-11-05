@@ -13,7 +13,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var countriesLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    var company: Company! = nil
+    var company: Company!
     var companies = [Company]()
     
     @IBOutlet weak var mapWebView: UIWebView!
@@ -37,6 +37,14 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     @IBOutlet weak var waysOfWorkingLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
     
+    
+    @IBOutlet weak var locationCell: UITableViewCell!
+    @IBOutlet weak var websiteCell: UITableViewCell!
+    @IBOutlet weak var infoCell: UITableViewCell!
+    
+    @IBOutlet weak var favoriteCell: UITableViewCell!
+    @IBOutlet weak var videoCell: UITableViewCell!
+    
     override func viewDidLoad() {
         headerHeight = UIScreen.mainScreen().bounds.width * 3 / 4
         super.viewDidLoad()
@@ -46,7 +54,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         tableView.tableFooterView = UIView(frame: CGRectZero)
         let continents = self.company!.continents.map { $0.continent }
         mapWebView.delegate = self
-
+        
         NSOperationQueue().addOperationWithBlock {
             var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
             let companyStyle = continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
@@ -57,7 +65,7 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         }
         
         
-
+        
         aboutLabel.text = company.companyDescription
         if company.companyDescription.isEmpty {
             aboutLabel.text = "To be announced"
@@ -79,14 +87,13 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
         
-        
-        
         locationLabel.text = company.locationDescription
         if company.locationDescription.isEmpty {
             locationImageView.removeFromSuperview()
             locationLabel.text = "To be announced"
         } else {
             locationImageView.loadImageFromUrl(company.locationUrl)
+            locationCell.accessoryType = .DisclosureIndicator
         }
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
@@ -102,52 +109,51 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         for (i, boolish) in companyArmadaFields.enumerate() {
             armadaFieldsImageViews[i].alpha = boolish ? 1 : 0.1
         }
-    }
-    
-    
+        
 
+        
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         parentViewController?.title = company!.name
+        NSOperationQueue().addOperationWithBlock {
+            NSThread.sleepForTimeInterval(3)
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
-    let favoriteCellRow = 0
-    let infoRow = 11
-    let websiteRow = 9
-    let videoRow = 10
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == favoriteCellRow {
-            FavoriteCompanies.append(company!.name)
-            let cell = tableView.cellForRowAtIndexPath(indexPath)!
-            cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
-        
-        
-        if indexPath.row == websiteRow {
-            if let url = company.website.httpUrl {
-                UIApplication.sharedApplication().openURL(url)
-                deselectSelectedCell()
-            }
-        }
-        
-        if indexPath.row == videoRow {
-            if let url = company.videoUrl.httpUrl {
-                UIApplication.sharedApplication().openURL(url)
-                deselectSelectedCell()
-            }
-        }
-        
-        if indexPath.row == infoRow {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-            self.performSegueWithIdentifier("InfoSegue", sender: self)
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            switch cell {
+            case favoriteCell:
+                FavoriteCompanies.append(company!.name)
+                cell.frame = CGRectMake(0, 0, cell.frame.width, 0)
+                tableView.beginUpdates()
+                tableView.endUpdates()
+            case websiteCell:
+                if let url = company.website.httpUrl {
+                    UIApplication.sharedApplication().openURL(url)
+                    deselectSelectedCell()
+                }
+            case videoCell:
+                if let url = company.videoUrl.httpUrl {
+                    UIApplication.sharedApplication().openURL(url)
+                    deselectSelectedCell()
+                }
+                
+            case infoCell:
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.performSegueWithIdentifier("InfoSegue", sender: self)
+                }
+            default:
+                break
             }
         }
     }
@@ -157,19 +163,28 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let viewController = segue.destinationViewController as? LocationViewController {
+            viewController.company = company
+        }
+    }
+    
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let zeroHeight: CGFloat = 0.000001
-        switch indexPath.row {
-        case videoRow where company.videoUrl.isEmpty: return zeroHeight
-        case websiteRow where company.website.isEmpty: return zeroHeight
-        case favoriteCellRow where FavoriteCompanies.contains(company!.name): return zeroHeight
-        default: return UITableViewAutomaticDimension
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            let zeroHeight: CGFloat = 0.000001
+            switch cell {
+            case videoCell where company.videoUrl.isEmpty: return zeroHeight
+            case websiteCell where company.website.isEmpty: return zeroHeight
+            case favoriteCell where FavoriteCompanies.contains(company.name): return zeroHeight
+            default: return UITableViewAutomaticDimension
+            }
         }
+        return UITableViewAutomaticDimension
     }
     
     
@@ -186,12 +201,12 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     }
     
     @IBAction func twitterButtonClicked(sender: AnyObject) {
-        if let twitterAppUrl = NSURL(string: "twitter:///user?screen_name=" + company!.twitter.componentsSeparatedByString("/").last!) where  UIApplication.sharedApplication().canOpenURL(twitterAppUrl) {
-            UIApplication.sharedApplication().openURL(twitterAppUrl)
-        } else {
+//        if let twitterAppUrl = NSURL(string: "twitter:///user?screen_name=" + company!.twitter.componentsSeparatedByString("/").last!) where  UIApplication.sharedApplication().canOpenURL(twitterAppUrl) {
+//            UIApplication.sharedApplication().openURL(twitterAppUrl)
+//        } else {
             if let url = company.twitter.httpUrl {
                 UIApplication.sharedApplication().openURL(url)
             }
-        }
+//        }
     }
 }
