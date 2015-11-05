@@ -16,8 +16,6 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         tableViewController.tableView.separatorStyle = .None
         tableViewController.tableView.startActivityIndicator()
         refresh()
-
-        
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {

@@ -52,7 +52,7 @@ extension Company {
         }
     }
     
-    func hasArmadaFieldType(armadaField: _ArmadaApi.ArmadaField) -> Bool {
+    func hasArmadaFieldType(armadaField: ArmadaField) -> Bool {
         switch armadaField {
         case .Startup:
             return isStartup
@@ -89,7 +89,7 @@ class _CompanyFilter {
                 return false
             }
         }
-        for field in _ArmadaApi.ArmadaField.All {
+        for field in ArmadaField.All {
             if armadaFields.contains(field) {
                 return false
             }
@@ -102,8 +102,8 @@ class _CompanyFilter {
         set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
     }
     
-    var armadaFields: [_ArmadaApi.ArmadaField] {
-        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { _ArmadaApi.ArmadaField(rawValue: $0) ?? .Startup } }
+    var armadaFields: [ArmadaField] {
+        get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { ArmadaField(rawValue: $0) ?? .Startup } }
         set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue } }
     }
     
@@ -196,8 +196,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-                return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "Ways of working", "", ""][section]
-        return ["I am studying", "I am looking for", "I wanna work in", "I want to work with", "I value", "I value ways of working", "", ""][section]
+        return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "Ways of working", "", ""][section]
     }
     
     func cellWithIdentifier(identifier: String) -> UITableViewCell {
@@ -208,10 +207,10 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         navigationItem.title = "\(CompanyFilter.filteredCompanies.count) of \(ArmadaApi.companies.count) Companies"
     }
     
-    let armadaFields = _ArmadaApi.ArmadaField.All
+    let armadaFields = ArmadaField.All
     
     
-    func armadaField(armadaField: _ArmadaApi.ArmadaField, isOn: Bool) {
+    func armadaField(armadaField: ArmadaField, isOn: Bool) {
         if isOn {
             CompanyFilter.armadaFields = CompanyFilter.armadaFields + [armadaField]
         } else {

@@ -20,6 +20,8 @@ extension UIView {
         activityIndicator.startAnimating()
         addSubview(activityIndicator)
         activityIndicator.didMoveToSuperview()
+//        activityIndicator.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+//        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
 //        self.addConstraints([
 //            NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 64),
 //            NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0),

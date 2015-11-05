@@ -35,6 +35,37 @@ public struct ArmadaGroup {
     let members: [ArmadaMember]
 }
 
+enum ArmadaField: String {
+    case Startup = "icon_startup"
+    case ClimateCompensation = "icon_climate_compensation"
+    case Diversity = "icon_diversity"
+    case Sustainability = "icon_sustainability"
+    
+    static var All: [ArmadaField] {
+        return [.Startup, .ClimateCompensation, .Diversity, .Sustainability]
+    }
+    
+    var title: String {
+        switch self {
+        case .Startup: return "Startup"
+        case .Diversity: return "Diversity"
+        case .ClimateCompensation: return "Climate Compensation"
+        case .Sustainability: return "Sustainability"
+        }
+    }
+    
+    var image: UIImage {
+        switch self {
+        case .Startup: return UIImage(named: "Rocket")!
+        case .ClimateCompensation: return UIImage(named: "Tree")!
+        case .Diversity: return UIImage(named: "diversity")!
+        case .Sustainability: return UIImage(named: "Leaf")!
+        }
+    }
+    
+}
+
+
 enum Response<T> {
     case Success(T)
     case Error(ErrorType)
@@ -519,35 +550,31 @@ public class _ArmadaApi {
         }
     }
     
-    enum ArmadaField: String {
-        case Startup = "icon_startup"
-        case ClimateCompensation = "icon_climate_compensation"
-        case Diversity = "icon_diversity"
-        case Sustainability = "icon_sustainability"
-        
-        static var All: [ArmadaField] {
-            return [.Startup, .ClimateCompensation, .Diversity, .Sustainability]
+
+    
+    func armadaFieldInfosFromServer(callback: Response<[ArmadaFieldInfo]> -> Void) {
+        pagesFromServer() {
+            callback($0 >>= {
+                json in
+                var armadaFieldInfos = [ArmadaFieldInfo]()
+                for armadaField in ArmadaField.All {
+                    if let title = json[armadaField.rawValue]??["title"] as? String,
+                        let description = (json[armadaField.rawValue]??["app_text"] as? String) {
+                        armadaFieldInfos += [ArmadaFieldInfo(title: title, description: description, armadaField: armadaField)]
+                    }
+                }
+                return .Success(armadaFieldInfos)
+            })
         }
-        
-        var title: String {
-            switch self {
-            case .Startup: return "Startup"
-            case .Diversity: return "Diversity"
-            case .ClimateCompensation: return "Climate Compensation"
-            case .Sustainability: return "Sustainability"
-            }
-        }
-        
-        var image: UIImage {
-            switch self {
-            case .Startup: return UIImage(named: "Rocket")!
-            case .ClimateCompensation: return UIImage(named: "Tree")!
-            case .Diversity: return UIImage(named: "diversity")!
-            case .Sustainability: return UIImage(named: "Leaf")!
-            }
-        }
-        
     }
+    
+}
+
+
+struct ArmadaFieldInfo {
+    let title: String
+    let description: String
+    let armadaField: ArmadaField
 }
 
 extension Array {

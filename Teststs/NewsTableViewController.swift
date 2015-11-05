@@ -26,13 +26,12 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     static var readArmadaNews: [String] {
         get {
-        return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
+            return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
         }
         set {
             NSUserDefaults.standardUserDefaults()["readArmadaNews"] = newValue
         }
     }
-    
     
     override func updateHeaderView() {
         super.updateHeaderView()
@@ -50,9 +49,8 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dataSource = ArmadaNewsTableViewDataSource(tableViewController: self)
+        self.dataSource = ArmadaNewsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        self.dataSource = dataSource
         
         headerMaskLayer = CAShapeLayer()
         headerMaskLayer.fillColor = UIColor.blackColor().CGColor
@@ -78,7 +76,6 @@ class NewsTableViewController: ScrollZoomTableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? NewsDetailTableViewController,
