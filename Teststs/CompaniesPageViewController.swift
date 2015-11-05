@@ -28,21 +28,6 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        print("CompaniesPageViewController did appear")
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("CompaniesPageViewController did disappear")
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         let index = (companies.indexOf((viewController as! CompanyViewController).company!)! + 1) % companies.count
         return viewControllerForCompany(companies[index])

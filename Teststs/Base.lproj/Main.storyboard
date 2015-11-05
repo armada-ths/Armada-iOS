@@ -97,7 +97,10 @@
                                 <connections>
                                     <outlet property="nameLabel" destination="Hbd-Aw-eiq" id="pOv-l0-5iu"/>
                                     <outlet property="roleLabel" destination="vkF-oe-Cd3" id="V1c-Gq-agX"/>
-                                    <segue destination="b4m-m2-JDN" kind="show" id="yRD-yq-24P"/>
+                                    <segue destination="b4m-m2-JDN" kind="show" id="yRD-yq-24P">
+                                        <segue key="commit" inheritsFrom="parent" id="BZb-MW-DZn"/>
+                                        <segue key="preview" inheritsFrom="commit" id="78w-eS-UzB"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3683,6 +3686,7 @@
         <segue reference="ReS-La-4Iy"/>
         <segue reference="HBS-08-1M2"/>
         <segue reference="bli-j8-CSx"/>
+        <segue reference="yRD-yq-24P"/>
         <segue reference="rqO-4i-A8F"/>
     </inferredMetricsTieBreakers>
 </document>

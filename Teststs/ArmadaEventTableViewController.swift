@@ -48,7 +48,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     cell.eventImageView.image = nil
                     cell.eventImageUrl = imageUrl.absoluteString
                     cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString){
-                        if let image = $0{
+                        if case .Success(let image) = $0 {
                             if cell.eventImageUrl == imageUrl.absoluteString{
                                 self.images[imageUrl.absoluteString] = image
                             }

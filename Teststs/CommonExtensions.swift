@@ -73,6 +73,36 @@ extension NSURL {
 }
 
 
+private let UIViewShowEmptyMessageTag = 93734214
+
+extension UIView {
+    func showEmptyMessage(show: Bool, message: String) {
+        if show {
+            let label = UILabel(frame: frame)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(label)
+            label.font = UIFont.systemFontOfSize(30)
+            label.text = message
+            label.numberOfLines = 0
+            label.textAlignment = .Center
+            label.sizeToFit()
+            label.tag = UIViewShowEmptyMessageTag
+            label.textColor = UIColor.lightGrayColor()
+            label.didMoveToSuperview()
+            label.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+            label.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+            label.widthAnchor.constraintEqualToAnchor(widthAnchor, constant: -40).active = true
+        } else {
+            for view in subviews {
+                if view.tag == UIViewShowEmptyMessageTag {
+                    view.removeFromSuperview()
+                }
+            }
+        }
+    }
+}
+
+
 extension UITableViewController {
     
     func showEmptyMessage(show: Bool, message: String) {
@@ -109,23 +139,26 @@ extension UIColor {
 }
 
 extension UIImageView {
-    func loadImageFromUrl(url: String, callback:(UIImage? -> ())? = nil) {
+    func loadImageFromUrl(url: String, callback:(Response<UIImage> -> Void)? = nil) {
         if let url = NSURL(string: url) {
             url.getData() {
                 switch $0 {
                 case .Success(let data):
-                    let image = UIImage(data: data)
+                    if let image = UIImage(data: data) {
                     let operation = NSBlockOperation() {
                         UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                             self.image = image
                             }, completion: nil)
-                        callback?(image)
+                        callback?(.Success(image))
                     }
                     operation.queuePriority = .VeryLow
                     NSOperationQueue.mainQueue().addOperation(operation)
+                    } else {
+                        callback?(.Error(NSError(domain: "imageBroken", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
+                    }
                 case .Error(let error):
                     self.image = nil
-                    callback?(nil)
+                    callback?(.Error(error))
                     print(error)
                 }
             }

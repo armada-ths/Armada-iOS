@@ -58,7 +58,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
                 cell.sponsorImageView.image = nil
                 cell.sponsorImageUrl = sponsor.imageUrl.absoluteString
                 cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString){
-                    if let image = $0{
+                    if case .Success(let image) = $0 {
                         if cell.sponsorImageUrl == sponsor.imageUrl.absoluteString{
                             self.images[sponsor.imageUrl.absoluteString]=image
                         }
