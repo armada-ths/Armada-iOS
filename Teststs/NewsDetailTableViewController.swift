@@ -3,11 +3,9 @@ import UIKit
 class NewsDetailTableViewController: UITableViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var publicationDateLabel: UILabel!
     
     var news: News!
-    
 
     @IBOutlet weak var contentTextView: UITextView!
     override func viewDidLoad() {

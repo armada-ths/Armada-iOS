@@ -8,7 +8,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
             super.init(tableViewController: tableViewController)
         }
         
-        
+        // For some reason - this offset has to be added if the first request fails, no fucking idea why
         var shit: CGFloat = 0
         
         override func updateFunc(callback: Response<[[News]]> -> Void) {
@@ -31,7 +31,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let newsItem = values[indexPath.section][indexPath.row]
+            let newsItem = self[indexPath]
             let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell
             cell.titleLabel.text = newsItem.title
             cell.descriptionLabel.text = newsItem.publishedDate.formatWithStyle(.LongStyle)
@@ -40,12 +40,14 @@ class NewsTableViewController: ScrollZoomTableViewController {
         }
     }
     
+    
+    static let readArmadaNewsKey = "readArmadaNews"
     static var readArmadaNews: [String] {
         get {
-        return NSUserDefaults.standardUserDefaults()["readArmadaNews"] as? [String] ?? []
+            return NSUserDefaults.standardUserDefaults()[readArmadaNewsKey] as? [String] ?? []
         }
         set {
-            NSUserDefaults.standardUserDefaults()["readArmadaNews"] = newValue
+            NSUserDefaults.standardUserDefaults()[readArmadaNewsKey] = newValue
         }
     }
     
@@ -59,7 +61,6 @@ class NewsTableViewController: ScrollZoomTableViewController {
         path.addLineToPoint(CGPoint(x: 0, y: headerRect.height-50))
         headerMaskLayer?.path = path.CGPath
     }
-    
     
     var dataSource: ArmadaNewsTableViewDataSource!
     
@@ -79,7 +80,6 @@ class NewsTableViewController: ScrollZoomTableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         updateHeaderView()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -97,7 +97,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if dataSource.values.isEmpty {
+        if dataSource.isEmpty {
             dataSource.refresh()
         }
     }
@@ -105,7 +105,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? NewsDetailTableViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                let news = dataSource.values[indexPath.section][indexPath.row]
+                let news = dataSource[indexPath]
                 controller.news = news
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {
                     NewsTableViewController.readArmadaNews.append(news.title)
