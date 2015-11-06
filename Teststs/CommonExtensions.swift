@@ -64,7 +64,7 @@ extension NSURL {
                 } catch {
                     return .Error(error)
                 }
-            })
+                })
         }
     }
     
@@ -75,7 +75,7 @@ extension NSURL {
                     return .Success(image)
                 }
                 return .Error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid Image"]))
-            })
+                })
         }
     }
     
@@ -85,27 +85,28 @@ extension NSURL {
 private let UIViewShowEmptyMessageTag = 93734214
 
 extension UIView {
-    func showEmptyMessage(show: Bool, message: String) {
-        if show {
-            let label = UILabel(frame: frame)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(label)
-            label.font = UIFont.systemFontOfSize(30)
-            label.text = message
-            label.numberOfLines = 0
-            label.textAlignment = .Center
-            label.sizeToFit()
-            label.tag = UIViewShowEmptyMessageTag
-            label.textColor = UIColor.lightGrayColor()
-            label.didMoveToSuperview()
-            label.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-            label.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-            label.widthAnchor.constraintEqualToAnchor(widthAnchor, constant: -40).active = true
-        } else {
-            for view in subviews {
-                if view.tag == UIViewShowEmptyMessageTag {
-                    view.removeFromSuperview()
-                }
+    func showEmptyMessage(message: String) {
+        hideEmptyMessage()
+        let label = UILabel(frame: frame)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(label)
+        label.font = UIFont.systemFontOfSize(30)
+        label.text = message
+        label.numberOfLines = 0
+        label.textAlignment = .Center
+        label.sizeToFit()
+        label.tag = UIViewShowEmptyMessageTag
+        label.textColor = UIColor.lightGrayColor()
+        label.didMoveToSuperview()
+        label.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+        label.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+        label.widthAnchor.constraintEqualToAnchor(widthAnchor, constant: -40).active = true
+    }
+    
+    func hideEmptyMessage() {
+        for view in subviews {
+            if view.tag == UIViewShowEmptyMessageTag {
+                view.removeFromSuperview()
             }
         }
     }
@@ -154,14 +155,14 @@ extension UIImageView {
                 switch $0 {
                 case .Success(let data):
                     if let image = UIImage(data: data) {
-                    let operation = NSBlockOperation() {
-                        UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                            self.image = image
-                            }, completion: nil)
-                        callback?(.Success(image))
-                    }
-                    operation.queuePriority = .VeryLow
-                    NSOperationQueue.mainQueue().addOperation(operation)
+                        let operation = NSBlockOperation() {
+                            UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                                self.image = image
+                                }, completion: nil)
+                            callback?(.Success(image))
+                        }
+                        operation.queuePriority = .VeryLow
+                        NSOperationQueue.mainQueue().addOperation(operation)
                     } else {
                         callback?(.Error(NSError(domain: "imageBroken", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
                     }
@@ -170,7 +171,7 @@ extension UIImageView {
                     callback?(.Error(error))
                     print(error)
                 }
-
+                
             }
         }
     }
