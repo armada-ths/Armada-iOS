@@ -28,7 +28,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.updateFilter()
                 }
-                
             }
         }
         
@@ -112,6 +111,10 @@ class OrganisationGroupsTableViewController: UITableViewController {
         if dataSource.values.isEmpty {
             dataSource.refresh()
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

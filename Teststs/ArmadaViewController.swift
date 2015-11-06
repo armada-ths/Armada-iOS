@@ -13,6 +13,13 @@ class ArmadaViewController: UIViewController {
     }
 
     @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
+        
+        for viewController in containedViewControllers {
+            if let viewController = viewController as? OrganisationGroupsTableViewController {
+                viewController.searchBar?.resignFirstResponder()
+            }
+        }
+        
         let viewController = containedViewControllers[sender.selectedSegmentIndex]
         self.addChildViewController(viewController)
         viewController.view.frame = self.containerView.bounds
