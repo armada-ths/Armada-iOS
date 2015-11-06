@@ -15,7 +15,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     callback(response.map { [$0] })
                     NSOperationQueue().addOperationWithBlock {
-                        NSThread.sleepForTimeInterval(1)
+                        NSThread.sleepForTimeInterval(0.3)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.scrollToNearestUpcomingEvent()
                         }
