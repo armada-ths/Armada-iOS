@@ -16,6 +16,10 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
 //        refresh()
     }
     
+    subscript(indexPath: NSIndexPath) -> T {
+        return values[indexPath.section][indexPath.row]
+    }
+    
     func refresh(refreshControl: UIRefreshControl? = nil) {
         if refreshControl == nil {
             tableViewController?.tableView.startActivityIndicator()
@@ -43,6 +47,10 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
                 self.tableViewController?.refreshControl = UIRefreshControl()
                 self.tableViewController?.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         }
+    }
+    
+    var isEmpty: Bool {
+        return values.isEmpty
     }
     
     func updateFunc(callback: Response<[[T]]> -> Void) {}

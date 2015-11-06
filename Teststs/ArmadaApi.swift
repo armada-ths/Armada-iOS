@@ -11,11 +11,6 @@ public struct ArmadaEvent {
     public let signupStartDate: NSDate?
     public let signupEndDate: NSDate?
     public let imageUrl: NSURL?
-    
-    var image: UIImage? {
-        return UIImage(named: title.stringByReplacingOccurrencesOfString("ä", withString: ""))
-    }
-    
 }
 
 public struct News {
@@ -33,6 +28,25 @@ public struct ArmadaMember: Equatable {
 public func ==(x: ArmadaMember, y: ArmadaMember) -> Bool {
     return x.name == y.name && x.role == y.role
 }
+
+public struct Sponsor {
+    let name: String
+    let imageUrl: NSURL
+    let description: String
+    let websiteUrl: NSURL
+    
+    let isMainPartner: Bool
+    let isMainSponsor: Bool
+    let isGreenPartner: Bool
+}
+
+struct ArmadaFieldInfo {
+    let title: String
+    let description: String
+    let armadaField: ArmadaField
+}
+
+
 
 public struct ArmadaGroup {
     let name: String
@@ -572,13 +586,6 @@ public class _ArmadaApi {
         }
     }
     
-}
-
-
-struct ArmadaFieldInfo {
-    let title: String
-    let description: String
-    let armadaField: ArmadaField
 }
 
 extension Array {

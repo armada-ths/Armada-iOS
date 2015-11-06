@@ -39,9 +39,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
             attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
             summaryLabel.attributedText = attrString
         }
-        
-        eventImageView.image = armadaEvent.image
-        
+            
         if let imageUrl =  armadaEvent.imageUrl {
             eventImageView.loadImageFromUrl(imageUrl.absoluteString)
         }

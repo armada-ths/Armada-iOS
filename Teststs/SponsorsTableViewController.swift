@@ -1,16 +1,5 @@
 import UIKit
 
-public struct Sponsor {
-    let name: String
-    let imageUrl: NSURL
-    let description: String
-    let websiteUrl: NSURL
-    
-    let isMainPartner: Bool
-    let isMainSponsor: Bool
-    let isGreenPartner: Bool
-}
-
 
 class SponsorsTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
@@ -25,26 +14,23 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
             ArmadaApi.sponsorsFromServer { response in
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                callback(response.map {
-                    sponsors in
-                    let sponsorGroups: [[Sponsor]] = [
-                        sponsors.filter { $0.isMainPartner },
-                        sponsors.filter { $0.isGreenPartner },
-                        sponsors.filter { $0.isMainSponsor },
-                        sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
-                    ]
-                    return sponsorGroups
+                    callback(response.map { sponsors in
+                        return [
+                            sponsors.filter { $0.isMainPartner },
+                            sponsors.filter { $0.isGreenPartner },
+                            sponsors.filter { $0.isMainSponsor },
+                            sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
+                        ]
                     })
                 }
             }
-            
         }
+    
         
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             let sponsorName = ["Main Partner", "Green Partner", "Main Sponsor", "Other Sponsor"][section]
             return sponsorName + (values[section].count > 1 ? "s" : "")
         }
-        
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let sponsor = values[indexPath.section][indexPath.row]
@@ -53,7 +39,7 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                 cell.sponsorLabel.text = sponsor.description
                 cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
             }
-            if let image = images[sponsor.imageUrl.absoluteString]{
+            if let image = images[sponsor.imageUrl.absoluteString] {
                 cell.sponsorImageView.image = image
             } else{
                 cell.sponsorImageView.image = nil
@@ -79,18 +65,17 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         registerForPreviewingWithDelegate(self, sourceView: view)
-
     }
     
     
-    var highlightedSponsor: Sponsor?
+    var highlightedIndexPath: NSIndexPath?
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
             guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
                 let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            let sponsor = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
-            highlightedSponsor = sponsor
+            let sponsor = dataSource[highlightedIndexPath]
+            self.highlightedIndexPath = highlightedIndexPath
             let viewController = storyboard!.instantiateViewControllerWithIdentifier("SponsorsWebViewController") as! SponsorsWebViewController
             viewController.url = sponsor.websiteUrl
             previewingContext.sourceRect = cell.frame
@@ -99,12 +84,11 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         openWebsite()
-        
     }
     
-    
     func openWebsite() {
-        if let sponsor = selectedSponsor ?? highlightedSponsor {
+        if let indexPath = tableView.indexPathForSelectedRow ?? highlightedIndexPath {
+            let sponsor = dataSource[indexPath]
             if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
                 UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
             }
@@ -112,24 +96,9 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         }
     }
     
-    var selectedSponsor: Sponsor? {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            return dataSource.values[indexPath.section][indexPath.row]
-        }
-        return nil
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if dataSource.values.isEmpty {
+        if dataSource.isEmpty {
             dataSource.refresh()
         }
     }
@@ -145,6 +114,5 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         openWebsite()
     }
-    
 }
 
