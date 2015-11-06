@@ -70,6 +70,18 @@ extension NSURL {
             })
         }
     }
+    
+    func getImage(callback: Response<UIImage> -> Void) {
+        getData() {
+            callback($0 >>= { data in
+                if let image = UIImage(data: data) {
+                    return .Success(image)
+                }
+                return .Error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid Image"]))
+            })
+        }
+    }
+    
 }
 
 

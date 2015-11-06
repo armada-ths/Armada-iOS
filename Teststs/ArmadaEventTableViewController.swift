@@ -11,55 +11,61 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         }
         
         override func updateFunc(callback: Response<[[ArmadaEvent]]> -> Void) {
-            ArmadaApi.eventsFromServer {
-                callback($0.map { [$0] })
-                
-                var row = 0
-                let dateFormat = "yyyy-MM-dd"
-                let now = NSDate().format(dateFormat)
-                if case .Success(let events) = $0 {
-                    for (i, event) in events.enumerate() {
-                        if event.startDate.format(dateFormat) >= now {
-                            row = i
-                            break
+            ArmadaApi.eventsFromServer { response in
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    callback(response.map { [$0] })
+                    NSOperationQueue().addOperationWithBlock {
+                        NSThread.sleepForTimeInterval(1)
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.scrollToNearestUpcomingEvent()
                         }
                     }
+
                 }
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    if row != 0 {
-                        self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
-                    }
+            }
+        }
+        
+        func scrollToNearestUpcomingEvent() {
+            var row = 0
+            let dateFormat = "yyyy-MM-dd"
+            let now = NSDate().format(dateFormat)
+            let events = values.flatten()
+            for (i, event) in events.enumerate() {
+                if event.startDate.format(dateFormat) >= now {
+                    row = i
+                    break
                 }
+            }
+            
+            if row != 0 {
+                self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
             }
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let armadaEvent = values[indexPath.section][indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventNewTableViewCell", forIndexPath: indexPath) as!
-            ArmadaEventNewTableViewCell
-            
+            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventNewTableViewCell", forIndexPath: indexPath) as! ArmadaEventNewTableViewCell
             cell.titleLabel.text = armadaEvent.title
+            cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
+            cell.descriptionLabel.text = armadaEvent.summary.attributedHtmlString?.string
             if let imageUrl = armadaEvent.imageUrl {
-                if let image = images[imageUrl.absoluteString]{
+                if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image
-                    cell.eventImageUrl = imageUrl.absoluteString
                 } else{
                     cell.eventImageView.image = nil
-                    cell.eventImageUrl = imageUrl.absoluteString
-                    cell.eventImageView.loadImageFromUrl(imageUrl.absoluteString) { response in
+                    imageUrl.getImage() { response in
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             if case .Success(let image) = response {
-                                if cell.eventImageUrl == imageUrl.absoluteString{
-                                    self.images[imageUrl.absoluteString] = image
+                                self.images[imageUrl.absoluteString] = image
+                                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ArmadaEventNewTableViewCell {
+                                    cell.eventImageView.image = image
                                 }
                             }
                         }
                     }
                 }
             }
-            cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
-            cell.descriptionLabel.text = armadaEvent.summary.attributedHtmlString?.string
+
             return cell
         }
     }
@@ -74,7 +80,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
         self.tableView.estimatedRowHeight = 400
-        self.clearsSelectionOnViewWillAppear = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

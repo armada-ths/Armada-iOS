@@ -25,15 +25,15 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
             ArmadaApi.sponsorsFromServer {
                 callback($0.map {
-                sponsors in
-                let sponsorGroups: [[Sponsor]] = [
-                    sponsors.filter { $0.isMainPartner },
-                    sponsors.filter { $0.isGreenPartner },
-                    sponsors.filter { $0.isMainSponsor },
-                    sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
-                ]
-                return sponsorGroups
-                })
+                    sponsors in
+                    let sponsorGroups: [[Sponsor]] = [
+                        sponsors.filter { $0.isMainPartner },
+                        sponsors.filter { $0.isGreenPartner },
+                        sponsors.filter { $0.isMainSponsor },
+                        sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
+                    ]
+                    return sponsorGroups
+                    })
             }
             
         }
@@ -53,14 +53,15 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
             }
             if let image = images[sponsor.imageUrl.absoluteString]{
                 cell.sponsorImageView.image = image
-                cell.sponsorImageUrl = sponsor.imageUrl.absoluteString
             } else{
                 cell.sponsorImageView.image = nil
-                cell.sponsorImageUrl = sponsor.imageUrl.absoluteString
-                cell.sponsorImageView.loadImageFromUrl(sponsor.imageUrl.absoluteString){
-                    if case .Success(let image) = $0 {
-                        if cell.sponsorImageUrl == sponsor.imageUrl.absoluteString{
-                            self.images[sponsor.imageUrl.absoluteString]=image
+                sponsor.imageUrl.getImage() { response in
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        if case .Success(let image) = response {
+                            self.images[sponsor.imageUrl.absoluteString] = image
+                            if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? NewSponsorsTableViewCell {
+                                cell.sponsorImageView.image = image
+                            }
                         }
                     }
                 }
@@ -75,7 +76,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         super.viewDidLoad()
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-
+        
         if #available(iOS 9.0, *) {
             registerForPreviewingWithDelegate(self, sourceView: view)
         }
