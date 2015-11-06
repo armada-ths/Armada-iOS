@@ -23,8 +23,9 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         }
         
         override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
-            ArmadaApi.sponsorsFromServer {
-                callback($0.map {
+            ArmadaApi.sponsorsFromServer { response in
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                callback(response.map {
                     sponsors in
                     let sponsorGroups: [[Sponsor]] = [
                         sponsors.filter { $0.isMainPartner },
@@ -34,6 +35,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
                     ]
                     return sponsorGroups
                     })
+                }
             }
             
         }

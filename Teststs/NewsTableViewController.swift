@@ -12,20 +12,20 @@ class NewsTableViewController: ScrollZoomTableViewController {
         var shit: CGFloat = 0
         
         override func updateFunc(callback: Response<[[News]]> -> Void) {
-            ArmadaApi.newsFromServer {
-                switch $0 {
-                case .Success:
-                    if self.values.isEmpty {
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
+            ArmadaApi.newsFromServer { response in
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    switch response {
+                    case .Success:
+                        if self.values.isEmpty {
                             let tableViewController = (self.tableViewController as! ScrollZoomTableViewController)
                             tableViewController.headerView.hidden = false
                             tableViewController.tableView.contentInset = UIEdgeInsets(top: tableViewController.headerHeight + self.shit, left: 0, bottom: 0, right: 0)
                             tableViewController.tableView.contentOffset = CGPoint(x: 0, y: -(tableViewController.headerHeight))
                         }
+                    case .Error: self.shit = 64
                     }
-                case .Error: self.shit = 64
+                    callback(response.map { [$0] })
                 }
-                callback($0.map { [$0] })
                 
             }
         }

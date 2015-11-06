@@ -15,7 +15,7 @@ extension String {
 }
 
 class OrganisationGroupsTableViewController: UITableViewController {
-
+    
     
     class ArmadaOrganisationGroupsTableViewDataSource: ArmadaTableViewDataSource<ArmadaMember> {
         
@@ -26,9 +26,9 @@ class OrganisationGroupsTableViewController: UITableViewController {
         var allOrganisationGroups = [ArmadaGroup]() {
             didSet {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.updateFilter()
+                    self.updateFilter()
                 }
-
+                
             }
         }
         
@@ -58,10 +58,12 @@ class OrganisationGroupsTableViewController: UITableViewController {
         
         override func updateFunc(callback: Response<[[ArmadaMember]]> -> Void) {
             ArmadaApi.organisationGroupsFromServer() { response in
-                if case .Success(let organisationGroups) = response {
-                    self.allOrganisationGroups = organisationGroups
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    if case .Success(let organisationGroups) = response {
+                        self.allOrganisationGroups = organisationGroups
+                    }
+                    callback(response.map { _ in [[]] })
                 }
-                callback(response.map { _ in [[]] })
             }
         }
         
@@ -73,7 +75,7 @@ class OrganisationGroupsTableViewController: UITableViewController {
         override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return filteredOrganisationGroups.count
         }
-
+        
         
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             return filteredOrganisationGroups[section].name
@@ -108,12 +110,12 @@ class OrganisationGroupsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let viewController = segue.destinationViewController as? ArmadaMembersPageViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-            viewController.selectedMember = dataSource.filteredOrganisationGroups[indexPath.section].members[indexPath.row]
+                viewController.selectedMember = dataSource.filteredOrganisationGroups[indexPath.section].members[indexPath.row]
                 viewController.members = dataSource.filteredOrganisationGroups.flatMap { $0.members }
-            deselectSelectedCell()
+                deselectSelectedCell()
         }
     }
-
+    
 }
 
 extension OrganisationGroupsTableViewController: UISearchBarDelegate {

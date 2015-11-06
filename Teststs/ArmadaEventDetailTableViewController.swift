@@ -11,7 +11,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UITextView!
     
     @IBOutlet weak var signupLabel: UILabel!
     
@@ -28,7 +28,8 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         let attrString = NSMutableAttributedString(string: armadaEvent.summary)
         attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
         summaryLabel.attributedText = attrString
-        
+        summaryLabel.textContainer.lineFragmentPadding = 0
+        summaryLabel.textContainerInset = UIEdgeInsetsZero
         if let text = armadaEvent.summary.attributedHtmlString{
             summaryLabel.attributedText = text
         }else{

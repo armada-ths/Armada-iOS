@@ -2151,22 +2151,22 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="fZ5-Aq-5QZ">
-                                        <rect key="frame" x="0.0" y="345" width="600" height="296"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="299" id="fZ5-Aq-5QZ">
+                                        <rect key="frame" x="0.0" y="345" width="600" height="299"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ5-Aq-5QZ" id="3Y1-U0-NBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="295"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-Au-yP6">
-                                                    <rect key="frame" x="61" y="8" width="14" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfz-Au-yP6">
+                                                    <rect key="frame" x="58" y="8" width="15" height="30"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCT" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckm-R6-lGV">
-                                                    <rect key="frame" x="10" y="38" width="65" height="30"/>
+                                                    <rect key="frame" x="8" y="38" width="65" height="30"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="tpZ-86-eov"/>
@@ -2175,75 +2175,50 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcU-36-SIt">
-                                                    <rect key="frame" x="93" y="476" width="138" height="1"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Lorem ipsum" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Dq0-Ad-rA9">
+                                                    <rect key="frame" x="81" y="8" width="511" height="242"/>
                                                     <animations/>
-                                                    <color key="backgroundColor" red="0.027450980390000001" green="0.79607843140000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="138" id="evZ-MT-1IX"/>
-                                                        <constraint firstAttribute="height" constant="1" id="nRZ-K8-8tf"/>
+                                                        <constraint firstAttribute="width" constant="10" id="UnE-fI-Ygp"/>
+                                                        <constraint firstAttribute="height" constant="10" id="pZc-z4-qXG"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <state key="normal" title="Sign Up">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqF-c8-zbb">
-                                                    <rect key="frame" x="90" y="8" width="464" height="303"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="mLJ-xE-J3i"/>
-                                                        <constraint firstAttribute="width" constant="454" id="mmn-iL-e3e"/>
-                                                    </constraints>
-                                                    <string key="text">Regarded as one of the most successful events last year, the Armada Run is back this fall as a kick-off to the career days. The third edition of the run will take place at KTH, campus valhallavägen. Challenge the students and take the opportunity to show that your organisation encourage a healthy lifestyle. After crossing the finish line, we will offer snacks and the opportunity to meet students and mingle in an informal atmosphere.
-</string>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                                    <color key="textColor" white="0.29999999999999999" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="mLJ-xE-J3i"/>
-                                                            <exclude reference="mmn-iL-e3e"/>
+                                                            <exclude reference="UnE-fI-Ygp"/>
+                                                            <exclude reference="pZc-z4-qXG"/>
                                                         </mask>
                                                     </variation>
-                                                </label>
+                                                </textView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="topMargin" secondItem="wqF-c8-zbb" secondAttribute="top" id="658-lO-i1o"/>
+                                                <constraint firstItem="Dq0-Ad-rA9" firstAttribute="leading" secondItem="ckm-R6-lGV" secondAttribute="trailing" id="5Eh-Yd-Ndw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Dq0-Ad-rA9" secondAttribute="trailing" id="8Yj-AO-BBi"/>
                                                 <constraint firstItem="Xfz-Au-yP6" firstAttribute="trailing" secondItem="ckm-R6-lGV" secondAttribute="trailing" id="FjN-cB-2BB"/>
-                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" id="Iv1-hX-kn1"/>
+                                                <constraint firstItem="Dq0-Ad-rA9" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" id="Mgz-5n-Rc8"/>
                                                 <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="3Y1-U0-NBT" secondAttribute="topMargin" constant="10" id="OJ4-tN-Icv"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="15" id="RSq-UE-ZnP"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="hcU-36-SIt" secondAttribute="bottom" constant="15" id="SYf-X0-tZQ"/>
-                                                <constraint firstItem="hcU-36-SIt" firstAttribute="leading" secondItem="wqF-c8-zbb" secondAttribute="leading" id="TEc-I5-LKd"/>
-                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leading" constant="90" id="WgU-AS-QCC"/>
+                                                <constraint firstItem="Dq0-Ad-rA9" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="leading" id="TQ8-jO-YQJ"/>
                                                 <constraint firstItem="ckm-R6-lGV" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leadingMargin" constant="20" id="b2K-ad-3Ce"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="49" id="bQs-KX-Fmz"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="15" id="ghf-q6-0S5"/>
-                                                <constraint firstAttribute="centerX" secondItem="wqF-c8-zbb" secondAttribute="centerX" id="lQc-Md-cbp"/>
-                                                <constraint firstItem="Xfz-Au-yP6" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="top" id="opO-ZC-F6e"/>
-                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="top" id="si2-UX-hMI"/>
-                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="leading" id="xtx-lH-DNQ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Dq0-Ad-rA9" secondAttribute="bottom" constant="40" id="bjH-Zd-vke"/>
+                                                <constraint firstItem="Dq0-Ad-rA9" firstAttribute="leading" secondItem="ckm-R6-lGV" secondAttribute="trailing" constant="8" id="eLT-gF-DrX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Dq0-Ad-rA9" secondAttribute="trailing" id="hQW-v9-NHE"/>
+                                                <constraint firstItem="ckm-R6-lGV" firstAttribute="leading" secondItem="3Y1-U0-NBT" secondAttribute="leadingMargin" id="sFD-Lo-0hW"/>
+                                                <constraint firstItem="Dq0-Ad-rA9" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="top" id="u3l-2U-Zqx"/>
                                                 <constraint firstItem="ckm-R6-lGV" firstAttribute="top" secondItem="Xfz-Au-yP6" secondAttribute="bottom" id="yDg-ee-kHl"/>
                                                 <constraint firstAttribute="topMargin" secondItem="Xfz-Au-yP6" secondAttribute="top" id="yGj-Xp-2xt"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wqF-c8-zbb" secondAttribute="trailing" constant="5" id="yPo-v3-Oef"/>
-                                                <constraint firstItem="wqF-c8-zbb" firstAttribute="leading" secondItem="Xfz-Au-yP6" secondAttribute="trailing" constant="15" id="yrl-L0-QsS"/>
-                                                <constraint firstItem="hcU-36-SIt" firstAttribute="top" secondItem="wqF-c8-zbb" secondAttribute="bottom" constant="10" id="zSf-ed-Sna"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="b2K-ad-3Ce"/>
+                                                    <exclude reference="5Eh-Yd-Ndw"/>
+                                                    <exclude reference="Mgz-5n-Rc8"/>
+                                                    <exclude reference="TQ8-jO-YQJ"/>
+                                                    <exclude reference="hQW-v9-NHE"/>
                                                     <exclude reference="OJ4-tN-Icv"/>
-                                                    <exclude reference="opO-ZC-F6e"/>
-                                                    <exclude reference="658-lO-i1o"/>
-                                                    <exclude reference="Iv1-hX-kn1"/>
-                                                    <exclude reference="RSq-UE-ZnP"/>
-                                                    <exclude reference="lQc-Md-cbp"/>
-                                                    <exclude reference="xtx-lH-DNQ"/>
-                                                    <exclude reference="yPo-v3-Oef"/>
-                                                    <exclude reference="TEc-I5-LKd"/>
-                                                    <exclude reference="zSf-ed-Sna"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2266,7 +2241,7 @@
                         <outlet property="eventImageView" destination="l8U-YR-BkE" id="pYd-Lz-x3M"/>
                         <outlet property="monthLabel" destination="ckm-R6-lGV" id="K5j-72-Pbp"/>
                         <outlet property="signupLabel" destination="uyw-1G-Voy" id="oi1-EZ-Jis"/>
-                        <outlet property="summaryLabel" destination="wqF-c8-zbb" id="C5Z-kO-hG5"/>
+                        <outlet property="summaryLabel" destination="Dq0-Ad-rA9" id="Rbo-BZ-dT9"/>
                         <outlet property="titleLabel" destination="Gg8-IY-5Uh" id="ywg-Ak-V6H"/>
                     </connections>
                 </tableViewController>
@@ -2397,7 +2372,7 @@
                                                     <rect key="frame" x="23" y="100" width="554" height="212"/>
                                                     <animations/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>

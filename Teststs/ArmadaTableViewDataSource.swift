@@ -18,7 +18,6 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
         updateFunc { response in
-//            NSOperationQueue.mainQueue().addOperationWithBlock {
                 switch response {
                 case .Success(let values):
                     self.values = values
@@ -38,7 +37,6 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
                 self.tableViewController?.tableView.stopActivityIndicator()
                 self.tableViewController!.refreshControl = UIRefreshControl()
                 self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-//            }
         }
     }
     
