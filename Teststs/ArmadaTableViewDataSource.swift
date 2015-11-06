@@ -12,11 +12,16 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         super.init()
         self.tableViewController = tableViewController
         tableViewController.tableView.separatorStyle = .None
-        tableViewController.tableView.startActivityIndicator()
-        refresh()
+
+//        refresh()
     }
     
     func refresh(refreshControl: UIRefreshControl? = nil) {
+        if refreshControl == nil {
+            tableViewController?.tableView.startActivityIndicator()
+            tableViewController?.showEmptyMessage(false, message: "")
+            self.tableViewController?.tableView.separatorStyle = .None
+        }
         updateFunc { response in
                 switch response {
                 case .Success(let values):
@@ -35,8 +40,8 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
                 self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .None : self.separatorStyle
                 self.tableViewController?.tableView.reloadData()
                 self.tableViewController?.tableView.stopActivityIndicator()
-                self.tableViewController!.refreshControl = UIRefreshControl()
-                self.tableViewController!.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+                self.tableViewController?.refreshControl = UIRefreshControl()
+                self.tableViewController?.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         }
     }
     

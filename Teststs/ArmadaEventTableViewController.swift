@@ -96,6 +96,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if dataSource.values.isEmpty {
+            dataSource.refresh()
+        }
         deselectSelectedCell()
     }
 }

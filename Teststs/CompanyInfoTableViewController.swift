@@ -35,6 +35,9 @@ class CompanyInfoTableViewController: UITableViewController {
         super.viewDidLoad()
         dataSource = DataSource(tableViewController: self)
         tableView.dataSource = dataSource
+        if dataSource.values.isEmpty {
+            dataSource.refresh()
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

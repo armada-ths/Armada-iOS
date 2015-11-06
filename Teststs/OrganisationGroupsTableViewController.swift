@@ -107,6 +107,13 @@ class OrganisationGroupsTableViewController: UITableViewController {
         super.viewDidAppear(animated)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if dataSource.values.isEmpty {
+            dataSource.refresh()
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let viewController = segue.destinationViewController as? ArmadaMembersPageViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {

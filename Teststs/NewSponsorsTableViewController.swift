@@ -133,6 +133,13 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if dataSource.values.isEmpty {
+            dataSource.refresh()
+        }
+    }
+    
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 120
     }
