@@ -14,13 +14,14 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             ArmadaApi.eventsFromServer { response in
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     callback(response.map { [$0] })
+                    
+                    // For some reason - we must wait before scrolling!
                     NSOperationQueue().addOperationWithBlock {
                         NSThread.sleepForTimeInterval(0.3)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.scrollToNearestUpcomingEvent()
                         }
                     }
-
                 }
             }
         }
@@ -44,7 +45,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let armadaEvent = values[indexPath.section][indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventNewTableViewCell", forIndexPath: indexPath) as! ArmadaEventNewTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
             cell.descriptionLabel.text = armadaEvent.summary.attributedHtmlString?.string
@@ -57,7 +58,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             if case .Success(let image) = response {
                                 self.images[imageUrl.absoluteString] = image
-                                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ArmadaEventNewTableViewCell {
+                                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ArmadaEventTableViewCell {
                                     cell.eventImageView.image = image
                                 }
                             }
@@ -65,7 +66,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     }
                 }
             }
-
             return cell
         }
     }
@@ -85,20 +85,20 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController,
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
-                let armadaEvent = dataSource.values[indexPath.section][indexPath.row]
+                let armadaEvent = dataSource[indexPath]
                 controller.armadaEvent = armadaEvent
                 if !readArmadaEvents.contains(armadaEvent.title) {
                     readArmadaEvents.append(armadaEvent.title)
                 }
+                deselectSelectedCell()
         }
     }
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if dataSource.values.isEmpty {
+        if dataSource.isEmpty {
             dataSource.refresh()
         }
-        deselectSelectedCell()
     }
 }

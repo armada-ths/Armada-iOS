@@ -1,10 +1,5 @@
 import UIKit
 
-
-public func <(x: NSDate, y: NSDate) -> Bool {
-    return x.timeIntervalSince1970 < y.timeIntervalSince1970
-}
-
 class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     
     @IBOutlet weak var eventImageView: UIImageView!
@@ -12,27 +7,20 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var summaryLabel: UITextView!
-    
     @IBOutlet weak var signupLabel: UILabel!
     
     var armadaEvent: ArmadaEvent!
     
     override func viewDidLoad() {
-        //        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         super.viewDidLoad()
-        
         dayLabel.text = armadaEvent.startDate.format("d")
         monthLabel.text = armadaEvent.startDate.format("MMM").uppercaseString.stringByReplacingOccurrencesOfString(".", withString: "")
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 3
-        let attrString = NSMutableAttributedString(string: armadaEvent.summary)
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        summaryLabel.attributedText = attrString
         summaryLabel.textContainer.lineFragmentPadding = 0
         summaryLabel.textContainerInset = UIEdgeInsetsZero
-        if let text = armadaEvent.summary.attributedHtmlString{
+        
+        if let text = armadaEvent.summary.attributedHtmlString {
             summaryLabel.attributedText = text
-        }else{
+        } else {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 3
             let attrString = NSMutableAttributedString(string: armadaEvent.summary)
@@ -43,6 +31,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         if let imageUrl =  armadaEvent.imageUrl {
             eventImageView.loadImageFromUrl(imageUrl.absoluteString)
         }
+
         titleLabel.text = armadaEvent.title
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
@@ -50,7 +39,7 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
         if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
             signupLabel.text = "Registration is over"
         } else {
-            if let signupStartDate =  armadaEvent.signupStartDate,
+            if let signupStartDate = armadaEvent.signupStartDate,
                 let signupLink = armadaEvent.signupLink where !signupLink.isEmpty,
                 let _ = NSURL(string: signupLink) {
                 if signupStartDate < NSDate() {
@@ -84,12 +73,4 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
 }

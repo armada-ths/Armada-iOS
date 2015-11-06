@@ -11,6 +11,9 @@ extension NSUserDefaults {
     }
 }
 
+public func <(x: NSDate, y: NSDate) -> Bool {
+    return x.timeIntervalSince1970 < y.timeIntervalSince1970
+}
 
 extension UIView {
     
