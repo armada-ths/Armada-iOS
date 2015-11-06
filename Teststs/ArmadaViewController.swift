@@ -8,7 +8,7 @@ class ArmadaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { self.storyboard!.instantiateViewControllerWithIdentifier($0) }
+        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { storyboard!.instantiateViewControllerWithIdentifier($0) }
         segmentedControlChanged(segmentedControl)
     }
 

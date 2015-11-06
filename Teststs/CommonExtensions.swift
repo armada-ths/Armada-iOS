@@ -1,5 +1,19 @@
 import UIKit
 
+extension String {
+    func containsWordWithPrefix(prefix: String) -> Bool {
+        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).map { $0.lowercaseString }
+        let searchWords = prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}).map { $0.lowercaseString }
+        for searchPrefix in searchWords {
+            if words.filter({ $0.hasPrefix(searchPrefix) }).isEmpty {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+
 extension NSUserDefaults {
     subscript(key: String) -> AnyObject? {
         get {

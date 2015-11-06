@@ -1,22 +1,7 @@
 import UIKit
 
-
-extension String {
-    func containsWordPrefix(prefix: String) -> Bool {
-        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).map { $0.lowercaseString }
-        let searchWords = prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}).map { $0.lowercaseString }
-        for searchPrefix in searchWords {
-            if words.filter({ $0.hasPrefix(searchPrefix) }).isEmpty {
-                return false
-            }
-        }
-        return true
-    }
-}
-
 class OrganisationGroupsTableViewController: UITableViewController {
-    
-    
+
     class ArmadaOrganisationGroupsTableViewDataSource: ArmadaTableViewDataSource<ArmadaMember> {
         
         override init(tableViewController: UITableViewController) {
@@ -34,22 +19,22 @@ class OrganisationGroupsTableViewController: UITableViewController {
         var filteredOrganisationGroups = [ArmadaGroup]()
         
         func updateFilter() {
-            let stopWatch = StopWatch()
             var matchingOrganisationGroups = [ArmadaGroup]()
             for group in allOrganisationGroups {
                 let searchText = (tableViewController as! OrganisationGroupsTableViewController).searchBar.text ?? ""
-                if !searchText.isEmpty {
-                    if !group.name.containsWordPrefix(searchText) {
-                        let members = group.members.filter { $0.name.containsWordPrefix(searchText) || $0.role.containsWordPrefix(searchText) }
+                if searchText.isEmpty {
+                    matchingOrganisationGroups += [group]
+                } else {
+                    if group.name.containsWordWithPrefix(searchText) {
+                        matchingOrganisationGroups += [group]
+                    } else {
+                        let members = group.members.filter { $0.name.containsWordWithPrefix(searchText) || $0.role.containsWordWithPrefix(searchText) }
                         if !members.isEmpty {
                             matchingOrganisationGroups += [ArmadaGroup(name: group.name, members: members)]
                         }
-                        continue
                     }
                 }
-                matchingOrganisationGroups += [group]
             }
-            stopWatch.print("Filtered organisations")
             filteredOrganisationGroups = matchingOrganisationGroups
             tableViewController?.tableView.reloadData()
             (tableViewController as! OrganisationGroupsTableViewController).searchBar.hidden = allOrganisationGroups.isEmpty
@@ -65,7 +50,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
                 }
             }
         }
-        
         
         override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return filteredOrganisationGroups[section].members.count
@@ -102,19 +86,11 @@ class OrganisationGroupsTableViewController: UITableViewController {
         searchBar.delegate = self
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if dataSource.values.isEmpty {
             dataSource.refresh()
         }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -125,7 +101,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
                 deselectSelectedCell()
         }
     }
-    
 }
 
 extension OrganisationGroupsTableViewController: UISearchBarDelegate {
