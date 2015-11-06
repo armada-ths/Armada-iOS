@@ -40,9 +40,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
-            if #available(iOS 9.0, *) {
-                registerForPreviewingWithDelegate(self, sourceView: view)
-            }
+        registerForPreviewingWithDelegate(self, sourceView: view)
     }
     
     
@@ -56,9 +54,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         highlightedCompany = company
         let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
         companyViewController.company = company
-        if #available(iOS 9.0, *) {
-            previewingContext.sourceRect = cell.frame
-        }
+        previewingContext.sourceRect = cell.frame
         return companyViewController
     }
     

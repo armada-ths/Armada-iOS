@@ -78,10 +78,8 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         super.viewDidLoad()
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        
-        if #available(iOS 9.0, *) {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
+        registerForPreviewingWithDelegate(self, sourceView: view)
+
     }
     
     
@@ -91,15 +89,11 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         viewControllerForLocation location: CGPoint) -> UIViewController? {
             guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
                 let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            
-            
             let sponsor = dataSource.values[highlightedIndexPath.section][highlightedIndexPath.row]
             highlightedSponsor = sponsor
             let viewController = storyboard!.instantiateViewControllerWithIdentifier("SponsorsWebViewController") as! SponsorsWebViewController
             viewController.url = sponsor.websiteUrl
-            if #available(iOS 9.0, *) {
-                previewingContext.sourceRect = cell.frame
-            }
+            previewingContext.sourceRect = cell.frame
             return viewController
     }
     

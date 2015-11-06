@@ -12,9 +12,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 9.0, *) {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
+        registerForPreviewingWithDelegate(self, sourceView: view)
         if FakeMatchFilter.isEmpty {
             FakeMatchFilter[CompanyProperty.WorkFields] = Array(ArmadaApi.workFields[0...3])
             FakeMatchFilter[CompanyProperty.CompanyValues] = Array(ArmadaApi.companyValues[0...2])
@@ -36,9 +34,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             highlightedCompany = companyWithPercentage.company
             let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
             companyViewController.company = highlightedCompany
-            if #available(iOS 9.0, *) {
-                previewingContext.sourceRect = cell.frame
-            }
+            previewingContext.sourceRect = cell.frame
             return companyViewController
     }
     

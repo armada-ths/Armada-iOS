@@ -179,7 +179,6 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
             case favoriteRow where FavoriteCompanies.contains(company.name): return zeroHeight
             default: return UITableViewAutomaticDimension
         }
-        return UITableViewAutomaticDimension
     }
     
     
