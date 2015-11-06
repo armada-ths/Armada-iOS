@@ -2502,156 +2502,6 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JUt-pl-71U">
-                                <rect key="frame" x="0.0" y="352" width="600" height="60"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JUt-pl-71U" id="tbO-3Q-v0p">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Armada Run" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-5V-2tW">
-                                            <rect key="frame" x="26" y="8" width="96" height="26"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="26" id="C22-Lr-5AX"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17th May" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3M-6w-186">
-                                            <rect key="frame" x="26" y="35" width="96" height="16"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="16" id="l3u-yg-ejQ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                    <constraints>
-                                        <constraint firstItem="NlM-5V-2tW" firstAttribute="top" secondItem="tbO-3Q-v0p" secondAttribute="topMargin" id="3Ju-eQ-Ejt"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="NlM-5V-2tW" secondAttribute="trailing" constant="470" id="Mwu-cD-2Ac"/>
-                                        <constraint firstItem="V3M-6w-186" firstAttribute="width" secondItem="NlM-5V-2tW" secondAttribute="width" id="PtZ-4L-mlk"/>
-                                        <constraint firstItem="V3M-6w-186" firstAttribute="top" secondItem="NlM-5V-2tW" secondAttribute="bottom" constant="1" id="SBR-a2-gd4"/>
-                                        <constraint firstAttribute="centerX" secondItem="NlM-5V-2tW" secondAttribute="centerX" constant="226" id="fJl-5F-dQH"/>
-                                        <constraint firstItem="V3M-6w-186" firstAttribute="bottom" secondItem="tbO-3Q-v0p" secondAttribute="bottomMargin" id="tU8-TK-PZp"/>
-                                        <constraint firstItem="NlM-5V-2tW" firstAttribute="leading" secondItem="tbO-3Q-v0p" secondAttribute="leadingMargin" constant="18" id="vLR-Ru-k0g"/>
-                                        <constraint firstItem="V3M-6w-186" firstAttribute="leading" secondItem="NlM-5V-2tW" secondAttribute="leading" id="xSo-R6-NTs"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Mwu-cD-2Ac"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsBackgroundTableViewCell" rowHeight="203" id="m4w-cV-4kq" customClass="NewsTableViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="412" width="600" height="203"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m4w-cV-4kq" id="QUG-IT-3Ce">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="202.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="News" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC7-J5-v7C">
-                                            <rect key="frame" x="226" y="65" width="149" height="72"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="from Armada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLy-yP-N83">
-                                            <rect key="frame" x="260" y="137" width="115" height="24"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                    <color key="backgroundColor" red="0.027450980390000001" green="0.79607843140000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="vC7-J5-v7C" firstAttribute="trailing" secondItem="DLy-yP-N83" secondAttribute="trailing" id="1r2-Zs-nZA"/>
-                                        <constraint firstItem="vC7-J5-v7C" firstAttribute="leading" secondItem="DLy-yP-N83" secondAttribute="trailing" constant="-97" id="5DP-UC-7a4"/>
-                                        <constraint firstAttribute="centerX" secondItem="vC7-J5-v7C" secondAttribute="centerX" id="LOJ-cG-97b"/>
-                                        <constraint firstItem="vC7-J5-v7C" firstAttribute="centerX" secondItem="DLy-yP-N83" secondAttribute="centerX" constant="0.5" id="LsI-H1-Nwp"/>
-                                        <constraint firstAttribute="centerY" secondItem="vC7-J5-v7C" secondAttribute="centerY" id="UZB-h8-dFd"/>
-                                        <constraint firstItem="vC7-J5-v7C" firstAttribute="top" secondItem="DLy-yP-N83" secondAttribute="bottom" constant="-100" id="Y1y-XD-tZS"/>
-                                        <constraint firstItem="DLy-yP-N83" firstAttribute="top" secondItem="vC7-J5-v7C" secondAttribute="bottom" id="wM0-lb-e66"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="5DP-UC-7a4"/>
-                                            <exclude reference="LsI-H1-Nwp"/>
-                                            <exclude reference="Y1y-XD-tZS"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="203" id="1hn-SJ-WH5" customClass="NewsTableViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="615" width="600" height="203"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1hn-SJ-WH5" id="IkU-h0-ESK">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="202.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="tpi-Ud-26y">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="202"/>
-                                            <animations/>
-                                        </imageView>
-                                        <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEF-qH-iZQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="202"/>
-                                            <animations/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="tintColor" red="0.44497642850000002" green="0.097961818150000005" blue="0.578145668" alpha="0.60999999999999999" colorSpace="calibratedRGB"/>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="News" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-dZ-195">
-                                            <rect key="frame" x="226" y="65" width="149" height="72"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="from Armada" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqH-m7-MEE">
-                                            <rect key="frame" x="260" y="137" width="115" height="24"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                    <constraints>
-                                        <constraint firstItem="EEF-qH-iZQ" firstAttribute="height" secondItem="tpi-Ud-26y" secondAttribute="height" id="0TS-Qo-O0O"/>
-                                        <constraint firstAttribute="centerY" secondItem="YOD-dZ-195" secondAttribute="centerY" id="871-bu-VcK"/>
-                                        <constraint firstItem="nqH-m7-MEE" firstAttribute="top" secondItem="YOD-dZ-195" secondAttribute="bottom" id="ENQ-g3-Qch"/>
-                                        <constraint firstItem="EEF-qH-iZQ" firstAttribute="centerY" secondItem="tpi-Ud-26y" secondAttribute="centerY" id="FLV-BP-mTf"/>
-                                        <constraint firstItem="YOD-dZ-195" firstAttribute="leading" secondItem="nqH-m7-MEE" secondAttribute="trailing" constant="-97" id="Iev-2l-UqS"/>
-                                        <constraint firstItem="YOD-dZ-195" firstAttribute="centerX" secondItem="nqH-m7-MEE" secondAttribute="centerX" constant="0.5" id="K9e-fF-j9o"/>
-                                        <constraint firstItem="tpi-Ud-26y" firstAttribute="leading" secondItem="IkU-h0-ESK" secondAttribute="leading" id="OJL-Vd-Nh0"/>
-                                        <constraint firstItem="EEF-qH-iZQ" firstAttribute="width" secondItem="tpi-Ud-26y" secondAttribute="width" id="Tje-yQ-pbJ"/>
-                                        <constraint firstItem="YOD-dZ-195" firstAttribute="trailing" secondItem="nqH-m7-MEE" secondAttribute="trailing" id="XaL-30-sVl"/>
-                                        <constraint firstAttribute="trailing" secondItem="tpi-Ud-26y" secondAttribute="trailing" id="eu1-wg-OUT"/>
-                                        <constraint firstAttribute="centerX" secondItem="YOD-dZ-195" secondAttribute="centerX" id="fD4-xr-nyw"/>
-                                        <constraint firstItem="tpi-Ud-26y" firstAttribute="top" secondItem="IkU-h0-ESK" secondAttribute="top" id="gwa-Y3-LB3"/>
-                                        <constraint firstAttribute="bottom" secondItem="tpi-Ud-26y" secondAttribute="bottom" id="hfk-LD-YQ7"/>
-                                        <constraint firstItem="YOD-dZ-195" firstAttribute="top" secondItem="nqH-m7-MEE" secondAttribute="bottom" constant="-100" id="oaf-Ln-iEg"/>
-                                        <constraint firstItem="EEF-qH-iZQ" firstAttribute="centerX" secondItem="tpi-Ud-26y" secondAttribute="centerX" id="w9T-hp-gZ5"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Iev-2l-UqS"/>
-                                            <exclude reference="K9e-fF-j9o"/>
-                                            <exclude reference="oaf-Ln-iEg"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="8lS-ZJ-p1Y" id="QLJ-i8-QR9"/>
@@ -3062,14 +2912,14 @@
         <!--Sponsors-->
         <scene sceneID="JdA-hg-cLc">
             <objects>
-                <tableViewController id="z1U-qK-Dnt" customClass="NewSponsorsTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="z1U-qK-Dnt" customClass="SponsorsTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="260" sectionHeaderHeight="28" sectionFooterHeight="28" id="QJW-Jm-qbu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SponsorsTableViewCellNoText" id="HwA-qT-9oV" customClass="SponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" tableViewCell="HwA-qT-9oV" id="VXJ-XI-HFh">
@@ -3111,7 +2961,7 @@
                                     <outlet property="sponsorImageView" destination="Pk2-DK-S4r" id="QUi-hM-yAh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewSponsorsTableViewCell" id="8YJ-Hh-mEj" customClass="NewSponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SponsorsTableViewCell" id="8YJ-Hh-mEj" customClass="SponsorsTableViewCell" customModule="Armada" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="352" width="600" height="260"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="8YJ-Hh-mEj" id="bxy-tb-5G2">
@@ -3575,7 +3425,6 @@
         <image name="Tree" width="78" height="100"/>
         <image name="armadaLogo" width="300" height="300"/>
         <image name="astronaut" width="128" height="128"/>
-        <image name="background" width="894" height="720"/>
         <image name="book" width="32" height="32"/>
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2" width="32" height="32"/>

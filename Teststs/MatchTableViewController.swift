@@ -51,7 +51,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let companiesWithMatchPercentages = calculateCompaniesWithMatchPercentages().filter { $0.percentage > 0 }
-        self.companiesWithMatchPercentages = Array(companiesWithMatchPercentages[0..<min(10, companiesWithMatchPercentages.count)])
+        self.companiesWithMatchPercentages = Array(companiesWithMatchPercentages)
         self.updateFavoritesUI()
         
         let labelTag = 1337
@@ -66,7 +66,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         
         filterButton.enabled = !MatchFilter.isEmpty
         filterButton.title = MatchFilter.isEmpty ? nil : "Filter"
-        
         tableView.scrollEnabled = !MatchFilter.isEmpty
         
         if MatchFilter.isEmpty {
@@ -154,7 +153,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             tableView.backgroundView = nil
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         }
-        navigationItem.title = "Top 10 Matches"
+        navigationItem.title = "Match   "
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -172,9 +171,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         let company = companyWithMatchPercentage.company
         cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
         cell.descriptionLabel.text = company.name
-        NSOperationQueue.mainQueue().addOperationWithBlock{
-            cell.matchProgressView.setProgress(Float(matchPercentage), animated: true)
-        }
+        cell.matchProgressView.setProgress(Float(matchPercentage), animated: false)
         cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
         cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
         if let image = company.image {

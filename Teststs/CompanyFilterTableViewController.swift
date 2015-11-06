@@ -78,7 +78,6 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     
     var CompanyFilter: _CompanyFilter! = nil
     var CopyFilter: _CompanyFilter! = nil
-    
     var armadaPages: AnyObject?
     
     override func viewDidLoad() {

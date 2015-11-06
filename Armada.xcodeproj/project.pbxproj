@@ -57,8 +57,8 @@
 		26C652691BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C652681BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift */; };
 		26C9607C1B06A434005A13E7 /* CatalogueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9607B1B06A434005A13E7 /* CatalogueTableViewController.swift */; };
 		26C9607E1B06A61A005A13E7 /* CompanyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C9607D1B06A61A005A13E7 /* CompanyTableViewCell.swift */; };
-		26CDD0D31BA4CC0D00CC2C1D /* NewSponsorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0D21BA4CC0D00CC2C1D /* NewSponsorsTableViewController.swift */; };
-		26CDD0D51BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0D41BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift */; };
+		26CDD0D31BA4CC0D00CC2C1D /* SponsorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0D21BA4CC0D00CC2C1D /* SponsorsTableViewController.swift */; };
+		26CDD0D51BA4CC3100CC2C1D /* SponsorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0D41BA4CC3100CC2C1D /* SponsorsTableViewCell.swift */; };
 		26CDD0D91BA4D9CD00CC2C1D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0D81BA4D9CD00CC2C1D /* AboutViewController.swift */; };
 		26CDD0DB1BA4EC8900CC2C1D /* MatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CDD0DA1BA4EC8900CC2C1D /* MatchTableViewCell.swift */; };
 		26CE1F561B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE1F551B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift */; };
@@ -137,8 +137,8 @@
 		26C652681BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaTableViewDataSource.swift; sourceTree = "<group>"; };
 		26C9607B1B06A434005A13E7 /* CatalogueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogueTableViewController.swift; sourceTree = "<group>"; };
 		26C9607D1B06A61A005A13E7 /* CompanyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyTableViewCell.swift; sourceTree = "<group>"; };
-		26CDD0D21BA4CC0D00CC2C1D /* NewSponsorsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSponsorsTableViewController.swift; sourceTree = "<group>"; };
-		26CDD0D41BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSponsorsTableViewCell.swift; sourceTree = "<group>"; };
+		26CDD0D21BA4CC0D00CC2C1D /* SponsorsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SponsorsTableViewController.swift; sourceTree = "<group>"; };
+		26CDD0D41BA4CC3100CC2C1D /* SponsorsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SponsorsTableViewCell.swift; sourceTree = "<group>"; };
 		26CDD0D81BA4D9CD00CC2C1D /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		26CDD0DA1BA4EC8900CC2C1D /* MatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTableViewCell.swift; sourceTree = "<group>"; };
 		26CE1F551B21E8F3009FDD22 /* AddCompanyPropertyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCompanyPropertyTableViewController.swift; sourceTree = "<group>"; };
@@ -276,9 +276,9 @@
 		265EABFD1BEC138F009CEDCD /* Sponsors */ = {
 			isa = PBXGroup;
 			children = (
-				26CDD0D41BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift */,
+				26CDD0D41BA4CC3100CC2C1D /* SponsorsTableViewCell.swift */,
 				26431A231BC9EE64002A2734 /* SponsorsWebViewController.swift */,
-				26CDD0D21BA4CC0D00CC2C1D /* NewSponsorsTableViewController.swift */,
+				26CDD0D21BA4CC0D00CC2C1D /* SponsorsTableViewController.swift */,
 			);
 			name = Sponsors;
 			sourceTree = "<group>";
@@ -470,7 +470,7 @@
 				269C0D091B8EB33D008FB633 /* Continent+CoreDataProperties.swift in Sources */,
 				260376801B8EB7980031F92F /* CompanyValue+CoreDataProperties.swift in Sources */,
 				269C0D051B8EAE5B008FB633 /* JobType+CoreDataProperties.swift in Sources */,
-				26CDD0D51BA4CC3100CC2C1D /* NewSponsorsTableViewCell.swift in Sources */,
+				26CDD0D51BA4CC3100CC2C1D /* SponsorsTableViewCell.swift in Sources */,
 				2602AD601B15133D00B0DB32 /* ArmadaEventTableViewController.swift in Sources */,
 				2602AD551B14F2A100B0DB32 /* ArmadaApi.swift in Sources */,
 				2671038C1B06B81D00C79164 /* CompanyViewController.swift in Sources */,
@@ -480,7 +480,7 @@
 				2601191D1BA600D500540ED5 /* WorkWay.swift in Sources */,
 				26CDD0D91BA4D9CD00CC2C1D /* AboutViewController.swift in Sources */,
 				26EE7B701BED3B3C00752ADF /* CompanyFilter.swift in Sources */,
-				26CDD0D31BA4CC0D00CC2C1D /* NewSponsorsTableViewController.swift in Sources */,
+				26CDD0D31BA4CC0D00CC2C1D /* SponsorsTableViewController.swift in Sources */,
 				2678975A1BB7B9A00013E8FC /* ArmadaEventNewTableViewCell.swift in Sources */,
 				2685FD661BB21AD40049FEE2 /* SettingsManager.swift in Sources */,
 				26BD3D3D1B1607D800CD0572 /* CommonExtensions.swift in Sources */,

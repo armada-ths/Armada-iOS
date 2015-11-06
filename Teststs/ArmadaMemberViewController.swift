@@ -26,7 +26,6 @@ class ArmadaMemberViewController: UIViewController {
                 self.view.stopActivityIndicator()
                 switch response {
                 case .Success:
-
                     self.nameLabel.hidden = false
                     self.roleLabel.hidden = false
                 case .Error(let error):

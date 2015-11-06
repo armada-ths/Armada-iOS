@@ -12,7 +12,7 @@ public struct Sponsor {
 }
 
 
-class NewSponsorsTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+class SponsorsTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     class ArmadaSponsorTableViewDataSource: ArmadaTableViewDataSource<Sponsor> {
         
@@ -48,7 +48,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let sponsor = values[indexPath.section][indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "NewSponsorsTableViewCellNoText" : "NewSponsorsTableViewCell") as! NewSponsorsTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
             if !sponsor.description.isEmpty {
                 cell.sponsorLabel.text = sponsor.description
                 cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
@@ -61,7 +61,7 @@ class NewSponsorsTableViewController: UITableViewController, UIViewControllerPre
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         if case .Success(let image) = response {
                             self.images[sponsor.imageUrl.absoluteString] = image
-                            if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? NewSponsorsTableViewCell {
+                            if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? SponsorsTableViewCell {
                                 cell.sponsorImageView.image = image
                             }
                         }

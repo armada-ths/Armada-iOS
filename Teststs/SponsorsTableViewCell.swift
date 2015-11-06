@@ -1,6 +1,6 @@
 import UIKit
 
-class NewSponsorsTableViewCell: UITableViewCell {
+class SponsorsTableViewCell: UITableViewCell {
     @IBOutlet weak var sponsorLabel: UILabel!
     @IBOutlet weak var sponsorImageView: UIImageView!
 }
