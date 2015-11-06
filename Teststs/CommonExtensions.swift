@@ -16,16 +16,13 @@ extension UIView {
     
     func startActivityIndicator() {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        activityIndicator.center = center
+        activityIndicator.frame = frame
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
         addSubview(activityIndicator)
         activityIndicator.didMoveToSuperview()
-//        activityIndicator.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-//        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-//        self.addConstraints([
-//            NSLayoutConstraint(item: activityIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 64),
-//            NSLayoutConstraint(item: activityIndicator, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0),
-//        ])
+        activityIndicator.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
+        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor, constant: -64).active = true
     }
     
     func stopActivityIndicator() {
@@ -173,6 +170,7 @@ extension UIImageView {
                     callback?(.Error(error))
                     print(error)
                 }
+
             }
         }
     }
@@ -228,7 +226,6 @@ extension NSDate {
     var isToday: Bool {
         return isSameDayAsDate(NSDate())
     }
-    
     
     var isTomorrow: Bool {
         return isSameDayAsDate(NSDate().dateByAddingTimeInterval(60*60*24))

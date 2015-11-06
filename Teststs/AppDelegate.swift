@@ -1,7 +1,4 @@
 import UIKit
-let armadaBlue = 0x273760
-let armadaGreen = 0x1C6965
-//let armadaGreen = 0x26956c
 
 struct ColorScheme {
     static let darkGrayTextColor = UIColor(hex: 0x1e1e1e)
@@ -15,16 +12,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        UITabBar.appearance().tintColor = UIColor(hex: armadaGreen)
-        window!.tintColor = UIColor(hex: armadaGreen)
-        UINavigationBar.appearance().barTintColor = UIColor(hex: armadaGreen)
+        UITabBar.appearance().tintColor = ColorScheme.armadaGreen
+        window!.tintColor = ColorScheme.armadaGreen
+        UINavigationBar.appearance().barTintColor = ColorScheme.armadaGreen
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UITableView.appearance().backgroundColor = UIColor.whiteColor()
+        
+//        window!.tintColor = UIColor(hex: armadaGreen)
+//        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+//        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
+//        UITableView.appearance().backgroundColor = UIColor.whiteColor()
         return true
     }
 

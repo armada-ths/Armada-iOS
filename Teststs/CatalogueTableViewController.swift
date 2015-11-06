@@ -180,6 +180,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = CompanyFilter
+            controller.CopyFilter = MatchFilter
         }
     }
     

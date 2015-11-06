@@ -6,6 +6,10 @@ class AboutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         ArmadaApi.pagesFromServer { response in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 switch response {
@@ -16,5 +20,5 @@ class AboutViewController: UIViewController {
                 }
             }
         }
-    }    
+    }
 }

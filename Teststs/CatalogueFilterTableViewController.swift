@@ -81,6 +81,14 @@ class _CompanyFilter {
         self.userDefaultsKey = userDefaultsKey
     }
     
+    func copyFilter(filter: _CompanyFilter) {
+        for property in CompanyProperty.All {
+            self[property] = filter[property]
+        }
+        self.armadaFields = filter.armadaFields
+
+    }
+    
     let Ω = NSUserDefaults.standardUserDefaults()
     
     var isEmpty: Bool {
@@ -95,6 +103,13 @@ class _CompanyFilter {
             }
         }
         return true
+    }
+    
+    func reset() {
+        for property in CompanyProperty.All {
+            self[property] = []
+        }
+        self.armadaFields = []
     }
     
     subscript(companyProperty: CompanyProperty) -> [String] {
@@ -138,6 +153,7 @@ class _CompanyFilter {
 class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCellDelegate {
     
     var CompanyFilter: _CompanyFilter! = nil
+    var CopyFilter: _CompanyFilter! = nil
     
     var armadaPages: AnyObject?
     
@@ -163,16 +179,18 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
         // Dispose of any resources that can be recreated.
     }
     
+    func copyFilter() {
+        CompanyFilter.copyFilter(CopyFilter)
+        updateTitle()
+        tableView.reloadData()
+    }
+    
     func resetFilter() {
-        for property in CompanyProperty.All {
-            CompanyFilter[property] = []
-        }
-        CompanyFilter.armadaFields = []
+        CompanyFilter.reset()
         updateTitle()
         NSOperationQueue.mainQueue().addOperationWithBlock {
             self.tableView.reloadData()
         }
-        
     }
     // MARK: - Table view data source
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
@@ -191,7 +209,7 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == numberOfSectionsInTableView(tableView) - 2 { return armadaFields.count }
-        if section == numberOfSectionsInTableView(tableView) - 1 { return 1 }
+        if section == numberOfSectionsInTableView(tableView) - 1 { return 2 }
         return CompanyFilter[CompanyProperty.All[section]].count + 1
     }
     
@@ -221,7 +239,11 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
-            return cellWithIdentifier("resetAllFiltersCell")
+            if indexPath.row == 0 {
+                return cellWithIdentifier(CompanyFilter.userDefaultsKey == MatchFilter.userDefaultsKey ? "copyCatalogueCell" : "copyMatchCell")
+            } else {
+                return cellWithIdentifier("resetAllFiltersCell")
+            }
         }
         
         if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
@@ -280,6 +302,36 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
     }
     
     
+    func presentResetAllFiltersAlert() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.addAction(UIAlertAction(title: "Reset Filter", style: .Destructive, handler: {
+            action in
+            self.resetFilter()
+//            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+//            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }))
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func presentCopyFilterAlert() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let prompt = CopyFilter.userDefaultsKey == MatchFilter.userDefaultsKey ? "Copy Match Filter" : "Copy Catalogue Filter"
+        alertController.addAction(UIAlertAction(title: prompt, style: UIAlertActionStyle.Destructive, handler: {
+            action in
+            self.copyFilter()
+//            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+//            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }))
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.cellForRowAtIndexPath(indexPath) as? AddCompanyPropertyTableViewCell != nil {
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -287,19 +339,12 @@ class CatalogueFilterTableViewController: UITableViewController, CompanyBoolCell
             }
         }
         if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            alertController.addAction(UIAlertAction(title: "Reset All Filters", style: .Destructive, handler: {
-                action in
-                self.resetFilter()
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
-            }))
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-                action in
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
-            }))
-            
-            presentViewController(alertController, animated: true, completion: nil)
-            
+            deselectSelectedCell()
+            if indexPath.row == 0 {
+                presentCopyFilterAlert()
+            } else {
+                presentResetAllFiltersAlert()
+            }
         }
     }
 }

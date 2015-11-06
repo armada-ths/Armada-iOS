@@ -1,7 +1,7 @@
 import UIKit
 
 
-private let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
+let MatchFilter = _CompanyFilter(userDefaultsKey: "MatchFilter")
 private let FakeMatchFilter = _CompanyFilter(userDefaultsKey: "FakeMatchFilter")
 
 class MatchTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
@@ -205,6 +205,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         }
         if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
             controller.CompanyFilter = MatchFilter
+            controller.CopyFilter = CompanyFilter
         }
     }
 }
