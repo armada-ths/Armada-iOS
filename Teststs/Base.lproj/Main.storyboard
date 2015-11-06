@@ -2821,7 +2821,7 @@
         <!--Filter-->
         <scene sceneID="wrj-ox-j3d">
             <objects>
-                <tableViewController id="Af4-R1-YXy" customClass="CatalogueFilterTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Af4-R1-YXy" customClass="CompanyFilterTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="54" sectionHeaderHeight="10" sectionFooterHeight="10" id="JT4-fu-LTc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2829,7 +2829,7 @@
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompanyPropertyCell" textLabel="4gf-Ch-7hq" detailTextLabel="ItK-k7-DOH" style="IBUITableViewCellStyleValue1" id="TBs-7X-aSS">
-                                <rect key="frame" x="0.0" y="114" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TBs-7X-aSS" id="Z7o-60-Z37">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>
@@ -2857,7 +2857,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPropertyCell" id="u6Z-fE-HNp" customClass="AddCompanyPropertyTableViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="168" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="167.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="u6Z-fE-HNp" id="NOE-UZ-FUX">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>
@@ -2881,7 +2881,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CompanyBoolCell" rowHeight="64" id="J4s-fR-TGY" customClass="CompanyBoolCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="222" width="600" height="64"/>
+                                <rect key="frame" x="0.0" y="221.5" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J4s-fR-TGY" id="rAV-KB-4E1">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63.5"/>
@@ -2945,7 +2945,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="copyCatalogueCell" rowHeight="54" id="fyH-Qd-ZHr">
-                                <rect key="frame" x="0.0" y="286" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="285.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fyH-Qd-ZHr" id="lZ6-uX-dcS">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>
@@ -2968,10 +2968,10 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="copyMatchCell" rowHeight="54" id="SGf-Fr-AMk">
-                                <rect key="frame" x="0.0" y="340" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="339.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SGf-Fr-AMk" id="4Dg-Kr-i6k">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Copy Match Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pj0-iL-RFs">
@@ -2991,7 +2991,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="resetAllFiltersCell" rowHeight="54" id="0N9-8L-G66">
-                                <rect key="frame" x="0.0" y="394" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="393.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0N9-8L-G66" id="DVB-6m-iWh">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>
@@ -3014,7 +3014,7 @@
                                 <animations/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TitleDetailTableViewCell" id="7jR-fx-FBq" customClass="TitleDetailTableViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="448" width="600" height="54"/>
+                                <rect key="frame" x="0.0" y="447.5" width="600" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="7jR-fx-FBq" id="Z3Y-Vo-xBW">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="53.5"/>

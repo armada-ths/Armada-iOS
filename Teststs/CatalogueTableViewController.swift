@@ -81,7 +81,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     func updateCompanies() {
         var companies = [Company]()
         if segmentedControl.selectedSegmentIndex == 0 {
-            companies = CompanyFilter.filteredCompanies
+            companies = CatalogueFilter.filteredCompanies
         } else {
             companies = ArmadaApi.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
@@ -178,8 +178,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
             companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
         }
-        if let controller = segue.destinationViewController as? CatalogueFilterTableViewController {
-            controller.CompanyFilter = CompanyFilter
+        if let controller = segue.destinationViewController as? CompanyFilterTableViewController {
+            controller.CompanyFilter = CatalogueFilter
             controller.CopyFilter = MatchFilter
         }
     }

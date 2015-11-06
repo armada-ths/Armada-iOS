@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UITableView.appearance().backgroundColor = UIColor.whiteColor()
         
-//        window!.tintColor = UIColor(hex: armadaGreen)
+//        window!.tintColor = ColorScheme.armadaGreen
 //        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
 //        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
 //        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
