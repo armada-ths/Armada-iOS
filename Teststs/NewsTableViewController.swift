@@ -101,6 +101,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         if dataSource.isEmpty {
             dataSource.refresh()
         }
