@@ -6,10 +6,10 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     var selectedCompany: Company!
 
     func viewControllerForCompany(company: Company) -> UIViewController {
-        let vc = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
-        vc.company = company
-        vc.companies = companies
-        return vc
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+        viewController.company = company
+        viewController.companies = companies
+        return viewController
     }
     
     override func viewDidLoad() {

@@ -46,8 +46,6 @@ struct ArmadaFieldInfo {
     let armadaField: ArmadaField
 }
 
-
-
 public struct ArmadaGroup {
     let name: String
     let members: [ArmadaMember]
@@ -83,7 +81,6 @@ enum ArmadaField: String {
     
 }
 
-
 enum Response<T> {
     case Success(T)
     case Error(ErrorType)
@@ -118,7 +115,6 @@ func >>=<T, G>(response: Response<T>, transform: T -> Response<G>) -> Response<G
 }
 
 let ArmadaApi = _ArmadaApi()
-
 public class _ArmadaApi {
     
     var companies = [Company]()
@@ -567,8 +563,6 @@ public class _ArmadaApi {
                 })
         }
     }
-    
-
     
     func armadaFieldInfosFromServer(callback: Response<[ArmadaFieldInfo]> -> Void) {
         pagesFromServer() {

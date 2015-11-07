@@ -12,8 +12,6 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         super.init()
         self.tableViewController = tableViewController
         tableViewController.tableView.separatorStyle = .None
-
-//        refresh()
     }
     
     subscript(indexPath: NSIndexPath) -> T {

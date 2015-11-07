@@ -1,14 +1,21 @@
 import UIKit
 
-
-
-
 class MatchTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     var companiesWithMatchPercentages = [(company: Company, percentage: Double)]()
     var matchPercentages = [Double]()
     var highlightedCompany: Company?
+    var highlightedIndexPath: NSIndexPath?
+    var label: UILabel?
+    
+    var selectedCompany: Company? {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            return companiesWithMatchPercentages[indexPath.row].company
+        }
+        return nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +27,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         }
     }
     
-    var highlightedIndexPath: NSIndexPath?
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -41,8 +47,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
     }
-    
-    var label: UILabel?
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -133,6 +137,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.tableView.reloadData()
     }
+    
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
     
     func updateFavoritesUI() {
@@ -181,15 +186,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         return cell
     }
     
-    var selectedCompany: Company? {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesWithMatchPercentages[indexPath.row].company
-        }
-        return nil
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Segue to CompaniesPageViewController")
         let companies = companiesWithMatchPercentages.map { $0.company }
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies

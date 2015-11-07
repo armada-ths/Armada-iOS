@@ -1,6 +1,5 @@
 import UIKit
 
-
 class CompanyInfoTableViewController: UITableViewController {
     
     class DataSource: ArmadaTableViewDataSource<ArmadaFieldInfo> {
@@ -17,11 +16,9 @@ class CompanyInfoTableViewController: UITableViewController {
             }
         }
         
-
-        
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTypeTableViewCell", forIndexPath: indexPath) as! CompanyTypeTableViewCell
-            let armadaFieldInfo = values[indexPath.section][indexPath.row]
+            let armadaFieldInfo = self[indexPath]
             cell.icon.image = armadaFieldInfo.armadaField.image
             cell.titleLabel.text = armadaFieldInfo.title
             cell.descriptionLabel.attributedText = armadaFieldInfo.description.attributedHtmlString
@@ -35,7 +32,7 @@ class CompanyInfoTableViewController: UITableViewController {
         super.viewDidLoad()
         dataSource = DataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        if dataSource.values.isEmpty {
+        if dataSource.isEmpty {
             dataSource.refresh()
         }
     }

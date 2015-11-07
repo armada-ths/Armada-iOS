@@ -1,11 +1,19 @@
 import UIKit
 
 class CatalogueTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
+    var highlightedCompany: Company?
+    
+    var selectedCompany: Company? {
+        if let indexPath = tableView.indexPathForSelectedRow {
+            return companiesByLetters[indexPath.section].companies[indexPath.row]
+        }
+        return nil
+    }
     
     func swedishOrdering(x: String, y: String) -> Bool {
         let firstNum = Int(String(x.lowercaseString.substringToIndex(x.startIndex.successor())))
@@ -26,8 +34,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             return false
         }
     }
-    
-    
+
     func updateCompaniesByLetters(companies: [Company]) {
         let stopWatch = StopWatch()
         companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercaseString })).sort(swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercaseString.hasPrefix(letter) })) }
@@ -42,9 +49,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         refresh()
         registerForPreviewingWithDelegate(self, sourceView: view)
     }
-    
-    
-    var highlightedCompany: Company?
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -161,13 +165,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         return companiesByLetters[section].letter
     }
     
-    var selectedCompany: Company? {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesByLetters[indexPath.section].companies[indexPath.row]
-        }
-        return nil
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
@@ -185,6 +182,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        // Can only edit when favorite segment is selected
         return segmentedControl.selectedSegmentIndex == 1
     }
     

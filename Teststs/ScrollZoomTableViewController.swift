@@ -9,7 +9,6 @@ class ScrollZoomTableViewController: UITableViewController {
     func initHeaderView() {
         print("Initing header view")
         headerView = tableView.tableHeaderView
-//        headerView.layoutIfNeeded()
         if headerHeight == 0 {
             headerHeight = headerView.frame.height
         }
@@ -30,15 +29,10 @@ class ScrollZoomTableViewController: UITableViewController {
         if headerView == nil {
             return
         }
-        
         var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
-        
         let difference = -tableView.contentOffset.y - headerHeight - max(navigationBarHeight,0)
-        
         if difference > 0  {
-//            print("Difference: \(difference), tableView.contentOffset.y: \(tableView.contentOffset.y)")
             headerRect.origin.y =  -headerHeight - difference
-//            headerRect.size.height = headerHeight + difference
         }
         headerView.frame = headerRect
     }
