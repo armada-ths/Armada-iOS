@@ -1550,8 +1550,8 @@
                                     <outlet property="eventImageView" destination="RkC-uR-jlD" id="nu2-ng-eY3"/>
                                     <outlet property="titleLabel" destination="nQQ-SJ-zD3" id="74c-IC-zIc"/>
                                     <segue destination="1vj-2m-lxX" kind="show" identifier="ArmadaEventDetailSegue" id="TRA-nv-BBS">
-                                        <segue key="commit" inheritsFrom="parent" id="yml-pj-kwn"/>
-                                        <segue key="preview" inheritsFrom="commit" id="9rP-qz-ucM"/>
+                                        <segue key="commit" inheritsFrom="parent" id="AaH-83-e4o"/>
+                                        <segue key="preview" inheritsFrom="commit" id="rrN-Y1-Iua"/>
                                     </segue>
                                 </connections>
                             </tableViewCell>
@@ -1585,7 +1585,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-YR-BkE">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l8U-YR-BkE">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                                     <animations/>
                                 </imageView>
@@ -1737,7 +1737,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JqX-MY-AES" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3995" y="3037"/>
+            <point key="canvasLocation" x="4123" y="2981"/>
         </scene>
         <!--Sponsors Web View Controller-->
         <scene sceneID="wL0-qX-DeG">
@@ -3019,9 +3019,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TRA-nv-BBS"/>
-        <segue reference="HBS-08-1M2"/>
-        <segue reference="bli-j8-CSx"/>
         <segue reference="ReS-La-4Iy"/>
+        <segue reference="bli-j8-CSx"/>
+        <segue reference="HBS-08-1M2"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
     </inferredMetricsTieBreakers>

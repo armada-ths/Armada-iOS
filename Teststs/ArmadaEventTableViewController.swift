@@ -37,7 +37,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     break
                 }
             }
-            
             if row != 0 {
                 self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
             }
@@ -70,7 +69,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         }
     }
     
-    var readArmadaEvents = [String]()
     var dataSource: ArmadaEventTableViewDataSource!
     
     override func viewDidLoad() {
@@ -87,9 +85,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
                 let armadaEvent = dataSource[indexPath]
                 controller.armadaEvent = armadaEvent
-                if !readArmadaEvents.contains(armadaEvent.title) {
-                    readArmadaEvents.append(armadaEvent.title)
-                }
                 deselectSelectedCell()
         }
     }

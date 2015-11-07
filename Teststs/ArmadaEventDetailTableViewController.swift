@@ -53,7 +53,11 @@ class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
                 signupLabel.text = "Registration TBA"
             }
         }
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        initHeaderView()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
