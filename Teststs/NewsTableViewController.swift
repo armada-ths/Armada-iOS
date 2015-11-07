@@ -30,6 +30,10 @@ class NewsTableViewController: ScrollZoomTableViewController {
             }
         }
         
+        override var hasNavigationBar: Bool {
+            return false
+        }
+        
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
             let newsItem = self[indexPath]
             let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell

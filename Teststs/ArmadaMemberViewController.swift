@@ -15,7 +15,7 @@ class ArmadaMemberViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.view.hideEmptyMessage()
-        view.startActivityIndicator()
+        view.startActivityIndicator(hasNavigationBar: false)
         nameLabel.hidden = true
         roleLabel.hidden = true
         nameLabel.text = member.name

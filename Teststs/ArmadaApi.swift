@@ -168,6 +168,21 @@ public class _ArmadaApi {
         return persistentStoreCoordinator
     }()
     
+    
+    static let companiesFileName = "companies.json"
+    
+    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
+    
+    let apiUrl = "http://armada.nu/api"
+    
+    
+    var persistentStoreUrlShm: NSURL {
+        return NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
+    }
+    var persistentStoreUrlWal: NSURL {
+        return NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+    }
+    
     func deleteDatabase() throws {
         let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
         let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
@@ -178,12 +193,7 @@ public class _ArmadaApi {
         
     }
     
-    var persistentStoreUrlShm: NSURL {
-        return NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
-    }
-    var persistentStoreUrlWal: NSURL {
-        return NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
-    }
+
     
     func copyDatabaseFromBundle() throws {
         let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
@@ -350,7 +360,7 @@ public class _ArmadaApi {
         stopWatch.print("Fetching managed companies ")
     }
     
-    
+    // Used for pre-fetching all companies logos - it's while the app is running in production
     func storeLogos() {
         let imageDirectory = applicationDocumentsDirectory.URLByAppendingPathComponent("logos")
         for company in companies {
@@ -367,7 +377,7 @@ public class _ArmadaApi {
     }
     
     class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool, String)> -> Void) {
-        let url = NSURL(string: "http://staging.armada.nu/api/companies")!
+        let url = NSURL(string: "http://armada.nu/api/companies")!
         let session = NSURLSession.sharedSession()
         let request = NSURLRequest(URL: url)
         var usedCache = false
@@ -416,16 +426,15 @@ public class _ArmadaApi {
         return Array(Set(companies.flatMap({ $0.programmes }).map { $0.programme })).sort(<)
     }
     
+    var programmes: [String] {
+        return educationTypes
+    }
+    
     func dateFromString(string: String) -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
         let b = string.componentsSeparatedByString(":")
         return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])
-    }
-    
-    
-    var programmes: [String] {
-        return educationTypes
     }
     
     public func eventsFromJson( jsonOriginal: AnyObject) -> [ArmadaEvent] {
@@ -488,35 +497,6 @@ public class _ArmadaApi {
             } ?? [])
     }
     
-    
-    
-    static let companiesFileName = "companies.json"
-    
-    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
-    
-    let apiUrl = "http://armada.nu/api"
-    
-    func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
-        armadaUrlWithPath("events").getJson() {
-            callback($0.map(self.eventsFromJson))
-        }
-    }
-    
-    func newsFromServer(callback: Response<[News]> -> Void) {
-        armadaUrlWithPath("news").getJson() {
-            callback($0.map(self.newsFromJson))
-        }
-    }
-    
-    func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
-        armadaUrlWithPath("sponsors").getJson() {
-            callback($0.map(self.sponsorsFromJson))
-        }
-    }
-    
-
-    
-    
     public func organisationGroupsFromJson(jsonOriginal: AnyObject) -> [ArmadaGroup] {
         var organisationGroups = [ArmadaGroup]()
         if let json = jsonOriginal["organisation_groups"] as? [AnyObject] {
@@ -538,6 +518,26 @@ public class _ArmadaApi {
         }
         return organisationGroups
     }
+
+    
+    func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
+        armadaUrlWithPath("events").getJson() {
+            callback($0.map(self.eventsFromJson))
+        }
+    }
+    
+    func newsFromServer(callback: Response<[News]> -> Void) {
+        armadaUrlWithPath("news").getJson() {
+            callback($0.map(self.newsFromJson))
+        }
+    }
+    
+    func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
+        armadaUrlWithPath("sponsors").getJson() {
+            callback($0.map(self.sponsorsFromJson))
+        }
+    }
+    
     
     func organisationGroupsFromServer(callback: Response<[ArmadaGroup]> -> Void) {
         armadaUrlWithPath("organisation_groups").getJson() {

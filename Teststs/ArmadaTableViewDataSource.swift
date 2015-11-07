@@ -18,9 +18,13 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         return values[indexPath.section][indexPath.row]
     }
     
+    var hasNavigationBar: Bool {
+        return true
+    }
+    
     func refresh(refreshControl: UIRefreshControl? = nil) {
         if refreshControl == nil {
-            tableViewController?.tableView.startActivityIndicator()
+            tableViewController?.tableView.startActivityIndicator(hasNavigationBar: hasNavigationBar)
             tableViewController?.showEmptyMessage(false, message: "")
             self.tableViewController?.tableView.separatorStyle = .None
         }

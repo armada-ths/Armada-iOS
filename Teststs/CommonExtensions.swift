@@ -31,7 +31,7 @@ public func <(x: NSDate, y: NSDate) -> Bool {
 
 extension UIView {
     
-    func startActivityIndicator() {
+    func startActivityIndicator(hasNavigationBar hasNavigationBar: Bool = true) {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         activityIndicator.frame = frame
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ extension UIView {
         addSubview(activityIndicator)
         activityIndicator.didMoveToSuperview()
         activityIndicator.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor, constant: -64).active = true
+        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor, constant: hasNavigationBar ? -64 : 0).active = true
     }
     
     func stopActivityIndicator() {

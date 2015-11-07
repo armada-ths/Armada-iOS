@@ -15,6 +15,10 @@ class OrganisationGroupsTableViewController: UITableViewController {
                 }
             }
         }
+
+        override var hasNavigationBar: Bool {
+            return false
+        }
         
         var filteredOrganisationGroups = [ArmadaGroup]()
         
