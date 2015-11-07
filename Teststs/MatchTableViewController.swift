@@ -207,6 +207,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        searchBar.resignFirstResponder()
         let companies = filteredCompaniesWithMatchPercentages.map { $0.company }
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies

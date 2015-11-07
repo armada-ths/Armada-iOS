@@ -20,13 +20,14 @@ class ArmadaMemberViewController: UIViewController {
         super.viewWillAppear(animated)
         self.view.hideEmptyMessage()
         view.startActivityIndicator(hasNavigationBar: false)
-        memberImageView.loadImageFromUrl(member.imageUrl.absoluteString) { response in
+        member.imageUrl.getImage() { response in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.view.stopActivityIndicator()
                 switch response {
-                case .Success:
+                case .Success(let image):
                     self.nameLabel.hidden = false
                     self.roleLabel.hidden = false
+                    self.memberImageView.image = image
                 case .Error(let error):
                     self.view.showEmptyMessage((error as NSError).localizedDescription)
                 }

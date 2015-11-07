@@ -166,7 +166,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        searchBar.resignFirstResponder()
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
             companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
