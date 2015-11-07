@@ -167,8 +167,13 @@ extension UIColor {
 
 extension UIImageView {
     func loadImageFromUrl(url: String, callback:(Response<UIImage> -> Void)? = nil) {
+        startActivityIndicator(hasNavigationBar: false)
         if let url = NSURL(string: url) {
             url.getData() {
+                NSOperationQueue.mainQueue().addOperationWithBlock {
+                    self.stopActivityIndicator()
+                }
+                
                 switch $0 {
                 case .Success(let data):
                     if let image = UIImage(data: data) {

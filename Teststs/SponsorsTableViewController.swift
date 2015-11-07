@@ -43,8 +43,10 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                 cell.sponsorImageView.image = image
             } else{
                 cell.sponsorImageView.image = nil
+                cell.sponsorImageView.startActivityIndicator()
                 sponsor.imageUrl.getImage() { response in
                     NSOperationQueue.mainQueue().addOperationWithBlock {
+                        cell.sponsorImageView.stopActivityIndicator()
                         if case .Success(let image) = response {
                             self.images[sponsor.imageUrl.absoluteString] = image
                             if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? SponsorsTableViewCell {

@@ -15,7 +15,6 @@ class FixedHeaderTableViewController: UITableViewController {
         if headerHeight == 0 {
             headerHeight = headerView.frame.height
         }
-        headerView.frame  = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
         tableView.addSubview(headerView)
         tableView.sendSubviewToBack(headerView)
         tableView.contentInset = UIEdgeInsets(top: headerHeight+navigationBarHeight, left: 0, bottom: 0, right: 0)
@@ -33,10 +32,12 @@ class FixedHeaderTableViewController: UITableViewController {
         if headerView == nil {
             return
         }
+        var headerRect = CGRect(x: 0, y: -headerHeight, width: tableView.bounds.width, height: headerHeight)
         let difference = -tableView.contentOffset.y - headerHeight - max(navigationBarHeight,0)
         if difference > 0  {
-            headerView.frame.origin.y =  -headerHeight - difference
+            headerRect.origin.y = -headerHeight - difference
         }
+        headerView.frame = headerRect
     }
     var headerView: UIView!
     
