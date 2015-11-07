@@ -91,6 +91,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         updateCompaniesByLetters(companies)
         showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites")
         searchBar.hidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
+        tableView.reloadData()
     }
     
     @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
@@ -101,7 +102,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         updateCompanies()
-        tableView.reloadData()
     }
     
     @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
@@ -208,7 +208,6 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         updateCompanies()
-        tableView.reloadData()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

@@ -33,7 +33,7 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let sponsor = values[indexPath.section][indexPath.row]
+            let sponsor = self[indexPath]
             let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
             if !sponsor.description.isEmpty {
                 cell.sponsorLabel.text = sponsor.description
@@ -51,9 +51,12 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                             self.images[sponsor.imageUrl.absoluteString] = image
                             if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? SponsorsTableViewCell {
                                 cell.sponsorImageView.image = image
+                                cell.setNeedsLayout()
                             }
                         }
                         if case .Error(let error) = response {
+                            cell.sponsorImageView.showEmptyMessage("Could not load image: \((error as NSError).localizedDescription)", fontSize: 15)
+
                             print(error)
                         }
                     }

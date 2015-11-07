@@ -3,8 +3,12 @@ import UIKit
 class MatchTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    var companiesWithMatchPercentages = [(company: Company, percentage: Double)]()
+    var companiesWithMatchPercentages = [(company: Company, percentage: Double, position: Int)]()
+    
+    
+    var filteredCompaniesWithMatchPercentages = [(company: Company, percentage: Double, position: Int)]()
     var matchPercentages = [Double]()
     var highlightedCompany: Company?
     var highlightedIndexPath: NSIndexPath?
@@ -12,13 +16,14 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     
     var selectedCompany: Company? {
         if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesWithMatchPercentages[indexPath.row].company
+            return filteredCompaniesWithMatchPercentages[indexPath.row].company
         }
         return nil
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         registerForPreviewingWithDelegate(self, sourceView: view)
         if FakeMatchFilter.isEmpty {
             FakeMatchFilter[CompanyProperty.WorkFields] = Array(ArmadaApi.workFields[0...3])
@@ -27,6 +32,14 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         }
     }
     
+    func updateFilteredCompanies() {
+        if let searchText = searchBar.text where !searchText.isEmpty {
+            filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages.filter { $0.company.name.lowercaseString.hasPrefix(searchText.lowercaseString) }
+        } else {
+            filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages
+        }
+        tableView.reloadData()
+    }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
@@ -36,7 +49,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             
             guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
                 let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            let companyWithPercentage = companiesWithMatchPercentages[highlightedIndexPath.row]
+            let companyWithPercentage = filteredCompaniesWithMatchPercentages[highlightedIndexPath.row]
             highlightedCompany = companyWithPercentage.company
             let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
             companyViewController.company = highlightedCompany
@@ -50,8 +63,9 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let companiesWithMatchPercentages = calculateCompaniesWithMatchPercentages().filter { $0.percentage > 0 }
-        self.companiesWithMatchPercentages = Array(companiesWithMatchPercentages)
+
+        self.companiesWithMatchPercentages = Array(calculateCompaniesWithMatchPercentages())
+        updateFilteredCompanies()
         self.updateFavoritesUI()
         
         let labelTag = 1337
@@ -109,11 +123,11 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         performSegueWithIdentifier("FilterSegue", sender: nil)
     }
     
-    func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double)] {
+    func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double, position: Int)] {
         
         let Filter = MatchFilter.isEmpty ? FakeMatchFilter : MatchFilter
         
-        var matches = [(company: Company, percentage: Double)]()
+        var matches = [(company: Company, percentage: Double, position: Int)]()
         for company in ArmadaApi.companies {
             var percentage = 1.0
             for companyProperty in CompanyProperty.All {
@@ -128,10 +142,16 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
                     percentage *= 0.8
                 }
             }
-            let zebra = (company: company, percentage: percentage)
+            let zebra = (company: company, percentage: percentage, position: 0)
             matches.append(zebra)
         }
-        return matches.sort { ($0.percentage == $1.percentage && $0.company.employeesWorld < $1.company.employeesWorld) || $0.percentage > $1.percentage }
+        matches = matches.sort { ($0.percentage == $1.percentage && $0.company.employeesWorld < $1.company.employeesWorld) || $0.percentage > $1.percentage }
+        
+        for i in 0..<matches.count {
+            matches[i].position = i+1
+        }
+        return matches
+        
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -154,7 +174,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             tableView.backgroundView = nil
             tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         }
-        navigationItem.title = "Match   "
+        navigationItem.title = "Match"
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -162,16 +182,16 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companiesWithMatchPercentages.count
+        return filteredCompaniesWithMatchPercentages.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MatchTableViewCell", forIndexPath: indexPath) as! MatchTableViewCell
-        let companyWithMatchPercentage = companiesWithMatchPercentages[indexPath.row]
+        let companyWithMatchPercentage = filteredCompaniesWithMatchPercentages[indexPath.row]
         let matchPercentage = companyWithMatchPercentage.percentage
         let company = companyWithMatchPercentage.company
         cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
-        cell.descriptionLabel.text = company.name
+        cell.descriptionLabel.text = "\(companyWithMatchPercentage.position). \(company.name)"
         cell.matchProgressView.setProgress(Float(matchPercentage), animated: false)
         cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
         cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
@@ -187,7 +207,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let companies = companiesWithMatchPercentages.map { $0.company }
+        let companies = filteredCompaniesWithMatchPercentages.map { $0.company }
         if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
@@ -199,3 +219,25 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     }
 }
 
+extension MatchTableViewController: UISearchBarDelegate {
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        updateFilteredCompanies()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+    }
+}

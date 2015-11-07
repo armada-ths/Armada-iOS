@@ -91,7 +91,7 @@ extension NSURL {
                 if let image = UIImage(data: data) {
                     return .Success(image)
                 }
-                return .Error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid Image"]))
+                return .Error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid image"]))
                 })
         }
     }
@@ -102,12 +102,12 @@ extension NSURL {
 private let UIViewShowEmptyMessageTag = 93734214
 
 extension UIView {
-    func showEmptyMessage(message: String) {
+    func showEmptyMessage(message: String, fontSize: CGFloat = 30) {
         hideEmptyMessage()
         let label = UILabel(frame: frame)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
-        label.font = UIFont.systemFontOfSize(30)
+        label.font = UIFont.systemFontOfSize(fontSize)
         label.text = message
         label.numberOfLines = 0
         label.textAlignment = .Center
@@ -167,13 +167,13 @@ extension UIColor {
 
 extension UIImageView {
     func loadImageFromUrl(url: String, callback:(Response<UIImage> -> Void)? = nil) {
+        hideEmptyMessage()
         startActivityIndicator(hasNavigationBar: false)
         if let url = NSURL(string: url) {
             url.getData() {
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     self.stopActivityIndicator()
                 }
-                
                 switch $0 {
                 case .Success(let data):
                     if let image = UIImage(data: data) {
@@ -187,11 +187,18 @@ extension UIImageView {
                         NSOperationQueue.mainQueue().addOperation(operation)
                     } else {
                         callback?(.Error(NSError(domain: "imageBroken", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                            self.showEmptyMessage("Broken image", fontSize: 15)
+                        }
+
                     }
                 case .Error(let error):
                     self.image = nil
                     callback?(.Error(error))
                     print(error)
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.showEmptyMessage("Failed to load image: \((error as NSError).localizedDescription)", fontSize: 15)
+                    }
                 }
                 
             }

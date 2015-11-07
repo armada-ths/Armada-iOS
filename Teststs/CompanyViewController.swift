@@ -2,9 +2,7 @@ import UIKit
 
 class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     
-    @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var favoritesButton: UIButton!
-    @IBOutlet weak var companyNameLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var jobLabel: UILabel!
@@ -41,7 +39,7 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        let continents = self.company!.continents.map { $0.continent }
+        let continents = self.company.continents.map { $0.continent }
         mapWebView.delegate = self
         
         NSOperationQueue().addOperationWithBlock {
@@ -62,31 +60,18 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sort().joinWithSeparator("\n")
         companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sort().joinWithSeparator("\n")
         waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sort().joinWithSeparator("\n")
-        
         websiteLabel.text = company.website
         videoLabel.text = company.videoUrl
-        
-        
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
-        
-        headerImageView.loadImageFromUrl(company.adUrl)
         employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
-        
-        locationLabel.text = company.locationDescription
-        if company.locationDescription.isEmpty {
-            locationImageView.removeFromSuperview()
-            locationLabel.text = "To be announced"
-        } else {
-            locationImageView.loadImageFromUrl(company.locationUrl)
-            locationCell.selectionStyle = .Default
-            locationCell.accessoryType = .DisclosureIndicator
-        }
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
         let socialMediaUrls = [company.facebook, company.linkedin, company.twitter]
-        let dummyUrl = NSURL(string: "")!
         for (index, url) in socialMediaUrls.enumerate() {
-            socialMediaButtons[index].enabled = UIApplication.sharedApplication().canOpenURL(NSURL(string: url) ?? dummyUrl)
+            socialMediaButtons[index].enabled = false
+            if let url = NSURL(string: url) where UIApplication.sharedApplication().canOpenURL(url) {
+                socialMediaButtons[index].enabled = true
+            }
         }
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
@@ -99,7 +84,21 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        parentViewController?.title = company!.name
+        parentViewController?.title = company.name
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        headerImageView.loadImageFromUrl(company.adUrl)
+        locationLabel.text = company.locationDescription
+        if company.locationDescription.isEmpty {
+            locationImageView.removeFromSuperview()
+            locationLabel.text = "To be announced"
+        } else {
+            locationImageView.loadImageFromUrl(company.locationUrl)
+            locationCell.selectionStyle = .Default
+            locationCell.accessoryType = .DisclosureIndicator
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

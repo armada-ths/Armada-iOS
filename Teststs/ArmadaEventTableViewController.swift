@@ -59,6 +59,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                                 self.images[imageUrl.absoluteString] = image
                                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ArmadaEventTableViewCell {
                                     cell.eventImageView.image = image
+                                    cell.setNeedsLayout()
                                 }
                             }
                         }
