@@ -129,6 +129,14 @@ class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
     
     @IBAction func unwind(segue: UIStoryboardSegue) {}
     
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == "LocationSegue" && company.locationDescription.isEmpty {
+            return false
+        }
+        return true
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let viewController = segue.destinationViewController as? LocationViewController {
             viewController.company = company
