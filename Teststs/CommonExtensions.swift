@@ -217,8 +217,7 @@ class StopWatch {
 extension String{
     var attributedHtmlString: NSAttributedString?{
         let html = "<div>" + self + "</div>" + "<style> div { font-family: \"helvetica neue\"; font-weight: 300; font-size: 18px; padding: 0; margin: 0; color: #4c4c4c; line-height: 25px;  }</style>"
-        let data = (html).dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false)
-        if let data = data{
+        if let data = html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
             return try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
         }
         return nil

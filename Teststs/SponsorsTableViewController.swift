@@ -51,6 +51,9 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                                 cell.sponsorImageView.image = image
                             }
                         }
+                        if case .Error(let error) = response {
+                            print(error)
+                        }
                     }
                 }
             }

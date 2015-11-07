@@ -10,17 +10,16 @@ class ArmadaMemberViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameLabel.hidden = true
+        roleLabel.hidden = true
+        nameLabel.text = member.name
+        roleLabel.text = member.role
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.view.hideEmptyMessage()
         view.startActivityIndicator(hasNavigationBar: false)
-        nameLabel.hidden = true
-        roleLabel.hidden = true
-        nameLabel.text = member.name
-        roleLabel.text = member.role
-        
         memberImageView.loadImageFromUrl(member.imageUrl.absoluteString) { response in
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.view.stopActivityIndicator()

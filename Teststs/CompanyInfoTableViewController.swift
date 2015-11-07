@@ -10,7 +10,7 @@ class CompanyInfoTableViewController: UITableViewController {
         
         override func updateFunc(callback: Response<[[ArmadaFieldInfo]]> -> Void) {
             ArmadaApi.armadaFieldInfosFromServer() { response in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     callback(response.map { [$0]})
                 }
             }
