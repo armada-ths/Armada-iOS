@@ -1,6 +1,6 @@
 import UIKit
 
-class NewsTableViewController: ScrollZoomTableViewController {
+class NewsTableViewController: FixedHeaderTableViewController {
     
     class ArmadaNewsTableViewDataSource: ArmadaTableViewDataSource<News> {
         
@@ -17,7 +17,7 @@ class NewsTableViewController: ScrollZoomTableViewController {
                     switch response {
                     case .Success:
                         if self.values.isEmpty {
-                            let tableViewController = (self.tableViewController as! ScrollZoomTableViewController)
+                            let tableViewController = (self.tableViewController as! FixedHeaderTableViewController)
                             tableViewController.headerView.hidden = false
                             tableViewController.tableView.contentInset = UIEdgeInsets(top: tableViewController.headerHeight + self.shit, left: 0, bottom: 0, right: 0)
                             tableViewController.tableView.contentOffset = CGPoint(x: 0, y: -(tableViewController.headerHeight))

@@ -1,6 +1,6 @@
 import UIKit
 
-class ArmadaEventDetailTableViewController: ScrollZoomTableViewController {
+class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
     
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var dayLabel: UILabel!

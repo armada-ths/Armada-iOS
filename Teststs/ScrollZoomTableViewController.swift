@@ -1,6 +1,6 @@
 import UIKit
 
-class ScrollZoomTableViewController: UITableViewController {
+class FixedHeaderTableViewController: UITableViewController {
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         updateHeaderView()

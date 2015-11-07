@@ -1,6 +1,6 @@
 import UIKit
 
-class CompanyViewController: ScrollZoomTableViewController, UIWebViewDelegate {
+class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     
     @IBOutlet weak var cell1: UITableViewCell!
     @IBOutlet weak var favoritesButton: UIButton!
