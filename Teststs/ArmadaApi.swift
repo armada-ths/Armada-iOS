@@ -13,6 +13,57 @@ public struct ArmadaEvent {
     public let signupEndDate: NSDate?
     public let imageUrl: NSURL?
     public let registrationRequired: Bool
+    
+    
+    
+    
+    enum SignupState {
+        case Passed, NotRequired, NotAvailable, Now, Future
+//        
+//        var description: String {
+//            switch self {
+//            case .Passed: return "Registration is over"
+//            case .NotRequired: return "No registration required"
+//            case .NotAvailable: return "Registration TBA"
+//            case .Now: return "Sign up"
+//            case .Future: return "Registration starts at \(signupStartDate.readableString)"
+//            }
+//        }
+    }
+    
+    var signupStateString: String {
+        switch signupState {
+        case .Passed: return "Registration is over"
+        case .NotRequired: return "No registration required"
+        case .NotAvailable: return "Registration TBA"
+        case .Now: return "Sign up before \(signupEndDate?.readableString ?? "")"
+        case .Future: return "Registration starts at \(signupStartDate?.readableString ?? "")"
+        }
+
+    }
+    
+    var signupState: SignupState {
+        if registrationRequired {
+            if startDate < NSDate() || signupEndDate != nil && signupEndDate! < NSDate() {
+                return .Passed
+            } else {
+                if let signupStartDate = signupStartDate,
+                    let signupLink = signupLink where !signupLink.isEmpty,
+                    let _ = NSURL(string: signupLink) {
+                        if signupStartDate < NSDate() {
+                            return .Now
+                        } else {
+                            return .Future
+                        }
+                } else {
+                    return .NotAvailable
+                }
+            }
+        } else {
+            return .NotRequired
+        }
+    }
+    
 }
 
 public struct News {

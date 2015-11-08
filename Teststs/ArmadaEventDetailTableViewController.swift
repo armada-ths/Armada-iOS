@@ -38,27 +38,11 @@ class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
         
-        
-        if armadaEvent.registrationRequired {
-            if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
-                signupLabel.text = "Registration is over"
-            } else {
-                if let signupStartDate = armadaEvent.signupStartDate,
-                    let signupLink = armadaEvent.signupLink where !signupLink.isEmpty,
-                    let _ = NSURL(string: signupLink) {
-                        if signupStartDate < NSDate() {
-                            signupLabel.text = "Sign Up"
-                            signupLabel.textColor = ColorScheme.armadaGreen
-                            tableView.allowsSelection = true
-                        } else {
-                            signupLabel.text = "Registration starts at \(signupStartDate.readableString)"
-                        }
-                } else {
-                    signupLabel.text = "Registration TBA"
-                }
-            }
-        } else {
-            signupLabel.text = "No registration required"
+        signupLabel.text = armadaEvent.signupStateString
+        if armadaEvent.signupState == .Now {
+//            signupLabel.text = "Sign Up"
+            signupLabel.textColor = ColorScheme.armadaGreen
+            tableView.allowsSelection = true
         }
     }
     

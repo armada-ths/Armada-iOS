@@ -54,7 +54,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
-            cell.descriptionLabel.text = armadaEvent.summaryWithoutHtml
+            cell.descriptionLabel.text = armadaEvent.signupStateString
+            
             if let imageUrl = armadaEvent.imageUrl {
                 if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image
@@ -95,7 +96,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 deselectSelectedCell()
         }
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
