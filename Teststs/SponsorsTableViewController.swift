@@ -36,27 +36,32 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
             let sponsor = self[indexPath]
             let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
             if !sponsor.description.isEmpty {
-                cell.sponsorLabel.text = sponsor.description
                 cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
             }
             if let image = images[sponsor.imageUrl.absoluteString] {
                 cell.sponsorImageView.image = image
             } else{
                 cell.sponsorImageView.image = nil
+
+                cell.sponsorImageView.hideEmptyMessage()
                 cell.sponsorImageView.startActivityIndicator()
+                print("Loading IndexPath: \(indexPath.section) \(indexPath.row)")
                 sponsor.imageUrl.getImage() { response in
                     NSOperationQueue.mainQueue().addOperationWithBlock {
                         cell.sponsorImageView.stopActivityIndicator()
-                        if case .Success(let image) = response {
+                        switch response {
+                        case .Success(let image):
                             self.images[sponsor.imageUrl.absoluteString] = image
                             if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? SponsorsTableViewCell {
+                                print("Loaded IndexPath: \(indexPath.section) \(indexPath.row)")
                                 cell.sponsorImageView.image = image
                                 cell.setNeedsLayout()
+                            } else {
+                                print("No cell for IndexPath: \(indexPath.section) \(indexPath.row)")
                             }
-                        }
-                        if case .Error(let error) = response {
+                        case .Error(let error):
                             cell.sponsorImageView.showEmptyMessage("Could not load image: \((error as NSError).localizedDescription)", fontSize: 15)
-
+                            print("Error for IndexPath: \(indexPath.section) \(indexPath.row)")
                             print(error)
                         }
                     }
@@ -104,15 +109,8 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        if dataSource.isEmpty {
-            dataSource.refresh()
-        }
-    }
-    
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120
+        return 200
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -122,5 +120,14 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         openWebsite()
     }
+
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if dataSource.isEmpty {
+            dataSource.refresh()
+        }
+    }
+    
 }
 

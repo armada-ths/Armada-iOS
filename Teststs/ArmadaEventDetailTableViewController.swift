@@ -27,31 +27,36 @@ class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
             attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
             summaryLabel.attributedText = attrString
         }
-            
+        
         if let imageUrl =  armadaEvent.imageUrl {
             eventImageView.loadImageFromUrl(imageUrl.absoluteString)
         }
-
+        
         titleLabel.text = armadaEvent.title
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
         
-        if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
-            signupLabel.text = "Registration is over"
-        } else {
-            if let signupStartDate = armadaEvent.signupStartDate,
-                let signupLink = armadaEvent.signupLink where !signupLink.isEmpty,
-                let _ = NSURL(string: signupLink) {
-                if signupStartDate < NSDate() {
-                    signupLabel.text = "Sign Up"
-                    signupLabel.textColor = ColorScheme.armadaGreen
-                    tableView.allowsSelection = true
-                } else {
-                    signupLabel.text = "Registration starts at \(signupStartDate.readableString)"
-                }
+        
+        if armadaEvent.registrationRequired {
+            if armadaEvent.startDate < NSDate() || armadaEvent.signupEndDate != nil && armadaEvent.signupEndDate! < NSDate() {
+                signupLabel.text = "Registration is over"
             } else {
-                signupLabel.text = "Registration TBA"
+                if let signupStartDate = armadaEvent.signupStartDate,
+                    let signupLink = armadaEvent.signupLink where !signupLink.isEmpty,
+                    let _ = NSURL(string: signupLink) {
+                        if signupStartDate < NSDate() {
+                            signupLabel.text = "Sign Up"
+                            signupLabel.textColor = ColorScheme.armadaGreen
+                            tableView.allowsSelection = true
+                        } else {
+                            signupLabel.text = "Registration starts at \(signupStartDate.readableString)"
+                        }
+                } else {
+                    signupLabel.text = "Registration TBA"
+                }
             }
+        } else {
+            signupLabel.text = "No registration required"
         }
     }
     

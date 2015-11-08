@@ -63,7 +63,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
             return filteredOrganisationGroups.count
         }
         
-        
         func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             return filteredOrganisationGroups[section].name
         }
@@ -73,6 +72,29 @@ class OrganisationGroupsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("OrganisationGroupIdentifier", forIndexPath: indexPath) as! MemberTableViewCell
             cell.nameLabel.text = member.name
             cell.roleLabel.text = member.role
+            
+            
+            cell.memberImageView.image = nil
+//            cell.memberImageView.hideEmptyMessage()
+//            cell.memberImageView.startActivityIndicator()
+//            member.imageUrl.getImage { response in
+//                NSOperationQueue.mainQueue().addOperationWithBlock {
+//                    cell.memberImageView.stopActivityIndicator()
+//                    switch response {
+//                    case .Success(let image):
+//                        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MemberTableViewCell {
+//                            
+//                            let imageRef = CGImageCreateWithImageInRect(image.CGImage, CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height / 2))
+//                            
+//                            
+//                            cell.memberImageView.image = UIImage(CGImage: imageRef!)
+//                        }
+//                    case .Error(let _):
+//                        cell.memberImageView.showEmptyMessage("Could not load image", fontSize: 8)
+//                        
+//                    }
+//                }
+//            }
             return cell
         }
     }

@@ -11,6 +11,7 @@ public struct ArmadaEvent {
     public let signupStartDate: NSDate?
     public let signupEndDate: NSDate?
     public let imageUrl: NSURL?
+    public let registrationRequired: Bool
 }
 
 public struct News {
@@ -456,7 +457,12 @@ public class _ArmadaApi {
                     let imageUrlString = json["picture_url"] as? String
                     let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
                     let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
-                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl)
+                    
+                    let registrationRequired = json["registration_required"] as? Bool ?? true
+                    
+                    print(String(data: try! NSJSONSerialization.dataWithJSONObject(json, options: []), encoding: NSUTF8StringEncoding))
+                    
+                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
             return nil
             } ?? []).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })

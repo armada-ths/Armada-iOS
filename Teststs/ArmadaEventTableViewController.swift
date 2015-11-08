@@ -17,7 +17,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     
                     // For some reason - we must wait before scrolling!
                     NSOperationQueue().addOperationWithBlock {
-                        NSThread.sleepForTimeInterval(0.3)
+                        NSThread.sleepForTimeInterval(0.7)
                         NSOperationQueue.mainQueue().addOperationWithBlock {
                             self.scrollToNearestUpcomingEvent()
                         }
@@ -78,7 +78,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         tableView.dataSource = dataSource
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         splitViewController?.delegate = self
-        self.tableView.estimatedRowHeight = 400
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {

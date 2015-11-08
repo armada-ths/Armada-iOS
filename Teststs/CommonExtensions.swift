@@ -169,39 +169,36 @@ extension UIImageView {
     func loadImageFromUrl(url: String, callback:(Response<UIImage> -> Void)? = nil) {
         hideEmptyMessage()
         startActivityIndicator(hasNavigationBar: false)
-        if let url = NSURL(string: url) {
-            url.getData() {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    self.stopActivityIndicator()
-                }
-                switch $0 {
-                case .Success(let data):
-                    if let image = UIImage(data: data) {
-                        let operation = NSBlockOperation() {
-                            UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                                self.image = image
-                                }, completion: nil)
-                            callback?(.Success(image))
-                        }
-                        operation.queuePriority = .VeryLow
-                        NSOperationQueue.mainQueue().addOperation(operation)
-                    } else {
-                        callback?(.Error(NSError(domain: "imageBroken", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.showEmptyMessage("Broken image", fontSize: 15)
-                        }
-
+        NSURL(string: url)?.getData() {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.stopActivityIndicator()
+            }
+            switch $0 {
+            case .Success(let data):
+                if let image = UIImage(data: data) {
+                    let operation = NSBlockOperation() {
+                        UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                            self.image = image
+                            }, completion: nil)
+                        callback?(.Success(image))
                     }
-                case .Error(let error):
-                    self.image = nil
+                    operation.queuePriority = .VeryLow
+                    NSOperationQueue.mainQueue().addOperation(operation)
+                } else {
+                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                        callback?(.Error(NSError(domain: "loadImageFromUrl", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
+                        self.showEmptyMessage("Broken image", fontSize: 15)
+                    }
+                }
+            case .Error(let error):
+                NSOperationQueue.mainQueue().addOperationWithBlock {
                     callback?(.Error(error))
                     print(error)
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        self.showEmptyMessage("Failed to load image: \((error as NSError).localizedDescription)", fontSize: 15)
-                    }
+                    self.image = nil
+                    self.showEmptyMessage("Failed to load image: \((error as NSError).localizedDescription)", fontSize: 15)
                 }
-                
             }
+            
         }
     }
 }

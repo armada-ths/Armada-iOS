@@ -49,7 +49,7 @@
         <scene sceneID="hfk-9l-Rnc">
             <objects>
                 <tableViewController storyboardIdentifier="OrganisationGroupsTableViewController" id="0VF-0V-hJR" customClass="OrganisationGroupsTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="62" sectionHeaderHeight="28" sectionFooterHeight="28" id="HkU-iS-kan">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" id="HkU-iS-kan">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -68,33 +68,58 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkF-oe-Cd3">
-                                            <rect key="frame" x="15" y="34" width="33" height="16"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="slz-OD-HWf">
+                                            <rect key="frame" x="15" y="10" width="570" height="94"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Etteplan" translatesAutoresizingMaskIntoConstraints="NO" id="f4h-Kz-IXm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="94"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" id="gQ1-a4-Wy7"/>
+                                                        <constraint firstAttribute="width" id="mL9-bx-JCM"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-T5-OhK">
+                                                    <rect key="frame" x="8" y="0.0" width="562" height="94"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Axl Elisson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-Aw-eiq">
+                                                            <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkF-oe-Cd3">
+                                                            <rect key="frame" x="0.0" y="21" width="33" height="73"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <animations/>
+                                                </stackView>
+                                            </subviews>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Axl Elisson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-Aw-eiq">
-                                            <rect key="frame" x="15" y="10" width="570" height="21"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </stackView>
                                     </subviews>
                                     <animations/>
                                     <constraints>
-                                        <constraint firstItem="Hbd-Aw-eiq" firstAttribute="top" secondItem="DEs-Kd-6W6" secondAttribute="topMargin" id="R3M-qf-xXs"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="vkF-oe-Cd3" secondAttribute="bottom" id="UYe-js-cST"/>
-                                        <constraint firstItem="vkF-oe-Cd3" firstAttribute="leading" secondItem="Hbd-Aw-eiq" secondAttribute="leading" id="XXF-1Z-q9b"/>
-                                        <constraint firstItem="vkF-oe-Cd3" firstAttribute="top" secondItem="Hbd-Aw-eiq" secondAttribute="bottom" constant="3" id="kmm-N3-FUO"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Hbd-Aw-eiq" secondAttribute="trailing" id="vin-k9-IeT"/>
-                                        <constraint firstItem="Hbd-Aw-eiq" firstAttribute="leading" secondItem="DEs-Kd-6W6" secondAttribute="leadingMargin" id="wRg-t5-ukh"/>
+                                        <constraint firstItem="slz-OD-HWf" firstAttribute="leading" secondItem="DEs-Kd-6W6" secondAttribute="leadingMargin" id="JiY-aA-ixs"/>
+                                        <constraint firstItem="slz-OD-HWf" firstAttribute="top" secondItem="DEs-Kd-6W6" secondAttribute="topMargin" id="KnF-RG-cS6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="slz-OD-HWf" secondAttribute="trailing" id="flM-K2-r43"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="slz-OD-HWf" secondAttribute="bottomMargin" id="gxS-Dl-igP"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="slz-OD-HWf" secondAttribute="bottom" id="hEt-7Z-m6i"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="hEt-7Z-m6i"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
+                                    <outlet property="memberImageView" destination="f4h-Kz-IXm" id="XxK-AJ-GUt"/>
                                     <outlet property="nameLabel" destination="Hbd-Aw-eiq" id="pOv-l0-5iu"/>
                                     <outlet property="roleLabel" destination="vkF-oe-Cd3" id="V1c-Gq-agX"/>
                                     <segue destination="k55-ic-tt7" kind="show" id="WlV-f9-SYd">
@@ -2999,6 +3024,7 @@
     <resources>
         <image name="Armada-icon" width="30" height="30"/>
         <image name="Armada-icon-1" width="30" height="30"/>
+        <image name="Etteplan" width="399" height="94"/>
         <image name="Leaf" width="64" height="100"/>
         <image name="Rocket" width="66" height="100"/>
         <image name="Tree" width="78" height="100"/>
