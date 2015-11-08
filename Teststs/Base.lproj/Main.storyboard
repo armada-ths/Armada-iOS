@@ -68,7 +68,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="slz-OD-HWf">
+                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slz-OD-HWf">
                                             <rect key="frame" x="15" y="10" width="570" height="94"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Etteplan" translatesAutoresizingMaskIntoConstraints="NO" id="f4h-Kz-IXm">
@@ -80,7 +80,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-T5-OhK">
-                                                    <rect key="frame" x="8" y="0.0" width="562" height="94"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="570" height="94"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Axl Elisson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbd-Aw-eiq">
                                                             <rect key="frame" x="0.0" y="0.0" width="82" height="21"/>
@@ -755,7 +755,10 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="r3a-gD-smm" kind="show" identifier="LocationSegue" id="fBy-Ie-KcO"/>
+                                            <segue destination="r3a-gD-smm" kind="show" identifier="LocationSegue" id="fBy-Ie-KcO">
+                                                <segue key="commit" inheritsFrom="parent" id="K87-ue-60y"/>
+                                                <segue key="preview" inheritsFrom="commit" id="oAw-jd-Xbs"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="68" id="7xP-QG-h5r">
@@ -3055,11 +3058,12 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="NVI-Nj-Wn8"/>
+        <segue reference="HmL-IU-78Y"/>
         <segue reference="TRA-nv-BBS"/>
         <segue reference="ReS-La-4Iy"/>
-        <segue reference="HmL-IU-78Y"/>
-        <segue reference="NVI-Nj-Wn8"/>
-        <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
+        <segue reference="WlV-f9-SYd"/>
+        <segue reference="fBy-Ie-KcO"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -3,7 +3,7 @@ import UIKit
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
     @IBAction func nowButtonClicked(sender: AnyObject) {
-        dataSource.scrollToNearestUpcomingEvent()
+        dataSource.scrollToNearestUpcomingEventAnimated(true)
     }
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
@@ -12,6 +12,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
+        
+        
+        var isFirstLoad = true
         
         override func updateFunc(callback: Response<[[ArmadaEvent]]> -> Void) {
             ArmadaApi.eventsFromServer { response in
@@ -22,14 +25,15 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
 //                    NSOperationQueue().addOperationWithBlock {
 //                        NSThread.sleepForTimeInterval(0.3)
 //                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.scrollToNearestUpcomingEvent()
+                            self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
+                            self.isFirstLoad = false
 //                        }
 //                    }
                 }
             }
         }
         
-        func scrollToNearestUpcomingEvent() {
+        func scrollToNearestUpcomingEventAnimated(animated: Bool) {
             var row = 0
             let dateFormat = "yyyy-MM-dd"
             let now = NSDate().format(dateFormat)
@@ -41,7 +45,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 }
             }
             if row != 0 {
-                self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: true)
+                self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: animated)
             }
         }
         
