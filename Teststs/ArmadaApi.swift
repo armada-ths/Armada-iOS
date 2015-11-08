@@ -460,8 +460,6 @@ public class _ArmadaApi {
                     
                     let registrationRequired = json["registration_required"] as? Bool ?? true
                     
-                    print(String(data: try! NSJSONSerialization.dataWithJSONObject(json, options: []), encoding: NSUTF8StringEncoding))
-                    
                     return ArmadaEvent(title: title, summary: summary, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
             return nil

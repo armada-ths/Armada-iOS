@@ -33,6 +33,8 @@ class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
         }
         
         titleLabel.text = armadaEvent.title
+        titleLabel.text = ""
+        title = armadaEvent.title
         signupLabel.textColor = UIColor.lightGrayColor()
         tableView.allowsSelection = false
         

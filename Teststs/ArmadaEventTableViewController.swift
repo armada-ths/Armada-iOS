@@ -22,7 +22,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
 //                    NSOperationQueue().addOperationWithBlock {
 //                        NSThread.sleepForTimeInterval(0.3)
 //                        NSOperationQueue.mainQueue().addOperationWithBlock {
-//                            self.scrollToNearestUpcomingEvent()
+                            self.scrollToNearestUpcomingEvent()
 //                        }
 //                    }
                 }
@@ -50,7 +50,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
-            cell.descriptionLabel.text = armadaEvent.summary.strippedFromHtmlString
+            cell.descriptionLabel.text = armadaEvent.summary
             if let imageUrl = armadaEvent.imageUrl {
                 if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image
