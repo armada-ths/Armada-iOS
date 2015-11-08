@@ -89,7 +89,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             companies = companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)})
         }
         updateCompaniesByLetters(companies)
-        showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No Company Matches\nYour Filter" : "No Favorites")
+        showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No company matches\nyour filter" : "No favorites")
         searchBar.hidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
         tableView.reloadData()
     }
@@ -225,7 +225,7 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
     
 }

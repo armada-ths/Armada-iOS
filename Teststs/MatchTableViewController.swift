@@ -38,6 +38,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         } else {
             filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages
         }
+        showEmptyMessage(filteredCompaniesWithMatchPercentages.isEmpty, message: "No companies found")
         tableView.reloadData()
     }
     
@@ -231,8 +232,8 @@ extension MatchTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         searchBar.text = nil
+        searchBar.resignFirstResponder()
         updateFilteredCompanies()
     }
     
@@ -241,6 +242,6 @@ extension MatchTableViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
 }

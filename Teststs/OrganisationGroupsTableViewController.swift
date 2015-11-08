@@ -42,6 +42,11 @@ class OrganisationGroupsTableViewController: UITableViewController {
             filteredOrganisationGroups = matchingOrganisationGroups
             tableViewController?.tableView.reloadData()
             (tableViewController as! OrganisationGroupsTableViewController).searchBar.hidden = allOrganisationGroups.isEmpty
+            
+            
+            
+            tableViewController?.showEmptyMessage(filteredOrganisationGroups.isEmpty, message: "No members found")
+            
         }
         
         override func updateFunc(callback: Response<[[ArmadaMember]]> -> Void) {
@@ -140,8 +145,8 @@ extension OrganisationGroupsTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         searchBar.text = nil
+        searchBar.resignFirstResponder()
         dataSource.updateFilter()
     }
     
@@ -150,6 +155,6 @@ extension OrganisationGroupsTableViewController: UISearchBarDelegate {
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
 }
