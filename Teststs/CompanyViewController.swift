@@ -51,7 +51,7 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
             }
         }
         
-        aboutLabel.text = company.companyDescription
+        aboutLabel.text = company.companyDescription.strippedFromHtmlString
         if company.companyDescription.isEmpty {
             aboutLabel.text = "To be announced"
         }
