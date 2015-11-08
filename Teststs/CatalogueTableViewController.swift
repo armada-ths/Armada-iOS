@@ -44,8 +44,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+//        refreshControl = UIRefreshControl()
+//        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
         registerForPreviewingWithDelegate(self, sourceView: view)
     }
@@ -215,7 +215,9 @@ extension CatalogueTableViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = nil
         searchBar.resignFirstResponder()
+        updateCompanies()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

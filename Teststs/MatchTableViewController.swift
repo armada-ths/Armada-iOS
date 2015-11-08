@@ -232,6 +232,8 @@ extension MatchTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        searchBar.text = nil
+        updateFilteredCompanies()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

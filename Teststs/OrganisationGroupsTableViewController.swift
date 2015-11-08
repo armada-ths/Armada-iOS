@@ -141,6 +141,8 @@ extension OrganisationGroupsTableViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        searchBar.text = nil
+        dataSource.updateFilter()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
