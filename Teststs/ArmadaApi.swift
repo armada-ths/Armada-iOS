@@ -4,6 +4,7 @@ import CoreData
 public struct ArmadaEvent {
     public let title: String
     public let summary: String
+    public let summaryWithoutHtml: String
     public let location: String?
     public let startDate: NSDate
     public let endDate: NSDate?
@@ -448,6 +449,7 @@ public class _ArmadaApi {
                 let startDate = self.dateFromString(startDateString),
                 let endDateString = json["ends_at"] as? String {
                     let location = json["location"] as? String
+                    let summaryWithoutHtml = summary.strippedFromHtmlString ?? ""
                     let signupLink = json["external_signup_link"] as? String
                     let signupStartDateString = json["signup_starts_at"] as? String
                     let signupEndDateString = json["signup_ends_at"] as? String
@@ -460,7 +462,7 @@ public class _ArmadaApi {
                     
                     let registrationRequired = json["registration_required"] as? Bool ?? true
                     
-                    return ArmadaEvent(title: title, summary: summary, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
+                    return ArmadaEvent(title: title, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
             return nil
             } ?? []).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })

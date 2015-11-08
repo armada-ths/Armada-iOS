@@ -22,6 +22,12 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                             sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
                         ]
                     })
+                    NSOperationQueue().addOperationWithBlock {
+                        NSThread.sleepForTimeInterval(0.2)
+                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                        self.tableViewController?.tableView.reloadData()
+                        }
+                    }
                 }
             }
         }
