@@ -2,6 +2,9 @@ import UIKit
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
+    @IBAction func nowButtonClicked(sender: AnyObject) {
+        dataSource.scrollToNearestUpcomingEvent()
+    }
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
         var images:[String:UIImage] = [:]
@@ -16,12 +19,12 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                     callback(response.map { [$0] })
                     
                     // For some reason - we must wait before scrolling!
-                    NSOperationQueue().addOperationWithBlock {
-                        NSThread.sleepForTimeInterval(0.7)
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.scrollToNearestUpcomingEvent()
-                        }
-                    }
+//                    NSOperationQueue().addOperationWithBlock {
+//                        NSThread.sleepForTimeInterval(0.3)
+//                        NSOperationQueue.mainQueue().addOperationWithBlock {
+//                            self.scrollToNearestUpcomingEvent()
+//                        }
+//                    }
                 }
             }
         }
@@ -47,7 +50,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
-            cell.descriptionLabel.text = armadaEvent.summary.attributedHtmlString?.string
+            cell.descriptionLabel.text = armadaEvent.summary.strippedFromHtmlString
             if let imageUrl = armadaEvent.imageUrl {
                 if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image

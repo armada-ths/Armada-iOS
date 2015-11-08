@@ -1587,7 +1587,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Events" id="6iY-55-R9g"/>
+                    <navigationItem key="navigationItem" title="Events" id="6iY-55-R9g">
+                        <barButtonItem key="rightBarButtonItem" title="Now" id="0GC-Yb-lh2">
+                            <connections>
+                                <action selector="nowButtonClicked:" destination="LCT-gq-bgE" id="US7-Mv-rZy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="900"/>
