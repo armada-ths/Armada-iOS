@@ -20,15 +20,8 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             ArmadaApi.eventsFromServer { response in
                 NSOperationQueue.mainQueue().addOperationWithBlock {
                     callback(response.map { [$0] })
-                    
-                    // For some reason - we must wait before scrolling!
-//                    NSOperationQueue().addOperationWithBlock {
-//                        NSThread.sleepForTimeInterval(0.3)
-//                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
-                            self.isFirstLoad = false
-//                        }
-//                    }
+                    self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
+                    self.isFirstLoad = false
                 }
             }
         }

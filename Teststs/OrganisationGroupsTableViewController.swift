@@ -42,9 +42,6 @@ class OrganisationGroupsTableViewController: UITableViewController {
             filteredOrganisationGroups = matchingOrganisationGroups
             tableViewController?.tableView.reloadData()
             (tableViewController as! OrganisationGroupsTableViewController).searchBar.hidden = allOrganisationGroups.isEmpty
-            
-            
-            
             tableViewController?.showEmptyMessage(filteredOrganisationGroups.isEmpty, message: "No members found")
             
         }
