@@ -2,10 +2,13 @@ import UIKit
 
 struct ColorScheme {
     static let darkGrayTextColor = UIColor(hex: 0x1e1e1e)
-    static let armadaBlue = UIColor(hex: 0x273760)
-    static let armadaGreen = UIColor(hex: 0x1C6965)
+    static let armadaBlue = UIColor(hex: 0xe73953)
+    static let armadaGreen = UIColor(hex: 0x00d790)
 }
 
+//0x00d790 Melon
+//0xe73953 Grape
+//0x2d2d2d Licorice
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UITabBar.appearance().tintColor = ColorScheme.armadaGreen
         window!.tintColor = ColorScheme.armadaGreen
-        UINavigationBar.appearance().barTintColor = ColorScheme.armadaGreen
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
+        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen//UIColor.whiteColor()
+        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
         UITableView.appearance().backgroundColor = UIColor.whiteColor()
         
 //        window!.tintColor = ColorScheme.armadaGreen
