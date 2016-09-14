@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 import CoreData
 
-public class Company: NSManagedObject {
+open class Company: NSManagedObject {
     
-    class func companyFromJson(json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
+    class func companyFromJson(_ json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
-        if let name = json["name"] as? String where !name.isEmpty,
+        if let name = json["name"] as? String , !name.isEmpty,
             
 
             
@@ -32,7 +32,7 @@ public class Company: NSManagedObject {
                 let videoUrl = json["video_url"] as? String ?? ""
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
-                let company = NSEntityDescription.insertNewObjectForEntityForName("Company", inManagedObjectContext: managedObjectContext) as! Company
+                let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 let description = json["description"] as? String ?? ""
                 let keywords = json["keywords"] as? String ?? ""
                 let contactName = json["contact_name"] as? String ?? ""
@@ -74,14 +74,14 @@ public class Company: NSManagedObject {
                 company.primaryWorkField = keywords
                 company.videoUrl = videoUrl
                 
-                _ = {
-                    let fetchRequest = NSFetchRequest()
+            _ = {
+                    let fetchRequest = NSFetchRequest<WorkField>()
                     let entityName = "WorkField"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkField])
-                    let workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest) )
+                    let workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for workField in workFields {
-                        let managedObject = existingObjects.filter({ $0.workField == workField }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! WorkField
+                        let managedObject = existingObjects.filter({ $0.workField == workField }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! WorkField
                         managedObject.workField = workField
                         existingObjects.insert(managedObject)
                         company.workFields.insert(managedObject)
@@ -89,13 +89,13 @@ public class Company: NSManagedObject {
                     }()
                 
                 _ = {
-                    let fetchRequest = NSFetchRequest()
+                    let fetchRequest = NSFetchRequest<JobType>()
                     let entityName = "JobType"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [JobType])
-                    let jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+                    let jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for jobType in jobTypes {
-                        let managedObject = existingObjects.filter({ $0.jobType == jobType }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! JobType
+                        let managedObject = existingObjects.filter({ $0.jobType == jobType }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! JobType
                         managedObject.jobType = jobType
                         existingObjects.insert(managedObject)
                         company.jobTypes.insert(managedObject)
@@ -103,13 +103,13 @@ public class Company: NSManagedObject {
                     }()
                 
                 _ = {
-                    let fetchRequest = NSFetchRequest()
+                    let fetchRequest = NSFetchRequest<Continent>()
                     let entityName = "Continent"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Continent])
-                    let continents = Array.removeNils(continents.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+                    let continents = Array.removeNils(continents.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for continent in continents {
-                        let managedObject = existingObjects.filter({ $0.continent == continent }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! Continent
+                        let managedObject = existingObjects.filter({ $0.continent == continent }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! Continent
                         managedObject.continent = continent
                         existingObjects.insert(managedObject)
                         company.continents.insert(managedObject)
@@ -117,13 +117,13 @@ public class Company: NSManagedObject {
                     }()
                 
                 _ = {
-                    let fetchRequest = NSFetchRequest()
+                    let fetchRequest = NSFetchRequest<CompanyValue>()
                     let entityName = "CompanyValue"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [CompanyValue])
-                    let companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+                    let companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for companyValue in companyValues {
-                        let managedObject = existingObjects.filter({ $0.companyValue == companyValue }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! CompanyValue
+                        let managedObject = existingObjects.filter({ $0.companyValue == companyValue }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! CompanyValue
                         managedObject.companyValue = companyValue
                         existingObjects.insert(managedObject)
                         company.companyValues.insert(managedObject)
@@ -131,13 +131,13 @@ public class Company: NSManagedObject {
                     }()
                 
                 _ = {
-                    let fetchRequest = NSFetchRequest()
+                    let fetchRequest = NSFetchRequest<Programme>()
                     let entityName = "Programme"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Programme])
-                    let programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+                    let programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for programme in programmes {
-                        let managedObject = existingObjects.filter({ $0.programme == programme }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! Programme
+                        let managedObject = existingObjects.filter({ $0.programme == programme }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! Programme
                         managedObject.programme = programme
                         existingObjects.insert(managedObject)
                         company.programmes.insert(managedObject)
@@ -146,13 +146,13 @@ public class Company: NSManagedObject {
                 
                 
                 _ = {
-                    let fetchRequest = NSFetchRequest()
+                    let fetchRequest = NSFetchRequest<WorkWay>()
                     let entityName = "WorkWay"
-                    fetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkWay])
-                    let workWays = Array.removeNils(workWays.map{($0["name"] as? String)?.componentsSeparatedByString(" | ").last})
+                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+                    let workWays = Array.removeNils(workWays.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
                     for workWay in workWays {
-                        let managedObject = existingObjects.filter({ $0.workWay == workWay }).first ?? NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: managedObjectContext) as! WorkWay
+                        let managedObject = existingObjects.filter({ $0.workWay == workWay }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! WorkWay
                         managedObject.workWay = workWay
                         existingObjects.insert(managedObject)
                         company.workWays.insert(managedObject)
@@ -167,22 +167,22 @@ public class Company: NSManagedObject {
         return nil
     }
     
-    public var imageName: String {
+    open var imageName: String {
         var imageName = name
-        imageName = imageName.stringByReplacingOccurrencesOfString("[^A-Za-z]+", withString: " ", options: NSStringCompareOptions.RegularExpressionSearch)
-        imageName = imageName.stringByReplacingOccurrencesOfString("( ab$)|(^ab )", withString: " ", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
-        imageName = imageName.stringByReplacingOccurrencesOfString("(international|group|consulting|partner|foods|technology|technologies|financial|industrial|technique|services|systems|swedish|defence|materiel|administration|sweden|healthcare|manufacturing|advisory)", withString: "", options: [NSStringCompareOptions.RegularExpressionSearch, NSStringCompareOptions.CaseInsensitiveSearch])
-        imageName = imageName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        imageName = imageName.replacingOccurrences(of: "[^A-Za-z]+", with: " ", options: NSString.CompareOptions.regularExpression)
+        imageName = imageName.replacingOccurrences(of: "( ab$)|(^ab )", with: " ", options: [NSString.CompareOptions.regularExpression, NSString.CompareOptions.caseInsensitive])
+        imageName = imageName.replacingOccurrences(of: "(international|group|consulting|partner|foods|technology|technologies|financial|industrial|technique|services|systems|swedish|defence|materiel|administration|sweden|healthcare|manufacturing|advisory)", with: "", options: [NSString.CompareOptions.regularExpression, NSString.CompareOptions.caseInsensitive])
+        imageName = imageName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         return imageName
     }
     
-    public var image: UIImage? {
+    open var image: UIImage? {
         return UIImage(named: imageName)
     }
     
-    public var map: UIImage {
-        if let url = NSURL(string: "http://www.armada.nu" + self.locationUrl),
-            let data = NSData(contentsOfURL: url),
+    open var map: UIImage {
+        if let url = URL(string: "http://www.armada.nu" + self.locationUrl),
+            let data = try? Data(contentsOf: url),
             let image = UIImage(data: data){
                 return image
         }
@@ -191,8 +191,8 @@ public class Company: NSManagedObject {
     
     var shortName: String {
         return ([" sverige", " ab", " sweden"].reduce(name) {
-            $0.stringByReplacingOccurrencesOfString($1, withString: "", options: .CaseInsensitiveSearch)
-            }).stringByTrimmingCharactersInSet(.whitespaceCharacterSet()).stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch)
+            $0.replacingOccurrences(of: $1, with: "", options: .caseInsensitive)
+            }).trimmingCharacters(in: .whitespaces).replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
     }
 }
 

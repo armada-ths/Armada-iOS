@@ -1,4 +1,15 @@
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class CatalogueTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
@@ -10,14 +21,14 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     var selectedCompany: Company? {
         if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesByLetters[indexPath.section].companies[indexPath.row]
+            return companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         }
         return nil
     }
     
-    func swedishOrdering(x: String, y: String) -> Bool {
-        let firstNum = Int(String(x.lowercaseString.substringToIndex(x.startIndex.successor())))
-        let secondNum = Int(String(y.lowercaseString.substringToIndex(y.startIndex.successor())))
+    func swedishOrdering(_ x: String, y: String) -> Bool {
+        let firstNum = Int(String(x.lowercased().substring(to: x.characters.index(after: x.startIndex))))
+        let secondNum = Int(String(y.lowercased().substring(to: y.characters.index(after: y.startIndex))))
         if firstNum != nil && secondNum != nil {
             return firstNum < secondNum
         } else if firstNum != nil {
@@ -26,18 +37,18 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             return true
         }
         
-        let result = x.compare(y, options: [], range: nil, locale: NSLocale(localeIdentifier: "se"))
+        let result = x.compare(y, options: [], range: nil, locale: Locale(identifier: "se"))
         switch result {
-        case .OrderedAscending, .OrderedSame:
+        case .orderedAscending, .orderedSame:
             return true
-        case .OrderedDescending:
+        case .orderedDescending:
             return false
         }
     }
 
-    func updateCompaniesByLetters(companies: [Company]) {
+    func updateCompaniesByLetters(_ companies: [Company]) {
         let stopWatch = StopWatch()
-        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercaseString })).sort(swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercaseString.hasPrefix(letter) })) }
+        companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercased() })).sorted(by: swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercased().hasPrefix(letter) })) }
         stopWatch.print("Updating letters")
     }
     
@@ -47,28 +58,28 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
 //        refreshControl = UIRefreshControl()
 //        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
-        registerForPreviewingWithDelegate(self, sourceView: view)
+        registerForPreviewing(with: self, sourceView: view)
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing,
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
-            let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-        let company = companiesByLetters[highlightedIndexPath.section].companies[highlightedIndexPath.row]
+        guard let highlightedIndexPath = tableView.indexPathForRow(at: location),
+            let cell = tableView.cellForRow(at: highlightedIndexPath) else  { return nil }
+        let company = companiesByLetters[(highlightedIndexPath as NSIndexPath).section].companies[(highlightedIndexPath as NSIndexPath).row]
         highlightedCompany = company
-        let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+        let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
         companyViewController.company = company
         previewingContext.sourceRect = cell.frame
         return companyViewController
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.performSegue(withIdentifier: "CompanyPageViewControllerSegue", sender: self)
     }
     
-    func refresh(refreshControl: UIRefreshControl? = nil) {
+    func refresh(_ refreshControl: UIRefreshControl? = nil) {
         ArmadaApi.updateCompanies {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 refreshControl?.endRefreshing()
                 self.updateCompanies()
                 self.tableView.reloadData()
@@ -85,119 +96,119 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         } else {
             companies = ArmadaApi.companies.filter({ FavoriteCompanies.contains($0.name) })
         }
-        if let searchText = searchBar.text where !searchText.isEmpty {
-            companies = companies.filter({ $0.name.lowercaseString.hasPrefix(searchText.lowercaseString)})
+        if let searchText = searchBar.text , !searchText.isEmpty {
+            companies = companies.filter({ $0.name.lowercased().hasPrefix(searchText.lowercased())})
         }
         updateCompaniesByLetters(companies)
         showEmptyMessage(companies.isEmpty, message: segmentedControl.selectedSegmentIndex == 0 ? "No company matches\nyour filter" : "No favorites")
-        searchBar.hidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
+        searchBar.isHidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
         tableView.reloadData()
     }
     
-    @IBAction func segmentedControlDidChange(sender: UISegmentedControl) {
+    @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
         updateCompanies()
         tableView.reloadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCompanies()
     }
     
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {}
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return companiesByLetters.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companiesByLetters[section].companies.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTableViewCell", forIndexPath: indexPath) as! CompanyTableViewCell
-        let company = companiesByLetters[indexPath.section].companies[indexPath.row]
-        cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyTableViewCell", for: indexPath) as! CompanyTableViewCell
+        let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
+        cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.primaryWorkField
         if let image = company.image {
             cell.logoImageView.image = image
-            cell.companyNameLabel.hidden = true
+            cell.companyNameLabel.isHidden = true
         } else {
             cell.logoImageView.image = nil
-            cell.companyNameLabel.hidden = false
+            cell.companyNameLabel.isHidden = false
             cell.companyNameLabel.text = company.name
         }
         
-        cell.firstIcon.hidden = true
-        cell.secondIcon.hidden = true
+        cell.firstIcon.isHidden = true
+        cell.secondIcon.isHidden = true
         
         let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity, ArmadaField.ClimateCompensation]
         let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality, company.hasClimateCompensated]
         
-        cell.secondIcon.hidden = true
-        cell.firstIcon.hidden = true
-        cell.thirdIcon.hidden = true
+        cell.secondIcon.isHidden = true
+        cell.firstIcon.isHidden = true
+        cell.thirdIcon.isHidden = true
         for i in 0..<stuff.count {
             if stuff[i] {
-                if cell.firstIcon.hidden {
+                if cell.firstIcon.isHidden {
                     cell.firstIcon.image = icons[i].image
-                    cell.firstIcon.hidden = false
-                } else if cell.secondIcon.hidden {
+                    cell.firstIcon.isHidden = false
+                } else if cell.secondIcon.isHidden {
                     cell.secondIcon.image = icons[i].image
-                    cell.secondIcon.hidden = false
+                    cell.secondIcon.isHidden = false
                 } else {
                     cell.thirdIcon.image = icons[i].image
-                    cell.thirdIcon.hidden = false
+                    cell.thirdIcon.isHidden = false
                 }
             }
         }
         return cell
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return companiesByLetters.map { $0.letter }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
-        if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
+        if let companiesPageViewController = segue.destination as? CompaniesPageViewController {
             companiesPageViewController.companies = companiesByLetters.flatMap { $0.companies }
             companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
         }
-        if let controller = segue.destinationViewController as? CompanyFilterTableViewController {
+        if let controller = segue.destination as? CompanyFilterTableViewController {
             controller.CompanyFilter = CatalogueFilter
             controller.CopyFilter = MatchFilter
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         // Can only edit when favorite segment is selected
         return segmentedControl.selectedSegmentIndex == 1
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             tableView.beginUpdates()
-            let company = companiesByLetters[indexPath.section].companies[indexPath.row]
+            let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
             FavoriteCompanies.remove(company.name)
             updateCompanies()
-            if tableView.numberOfRowsInSection(indexPath.section) == 1 {
-                tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
+            if tableView.numberOfRows(inSection: (indexPath as NSIndexPath).section) == 1 {
+                tableView.deleteSections(IndexSet(integer: (indexPath as NSIndexPath).section), with: .fade)
             } else {
-                tableView.deleteRowsAtIndexPaths([indexPath],
-                    withRowAnimation: .Fade)
+                tableView.deleteRows(at: [indexPath],
+                    with: .fade)
             }
             tableView.endUpdates()
         }
@@ -206,25 +217,25 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
 
 extension CatalogueTableViewController: UISearchBarDelegate {
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateCompanies()
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchBar.resignFirstResponder()
         updateCompanies()
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
     

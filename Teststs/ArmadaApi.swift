@@ -6,19 +6,19 @@ public struct ArmadaEvent {
     public let summary: String
     public let summaryWithoutHtml: String
     public let location: String?
-    public let startDate: NSDate
-    public let endDate: NSDate?
+    public let startDate: Date
+    public let endDate: Date?
     public let signupLink: String?
-    public let signupStartDate: NSDate?
-    public let signupEndDate: NSDate?
-    public let imageUrl: NSURL?
+    public let signupStartDate: Date?
+    public let signupEndDate: Date?
+    public let imageUrl: URL?
     public let registrationRequired: Bool
     
     
     
     
     enum SignupState {
-        case Passed, NotRequired, NotAvailable, Now, Future
+        case passed, notRequired, notAvailable, now, future
 //        
 //        var description: String {
 //            switch self {
@@ -33,34 +33,34 @@ public struct ArmadaEvent {
     
     var signupStateString: String {
         switch signupState {
-        case .Passed: return "Registration is over"
-        case .NotRequired: return "No registration required"
-        case .NotAvailable: return "Registration TBA"
-        case .Now: return "Sign up before \(signupEndDate?.readableString ?? "")"
-        case .Future: return "Registration starts at \(signupStartDate?.readableString ?? "")"
+        case .passed: return "Registration is over"
+        case .notRequired: return "No registration required"
+        case .notAvailable: return "Registration TBA"
+        case .now: return "Sign up before \(signupEndDate?.readableString ?? "")"
+        case .future: return "Registration starts at \(signupStartDate?.readableString ?? "")"
         }
 
     }
     
     var signupState: SignupState {
         if registrationRequired {
-            if startDate < NSDate() || signupEndDate != nil && signupEndDate! < NSDate() {
-                return .Passed
+            if startDate < Date() || signupEndDate != nil && signupEndDate! < Date() {
+                return .passed
             } else {
                 if let signupStartDate = signupStartDate,
-                    let signupLink = signupLink where !signupLink.isEmpty,
-                    let _ = NSURL(string: signupLink) {
-                        if signupStartDate < NSDate() {
-                            return .Now
+                    let signupLink = signupLink , !signupLink.isEmpty,
+                    let _ = URL(string: signupLink) {
+                        if signupStartDate < Date() {
+                            return .now
                         } else {
-                            return .Future
+                            return .future
                         }
                 } else {
-                    return .NotAvailable
+                    return .notAvailable
                 }
             }
         } else {
-            return .NotRequired
+            return .notRequired
         }
     }
     
@@ -69,12 +69,12 @@ public struct ArmadaEvent {
 public struct News {
     public let title: String
     public let content: String
-    public let publishedDate: NSDate
+    public let publishedDate: Date
 }
 
 public struct ArmadaMember: Equatable {
     let name: String
-    let imageUrl: NSURL
+    let imageUrl: URL
     let role: String
 }
 
@@ -84,9 +84,9 @@ public func ==(x: ArmadaMember, y: ArmadaMember) -> Bool {
 
 public struct Sponsor {
     let name: String
-    let imageUrl: NSURL
+    let imageUrl: URL
     let description: String
-    let websiteUrl: NSURL
+    let websiteUrl: URL
     
     let isMainPartner: Bool
     let isMainSponsor: Bool
@@ -135,58 +135,59 @@ enum ArmadaField: String {
 }
 
 enum Response<T> {
-    case Success(T)
-    case Error(ErrorType)
+    case success(T)
+    case error(Error)
     
-    func map<G>(transform: T -> G) -> Response<G> {
+    //Applicerar en transform om success annars inte.
+    func map<G>(_ transform: (T) -> G) -> Response<G> {
         switch self {
-        case .Success(let value):
-            return .Success(transform(value))
-        case .Error(let error):
-            return .Error(error)
+        case .success(let value):
+            return .success(transform(value))
+        case .error(let error):
+            return .error(error)
         }
         
     }
     
-    static func flatten<T>(response: Response<Response<T>>) -> Response<T> {
+    static func flatten<T>(_ response: Response<Response<T>>) -> Response<T> {
         switch response {
-        case .Success(let innerResponse):
+        case .success(let innerResponse):
             return innerResponse
-        case .Error(let error):
-            return .Error(error)
+        case .error(let error):
+            return .error(error)
         }
     }
     
-    func flatMap<G>(transform: T -> Response<G>) -> Response<G> {
+    func flatMap<G>(_ transform: (T) -> Response<G>) -> Response<G> {
         return Response.flatten(map(transform))
     }
 }
 
-infix operator >>= {}
-func >>=<T, G>(response: Response<T>, transform: T -> Response<G>) -> Response<G> {
+infix operator >>=
+func >>=<T, G>(response: Response<T>, transform: (T) -> Response<G>) -> Response<G> {
     return response.flatMap(transform)
 }
 
 let ArmadaApi = _ArmadaApi()
-public class _ArmadaApi {
+open class _ArmadaApi {
     
     var companies = [Company]()
     
     var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
     
-    private let applicationDocumentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
+    fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     
-    private lazy var managedObjectModel: NSManagedObjectModel = {
-        return NSManagedObjectModel(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("CompanyModel", withExtension: "momd")!)!
+    fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
+        return NSManagedObjectModel(contentsOf: Bundle(for: type(of: self)).url(forResource: "CompanyModel", withExtension: "momd")!)!
     }()
     
-    let persistentStoreUrl = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("Companies.sqlite")
+    let persistentStoreUrl = URL(fileURLWithPath: dir).appendingPathComponent("Companies.sqlite")
     
-    private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    fileprivate lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         print("Persisten store: \(self.persistentStoreUrl)")
         
-        let databaseExists = NSFileManager.defaultManager().fileExistsAtPath(self.persistentStoreUrl.path!)
+        let databaseExists = FileManager.default.fileExists(atPath: self.persistentStoreUrl.path)
         do {
             if !databaseExists {
                 print("persistentStoreCoordinator does not exist - copying from bundle")
@@ -195,7 +196,7 @@ public class _ArmadaApi {
                 print("persistentStoreCoordinator exists")
             }
             
-            try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
         } catch {
             do {
                 print("persistentStoreCoordinator fucked up - deleting database")
@@ -204,12 +205,12 @@ public class _ArmadaApi {
                     print("persistentStoreCoordinator old database sucked - testing bundle")
                     try self.copyDatabaseFromBundle()
                 }
-                try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+                try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
             } catch {
                 print("persistentStoreCoordinator - the bundle sucked too")
                 do {
                     try self.deleteDatabase()
-                    try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.persistentStoreUrl, options: nil)
+                    try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
                 } catch {
                     print("persistentStoreCoordinator oh god - we messed up - goodbye")
                     print(error)
@@ -224,44 +225,44 @@ public class _ArmadaApi {
     
     static let companiesFileName = "companies.json"
     
-    static let dir = (NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as [String])[0]
+    static let dir = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as [String])[0]
     
     let apiUrl = "http://armada.nu/api"
     
     
-    var persistentStoreUrlShm: NSURL {
-        return NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
+    var persistentStoreUrlShm: URL {
+        return URL(string: persistentStoreUrl.absoluteString + "-shm")!
     }
-    var persistentStoreUrlWal: NSURL {
-        return NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+    var persistentStoreUrlWal: URL {
+        return URL(string: persistentStoreUrl.absoluteString + "-wal")!
     }
     
     func deleteDatabase() throws {
-        let persistentStoreUrlShm = NSURL(string: persistentStoreUrl.absoluteString + "-shm")!
-        let persistentStoreUrlWal = NSURL(string: persistentStoreUrl.absoluteString + "-wal")!
+        let persistentStoreUrlShm = URL(string: persistentStoreUrl.absoluteString + "-shm")!
+        let persistentStoreUrlWal = URL(string: persistentStoreUrl.absoluteString + "-wal")!
         
-        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrl)
-        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlShm)
-        try NSFileManager.defaultManager().removeItemAtURL(persistentStoreUrlWal)
+        try FileManager.default.removeItem(at: persistentStoreUrl)
+        try FileManager.default.removeItem(at: persistentStoreUrlShm)
+        try FileManager.default.removeItem(at: persistentStoreUrlWal)
         
     }
     
 
     
     func copyDatabaseFromBundle() throws {
-        let sqliteUrl = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite")!
-        let sqliteUrlShm = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-shm")!
-        let sqliteUrlWal = NSBundle(forClass: self.dynamicType).URLForResource("Companies", withExtension: "sqlite-wal")!
+        let sqliteUrl = Bundle(for: type(of: self)).url(forResource: "Companies", withExtension: "sqlite")!
+        let sqliteUrlShm = Bundle(for: type(of: self)).url(forResource: "Companies", withExtension: "sqlite-shm")!
+        let sqliteUrlWal = Bundle(for: type(of: self)).url(forResource: "Companies", withExtension: "sqlite-wal")!
         
-        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrl, toURL: persistentStoreUrl)
-        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlShm, toURL: persistentStoreUrlShm)
-        try NSFileManager.defaultManager().copyItemAtURL(sqliteUrlWal, toURL: persistentStoreUrlWal)
+        try FileManager.default.copyItem(at: sqliteUrl, to: persistentStoreUrl)
+        try FileManager.default.copyItem(at: sqliteUrlShm, to: persistentStoreUrlShm)
+        try FileManager.default.copyItem(at: sqliteUrlWal, to: persistentStoreUrlWal)
         print("Copied companies from bundle")
         
     }
     
-    private lazy var managedObjectContext: NSManagedObjectContext = {
-        let managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+    fileprivate lazy var managedObjectContext: NSManagedObjectContext = {
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
@@ -270,66 +271,65 @@ public class _ArmadaApi {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.WorkFields] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("WorkField", inManagedObjectContext: managedObjectContext)!
-            let workFields =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkField]
-            workFields[0]
+            numberOfCompaniesForPropertyValueMap[.workFields] = [:]
+            let fetchRequest = NSFetchRequest<WorkField>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "WorkField", in: managedObjectContext)!
+            let workFields =  try! managedObjectContext.fetch(fetchRequest)
             for workField in workFields {
-                numberOfCompaniesForPropertyValueMap[.WorkFields]![workField.workField] = workField.companies.count
+                numberOfCompaniesForPropertyValueMap[.workFields]![workField.workField] = workField.companies.count
             }
             }()
         
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.Programmes] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("Programme", inManagedObjectContext: managedObjectContext)!
-            let programmes =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Programme]
+            numberOfCompaniesForPropertyValueMap[.programmes] = [:]
+            let fetchRequest = NSFetchRequest<Programme>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Programme", in: managedObjectContext)!
+            let programmes =  try! managedObjectContext.fetch(fetchRequest)
             for programme in programmes {
-                numberOfCompaniesForPropertyValueMap[.Programmes]![programme.programme] = programme.companies.count
+                numberOfCompaniesForPropertyValueMap[.programmes]![programme.programme] = programme.companies.count
             }
             }()
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.CompanyValues] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("CompanyValue", inManagedObjectContext: managedObjectContext)!
-            let companyValues =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [CompanyValue]
+            numberOfCompaniesForPropertyValueMap[.companyValues] = [:]
+            let fetchRequest = NSFetchRequest<CompanyValue>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "CompanyValue", in: managedObjectContext)!
+            let companyValues =  try! managedObjectContext.fetch(fetchRequest)
             for companyValue in companyValues {
-                numberOfCompaniesForPropertyValueMap[.CompanyValues]![companyValue.companyValue] = companyValue.companies.count
+                numberOfCompaniesForPropertyValueMap[.companyValues]![companyValue.companyValue] = companyValue.companies.count
             }
             }()
         
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.Continents] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("Continent", inManagedObjectContext: managedObjectContext)!
-            let continents =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Continent]
+            numberOfCompaniesForPropertyValueMap[.continents] = [:]
+            let fetchRequest = NSFetchRequest<Continent>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Continent", in: managedObjectContext)!
+            let continents =  try! managedObjectContext.fetch(fetchRequest)
             for continent in continents {
-                numberOfCompaniesForPropertyValueMap[.Continents]![continent.continent] = continent.companies.count
+                numberOfCompaniesForPropertyValueMap[.continents]![continent.continent] = continent.companies.count
             }
             }()
         
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.JobTypes] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("JobType", inManagedObjectContext: managedObjectContext)!
-            let jobTypes =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [JobType]
+            numberOfCompaniesForPropertyValueMap[.jobTypes] = [:]
+            let fetchRequest = NSFetchRequest<JobType>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "JobType", in: managedObjectContext)!
+            let jobTypes =  try! managedObjectContext.fetch(fetchRequest)
             for jobType in jobTypes {
-                numberOfCompaniesForPropertyValueMap[.JobTypes]![jobType.jobType] = jobType.companies.count
+                numberOfCompaniesForPropertyValueMap[.jobTypes]![jobType.jobType] = jobType.companies.count
             }
             }()
         
         _ = {
-            numberOfCompaniesForPropertyValueMap[.WorkWays] = [:]
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = NSEntityDescription.entityForName("WorkWay", inManagedObjectContext: managedObjectContext)!
-            let workWays =  try! managedObjectContext.executeFetchRequest(fetchRequest) as! [WorkWay]
+            numberOfCompaniesForPropertyValueMap[.workWays] = [:]
+            let fetchRequest = NSFetchRequest<WorkWay>()
+            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "WorkWay", in: managedObjectContext)!
+            let workWays =  try! managedObjectContext.fetch(fetchRequest) 
             for workWay in workWays {
-                numberOfCompaniesForPropertyValueMap[.WorkWays]![workWay.workWay] = workWay.companies.count
+                numberOfCompaniesForPropertyValueMap[.workWays]![workWay.workWay] = workWay.companies.count
             }
             }()
         
@@ -337,48 +337,49 @@ public class _ArmadaApi {
         self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
     }
     
-    func numberOfCompaniesContainingValue(value: String, forProperty property: CompanyProperty) -> Int? {
+    func numberOfCompaniesContainingValue(_ value: String, forProperty property: CompanyProperty) -> Int? {
         return numberOfCompaniesForPropertyValueMap[property]![value]
     }
     
     
-    private init() {
+    fileprivate init() {
         let cacheSizeMemory = 256*1024*1024
         let cacheSizeDisk = 256*1024*1024
-        let sharedCache = NSURLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).stringByAppendingPathComponent("nsurlcache"))
-        NSURLCache.setSharedURLCache(sharedCache)
+        let sharedCache = URLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).appendingPathComponent("nsurlcache"))
+        //URLCache.setSharedURLCache(sharedCache)
+        URLCache.shared = sharedCache
         let stopWatch = StopWatch()
         print(persistentStoreUrl)
         
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "localizedCaseInsensitiveCompare:")]
-        companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
+        let fetchRequest = NSFetchRequest<Company>()
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Company", in: managedObjectContext)!
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+        companies = try! managedObjectContext.fetch(fetchRequest)
         print("Result: \(companies.count)")
         stopWatch.print("Fetching managed companies ")
     }
     
     
-    func updateCompanies(callback: () -> ()) {
+    func updateCompanies(_ callback: @escaping () -> ()) {
         let stopWatch = StopWatch()
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("Company", inManagedObjectContext: managedObjectContext)!
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: "caseInsensitiveCompare:")]
-        companies = try! managedObjectContext.executeFetchRequest(fetchRequest) as! [Company]
+        let fetchRequest = NSFetchRequest<Company>()
+        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Company", in: managedObjectContext)!
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))]
+        companies = try! managedObjectContext.fetch(fetchRequest)
         
         _ArmadaApi.getCompaniesRespectingEtag() {
             switch $0 {
-            case .Success(let (_, usedCache, etag)):
+            case .success(let (_, usedCache, etag)):
                 if !usedCache {
                     self.armadaUrlWithPath("companies").getJson() {
                         switch $0 {
-                        case .Success(let json):
+                        case .success(let json):
                             if let companiesJson = json["companies"] as? [AnyObject] {
-                                NSOperationQueue.mainQueue().addOperationWithBlock {
+                                OperationQueue.main.addOperation {
                                     print("DESTROYING THE DATABASE!!!!!")
                                     if companiesJson.count > 0 {
                                         for company in self.companies {
-                                            self.managedObjectContext.deleteObject(company)
+                                            self.managedObjectContext.delete(company)
                                         }
                                         try! self.managedObjectContext.save()
                                         self.companies = []
@@ -396,14 +397,14 @@ public class _ArmadaApi {
                                 callback()
                             }
                             
-                        case .Error:
+                        case .error:
                             callback()
                         }
                     }
                 } else {
                     callback()
                 }
-            case .Error(let error):
+            case .error(let error):
                 print(error)
                 callback()
             }
@@ -415,29 +416,29 @@ public class _ArmadaApi {
     
     // Used for pre-fetching all companies logos - it's while the app is running in production
     func storeLogos() {
-        let imageDirectory = applicationDocumentsDirectory.URLByAppendingPathComponent("logos")
+        let imageDirectory = applicationDocumentsDirectory.appendingPathComponent("logos")
         for company in companies {
             
-            try! NSFileManager.defaultManager().createDirectoryAtURL(imageDirectory, withIntermediateDirectories: true, attributes: nil)
-            if let url = NSURL(string: company.logoUrl) {
+            try! FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true, attributes: nil)
+            if let url = URL(string: company.logoUrl) {
                 url.getData() {
-                    if case .Success(let data) = $0 {
-                        data.writeToURL(imageDirectory.URLByAppendingPathComponent(company.imageName + ".png"), atomically: true)
+                    if case .success(let data) = $0 {
+                        try? data.write(to: imageDirectory.appendingPathComponent(company.imageName + ".png"), options: [.atomic])
                     }
                 }
             }
         }
     }
     
-    class func getCompaniesRespectingEtag(callback: Response<(NSData, Bool, String)> -> Void) {
-        let url = NSURL(string: "http://armada.nu/api/companies")!
-        let session = NSURLSession.sharedSession()
-        let request = NSURLRequest(URL: url)
+    class func getCompaniesRespectingEtag(_ callback: @escaping (Response<(Data, Bool, String)>) -> Void) {
+        let url = URL(string: "http://armada.nu/api/companies")!
+        let session = URLSession.shared
+        let request = URLRequest(url: url)
         var usedCache = false
-        let dataTask = session.dataTaskWithRequest(request) {
+        let dataTask = session.dataTask(with: request, completionHandler: {
             (data, response, error) in
             var etag: String?
-            if let httpResponse = response as? NSHTTPURLResponse {
+            if let httpResponse = response as? HTTPURLResponse {
                 etag = httpResponse.etag
                 usedCache = httpResponse.etag == ArmadaApi.companies.first?.etag
             }
@@ -445,52 +446,52 @@ public class _ArmadaApi {
                 let etag = etag {
                     let zebra = (data, usedCache, etag)
                     print("Url: \(url.absoluteString), cached: \(usedCache)")
-                    callback(.Success(zebra))
+                    callback(.success(zebra))
             } else if let error = error {
-                callback(.Error(error))
+                callback(.error(error))
             } else {
-                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+                callback(.error(NSError(domain: "getData", code: 1337, userInfo: nil)))
             }
-        }
+        }) 
         dataTask.resume()
     }
     
     var jobTypes: [String] {
-        return Array(Set(companies.flatMap({ $0.jobTypes }).map { $0.jobType })).sort(<)
+        return Array(Set(companies.flatMap({ $0.jobTypes }).map { $0.jobType })).sorted(by: <)
     }
     
     var companyValues: [String] {
-        return Array(Set(companies.flatMap({ $0.companyValues }).map { $0.companyValue })).sort(<)
+        return Array(Set(companies.flatMap({ $0.companyValues }).map { $0.companyValue })).sorted(by: <)
     }
     
     var workWays: [String] {
-        return Array(Set(companies.flatMap({ $0.workWays }).map { $0.workWay })).sort(<)
+        return Array(Set(companies.flatMap({ $0.workWays }).map { $0.workWay })).sorted(by: <)
     }
     
     var continents: [String] {
-        return Array(Set(companies.flatMap({ $0.continents }).map { $0.continent })).sort(<)
+        return Array(Set(companies.flatMap({ $0.continents }).map { $0.continent })).sorted(by: <)
     }
     
     var workFields: [String] {
-        return Array(Set(companies.flatMap({ $0.workFields }).map { $0.workField })).sort(<)
+        return Array(Set(companies.flatMap({ $0.workFields }).map { $0.workField })).sorted(by: <)
     }
     
     var educationTypes: [String] {
-        return Array(Set(companies.flatMap({ $0.programmes }).map { $0.programme })).sort(<)
+        return Array(Set(companies.flatMap({ $0.programmes }).map { $0.programme })).sorted(by: <)
     }
     
     var programmes: [String] {
         return educationTypes
     }
     
-    func dateFromString(string: String) -> NSDate? {
-        let dateFormatter = NSDateFormatter()
+    func dateFromString(_ string: String) -> Date? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZ"
-        let b = string.componentsSeparatedByString(":")
-        return dateFormatter.dateFromString(b[0..<b.count-1].joinWithSeparator(":") + b[b.count-1])
+        let b = string.components(separatedBy: ":")
+        return dateFormatter.date(from: b[0..<b.count-1].joined(separator: ":") + b[b.count-1])
     }
     
-    public func eventsFromJson( jsonOriginal: AnyObject) -> [ArmadaEvent] {
+    open func eventsFromJson( _ jsonOriginal: AnyObject) -> [ArmadaEvent] {
         let json = jsonOriginal["events"]
         
         let events =  Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
@@ -504,24 +505,26 @@ public class _ArmadaApi {
                     let signupLink = json["external_signup_link"] as? String
                     let signupStartDateString = json["signup_starts_at"] as? String
                     let signupEndDateString = json["signup_ends_at"] as? String
-                    let signupStartDate: NSDate? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
-                    let signupEndDate: NSDate? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
-                    let title = title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    let signupStartDate: Date? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
+                    let signupEndDate: Date? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
+                    let title = title.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     let imageUrlString = json["picture_url"] as? String
-                    let imageUrl: NSURL? = imageUrlString != nil ? NSURL(string: imageUrlString!) : nil
-                    let summary = summary.stringByReplacingOccurrencesOfString("\\s+", withString: " ", options: .RegularExpressionSearch, range: nil)
+                    let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
+                    let summary = summary.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
                     
                     let registrationRequired = json["registration_required"] as? Bool ?? true
                     
                     return ArmadaEvent(title: title, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
             return nil
-            } ?? []).sort({ $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 })
-        let lastDate = events.last?.startDate ?? NSDate()
-        return events.filter { $0.startDate.format("yyyy") == lastDate.format("yyyy") }
+            } ?? []).sorted(by: { $0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970 })
+        let lastDate = events.first?.startDate ?? Date()
+        let filteredEvents = events.filter{ $0.startDate.format("yyyy") == lastDate.format("yyyy") }
+        if (filteredEvents.count < 3) {return events}
+        return filteredEvents
     }
     
-    public func newsFromJson(jsonOriginal: AnyObject) -> [News] {
+    open func newsFromJson(_ jsonOriginal: AnyObject) -> [News] {
         let json = jsonOriginal["news"]
         
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
@@ -535,15 +538,15 @@ public class _ArmadaApi {
             } ?? [])
     }
     
-    public func sponsorsFromJson(jsonOriginal: AnyObject) -> [Sponsor] {
+    open func sponsorsFromJson(_ jsonOriginal: AnyObject) -> [Sponsor] {
         let json = jsonOriginal["sponsors"]
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Sponsor? in
             if let name = json["name"] as? String ?? json["title"] as? String,
                 let description = json["full_text"] as? String,
                 let imageUrlString = json["logo_url"] as? String,
-                let imageUrl = NSURL(string: imageUrlString),
+                let imageUrl = URL(string: imageUrlString),
                 let websiteUrlString = json["website_url"] as? String,
-                let websiteUrl = NSURL(string: websiteUrlString) {
+                let websiteUrl = URL(string: websiteUrlString) {
                     let isMainPartner = json["main_partner"] as? Bool ?? false
                     let isMainSponsor = json["main_sponsor"] as? Bool ?? false
                     let isGreenPartner = json["green_partner"] as? Bool ?? false
@@ -554,7 +557,7 @@ public class _ArmadaApi {
             } ?? [])
     }
     
-    public func organisationGroupsFromJson(jsonOriginal: AnyObject) -> [ArmadaGroup] {
+    open func organisationGroupsFromJson(_ jsonOriginal: AnyObject) -> [ArmadaGroup] {
         var organisationGroups = [ArmadaGroup]()
         if let json = jsonOriginal["organisation_groups"] as? [AnyObject] {
             for object in json {
@@ -565,7 +568,7 @@ public class _ArmadaApi {
                             if let name = member["name"] as? String,
                                 let role = member["role"] as? String,
                                 let imageUrlString = member["picture_url"] as? String,
-                                let imageUrl = NSURL(string: imageUrlString) {
+                                let imageUrl = URL(string: imageUrlString) {
                                     members += [ArmadaMember(name: name, imageUrl: imageUrl, role: role)]
                             }
                         }
@@ -577,36 +580,36 @@ public class _ArmadaApi {
     }
 
     
-    func eventsFromServer(callback: Response<[ArmadaEvent]> -> Void) {
+    func eventsFromServer(_ callback: @escaping (Response<[ArmadaEvent]>) -> Void) {
         armadaUrlWithPath("events").getJson() {
             callback($0.map(self.eventsFromJson))
         }
     }
     
-    func newsFromServer(callback: Response<[News]> -> Void) {
+    func newsFromServer(_ callback: @escaping (Response<[News]>) -> Void) {
         armadaUrlWithPath("news").getJson() {
             callback($0.map(self.newsFromJson))
         }
     }
     
-    func sponsorsFromServer(callback: Response<[Sponsor]> -> Void) {
+    func sponsorsFromServer(_ callback: @escaping (Response<[Sponsor]>) -> Void) {
         armadaUrlWithPath("sponsors").getJson() {
             callback($0.map(self.sponsorsFromJson))
         }
     }
     
     
-    func organisationGroupsFromServer(callback: Response<[ArmadaGroup]> -> Void) {
+    func organisationGroupsFromServer(_ callback: @escaping (Response<[ArmadaGroup]>) -> Void) {
         armadaUrlWithPath("organisation_groups").getJson() {
             callback($0.map(self.organisationGroupsFromJson))
         }
     }
     
-    func armadaUrlWithPath(path: String) -> NSURL {
-        return NSURL(string: (apiUrl as NSString).stringByAppendingPathComponent(path))!
+    func armadaUrlWithPath(_ path: String) -> URL {
+        return URL(string: (apiUrl as NSString).appendingPathComponent(path))!
     }
     
-    func pagesFromServer(callback: Response<AnyObject> -> Void) {
+    func pagesFromServer(_ callback: @escaping (Response<AnyObject>) -> Void) {
         armadaUrlWithPath("pages").getJson() {
             callback($0.map {
                 json in
@@ -621,18 +624,18 @@ public class _ArmadaApi {
         }
     }
     
-    func armadaFieldInfosFromServer(callback: Response<[ArmadaFieldInfo]> -> Void) {
+    func armadaFieldInfosFromServer(_ callback: @escaping (Response<[ArmadaFieldInfo]>) -> Void) {
         pagesFromServer() {
             callback($0 >>= {
                 json in
                 var armadaFieldInfos = [ArmadaFieldInfo]()
                 for armadaField in ArmadaField.All {
-                    if let title = json[armadaField.rawValue]??["title"] as? String,
-                        let description = (json[armadaField.rawValue]??["app_text"] as? String) {
+                    if let title = Json(object: json)[armadaField.rawValue]["title"].string,
+                        let description = (Json(object: json)[armadaField.rawValue]["app_text"].string) {
                         armadaFieldInfos += [ArmadaFieldInfo(title: title, description: description, armadaField: armadaField)]
                     }
                 }
-                return .Success(armadaFieldInfos)
+                return .success(armadaFieldInfos)
             })
         }
     }
@@ -640,12 +643,12 @@ public class _ArmadaApi {
 }
 
 extension Array {
-    static func removeNils(array: [Element?]) -> [Element] {
+    static func removeNils(_ array: [Element?]) -> [Element] {
         return array.filter { $0 != nil }.map { $0! }
     }
 }
 
-extension NSHTTPURLResponse {
+extension HTTPURLResponse {
     var etag: String? {
         return allHeaderFields["Etag"] as? String
     }

@@ -5,8 +5,8 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     var companies = [Company]()
     var selectedCompany: Company!
 
-    func viewControllerForCompany(company: Company) -> UIViewController {
-        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+    func viewControllerForCompany(_ company: Company) -> UIViewController {
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
         viewController.company = company
         viewController.companies = companies
         return viewController
@@ -16,16 +16,16 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        setViewControllers([viewControllerForCompany(selectedCompany)], direction: .Forward, animated: true, completion: {done in })
+        setViewControllers([viewControllerForCompany(selectedCompany)], direction: .forward, animated: true, completion: {done in })
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let index = (companies.indexOf((viewController as! CompanyViewController).company)! + 1) % companies.count
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let index = (companies.index(of: (viewController as! CompanyViewController).company)! + 1) % companies.count
         return viewControllerForCompany(companies[index])
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let index = (companies.indexOf((viewController as! CompanyViewController).company)! - 1 + companies.count) % companies.count
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let index = (companies.index(of: (viewController as! CompanyViewController).company)! - 1 + companies.count) % companies.count
         return viewControllerForCompany(companies[index])
     }
 }

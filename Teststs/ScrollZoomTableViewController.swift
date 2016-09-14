@@ -2,7 +2,7 @@ import UIKit
 
 class FixedHeaderTableViewController: UITableViewController {
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateHeaderView()
     }
     
@@ -16,7 +16,7 @@ class FixedHeaderTableViewController: UITableViewController {
             headerHeight = headerView.frame.height
         }
         tableView.addSubview(headerView)
-        tableView.sendSubviewToBack(headerView)
+        tableView.sendSubview(toBack: headerView)
         tableView.contentInset = UIEdgeInsets(top: headerHeight+navigationBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentOffset = CGPoint(x: 0, y: -(headerHeight+navigationBarHeight))
         updateHeaderView()
@@ -24,8 +24,8 @@ class FixedHeaderTableViewController: UITableViewController {
 
     
     var navigationBarHeight: CGFloat {
-        if parentViewController == nil { return 0 }
-        return (parentViewController as? ArmadaViewController != nil) ? -64 : 64
+        if parent == nil { return 0 }
+        return (parent as? ArmadaViewController != nil) ? -64 : 64
     }
     
     func updateHeaderView() {

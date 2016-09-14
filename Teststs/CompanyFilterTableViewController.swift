@@ -1,40 +1,40 @@
 import UIKit
 
 enum CompanyProperty: CustomStringConvertible {
-    case Programmes, JobTypes, Continents, WorkFields, CompanyValues, WorkWays
+    case programmes, jobTypes, continents, workFields, companyValues, workWays
     
-    static let All = [Programmes, JobTypes, Continents, WorkFields, CompanyValues, WorkWays]
+    static let All = [programmes, jobTypes, continents, workFields, companyValues, workWays]
     
     var penalty: Double {
         switch self {
-        case .Programmes: return 0.2
-        case .JobTypes: return 0.6
-        case .Continents: return 0.9
-        case .WorkFields: return 0.4
-        case .CompanyValues: return 0.9
-        case .WorkWays: return 0.9
+        case .programmes: return 0.2
+        case .jobTypes: return 0.6
+        case .continents: return 0.9
+        case .workFields: return 0.4
+        case .companyValues: return 0.9
+        case .workWays: return 0.9
         }
     }
     
     var values: [String] {
         switch self {
-        case .Programmes: return ArmadaApi.programmes
-        case .JobTypes: return ArmadaApi.jobTypes
-        case .Continents: return ArmadaApi.continents
-        case .WorkFields: return ArmadaApi.workFields
-        case .CompanyValues: return ArmadaApi.companyValues
-        case .WorkWays: return ArmadaApi.workWays
+        case .programmes: return ArmadaApi.programmes
+        case .jobTypes: return ArmadaApi.jobTypes
+        case .continents: return ArmadaApi.continents
+        case .workFields: return ArmadaApi.workFields
+        case .companyValues: return ArmadaApi.companyValues
+        case .workWays: return ArmadaApi.workWays
         }
     }
     
     var description: String {
         switch self {
-        case .Programmes: return "Programme"
-        case .JobTypes: return "Job Type"
-        case .Continents: return "Continent"
-        case .WorkFields: return "Work Field"
-        case .CompanyValues: return "Company Value"
-        case .WorkWays: return "Way of Working"
+        case .programmes: return "Programme"
+        case .jobTypes: return "Job Type"
+        case .continents: return "Continent"
+        case .workFields: return "Work Field"
+        case .companyValues: return "Company Value"
+        case .workWays: return "Way of Working"
         }
     }
 }
@@ -42,17 +42,17 @@ enum CompanyProperty: CustomStringConvertible {
 extension Company {
     subscript(companyProperty: CompanyProperty) -> [String] {
         switch companyProperty {
-        case .Programmes: return programmes.map {$0.programme}
-        case .JobTypes: return jobTypes.map {$0.jobType}
-        case .Continents: return continents.map {$0.continent}
-        case .WorkFields: return workFields.map {$0.workField}
-        case .CompanyValues: return companyValues.map {$0.companyValue}
-        case .WorkWays: return workWays.map {$0.workWay}
+        case .programmes: return programmes.map {$0.programme}
+        case .jobTypes: return jobTypes.map {$0.jobType}
+        case .continents: return continents.map {$0.continent}
+        case .workFields: return workFields.map {$0.workField}
+        case .companyValues: return companyValues.map {$0.companyValue}
+        case .workWays: return workWays.map {$0.workWay}
             
         }
     }
     
-    func hasArmadaFieldType(armadaField: ArmadaField) -> Bool {
+    func hasArmadaFieldType(_ armadaField: ArmadaField) -> Bool {
         switch armadaField {
         case .Startup:
             return isStartup
@@ -68,7 +68,7 @@ extension Company {
 
 }
 
-func numberOfCompaniesForPropertyValue(property: CompanyProperty, value: String) -> Int {
+func numberOfCompaniesForPropertyValue(_ property: CompanyProperty, value: String) -> Int {
     return ArmadaApi.companies.filter({ ($0[property]).contains(value) }).count
 }
 
@@ -84,8 +84,8 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
         super.viewDidLoad()
         
         ArmadaApi.pagesFromServer {
-            if case .Success(let armadaPages) = $0 {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+            if case .success(let armadaPages) = $0 {
+                OperationQueue.main.addOperation {
                 	self.armadaPages = armadaPages
                     self.tableView.reloadData()
                 }
@@ -111,14 +111,14 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     func resetFilter() {
         CompanyFilter.reset()
         updateTitle()
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             self.tableView.reloadData()
         }
     }
     // MARK: - Table view data source
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {}
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(CompanyFilter.description)
         print("VIEW WILL APPEAR")
@@ -126,22 +126,22 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
         tableView.reloadData()
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return CompanyProperty.All.count + 1 + 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == numberOfSectionsInTableView(tableView) - 2 { return armadaFields.count }
-        if section == numberOfSectionsInTableView(tableView) - 1 { return 2 }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == numberOfSections(in: tableView) - 2 { return armadaFields.count }
+        if section == numberOfSections(in: tableView) - 1 { return 2 }
         return CompanyFilter[CompanyProperty.All[section]].count + 1
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "Ways of working", "", ""][section]
     }
     
-    func cellWithIdentifier(identifier: String) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(identifier)!
+    func cellWithIdentifier(_ identifier: String) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: identifier)!
     }
     
     func updateTitle() {
@@ -151,7 +151,7 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     let armadaFields = ArmadaField.All
     
     
-    func armadaField(armadaField: ArmadaField, isOn: Bool) {
+    func armadaField(_ armadaField: ArmadaField, isOn: Bool) {
         if isOn {
             CompanyFilter.armadaFields = CompanyFilter.armadaFields + [armadaField]
         } else {
@@ -160,21 +160,21 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
         updateTitle()
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
-            if indexPath.row == 0 {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath as NSIndexPath).section == numberOfSections(in: tableView) - 1 {
+            if (indexPath as NSIndexPath).row == 0 {
                 return cellWithIdentifier(CompanyFilter.userDefaultsKey == MatchFilter.userDefaultsKey ? "copyCatalogueCell" : "copyMatchCell")
             } else {
                 return cellWithIdentifier("resetAllFiltersCell")
             }
         }
         
-        if indexPath.section == numberOfSectionsInTableView(tableView) - 2 {
+        if (indexPath as NSIndexPath).section == numberOfSections(in: tableView) - 2 {
             let cell = cellWithIdentifier("CompanyBoolCell") as! CompanyBoolCell
-            let armadaField = armadaFields[indexPath.row]
-            cell.titleLabel.text = armadaPages?[armadaField.rawValue]??["title"] as? String ?? armadaField.title
+            let armadaField = armadaFields[(indexPath as NSIndexPath).row]
+            cell.titleLabel.text = Json(object: armadaPages)[armadaField.rawValue]["title"].string ?? armadaField.title
             cell.iconImageView.image = armadaField.image
-            cell.valueSwitch.on = CompanyFilter.armadaFields.contains(armadaField)
+            cell.valueSwitch.isOn = CompanyFilter.armadaFields.contains(armadaField)
             cell.armadaField = armadaField
             cell.delegate = self
             let companies = ArmadaApi.companies.filter { $0.hasArmadaFieldType(armadaField) }
@@ -183,87 +183,87 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
             return cell
         }
         
-        let property = CompanyProperty.All[indexPath.section]
-        if indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1 {
+        let property = CompanyProperty.All[(indexPath as NSIndexPath).section]
+        if (indexPath as NSIndexPath).row < tableView.numberOfRows(inSection: (indexPath as NSIndexPath).section) - 1 {
             let cell = cellWithIdentifier("TitleDetailTableViewCell") as! TitleDetailTableViewCell
-            cell.titleLabel?.text = CompanyFilter[property][indexPath.row]
-            cell.detailLabel?.text = "\(numberOfCompaniesForPropertyValue(property, value: CompanyFilter[property][indexPath.row]))"
+            cell.titleLabel?.text = CompanyFilter[property][(indexPath as NSIndexPath).row]
+            cell.detailLabel?.text = "\(numberOfCompaniesForPropertyValue(property, value: CompanyFilter[property][(indexPath as NSIndexPath).row]))"
             return cell
         } else {
             let cell = cellWithIdentifier("AddPropertyCell") as! AddCompanyPropertyTableViewCell
-            cell.addButton.setTitle("Add \(property)", forState: .Normal)
+            cell.addButton.setTitle("Add \(property)", for: UIControlState())
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return indexPath.row < tableView.numberOfRowsInSection(indexPath.section) - 1
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return (indexPath as NSIndexPath).row < tableView.numberOfRows(inSection: (indexPath as NSIndexPath).section) - 1
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let property = CompanyProperty.All[indexPath.section]
-            let value = CompanyFilter[property][indexPath.row]
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let property = CompanyProperty.All[(indexPath as NSIndexPath).section]
+            let value = CompanyFilter[property][(indexPath as NSIndexPath).row]
             CompanyFilter[property] = CompanyFilter[property].filter { $0 != value }
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             updateTitle()
             
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(segue.destinationViewController)
-        if let viewController = (segue.destinationViewController as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue.destination)
+        if let viewController = (segue.destination as? UINavigationController)?.childViewControllers.first as? AddCompanyPropertyTableViewController,
             let indexPath = tableView.indexPathForSelectedRow {
-                viewController.property = CompanyProperty.All[indexPath.section]
+                viewController.property = CompanyProperty.All[(indexPath as NSIndexPath).section]
                 viewController.companyFilter = CompanyFilter
         }
     }
     
     
     func presentResetAllFiltersAlert() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alertController.addAction(UIAlertAction(title: "Reset Filter", style: .Destructive, handler: {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "Reset Filter", style: .destructive, handler: {
             action in
             self.resetFilter()
 //            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
 //            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }))
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     func presentCopyFilterAlert() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let prompt = CopyFilter.userDefaultsKey == MatchFilter.userDefaultsKey ? "Copy Match Filter" : "Copy Catalogue Filter"
-        alertController.addAction(UIAlertAction(title: prompt, style: UIAlertActionStyle.Destructive, handler: {
+        alertController.addAction(UIAlertAction(title: prompt, style: UIAlertActionStyle.destructive, handler: {
             action in
             self.copyFilter()
 //            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
             action in
 //            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }))
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.cellForRowAtIndexPath(indexPath) as? AddCompanyPropertyTableViewCell != nil {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.performSegueWithIdentifier("AddPropertySegue", sender: self)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.cellForRow(at: indexPath) as? AddCompanyPropertyTableViewCell != nil {
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "AddPropertySegue", sender: self)
             }
         }
-        if indexPath.section == numberOfSectionsInTableView(tableView) - 1 {
+        if (indexPath as NSIndexPath).section == numberOfSections(in: tableView) - 1 {
             deselectSelectedCell()
-            if indexPath.row == 0 {
+            if (indexPath as NSIndexPath).row == 0 {
                 presentCopyFilterAlert()
             } else {
                 presentResetAllFiltersAlert()

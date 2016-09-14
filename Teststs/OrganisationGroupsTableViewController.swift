@@ -10,7 +10,7 @@ class OrganisationGroupsTableViewController: UITableViewController {
         
         var allOrganisationGroups = [ArmadaGroup]() {
             didSet {
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     self.updateFilter()
                 }
             }
@@ -41,15 +41,15 @@ class OrganisationGroupsTableViewController: UITableViewController {
             }
             filteredOrganisationGroups = matchingOrganisationGroups
             tableViewController?.tableView.reloadData()
-            (tableViewController as! OrganisationGroupsTableViewController).searchBar.hidden = allOrganisationGroups.isEmpty
+            (tableViewController as! OrganisationGroupsTableViewController).searchBar.isHidden = allOrganisationGroups.isEmpty
             tableViewController?.showEmptyMessage(filteredOrganisationGroups.isEmpty, message: "No members found")
             
         }
         
-        override func updateFunc(callback: Response<[[ArmadaMember]]> -> Void) {
+        override func updateFunc(_ callback: @escaping (Response<[[ArmadaMember]]>) -> Void) {
             ArmadaApi.organisationGroupsFromServer() { response in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    if case .Success(let organisationGroups) = response {
+                OperationQueue.main.addOperation {
+                    if case .success(let organisationGroups) = response {
                         self.allOrganisationGroups = organisationGroups
                     }
                     callback(response.map { _ in [[]] })
@@ -57,21 +57,21 @@ class OrganisationGroupsTableViewController: UITableViewController {
             }
         }
         
-        override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return filteredOrganisationGroups[section].members.count
         }
         
-        override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        override func numberOfSections(in tableView: UITableView) -> Int {
             return filteredOrganisationGroups.count
         }
         
-        func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             return filteredOrganisationGroups[section].name
         }
         
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let member = filteredOrganisationGroups[indexPath.section].members[indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("OrganisationGroupIdentifier", forIndexPath: indexPath) as! MemberTableViewCell
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let member = filteredOrganisationGroups[(indexPath as NSIndexPath).section].members[(indexPath as NSIndexPath).row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrganisationGroupIdentifier", for: indexPath) as! MemberTableViewCell
             cell.nameLabel.text = member.name
             cell.roleLabel.text = member.role
             
@@ -107,25 +107,25 @@ class OrganisationGroupsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.hidden = true
+        searchBar.isHidden = true
         let dataSource = ArmadaOrganisationGroupsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         self.dataSource = dataSource
         searchBar.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if dataSource.values.isEmpty {
             dataSource.refresh()
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let viewController = segue.destinationViewController as? ArmadaMembersPageViewController,
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ArmadaMembersPageViewController,
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 searchBar.resignFirstResponder()
-                viewController.selectedMember = dataSource.filteredOrganisationGroups[indexPath.section].members[indexPath.row]
+                viewController.selectedMember = dataSource.filteredOrganisationGroups[(indexPath as NSIndexPath).section].members[(indexPath as NSIndexPath).row]
                 viewController.members = dataSource.filteredOrganisationGroups.flatMap { $0.members }
                 deselectSelectedCell()
         }
@@ -133,25 +133,25 @@ class OrganisationGroupsTableViewController: UITableViewController {
 }
 
 extension OrganisationGroupsTableViewController: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataSource.updateFilter()
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchBar.resignFirstResponder()
         dataSource.updateFilter()
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
 }

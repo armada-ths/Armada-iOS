@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZEp-63-beV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -33,11 +33,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="a2f-UO-1RC" kind="relationship" relationship="viewControllers" id="7tt-dJ-XFY"/>
                         <segue destination="Sfm-gb-Dm5" kind="relationship" relationship="viewControllers" id="foI-KK-A6K"/>
                         <segue destination="jJ3-6Q-5le" kind="relationship" relationship="viewControllers" id="3qE-jf-gre"/>
                         <segue destination="4iu-Mc-4ON" kind="relationship" relationship="viewControllers" id="WYC-jj-0Q2"/>
-                        <segue destination="I44-E6-5rF" kind="relationship" relationship="viewControllers" id="N2c-hc-HSB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1641,7 +1639,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEN-gO-yk9">
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oEN-gO-yk9">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
@@ -2596,9 +2594,18 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Matchmaking" id="yf8-XP-j1C">
+                    <navigationItem key="navigationItem" id="yf8-XP-j1C">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" id="qbP-YK-V2U"/>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="4IA-8e-Yng">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="LuE-ak-f9L">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Sort by match"/>
+                                <segment title="Sort by Name"/>
+                            </segments>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="Match" id="4IA-8e-Yng">
                             <connections>
                                 <segue destination="Af4-R1-YXy" kind="show" identifier="FilterSegue" id="NVI-Nj-Wn8"/>
                             </connections>
@@ -2614,11 +2621,11 @@
             </objects>
             <point key="canvasLocation" x="880" y="2028"/>
         </scene>
-        <!--Match-->
+        <!--Catalogue-->
         <scene sceneID="xYm-1i-tSQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sfm-gb-Dm5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Match" image="heart" id="BLj-G6-POy">
+                    <tabBarItem key="tabBarItem" title="Catalogue" image="book" id="BLj-G6-POy">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="heart-1"/>
                         </userDefinedRuntimeAttributes>
@@ -2817,7 +2824,6 @@
         <image name="ericsson_white" width="640" height="640"/>
         <image name="facebook" width="128" height="128"/>
         <image name="globe-2" width="128" height="128"/>
-        <image name="heart" width="32" height="32"/>
         <image name="heart-1" width="32" height="32"/>
         <image name="linkedin" width="128" height="128"/>
         <image name="newBackground" width="894" height="580"/>
@@ -2830,8 +2836,8 @@
         <segue reference="fBy-Ie-KcO"/>
         <segue reference="ReS-La-4Iy"/>
         <segue reference="TRA-nv-BBS"/>
-        <segue reference="bli-j8-CSx"/>
-        <segue reference="HBS-08-1M2"/>
+        <segue reference="HmL-IU-78Y"/>
+        <segue reference="NVI-Nj-Wn8"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
     </inferredMetricsTieBreakers>

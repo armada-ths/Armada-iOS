@@ -11,18 +11,18 @@ class NewsTableViewController: FixedHeaderTableViewController {
         // For some reason - this offset has to be added if the first request fails, no fucking idea why
         var shit: CGFloat = 0
         
-        override func updateFunc(callback: Response<[[News]]> -> Void) {
+        override func updateFunc(_ callback: @escaping (Response<[[News]]>) -> Void) {
             ArmadaApi.newsFromServer { response in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     switch response {
-                    case .Success:
+                    case .success:
                         if self.values.isEmpty {
                             let tableViewController = (self.tableViewController as! FixedHeaderTableViewController)
-                            tableViewController.headerView.hidden = false
+                            tableViewController.headerView.isHidden = false
                             tableViewController.tableView.contentInset = UIEdgeInsets(top: tableViewController.headerHeight + self.shit, left: 0, bottom: 0, right: 0)
                             tableViewController.tableView.contentOffset = CGPoint(x: 0, y: -(tableViewController.headerHeight))
                         }
-                    case .Error: self.shit = 64
+                    case .error: self.shit = 64
                     }
                     callback(response.map { [$0] })
                 }
@@ -34,12 +34,12 @@ class NewsTableViewController: FixedHeaderTableViewController {
             return false
         }
         
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let newsItem = self[indexPath]
-            let cell = tableView.dequeueReusableCellWithIdentifier("NewsTableViewCell", forIndexPath: indexPath) as! NewsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableViewCell", for: indexPath) as! NewsTableViewCell
             cell.titleLabel.text = newsItem.title
-            cell.descriptionLabel.text = newsItem.publishedDate.formatWithStyle(.LongStyle)
-            cell.isReadLabel.hidden = NewsTableViewController.readArmadaNews.contains(newsItem.title)
+            cell.descriptionLabel.text = newsItem.publishedDate.formatWithStyle(.long)
+            cell.isReadLabel.isHidden = NewsTableViewController.readArmadaNews.contains(newsItem.title)
             return cell
         }
     }
@@ -48,10 +48,10 @@ class NewsTableViewController: FixedHeaderTableViewController {
     static let readArmadaNewsKey = "readArmadaNews"
     static var readArmadaNews: [String] {
         get {
-            return NSUserDefaults.standardUserDefaults()[readArmadaNewsKey] as? [String] ?? []
+            return UserDefaults.standard[readArmadaNewsKey] as? [String] ?? []
         }
         set {
-            NSUserDefaults.standardUserDefaults()[readArmadaNewsKey] = newValue
+            UserDefaults.standard[readArmadaNewsKey] = newValue as AnyObject?
         }
     }
     
@@ -59,11 +59,11 @@ class NewsTableViewController: FixedHeaderTableViewController {
         super.updateHeaderView()
         let headerRect = headerView.frame
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: 0, y: 0))
-        path.addLineToPoint(CGPoint(x: headerRect.width, y: 0))
-        path.addLineToPoint(CGPoint(x: headerRect.width, y: headerRect.height))
-        path.addLineToPoint(CGPoint(x: 0, y: headerRect.height-50))
-        headerMaskLayer?.path = path.CGPath
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: headerRect.width, y: 0))
+        path.addLine(to: CGPoint(x: headerRect.width, y: headerRect.height))
+        path.addLine(to: CGPoint(x: 0, y: headerRect.height-50))
+        headerMaskLayer?.path = path.cgPath
     }
     
     var dataSource: ArmadaNewsTableViewDataSource!
@@ -73,15 +73,15 @@ class NewsTableViewController: FixedHeaderTableViewController {
         self.dataSource = ArmadaNewsTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         headerMaskLayer = CAShapeLayer()
-        headerMaskLayer.fillColor = UIColor.blackColor().CGColor
+        headerMaskLayer.fillColor = UIColor.black.cgColor
         headerView.layer.mask = headerMaskLayer
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
-        headerView.hidden = true
+        headerView.isHidden = true
         tableView.contentOffset = CGPoint(x: 0, y: 0)
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateHeaderView()
     }
@@ -91,15 +91,15 @@ class NewsTableViewController: FixedHeaderTableViewController {
         updateHeaderView()
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
         if dataSource.isEmpty {
@@ -107,9 +107,9 @@ class NewsTableViewController: FixedHeaderTableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if let controller = segue.destinationViewController as? NewsDetailTableViewController,
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if let controller = segue.destination as? NewsDetailTableViewController,
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 let news = dataSource[indexPath]
                 controller.news = news
                 if !NewsTableViewController.readArmadaNews.contains(news.title) {

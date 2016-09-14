@@ -11,43 +11,43 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         self.separatorStyle = tableViewController.tableView.separatorStyle
         super.init()
         self.tableViewController = tableViewController
-        tableViewController.tableView.separatorStyle = .None
+        tableViewController.tableView.separatorStyle = .none
     }
     
-    subscript(indexPath: NSIndexPath) -> T {
-        return values[indexPath.section][indexPath.row]
+    subscript(indexPath: IndexPath) -> T {
+        return values[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
     }
     
     var hasNavigationBar: Bool {
         return true
     }
     
-    func refresh(refreshControl: UIRefreshControl? = nil) {
+    func refresh(_ refreshControl: UIRefreshControl? = nil) {
         if refreshControl == nil {
             tableViewController?.tableView.startActivityIndicator(hasNavigationBar: hasNavigationBar)
             tableViewController?.showEmptyMessage(false, message: "")
-            self.tableViewController?.tableView.separatorStyle = .None
+            self.tableViewController?.tableView.separatorStyle = .none
         }
         updateFunc { response in
                 switch response {
-                case .Success(let values):
+                case .success(let values):
                     self.values = values
                     self.tableViewController?.showEmptyMessage(self.values.isEmpty, message: "Nothing to be seen")
                     print("Refreshed")
-                case .Error(let error):
+                case .error(let error):
                     self.tableViewController?.showEmptyMessage(self.values.isEmpty, message: (error as NSError).localizedDescription)
                     if !self.values.isEmpty {
-                        let alertController = UIAlertController(title: nil, message: (error as NSError).localizedDescription, preferredStyle: .Alert)
-                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                        self.tableViewController?.presentViewController(alertController, animated: true, completion: nil)
+                        let alertController = UIAlertController(title: nil, message: (error as NSError).localizedDescription, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.tableViewController?.present(alertController, animated: true, completion: nil)
                     }
                 }
                 self.tableViewController?.refreshControl?.endRefreshing()
-                self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .None : self.separatorStyle
+                self.tableViewController?.tableView.separatorStyle = self.values.isEmpty ? .none : self.separatorStyle
                 self.tableViewController?.tableView.reloadData()
                 self.tableViewController?.tableView.stopActivityIndicator()
                 self.tableViewController?.refreshControl = UIRefreshControl()
-                self.tableViewController?.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+                self.tableViewController?.refreshControl!.addTarget(self, action: #selector(ArmadaTableViewDataSource.refresh(_:)), for: UIControlEvents.valueChanged)
         }
     }
     
@@ -55,27 +55,27 @@ class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
         return values.isEmpty
     }
     
-    func updateFunc(callback: Response<[[T]]> -> Void) {}
+    func updateFunc(_ callback: @escaping (Response<[[T]]>) -> Void) {}
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 120
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return values.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return values[section].count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         assert(false)
-        return tableView.dequeueReusableCellWithIdentifier("")!
+        return tableView.dequeueReusableCell(withIdentifier: "")!
     }
     
 }

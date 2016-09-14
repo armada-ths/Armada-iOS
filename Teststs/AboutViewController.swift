@@ -8,14 +8,14 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ArmadaApi.pagesFromServer { response in
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 switch response {
-                case .Success(let armadaPages):
-                    self.aboutTextView.attributedText = (armadaPages["about_ths_armada"]??["app_text"] as? String)?.attributedHtmlString ?? NSAttributedString(string: (armadaPages["about_ths_armada"]??["app_text"] as? String) ?? "")
-                case .Error(let error):
+                case .success(let armadaPages):
+                    self.aboutTextView.attributedText = (Json(object: armadaPages)["about_ths_armada"]["app_text"].string)?.attributedHtmlString ?? NSAttributedString(string: (Json(object: armadaPages)["about_ths_armada"]["app_text"].string) ?? "")
+                case .error(let error):
                     print(error)
                 }
             }
