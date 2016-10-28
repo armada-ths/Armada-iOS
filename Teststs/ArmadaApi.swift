@@ -531,14 +531,12 @@ open class _ArmadaApi {
         return filteredEvents
     }
     
-    open func newsFromJson(_ jsonOriginal: AnyObject) -> [News] {
-        let json = jsonOriginal["news"]
-        
+    open func newsFromJson(_ json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
-                let content = json["content"] as? String,
-                let dateString = json["date_published"] as? String,
-                let date = self.dateFromString(dateString) {
+                let content = json["html_article_text"] as? String,
+                let dateTimestamp = json["date_published"] as? Int {
+                    let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
                     return News(title: title, content: content, publishedDate: date)
             }
             return nil
