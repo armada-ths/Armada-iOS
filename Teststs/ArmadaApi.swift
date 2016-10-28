@@ -227,7 +227,8 @@ open class _ArmadaApi {
     
     static let dir = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as [String])[0]
     
-    let apiUrl = "http://armada.nu/api"
+    //let apiUrl = "http://armada.nu/api"
+    let apiUrl = "https://ais.armada.nu/api"
     
     
     var persistentStoreUrlShm: URL {
@@ -491,30 +492,36 @@ open class _ArmadaApi {
         return dateFormatter.date(from: b[0..<b.count-1].joined(separator: ":") + b[b.count-1])
     }
     
-    open func eventsFromJson( _ jsonOriginal: AnyObject) -> [ArmadaEvent] {
-        let json = jsonOriginal["events"]
+    open func eventsFromJson( _ json: AnyObject) -> [ArmadaEvent] {
         
         let events =  Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
-            if let title = json["title"] as? String,
-                let summary = json["description"] as? String,
-                let startDateString = json["starts_at"] as? String,
-                let startDate = self.dateFromString(startDateString),
-                let endDateString = json["ends_at"] as? String {
+            if let name = json["name"] as? String,
+                let description = json["description"] as? String,
+                let startDateTimestamp = json["event_start"] as? Int,
+                let endDateTimestamp = json["event_end"] as? Int {
+                    let startDate = Date(timeIntervalSince1970: TimeInterval(startDateTimestamp))
+                    let endDate = Date(timeIntervalSince1970: TimeInterval(endDateTimestamp))
                     let location = json["location"] as? String
-                    let summaryWithoutHtml = summary.strippedFromHtmlString ?? ""
-                    let signupLink = json["external_signup_link"] as? String
-                    let signupStartDateString = json["signup_starts_at"] as? String
-                    let signupEndDateString = json["signup_ends_at"] as? String
-                    let signupStartDate: Date? = signupStartDateString != nil ? self.dateFromString(signupStartDateString!) : nil
-                    let signupEndDate: Date? = signupEndDateString != nil ? self.dateFromString(signupEndDateString!) : nil
-                    let title = title.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-                    let imageUrlString = json["picture_url"] as? String
+                    let summaryWithoutHtml = description.strippedFromHtmlString
+                    let signupLink = json["signup_link"] as? String
+                    let registrationStartDate: Date?
+                    if let registrationStartDateTimestamp = json["registration_start"] as? Int {
+                        registrationStartDate = Date(timeIntervalSince1970: TimeInterval(registrationStartDateTimestamp))
+                    } else {
+                        registrationStartDate = nil
+                    }
+                    let registrationEndDate: Date?
+                    if let registrationEndDateTimestamp = json["registration_end"] as? Int {
+                        registrationEndDate = Date(timeIntervalSince1970: TimeInterval(registrationEndDateTimestamp))
+                    } else {
+                        registrationEndDate = nil
+                    }
+                    let name = name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    let imageUrlString = json["image_url"] as? String
                     let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
-                    let summary = summary.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
-                    
+                    let summary = description.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
                     let registrationRequired = json["registration_required"] as? Bool ?? true
-                    
-                    return ArmadaEvent(title: title, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: self.dateFromString(endDateString), signupLink: signupLink, signupStartDate: signupStartDate, signupEndDate: signupEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
+                    return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
             return nil
             } ?? []).sorted(by: { $0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970 })
