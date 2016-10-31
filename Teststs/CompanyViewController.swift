@@ -21,7 +21,6 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     @IBOutlet weak var linkedinButton: UIButton!
     @IBOutlet weak var likesDiversityImageView: UIImageView!
     @IBOutlet weak var videoLabel: UILabel!
-    @IBOutlet weak var waysOfWorkingLabel: UILabel!
     @IBOutlet weak var employeeLabel: UILabel!
     @IBOutlet weak var locationCell: UITableViewCell!
     
@@ -59,7 +58,6 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).sorted().joined(separator: "\n")
         fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sorted().joined(separator: "\n")
         companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sorted().joined(separator: "\n")
-        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sorted().joined(separator: "\n")
         websiteLabel.text = company.website
         videoLabel.text = company.videoUrl
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")

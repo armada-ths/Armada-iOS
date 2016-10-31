@@ -369,10 +369,10 @@ open class _ArmadaApi {
             switch $0 {
             case .success(let (_, usedCache, etag)):
                 if !usedCache {
-                    self.armadaUrlWithPath("companies").getJson() {
+                    self.armadaUrlWithPath("exhibitors").getJson() {
                         switch $0 {
                         case .success(let json):
-                            if let companiesJson = json["companies"] as? [AnyObject] {
+                            if let companiesJson = json as? [AnyObject] {
                                 OperationQueue.main.addOperation {
                                     print("DESTROYING THE DATABASE!!!!!")
                                     if companiesJson.count > 0 {
