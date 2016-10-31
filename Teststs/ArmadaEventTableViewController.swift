@@ -2,7 +2,7 @@ import UIKit
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
-    @IBAction func nowButtonClicked(sender: AnyObject) {
+    @IBAction func nowButtonClicked(_ sender: AnyObject) {
         dataSource.scrollToNearestUpcomingEventAnimated(true)
     }
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
@@ -16,9 +16,9 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         
         var isFirstLoad = true
         
-        override func updateFunc(callback: Response<[[ArmadaEvent]]> -> Void) {
+        override func updateFunc(_ callback: @escaping (Response<[[ArmadaEvent]]>) -> Void) {
             ArmadaApi.eventsFromServer { response in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     callback(response.map { [$0] })
                     self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
                     self.isFirstLoad = false
@@ -26,25 +26,25 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
             }
         }
         
-        func scrollToNearestUpcomingEventAnimated(animated: Bool) {
+        func scrollToNearestUpcomingEventAnimated(_ animated: Bool) {
             var row = 0
             let dateFormat = "yyyy-MM-dd"
-            let now = NSDate().format(dateFormat)
-            let events = values.flatten()
-            for (i, event) in events.enumerate() {
+            let now = Date().format(dateFormat)
+            let events = values.joined()
+            for (i, event) in events.enumerated() {
                 if event.startDate.format(dateFormat) >= now {
                     row = i
                     break
                 }
             }
             if row != 0 {
-                self.tableViewController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: row, inSection: 0), atScrollPosition: .Top, animated: animated)
+                self.tableViewController?.tableView.scrollToRow(at: IndexPath(item: row, section: 0), at: .top, animated: animated)
             }
         }
         
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let armadaEvent = values[indexPath.section][indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("ArmadaEventTableViewCell", forIndexPath: indexPath) as! ArmadaEventTableViewCell
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let armadaEvent = values[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ArmadaEventTableViewCell", for: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
             cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
             cell.descriptionLabel.text = armadaEvent.signupStateString
@@ -55,10 +55,10 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 } else{
                     cell.eventImageView.image = nil
                     imageUrl.getImage() { response in
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            if case .Success(let image) = response {
+                        OperationQueue.main.addOperation {
+                            if case .success(let image) = response {
                                 self.images[imageUrl.absoluteString] = image
-                                if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ArmadaEventTableViewCell {
+                                if let cell = tableView.cellForRow(at: indexPath) as? ArmadaEventTableViewCell {
                                     cell.eventImageView.image = image
                                     cell.setNeedsLayout()
                                 }
@@ -77,20 +77,20 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         super.viewDidLoad()
         dataSource = ArmadaEventTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         splitViewController?.delegate = self
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if let controller = segue.destinationViewController as? ArmadaEventDetailTableViewController,
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if let controller = segue.destination as? ArmadaEventDetailTableViewController,
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
                 let armadaEvent = dataSource[indexPath]
                 controller.armadaEvent = armadaEvent
                 deselectSelectedCell()
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if dataSource.isEmpty {
             dataSource.refresh()

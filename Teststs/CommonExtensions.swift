@@ -1,9 +1,9 @@
 import UIKit
 
 extension String {
-    func containsWordWithPrefix(prefix: String) -> Bool {
-        let words = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).map { $0.lowercaseString }
-        let searchWords = prefix.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({ !$0.isEmpty}).map { $0.lowercaseString }
+    func containsWordWithPrefix(_ prefix: String) -> Bool {
+        let words = self.components(separatedBy: CharacterSet.whitespacesAndNewlines).map { $0.lowercased() }
+        let searchWords = prefix.components(separatedBy: CharacterSet.whitespacesAndNewlines).filter({ !$0.isEmpty}).map { $0.lowercased() }
         for searchPrefix in searchWords {
             if words.filter({ $0.hasPrefix(searchPrefix) }).isEmpty {
                 return false
@@ -14,32 +14,29 @@ extension String {
 }
 
 
-extension NSUserDefaults {
+extension UserDefaults {
     subscript(key: String) -> AnyObject? {
         get {
-            return objectForKey(key)
+            return object(forKey: key) as AnyObject?
         }
         set {
-            setObject(newValue, forKey: key)
+            set(newValue, forKey: key)
         }
     }
 }
 
-public func <(x: NSDate, y: NSDate) -> Bool {
-    return x.timeIntervalSince1970 < y.timeIntervalSince1970
-}
 
 extension UIView {
     
-    func startActivityIndicator(hasNavigationBar hasNavigationBar: Bool = true) {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    func startActivityIndicator(hasNavigationBar: Bool = true) {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         activityIndicator.frame = frame
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
         addSubview(activityIndicator)
         activityIndicator.didMoveToSuperview()
-        activityIndicator.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-        activityIndicator.centerYAnchor.constraintEqualToAnchor(centerYAnchor, constant: hasNavigationBar ? -64 : 0).active = true
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor, constant: hasNavigationBar ? -64 : 0).isActive = true
     }
     
     func stopActivityIndicator() {
@@ -54,44 +51,44 @@ extension UIView {
 
 
 
-extension NSURL {
-    func getData(callback: Response<NSData> -> Void) {
+extension URL {
+    func getData(_ callback: @escaping (Response<Data>) -> Void) {
         let url = self
-        let session = NSURLSession.sharedSession()
-        let request = NSURLRequest(URL: url)
-        let dataTask = session.dataTaskWithRequest(request) {
+        let session = URLSession.shared
+        let request = URLRequest(url: url)
+        let dataTask = session.dataTask(with: request, completionHandler: {
             (data, response, error) in
             if let data = data {
-                callback(.Success(data))
+                callback(.success(data))
             } else if let error = error {
-                callback(.Error(error))
+                callback(.error(error))
             } else {
-                callback(.Error(NSError(domain: "getData", code: 1337, userInfo: nil)))
+                callback(.error(NSError(domain: "getData", code: 1337, userInfo: nil)))
             }
-        }
+        }) 
         dataTask.resume()
     }
     
-    func getJson(callback: Response<AnyObject> -> Void) {
+    func getJson(_ callback: @escaping (Response<AnyObject>) -> Void) {
         getData() {
             callback($0 >>= { data in
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-                    return .Success(json)
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
+                    return .success(json)
                 } catch {
-                    return .Error(error)
+                    return .error(error)
                 }
                 })
         }
     }
     
-    func getImage(callback: Response<UIImage> -> Void) {
+    func getImage(_ callback: @escaping (Response<UIImage>) -> Void) {
         getData() {
             callback($0 >>= { data in
                 if let image = UIImage(data: data) {
-                    return .Success(image)
+                    return .success(image)
                 }
-                return .Error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid image"]))
+                return .error(NSError(domain: "getImage", code: 123456, userInfo: [NSLocalizedDescriptionKey: "Invalid image"]))
                 })
         }
     }
@@ -102,22 +99,22 @@ extension NSURL {
 private let UIViewShowEmptyMessageTag = 93734214
 
 extension UIView {
-    func showEmptyMessage(message: String, fontSize: CGFloat = 30) {
+    func showEmptyMessage(_ message: String, fontSize: CGFloat = 30) {
         hideEmptyMessage()
         let label = UILabel(frame: frame)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
-        label.font = UIFont.systemFontOfSize(fontSize)
+        label.font = UIFont.systemFont(ofSize: fontSize)
         label.text = message
         label.numberOfLines = 0
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.sizeToFit()
         label.tag = UIViewShowEmptyMessageTag
-        label.textColor = UIColor.lightGrayColor()
+        label.textColor = UIColor.lightGray
         label.didMoveToSuperview()
-        label.centerXAnchor.constraintEqualToAnchor(centerXAnchor).active = true
-        label.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-        label.widthAnchor.constraintEqualToAnchor(widthAnchor, constant: -40).active = true
+        label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        label.widthAnchor.constraint(equalTo: widthAnchor, constant: -40).isActive = true
     }
     
     func hideEmptyMessage() {
@@ -132,26 +129,26 @@ extension UIView {
 
 extension UITableViewController {
     
-    func showEmptyMessage(show: Bool, message: String) {
+    func showEmptyMessage(_ show: Bool, message: String) {
         if show {
-            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
-            label.font = UIFont.systemFontOfSize(30)
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
+            label.font = UIFont.systemFont(ofSize: 30)
             label.text = message
             label.numberOfLines = 2
-            label.textAlignment = .Center
+            label.textAlignment = .center
             label.sizeToFit()
-            label.textColor = UIColor.lightGrayColor()
+            label.textColor = UIColor.lightGray
             tableView.backgroundView = label
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         } else {
             tableView.backgroundView = nil
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         }
     }
     
     func deselectSelectedCell() {
         if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 }
@@ -166,33 +163,33 @@ extension UIColor {
 }
 
 extension UIImageView {
-    func loadImageFromUrl(url: String, callback:(Response<UIImage> -> Void)? = nil) {
+    func loadImageFromUrl(_ url: String, callback:((Response<UIImage>) -> Void)? = nil) {
         hideEmptyMessage()
         startActivityIndicator(hasNavigationBar: false)
-        NSURL(string: url)?.getData() {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+        URL(string: url)?.getData() {
+            OperationQueue.main.addOperation {
                 self.stopActivityIndicator()
             }
             switch $0 {
-            case .Success(let data):
+            case .success(let data):
                 if let image = UIImage(data: data) {
-                    let operation = NSBlockOperation() {
-                        UIView.transitionWithView(self, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    let operation = BlockOperation() {
+                        UIView.transition(with: self, duration: 0.2, options: UIViewAnimationOptions.transitionCrossDissolve, animations: {
                             self.image = image
                             }, completion: nil)
-                        callback?(.Success(image))
+                        callback?(.success(image))
                     }
-                    operation.queuePriority = .VeryLow
-                    NSOperationQueue.mainQueue().addOperation(operation)
+                    operation.queuePriority = .veryLow
+                    OperationQueue.main.addOperation(operation)
                 } else {
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
-                        callback?(.Error(NSError(domain: "loadImageFromUrl", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
+                    OperationQueue.main.addOperation {
+                        callback?(.error(NSError(domain: "loadImageFromUrl", code: 12345, userInfo: [NSLocalizedDescriptionKey: "Broken image"])))
                         self.showEmptyMessage("Broken image", fontSize: 15)
                     }
                 }
-            case .Error(let error):
-                NSOperationQueue.mainQueue().addOperationWithBlock {
-                    callback?(.Error(error))
+            case .error(let error):
+                OperationQueue.main.addOperation {
+                    callback?(.error(error))
                     print(error)
                     self.image = nil
                     self.showEmptyMessage("Failed to load image: \((error as NSError).localizedDescription)", fontSize: 15)
@@ -214,74 +211,74 @@ extension Int {
 }
 
 class StopWatch {
-    var start = NSDate()
+    var start = Date()
     
     init() {}
     
-    func print(description: String) {
-        Swift.print("\(description) \(Int(NSDate().timeIntervalSinceDate(start)*1000))ms")
-        start = NSDate()
+    func print(_ description: String) {
+        Swift.print("\(description) \(Int(Date().timeIntervalSince(start)*1000))ms")
+        start = Date()
     }
 }
 extension String{
     var attributedHtmlString: NSAttributedString? {
         let html = "<div>" + self + "</div>" + "<style> div { font-family: \"helvetica neue\"; font-weight: 300; font-size: 18px; padding: 0; margin: 0; color: #4c4c4c; line-height: 25px;  }</style>"
-        if let data = html.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+        if let data = html.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             return try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
         }
         return nil
     }
     
     var strippedFromHtmlString: String {
-        if let data = self.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: false) {
+        if let data = self.data(using: String.Encoding.unicode, allowLossyConversion: false) {
             return (try? NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil).string) ?? ""
         }
         return ""
     }
     
-    var httpUrl: NSURL? {
+    var httpUrl: URL? {
         let httpPrefix = "http"
-        return NSURL(string: (hasPrefix(httpPrefix) ? "" : httpPrefix + "://") + stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()))
+        return URL(string: (hasPrefix(httpPrefix) ? "" : httpPrefix + "://") + trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
     }
 }
 
 
-extension NSDate {
+extension Date {
     
-    func isSameDayAsDate(date: NSDate) -> Bool {
-        let dateCalendarComponents = NSCalendar.currentCalendar().components([.Era, .Year, .Month, .Day, .Hour, .Minute], fromDate: date)
-        let calendarComponents = NSCalendar.currentCalendar().components([.Era, .Year, .Month, .Day, .Hour, .Minute], fromDate: self)
+    func isSameDayAsDate(_ date: Date) -> Bool {
+        let dateCalendarComponents = (Calendar.current as NSCalendar).components([.era, .year, .month, .day, .hour, .minute], from: date)
+        let calendarComponents = (Calendar.current as NSCalendar).components([.era, .year, .month, .day, .hour, .minute], from: self)
         return dateCalendarComponents.year == calendarComponents.year
             && dateCalendarComponents.month == calendarComponents.month
             && dateCalendarComponents.day == calendarComponents.day
     }
     
     var isToday: Bool {
-        return isSameDayAsDate(NSDate())
+        return isSameDayAsDate(Date())
     }
     
     var isTomorrow: Bool {
-        return isSameDayAsDate(NSDate().dateByAddingTimeInterval(60*60*24))
+        return isSameDayAsDate(Date().addingTimeInterval(60*60*24))
     }
     
     var isYesterDay: Bool {
-        return isSameDayAsDate(NSDate().dateByAddingTimeInterval(-60*60*24))
+        return isSameDayAsDate(Date().addingTimeInterval(-60*60*24))
     }
     
-    func format(format: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.systemTimeZone()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en")
+    func format(_ format: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale(identifier: "en")
         dateFormatter.dateFormat = format
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
     
-    func formatWithStyle(dataStyle: NSDateFormatterStyle) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone.systemTimeZone()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en")
+    func formatWithStyle(_ dataStyle: DateFormatter.Style) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale(identifier: "en")
         dateFormatter.dateStyle = dataStyle
-        return dateFormatter.stringFromDate(self)
+        return dateFormatter.string(from: self)
     }
     
     var readableString: String {
@@ -299,13 +296,37 @@ extension NSDate {
         let month = self.format("MMMM")
         let year = self.format("yyyy")
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.short
         
-        if year == NSDate().format("yyyy") {
+        if year == Date().format("yyyy") {
             return "\(day) \(month) \(time)"
         } else {
             return "\(day) \(month) \(time), \(year)"
         }
+    }
+}
+
+class Json{
+    let value:AnyObject?
+    var string:String?  { return value as? String}
+    var num:Int?  { return value as? Int}
+    public init(object:Any?){
+        print(object)
+        value = object as AnyObject?
+    }
+    public subscript(_ index: Int) -> Json {
+        if let data = value,
+            let result = data[index]{
+            return Json(object: result)
+        }
+        return Json(object: nil)
+    }
+    public subscript(_ index: String) -> Json {
+        if let data = value,
+            let result = data[index]{
+            return Json(object: result)
+        }
+        return Json(object: nil)
     }
 }

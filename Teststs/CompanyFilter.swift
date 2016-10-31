@@ -8,11 +8,11 @@ class _CompanyFilter {
     
     let userDefaultsKey: String
     
-    private init(userDefaultsKey: String) {
+    fileprivate init(userDefaultsKey: String) {
         self.userDefaultsKey = userDefaultsKey
     }
     
-    func copyFilter(filter: _CompanyFilter) {
+    func copyFilter(_ filter: _CompanyFilter) {
         for property in CompanyProperty.All {
             self[property] = filter[property]
         }
@@ -20,7 +20,7 @@ class _CompanyFilter {
         
     }
     
-    let Ω = NSUserDefaults.standardUserDefaults()
+    let Ω = UserDefaults.standard
     
     var isEmpty: Bool {
         for property in CompanyProperty.All {
@@ -45,12 +45,12 @@ class _CompanyFilter {
     
     subscript(companyProperty: CompanyProperty) -> [String] {
         get { return Ω["\(userDefaultsKey)\(companyProperty)"] as? [String] ?? [] }
-        set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue }
+        set { Ω["\(userDefaultsKey)\(companyProperty)"] = newValue as AnyObject? }
     }
     
     var armadaFields: [ArmadaField] {
         get { return (Ω["\(userDefaultsKey)armadaField"] as? [String] ?? []).map { ArmadaField(rawValue: $0) ?? .Startup } }
-        set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue } }
+        set { Ω["\(userDefaultsKey)armadaField"] = newValue.map { $0.rawValue }  as AnyObject?}
     }
     
     var filteredCompanies: [Company] {
@@ -62,7 +62,7 @@ class _CompanyFilter {
             let filterValues = self[property]
             if !filterValues.isEmpty {
                 filteredCompanies = filteredCompanies.filter { company in
-                    !Set(company[property]).intersect(filterValues).isEmpty
+                    !Set(company[property]).intersection(filterValues).isEmpty
                 }
             }
         }

@@ -19,23 +19,23 @@ class AddCompanyPropertyTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return values.count
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        companyFilter[property] = companyFilter[property] + [values[indexPath.row]]
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        companyFilter[property] = companyFilter[property] + [values[(indexPath as NSIndexPath).row]]
         return indexPath
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TitleDetailTableViewCell", forIndexPath: indexPath) as! TitleDetailTableViewCell
-        cell.titleLabel.text = values[indexPath.row]
-        cell.detailLabel.text = "\(ArmadaApi.numberOfCompaniesContainingValue(values[indexPath.row], forProperty: property) ?? 0)"
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TitleDetailTableViewCell", for: indexPath) as! TitleDetailTableViewCell
+        cell.titleLabel.text = values[(indexPath as NSIndexPath).row]
+        cell.detailLabel.text = "\(ArmadaApi.numberOfCompaniesContainingValue(values[(indexPath as NSIndexPath).row], forProperty: property) ?? 0)"
         return cell
     }
 

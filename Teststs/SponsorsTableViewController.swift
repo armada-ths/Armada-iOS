@@ -11,20 +11,18 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
             super.init(tableViewController: tableViewController)
         }
         
-        override func updateFunc(callback: Response<[[Sponsor]]> -> Void) {
+        override func updateFunc(_ callback: @escaping (Response<[[Sponsor]]>) -> Void) {
             ArmadaApi.sponsorsFromServer { response in
-                NSOperationQueue.mainQueue().addOperationWithBlock {
+                OperationQueue.main.addOperation {
                     callback(response.map { sponsors in
                         return [
                             sponsors.filter { $0.isMainPartner },
-                            sponsors.filter { $0.isGreenPartner },
-                            sponsors.filter { $0.isMainSponsor },
-                            sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
+                            sponsors.filter { !$0.isMainPartner }
                         ]
                     })
-                    NSOperationQueue().addOperationWithBlock {
-                        NSThread.sleepForTimeInterval(0.2)
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
+                    OperationQueue().addOperation {
+                        Thread.sleep(forTimeInterval: 0.2)
+                        OperationQueue.main.addOperation {
                         self.tableViewController?.tableView.reloadData()
                         }
                     }
@@ -33,14 +31,14 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         }
     
         
-        func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            let sponsorName = ["Main Partner", "Green Partner", "Main Sponsor", "Other Sponsor"][section]
+        func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            let sponsorName = ["Main Partner", "Sponsor"][section]
             return sponsorName + (values[section].count > 1 ? "s" : "")
         }
         
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let sponsor = self[indexPath]
-            let cell = tableView.dequeueReusableCellWithIdentifier(sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
             if !sponsor.description.isEmpty {
                 cell.sponsorLabel.attributedText = sponsor.description.attributedHtmlString
             }
@@ -51,23 +49,23 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
 
                 cell.sponsorImageView.hideEmptyMessage()
                 cell.sponsorImageView.startActivityIndicator()
-                print("Loading IndexPath: \(indexPath.section) \(indexPath.row)")
+                print("Loading IndexPath: \((indexPath as NSIndexPath).section) \((indexPath as NSIndexPath).row)")
                 sponsor.imageUrl.getImage() { response in
-                    NSOperationQueue.mainQueue().addOperationWithBlock {
+                    OperationQueue.main.addOperation {
                         cell.sponsorImageView.stopActivityIndicator()
                         switch response {
-                        case .Success(let image):
+                        case .success(let image):
                             self.images[sponsor.imageUrl.absoluteString] = image
-                            if let cell = self.tableViewController?.tableView.cellForRowAtIndexPath(indexPath) as? SponsorsTableViewCell {
-                                print("Loaded IndexPath: \(indexPath.section) \(indexPath.row)")
+                            if let cell = self.tableViewController?.tableView.cellForRow(at: indexPath) as? SponsorsTableViewCell {
+                                print("Loaded IndexPath: \((indexPath as NSIndexPath).section) \((indexPath as NSIndexPath).row)")
                                 cell.sponsorImageView.image = image
                                 cell.setNeedsLayout()
                             } else {
-                                print("No cell for IndexPath: \(indexPath.section) \(indexPath.row)")
+                                print("No cell for IndexPath: \((indexPath as NSIndexPath).section) \((indexPath as NSIndexPath).row)")
                             }
-                        case .Error(let error):
+                        case .error(let error):
                             cell.sponsorImageView.showEmptyMessage("Could not load image: \((error as NSError).localizedDescription)", fontSize: 15)
-                            print("Error for IndexPath: \(indexPath.section) \(indexPath.row)")
+                            print("Error for IndexPath: \((indexPath as NSIndexPath).section) \((indexPath as NSIndexPath).row)")
                             print(error)
                         }
                     }
@@ -83,52 +81,52 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         super.viewDidLoad()
         dataSource = ArmadaSponsorTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
-        registerForPreviewingWithDelegate(self, sourceView: view)
+        registerForPreviewing(with: self, sourceView: view)
     }
     
     
-    var highlightedIndexPath: NSIndexPath?
+    var highlightedIndexPath: IndexPath?
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing,
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
-            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
-                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
+            guard let highlightedIndexPath = tableView.indexPathForRow(at: location),
+                let cell = tableView.cellForRow(at: highlightedIndexPath) else  { return nil }
             let sponsor = dataSource[highlightedIndexPath]
             self.highlightedIndexPath = highlightedIndexPath
-            let viewController = storyboard!.instantiateViewControllerWithIdentifier("SponsorsWebViewController") as! SponsorsWebViewController
+            let viewController = storyboard!.instantiateViewController(withIdentifier: "SponsorsWebViewController") as! SponsorsWebViewController
             viewController.url = sponsor.websiteUrl
             previewingContext.sourceRect = cell.frame
             return viewController
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         openWebsite()
     }
     
     func openWebsite() {
         if let indexPath = tableView.indexPathForSelectedRow ?? highlightedIndexPath {
             let sponsor = dataSource[indexPath]
-            if UIApplication.sharedApplication().canOpenURL(sponsor.websiteUrl) {
-                UIApplication.sharedApplication().openURL(sponsor.websiteUrl)
+            if UIApplication.shared.canOpenURL(sponsor.websiteUrl) {
+                UIApplication.shared.openURL(sponsor.websiteUrl)
             }
             deselectSelectedCell()
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         openWebsite()
     }
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if dataSource.isEmpty {
             dataSource.refresh()

@@ -2,7 +2,7 @@ import UIKit
 
 protocol CompanyBoolCellDelegate {
  
-    func armadaField(armadaField: ArmadaField, isOn: Bool)
+    func armadaField(_ armadaField: ArmadaField, isOn: Bool)
 }
 
 
@@ -17,8 +17,8 @@ class CompanyBoolCell: UITableViewCell {
     var armadaField: ArmadaField!
     var delegate: CompanyBoolCellDelegate?
     
-    @IBAction func switchChanged(sender: UISwitch) {
-        delegate?.armadaField(armadaField, isOn: sender.on)
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        delegate?.armadaField(armadaField, isOn: sender.isOn)
     }
 
     

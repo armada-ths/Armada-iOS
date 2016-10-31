@@ -11,12 +11,12 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     var filteredCompaniesWithMatchPercentages = [(company: Company, percentage: Double, position: Int)]()
     var matchPercentages = [Double]()
     var highlightedCompany: Company?
-    var highlightedIndexPath: NSIndexPath?
+    var highlightedIndexPath: IndexPath?
     var label: UILabel?
     
     var selectedCompany: Company? {
         if let indexPath = tableView.indexPathForSelectedRow {
-            return filteredCompaniesWithMatchPercentages[indexPath.row].company
+            return filteredCompaniesWithMatchPercentages[(indexPath as NSIndexPath).row].company
         }
         return nil
     }
@@ -24,17 +24,17 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        registerForPreviewingWithDelegate(self, sourceView: view)
+        registerForPreviewing(with: self, sourceView: view)
         if FakeMatchFilter.isEmpty {
-            FakeMatchFilter[CompanyProperty.WorkFields] = Array(ArmadaApi.workFields[0...3])
-            FakeMatchFilter[CompanyProperty.CompanyValues] = Array(ArmadaApi.companyValues[0...2])
-            FakeMatchFilter[CompanyProperty.WorkWays] = Array(ArmadaApi.workWays[0...2])
+            FakeMatchFilter[CompanyProperty.workFields] = Array(ArmadaApi.workFields[0...3])
+            FakeMatchFilter[CompanyProperty.companyValues] = Array(ArmadaApi.companyValues[0...2])
+            FakeMatchFilter[CompanyProperty.workWays] = Array(ArmadaApi.workWays[0...2])
         }
     }
     
     func updateFilteredCompanies() {
-        if let searchText = searchBar.text where !searchText.isEmpty {
-            filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages.filter { $0.company.name.lowercaseString.hasPrefix(searchText.lowercaseString) }
+        if let searchText = searchBar.text , !searchText.isEmpty {
+            filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages.filter { $0.company.name.lowercased().hasPrefix(searchText.lowercased()) }
         } else {
             filteredCompaniesWithMatchPercentages = companiesWithMatchPercentages
         }
@@ -42,27 +42,27 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         tableView.reloadData()
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing,
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
         viewControllerForLocation location: CGPoint) -> UIViewController? {
             if MatchFilter.isEmpty {
                 return nil
             }
             
-            guard let highlightedIndexPath = tableView.indexPathForRowAtPoint(location),
-                let cell = tableView.cellForRowAtIndexPath(highlightedIndexPath) else  { return nil }
-            let companyWithPercentage = filteredCompaniesWithMatchPercentages[highlightedIndexPath.row]
+            guard let highlightedIndexPath = tableView.indexPathForRow(at: location),
+                let cell = tableView.cellForRow(at: highlightedIndexPath) else  { return nil }
+            let companyWithPercentage = filteredCompaniesWithMatchPercentages[(highlightedIndexPath as NSIndexPath).row]
             highlightedCompany = companyWithPercentage.company
-            let companyViewController = storyboard!.instantiateViewControllerWithIdentifier("CompanyViewController") as! CompanyViewController
+            let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
             companyViewController.company = highlightedCompany
             previewingContext.sourceRect = cell.frame
             return companyViewController
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        self.performSegueWithIdentifier("CompanyPageViewControllerSegue", sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.performSegue(withIdentifier: "CompanyPageViewControllerSegue", sender: self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         self.companiesWithMatchPercentages = Array(calculateCompaniesWithMatchPercentages())
@@ -79,29 +79,29 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         }
         
         
-        filterButton.enabled = !MatchFilter.isEmpty
+        filterButton.isEnabled = !MatchFilter.isEmpty
         filterButton.title = MatchFilter.isEmpty ? nil : "Filter"
-        tableView.scrollEnabled = !MatchFilter.isEmpty
+        tableView.isScrollEnabled = !MatchFilter.isEmpty
         
         if MatchFilter.isEmpty {
             let overlay = UIView(frame: view.frame)
             overlay.alpha = 0.4
             overlay.tag = overlayTag
-            overlay.backgroundColor = UIColor.blackColor()
+            overlay.backgroundColor = UIColor.black
             overlay.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(overlay)
-            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
-            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
-            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0))
-            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: overlay, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1, constant: 0))
             
             let label = UIButton(frame: view.frame)
-            label.setTitleColor(UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.5), forState: .Highlighted)
-            label.setTitle("Start Matching", forState: .Normal)
+            label.setTitleColor(UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0.5), for: .highlighted)
+            label.setTitle("Start Matching", for: UIControlState())
             label.translatesAutoresizingMaskIntoConstraints = false
             label.backgroundColor = ColorScheme.armadaGreen
             
-            label.titleLabel?.font = UIFont.systemFontOfSize(25)
+            label.titleLabel?.font = UIFont.systemFont(ofSize: 25)
             
             let layer = label.layer
             layer.cornerRadius = 10
@@ -110,18 +110,18 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             label.contentEdgeInsets = UIEdgeInsets(top: topPadding, left: leadingPadding, bottom: topPadding, right: leadingPadding)
             
             label.tag = labelTag
-            label.addTarget(self, action: "openFilter:", forControlEvents: UIControlEvents.TouchUpInside)
+            label.addTarget(self, action: #selector(MatchTableViewController.openFilter(_:)), for: UIControlEvents.touchUpInside)
             view.addSubview(label)
-            view.bringSubviewToFront(label)
-            view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
-            view.addConstraint(NSLayoutConstraint(item: label, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: -64))
+            view.bringSubview(toFront: label)
+            view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: -64))
         }
         
         self.tableView.reloadData()
     }
     
-    func openFilter(sender: AnyObject) {
-        performSegueWithIdentifier("FilterSegue", sender: nil)
+    func openFilter(_ sender: AnyObject) {
+        performSegue(withIdentifier: "FilterSegue", sender: nil)
     }
     
     func calculateCompaniesWithMatchPercentages() -> [(company: Company, percentage: Double, position: Int)] {
@@ -146,7 +146,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
             let zebra = (company: company, percentage: percentage, position: 0)
             matches.append(zebra)
         }
-        matches = matches.sort { ($0.percentage == $1.percentage && $0.company.employeesWorld < $1.company.employeesWorld) || $0.percentage > $1.percentage }
+        matches = matches.sorted { ($0.percentage == $1.percentage && $0.company.employeesWorld < $1.company.employeesWorld) || $0.percentage > $1.percentage }
         
         for i in 0..<matches.count {
             matches[i].position = i+1
@@ -155,66 +155,66 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.tableView.reloadData()
     }
     
-    @IBAction func unwind(unwindSegue: UIStoryboardSegue) {}
+    @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {}
     
     func updateFavoritesUI() {
         if companiesWithMatchPercentages.isEmpty {
-            let label = UILabel(frame: CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height))
             label.text = "No Matches"
-            label.textAlignment = .Center
+            label.textAlignment = .center
             label.sizeToFit()
-            label.textColor = UIColor.lightGrayColor()
-            label.font = UIFont.systemFontOfSize(30)
+            label.textColor = UIColor.lightGray
+            label.font = UIFont.systemFont(ofSize: 30)
             tableView.backgroundView = label
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         } else {
             tableView.backgroundView = nil
-            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         }
         navigationItem.title = "Match"
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCompaniesWithMatchPercentages.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MatchTableViewCell", forIndexPath: indexPath) as! MatchTableViewCell
-        let companyWithMatchPercentage = filteredCompaniesWithMatchPercentages[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MatchTableViewCell", for: indexPath) as! MatchTableViewCell
+        let companyWithMatchPercentage = filteredCompaniesWithMatchPercentages[(indexPath as NSIndexPath).row]
         let matchPercentage = companyWithMatchPercentage.percentage
         let company = companyWithMatchPercentage.company
-        cell.descriptionLabel.text = company.description.substringToIndex(company.description.endIndex.advancedBy(-1))
+        cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = "\(companyWithMatchPercentage.position). \(company.name)"
         cell.matchProgressView.setProgress(Float(matchPercentage), animated: false)
         cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
         cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
         if let image = company.image {
             cell.logoImageView.image = image
-            cell.companyNameLabel.hidden = true
+            cell.companyNameLabel.isHidden = true
         } else {
             cell.logoImageView.image = nil
-            cell.companyNameLabel.hidden = false
+            cell.companyNameLabel.isHidden = false
             cell.companyNameLabel.text = company.name
         }
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
         let companies = filteredCompaniesWithMatchPercentages.map { $0.company }
-        if let companiesPageViewController = segue.destinationViewController as? CompaniesPageViewController {
+        if let companiesPageViewController = segue.destination as? CompaniesPageViewController {
             companiesPageViewController.companies = companies
             companiesPageViewController.selectedCompany = selectedCompany ?? highlightedCompany
         }
-        if let controller = segue.destinationViewController as? CompanyFilterTableViewController {
+        if let controller = segue.destination as? CompanyFilterTableViewController {
             controller.CompanyFilter = MatchFilter
             controller.CopyFilter = CatalogueFilter
         }
@@ -223,25 +223,25 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
 
 extension MatchTableViewController: UISearchBarDelegate {
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateFilteredCompanies()
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchBar.resignFirstResponder()
         updateFilteredCompanies()
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
     }
 }

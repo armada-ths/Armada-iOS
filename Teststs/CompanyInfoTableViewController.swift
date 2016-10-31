@@ -8,16 +8,16 @@ class CompanyInfoTableViewController: UITableViewController {
             super.init(tableViewController: tableViewController)
         }
         
-        override func updateFunc(callback: Response<[[ArmadaFieldInfo]]> -> Void) {
+        override func updateFunc(_ callback: @escaping (Response<[[ArmadaFieldInfo]]>) -> Void) {
             ArmadaApi.armadaFieldInfosFromServer() { response in
-                 NSOperationQueue.mainQueue().addOperationWithBlock {
+                 OperationQueue.main.addOperation {
                     callback(response.map { [$0]})
                 }
             }
         }
         
-        override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("CompanyTypeTableViewCell", forIndexPath: indexPath) as! CompanyTypeTableViewCell
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyTypeTableViewCell", for: indexPath) as! CompanyTypeTableViewCell
             let armadaFieldInfo = self[indexPath]
             cell.icon.image = armadaFieldInfo.armadaField.image
             cell.titleLabel.text = armadaFieldInfo.title
@@ -37,11 +37,11 @@ class CompanyInfoTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
 }

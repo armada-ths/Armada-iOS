@@ -8,11 +8,11 @@ class ArmadaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { storyboard!.instantiateViewControllerWithIdentifier($0) }
+        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { storyboard!.instantiateViewController(withIdentifier: $0) }
         segmentedControlChanged(segmentedControl)
     }
 
-    @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
         
         for viewController in containedViewControllers {
             if let viewController = viewController as? OrganisationGroupsTableViewController {
@@ -24,6 +24,6 @@ class ArmadaViewController: UIViewController {
         self.addChildViewController(viewController)
         viewController.view.frame = self.containerView.bounds
         self.containerView.addSubview(viewController.view)
-        viewController.didMoveToParentViewController(self)
+        viewController.didMove(toParentViewController: self)
     }
 }

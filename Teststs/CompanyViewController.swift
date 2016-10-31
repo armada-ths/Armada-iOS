@@ -34,19 +34,19 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     let infoRow = 11
     
     override func viewDidLoad() {
-        headerHeight = UIScreen.mainScreen().bounds.width * 3 / 4
+        headerHeight = UIScreen.main.bounds.width * 3 / 4
         super.viewDidLoad()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         let continents = self.company.continents.map { $0.continent }
         mapWebView.delegate = self
         
-        NSOperationQueue().addOperationWithBlock {
-            var html = String(try! NSString(contentsOfURL: NSBundle(forClass: self.dynamicType).URLForResource("worldMap", withExtension: "html")!, encoding: NSUTF8StringEncoding))
-            let companyStyle = continents.reduce("<style>", combine: {$0 + "#" + $1.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil) + "{ fill:#349939}"})
-            html = html.stringByReplacingOccurrencesOfString("<style>", withString: companyStyle)
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue().addOperation {
+            var html = String(try! NSString(contentsOf: Bundle(for: type(of: self)).url(forResource: "worldMap", withExtension: "html")!, encoding: String.Encoding.utf8.rawValue))
+            let companyStyle = continents.reduce("<style>", {$0 + "#" + $1.replacingOccurrences(of: " ", with: "", options: [], range: nil) + "{ fill:#349939}"})
+            html = html.replacingOccurrences(of: "<style>", with: companyStyle)
+            OperationQueue.main.addOperation {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
             }
         }
@@ -56,10 +56,10 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
             aboutLabel.text = "To be announced"
         }
         
-        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).sort().joinWithSeparator("\n")
-        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sort().joinWithSeparator("\n")
-        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sort().joinWithSeparator("\n")
-        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sort().joinWithSeparator("\n")
+        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).sorted().joined(separator: "\n")
+        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sorted().joined(separator: "\n")
+        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sorted().joined(separator: "\n")
+        waysOfWorkingLabel.text = Array(company.workWays.map { "● " + $0.workWay }).sorted().joined(separator: "\n")
         websiteLabel.text = company.website
         videoLabel.text = company.videoUrl
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
@@ -67,27 +67,27 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         
         let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
         let socialMediaUrls = [company.facebook, company.linkedin, company.twitter]
-        for (index, url) in socialMediaUrls.enumerate() {
-            socialMediaButtons[index].enabled = false
-            if let url = NSURL(string: url) where UIApplication.sharedApplication().canOpenURL(url) {
-                socialMediaButtons[index].enabled = true
+        for (index, url) in socialMediaUrls.enumerated() {
+            socialMediaButtons[index]?.isEnabled = false
+            if let url = URL(string: url) , UIApplication.shared.canOpenURL(url) {
+                socialMediaButtons[index]?.isEnabled = true
             }
         }
         
         let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
         let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]
         
-        for (i, boolish) in companyArmadaFields.enumerate() {
-            armadaFieldsImageViews[i].alpha = boolish ? 1 : 0.1
+        for (i, boolish) in companyArmadaFields.enumerated() {
+            armadaFieldsImageViews[i]?.alpha = boolish ? 1 : 0.1
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parentViewController?.title = company.name
+        parent?.title = company.name
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         headerImageView.loadImageFromUrl(company.adUrl)
         locationLabel.text = company.locationDescription
@@ -96,60 +96,60 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
             locationLabel.text = "To be announced"
         } else {
             locationImageView.loadImageFromUrl(company.locationUrl)
-            locationCell.selectionStyle = .Default
-            locationCell.accessoryType = .DisclosureIndicator
+            locationCell.selectionStyle = .default
+            locationCell.accessoryType = .disclosureIndicator
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        switch indexPath.row {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch (indexPath as NSIndexPath).row {
         case favoriteRow:
             FavoriteCompanies.append(company!.name)
             tableView.beginUpdates()
             tableView.endUpdates()
         case websiteRow:
             if let url = company.website.httpUrl {
-                UIApplication.sharedApplication().openURL(url)
+                UIApplication.shared.openURL(url as URL)
                 deselectSelectedCell()
             }
         case videoRow:
             if let url = company.videoUrl.httpUrl {
-                UIApplication.sharedApplication().openURL(url)
+                UIApplication.shared.openURL(url as URL)
                 deselectSelectedCell()
             }
         case infoRow:
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.performSegueWithIdentifier("InfoSegue", sender: self)
+            OperationQueue.main.addOperation {
+                self.performSegue(withIdentifier: "InfoSegue", sender: self)
             }
         default:
             break
         }
     }
     
-    @IBAction func unwind(segue: UIStoryboardSegue) {}
+    @IBAction func unwind(_ segue: UIStoryboardSegue) {}
     
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "LocationSegue" && company.locationDescription.isEmpty {
             return false
         }
         return true
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let viewController = segue.destinationViewController as? LocationViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? LocationViewController {
             viewController.company = company
             deselectSelectedCell()
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let zeroHeight: CGFloat = 0.000001
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case videoRow where company.videoUrl.isEmpty: return zeroHeight
         case websiteRow where company.website.isEmpty: return zeroHeight
         case favoriteRow where FavoriteCompanies.contains(company.name): return zeroHeight
@@ -158,21 +158,21 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     }
     
     
-    @IBAction func facebookButtonClicked(sender: AnyObject) {
+    @IBAction func facebookButtonClicked(_ sender: AnyObject) {
         if let url = company.facebook.httpUrl {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url as URL)
         }
     }
     
-    @IBAction func linkedinButtonClicked(sender: AnyObject) {
+    @IBAction func linkedinButtonClicked(_ sender: AnyObject) {
         if let url = company.linkedin.httpUrl {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url as URL)
         }
     }
     
-    @IBAction func twitterButtonClicked(sender: AnyObject) {
+    @IBAction func twitterButtonClicked(_ sender: AnyObject) {
         if let url = company.twitter.httpUrl {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url as URL)
         }
     }
 }

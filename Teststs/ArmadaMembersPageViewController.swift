@@ -5,8 +5,8 @@ class ArmadaMembersPageViewController: UIPageViewController, UIPageViewControlle
     var members = [ArmadaMember]()
     var selectedMember: ArmadaMember!
     
-    func viewControllerForMember(member: ArmadaMember) -> UIViewController {
-        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("ArmadaMemberViewController") as! ArmadaMemberViewController
+    func viewControllerForMember(_ member: ArmadaMember) -> UIViewController {
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "ArmadaMemberViewController") as! ArmadaMemberViewController
         viewController.member = member
         return viewController
     }
@@ -15,18 +15,18 @@ class ArmadaMembersPageViewController: UIPageViewController, UIPageViewControlle
         super.viewDidLoad()
         delegate = self
         dataSource = self
-        setViewControllers([viewControllerForMember(selectedMember)], direction: .Forward, animated: true, completion: {done in })
+        setViewControllers([viewControllerForMember(selectedMember)], direction: .forward, animated: true, completion: {done in })
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let member = (viewController as! ArmadaMemberViewController).member
-        let index = (members.indexOf(member)! + 1) % members.count
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let member = (viewController as! ArmadaMemberViewController).member!
+        let index = (members.index(of: member)! + 1) % members.count
         return viewControllerForMember(members[index])
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let member = (viewController as! ArmadaMemberViewController).member
-        let index = (members.indexOf(member)! - 1 + members.count) % members.count
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let member = (viewController as! ArmadaMemberViewController).member!
+        let index = (members.index(of: member)! - 1 + members.count) % members.count
         return viewControllerForMember(members[index])
     }
 }

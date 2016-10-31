@@ -2,13 +2,22 @@ import UIKit
 
 let FavoriteCompanies = _FavoriteCompanies()
 
-class _FavoriteCompanies: SequenceType, CollectionType {
+class _FavoriteCompanies: Sequence, Collection {
+    /// Returns the position immediately after the given index.
+    ///
+    /// - Parameter i: A valid index of the collection. `i` must be less than
+    ///   `endIndex`.
+    /// - Returns: The index value immediately after `i`.
+    public func index(after i: Int) -> Int {
+        return i+1;
+    }
+
     
-    private init() {}
+    fileprivate init() {}
     
-    private let key = "FavoriteCompanies"
+    fileprivate let key = "FavoriteCompanies"
     
-    private let Ω = NSUserDefaults.standardUserDefaults()
+    fileprivate let Ω = UserDefaults.standard
     
     
     var startIndex: Int {
@@ -23,23 +32,23 @@ class _FavoriteCompanies: SequenceType, CollectionType {
         return count == 0
     }
     
-    func append(companyName: String) {
+    func append(_ companyName: String) {
         var companyNames = (Ω[key] as? [String]) ?? []
         companyNames.append(companyName)
-        companyNames = companyNames.sort({ $0 < $1 })
-        Ω[key] = companyNames
+        companyNames = companyNames.sorted(by: { $0 < $1 })
+        Ω[key] = companyNames as AnyObject?
     }
     
-    func removeAtIndex(index: Int) {
+    func removeAtIndex(_ index: Int) {
         var companyNames = (Ω[key] as? [String]) ?? []
-        companyNames.removeAtIndex(index)
-        Ω[key] = companyNames
+        companyNames.remove(at: index)
+        Ω[key] = companyNames as AnyObject?
     }
     
-    func remove(companyName: String) {
+    func remove(_ companyName: String) {
         var companyNames = (Ω[key] as? [String]) ?? []
         companyNames = companyNames.filter({ $0 != companyName })
-        Ω[key] = companyNames
+        Ω[key] = companyNames as AnyObject?
     }
     
     var count: Int {
@@ -50,11 +59,12 @@ class _FavoriteCompanies: SequenceType, CollectionType {
         return ((Ω[key] as? [String]) ?? [])[index]
     }
     
-    func generate() -> AnyGenerator<String> {
+    func makeIterator() -> AnyIterator<String> {
         var index = 0
-        return anyGenerator {
+        return AnyIterator {
             if index < self.count {
-                return self[index++]
+                index += 1
+                return self[index-1]
             }
             return nil
         }

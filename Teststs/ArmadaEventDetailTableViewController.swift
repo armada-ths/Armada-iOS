@@ -12,7 +12,7 @@ class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         summaryLabel.textContainer.lineFragmentPadding = 0
-        summaryLabel.textContainerInset = UIEdgeInsetsZero
+        summaryLabel.textContainerInset = UIEdgeInsets.zero
 
         var moreInfo = "<p><strong>When: </strong>\(armadaEvent.startDate.readableString)</p>"
         moreInfo += "<p><strong>Where: </strong>\((armadaEvent.location ?? "").isEmpty ? "TBA" : armadaEvent.location!)</p>"
@@ -36,37 +36,37 @@ class ArmadaEventDetailTableViewController: FixedHeaderTableViewController {
         titleLabel.text = armadaEvent.title
         titleLabel.text = ""
         title = armadaEvent.title
-        signupLabel.textColor = UIColor.lightGrayColor()
+        signupLabel.textColor = UIColor.lightGray
         tableView.allowsSelection = false
         
         signupLabel.text = armadaEvent.signupStateString
-        if armadaEvent.signupState == .Now {
+        if armadaEvent.signupState == .now {
 //            signupLabel.text = "Sign Up"
             signupLabel.textColor = ColorScheme.armadaGreen
             tableView.allowsSelection = true
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initHeaderView()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 && tableView.allowsSelection {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row == 0 && tableView.allowsSelection {
             if let signupUrl = armadaEvent.signupLink,
-                let url = NSURL(string: signupUrl) {
-                    UIApplication.sharedApplication().openURL(url)
+                let url = URL(string: signupUrl) {
+                    UIApplication.shared.openURL(url)
                     deselectSelectedCell()
             }
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 }
