@@ -87,10 +87,7 @@ public struct Sponsor {
     let imageUrl: URL
     let description: String
     let websiteUrl: URL
-    
     let isMainPartner: Bool
-    let isMainSponsor: Bool
-    let isGreenPartner: Bool
 }
 
 struct ArmadaFieldInfo {
@@ -552,9 +549,7 @@ open class _ArmadaApi {
                 let websiteUrl = URL(string: websiteUrlString) {
                     let description = json["full_text"] as? String ?? ""
                     let isMainPartner = json["is_main_partner"] as? Bool ?? false
-                    let isMainSponsor = json["main_sponsor"] as? Bool ?? false
-                    let isGreenPartner = json["green_partner"] as? Bool ?? false
-                    return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl, isMainPartner: isMainPartner, isMainSponsor: isMainSponsor, isGreenPartner: isGreenPartner)
+                    return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl, isMainPartner: isMainPartner)
                     
             }
             return nil

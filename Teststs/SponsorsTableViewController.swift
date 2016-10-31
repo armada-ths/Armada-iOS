@@ -17,9 +17,7 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                     callback(response.map { sponsors in
                         return [
                             sponsors.filter { $0.isMainPartner },
-                            sponsors.filter { $0.isGreenPartner },
-                            sponsors.filter { $0.isMainSponsor },
-                            sponsors.filter { !$0.isMainPartner && !$0.isMainSponsor && !$0.isGreenPartner }
+                            sponsors.filter { !$0.isMainPartner }
                         ]
                     })
                     OperationQueue().addOperation {
@@ -34,7 +32,7 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
     
         
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            let sponsorName = ["Main Partner", "Green Partner", "Main Sponsor", "Other Sponsor"][section]
+            let sponsorName = ["Main Partner", "Sponsor"][section]
             return sponsorName + (values[section].count > 1 ? "s" : "")
         }
         
