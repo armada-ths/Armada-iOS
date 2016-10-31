@@ -1,9 +1,9 @@
 import UIKit
 
 enum CompanyProperty: CustomStringConvertible {
-    case programmes, jobTypes, continents, workFields, companyValues, workWays
+    case programmes, jobTypes, continents, workFields, companyValues
     
-    static let All = [programmes, jobTypes, continents, workFields, companyValues, workWays]
+    static let All = [programmes, jobTypes, continents, workFields, companyValues]
     
     var penalty: Double {
         switch self {
@@ -12,7 +12,6 @@ enum CompanyProperty: CustomStringConvertible {
         case .continents: return 0.9
         case .workFields: return 0.4
         case .companyValues: return 0.9
-        case .workWays: return 0.9
         }
     }
     
@@ -23,7 +22,6 @@ enum CompanyProperty: CustomStringConvertible {
         case .continents: return ArmadaApi.continents
         case .workFields: return ArmadaApi.workFields
         case .companyValues: return ArmadaApi.companyValues
-        case .workWays: return ArmadaApi.workWays
         }
     }
     
@@ -34,7 +32,6 @@ enum CompanyProperty: CustomStringConvertible {
         case .continents: return "Continent"
         case .workFields: return "Work Field"
         case .companyValues: return "Company Value"
-        case .workWays: return "Way of Working"
         }
     }
 }
@@ -47,8 +44,6 @@ extension Company {
         case .continents: return continents.map {$0.continent}
         case .workFields: return workFields.map {$0.workField}
         case .companyValues: return companyValues.map {$0.companyValue}
-        case .workWays: return workWays.map {$0.workWay}
-            
         }
     }
     
@@ -64,8 +59,6 @@ extension Company {
             return likesEnvironment
         }
     }
-    
-
 }
 
 func numberOfCompaniesForPropertyValue(_ property: CompanyProperty, value: String) -> Int {

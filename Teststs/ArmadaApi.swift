@@ -321,16 +321,6 @@ open class _ArmadaApi {
             }
             }()
         
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.workWays] = [:]
-            let fetchRequest = NSFetchRequest<WorkWay>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "WorkWay", in: managedObjectContext)!
-            let workWays =  try! managedObjectContext.fetch(fetchRequest) 
-            for workWay in workWays {
-                numberOfCompaniesForPropertyValueMap[.workWays]![workWay.workWay] = workWay.companies.count
-            }
-            }()
-        
         
         self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
     }
