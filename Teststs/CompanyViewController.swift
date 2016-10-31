@@ -28,9 +28,9 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     var companies = [Company]()
     
     let favoriteRow = 0
-    let websiteRow = 9
-    let videoRow = 10
-    let infoRow = 11
+    let websiteRow = 8
+    let videoRow = 9
+    let infoRow = 10
     
     override func viewDidLoad() {
         headerHeight = UIScreen.main.bounds.width * 3 / 4
@@ -115,10 +115,11 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
                 UIApplication.shared.openURL(url as URL)
                 deselectSelectedCell()
             }
-        case infoRow:
+        //Info row should not be clickable. Readd if you want that
+        /*case infoRow:
             OperationQueue.main.addOperation {
                 self.performSegue(withIdentifier: "InfoSegue", sender: self)
-            }
+            }*/
         default:
             break
         }
