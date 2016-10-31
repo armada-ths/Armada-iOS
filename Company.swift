@@ -19,37 +19,37 @@ open class Company: NSManagedObject {
 
             
             let workFields = json["work_fields"] as? [[String:AnyObject]],
-            let programmes = json["programmes"] as? [[String:AnyObject]],
+            let programmes = json["programs"] as? [[String:AnyObject]],
             let jobTypes = json["job_types"] as? [[String:AnyObject]],
             let continents = json["continents"] as? [[String:AnyObject]],
             //            let image = UIImage(named: name),
-            let companyValues = json["company_values"] as? [[String:AnyObject]],
-            let workWays = json["ways_of_working"] as? [[String:AnyObject]] {
+            let companyValues = json["values"] as? [[String:AnyObject]] {
                 let website = json["website_url"] as? String ?? ""
                 
                 let countries = json["countries"] as? Int ?? 0
-                let locationUrl = json["map_url"] as? String ?? ""
-                let videoUrl = json["video_url"] as? String ?? ""
+                let locationUrl = json["map_url"] as? String ?? ""// TODO: Checka den
+                let videoUrl = json["video_url"] as? String ?? ""// TODO: Checka den
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
-                let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 let description = json["description"] as? String ?? ""
-                let keywords = json["keywords"] as? String ?? ""
-                let contactName = json["contact_name"] as? String ?? ""
-                let contactEmail = json["contact_email"] as? String ?? ""
-                let contactPhone = json["contact_number"] as? String ?? ""
-                let isStartup = json["startup_exhibitor"] as? Bool ?? false
-                let likesEquality = json["diversity_exhibitor"] as? Bool ?? false
-                let likesEnvironment = json["green_room_exhibitor"] as? Bool ?? false
-                let hasClimateCompensated = json["has_climate_compensated"] as? Bool ?? false
-                let locationDescription = json["location"] as? String ?? ""
+                let keywords = json["keywords"] as? String ?? ""// ???
+                let contactName = json["contact_name"] as? String ?? ""// ???
+                let contactEmail = json["contact_email"] as? String ?? ""// ???
+                let contactPhone = json["contact_number"] as? String ?? ""// ???
+                let isStartup = json["startup_exhibitor"] as? Bool ?? false// TODO: Checka den
+                let likesEquality = json["diversity"] as? Bool ?? false
+                let likesEnvironment = json["green_room_exhibitor"] as? Bool ?? false// ???
+                let hasClimateCompensated = json["sustainability"] as? Bool ?? false// TODO: Checka den
+                let locationDescription = json["location"] as? String ?? ""// TODO: Sannorligt rätt
                 let facebook = json["facebook_url"] as? String ?? ""
                 let linkedin = json["linkedin_url"] as? String ?? ""
                 let twitter = json["twitter_url"] as? String ?? ""
                 
                 let adUrl = json["ad_url"] as? String ?? ""
                 let logoUrl = json["logo_url"] as? String ?? ""
-                
+            
+            
+                let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 company.name = name
                 company.companyDescription = description
                 company.website = website
@@ -73,7 +73,7 @@ open class Company: NSManagedObject {
                 company.keywords = keywords
                 company.primaryWorkField = keywords
                 company.videoUrl = videoUrl
-                
+            
             _ = {
                     let fetchRequest = NSFetchRequest<WorkField>()
                     let entityName = "WorkField"
@@ -141,21 +141,6 @@ open class Company: NSManagedObject {
                         managedObject.programme = programme
                         existingObjects.insert(managedObject)
                         company.programmes.insert(managedObject)
-                    }
-                    }()
-                
-                
-                _ = {
-                    let fetchRequest = NSFetchRequest<WorkWay>()
-                    let entityName = "WorkWay"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
-                    let workWays = Array.removeNils(workWays.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for workWay in workWays {
-                        let managedObject = existingObjects.filter({ $0.workWay == workWay }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! WorkWay
-                        managedObject.workWay = workWay
-                        existingObjects.insert(managedObject)
-                        company.workWays.insert(managedObject)
                     }
                     }()
                 
