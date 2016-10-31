@@ -543,16 +543,15 @@ open class _ArmadaApi {
             } ?? [])
     }
     
-    open func sponsorsFromJson(_ jsonOriginal: AnyObject) -> [Sponsor] {
-        let json = jsonOriginal["sponsors"]
+    open func sponsorsFromJson(_ json: AnyObject) -> [Sponsor] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> Sponsor? in
-            if let name = json["name"] as? String ?? json["title"] as? String,
-                let description = json["full_text"] as? String,
+            if let name = json["name"] as? String,
                 let imageUrlString = json["logo_url"] as? String,
                 let imageUrl = URL(string: imageUrlString),
-                let websiteUrlString = json["website_url"] as? String,
+                let websiteUrlString = json["link_url"] as? String,
                 let websiteUrl = URL(string: websiteUrlString) {
-                    let isMainPartner = json["main_partner"] as? Bool ?? false
+                    let description = json["full_text"] as? String ?? ""
+                    let isMainPartner = json["is_main_partner"] as? Bool ?? false
                     let isMainSponsor = json["main_sponsor"] as? Bool ?? false
                     let isGreenPartner = json["green_partner"] as? Bool ?? false
                     return Sponsor(name: name, imageUrl: imageUrl, description: description, websiteUrl: websiteUrl, isMainPartner: isMainPartner, isMainSponsor: isMainSponsor, isGreenPartner: isGreenPartner)
@@ -598,7 +597,7 @@ open class _ArmadaApi {
     }
     
     func sponsorsFromServer(_ callback: @escaping (Response<[Sponsor]>) -> Void) {
-        armadaUrlWithPath("sponsors").getJson() {
+        armadaUrlWithPath("partners").getJson() {
             callback($0.map(self.sponsorsFromJson))
         }
     }
