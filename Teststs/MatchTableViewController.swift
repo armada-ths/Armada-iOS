@@ -28,7 +28,6 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         if FakeMatchFilter.isEmpty {
             FakeMatchFilter[CompanyProperty.workFields] = Array(ArmadaApi.workFields[0...3])
             FakeMatchFilter[CompanyProperty.companyValues] = Array(ArmadaApi.companyValues[0...2])
-            FakeMatchFilter[CompanyProperty.workWays] = Array(ArmadaApi.workWays[0...2])
         }
     }
     
