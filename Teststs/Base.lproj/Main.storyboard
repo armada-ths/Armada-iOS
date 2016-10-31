@@ -481,11 +481,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="umj-5h-GAg">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Info" id="qkY-Om-cU2">
-                            <connections>
-                                <segue destination="BG5-9C-bK2" kind="presentation" id="ReS-La-4Iy"/>
-                            </connections>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dzO-lc-2gt">
                             <rect key="frame" x="84" y="7" width="208" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1630,7 +1625,6 @@
                             <segments>
                                 <segment title="News"/>
                                 <segment title="About"/>
-                                <segment title="Members"/>
                             </segments>
                             <connections>
                                 <action selector="segmentedControlChanged:" destination="uhV-zT-dVe" eventType="valueChanged" id="il3-fq-ug0"/>
@@ -2763,12 +2757,11 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TRA-nv-BBS"/>
-        <segue reference="HmL-IU-78Y"/>
-        <segue reference="NVI-Nj-Wn8"/>
-        <segue reference="fBy-Ie-KcO"/>
-        <segue reference="vNm-TG-1NB"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="rqO-4i-A8F"/>
+        <segue reference="fBy-Ie-KcO"/>
+        <segue reference="HBS-08-1M2"/>
+        <segue reference="bli-j8-CSx"/>
+        <segue reference="TRA-nv-BBS"/>
     </inferredMetricsTieBreakers>
 </document>
