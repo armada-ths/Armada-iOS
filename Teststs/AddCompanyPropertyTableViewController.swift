@@ -9,8 +9,11 @@ class AddCompanyPropertyTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         values = property.values.filter { !companyFilter[property].contains($0) }
-        
-        title = "Add \(property)"
+        if let property = property{
+            title = "Add \(property)"
+        }else{
+            title = "Add"
+        }
     }
 
     override func didReceiveMemoryWarning() {
