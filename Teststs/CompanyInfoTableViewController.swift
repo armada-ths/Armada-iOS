@@ -1,7 +1,6 @@
 import UIKit
 
 class CompanyInfoTableViewController: UITableViewController {
-    
     class DataSource: ArmadaTableViewDataSource<ArmadaFieldInfo> {
         
         override init(tableViewController: UITableViewController) {
