@@ -145,8 +145,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         cell.firstIcon.isHidden = true
         cell.secondIcon.isHidden = true
         
-        let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity, ArmadaField.ClimateCompensation]
-        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality, company.hasClimateCompensated]
+        let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
+        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.isHidden = true
         cell.firstIcon.isHidden = true

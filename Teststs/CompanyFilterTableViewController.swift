@@ -51,8 +51,6 @@ extension Company {
         switch armadaField {
         case .Startup:
             return isStartup
-        case .ClimateCompensation:
-            return hasClimateCompensated
         case .Diversity:
             return likesEquality
         case .Sustainability:

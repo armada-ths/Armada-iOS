@@ -14,7 +14,6 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     @IBOutlet weak var isStartupImageView: UIImageView!
     @IBOutlet weak var companyValuesLabel: UILabel!
     @IBOutlet weak var likesEnvironmentImageView: UIImageView!
-    @IBOutlet weak var hasClimateCompensatedImageView: UIImageView!
     @IBOutlet weak var headerImageView: UIImageView!
     @IBOutlet weak var twitterButton: UIButton!
     @IBOutlet weak var facebookButton: UIButton!
@@ -72,8 +71,8 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
             }
         }
         
-        let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, hasClimateCompensatedImageView, likesDiversityImageView]
-        let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.hasClimateCompensated, company.likesEquality]
+        let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, likesDiversityImageView]
+        let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         for (i, boolish) in companyArmadaFields.enumerated() {
             armadaFieldsImageViews[i]?.alpha = boolish ? 1 : 0.1

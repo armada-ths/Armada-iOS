@@ -25,7 +25,6 @@ extension Company {
     @NSManaged var programmes: Set<Programme>
     @NSManaged var workWays: Set<WorkWay>
     @NSManaged var isStartup: Bool
-    @NSManaged var hasClimateCompensated: Bool
     @NSManaged var likesEquality: Bool
     @NSManaged var likesEnvironment: Bool
     @NSManaged var adUrl: String

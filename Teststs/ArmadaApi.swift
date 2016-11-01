@@ -103,19 +103,17 @@ public struct ArmadaGroup {
 
 enum ArmadaField: String {
     case Startup = "icon_startup"
-    case ClimateCompensation = "icon_climate_compensation"
     case Diversity = "icon_diversity"
     case Sustainability = "icon_sustainability"
     
     static var All: [ArmadaField] {
-        return [.Startup, .ClimateCompensation, .Diversity, .Sustainability]
+        return [.Startup, .Diversity, .Sustainability]
     }
     
     var title: String {
         switch self {
         case .Startup: return "Startup"
         case .Diversity: return "Diversity"
-        case .ClimateCompensation: return "Climate Compensation"
         case .Sustainability: return "Sustainability"
         }
     }
@@ -123,7 +121,6 @@ enum ArmadaField: String {
     var image: UIImage {
         switch self {
         case .Startup: return UIImage(named: "Rocket")!
-        case .ClimateCompensation: return UIImage(named: "Tree")!
         case .Diversity: return UIImage(named: "diversity")!
         case .Sustainability: return UIImage(named: "Leaf")!
         }
@@ -417,7 +414,7 @@ open class _ArmadaApi {
             }
         }
     }
-    
+    //2e5b04734f94c72083dd70b8d532c8cc
     class func getCompaniesRespectingEtag(_ callback: @escaping (Response<(Data, Bool, String)>) -> Void) {
         let url = URL(string: "http://armada.nu/api/companies")!
         let session = URLSession.shared
