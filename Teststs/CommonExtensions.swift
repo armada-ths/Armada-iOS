@@ -312,16 +312,16 @@ class Json{
     var string:String?  { return value as? String}
     var num:Int?  { return value as? Int}
     public init(object:Any?){
-        print(object)
         value = object as AnyObject?
     }
-    public subscript(_ index: Int) -> Json {
-        if let data = value,
-            let result = data[index]{
-            return Json(object: result)
+    /*public subscript(_ index: Int) -> Json {
+        if let data = value as? [AnyObject],
+            index >= 0,
+            index < data.count {
+            return Json(object: data[index])
         }
         return Json(object: nil)
-    }
+    }*/
     public subscript(_ index: String) -> Json {
         if let data = value,
             let result = data[index]{

@@ -142,16 +142,14 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             cell.companyNameLabel.text = company.name
         }
         
-        cell.firstIcon.isHidden = true
-        cell.secondIcon.isHidden = true
         
-        let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
-        let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
+        //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
+        //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.isHidden = true
         cell.firstIcon.isHidden = true
         cell.thirdIcon.isHidden = true
-        for i in 0..<stuff.count {
+        /*for i in 0..<stuff.count {
             if stuff[i] {
                 if cell.firstIcon.isHidden {
                     cell.firstIcon.image = icons[i].image
@@ -164,7 +162,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
                     cell.thirdIcon.isHidden = false
                 }
             }
-        }
+        }*/
         return cell
     }
     

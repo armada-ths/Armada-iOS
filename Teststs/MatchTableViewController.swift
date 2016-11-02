@@ -193,7 +193,7 @@ class MatchTableViewController: UITableViewController, UIViewControllerPreviewin
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = "\(companyWithMatchPercentage.position). \(company.name)"
         cell.matchProgressView.setProgress(Float(matchPercentage), animated: false)
-        cell.workFieldLabel.text = company.primaryWorkField ?? "Other"
+        cell.workFieldLabel.text = company.primaryWorkField 
         cell.matchLabel.text = "\(Int(round(matchPercentage * 100)))%"
         if let image = company.image {
             cell.logoImageView.image = image

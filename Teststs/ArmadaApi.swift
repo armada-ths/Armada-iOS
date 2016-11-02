@@ -355,7 +355,7 @@ open class _ArmadaApi {
         _ArmadaApi.getCompaniesRespectingEtag() {
             switch $0 {
             case .success(let (_, usedCache, etag)):
-                if !usedCache {
+                if !usedCache || true {
                     self.armadaUrlWithPath("exhibitors").getJson() {
                         switch $0 {
                         case .success(let json):
