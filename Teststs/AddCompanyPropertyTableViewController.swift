@@ -15,6 +15,18 @@ class AddCompanyPropertyTableViewController: UITableViewController {
             title = "Add"
         }
     }
+    
+    @IBAction func sortTypeSegmentControlChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            values.sort()
+        } else {
+            values.sort() { x,y in
+                return ArmadaApi.numberOfCompaniesContainingValue(x, forProperty: property) ?? 0 > ArmadaApi.numberOfCompaniesContainingValue(y, forProperty: property) ?? 0
+                
+            }
+        }
+        tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
