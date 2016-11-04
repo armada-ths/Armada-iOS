@@ -5,9 +5,8 @@ class ArmadaMemberViewController: UIViewController {
     @IBOutlet weak var memberImageView: UIImageView!
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
+
     var member: ArmadaMember!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +37,8 @@ class ArmadaMemberViewController: UIViewController {
             }
         }else{
             self.view.showEmptyMessage("No image")
+            self.nameLabel.isHidden = false
+            self.roleLabel.isHidden = false
         }
     }
 }

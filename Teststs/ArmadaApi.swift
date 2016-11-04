@@ -549,7 +549,8 @@ open class _ArmadaApi {
             for roleJson in json {
                 var members = [ArmadaMember]()
                 if let groupTitle = roleJson["role"] as? String,
-                    let roleJson = roleJson["people"] as? [AnyObject] {
+                    let roleJson = roleJson["people"] as? [AnyObject],
+                    groupTitle != "Armada" {//Everybody is in the correct group and armada group, so ignore the armada group.
                     
                     for memberJson in roleJson {
                         if let name = memberJson["name"] as? String,
@@ -559,18 +560,6 @@ open class _ArmadaApi {
                         }
                     }
                     organisationGroups += [ArmadaGroup(name: groupTitle, members: members)]
-                    /*if let name = object["name"] as? String,
-                     let jsonMembers = object["members"] as? [AnyObject] {
-                     for member in jsonMembers {
-                     if let name = member["name"] as? String,
-                     let role = member["role"] as? String,
-                     let imageUrlString = member["picture_url"] as? String,
-                     let imageUrl = URL(string: imageUrlString) {
-                     members += [ArmadaMember(name: name, imageUrl: imageUrl, role: role)]
-                     }
-                     }
-                     organisationGroups += [ArmadaGroup(name: name, members: members)]
-                     }*/
                 }
             }
         }

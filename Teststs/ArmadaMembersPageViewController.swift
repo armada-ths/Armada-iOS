@@ -8,6 +8,7 @@ class ArmadaMembersPageViewController: UIPageViewController, UIPageViewControlle
     func viewControllerForMember(_ member: ArmadaMember) -> UIViewController {
         let viewController = self.storyboard!.instantiateViewController(withIdentifier: "ArmadaMemberViewController") as! ArmadaMemberViewController
         viewController.member = member
+        // TODO: Set title of the target viewcontroller to member.name
         return viewController
     }
     
