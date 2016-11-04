@@ -31,7 +31,7 @@ open class Company: NSManagedObject {
                 let videoUrl = json["video_url"] as? String ?? ""// TODO: finns inte än?
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
-                let description = json["short_description"] as? String ?? ""
+                let description = json["description"] as? String ?? ""
                 let keywords = json["keywords"] as? String ?? ""// TODO: Bort?
                 let contactName = json["contact_name"] as? String ?? ""// TODO: Bort?
                 let contactEmail = json["contact_email"] as? String ?? ""// TODO: Bort?
