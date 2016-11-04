@@ -74,7 +74,7 @@ public struct News {
 
 public struct ArmadaMember: Equatable {
     let name: String
-    let imageUrl: URL
+    let imageUrl: URL?
     let role: String
 }
 
@@ -545,20 +545,32 @@ open class _ArmadaApi {
     
     open func organisationGroupsFromJson(_ jsonOriginal: AnyObject) -> [ArmadaGroup] {
         var organisationGroups = [ArmadaGroup]()
-        if let json = jsonOriginal["organisation_groups"] as? [AnyObject] {
-            for object in json {
+        if let json = jsonOriginal as? [AnyObject] {
+            for roleJson in json {
                 var members = [ArmadaMember]()
-                if let name = object["name"] as? String,
-                    let jsonMembers = object["members"] as? [AnyObject] {
-                        for member in jsonMembers {
-                            if let name = member["name"] as? String,
-                                let role = member["role"] as? String,
-                                let imageUrlString = member["picture_url"] as? String,
-                                let imageUrl = URL(string: imageUrlString) {
-                                    members += [ArmadaMember(name: name, imageUrl: imageUrl, role: role)]
-                            }
+                if let groupTitle = roleJson["role"] as? String,
+                    let roleJson = roleJson["people"] as? [AnyObject] {
+                    
+                    for memberJson in roleJson {
+                        if let name = memberJson["name"] as? String,
+                            let imageUrlString = memberJson["picture"] as? String {
+                            let imageUrl = URL(string: imageUrlString)
+                            members += [ArmadaMember(name: name, imageUrl: imageUrl, role: groupTitle)]
                         }
-                        organisationGroups += [ArmadaGroup(name: name, members: members)]
+                    }
+                    organisationGroups += [ArmadaGroup(name: groupTitle, members: members)]
+                    /*if let name = object["name"] as? String,
+                     let jsonMembers = object["members"] as? [AnyObject] {
+                     for member in jsonMembers {
+                     if let name = member["name"] as? String,
+                     let role = member["role"] as? String,
+                     let imageUrlString = member["picture_url"] as? String,
+                     let imageUrl = URL(string: imageUrlString) {
+                     members += [ArmadaMember(name: name, imageUrl: imageUrl, role: role)]
+                     }
+                     }
+                     organisationGroups += [ArmadaGroup(name: name, members: members)]
+                     }*/
                 }
             }
         }
@@ -586,7 +598,7 @@ open class _ArmadaApi {
     
     
     func organisationGroupsFromServer(_ callback: @escaping (Response<[ArmadaGroup]>) -> Void) {
-        armadaUrlWithPath("organisation_groups").getJson() {
+        armadaUrlWithPath("organization").getJson() {
             callback($0.map(self.organisationGroupsFromJson))
         }
     }
