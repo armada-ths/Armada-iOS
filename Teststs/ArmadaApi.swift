@@ -559,7 +559,9 @@ open class _ArmadaApi {
                             members += [ArmadaMember(name: name, imageUrl: imageUrl, role: groupTitle)]
                         }
                     }
-                    organisationGroups += [ArmadaGroup(name: groupTitle, members: members)]
+                    if members.count != 0 {//Some groups are empty, we dont want those
+                        organisationGroups += [ArmadaGroup(name: groupTitle, members: members)]
+                    }
                 }
             }
         }
