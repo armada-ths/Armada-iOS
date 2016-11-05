@@ -58,7 +58,9 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sorted().joined(separator: "\n")
         companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sorted().joined(separator: "\n")
         websiteLabel.text = company.website
+        websiteLabel.textColor = ColorScheme.armadaDarkMelon
         videoLabel.text = company.videoUrl
+        videoLabel.textColor = ColorScheme.armadaDarkMelon
         countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
         employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
         
