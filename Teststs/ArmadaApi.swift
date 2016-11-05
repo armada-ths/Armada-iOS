@@ -352,10 +352,10 @@ open class _ArmadaApi {
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))]
         companies = try! managedObjectContext.fetch(fetchRequest)
         
-        _ArmadaApi.getCompaniesRespectingEtag() {
+        getCompaniesRespectingEtag() {
             switch $0 {
             case .success(let (_, usedCache, etag)):
-                if !usedCache || true {
+                if !usedCache {
                     self.armadaUrlWithPath("exhibitors").getJson() {
                         switch $0 {
                         case .success(let json):
@@ -415,8 +415,8 @@ open class _ArmadaApi {
         }
     }
     //2e5b04734f94c72083dd70b8d532c8cc
-    class func getCompaniesRespectingEtag(_ callback: @escaping (Response<(Data, Bool, String)>) -> Void) {
-        let url = URL(string: "http://armada.nu/api/companies")!
+    func getCompaniesRespectingEtag(_ callback: @escaping (Response<(Data, Bool, String)>) -> Void) {
+        let url = self.armadaUrlWithPath("exhibitors")
         let session = URLSession.shared
         let request = URLRequest(url: url)
         var usedCache = false
