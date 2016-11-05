@@ -42,7 +42,7 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
         
         OperationQueue().addOperation {
             var html = String(try! NSString(contentsOf: Bundle(for: type(of: self)).url(forResource: "worldMap", withExtension: "html")!, encoding: String.Encoding.utf8.rawValue))
-            let companyStyle = continents.reduce("<style>", {$0 + "#" + $1.replacingOccurrences(of: " ", with: "", options: [], range: nil) + "{ fill:#349939}"})
+            let companyStyle = continents.reduce("<style>", {$0 + "#" + $1.replacingOccurrences(of: " ", with: "", options: [], range: nil) + "{ fill:#00be77}"})
             html = html.replacingOccurrences(of: "<style>", with: companyStyle)
             OperationQueue.main.addOperation {
                 self.mapWebView.loadHTMLString(html, baseURL: nil)
