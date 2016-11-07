@@ -8,7 +8,7 @@ class ArmadaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        containedViewControllers = ["NewsTableViewController", "AboutViewController", "OrganisationGroupsTableViewController"].map { storyboard!.instantiateViewController(withIdentifier: $0) }
+        containedViewControllers = ["NewsTableViewController", "BanquetTableViewController", "OrganisationGroupsTableViewController"].map { storyboard!.instantiateViewController(withIdentifier: $0) }
         segmentedControlChanged(segmentedControl)
     }
 
@@ -25,5 +25,6 @@ class ArmadaViewController: UIViewController {
         viewController.view.frame = self.containerView.bounds
         self.containerView.addSubview(viewController.view)
         viewController.didMove(toParentViewController: self)
+        
     }
 }
