@@ -61,13 +61,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TxH-jW-wZW">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TxH-jW-wZW">
                                             <rect key="frame" x="24" y="16" width="47" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" ambiguous="YES" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sVz-BY-OCo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sVz-BY-OCo">
                                             <rect key="frame" x="24" y="45" width="30" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="IyP-ea-TF4"/>
@@ -77,22 +77,22 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="900" text="Seat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKG-ek-IbM">
-                                            <rect key="frame" x="320" y="42" width="31" height="17.5"/>
+                                            <rect key="frame" x="320" y="37.5" width="31" height="22"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.77595248287671237" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="linkedin" translatesAutoresizingMaskIntoConstraints="NO" id="Aoi-cu-OOg">
-                                            <rect key="frame" x="325" y="16" width="26" height="26"/>
+                                            <rect key="frame" x="329.5" y="16" width="21.5" height="21.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Aoi-cu-OOg" secondAttribute="height" multiplier="1:1" id="aqu-Xp-ytn"/>
-                                                <constraint firstAttribute="height" constant="26" id="jJi-xH-hqd"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="sVz-BY-OCo" firstAttribute="top" secondItem="TxH-jW-wZW" secondAttribute="bottom" constant="4" id="0t1-jh-zFK"/>
                                         <constraint firstItem="jKG-ek-IbM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sVz-BY-OCo" secondAttribute="trailing" constant="30" id="1L8-fX-afa"/>
+                                        <constraint firstItem="Aoi-cu-OOg" firstAttribute="height" secondItem="TxH-jW-wZW" secondAttribute="height" id="1eR-v1-bqz"/>
                                         <constraint firstItem="Aoi-cu-OOg" firstAttribute="top" secondItem="EFs-uo-Blg" secondAttribute="topMargin" constant="8" id="2Sx-AL-gTw"/>
                                         <constraint firstItem="jKG-ek-IbM" firstAttribute="trailing" secondItem="EFs-uo-Blg" secondAttribute="trailingMargin" constant="-16" id="864-SJ-ayY"/>
                                         <constraint firstItem="TxH-jW-wZW" firstAttribute="top" secondItem="EFs-uo-Blg" secondAttribute="topMargin" constant="8" id="9o0-aB-zuN"/>
