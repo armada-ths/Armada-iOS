@@ -78,6 +78,32 @@ public struct ArmadaMember: Equatable {
     let role: String
 }
 
+public struct ArmadaBanquetPlacement {
+    let firstName: String
+    let lastName: String
+    let linkedinUrl: URL?
+    let table: String
+    let seat: String
+    public init?(json: AnyObject){
+        if let firstName = json["first_name"] as? String,
+            let lastName = json["last_name"] as? String,
+            let table = json["table"] as? String,
+            let seat = json["seat"] as? String {
+            self.firstName = firstName
+            self.lastName = lastName
+            self.table = table
+            self.seat = seat
+            if let urlString = json["linkedin_url"] as? String{
+                self.linkedinUrl = URL(string: urlString)
+            } else {
+                self.linkedinUrl = nil
+            }
+            return 
+        }
+        return nil
+    }
+}
+
 public func ==(x: ArmadaMember, y: ArmadaMember) -> Bool {
     return x.name == y.name && x.role == y.role
 }
@@ -567,6 +593,13 @@ open class _ArmadaApi {
         }
         return organisationGroups
     }
+    
+    public func banquetPlacementFromJson(_ jsonOriginal: [AnyObject]) -> [ArmadaBanquetPlacement] {
+        if let json = jsonOriginal as? [AnyObject]{
+            return json.flatMap { ArmadaBanquetPlacement(json: $0) }
+        }
+        return []
+    }
 
     
     func eventsFromServer(_ callback: @escaping (Response<[ArmadaEvent]>) -> Void) {
@@ -628,6 +661,25 @@ open class _ArmadaApi {
             })
         }
     }
+    func banquetPlacementFromServer(_ callback: @escaping (Response<AnyObject>) -> Void) {
+        armadaUrlWithPath("banquet_placement").getJson(callback)
+    }
+    
+    func banquetPlacementsFromServer(_ callback: @escaping (Response<[ArmadaBanquetPlacement]>) -> Void) {
+        banquetPlacementFromServer {
+            switch $0 {
+            case .success(let json):
+                if let json = json as? [AnyObject]{
+                    callback(.success(self.banquetPlacementFromJson(json)))
+                }else{
+                    callback(.error(NSError(domain: "banquetPlacementsFromServer", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not parse result from server"])))
+                }
+            case .error(let error):
+                callback(.error(error))
+            }
+        }
+    }
+    
     
 }
 
