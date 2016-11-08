@@ -78,6 +78,44 @@ public struct ArmadaMember: Equatable {
     let role: String
 }
 
+public struct ArmadaBanquetPlacement {
+    let firstName: String
+    let lastName: String
+    let linkedinUrl: URL?
+    let table: Int
+    let seat: String
+    let jobTitle: String
+    public init?(json: AnyObject){
+        if let firstName = json["first_name"] as? String,
+            let lastName = json["last_name"] as? String,
+            let seat = json["seat"] as? String {
+            
+            var table: Int = 0
+            if let tmp = json["table"] as? Int{
+                table = tmp
+            }else if let tmpString =  json["table"] as? String,
+                let tmp = Int(tmpString) {
+                table = tmp
+            }
+            
+            self.firstName = firstName
+            self.lastName = lastName
+            self.table = table
+            self.seat = seat
+            self.jobTitle = json["job_title"] as? String ?? "No title"
+            if let urlString = json["linkedin_url"] as? String,
+                urlString.characters.count > 5 {
+                
+                self.linkedinUrl = URL(string: urlString)
+            } else {
+                self.linkedinUrl = nil
+            }
+            return 
+        }
+        return nil
+    }
+}
+
 public func ==(x: ArmadaMember, y: ArmadaMember) -> Bool {
     return x.name == y.name && x.role == y.role
 }
@@ -567,6 +605,13 @@ open class _ArmadaApi {
         }
         return organisationGroups
     }
+    
+    public func banquetPlacementFromJson(_ jsonOriginal: [AnyObject]) -> [ArmadaBanquetPlacement] {
+        if let json = jsonOriginal as? [AnyObject]{
+            return json.flatMap { ArmadaBanquetPlacement(json: $0) }
+        }
+        return []
+    }
 
     
     func eventsFromServer(_ callback: @escaping (Response<[ArmadaEvent]>) -> Void) {
@@ -628,6 +673,28 @@ open class _ArmadaApi {
             })
         }
     }
+    func banquetPlacementFromServer(_ callback: @escaping (Response<AnyObject>) -> Void) {
+        armadaUrlWithPath("banquet_placement").getJson(callback)
+    }
+    
+    func banquetPlacementsFromServer(_ callback: @escaping (Response<[(table: Int, people: [ArmadaBanquetPlacement])]>) -> Void) {
+        banquetPlacementFromServer {
+            switch $0 {
+            case .success(let json):
+                if let json = json as? [AnyObject]{
+                    let placements = self.banquetPlacementFromJson(json)
+                    var tables = Array(Set(placements.map{ $0.table }))
+                    let result = tables.map{ table in (table, placements.filter{ $0.table == table })}
+                    callback(.success(result))
+                }else{
+                    callback(.error(NSError(domain: "banquetPlacementsFromServer", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not parse result from server"])))
+                }
+            case .error(let error):
+                callback(.error(error))
+            }
+        }
+    }
+    
     
 }
 

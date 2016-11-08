@@ -14,9 +14,8 @@ class ArmadaMemberViewController: UIViewController {
         roleLabel.isHidden = true
         nameLabel.text = member.name
         roleLabel.text = member.role
-        
-        // TODO: Set title of the target viewcontroller to member.name
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let imageUrl = member.imageUrl {
