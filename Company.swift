@@ -36,7 +36,7 @@ open class Company: NSManagedObject {
                 let contactName = json["contact_name"] as? String ?? ""// TODO: Bort?
                 let contactEmail = json["contact_email"] as? String ?? ""// TODO: Bort?
                 let contactPhone = json["contact_number"] as? String ?? ""// TODO: Bort?
-                let isStartup = json["startup_exhibitor"] as? Bool ?? false// TODO: Finns inte med än?
+                let isStartup = json["startup"] as? Bool ?? false// TODO: Finns inte med än?
                 let likesEquality = json["diversity"] as? Bool ?? false
                 let likesEnvironment = json["sustainability"] as? Bool ?? false
                 let locationDescription = json["location"] as? String ?? ""// TODO: Sannorligt rätt men finns inte än
