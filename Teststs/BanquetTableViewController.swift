@@ -53,7 +53,10 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
                 self.view.hideEmptyMessage()
             }
             self.view.stopActivityIndicator()
-            self.allPlacements = placements.sorted { $0.0.table < $0.1.table }
+            self.allPlacements = placements.map {
+                (table: $0.table, people: $0.people.sorted(by: { $0.seat < $1.seat }))
+            }.sorted { $0.0.table < $0.1.table }
+        
             self.filteredPlacements = self.filterPlacements(placements: self.allPlacements, by: self.searchBar.text!)
             
             self.tableView.reloadData()
