@@ -83,12 +83,12 @@ public struct ArmadaBanquetPlacement {
     let lastName: String
     let linkedinUrl: URL?
     let table: Int
-    let seat: String
+    let seat: Int
     let jobTitle: String
     public init?(json: AnyObject){
         if let firstName = json["first_name"] as? String,
             let lastName = json["last_name"] as? String,
-            let seat = json["seat"] as? String {
+            let seat = json["seat"] as? Int {
             
             var table: Int = 0
             if let tmp = json["table"] as? Int{
