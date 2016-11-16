@@ -221,6 +221,7 @@ open class _ArmadaApi {
         
         let databaseExists = FileManager.default.fileExists(atPath: self.persistentStoreUrl.path)
         do {
+            //throw NSError(domain: "fake error", code: 1, userInfo: nil)
             if !databaseExists {
                 print("persistentStoreCoordinator does not exist - copying from bundle")
                 try self.copyDatabaseFromBundle()
@@ -232,6 +233,7 @@ open class _ArmadaApi {
         } catch {
             try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
             do {
+                //throw NSError(domain: "fake error", code: 2, userInfo: nil)
                 print("persistentStoreCoordinator fucked up - deleting database")
                 if databaseExists {
                     print("persistentStoreCoordinator old database sucked - testing bundle")
@@ -242,12 +244,13 @@ open class _ArmadaApi {
                 print("persistentStoreCoordinator - the bundle sucked too")
                 try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
                 do {
-                    
+                    //throw NSError(domain: "fake error", code: 3, userInfo: nil)
                     try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
                 } catch {
                     print("persistentStoreCoordinator oh god - we messed up - goodbye")
                     debugPrint(error)
                     print("This might not be as bad as we think, lets try without a persistent store. Exciting!")
+                    //This gives a far worse user experience, but at least the app works.
                     //abort()
                     
                 }

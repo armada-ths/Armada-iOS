@@ -13,5 +13,6 @@ class BanquetTableViewCell: UITableViewCell {
     @IBOutlet weak var jobTitleLabel: UILabel!
     @IBOutlet weak var seatLabel: UILabel!
     @IBOutlet weak var linkedInImageView: UIImageView!
+    //@IBOutlet weak var contentView: UIView!
 
 }

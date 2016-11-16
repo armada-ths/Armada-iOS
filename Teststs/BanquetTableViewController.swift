@@ -55,6 +55,7 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
             self.view.stopActivityIndicator()
             self.allPlacements = placements.sorted { $0.0.table < $0.1.table }
             self.filteredPlacements = self.filterPlacements(placements: self.allPlacements, by: self.searchBar.text!)
+            
             self.tableView.reloadData()
         }
     }
@@ -91,6 +92,19 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
         cell.jobTitleLabel.text = person.jobTitle
         
         cell.linkedInImageView?.isHidden = (person.linkedinUrl == nil)
+        
+        cell.contentView.layer.removeAllAnimations()
+        if "\(person.firstName) \(person.lastName) \(person.jobTitle)".lowercased().contains(searchBar.text!.lowercased()) {
+            UIView.animate(withDuration: 0.5, animations: {
+                cell.contentView.backgroundColor = UIColor.lightGray
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.5, animations: {
+                    cell.contentView.backgroundColor = UIColor.white
+                })
+            })
+        }else{
+            cell.contentView.backgroundColor = UIColor.white
+        }
         return cell
     }
     

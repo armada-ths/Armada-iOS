@@ -44,7 +44,7 @@
         <scene sceneID="Wmm-65-r2f">
             <objects>
                 <tableViewController storyboardIdentifier="BanquetTableViewController" id="bEX-Lq-IJl" customClass="BanquetTableViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="28" sectionFooterHeight="28" id="wT6-Rh-jQH">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="28" sectionFooterHeight="28" id="wT6-Rh-jQH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,7 +62,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="900" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TxH-jW-wZW">
-                                            <rect key="frame" x="24" y="16" width="47" height="21"/>
+                                            <rect key="frame" x="24" y="16" width="47" height="21.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -77,13 +77,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="900" text="Seat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKG-ek-IbM">
-                                            <rect key="frame" x="320" y="37.5" width="31" height="22"/>
+                                            <rect key="frame" x="320" y="38" width="31" height="21.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.77595248287671237" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="linkedin" translatesAutoresizingMaskIntoConstraints="NO" id="Aoi-cu-OOg">
-                                            <rect key="frame" x="329.5" y="16" width="21.5" height="21.5"/>
+                                            <rect key="frame" x="329" y="16" width="22" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Aoi-cu-OOg" secondAttribute="height" multiplier="1:1" id="aqu-Xp-ytn"/>
                                             </constraints>
@@ -106,6 +106,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="contentView" destination="EFs-uo-Blg" id="r4p-vx-vzQ"/>
                                     <outlet property="jobTitleLabel" destination="sVz-BY-OCo" id="3c1-aS-zct"/>
                                     <outlet property="linkedInImageView" destination="Aoi-cu-OOg" id="JP3-wb-mcw"/>
                                     <outlet property="nameLabel" destination="TxH-jW-wZW" id="lT1-aI-m7o"/>
