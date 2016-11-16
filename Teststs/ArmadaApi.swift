@@ -230,9 +230,9 @@ open class _ArmadaApi {
             
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
         } catch {
+            try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
             do {
                 print("persistentStoreCoordinator fucked up - deleting database")
-                try self.deleteDatabase()
                 if databaseExists {
                     print("persistentStoreCoordinator old database sucked - testing bundle")
                     try self.copyDatabaseFromBundle()
@@ -240,13 +240,16 @@ open class _ArmadaApi {
                 try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
             } catch {
                 print("persistentStoreCoordinator - the bundle sucked too")
+                try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
                 do {
-                    try self.deleteDatabase()
+                    
                     try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
                 } catch {
                     print("persistentStoreCoordinator oh god - we messed up - goodbye")
-                    print(error)
-                    abort()
+                    debugPrint(error)
+                    print("This might not be as bad as we think, lets try without a persistent store. Exciting!")
+                    //abort()
+                    
                 }
                 
             }
@@ -404,7 +407,10 @@ open class _ArmadaApi {
                                         for company in self.companies {
                                             self.managedObjectContext.delete(company)
                                         }
-                                        try! self.managedObjectContext.save()
+                                        if let count = self.managedObjectContext.persistentStoreCoordinator?.persistentStores.count
+                                            , count > 0 {
+                                            try? self.managedObjectContext.save()
+                                        }
                                         self.companies = []
                                         for json in companiesJson {
                                             if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
@@ -412,7 +418,10 @@ open class _ArmadaApi {
                                                 self.companies.append(company)
                                             }
                                         }
-                                        try! self.managedObjectContext.save()
+                                        if let count = self.managedObjectContext.persistentStoreCoordinator?.persistentStores.count
+                                            , count > 0 {
+                                        try? self.managedObjectContext.save()
+                                        }
                                     }
                                     callback()
                                 }
