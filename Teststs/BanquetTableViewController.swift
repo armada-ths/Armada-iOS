@@ -124,7 +124,7 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
                 cell.contentView.backgroundColor = UIColor.lightGray
             }, completion: { _ in
                 UIView.animate(withDuration: 0.5, animations: {
-                    cell.contentView.backgroundColor = UIColor.white
+                    cell.contentView.backgroundColor = UIColor(hex: 0xeeeeee)
                 })
             })
         }else{
