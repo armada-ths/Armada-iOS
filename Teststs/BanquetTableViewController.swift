@@ -134,13 +134,14 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let person = filteredPlacements[indexPath.section].people[indexPath.row]
+        if indexPath.section > 0 {
+        let person = filteredPlacements[indexPath.section-1].people[indexPath.row]
         if let url = person.linkedinUrl{
             UIApplication.shared.openURL(url)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     
