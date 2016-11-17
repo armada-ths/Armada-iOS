@@ -76,19 +76,41 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return filteredPlacements.count
+        return filteredPlacements.count + 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredPlacements[section].people.count
+        if section == 0 {
+            return 1
+        }
+        return filteredPlacements[section-1].people.count
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Table \(filteredPlacements[section].table)"
+        if section == 0 {
+            return nil
+        }
+        return "Table \(filteredPlacements[section-1].table)"
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BanquetImageTableViewCell", for: indexPath) as! BanquetImageTableViewCell
+            URL(string: "https://ais.armada.nu/static/images/bordsplacering.png")?.getImage { response in
+                OperationQueue.main.addOperation {
+                switch response {
+                case .success(let image):
+                        cell.banquetImageView.image = image
+                case .error(let error):
+                    print(error)
+                    }
+                }
+            }
+            return cell
+        }
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "BanquetTableViewCell", for: indexPath) as! BanquetTableViewCell
-        let person = filteredPlacements[indexPath.section].people[indexPath.row]
+        let person = filteredPlacements[indexPath.section-1].people[indexPath.row]
 
         cell.nameLabel.text = "\(person.firstName) \(person.lastName)"
         cell.seatLabel.text = "Seat \(person.seat)"
@@ -125,5 +147,13 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateResults(placements: allPlacements)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
