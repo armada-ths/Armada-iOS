@@ -27,7 +27,7 @@ open class Company: NSManagedObject {
                 let website = json["website_url"] as? String ?? ""
                 
                 let countries = json["countries"] as? Int ?? 0
-                let locationUrl = json["map_url"] as? String ?? ""// TODO: finns inte än?
+                let locationUrl = json["map_location_url"] as? String ?? ""// TODO: finns inte än?
                 let videoUrl = json["video_url"] as? String ?? ""// TODO: finns inte än?
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
