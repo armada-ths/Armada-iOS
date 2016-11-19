@@ -160,7 +160,7 @@ enum ArmadaField: String {
         switch self {
         case .Startup: return UIImage(named: "Rocket")!
         case .Diversity: return UIImage(named: "diversity")!
-        case .Sustainability: return UIImage(named: "Leaf")!
+        case .Sustainability: return UIImage(named: "sustainability")!
         }
     }
     

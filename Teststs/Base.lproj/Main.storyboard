@@ -1207,31 +1207,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rocket" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-mv-KKS">
-                                                    <rect key="frame" x="15" y="11" width="195" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diversity" translatesAutoresizingMaskIntoConstraints="NO" id="Xgn-w6-dOZ">
+                                                    <rect key="frame" x="30" y="11" width="277.5" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Imb-an-D19"/>
+                                                        <constraint firstAttribute="height" constant="30" id="iIC-J7-j6s"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diversity" translatesAutoresizingMaskIntoConstraints="NO" id="Xgn-w6-dOZ">
-                                                    <rect key="frame" x="195" y="11" width="195" height="30"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Leaf" translatesAutoresizingMaskIntoConstraints="NO" id="536-mX-miU">
-                                                    <rect key="frame" x="390" y="11" width="195" height="30"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sustainability" translatesAutoresizingMaskIntoConstraints="NO" id="536-mX-miU">
+                                                    <rect key="frame" x="307.5" y="11" width="277.5" height="30"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="536-mX-miU" firstAttribute="centerY" secondItem="UsG-mv-KKS" secondAttribute="centerY" id="23i-dS-aBk"/>
-                                                <constraint firstItem="536-mX-miU" firstAttribute="height" secondItem="UsG-mv-KKS" secondAttribute="height" id="74r-ql-1zK"/>
-                                                <constraint firstItem="UsG-mv-KKS" firstAttribute="top" secondItem="jEh-bp-ZiN" secondAttribute="top" constant="11" id="FOt-cl-7Fh"/>
-                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="width" secondItem="UsG-mv-KKS" secondAttribute="width" id="Mr9-hu-2D2"/>
-                                                <constraint firstItem="UsG-mv-KKS" firstAttribute="leading" secondItem="jEh-bp-ZiN" secondAttribute="leading" constant="15" id="P8g-bT-xaR"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="centerY" secondItem="Xgn-w6-dOZ" secondAttribute="centerY" id="2Li-Zu-vxS"/>
+                                                <constraint firstItem="536-mX-miU" firstAttribute="height" secondItem="Xgn-w6-dOZ" secondAttribute="height" id="91A-4z-aul"/>
                                                 <constraint firstAttribute="trailing" secondItem="536-mX-miU" secondAttribute="trailing" constant="15" id="TEA-Jo-1yj"/>
-                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="centerY" secondItem="UsG-mv-KKS" secondAttribute="centerY" id="TyW-Vg-hKD"/>
                                                 <constraint firstItem="536-mX-miU" firstAttribute="leading" secondItem="Xgn-w6-dOZ" secondAttribute="trailing" id="UL3-VS-TmK"/>
-                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="leading" secondItem="UsG-mv-KKS" secondAttribute="trailing" constant="-15" id="Xac-hf-pry"/>
-                                                <constraint firstItem="536-mX-miU" firstAttribute="width" secondItem="UsG-mv-KKS" secondAttribute="width" id="bhj-eo-3k4"/>
-                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="height" secondItem="UsG-mv-KKS" secondAttribute="height" id="t0y-bz-8ga"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="leading" secondItem="jEh-bp-ZiN" secondAttribute="leadingMargin" constant="15" id="WeM-Rq-6Gb"/>
+                                                <constraint firstItem="Xgn-w6-dOZ" firstAttribute="width" secondItem="536-mX-miU" secondAttribute="width" id="hj8-Og-REP"/>
+                                                <constraint firstAttribute="topMargin" secondItem="Xgn-w6-dOZ" secondAttribute="top" id="z0Q-HJ-wa3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1311,7 +1304,6 @@
                         <outlet property="favoritesButton" destination="mAg-sQ-oaQ" id="WXb-Gz-Y2O"/>
                         <outlet property="fieldsLabel" destination="Pvu-eY-r7g" id="SRH-pi-x5Z"/>
                         <outlet property="headerImageView" destination="tKa-d3-hjD" id="wOr-X8-U19"/>
-                        <outlet property="isStartupImageView" destination="UsG-mv-KKS" id="CuY-5Q-DdU"/>
                         <outlet property="jobLabel" destination="lqy-IJ-IgT" id="fbi-mi-btE"/>
                         <outlet property="likesDiversityImageView" destination="Xgn-w6-dOZ" id="lN5-Lj-927"/>
                         <outlet property="likesEnvironmentImageView" destination="536-mX-miU" id="RSw-87-htW"/>
@@ -2840,7 +2832,6 @@
         <image name="Armada-icon-1" width="30" height="30"/>
         <image name="Etteplan" width="399" height="94"/>
         <image name="Leaf" width="64" height="100"/>
-        <image name="Rocket" width="66" height="100"/>
         <image name="Tree" width="78" height="100"/>
         <image name="armadaLogo" width="300" height="300"/>
         <image name="astronaut" width="128" height="128"/>
@@ -2848,7 +2839,7 @@
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
-        <image name="diversity" width="300" height="174"/>
+        <image name="diversity" width="462" height="390"/>
         <image name="ericsson-logo" width="280" height="248"/>
         <image name="ericsson_white" width="640" height="640"/>
         <image name="facebook" width="128" height="128"/>
@@ -2858,6 +2849,7 @@
         <image name="linkedin" width="128" height="128"/>
         <image name="notepad" width="32" height="32"/>
         <image name="notepad-1" width="32" height="32"/>
+        <image name="sustainability" width="201" height="339"/>
         <image name="ths_white" width="640" height="640"/>
         <image name="twitter" width="128" height="128"/>
     </resources>

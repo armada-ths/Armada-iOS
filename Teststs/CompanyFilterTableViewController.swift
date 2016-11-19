@@ -118,7 +118,7 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return CompanyProperty.All.count + 1 + 1
+        return CompanyProperty.All.count + 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,7 +128,7 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "Ways of working", "", ""][section]
+        return ["Programmes", "Job Types", "Continents", "Work Fields", "Company Values", "", ""][section]
     }
     
     func cellWithIdentifier(_ identifier: String) -> UITableViewCell {
