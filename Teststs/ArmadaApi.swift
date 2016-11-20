@@ -283,7 +283,6 @@ open class _ArmadaApi {
         try FileManager.default.removeItem(at: persistentStoreUrl)
         try FileManager.default.removeItem(at: persistentStoreUrlShm)
         try FileManager.default.removeItem(at: persistentStoreUrlWal)
-        
     }
     
 
@@ -394,7 +393,7 @@ open class _ArmadaApi {
         let fetchRequest = NSFetchRequest<Company>()
         fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Company", in: managedObjectContext)!
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))]
-        companies = try! managedObjectContext.fetch(fetchRequest)
+        companies = (try? managedObjectContext.fetch(fetchRequest)) ?? []
         
         getCompaniesRespectingEtag() {
             switch $0 {
