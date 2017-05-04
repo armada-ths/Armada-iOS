@@ -573,7 +573,7 @@ open class _ArmadaApi {
                     return News(title: title, content: content, publishedDate: date)
             }
             return nil
-            } ?? [])
+            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
     }
     
     open func sponsorsFromJson(_ json: AnyObject) -> [Sponsor] {
