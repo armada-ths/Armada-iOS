@@ -146,6 +146,11 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
     
     
     // MARK: UISearchBarDelegate
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = !(searchBar.text ?? "").isEmpty
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         updateResults(placements: allPlacements)
     }
@@ -156,5 +161,9 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
     }
 }
