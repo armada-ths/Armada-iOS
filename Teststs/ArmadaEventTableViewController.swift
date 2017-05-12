@@ -41,14 +41,17 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 self.tableViewController?.tableView.scrollToRow(at: IndexPath(item: row, section: 0), at: .top, animated: animated)
             }
         }
-        
+
+
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let armadaEvent = values[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArmadaEventTableViewCell", for: indexPath) as! ArmadaEventTableViewCell
             cell.titleLabel.text = armadaEvent.title
-            cell.dateLabel.text = armadaEvent.startDate.format("d") + "\n" + armadaEvent.startDate.format("MMM")
+            cell.dateLabel.text = armadaEvent.startDate.format("d")  + "\n" +
+                armadaEvent.startDate.format("MMM") + "\n" +
+                armadaEvent.startDate.format("y")
             cell.descriptionLabel.text = armadaEvent.signupStateString
-            
+            //print(armadaEvent.startDate.format("y"))
             if let imageUrl = armadaEvent.imageUrl {
                 if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image
