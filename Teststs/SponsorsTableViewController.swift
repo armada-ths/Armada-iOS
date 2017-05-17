@@ -29,8 +29,17 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                 }
             }
         }
+        
     
-
+        func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            let sponsorName = ["Main Partner", "Partner"][section]
+            if (values[section].count == 0){
+                return ""
+            }
+            return sponsorName + (values[section].count > 1 ? "s" : "")
+        }
+        
+        
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let sponsor = self[indexPath]
             let cell = tableView.dequeueReusableCell(withIdentifier: sponsor.description.isEmpty ? "SponsorsTableViewCellNoText" : "SponsorsTableViewCell") as! SponsorsTableViewCell
