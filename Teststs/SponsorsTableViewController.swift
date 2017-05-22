@@ -107,6 +107,15 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
         openWebsite()
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        print("tableview hello")
+        let labelFrame = CGRect(x: 0, y: 0, width: 200, height: 40)
+        let testLabel = UILabel(frame: labelFrame)
+        testLabel.text = dataSource.tableView(tableView, titleForHeaderInSection: section)
+        testLabel.textAlignment = .center
+        return testLabel
+    }
+    
     func openWebsite() {
         if let indexPath = tableView.indexPathForSelectedRow ?? highlightedIndexPath {
             let sponsor = dataSource[indexPath]
