@@ -23,10 +23,9 @@ class LargeNewsTableViewCell: UITableViewCell, NewsCell {
             if let newsItem = newsItem{
                 titleLabel.text = newsItem.title
                 dateLabel.text = newsItem.publishedDate.readableString
-                newsImageView.loadImageFromUrl("https://upload.wikimedia.org/wikipedia/en/2/29/Armada_novel_cover.jpg")
+                newsImageView.loadImageFromUrl(newsItem.imageUrl)
             }
         }
-        
     }
     
     override func awakeFromNib() {

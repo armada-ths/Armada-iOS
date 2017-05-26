@@ -68,6 +68,7 @@ public struct ArmadaEvent {
 
 public struct News {
     public let title: String
+    public let imageUrl: String
     public let content: String
     public let publishedDate: Date
 }
@@ -567,11 +568,12 @@ open class _ArmadaApi {
     open func newsFromJson(_ json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if let title = json["title"] as? String,
+                let imageUrl = json["image"] as? String,
                 let content = json["html_article_text"] as? String,
                 let dateTimestamp = json["date_published"] as? Int {
                     let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, content: content, publishedDate: date)
-            }
+                    return News(title: title, imageUrl : imageUrl, content: content, publishedDate: date)
+                }
             return nil
             } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SmallTableViewCell: UITableViewCell, NewsCell {
+class SmallNewsTableViewCell: UITableViewCell, NewsCell {
 
     @IBOutlet weak var newsImageView: UIImageView!
     
@@ -20,10 +20,9 @@ class SmallTableViewCell: UITableViewCell, NewsCell {
             if let newsItem = newsItem{
                 titleLabel.text = newsItem.title
                 dateLabel.text = newsItem.publishedDate.readableString
-                newsImageView.loadImageFromUrl("https://cdn.apk-cloud.com/detail/image/se.ths.kth.Aramda-w250.png")
+                newsImageView.loadImageFromUrl(newsItem.imageUrl)
             }
-        }
-        
+        }        
     }
     override func awakeFromNib() {
         super.awakeFromNib()
