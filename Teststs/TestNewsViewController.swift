@@ -24,8 +24,6 @@ class TestNewsViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-    
-
 }
 
 extension TestNewsViewController: UITableViewDataSource {
@@ -55,7 +53,6 @@ extension TestNewsViewController: UITableViewDataSource {
             }
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = indexPath.row == 0 ? "largeNewsCell" : "smallNewsCell"
@@ -63,11 +60,15 @@ extension TestNewsViewController: UITableViewDataSource {
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NewsCell
         cell.newsItem = news[indexPath.row]
         return cell as! UITableViewCell
-            
-
     }
-
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if let controller = segue.destination as? DetailedNewsTableViewController,
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+            controller.news = news[indexPath.row]
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
     
     
     
