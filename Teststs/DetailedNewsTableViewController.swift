@@ -3,7 +3,6 @@
 //  Armada
 //
 //  Created by Ola Roos on 30/05/17.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
 //
 
 import UIKit
@@ -18,7 +17,6 @@ class DetailedNewsTableViewController: UITableViewController {
     var news: News!
     
     @IBAction func goBack(_ sender: Any) {
-        print("pushing naviation bar")
         self.dismiss(animated: true, completion: nil)
     }
     
