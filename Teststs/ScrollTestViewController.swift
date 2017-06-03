@@ -24,7 +24,8 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
     var defaultScrollHeight: CGFloat!
     var maxScrollOffset: CGFloat!
     var maxScale: CGFloat!
-
+    var disableScroll: Bool!
+    
     var news: News!
 
     @IBOutlet weak var newsImageView: UIImageView!
@@ -39,6 +40,7 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         scrollView.delegate = self
         scale = 4
+        disableScroll = false
         previousOffset = 0
         newsImageView.loadImageFromUrl(news.imageUrl)
         titleLabel.text = news.title
@@ -53,7 +55,10 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
         defaultScrollHeight = scrollView.frame.height
         maxScrollOffset = defaultTopHeight + defaultScrollHeight
         maxScale = (scrollSubView.frame.height - (defaultTopHeight + defaultScrollHeight)) / defaultTopHeight
-        if (scale > maxScale){
+        print(maxScale)
+        if (maxScale < 1){
+            disableScroll = true
+        } else if (scale > maxScale){
             scale = maxScale
         }
     }
@@ -73,7 +78,10 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateFrames(scrollView.contentOffset.y)
+        if (disableScroll == false){
+                updateFrames(scrollView.contentOffset.y)
+        }
+        
     }
 }
 
