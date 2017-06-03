@@ -3,7 +3,7 @@
 //  Armada
 //
 //  Created by Ola Roos on 02/06/17.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
+//  Copyright © 2017 Ola Roos. All rights reserved.
 //
 
 import UIKit
@@ -33,9 +33,6 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
 
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
@@ -46,7 +43,6 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
         titleLabel.text = news.title
         dateLabel.text = news.publishedDate.formatWithStyle(.long)
         contentTextView.attributedText = news.content.attributedHtmlString ?? NSAttributedString(string: news.content)
-
     }
 
     override func viewDidAppear(_ animated: Bool) {

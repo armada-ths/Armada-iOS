@@ -696,7 +696,7 @@ open class _ArmadaApi {
             case .success(let json):
                 if let json = json as? [AnyObject]{
                     let placements = self.banquetPlacementFromJson(json)
-                    var tables = Array(Set(placements.map{ $0.table }))
+                    let tables = Array(Set(placements.map{ $0.table }))
                     let result = tables.map{ table in (table, placements.filter{ $0.table == table })}
                     callback(.success(result))
                 }else{
