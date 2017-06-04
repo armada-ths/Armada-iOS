@@ -19,7 +19,7 @@ class SmallNewsTableViewCell: UITableViewCell, NewsCell {
         didSet{
             if let newsItem = newsItem{
                 titleLabel.text = newsItem.title
-                dateLabel.text = newsItem.publishedDate.readableString
+                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
                 newsImageView.loadImageFromUrl(newsItem.imageUrl)
             }
         }        

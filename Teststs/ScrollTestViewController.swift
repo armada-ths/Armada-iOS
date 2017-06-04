@@ -51,13 +51,13 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
         defaultScrollHeight = scrollView.frame.height
         maxScrollOffset = defaultTopHeight + defaultScrollHeight
         maxScale = (scrollSubView.frame.height - (defaultTopHeight + defaultScrollHeight)) / defaultTopHeight
-        print(maxScale)
         if (maxScale < 1){
             disableScroll = true
         } else if (scale > maxScale){
             scale = maxScale
         }
     }
+
     func updateFrames(_ newOffset: CGFloat){
         let diff: CGFloat = (newOffset - previousOffset) / scale
         if (newOffset / scale <= defaultTopHeight){
@@ -76,8 +76,7 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if (disableScroll == false){
                 updateFrames(scrollView.contentOffset.y)
-        }
-        
+        }        
     }
 }
 

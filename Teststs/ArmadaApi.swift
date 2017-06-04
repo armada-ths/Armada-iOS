@@ -14,9 +14,6 @@ public struct ArmadaEvent {
     public let imageUrl: URL?
     public let registrationRequired: Bool
     
-    
-    
-    
     enum SignupState {
         case passed, notRequired, notAvailable, now, future
 //        
