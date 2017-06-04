@@ -43,8 +43,9 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
         titleLabel.text = news.title
         dateLabel.text = news.publishedDate.formatWithStyle(.long)
         contentTextView.attributedText = news.content.attributedHtmlString ?? NSAttributedString(string: news.content)
+        
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         // Variables take different values if set in viewDidLoad()        
         defaultTopHeight = topView.frame.height
