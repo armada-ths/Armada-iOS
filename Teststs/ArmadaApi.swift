@@ -67,6 +67,7 @@ public struct News {
     public let title: String
     public let imageUrl: String
     public let content: String
+    public let ingress: String
     public let publishedDate: Date
 }
 
@@ -567,9 +568,11 @@ open class _ArmadaApi {
             if let title = json["title"] as? String,
                 let imageUrl = json["image"] as? String,
                 let content = json["html_article_text"] as? String,
+                // let ingress = json["ingress"] as? String,
+                let ingress = "ingress property exists in database" as? String,
                 let dateTimestamp = json["date_published"] as? Int {
                     let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, imageUrl : imageUrl, content: content, publishedDate: date)
+                    return News(title: title, imageUrl : imageUrl, content: content, ingress: ingress, publishedDate: date)
                 }
             return nil
             } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
