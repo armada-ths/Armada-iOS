@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestNewsViewController: UIViewController {
+class NewsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var news: [News] = []
@@ -26,7 +26,7 @@ class TestNewsViewController: UIViewController {
     }
 }
 
-extension TestNewsViewController: UITableViewDataSource {
+extension NewsViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -63,7 +63,7 @@ extension TestNewsViewController: UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if let controller = segue.destination as? ScrollTestViewController,
+        if let controller = segue.destination as? ScrollNewsViewController,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             controller.news = news[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: true)

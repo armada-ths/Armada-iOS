@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
+class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
