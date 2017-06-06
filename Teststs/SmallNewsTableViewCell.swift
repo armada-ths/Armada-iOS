@@ -3,7 +3,7 @@
 //  Armada
 //
 //  Created by Ola Roos on 22/05/17.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
+//  Copyright © 2017 Ola Roos. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,7 @@ class SmallNewsTableViewCell: UITableViewCell, NewsCell {
         didSet{
             if let newsItem = newsItem{
                 titleLabel.text = newsItem.title
-                dateLabel.text = newsItem.publishedDate.readableString
+                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
                 newsImageView.loadImageFromUrl(newsItem.imageUrl)
             }
         }        

@@ -14,9 +14,6 @@ public struct ArmadaEvent {
     public let imageUrl: URL?
     public let registrationRequired: Bool
     
-    
-    
-    
     enum SignupState {
         case passed, notRequired, notAvailable, now, future
 //        
@@ -70,6 +67,7 @@ public struct News {
     public let title: String
     public let imageUrl: String
     public let content: String
+    public let ingress: String
     public let publishedDate: Date
 }
 
@@ -570,9 +568,11 @@ open class _ArmadaApi {
             if let title = json["title"] as? String,
                 let imageUrl = json["image"] as? String,
                 let content = json["html_article_text"] as? String,
+                // let ingress = json["ingress"] as? String,
+                let ingress = "ingress property exists in database" as? String,
                 let dateTimestamp = json["date_published"] as? Int {
                     let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, imageUrl : imageUrl, content: content, publishedDate: date)
+                    return News(title: title, imageUrl : imageUrl, content: content, ingress: ingress, publishedDate: date)
                 }
             return nil
             } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
@@ -696,7 +696,7 @@ open class _ArmadaApi {
             case .success(let json):
                 if let json = json as? [AnyObject]{
                     let placements = self.banquetPlacementFromJson(json)
-                    var tables = Array(Set(placements.map{ $0.table }))
+                    let tables = Array(Set(placements.map{ $0.table }))
                     let result = tables.map{ table in (table, placements.filter{ $0.table == table })}
                     callback(.success(result))
                 }else{

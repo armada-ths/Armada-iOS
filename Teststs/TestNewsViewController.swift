@@ -3,7 +3,7 @@
 //  Armada
 //
 //  Created by Ola Roos on 22/05/17.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
+//  Copyright © 2017 Ola Roos. All rights reserved.
 //
 
 import UIKit
@@ -63,7 +63,7 @@ extension TestNewsViewController: UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if let controller = segue.destination as? DetailedNewsTableViewController,
+        if let controller = segue.destination as? ScrollTestViewController,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             controller.news = news[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: true)

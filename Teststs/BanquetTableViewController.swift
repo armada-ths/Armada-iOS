@@ -9,14 +9,15 @@
 import UIKit
 
 class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
-
     
     var allPlacements =  [(table: Int, people: [ArmadaBanquetPlacement])]()
     var filteredPlacements =  [(table: Int, people: [ArmadaBanquetPlacement])]()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         searchBar.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -27,6 +28,7 @@ class BanquetTableViewController: UITableViewController, UISearchBarDelegate {
         if (allPlacements.count == 0){
             load()
         }
+        
     }
     
     func load(){

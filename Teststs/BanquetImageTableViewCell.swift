@@ -12,5 +12,4 @@ class BanquetImageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var banquetImageView: UIImageView!
 
-
 }
