@@ -36,7 +36,7 @@ class ScrollTestViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
-        scale = 4
+        scale = 2
         disableScroll = false
         previousOffset = 0
         newsImageView.loadImageFromUrl(news.imageUrl)

@@ -24,7 +24,7 @@ class LargeNewsTableViewCell: UITableViewCell, NewsCell {
     var newsItem: News? = nil{
         didSet{
             if let newsItem = newsItem{
-                if (newsItem.ingress == "ingress property exists in database"){
+                if (newsItem.ingress != "ingress property exists in database"){
                     //ingressTextView.text = newsItem.ingress
                     ingressTextView.text = "Om Nom Nom Nom..."
                 } else {
