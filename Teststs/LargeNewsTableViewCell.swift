@@ -34,7 +34,7 @@ class LargeNewsTableViewCell: UITableViewCell, NewsCell {
                 }
                 titleLabel.text = newsItem.title
                 dateLabel.text = newsItem.publishedDate.format("dd MMMM")
-                newsImageView.loadImageFromUrl(newsItem.imageUrl)
+                newsImageView.loadImageFromUrl(newsItem.imageUrlWide)
             }
         }
     }
