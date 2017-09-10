@@ -28,8 +28,7 @@ class SponsorsTableViewController: UITableViewController, UIViewControllerPrevie
                     }
                 }
             }
-        }
-        
+        }        
     
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             let sponsorName = ["Main Partner", "Partner"][section]

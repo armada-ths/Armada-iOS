@@ -61,9 +61,12 @@
 		26EE7B701BED3B3C00752ADF /* CompanyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EE7B6F1BED3B3C00752ADF /* CompanyFilter.swift */; };
 		26F256481BEA9FA3002D9AAB /* OrganisationGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F256471BEA9FA3002D9AAB /* OrganisationGroupsTableViewController.swift */; };
 		26F2564C1BEABCF3002D9AAB /* MemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F2564B1BEABCF3002D9AAB /* MemberTableViewCell.swift */; };
+		9F429D4E1F5F1E61003981B8 /* PartnerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F429D4D1F5F1E61003981B8 /* PartnerCollectionViewCell.swift */; };
 		9F793D6F1ED360A0002C36E3 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F793D6E1ED360A0002C36E3 /* NewsViewController.swift */; };
 		9F793D711ED36312002C36E3 /* LargeNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F793D701ED36312002C36E3 /* LargeNewsTableViewCell.swift */; };
 		9F793D731ED36D2B002C36E3 /* SmallNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F793D721ED36D2B002C36E3 /* SmallNewsTableViewCell.swift */; };
+		9F821B461F5F22E20071BF28 /* AboutCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F821B451F5F22E20071BF28 /* AboutCollectionViewController.swift */; };
+		9F821B481F5F2C750071BF28 /* ArmadaCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F821B471F5F2C750071BF28 /* ArmadaCollectionViewDataSource.swift */; };
 		9FF205B71EE1BA10009748B5 /* ScrollNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF205B61EE1BA10009748B5 /* ScrollNewsViewController.swift */; };
 		DA0006941B153B6A006BFDBD /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */; };
 		DA0006961B153C54006BFDBD /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0006951B153C54006BFDBD /* NewsTableViewController.swift */; };
@@ -149,9 +152,12 @@
 		26EE7B6F1BED3B3C00752ADF /* CompanyFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyFilter.swift; sourceTree = "<group>"; };
 		26F256471BEA9FA3002D9AAB /* OrganisationGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganisationGroupsTableViewController.swift; sourceTree = "<group>"; };
 		26F2564B1BEABCF3002D9AAB /* MemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberTableViewCell.swift; sourceTree = "<group>"; };
+		9F429D4D1F5F1E61003981B8 /* PartnerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerCollectionViewCell.swift; sourceTree = "<group>"; };
 		9F793D6E1ED360A0002C36E3 /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		9F793D701ED36312002C36E3 /* LargeNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeNewsTableViewCell.swift; sourceTree = "<group>"; };
 		9F793D721ED36D2B002C36E3 /* SmallNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallNewsTableViewCell.swift; sourceTree = "<group>"; };
+		9F821B451F5F22E20071BF28 /* AboutCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCollectionViewController.swift; sourceTree = "<group>"; };
+		9F821B471F5F2C750071BF28 /* ArmadaCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArmadaCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		9FF205B61EE1BA10009748B5 /* ScrollNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollNewsViewController.swift; sourceTree = "<group>"; };
 		DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewCell.swift; path = Teststs/NewsTableViewCell.swift; sourceTree = "<group>"; };
 		DA0006951B153C54006BFDBD /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewController.swift; path = Teststs/NewsTableViewController.swift; sourceTree = "<group>"; };
@@ -205,11 +211,13 @@
 		265B7DDE1B053A080074450B /* Armada */ = {
 			isa = PBXGroup;
 			children = (
+				9F429D461F5F1C3B003981B8 /* About */,
 				265B7DE11B053A080074450B /* AppDelegate.swift */,
 				26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */,
 				26BD3D3C1B1607D800CD0572 /* CommonExtensions.swift */,
 				269A223B1B1CF45B00023BE8 /* TabBarController.swift */,
 				26C652681BB5FBEA00798FBE /* ArmadaTableViewDataSource.swift */,
+				9F821B471F5F2C750071BF28 /* ArmadaCollectionViewDataSource.swift */,
 				26B469791B5E858D00AE75E3 /* ScrollZoomTableViewController.swift */,
 				26C6526A1BB5FF7700798FBE /* ArmadaApi */,
 				265EABFE1BEC13AB009CEDCD /* Catalogue + Match */,
@@ -364,6 +372,15 @@
 			name = ArmadaApi;
 			sourceTree = "<group>";
 		};
+		9F429D461F5F1C3B003981B8 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				9F429D4D1F5F1E61003981B8 /* PartnerCollectionViewCell.swift */,
+				9F821B451F5F22E20071BF28 /* AboutCollectionViewController.swift */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
 		9FD6DB271EE742500050DF29 /* 2016 */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,8 +515,10 @@
 				26402E5D1B8F987700EC84E4 /* ArmadaViewController.swift in Sources */,
 				269C0D011B8E9BDE008FB633 /* WorkField+CoreDataProperties.swift in Sources */,
 				265EABF91BEBE8D2009CEDCD /* ArmadaMembersPageViewController.swift in Sources */,
+				9F821B461F5F22E20071BF28 /* AboutCollectionViewController.swift in Sources */,
 				269C0CFE1B8E8D9F008FB633 /* Company.swift in Sources */,
 				260376811B8EB7980031F92F /* CompanyValue.swift in Sources */,
+				9F821B481F5F2C750071BF28 /* ArmadaCollectionViewDataSource.swift in Sources */,
 				26C2EF941BA211FE00D125D8 /* CompanyTypeTableViewCell.swift in Sources */,
 				26F2564C1BEABCF3002D9AAB /* MemberTableViewCell.swift in Sources */,
 				2633574A1BC69DA30046D05E /* TitleDetailTableViewCell.swift in Sources */,
@@ -526,6 +545,7 @@
 				2678975A1BB7B9A00013E8FC /* ArmadaEventTableViewCell.swift in Sources */,
 				26BD3D3D1B1607D800CD0572 /* CommonExtensions.swift in Sources */,
 				261B58BB1B1641ED006F3968 /* CompaniesPageViewController.swift in Sources */,
+				9F429D4E1F5F1E61003981B8 /* PartnerCollectionViewCell.swift in Sources */,
 				2601191C1BA600D500540ED5 /* WorkWay+CoreDataProperties.swift in Sources */,
 				269C0CFA1B8E8D18008FB633 /* CompanyModel.xcdatamodeld in Sources */,
 				26F256481BEA9FA3002D9AAB /* OrganisationGroupsTableViewController.swift in Sources */,

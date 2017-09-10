@@ -1,6 +1,6 @@
 import UIKit
 
-class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource {
+class ArmadaTableViewDataSource<T>: NSObject, UITableViewDataSource{
     
     var values = [[T]]()
     weak var tableViewController: UITableViewController?
