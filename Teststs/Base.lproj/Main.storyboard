@@ -2758,36 +2758,40 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cp9-py-yKd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cbv-zV-Fxz">
-                            <size key="itemSize" width="151" height="148"/>
+                            <size key="itemSize" width="185" height="157"/>
                             <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="50" height="50"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="partnerCell" id="C67-oU-6f5" customClass="PartnerCollectionViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="151" height="148"/>
+                                <rect key="frame" x="95" y="50" width="185" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="151" height="148"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="185" height="157"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozr-tN-XPC">
-                                            <rect key="frame" x="54" y="64" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wud-Tl-dan">
+                                            <rect key="frame" x="17" y="4.5" width="151" height="148"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="148" id="PQG-ed-v0M"/>
+                                                <constraint firstAttribute="width" constant="151" id="hVO-X0-XBV"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" red="0.29975063363340748" green="1" blue="0.280234805022053" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Ozr-tN-XPC" firstAttribute="centerX" secondItem="C67-oU-6f5" secondAttribute="centerX" id="nIH-TG-AJY"/>
-                                    <constraint firstItem="Ozr-tN-XPC" firstAttribute="centerY" secondItem="C67-oU-6f5" secondAttribute="centerY" id="nbb-Vu-Qsr"/>
+                                    <constraint firstItem="wud-Tl-dan" firstAttribute="centerY" secondItem="C67-oU-6f5" secondAttribute="centerY" id="LeA-c2-jql"/>
+                                    <constraint firstItem="wud-Tl-dan" firstAttribute="centerX" secondItem="C67-oU-6f5" secondAttribute="centerX" id="MtQ-Wo-Cnq"/>
                                 </constraints>
+                                <size key="customSize" width="185" height="157"/>
                                 <connections>
-                                    <outlet property="partnerLabel" destination="Ozr-tN-XPC" id="bVW-dk-dId"/>
+                                    <outlet property="imgHeightConstraint" destination="PQG-ed-v0M" id="lMI-sY-mLx"/>
+                                    <outlet property="imgWidthConstraint" destination="hVO-X0-XBV" id="d1K-Ly-u1e"/>
+                                    <outlet property="partnerImage" destination="wud-Tl-dan" id="xUM-U4-lNg"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -2797,7 +2801,7 @@
                             <color key="backgroundColor" red="0.94440861502442663" green="1" blue="0.29669647481657546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </collectionReusableView>
                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="giV-hE-19h">
-                            <rect key="frame" x="0.0" y="198" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="207" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <color key="backgroundColor" red="1" green="0.40651354170791876" blue="0.25598792549293969" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </collectionReusableView>

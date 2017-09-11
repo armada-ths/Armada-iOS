@@ -63,7 +63,6 @@ class ArmadaCollectionViewDataSource<T>: NSObject, UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {    
 
         return values[0].count
-        //        only for test
     }
     
     func collectionView(_ collectionView: UICollectionView,
