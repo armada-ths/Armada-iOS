@@ -65,13 +65,13 @@ public struct ArmadaEvent {
 }
 
 public struct News {
-    public let title: String
-    public let imageUrlWide: String
-    public let imageUrlSquare: String
-    public let content: String
-    public let ingress: String
-    public let publishedDate: Date
-    public let featured: Bool
+    public var title: String
+    public var imageUrlWide: String
+    public var imageUrlSquare: String
+    public var content: String
+    public var ingress: String
+    public var publishedDate: Date
+    public var featured: Bool
 }
 
 public struct ArmadaMember: Equatable {
@@ -568,57 +568,43 @@ open class _ArmadaApi {
         return filteredEvents
     }
     
-    open func createNewsFromYaml(url: URL, handler:@escaping (_ data: String) -> ()){
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    open func createNewsFromYaml(url: URL, callback: @escaping (Data) -> ()){
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            handler(responseString as! String)
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            callback(data!)
 
-        }
-        task.resume()
+            }.resume()
     }
     
     open func newsFromJsonNew(_ json: AnyObject) -> [News] {
-        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
-            if let articleUrl = URL(string: json["download_url"] as! String){
-                let test = createNewsFromYaml(url: articleUrl, handler:{ (data) -> () in
+        var newsArray = Array <News>()
+        for news in (json as? [[String: AnyObject]])! {
+            if let articleUrl = news["download_url"]{
+                createNewsFromYaml(url: URL(string: articleUrl as! String)!, callback: { data in
+                    let responseString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     do{
-                        let splitted = data.components(separatedBy: "---")
+                        let splitted = responseString!.components(separatedBy: "---")
                         let value = try Yaml.load(splitted[1])
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                         let title = value["title"].string!
                         let ingress = value["ingress"].string!
-                        let imageUrlWide = self.imageUrlBase + value["cover_wide"].string!//Lägg till rätt url
-                        let imageUrlSquare = self.imageUrlBase + value["cover_square"].string!//Lägg till rätt url
+                        let imageUrlWide = self.imageUrlBase + value["cover_wide"].string!
+                        let imageUrlSquare = self.imageUrlBase + value["cover_square"].string!
                         let featured = value["featured"].bool!
                         let publishedDate = dateFormatter.date(from:value["date"].string!)!
-                        let newsArticle = News(title: title, imageUrlWide: imageUrlWide, imageUrlSquare: imageUrlSquare, content: splitted[2], ingress: ingress, publishedDate: publishedDate, featured: featured)
-                        print(newsArticle)
-                        
+                        let newsArticle = News(title: title, imageUrlWide: imageUrlWide, imageUrlSquare: imageUrlSquare, content: splitted[2], ingress: ingress, publishedDate:  publishedDate, featured: featured)
+                        newsArray.append(newsArticle)
+                       print(newsArray)
                     }
                     catch{
                         print("OH NO")
                     }
-
                 })
-                if let title = json["title"] as? String,
-                    let imageUrl = json["image"] as? String,
-                    let content = json["html_article_text"] as? String,
-                    // let ingress = json["ingress"] as? String,
-                    let ingress = "ingress property exists in database" as? String,
-                    let dateTimestamp = json["date_published"] as? Int {
-                    let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, imageUrlWide : imageUrl, imageUrlSquare: "TEST", content: content, ingress: ingress, publishedDate: date, featured: false)
-                }
             }
-            return nil
-            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
+        }
+        return newsArray.sorted(by: { $0.publishedDate > $1.publishedDate })
     }
     
     open func newsFromJson(_ json: AnyObject) -> [News] {
