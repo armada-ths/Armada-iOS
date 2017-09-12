@@ -36,20 +36,20 @@ extension NewsViewController: UITableViewDataSource {
     }
     func updateFunc(){
         ArmadaApi.newsFromServer(){
-            response in
+            news, error, errorMessage in
             OperationQueue.main.addOperation {[weak self] in
                 self?.tableView.stopActivityIndicator()
                 
-                switch response {
-                case .success(let news):
-                    self?.tableView.hideEmptyMessage()
-                    self?.news = news
-                    self?.tableView.reloadData()
-                case .error(let error):
-                    self?.tableView.showEmptyMessage(error.localizedDescription)
+                if(error == true){
+                    self?.tableView.showEmptyMessage(errorMessage)
                     self?.news = []
                     self?.tableView.reloadData()
                 }
+                else{
+                    self?.news = news as! [News]
+                    self?.tableView.reloadData()
+                }
+
             }
         }
     }
