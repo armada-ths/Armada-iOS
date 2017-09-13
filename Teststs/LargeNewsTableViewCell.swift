@@ -24,17 +24,10 @@ class LargeNewsTableViewCell: UITableViewCell, NewsCell {
     var newsItem: News? = nil{
         didSet{
             if let newsItem = newsItem{
-                if (newsItem.ingress != "ingress property exists in database"){
-                    //ingressTextView.text = newsItem.ingress
-                    ingressTextView.text = "Om Nom Nom Nom..."
-                } else {
-                    ingressTextView.isSelectable = false
-                    ingressTextView.isHidden = true
-                    print(ingressTextView.frame.height)
-                }
+                ingressTextView.text = newsItem.ingress
                 titleLabel.text = newsItem.title
                 dateLabel.text = newsItem.publishedDate.format("dd MMMM")
-                newsImageView.loadImageFromUrl(newsItem.imageUrl)
+                newsImageView.loadImageFromUrl(newsItem.imageUrlWide)
             }
         }
     }

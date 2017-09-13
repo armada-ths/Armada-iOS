@@ -36,35 +36,42 @@ extension NewsViewController: UITableViewDataSource {
     }
     func updateFunc(){
         ArmadaApi.newsFromServer(){
-            response in
+            news, error, errorMessage in
             OperationQueue.main.addOperation {[weak self] in
                 self?.tableView.stopActivityIndicator()
                 
-                switch response {
-                case .success(let news):
-                    self?.tableView.hideEmptyMessage()
-                    self?.news = news
-                    self?.tableView.reloadData()
-                case .error(let error):
-                    self?.tableView.showEmptyMessage(error.localizedDescription)
+                if(error == true){
+                    self?.tableView.showEmptyMessage(errorMessage)
                     self?.news = []
                     self?.tableView.reloadData()
                 }
+                else{
+                    self?.news = news as! [News]
+                    self?.tableView.reloadData()
+                }
+
             }
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellIdentifier = indexPath.row == 0 ? "largeNewsCell" : "smallNewsCell"
-
+        let cellIdentifier = news[indexPath.row].featured == true ? "largeNewsCell" : "smallNewsCell"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NewsCell
         cell.newsItem = news[indexPath.row]
         return cell as! UITableViewCell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+
         if let controller = segue.destination as? ScrollNewsViewController,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+            if (news[indexPath.row].content == ""){
+                ArmadaApi.newsContentFromServer(contentUrl: news[indexPath.row].contentUrl) {
+                    content in
+                    print(content)
+                    self.news[indexPath.row].content = content
+                }
+            }
             controller.news = news[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: true)
         }

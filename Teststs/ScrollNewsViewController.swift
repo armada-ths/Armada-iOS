@@ -39,10 +39,19 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         scale = 2
         disableScroll = false
         previousOffset = 0
-        newsImageView.loadImageFromUrl(news.imageUrl)
+        newsImageView.loadImageFromUrl(news.imageUrlWide)
         titleLabel.text = news.title
         dateLabel.text = news.publishedDate.formatWithStyle(.long)
         contentTextView.attributedText = news.content.attributedHtmlString ?? NSAttributedString(string: news.content)
+        if (news.content == ""){
+            ArmadaApi.newsContentFromServer(contentUrl: news.contentUrl) {
+                content in
+                DispatchQueue.main.sync {
+                    self.contentTextView.attributedText = content.attributedHtmlString ?? NSAttributedString(string: content)
+                }
+            }
+        }
+
         
     }
     

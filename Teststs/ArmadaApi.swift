@@ -65,10 +65,13 @@ public struct ArmadaEvent {
 
 public struct News {
     public let title: String
-    public let imageUrl: String
-    public let content: String
+    public let imageUrlWide: String
+    public let imageUrlSquare: String
+    public var content: String
     public let ingress: String
     public let publishedDate: Date
+    public let featured: Bool
+    public let contentUrl: String
 }
 
 public struct ArmadaMember: Equatable {
@@ -266,7 +269,9 @@ open class _ArmadaApi {
     
     //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
-    
+    let imageUrlBase = "https://github.com/armada-ths/armada.nu/tree/master/content"
+    let newsUrl = "http://webtest.armada.nu"
+    let rawUrlBase = "https://raw.githubusercontent.com/armada-ths/armada.nu/master/content/news/"
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -563,19 +568,27 @@ open class _ArmadaApi {
         return filteredEvents
     }
     
+
+    
     open func newsFromJson(_ json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
-            if let title = json["title"] as? String,
-                let imageUrl = json["image"] as? String,
-                let content = json["html_article_text"] as? String,
-                // let ingress = json["ingress"] as? String,
-                let ingress = "ingress property exists in database" as? String,
-                let dateTimestamp = json["date_published"] as? Int {
-                    let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, imageUrl : imageUrl, content: content, ingress: ingress, publishedDate: date)
+            if((json["layout"] as? String) == "News"){
+                if let title = json["title"] as? String,
+                let imageUrlWide = json["cover_wide"] as? String,
+                var contentUrl = json["__url"] as? String,
+                let imageUrlSquare = json["cover_square"] as? String,
+                let ingress = json["ingress"] as? String,
+                let dateTimestamp = json["date"] as? String,
+                let featured = json["featured"] as? Bool{
+                    let urlComponents = contentUrl.components(separatedBy: "/")
+                    contentUrl = urlComponents[2] + ".md"
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: rawUrlBase + contentUrl)
                 }
+            }
             return nil
-            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
+            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate }).sorted(by: {Int(NSNumber(value:$0.featured)) > Int(NSNumber(value:$1.featured)) })
     }
     
     open func sponsorsFromJson(_ json: AnyObject) -> [Sponsor] {
@@ -633,10 +646,59 @@ open class _ArmadaApi {
         }
     }
     
-    func newsFromServer(_ callback: @escaping (Response<[News]>) -> Void) {
-        armadaUrlWithPath("news").getJson() {
-            callback($0.map(self.newsFromJson))
+    
+    func parseHTML(HTMLContent: String)->Any{
+        let collections = HTMLContent.components(separatedBy: "window.__COLLECTION__ = [")
+        let news = collections[1].components(separatedBy: "];")
+        let test = "[" + news[0] + "]"
+        var data: NSData = test.data(using: String.Encoding.utf8)! as NSData
+        do{
+            let json = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions())
+                return json
         }
+        catch{
+
+        }
+        return []
+    }
+    
+    func newsFromServer(_ callback: @escaping (Array<News>, Bool, String) -> Void) {
+        let request = NSMutableURLRequest(url: (URL(string: newsUrl))!)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            if (data == nil){
+                callback(Array<News>(), true, (error?.localizedDescription)!)
+            }
+            else{
+                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                let newsJson = self.parseHTML(HTMLContent: responseString! as String)
+                let newsObjects = self.newsFromJson(newsJson as AnyObject)
+                callback(newsObjects, false, "")
+            }
+        }.resume()
+        
+    }
+    
+    func parseNewsContent(content: String)->String{
+        let splitContent = content.components(separatedBy: "---")
+        return splitContent[2]
+    
+    }
+    
+    func newsContentFromServer(contentUrl: String,_ callback: @escaping (String) -> Void){
+        let request = NSMutableURLRequest(url: (URL(string: contentUrl))!)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            if(data == nil){
+                callback("")
+            }
+            else{
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                callback(self.parseNewsContent(content: responseString as! String))
+
+            }
+        }.resume()
+        
     }
     
     func sponsorsFromServer(_ callback: @escaping (Response<[Sponsor]>) -> Void) {
