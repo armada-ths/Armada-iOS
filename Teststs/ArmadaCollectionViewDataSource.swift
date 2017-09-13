@@ -60,6 +60,12 @@ class ArmadaCollectionViewDataSource<T>: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = UICollectionReusableView()
+        return view
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {    
 
         return values[0].count

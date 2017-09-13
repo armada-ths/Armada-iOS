@@ -10,6 +10,8 @@ import UIKit
 // UICollectionViewDelegateFlowLayout add to handle custom cell size
 
 class AboutCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = UIColor.red
@@ -34,18 +36,22 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     // Also, this is a delegate function so don't put it in the DataSource class below or it wont work :[
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let sqWidth:CGFloat = collectionView.contentSize.width/2 - 20.0
-        // NOTE: 
-        // setting the backgroundcolor to design greyish (F8F7F7)
-        let color = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 0xFF)
-        collectionView.backgroundColor = color
+        // NOTE:
+        // The left inset and right inset is set to 20 pixels in Storyboard.
+        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 0xFF)
+        let sqWidth:CGFloat = collectionView.contentSize.width/2 - 20.0 - 8.0
+        collectionView.backgroundColor = designGrey
         return CGSize(width: sqWidth, height: sqWidth);
     }
+    
+    
+    
     
     // DATASOURCE:
     var dataSource: ArmadaSponsorCollectionViewDataSource!
     class ArmadaSponsorCollectionViewDataSource: ArmadaCollectionViewDataSource<Sponsor> {
         
+
         // NOTE:
         // Override this function to tweak handling of the Sponsor data.
         override func updateFunc(_ callback: @escaping (Response<[[Sponsor]]>) -> Void) {
@@ -64,6 +70,31 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
             }
         }
         
+        // NOTE:
+        // this method deques the header view
+        override func collectionView(_ collectionView: UICollectionView,
+                                     viewForSupplementaryElementOfKind kind: String,
+                                     at indexPath: IndexPath) -> UICollectionReusableView {
+            print("running function for UICollectionReusableView")
+            //1
+            switch kind {
+            //2
+            case UICollectionElementKindSectionHeader:
+                //3
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                 withReuseIdentifier: "AboutHeaderCollectionReusableView",
+                                                                                 for: indexPath) as! AboutHeaderCollectionReusableView
+                headerView.noticeLabel.text = "hardcoded content goes here"
+                let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 0xFF)
+                headerView.backgroundColor = designGrey
+                return headerView
+            default:
+                //4
+                assert(false, "Unexpected element kind")
+            }
+        }
+
+        
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                 let sponsor = self[indexPath]
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "partnerCell", for: indexPath) as! PartnerCollectionViewCell
@@ -80,8 +111,11 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                     // use default ratio
                     ratio = 1.0
                 }
-                cell.imgHeightConstraint.constant = ratio * cell.frame.width
-                cell.imgWidthConstraint.constant = cell.frame.width
+                cell.imgHeightConstraint.constant = ratio * cell.frame.width - 2.0 - 5.0
+                cell.imgWidthConstraint.constant = cell.frame.width - 2.0 - 5.0
+            
+                cell.layer.borderWidth = 1.0
+            
                 return cell
         }
     }

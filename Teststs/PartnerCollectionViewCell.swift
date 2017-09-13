@@ -16,6 +16,4 @@ class PartnerCollectionViewCell: UICollectionViewCell {
     // Outlets cannot be connected to repeating content iOS
     @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imgWidthConstraint: NSLayoutConstraint!
-    
-    
 }

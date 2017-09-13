@@ -2755,19 +2755,19 @@
         <scene sceneID="GF3-7V-J1e">
             <objects>
                 <collectionViewController id="qoy-dk-FWN" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cp9-py-yKd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cp9-py-yKd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cbv-zV-Fxz">
                             <size key="itemSize" width="185" height="157"/>
-                            <size key="headerReferenceSize" width="50" height="50"/>
-                            <size key="footerReferenceSize" width="50" height="50"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="386"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="partnerCell" id="C67-oU-6f5" customClass="PartnerCollectionViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="95" y="50" width="185" height="157"/>
+                                <rect key="frame" x="95" y="386" width="185" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="185" height="157"/>
@@ -2795,15 +2795,29 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Kwr-No-xSQ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AboutHeaderCollectionReusableView" id="Kwr-No-xSQ" customClass="AboutHeaderCollectionReusableView" customModule="Armada" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="386"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hardcoded content goes here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGe-19-aQk">
+                                    <rect key="frame" x="33" y="161" width="308" height="63"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="63" id="jli-tI-Hxy"/>
+                                        <constraint firstAttribute="width" constant="308" id="tiV-NT-fSf"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" red="0.94440861502442663" green="1" blue="0.29669647481657546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </collectionReusableView>
-                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="giV-hE-19h">
-                            <rect key="frame" x="0.0" y="207" width="375" height="50"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <color key="backgroundColor" red="1" green="0.40651354170791876" blue="0.25598792549293969" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="dGe-19-aQk" firstAttribute="centerX" secondItem="Kwr-No-xSQ" secondAttribute="centerX" id="FYL-Mm-4aX"/>
+                                <constraint firstItem="dGe-19-aQk" firstAttribute="centerY" secondItem="Kwr-No-xSQ" secondAttribute="centerY" id="luj-C4-RdA"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="noticeLabel" destination="dGe-19-aQk" id="KSl-KJ-4nu"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="qoy-dk-FWN" id="kAZ-Zk-CwG"/>
