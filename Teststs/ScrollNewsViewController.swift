@@ -32,6 +32,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var ingressLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,19 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         newsImageView.loadImageFromUrl(news.imageUrlWide)
         titleLabel.text = news.title
         dateLabel.text = news.publishedDate.formatWithStyle(.long)
-        contentTextView.attributedText = news.content.attributedHtmlString ?? NSAttributedString(string: news.content)
+        ingressLabel.text = news.ingress
+        if (news.content == ""){
+            ArmadaApi.newsContentFromServer(contentUrl: news.contentUrl){
+                newsContent in
+                OperationQueue.main.addOperation {[weak self] in
+                    self?.news.content = newsContent
+                    self?.contentTextView.attributedText = newsContent.attributedHtmlString ?? NSAttributedString(string: newsContent)
+                }
+            }
+        }
+        else{
+            contentTextView.attributedText = news.content.attributedHtmlString ?? NSAttributedString(string: news.content)
+        }
         
     }
     

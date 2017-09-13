@@ -271,6 +271,7 @@ open class _ArmadaApi {
     let apiUrl = "https://ais.armada.nu/api"
     let imageUrlBase = "https://github.com/armada-ths/armada.nu/tree/master/content"
     let newsUrl = "http://webtest.armada.nu"
+    let rawUrlBase = "https://raw.githubusercontent.com/armada-ths/armada.nu/master/content"
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -569,10 +570,8 @@ open class _ArmadaApi {
     
 
     
-    open func newsFromJsonNew(_ json: AnyObject) -> [News] {
+    open func newsFromJson(_ json: AnyObject) -> [News] {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
-            print(json)
-
             if((json["layout"] as? String) == "News"){
                 if let title = json["title"] as? String,
                 let imageUrlWide = json["cover_wide"] as? String,
@@ -581,30 +580,14 @@ open class _ArmadaApi {
                 let ingress = json["ingress"] as? String,
                 let dateTimestamp = json["date"] as? String,
                 let featured = json["featured"] as? Bool{
+                    print(contentUrl)
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: newsUrl + contentUrl)
+                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: rawUrlBase + contentUrl)
                 }
             }
             return nil
-            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
-    }
-    
-    open func newsFromJson(_ json: AnyObject) -> [News] {
-
-        return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
-            if let title = json["title"] as? String,
-                let imageUrl = json["image"] as? String,
-                let content = json["html_article_text"] as? String,
-                // let ingress = json["ingress"] as? String,
-                let ingress = "ingress property exists in database" as? String,
-                let dateTimestamp = json["date_published"] as? Int {
-                    let date = Date(timeIntervalSince1970: TimeInterval(dateTimestamp))
-                    return News(title: title, imageUrlWide : imageUrl, imageUrlSquare: "NO", content: content, ingress: ingress, publishedDate: date, featured: false, contentUrl: newsUrl)
-                }
-
-            return nil
-            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
+            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate }).sorted(by: {Int(NSNumber(value:$0.featured)) > Int(NSNumber(value:$1.featured)) })
     }
     
     open func sponsorsFromJson(_ json: AnyObject) -> [Sponsor] {
@@ -688,10 +671,35 @@ open class _ArmadaApi {
             else{
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 let newsJson = self.parseHTML(HTMLContent: responseString! as String)
-                let newsObjects = self.newsFromJsonNew(newsJson as AnyObject)
+                let newsObjects = self.newsFromJson(newsJson as AnyObject)
                 callback(newsObjects, false, "")
             }
         }.resume()
+        
+    }
+    
+    func parseNewsContent(content: String)->String{
+        return "Test"
+    
+    }
+    
+    func newsContentFromServer(contentUrl: String,_ callback: @escaping (String) -> Void){
+        print(contentUrl)
+        let request = NSMutableURLRequest(url: (URL(string: contentUrl))!)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            print(data)
+            print(response)
+            print(error)
+            if(data == nil){
+                callback("")
+            }
+            else{
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                print(responseString)
+                callback(responseString as! String)
+            }
+        }
         
     }
     

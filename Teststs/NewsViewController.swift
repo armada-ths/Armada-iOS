@@ -55,8 +55,7 @@ extension NewsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellIdentifier = indexPath.row == 0 ? "largeNewsCell" : "smallNewsCell"
-
+        let cellIdentifier = news[indexPath.row].featured == true ? "largeNewsCell" : "smallNewsCell"
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NewsCell
         cell.newsItem = news[indexPath.row]
         return cell as! UITableViewCell
