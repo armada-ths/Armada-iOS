@@ -271,7 +271,7 @@ open class _ArmadaApi {
     let apiUrl = "https://ais.armada.nu/api"
     let imageUrlBase = "https://github.com/armada-ths/armada.nu/tree/master/content"
     let newsUrl = "http://webtest.armada.nu"
-    let rawUrlBase = "https://raw.githubusercontent.com/armada-ths/armada.nu/master/content"
+    let rawUrlBase = "https://raw.githubusercontent.com/armada-ths/armada.nu/master/content/news/"
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -575,12 +575,13 @@ open class _ArmadaApi {
             if((json["layout"] as? String) == "News"){
                 if let title = json["title"] as? String,
                 let imageUrlWide = json["cover_wide"] as? String,
-                let contentUrl = json["__url"] as? String,
+                var contentUrl = json["__url"] as? String,
                 let imageUrlSquare = json["cover_square"] as? String,
                 let ingress = json["ingress"] as? String,
                 let dateTimestamp = json["date"] as? String,
                 let featured = json["featured"] as? Bool{
-                    print(contentUrl)
+                    let urlComponents = contentUrl.components(separatedBy: "/")
+                    contentUrl = urlComponents[2] + ".md"
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: rawUrlBase + contentUrl)
@@ -679,27 +680,24 @@ open class _ArmadaApi {
     }
     
     func parseNewsContent(content: String)->String{
-        return "Test"
+        let splitContent = content.components(separatedBy: "---")
+        return splitContent[2]
     
     }
     
     func newsContentFromServer(contentUrl: String,_ callback: @escaping (String) -> Void){
-        print(contentUrl)
         let request = NSMutableURLRequest(url: (URL(string: contentUrl))!)
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-            print(data)
-            print(response)
-            print(error)
             if(data == nil){
                 callback("")
             }
             else{
             let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print(responseString)
-                callback(responseString as! String)
+                callback(self.parseNewsContent(content: responseString as! String))
+
             }
-        }
+        }.resume()
         
     }
     

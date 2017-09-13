@@ -62,8 +62,16 @@ extension NewsViewController: UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+
         if let controller = segue.destination as? ScrollNewsViewController,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+            if (news[indexPath.row].content == ""){
+                ArmadaApi.newsContentFromServer(contentUrl: news[indexPath.row].contentUrl) {
+                    content in
+                    print(content)
+                    self.news[indexPath.row].content = content
+                }
+            }
             controller.news = news[indexPath.row]
             tableView.deselectRow(at: indexPath, animated: true)
         }
