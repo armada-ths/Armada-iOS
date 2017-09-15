@@ -68,7 +68,6 @@ extension NewsViewController: UITableViewDataSource {
             if (news[indexPath.row].content == ""){
                 ArmadaApi.newsContentFromServer(contentUrl: news[indexPath.row].contentUrl) {
                     content in
-                    print(content)
                     self.news[indexPath.row].content = content
                 }
             }

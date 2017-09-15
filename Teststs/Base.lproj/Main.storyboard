@@ -29,9 +29,9 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="4iu-Mc-4ON" kind="relationship" relationship="viewControllers" id="WYC-jj-0Q2"/>
                         <segue destination="8Tp-TM-GpC" kind="relationship" relationship="viewControllers" id="RUb-jB-zY6"/>
                         <segue destination="J7h-B4-S97" kind="relationship" relationship="viewControllers" id="bRF-F4-mrP"/>
+                        <segue destination="4iu-Mc-4ON" kind="relationship" relationship="viewControllers" id="WYC-jj-0Q2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ifH-bz-xrg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2122,7 +2122,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2957,7 +2957,6 @@
                                         </imageView>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" red="0.86570868669660306" green="1" blue="0.17835577100910616" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="Qc6-xB-N4J" firstAttribute="centerY" secondItem="bQH-5n-u7m" secondAttribute="centerY" id="3sW-ef-BRz"/>
                                     <constraint firstItem="Qc6-xB-N4J" firstAttribute="centerX" secondItem="bQH-5n-u7m" secondAttribute="centerX" id="KeS-ik-Tvo"/>
@@ -3019,11 +3018,11 @@
             </objects>
             <point key="canvasLocation" x="-5378" y="2661"/>
         </scene>
-        <!--News-->
+        <!--About-->
         <scene sceneID="1SE-Rw-dNU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="News" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3031,18 +3030,18 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="mgr-zB-uCX" kind="relationship" relationship="rootViewController" id="jQW-zX-n9B"/>
+                        <segue destination="ofB-FR-WoU" kind="relationship" relationship="rootViewController" id="Vap-ox-c94"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbC-qc-AeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6341.6000000000004" y="769.56521739130437"/>
+            <point key="canvasLocation" x="5356" y="788"/>
         </scene>
-        <!--About-->
+        <!--News-->
         <scene sceneID="e9b-3l-nTu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="About" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="About" id="cp8-zd-cXN" userLabel="About"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3050,12 +3049,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ofB-FR-WoU" kind="relationship" relationship="rootViewController" id="CZv-Os-Ues"/>
+                        <segue destination="mgr-zB-uCX" kind="relationship" relationship="rootViewController" id="nN7-gB-xX9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kkx-ty-nAB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5356" y="791"/>
+            <point key="canvasLocation" x="6430" y="788"/>
         </scene>
     </scenes>
     <resources>
@@ -3078,6 +3077,8 @@
         <image name="heart" width="399" height="94"/>
         <image name="heart-1" width="32" height="32"/>
         <image name="linkedin" width="128" height="128"/>
+        <image name="notepad" width="16" height="16"/>
+        <image name="notepad-1" width="16" height="16"/>
         <image name="sustainability" width="201" height="339"/>
         <image name="ths_white" width="640" height="640"/>
         <image name="twitter" width="128" height="128"/>
