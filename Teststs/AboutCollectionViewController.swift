@@ -24,6 +24,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         super.viewDidLoad()
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
+
     }
     
     // DELEGATE methods:
@@ -131,6 +132,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
             
             return cell
         }
+        
     }
 }
 
