@@ -10,6 +10,7 @@ import UIKit
 // UICollectionViewDelegateFlowLayout add to handle custom cell size
 
 class AboutCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    @IBOutlet var aboutView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,8 +24,9 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         super.viewDidLoad()
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
+
     }
-    
+
     // DELEGATE methods:
     
     // NOTE:
@@ -37,12 +39,9 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
         // The left inset and right inset is set to 20 pixels in Storyboard.
-        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 0xFF)
-        let sqWidth:CGFloat = collectionView.contentSize.width/2 - 20.0 - 8.0
-        collectionView.backgroundColor = designGrey
+        let sqWidth:CGFloat = collectionView.contentSize.width/3 - 20.0 - 8.0
         return CGSize(width: sqWidth, height: sqWidth);
     }
-    
     
     
     
@@ -83,9 +82,22 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                                  withReuseIdentifier: "AboutHeaderCollectionReusableView",
                                                                                  for: indexPath) as! AboutHeaderCollectionReusableView
-                headerView.noticeLabel.text = "hardcoded content goes here"
-                let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 0xFF)
-                headerView.backgroundColor = designGrey
+                let about = "<font size='4' line-height: '0.7'><b>Started in 1981,</b> THS Armada is a part of the student union THS and the largest student driven project at KTH The Royal Institute of Technology. The fair was first organised in 1981 and has been a recurring event at KTH ever since. The project has a turnover of more than 6 million SEK and involves more than 300 students.\n\n<b>Aside from the fair</b>, THS Armada has several other events, all to give you the best possible chance of finding your <i>dream</i> employer.</font>"
+                let diversity = "<font size = '4' line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>diversity</b> in their organization and/or business and operations.</font>" //Events with this icon will be focused on topics regarding diversity.
+                
+                let sustainability = "<font size = '4' line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>sustainability</b> in their organization and/or business and operations.</font>"
+               // Events with this icon will be focused on topics regarding sustainability."
+                
+                let quality = "<font size = '4' line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>quality</b> in their organization and/or business and operations.</font>"
+                //Events with this icon will be focused on topics regarding quality."
+                headerView.aboutText.attributedText =  about.attributedHtmlString
+                headerView.aboutText.isScrollEnabled = false
+                headerView.diversityText.attributedText = diversity.attributedHtmlString
+                headerView.diversityText.isScrollEnabled = false
+                headerView.sustainabilityText.attributedText = sustainability.attributedHtmlString
+                headerView.sustainabilityText.isScrollEnabled = false
+                headerView.qualityText.attributedText = quality.attributedHtmlString
+                headerView.qualityText.isScrollEnabled = false
                 return headerView
             default:
                 //4
@@ -113,10 +125,11 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
             cell.imgHeightConstraint.constant = ratio * cell.frame.width - 2.0 - 5.0
             cell.imgWidthConstraint.constant = cell.frame.width - 2.0 - 5.0
             
-            cell.layer.borderWidth = 1.0
+           // cell.layer.borderWidth = 1.0
             
             return cell
         }
+        
     }
 }
 

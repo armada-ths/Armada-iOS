@@ -575,16 +575,14 @@ open class _ArmadaApi {
             if((json["layout"] as? String) == "News"){
                 if let title = json["title"] as? String,
                 let imageUrlWide = json["cover_wide"] as? String,
-                var contentUrl = json["__url"] as? String,
+                let contentUrl = json["__url"] as? String,
                 let imageUrlSquare = json["cover_square"] as? String,
                 let ingress = json["ingress"] as? String,
                 let dateTimestamp = json["date"] as? String,
                 let featured = json["featured"] as? Bool{
-                    let urlComponents = contentUrl.components(separatedBy: "/")
-                    contentUrl = urlComponents[2] + ".md"
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: rawUrlBase + contentUrl)
+                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: newsUrl + contentUrl)
                 }
             }
             return nil
@@ -679,10 +677,29 @@ open class _ArmadaApi {
         
     }
     
-    func parseNewsContent(content: String)->String{
-        let splitContent = content.components(separatedBy: "---")
-        return splitContent[2]
+    func getNewsContent(_ json: Any, url: String) -> String{
+        let content = json as! [String: Any]
+        let json = content["pages"] as! [String: Any]
+        let newsArticle = json[(url.components(separatedBy: newsUrl)[1])] as! [String: AnyObject]
+        return newsArticle["body"] as! String
+    }
     
+    
+  func parseNewsContent(content: String, urlString: String)->String{
+        let splitContent = content.components(separatedBy: "window.__INITIAL_STATE__ =")
+        if (splitContent.count < 2){
+            return ""
+        }
+        let jsonFormat = splitContent[1].components(separatedBy: "</script>")
+        let data: NSData = jsonFormat[0].data(using: String.Encoding.utf8)! as NSData
+        do{
+            let json = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions())
+            return getNewsContent(json, url: urlString)
+        }
+        catch{
+            print("ERROR")
+        }
+        return ""       
     }
     
     func newsContentFromServer(contentUrl: String,_ callback: @escaping (String) -> Void){
@@ -694,7 +711,7 @@ open class _ArmadaApi {
             }
             else{
             let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                callback(self.parseNewsContent(content: responseString as! String))
+                callback(self.parseNewsContent(content: responseString! as String, urlString: contentUrl))
 
             }
         }.resume()

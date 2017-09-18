@@ -9,7 +9,10 @@
 import UIKit
 
 class AboutHeaderCollectionReusableView: UICollectionReusableView {
-    @IBOutlet weak var noticeLabel: UILabel!
+    @IBOutlet weak var aboutText: UITextView!
+    @IBOutlet weak var diversityText: UITextView!
+    @IBOutlet weak var sustainabilityText: UITextView!    
+    @IBOutlet weak var qualityText: UITextView!
     
 }
 
