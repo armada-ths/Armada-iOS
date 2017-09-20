@@ -81,8 +81,9 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 imgView.image = tmpImage
                 
                 // setup title:
-                titleLabel.text = newsItem.title
-                titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
+                //titleLabel.text = newsItem.title
+                titleLabel.text = "Master thesis seminar with KTH"
+                titleLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
                 titleH.constant = whiteH.constant / 2
                 
                 // setup date:

@@ -38,6 +38,7 @@ class NewsViewController: UIViewController {
         label.textAlignment = .center
         label.attributedText = myMutableString
         self.navigationItem.titleView = label
+        
     }
 }
 

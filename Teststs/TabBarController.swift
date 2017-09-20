@@ -4,6 +4,6 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedIndex = 1
+        selectedIndex = 1        
     }
 }

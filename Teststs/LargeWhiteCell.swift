@@ -22,6 +22,10 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var imgH: NSLayoutConstraint!
     
     @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var dateView: UIView!
+    
+    @IBOutlet weak var dateimgView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
     var newsItem: News? = nil{
@@ -34,7 +38,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 let screenH = screenSize.size.height
                 
                 let A:CGFloat = 2.4
-                let B:CGFloat = 0.02
+                let B:CGFloat = 0.04
                 let C:CGFloat = 1.1
                 let D:CGFloat = 0.25
                 
@@ -68,13 +72,21 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 imgView.image = tmpImage
                 
                 // setup title:
-                titleLabel.text = newsItem.title
+                //titleLabel.text = newsItem.title
+                titleLabel.text = "Master thesis seminar with KTH"
                 titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 
                 // setup date:
                 dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
-                dateLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
-                dateLabel.backgroundColor = armadaDarkGreen
+                dateLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
+                
+                // setup dateView:
+                dateView.backgroundColor = .white
+                
+                // setup date img:
+                dateimgView.image = #imageLiteral(resourceName: "dateBanner.png")
+                dateimgView.alpha = 0.5
+                
             }
         }
     }
