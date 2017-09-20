@@ -69,9 +69,11 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 
                 // setup title:
                 titleLabel.text = newsItem.title
-
+                titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
+                
                 // setup date:
                 dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
+                dateLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 dateLabel.backgroundColor = armadaDarkGreen
             }
         }

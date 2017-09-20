@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -2115,7 +2116,7 @@
                                             <outlet property="imgH" destination="RMA-vZ-0sH" id="kA9-At-EA4"/>
                                             <outlet property="imgView" destination="48w-FX-Ljn" id="hTV-4V-X6w"/>
                                             <outlet property="titleLabel" destination="Hq0-Oz-rme" id="h0Z-CE-T5r"/>
-                                            <segue destination="XDm-sX-m3S" kind="show" trigger="accessoryAction" id="PCI-cw-ASl"/>
+                                            <segue destination="XDm-sX-m3S" kind="show" id="XAN-qI-yVU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2210,7 +2211,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -3282,12 +3283,12 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="RGJ-y3-kDg"/>
         <segue reference="TRA-nv-BBS"/>
-        <segue reference="dHJ-dF-k7O"/>
+        <segue reference="rqO-4i-A8F"/>
+        <segue reference="4vG-nW-9OL"/>
         <segue reference="HmL-IU-78Y"/>
         <segue reference="NVI-Nj-Wn8"/>
-        <segue reference="4vG-nW-9OL"/>
-        <segue reference="rqO-4i-A8F"/>
         <segue reference="WlV-f9-SYd"/>
     </inferredMetricsTieBreakers>
 </document>
