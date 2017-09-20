@@ -24,10 +24,10 @@ class LargeNewsTableViewCell: UITableViewCell, NewsCell {
     var newsItem: News? = nil{
         didSet{
             if let newsItem = newsItem{
-                ingressTextView.text = newsItem.ingress
-                titleLabel.text = newsItem.title
-                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
-                newsImageView.loadImageFromUrl(newsItem.imageUrlWide)
+//                ingressTextView.text = newsItem.ingress
+//                titleLabel.text = newsItem.title
+//                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
+//                newsImageView.loadImageFromUrl(newsItem.imageUrlWide)
             }
         }
     }
