@@ -582,11 +582,16 @@ open class _ArmadaApi {
                 let featured = json["featured"] as? Bool{
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: dateFormatter.date(from: dateTimestamp)!, featured: featured, contentUrl: newsUrl + contentUrl)
+                    let publishedDate = dateFormatter.date(from: dateTimestamp)!
+                    let date = Date()
+                    if (date < publishedDate){
+                        return nil
+                    }
+                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: publishedDate, featured: featured, contentUrl: newsUrl + contentUrl)
                 }
             }
             return nil
-            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate }).sorted(by: {Int(NSNumber(value:$0.featured)) > Int(NSNumber(value:$1.featured)) })
+            } ?? []).sorted(by: { $0.publishedDate > $1.publishedDate })
     }
     
     open func sponsorsFromJson(_ json: AnyObject) -> [Sponsor] {
