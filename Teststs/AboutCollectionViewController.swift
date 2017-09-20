@@ -30,8 +30,8 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
             string: "A B O U T THS Armada 2017",
             attributes: [NSFontAttributeName:UIFont(
                 name: "BebasNeue-Thin",
-                size: 20.0)!])
-        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueBook", size: 20.0), range:NSRange(location: 0, length: 9))
+                size: 22.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 9))
         label.textAlignment = .center
         label.attributedText = myMutableString
         self.navigationItem.titleView = label
