@@ -72,8 +72,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 imgView.image = tmpImage
                 
                 // setup title:
-                //titleLabel.text = newsItem.title
-                titleLabel.text = "Master thesis seminar with KTH"
+                titleLabel.text = newsItem.title            
                 titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 
                 // setup date:
