@@ -12,15 +12,12 @@ class SmallNewsTableViewCell: UITableViewCell, NewsCell {
 
     @IBOutlet weak var newsImageView: UIImageView!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var dateLabel: UILabel!
     var newsItem: News? = nil{
         didSet{
             if let newsItem = newsItem{
-                titleLabel.text = newsItem.title
-                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
-                newsImageView.loadImageFromUrl(newsItem.imageUrlSquare)
+//                titleLabel.text = newsItem.title
+//                dateLabel.text = newsItem.publishedDate.format("dd MMMM")
+//                newsImageView.loadImageFromUrl(newsItem.imageUrlSquare)
             }
         }        
     }
