@@ -13,14 +13,18 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var news: [News] = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
+        tableView.backgroundColor = designGrey
         tableView.startActivityIndicator()
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         updateFunc()
+        
+        // remove cell borders
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // fix header
         let frame = CGRect(x: 0,y: 0, width: 400, height: 100);

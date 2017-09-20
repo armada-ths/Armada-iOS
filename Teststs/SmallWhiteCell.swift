@@ -83,6 +83,7 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
                 dateLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 dateLabel.backgroundColor = armadaDarkGreen
+                
             }
         }
     }
