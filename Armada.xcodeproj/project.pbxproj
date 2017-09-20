@@ -94,6 +94,7 @@
 		9FF3C55D1F725CDC00822128 /* Lato-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C54B1F725CDC00822128 /* Lato-SemiboldItalic.ttf */; };
 		9FF3C55E1F725CDC00822128 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C54C1F725CDC00822128 /* Lato-Thin.ttf */; };
 		9FF3C55F1F725CDC00822128 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C54D1F725CDC00822128 /* Lato-ThinItalic.ttf */; };
+		9FF3C5621F7260D600822128 /* NewsNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF3C5611F7260D600822128 /* NewsNavBar.swift */; };
 		DA0006941B153B6A006BFDBD /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */; };
 		DA22E3201DD104FD00ADE89D /* BanquetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22E31F1DD104FD00ADE89D /* BanquetTableViewController.swift */; };
 		DA22E3221DD10CE600ADE89D /* BanquetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22E3211DD10CE600ADE89D /* BanquetTableViewCell.swift */; };
@@ -210,6 +211,7 @@
 		9FF3C54B1F725CDC00822128 /* Lato-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		9FF3C54C1F725CDC00822128 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		9FF3C54D1F725CDC00822128 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		9FF3C5611F7260D600822128 /* NewsNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNavBar.swift; sourceTree = "<group>"; };
 		DA0006931B153B6A006BFDBD /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewCell.swift; path = Teststs/NewsTableViewCell.swift; sourceTree = "<group>"; };
 		DA22E31F1DD104FD00ADE89D /* BanquetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanquetTableViewController.swift; sourceTree = "<group>"; };
 		DA22E3211DD10CE600ADE89D /* BanquetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanquetTableViewCell.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		265B7DDE1B053A080074450B /* Armada */ = {
 			isa = PBXGroup;
 			children = (
+				9FF3C5601F7260BB00822128 /* NavigationBars */,
 				9F821B4D1F6B2AD60071BF28 /* About */,
 				265B7DE11B053A080074450B /* AppDelegate.swift */,
 				26402E5E1B8FA54F00EC84E4 /* armadaEvents.sketch */,
@@ -474,6 +477,14 @@
 			name = News;
 			sourceTree = "<group>";
 		};
+		9FF3C5601F7260BB00822128 /* NavigationBars */ = {
+			isa = PBXGroup;
+			children = (
+				9FF3C5611F7260D600822128 /* NewsNavBar.swift */,
+			);
+			name = NavigationBars;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -612,6 +623,7 @@
 			files = (
 				260376851B8EB9EB0031F92F /* Programme.swift in Sources */,
 				26402E5D1B8F987700EC84E4 /* ArmadaViewController.swift in Sources */,
+				9FF3C5621F7260D600822128 /* NewsNavBar.swift in Sources */,
 				269C0D011B8E9BDE008FB633 /* WorkField+CoreDataProperties.swift in Sources */,
 				265EABF91BEBE8D2009CEDCD /* ArmadaMembersPageViewController.swift in Sources */,
 				9F821B511F6B2BBD0071BF28 /* AboutCollectionViewController.swift in Sources */,

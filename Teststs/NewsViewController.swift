@@ -22,7 +22,18 @@ class NewsViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         updateFunc()
         
-        // Do any additional setup after loading the view.
+        // fix header
+        let frame = CGRect(x: 0,y: 0, width: 400, height: 100);
+        let label = UILabel(frame: frame)
+        let myMutableString = NSMutableAttributedString(
+            string: "N E W S THS Armada 2017",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeue-Thin",
+                size: 20.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueBook", size: 20.0), range:NSRange(location: 0, length: 8))
+        label.textAlignment = .center
+        label.attributedText = myMutableString
+        self.navigationItem.titleView = label
     }
 }
 

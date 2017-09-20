@@ -24,6 +24,17 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         super.viewDidLoad()
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
+        let frame = CGRect(x: 0,y: 0, width: 400, height: 100);
+        let label = UILabel(frame: frame)
+        let myMutableString = NSMutableAttributedString(
+            string: "A B O U T THS Armada 2017",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeue-Thin",
+                size: 20.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueBook", size: 20.0), range:NSRange(location: 0, length: 9))
+        label.textAlignment = .center
+        label.attributedText = myMutableString
+        self.navigationItem.titleView = label
 
     }
 
