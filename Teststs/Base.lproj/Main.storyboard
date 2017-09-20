@@ -1985,29 +1985,48 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Y6-Poy">
-                                                                    <rect key="frame" x="273" y="124" width="78" height="22"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-lF-DjT" userLabel="dateview">
+                                                                    <rect key="frame" x="279" y="132" width="80" height="14"/>
+                                                                    <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W1x-9h-v0D" userLabel="dateimg">
+                                                                            <rect key="frame" x="0.0" y="-11" width="92" height="25"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="25" id="cF4-Qs-A7B" userLabel="dateimgH"/>
+                                                                                <constraint firstAttribute="width" constant="92" id="sp1-jh-ipv" userLabel="dateimgW"/>
+                                                                            </constraints>
+                                                                        </imageView>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Y6-Poy" userLabel="datelabel">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="14"/>
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" red="0.93018535196930097" green="1" blue="0.6777011544958581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="22" id="dLm-mS-v7M"/>
-                                                                        <constraint firstAttribute="width" constant="78" id="ihh-NW-EVd"/>
+                                                                        <constraint firstAttribute="width" constant="80" id="Doo-Xf-YWx" userLabel="dateW"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" id="J4v-U2-0L0"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="1vG-Y6-Poy" secondAttribute="trailing" id="Peh-X8-x61"/>
+                                                                        <constraint firstItem="1vG-Y6-Poy" firstAttribute="top" secondItem="6qH-lF-DjT" secondAttribute="top" id="Y9B-oe-XLO"/>
+                                                                        <constraint firstItem="1vG-Y6-Poy" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="hpf-OT-IyD"/>
+                                                                        <constraint firstItem="W1x-9h-v0D" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="iSg-kb-BFJ"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="W1x-9h-v0D" secondAttribute="bottom" id="o8u-3T-u15"/>
+                                                                        <constraint firstAttribute="height" constant="14" id="us5-bv-ZJp" userLabel="dateH"/>
                                                                     </constraints>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                </view>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" constant="8" id="1gD-QM-uRZ" userLabel="date.bottom"/>
                                                                 <constraint firstItem="deS-d4-beh" firstAttribute="leading" secondItem="EVf-oR-eVr" secondAttribute="trailing" constant="8" id="5xB-qO-wjx" userLabel="title.lead"/>
                                                                 <constraint firstAttribute="height" constant="154" id="LnM-QV-h1H" userLabel="whiteH"/>
                                                                 <constraint firstAttribute="bottom" secondItem="EVf-oR-eVr" secondAttribute="bottom" id="MR3-1c-sqV" userLabel="left.bottom"/>
                                                                 <constraint firstItem="EVf-oR-eVr" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" id="Mls-wo-1ox" userLabel="left.top"/>
                                                                 <constraint firstAttribute="trailing" secondItem="deS-d4-beh" secondAttribute="trailing" constant="8" id="Vwq-RS-vp3" userLabel="title.trail"/>
                                                                 <constraint firstItem="EVf-oR-eVr" firstAttribute="height" secondItem="8N3-D2-P2C" secondAttribute="height" id="YjI-54-UQb" userLabel="left.height"/>
-                                                                <constraint firstAttribute="trailing" secondItem="1vG-Y6-Poy" secondAttribute="trailing" constant="8" id="a4z-Qi-2wW" userLabel="date.trail"/>
+                                                                <constraint firstAttribute="trailing" secondItem="6qH-lF-DjT" secondAttribute="trailing" id="qJ7-uO-Ybt" userLabel="dateview.trail"/>
                                                                 <constraint firstItem="EVf-oR-eVr" firstAttribute="leading" secondItem="8N3-D2-P2C" secondAttribute="leading" id="qaU-td-je8" userLabel="left.lead"/>
                                                                 <constraint firstItem="deS-d4-beh" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" constant="8" id="tSM-WU-Xw7" userLabel="title.top"/>
+                                                                <constraint firstAttribute="bottom" secondItem="6qH-lF-DjT" secondAttribute="bottom" constant="8" id="uA6-Ch-jxa" userLabel="dateview.bottom"/>
                                                                 <constraint firstAttribute="width" constant="359" id="v2y-Dz-het" userLabel="whiteW"/>
                                                             </constraints>
                                                         </view>
@@ -2028,7 +2047,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dateImgView" destination="W1x-9h-v0D" id="3Jt-qS-YiA"/>
                                             <outlet property="dateLabel" destination="1vG-Y6-Poy" id="DE2-t0-qsd"/>
+                                            <outlet property="dateView" destination="6qH-lF-DjT" id="r2a-8I-gg5"/>
+                                            <outlet property="dateimgH" destination="cF4-Qs-A7B" id="2f0-ey-uz1"/>
+                                            <outlet property="dateimgW" destination="sp1-jh-ipv" id="VfM-eu-n23"/>
                                             <outlet property="greyH" destination="l2r-IJ-tEb" id="U4d-Yi-Ia6"/>
                                             <outlet property="greyView" destination="hsg-a5-YAB" id="2qn-wa-tyX"/>
                                             <outlet property="greyW" destination="GlQ-eU-5Z1" id="Asa-8w-7qz"/>
