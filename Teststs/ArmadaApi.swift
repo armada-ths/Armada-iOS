@@ -576,9 +576,6 @@ open class _ArmadaApi {
                 if let title = json["title"] as? String,
                 let contentUrl = json["__url"] as? String,
                 let dateTimestamp = json["date"] as? String{
-                    print(title)
-                  //  let cellIdentifier = news[indexPath.row].featured == true ? "largeWhiteCell" : "smallWhiteCell"
-                   // let featured = json["featured"] as? Bool != nil ? json["featured"] as! Bool: false
                     let featured = json["featured"] as? Bool != nil ? json["featured"] as! Bool: false
                     let imageUrlWide = json["cover_wide"] as? String != nil ? newsUrl + (json["cover_wide"] as? String)! : ""
                     let imageUrlSquare = json["cover_square"] as? String != nil ? newsUrl + (json["cover_square"] as? String)! : ""
@@ -701,7 +698,8 @@ open class _ArmadaApi {
         let json = content["pages"] as! [String: Any]
         let newsArticle = json[(url.components(separatedBy: newsUrl)[1])] as! [String: AnyObject]
         var news = newsArticle["body"] as! String
-        return news.replacingOccurrences(of: ">#<", with: "><")
+        news = news.replacingOccurrences(of: ">#<", with: "><")
+        return news
     }
     
     
