@@ -1718,10 +1718,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4d-SM-j11" userLabel="supportView 1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="442"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="506"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tcq-uM-cAn" userLabel="supportView 2">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="468"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="247" verticalHuggingPriority="247" horizontalCompressionResistancePriority="747" verticalCompressionResistancePriority="747" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-NL-mot" userLabel="Top View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -1730,7 +1730,7 @@
                                                 </constraints>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="uyv-pp-9qP">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlR-He-aDb" userLabel="Scroll Sub View">
                                                         <rect key="frame" x="0.0" y="235" width="375" height="136"/>
@@ -1838,7 +1838,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="r4d-SM-j11" secondAttribute="trailing" id="9rc-t2-pxs"/>
-                            <constraint firstItem="r4d-SM-j11" firstAttribute="top" secondItem="EyW-Sw-K2O" secondAttribute="top" constant="64" id="9xW-bn-H1D"/>
+                            <constraint firstItem="r4d-SM-j11" firstAttribute="top" secondItem="EyW-Sw-K2O" secondAttribute="top" id="9xW-bn-H1D"/>
                             <constraint firstItem="r4d-SM-j11" firstAttribute="leading" secondItem="EyW-Sw-K2O" secondAttribute="leading" id="Nwy-b1-k8p"/>
                             <constraint firstItem="r4d-SM-j11" firstAttribute="width" secondItem="EyW-Sw-K2O" secondAttribute="width" id="bmA-Ue-GPU"/>
                             <constraint firstItem="vPR-Bp-Aeg" firstAttribute="top" secondItem="r4d-SM-j11" secondAttribute="bottom" constant="112" id="eDV-HZ-lTn"/>
@@ -2291,7 +2291,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -3317,7 +3317,7 @@
         <!--About-->
         <scene sceneID="1SE-Rw-dNU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
@@ -3336,7 +3336,7 @@
         <!--News-->
         <scene sceneID="e9b-3l-nTu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NavBarController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NewsNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
