@@ -56,20 +56,22 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 holderH.constant = greyH.constant - 2 * verticalGap
                 holderW.constant = greyW.constant - 2 * horizontalGap
                 
-                // calculate ratio
-                let url = NSURL(string: newsItem.imageUrlWide)
-                let data = try! Data(contentsOf: url! as URL)
-                // make catch statement here!
-                let tmpImage = UIImage(data: data)
-                
-                let tmpImageH:CGFloat = (tmpImage?.size.height)!
-                let tmpImageW:CGFloat = (tmpImage?.size.width)!
-//                let ratio:CGFloat = (tmpImageH/tmpImageW)
-                let ratio:CGFloat = (9.0/15.0)
-                
-                // setup image: depend on image width
-                imgH.constant = holderW.constant * ratio
-                imgView.image = tmpImage
+                // setup image
+                do {
+                    let url = NSURL(string: newsItem.imageUrlWide)
+                    let data = try! Data(contentsOf: url! as URL)
+                    let tmpImage = UIImage(data: data)
+                    // adjust img height
+                    let tmpImageH:CGFloat = (tmpImage?.size.height)!
+                    let tmpImageW:CGFloat = (tmpImage?.size.width)!
+                    let ratio:CGFloat = (tmpImageH/tmpImageW)
+                    imgH.constant = holderW.constant * ratio
+                    imgView.image = tmpImage
+                } catch {
+                    // adjust image height
+                    let ratio:CGFloat = (9.0/15.0)
+                    imgH.constant = holderW.constant * ratio
+                }
                 
                 // setup title:
                 titleLabel.text = newsItem.title            
@@ -85,6 +87,11 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 // setup date img:
                 dateimgView.image = #imageLiteral(resourceName: "dateBanner.png")
                 dateimgView.alpha = 0.5
+                
+                // resize cell height so that the area under the image has height 56
+                greyH.constant = 56 + imgH.constant + 2 * verticalGap
+                holderH.constant = 56 + imgH.constant
+                
                 
             }
         }

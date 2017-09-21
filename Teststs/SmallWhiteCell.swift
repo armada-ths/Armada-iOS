@@ -66,19 +66,15 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 // setup leftview: depend on whiteview
                 leftW.constant = whiteW.constant * D
                 
-                // calculate ratio
-                let url = NSURL(string: newsItem.imageUrlSquare)
-                let data = try! Data(contentsOf: url! as URL)
-                // make catch statement here!
-                let tmpImage = UIImage(data: data)
-
-                let tmpImageH:CGFloat = (tmpImage?.size.height)!
-                let tmpImageW:CGFloat = (tmpImage?.size.width)!
-                let ratio:CGFloat = (tmpImageH/tmpImageW)
-                
-                // setup image: depend on image width
-                imgH.constant = leftW.constant * ratio
-                imgView.image = tmpImage
+                // try to setup image
+                imgH.constant = leftW.constant
+                do{
+                    let url =  NSURL(string: newsItem.imageUrlSquare)
+                    let data = try Data(contentsOf: url! as URL)
+                    let tmpImage =  UIImage(data: data)
+                    imgView.image = tmpImage
+                }
+                catch{}
                 
                 // setup title:
                 titleLabel.text = newsItem.title        

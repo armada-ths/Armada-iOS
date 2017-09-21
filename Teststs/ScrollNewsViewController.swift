@@ -41,7 +41,6 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
             // make catch statement here!
             let tmpImage =  UIImage(data: data)
             newsImageView.image = tmpImage
-
         }
         catch{}
         titleLabel.text = news.title
