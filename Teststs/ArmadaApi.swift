@@ -574,12 +574,16 @@ open class _ArmadaApi {
         return Array.removeNils((json as? [[String: AnyObject]])?.map { json -> News? in
             if((json["layout"] as? String) == "News"){
                 if let title = json["title"] as? String,
-                let imageUrlWide = json["cover_wide"] as? String,
                 let contentUrl = json["__url"] as? String,
-                let imageUrlSquare = json["cover_square"] as? String,
-                let ingress = json["ingress"] as? String,
-                let dateTimestamp = json["date"] as? String,
-                let featured = json["featured"] as? Bool{
+                let dateTimestamp = json["date"] as? String{
+                    print(title)
+                  //  let cellIdentifier = news[indexPath.row].featured == true ? "largeWhiteCell" : "smallWhiteCell"
+                   // let featured = json["featured"] as? Bool != nil ? json["featured"] as! Bool: false
+                    let featured = json["featured"] as? Bool != nil ? json["featured"] as! Bool: false
+                    let imageUrlWide = json["cover_wide"] as? String != nil ? newsUrl + (json["cover_wide"] as? String)! : ""
+                    let imageUrlSquare = json["cover_square"] as? String != nil ? newsUrl + (json["cover_square"] as? String)! : ""
+                    let ingress = json["ingress"] as? String != nil ? json["ingress"] as! String : ""
+
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     let publishedDate = dateFormatter.date(from: dateTimestamp)!
@@ -587,7 +591,7 @@ open class _ArmadaApi {
                     if (date < publishedDate){
                         return nil
                     }
-                    return News(title: title, imageUrlWide : newsUrl + imageUrlWide, imageUrlSquare: newsUrl + imageUrlSquare, content: "", ingress: ingress, publishedDate: publishedDate, featured: featured, contentUrl: newsUrl + contentUrl)
+                    return News(title: title, imageUrlWide : imageUrlWide, imageUrlSquare: imageUrlSquare, content: "", ingress: ingress, publishedDate: publishedDate, featured: featured, contentUrl: newsUrl + contentUrl)
                 }
             }
             return nil
@@ -675,7 +679,17 @@ open class _ArmadaApi {
             else{
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 let newsJson = self.parseHTML(HTMLContent: responseString! as String)
-                let newsObjects = self.newsFromJson(newsJson as AnyObject)
+                var newsObjects = self.newsFromJson(newsJson as AnyObject)
+                if(newsObjects[0].featured != true){
+                    for i in 1 ... newsObjects.count{
+                        if(newsObjects[i].featured == true){
+                            let tempNews = newsObjects[i]
+                            newsObjects.remove(at: i)
+                            newsObjects.insert(tempNews, at: 0)
+                            break
+                        }
+                    }
+                }
                 callback(newsObjects, false, "")
             }
         }.resume()
@@ -686,7 +700,8 @@ open class _ArmadaApi {
         let content = json as! [String: Any]
         let json = content["pages"] as! [String: Any]
         let newsArticle = json[(url.components(separatedBy: newsUrl)[1])] as! [String: AnyObject]
-        return newsArticle["body"] as! String
+        var news = newsArticle["body"] as! String
+        return news.replacingOccurrences(of: ">#<", with: "><")
     }
     
     
@@ -716,7 +731,7 @@ open class _ArmadaApi {
             }
             else{
             let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                callback(self.parseNewsContent(content: responseString! as String, urlString: contentUrl))
+            callback(self.parseNewsContent(content: responseString! as String, urlString: contentUrl))
 
             }
         }.resume()
