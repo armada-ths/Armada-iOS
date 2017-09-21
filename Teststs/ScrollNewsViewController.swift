@@ -48,9 +48,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         titleLabel.font = UIFont(name:"BebasNeueRegular", size: 35.0)
         ingressLabel.text = news.ingress
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "dd MMM YYY"
-        dateLabel.text = dateFormat.string(from: news.publishedDate)
+        dateLabel.text = news.publishedDate.format("dd MMM YYY")
         dateLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
 
         if (news.content == ""){
