@@ -2000,11 +2000,20 @@
                                                                                 <constraint firstAttribute="height" constant="73" id="yEM-gV-P0j" userLabel="imgH"/>
                                                                             </constraints>
                                                                         </imageView>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle_compressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWT-ah-Pb7" userLabel="circleView">
+                                                                            <rect key="frame" x="0.0" y="40" width="118" height="73"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="73" id="pVC-WP-cha" userLabel="circleH"/>
+                                                                            </constraints>
+                                                                        </imageView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
+                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="5wU-Ml-EvD"/>
+                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="width" secondItem="EVf-oR-eVr" secondAttribute="width" id="8NE-i8-1cd" userLabel="circleW"/>
                                                                         <constraint firstAttribute="width" constant="118" id="8j2-uX-EH8"/>
                                                                         <constraint firstItem="Xug-R1-azU" firstAttribute="width" secondItem="EVf-oR-eVr" secondAttribute="width" id="Gn6-BY-mjr" userLabel="imgW"/>
+                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="cSE-yK-z37"/>
                                                                         <constraint firstItem="Xug-R1-azU" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="ery-MH-Erg" userLabel="img.centery"/>
                                                                         <constraint firstItem="Xug-R1-azU" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="mhV-Rh-jp6" userLabel="img.centerx"/>
                                                                     </constraints>
@@ -2080,6 +2089,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="circleH" destination="pVC-WP-cha" id="MDe-Ob-PGE"/>
                                             <outlet property="dateImgView" destination="W1x-9h-v0D" id="3Jt-qS-YiA"/>
                                             <outlet property="dateLabel" destination="1vG-Y6-Poy" id="DE2-t0-qsd"/>
                                             <outlet property="dateView" destination="6qH-lF-DjT" id="r2a-8I-gg5"/>
@@ -2291,7 +2301,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -3366,6 +3376,7 @@
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
+        <image name="circle_compressed.png" width="800" height="800"/>
         <image name="diversity" width="867" height="922"/>
         <image name="ericsson-logo" width="280" height="248"/>
         <image name="ericsson_white" width="640" height="640"/>

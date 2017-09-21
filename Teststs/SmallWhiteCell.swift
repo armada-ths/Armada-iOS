@@ -22,7 +22,8 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgH: NSLayoutConstraint!
-
+    @IBOutlet weak var circleH: NSLayoutConstraint!
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleH: NSLayoutConstraint!
     
@@ -68,6 +69,8 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 
                 // try to setup image
                 imgH.constant = leftW.constant
+                circleH.constant = leftW.constant
+                
                 do{
                     let url =  NSURL(string: newsItem.imageUrlSquare)
                     let data = try Data(contentsOf: url! as URL)
