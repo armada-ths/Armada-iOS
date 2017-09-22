@@ -14,6 +14,8 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollSubView: UIView!
     
+    @IBOutlet weak var scrollsubViewW: NSLayoutConstraint!
+
     var newTopFrame: CGRect!
     var newScrollFrame: CGRect!
     var scale: CGFloat!
@@ -26,7 +28,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var ingressLabel: UILabel!
-
+    
     @IBOutlet weak var newsImgW: NSLayoutConstraint!
     @IBOutlet weak var newsImgH: NSLayoutConstraint!
     
@@ -48,12 +50,23 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
             newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
             newsImgH.constant = 0.0
         }
+        
+        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
+        
+        // setup ScrollView
+        scrollView.backgroundColor = designGrey
+        
+        // setup scrollSubView
+        scrollsubViewW.constant = newsImgW.constant
+        scrollSubView.backgroundColor = .white
+        scrollSubView.layer.borderWidth = 0.5
+        
         titleLabel.text = news.title
         titleLabel.font = UIFont(name:"BebasNeueRegular", size: 30.0)
         titleLabel.textColor = ColorScheme.armadaGreen
         ingressLabel.text = news.ingress
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
-        dateLabel.text = news.publishedDate.format("dd MMM YYY")
+        dateLabel.text = news.publishedDate.format("yyyy MMM dd")
         dateLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
 
         if (news.content == ""){
