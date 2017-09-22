@@ -59,7 +59,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 // setup image
                 do {
                     let url = NSURL(string: newsItem.imageUrlWide)
-                    let data = try! Data(contentsOf: url! as URL)
+                    let data = try Data(contentsOf: url! as URL)
                     let tmpImage = UIImage(data: data)
                     // adjust img height
                     let tmpImageH:CGFloat = (tmpImage?.size.height)!

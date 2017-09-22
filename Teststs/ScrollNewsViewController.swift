@@ -35,8 +35,10 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        print(news.imageUrlWide)
         do{
             let url =  NSURL(string: news.imageUrlWide)
+            print(url)
             let data = try Data(contentsOf: url! as URL)
             // make catch statement here!
             let tmpImage =  UIImage(data: data)

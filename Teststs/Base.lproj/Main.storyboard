@@ -1724,13 +1724,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="247" verticalHuggingPriority="247" horizontalCompressionResistancePriority="747" verticalCompressionResistancePriority="747" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-NL-mot" userLabel="Top View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" id="jsp-Vg-V5D"/>
+                                                    <constraint firstAttribute="height" constant="60" id="Bgc-xM-XOL"/>
                                                 </constraints>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="uyv-pp-9qP">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlR-He-aDb" userLabel="Scroll Sub View">
                                                         <rect key="frame" x="0.0" y="235" width="375" height="136"/>
@@ -3109,20 +3109,20 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AIE-EQ-Rvu">
                             <size key="itemSize" width="197" height="180"/>
-                            <size key="headerReferenceSize" width="50" height="747"/>
+                            <size key="headerReferenceSize" width="50" height="756"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="partnerCell" id="bQH-5n-u7m" customClass="PartnerCollectionViewCell" customModule="Armada" customModuleProvider="target">
-                                <rect key="frame" x="89" y="747" width="197" height="180"/>
+                                <rect key="frame" x="89" y="756" width="197" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="197" height="180"/>
@@ -3149,7 +3149,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AboutHeaderCollectionReusableView" id="HC7-cb-OUP" customClass="AboutHeaderCollectionReusableView" customModule="Armada" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="747"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="756"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJF-N0-vNk">
@@ -3171,7 +3171,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-zK-luL">
-                                    <rect key="frame" x="10" y="96" width="355" height="360"/>
+                                    <rect key="frame" x="10" y="106" width="355" height="360"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U6k-wb-iu5">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="120"/>
@@ -3251,7 +3251,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partners" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-TW-3Vq">
-                                    <rect key="frame" x="18" y="466" width="339" height="21.5"/>
+                                    <rect key="frame" x="18" y="486" width="339" height="21.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21.5" id="S3e-eo-8bx"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="euY-0v-31t"/>
@@ -3267,19 +3267,21 @@
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leadingMargin" priority="999" constant="10" id="4J0-BP-5R6"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="top" secondItem="HC7-cb-OUP" secondAttribute="topMargin" id="5N9-Bf-OjN"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="dEU-6d-lYx" secondAttribute="trailing" priority="999" constant="10" id="5aA-Ma-KPd"/>
+                                <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" priority="950" constant="20" id="5ji-Ij-Nz1"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="bottom" secondItem="HC7-cb-OUP" secondAttribute="bottomMargin" priority="250" constant="10" id="8WV-Tl-ZdA"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" id="Afo-mQ-nrR"/>
-                                <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="lessThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" constant="10" id="AiU-ln-yof"/>
+                                <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="lessThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" constant="20" id="AiU-ln-yof"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="DhC-fb-EMj"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="IVz-HZ-ut7"/>
                                 <constraint firstItem="dEU-6d-lYx" firstAttribute="top" relation="lessThanOrEqual" secondItem="TJF-N0-vNk" secondAttribute="bottom" constant="30" id="IvT-QX-opZ"/>
-                                <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="lessThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" constant="20" id="KPW-4w-rgH"/>
+                                <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="lessThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" constant="30" id="KPW-4w-rgH"/>
                                 <constraint firstItem="dEU-6d-lYx" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leadingMargin" priority="999" constant="10" id="KUX-nY-tAi"/>
                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="OUb-TW-3Vq" secondAttribute="bottom" id="VIZ-Y2-hhc"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="OUb-TW-3Vq" secondAttribute="trailing" priority="999" constant="10" id="ciA-oQ-VMc"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leading" priority="999" constant="10" id="m6R-6u-e5n"/>
                                 <constraint firstItem="dEU-6d-lYx" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="pdg-al-liW"/>
-                                <constraint firstItem="dEU-6d-lYx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TJF-N0-vNk" secondAttribute="bottom" id="qSh-Or-XD3"/>
+                                <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" priority="999" constant="15" id="qP1-c1-u7n"/>
+                                <constraint firstItem="dEU-6d-lYx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TJF-N0-vNk" secondAttribute="bottom" constant="5" id="qSh-Or-XD3"/>
                                 <constraint firstAttribute="trailing" secondItem="TJF-N0-vNk" secondAttribute="trailing" priority="999" constant="10" id="sth-wA-8fo"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="top" secondItem="HC7-cb-OUP" secondAttribute="topMargin" id="tQS-s9-8Db"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leading" constant="10" id="x01-50-nKG"/>

@@ -588,7 +588,7 @@ open class _ArmadaApi {
                     if (date < publishedDate){
                         return nil
                     }
-                    return News(title: title, imageUrlWide : imageUrlWide, imageUrlSquare: imageUrlSquare, content: "", ingress: ingress, publishedDate: publishedDate, featured: featured, contentUrl: newsUrl + contentUrl)
+                    return News(title: title, imageUrlWide : imageUrlWide.replacingOccurrences(of: " ", with: "%20"), imageUrlSquare: imageUrlSquare.replacingOccurrences(of: " ", with: "%20"), content: "", ingress: ingress, publishedDate: publishedDate, featured: featured, contentUrl: newsUrl + contentUrl)
                 }
             }
             return nil

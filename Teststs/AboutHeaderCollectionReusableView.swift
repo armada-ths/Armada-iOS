@@ -14,5 +14,7 @@ class AboutHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var sustainabilityText: UITextView!    
     @IBOutlet weak var qualityText: UITextView!
     
+    
+    
 }
 
