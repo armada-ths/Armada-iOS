@@ -42,7 +42,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
             let ratio:CGFloat = (tmpImage!.size.height/tmpImage!.size.width)
             newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
             newsImgH.constant = ratio * newsImgW.constant
-            
+            newsImageView.layer.borderWidth = 0.5        
             newsImageView.image = tmpImage
         }
         catch{
@@ -63,7 +63,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         
         titleLabel.text = news.title
         titleLabel.font = UIFont(name:"BebasNeueRegular", size: 30.0)
-        titleLabel.textColor = ColorScheme.armadaGreen
+        //titleLabel.textColor = ColorScheme.armadaGreen
         ingressLabel.text = news.ingress
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
         dateLabel.text = news.publishedDate.format("yyyy MMM dd")

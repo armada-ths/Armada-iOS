@@ -69,6 +69,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                     let tmpImageW:CGFloat = (tmpImage?.size.width)!
                     let ratio:CGFloat = (tmpImageH/tmpImageW)
                     imgH.constant = holderW.constant * ratio
+                    imgView.layer.borderWidth = 0.5
                     imgView.image = tmpImage
                 } catch {
                     // adjust image height
