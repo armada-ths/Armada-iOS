@@ -21,7 +21,11 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var leftW: NSLayoutConstraint!
     
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var imgW: NSLayoutConstraint!
     @IBOutlet weak var imgH: NSLayoutConstraint!
+    
+    @IBOutlet weak var circleView: UIImageView!
+    @IBOutlet weak var circleW: NSLayoutConstraint!
     @IBOutlet weak var circleH: NSLayoutConstraint!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -47,7 +51,7 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 let A:CGFloat = 5.5
                 let B:CGFloat = 0.04
                 let C:CGFloat = 1.1
-                let D:CGFloat = 0.25
+                let D:CGFloat = 0.8
                 
                 // setup verticalGap; horizontalGap: depend on screensize
                 let horizontalGap = screenW * B
@@ -65,11 +69,13 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 whiteW.constant = greyW.constant - 2 * horizontalGap
                 
                 // setup leftview: depend on whiteview
-                leftW.constant = whiteW.constant * D
+                leftW.constant = whiteH.constant
                 
                 // try to setup image
-                imgH.constant = leftW.constant
-                circleH.constant = leftW.constant
+                imgH.constant = leftW.constant * D
+                imgW.constant = imgH.constant
+                circleH.constant = imgH.constant
+                circleW.constant = imgH.constant
                 
                 do{
                     let url =  NSURL(string: newsItem.imageUrlSquare)
@@ -95,6 +101,8 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 dateImgView.image = #imageLiteral(resourceName: "dateBanner.png")
                 dateImgView.alpha = 0.5
                 
+                // setup circle img:
+                circleView.image = #imageLiteral(resourceName: "circle_compressed.png")
                 
             }
         }

@@ -1997,12 +1997,14 @@
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xug-R1-azU">
                                                                             <rect key="frame" x="0.0" y="40" width="118" height="73"/>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="width" constant="118" id="yCa-w9-rkT" userLabel="imgW"/>
                                                                                 <constraint firstAttribute="height" constant="73" id="yEM-gV-P0j" userLabel="imgH"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle_compressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWT-ah-Pb7" userLabel="circleView">
                                                                             <rect key="frame" x="0.0" y="40" width="118" height="73"/>
                                                                             <constraints>
+                                                                                <constraint firstAttribute="width" constant="118" id="MiN-4d-kbv" userLabel="circleW"/>
                                                                                 <constraint firstAttribute="height" constant="73" id="pVC-WP-cha" userLabel="circleH"/>
                                                                             </constraints>
                                                                         </imageView>
@@ -2010,9 +2012,7 @@
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="5wU-Ml-EvD"/>
-                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="width" secondItem="EVf-oR-eVr" secondAttribute="width" id="8NE-i8-1cd" userLabel="circleW"/>
                                                                         <constraint firstAttribute="width" constant="118" id="8j2-uX-EH8"/>
-                                                                        <constraint firstItem="Xug-R1-azU" firstAttribute="width" secondItem="EVf-oR-eVr" secondAttribute="width" id="Gn6-BY-mjr" userLabel="imgW"/>
                                                                         <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="cSE-yK-z37"/>
                                                                         <constraint firstItem="Xug-R1-azU" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="ery-MH-Erg" userLabel="img.centery"/>
                                                                         <constraint firstItem="Xug-R1-azU" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="mhV-Rh-jp6" userLabel="img.centerx"/>
@@ -2090,6 +2090,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="circleH" destination="pVC-WP-cha" id="MDe-Ob-PGE"/>
+                                            <outlet property="circleView" destination="SWT-ah-Pb7" id="yla-eA-9DH"/>
+                                            <outlet property="circleW" destination="MiN-4d-kbv" id="QUM-um-55B"/>
                                             <outlet property="dateImgView" destination="W1x-9h-v0D" id="3Jt-qS-YiA"/>
                                             <outlet property="dateLabel" destination="1vG-Y6-Poy" id="DE2-t0-qsd"/>
                                             <outlet property="dateView" destination="6qH-lF-DjT" id="r2a-8I-gg5"/>
@@ -2100,6 +2102,7 @@
                                             <outlet property="greyW" destination="GlQ-eU-5Z1" id="Asa-8w-7qz"/>
                                             <outlet property="imgH" destination="yEM-gV-P0j" id="bEZ-Se-byI"/>
                                             <outlet property="imgView" destination="Xug-R1-azU" id="Zfa-cF-yxn"/>
+                                            <outlet property="imgW" destination="yCa-w9-rkT" id="xqT-h6-EBI"/>
                                             <outlet property="leftW" destination="8j2-uX-EH8" id="LjJ-Ll-Lsa"/>
                                             <outlet property="titleH" destination="16Z-cq-SeX" id="ifq-Dz-VSV"/>
                                             <outlet property="titleLabel" destination="deS-d4-beh" id="LQ4-g4-A2A"/>
@@ -2301,7 +2304,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2431,7 +2434,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="441-F1-9Fi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="441-F1-9Fi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     </navigationBar>
@@ -2454,7 +2457,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qHW-9i-Qpr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qHW-9i-Qpr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2972,7 +2975,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JEf-h2-jwW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JEf-h2-jwW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3069,7 +3072,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oNX-Of-RAF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HpA-x9-gLe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HpA-x9-gLe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3092,7 +3095,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hlx-dR-YYV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hlx-dR-YYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3109,7 +3112,7 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3315,7 +3318,7 @@
             <objects>
                 <navigationController title="Info" automaticallyAdjustsScrollViewInsets="NO" id="BG5-9C-bK2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CdP-Hl-062">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CdP-Hl-062">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3334,7 +3337,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3353,7 +3356,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFu-SQ-U48">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
