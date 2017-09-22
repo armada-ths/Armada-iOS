@@ -106,11 +106,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                                      viewForSupplementaryElementOfKind kind: String,
                                      at indexPath: IndexPath) -> UICollectionReusableView {
             print("running function for UICollectionReusableView")
-            //1
-            switch kind {
-            //2
-            case UICollectionElementKindSectionHeader:
-                //3
+
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                                  withReuseIdentifier: "AboutHeaderCollectionReusableView",
                                                                                  for: indexPath) as! AboutHeaderCollectionReusableView
@@ -133,10 +129,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 headerView.qualityText.isScrollEnabled = false
                 headerView.partnersLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 return headerView
-            default:
-                //4
-                assert(false, "Unexpected element kind")
-            }
         }
         
         
