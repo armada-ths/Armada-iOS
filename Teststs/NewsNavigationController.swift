@@ -14,8 +14,7 @@ class NewsNavigationController: UINavigationController {
         super.viewDidLoad()
         let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
         self.navigationBar.isTranslucent = false
-        self.navigationBar.backgroundColor = designGrey        
-        // Do any additional setup after loading the view.
+        self.navigationBar.backgroundColor = designGrey
     }
 
     override func didReceiveMemoryWarning() {

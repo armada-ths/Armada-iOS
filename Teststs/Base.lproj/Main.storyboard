@@ -2239,8 +2239,11 @@
                             <constraint firstItem="Pdc-H5-u5e" firstAttribute="leading" secondItem="XEi-IM-O3P" secondAttribute="leading" id="xLN-rA-QTE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="IS3-c8-foY" userLabel="News"/>
+                    <navigationItem key="navigationItem" id="IS3-c8-foY" userLabel="News">
+                        <barButtonItem key="backBarButtonItem" title="df" id="OM3-fw-C4H"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="backBarButton" destination="OM3-fw-C4H" id="iC1-b9-FL1"/>
                         <outlet property="tableView" destination="Pdc-H5-u5e" id="ugN-zD-D57"/>
                     </connections>
                 </viewController>
@@ -3419,7 +3422,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="HmL-IU-78Y"/>
         <segue reference="NVI-Nj-Wn8"/>
-        <segue reference="RGJ-y3-kDg"/>
+        <segue reference="XAN-qI-yVU"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="4vG-nW-9OL"/>
         <segue reference="rqO-4i-A8F"/>

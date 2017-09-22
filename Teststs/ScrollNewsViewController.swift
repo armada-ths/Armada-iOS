@@ -48,6 +48,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         label.textAlignment = .center
         label.attributedText = myMutableString
         self.navigationItem.titleView = label
+        self.navigationItem.backBarButtonItem?.title = ""
         
         
         do{

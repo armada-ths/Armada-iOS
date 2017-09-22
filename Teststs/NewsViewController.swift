@@ -14,6 +14,7 @@ class NewsViewController: UIViewController {
     var refreshControl: UIRefreshControl!
 
     
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
     func refresh(sender:AnyObject)
     {
         updateFunc()
@@ -22,6 +23,9 @@ class NewsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // set title for back button for cell-segues
+        backBarButton.title = ""
+        
         let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
         tableView.backgroundColor = designGrey
         tableView.startActivityIndicator()
