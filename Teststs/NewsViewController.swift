@@ -9,9 +9,16 @@
 import UIKit
 
 class NewsViewController: UIViewController {
-
     @IBOutlet weak var tableView: UITableView!
     var news: [News] = []
+    var refreshControl: UIRefreshControl!
+
+    
+    func refresh(sender:AnyObject)
+    {
+        updateFunc()
+        refreshControl.endRefreshing()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +28,10 @@ class NewsViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
         updateFunc()
         
         // remove cell borders
@@ -55,7 +66,6 @@ extension NewsViewController: UITableViewDataSource {
             news, error, errorMessage in
             OperationQueue.main.addOperation {[weak self] in
                 self?.tableView.stopActivityIndicator()
-                
                 if(error == true){
                     self?.tableView.showEmptyMessage(errorMessage)
                     self?.news = []
@@ -69,6 +79,10 @@ extension NewsViewController: UITableViewDataSource {
             }
         }
     }
+    
+    
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cellIdentifier = news[indexPath.row].featured == true ? "largeWhiteCell" : "smallWhiteCell"
