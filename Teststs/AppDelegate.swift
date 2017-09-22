@@ -23,12 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UITabBar.appearance().tintColor = ColorScheme.armadaDarkMelon
         window!.tintColor = ColorScheme.armadaDarkMelon
-        //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
-        UINavigationBar.appearance().tintColor = ColorScheme.armadaDarkMelon//UIColor.whiteColor()
-        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
+        
+        UINavigationBar.appearance().tintColor = ColorScheme.armadaDarkMelon
+        
         UITableView.appearance().backgroundColor = UIColor.white
         UIProgressView.appearance().tintColor = ColorScheme.armadaMelon
         
+        // setup status-bar style
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        
+//UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
+//UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
 //        window!.tintColor = ColorScheme.armadaGreen
 //        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
 //        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
