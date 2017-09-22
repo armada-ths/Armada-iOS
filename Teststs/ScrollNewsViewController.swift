@@ -35,10 +35,8 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
-        print(news.imageUrlWide)
         do{
             let url =  NSURL(string: news.imageUrlWide)
-            print(url)
             let data = try Data(contentsOf: url! as URL)
             // make catch statement here!
             let tmpImage =  UIImage(data: data)
@@ -46,7 +44,8 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         }
         catch{}
         titleLabel.text = news.title
-        titleLabel.font = UIFont(name:"BebasNeueRegular", size: 35.0)
+        titleLabel.font = UIFont(name:"BebasNeueRegular", size: 30.0)
+        titleLabel.textColor = ColorScheme.armadaGreen
         ingressLabel.text = news.ingress
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
         dateLabel.text = news.publishedDate.format("dd MMM YYY")
