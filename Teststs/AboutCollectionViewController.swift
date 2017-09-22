@@ -103,12 +103,14 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 //Events with this icon will be focused on topics regarding quality."
                 headerView.aboutText.attributedText =  about.attributedHtmlString
                 headerView.aboutText.isScrollEnabled = false
+                headerView.coreValuesLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 headerView.diversityText.attributedText = diversity.attributedHtmlString
                 headerView.diversityText.isScrollEnabled = false
                 headerView.sustainabilityText.attributedText = sustainability.attributedHtmlString
                 headerView.sustainabilityText.isScrollEnabled = false
                 headerView.qualityText.attributedText = quality.attributedHtmlString
                 headerView.qualityText.isScrollEnabled = false
+                headerView.partnersLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 return headerView
             default:
                 //4

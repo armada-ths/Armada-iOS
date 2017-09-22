@@ -13,7 +13,8 @@ class AboutHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var diversityText: UITextView!
     @IBOutlet weak var sustainabilityText: UITextView!    
     @IBOutlet weak var qualityText: UITextView!
-    
+    @IBOutlet weak var partnersLabel: UILabel!
+    @IBOutlet weak var coreValuesLabel: UILabel!
     
     
 }

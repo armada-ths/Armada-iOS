@@ -2301,7 +2301,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -3109,7 +3109,7 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3162,7 +3162,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Values" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-6d-lYx">
-                                    <rect key="frame" x="18" y="55.5" width="339" height="20.5"/>
+                                    <rect key="frame" x="18" y="55" width="339" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="rWy-WA-NZ7"/>
                                     </constraints>
@@ -3267,7 +3267,7 @@
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leadingMargin" priority="999" constant="10" id="4J0-BP-5R6"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="top" secondItem="HC7-cb-OUP" secondAttribute="topMargin" id="5N9-Bf-OjN"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="dEU-6d-lYx" secondAttribute="trailing" priority="999" constant="10" id="5aA-Ma-KPd"/>
-                                <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" priority="950" constant="20" id="5ji-Ij-Nz1"/>
+                                <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" priority="999" constant="20" id="5ji-Ij-Nz1"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="bottom" secondItem="HC7-cb-OUP" secondAttribute="bottomMargin" priority="250" constant="10" id="8WV-Tl-ZdA"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" id="Afo-mQ-nrR"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="lessThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" constant="20" id="AiU-ln-yof"/>
@@ -3289,7 +3289,9 @@
                             </constraints>
                             <connections>
                                 <outlet property="aboutText" destination="TJF-N0-vNk" id="jcg-d4-tkW"/>
+                                <outlet property="coreValuesLabel" destination="dEU-6d-lYx" id="8g2-JW-dvq"/>
                                 <outlet property="diversityText" destination="Nhb-nE-o8b" id="sma-Ko-k4K"/>
+                                <outlet property="partnersLabel" destination="OUb-TW-3Vq" id="siW-ww-fQU"/>
                                 <outlet property="qualityText" destination="zzt-lI-bg8" id="uA3-Aq-zov"/>
                                 <outlet property="sustainabilityText" destination="Mhn-iF-fFO" id="JqI-DC-V3D"/>
                             </connections>
