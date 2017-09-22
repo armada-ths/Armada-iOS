@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = ColorScheme.armadaDarkMelon
         
         UITableView.appearance().backgroundColor = UIColor.white
-        UIProgressView.appearance().tintColor = ColorScheme.armadaMelon
+        
+        // setup the color of the text for the back button
+        UIProgressView.appearance().tintColor = ColorScheme.armadaDarkMelon
         
         // setup status-bar style
         UIApplication.shared.statusBarStyle = .lightContent

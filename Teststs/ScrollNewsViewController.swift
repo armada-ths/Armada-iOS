@@ -35,6 +35,21 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        
+        // fix header
+        let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
+        let label = UILabel(frame: frame)
+        let myMutableString = NSMutableAttributedString(
+            string: "N E W S THS Armada 2017",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeue-Thin",
+                size: 22.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 8))
+        label.textAlignment = .center
+        label.attributedText = myMutableString
+        self.navigationItem.titleView = label
+        
+        
         do{
             let url =  NSURL(string: news.imageUrlWide)
             let data = try Data(contentsOf: url! as URL)

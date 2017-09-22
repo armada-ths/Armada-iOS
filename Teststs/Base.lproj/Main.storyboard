@@ -1740,7 +1740,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlR-He-aDb" userLabel="Scroll Sub View">
-                                                        <rect key="frame" x="-10" y="233" width="395" height="156"/>
+                                                        <rect key="frame" x="-10" y="233" width="395" height="116"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flK-wp-5Rg">
                                                                 <rect key="frame" x="10" y="10" width="375" height="42"/>
@@ -1749,7 +1749,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRx-4Y-Tst">
-                                                                <rect key="frame" x="281" y="72" width="120" height="18"/>
+                                                                <rect key="frame" x="281" y="62" width="120" height="18"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dateBanner.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q55-oY-HpV">
                                                                         <rect key="frame" x="8" y="-9" width="110" height="27"/>
@@ -1778,13 +1778,13 @@
                                                                 </constraints>
                                                             </view>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qHH-fS-mI0">
-                                                                <rect key="frame" x="10" y="120" width="375" height="36"/>
+                                                                <rect key="frame" x="10" y="80" width="375" height="36"/>
                                                                 <fontDescription key="fontDescription" name="Lato-ThinItalic" family="Lato" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNz-DN-WXe">
-                                                                <rect key="frame" x="10" y="62" width="256" height="0.0"/>
+                                                                <rect key="frame" x="10" y="62" width="256" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1795,15 +1795,15 @@
                                                             <constraint firstItem="qHH-fS-mI0" firstAttribute="leading" secondItem="hlR-He-aDb" secondAttribute="leading" constant="10" id="6Vm-Hq-VEp"/>
                                                             <constraint firstAttribute="trailing" secondItem="SRx-4Y-Tst" secondAttribute="trailing" constant="-6" id="8B8-bM-tCi" userLabel="VIEWTRAIL"/>
                                                             <constraint firstAttribute="trailing" secondItem="qHH-fS-mI0" secondAttribute="trailing" constant="10" id="9YL-bo-eYY"/>
-                                                            <constraint firstItem="qHH-fS-mI0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dNz-DN-WXe" secondAttribute="bottom" id="Arq-eu-1jk"/>
-                                                            <constraint firstItem="SRx-4Y-Tst" firstAttribute="top" secondItem="flK-wp-5Rg" secondAttribute="bottom" constant="20" id="Gsg-9f-HEt" userLabel="VIEWTOP"/>
+                                                            <constraint firstItem="qHH-fS-mI0" firstAttribute="top" secondItem="dNz-DN-WXe" secondAttribute="bottom" id="Arq-eu-1jk"/>
+                                                            <constraint firstItem="SRx-4Y-Tst" firstAttribute="top" secondItem="flK-wp-5Rg" secondAttribute="bottom" constant="10" id="Gsg-9f-HEt" userLabel="VIEWTOP"/>
                                                             <constraint firstItem="dNz-DN-WXe" firstAttribute="leading" secondItem="hlR-He-aDb" secondAttribute="leading" constant="10" id="HWH-Bi-jgK"/>
                                                             <constraint firstItem="SRx-4Y-Tst" firstAttribute="leading" secondItem="dNz-DN-WXe" secondAttribute="trailing" constant="15" id="OJd-F9-P7k" userLabel="VIEWLEAD"/>
                                                             <constraint firstItem="dNz-DN-WXe" firstAttribute="top" secondItem="flK-wp-5Rg" secondAttribute="bottom" constant="10" id="PmH-vh-Npt"/>
                                                             <constraint firstAttribute="bottom" secondItem="qHH-fS-mI0" secondAttribute="bottom" id="RP6-eM-0bG"/>
                                                             <constraint firstItem="qHH-fS-mI0" firstAttribute="leading" secondItem="hlR-He-aDb" secondAttribute="leading" constant="10" id="b7m-nS-Obc"/>
                                                             <constraint firstItem="flK-wp-5Rg" firstAttribute="top" secondItem="hlR-He-aDb" secondAttribute="top" constant="10" id="ejP-Qn-KgT"/>
-                                                            <constraint firstItem="qHH-fS-mI0" firstAttribute="top" secondItem="SRx-4Y-Tst" secondAttribute="bottom" constant="30" id="mv0-gG-TTF" userLabel="VIEWBOTTOM"/>
+                                                            <constraint firstItem="qHH-fS-mI0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SRx-4Y-Tst" secondAttribute="bottom" id="mv0-gG-TTF" userLabel="VIEWBOTTOM"/>
                                                             <constraint firstAttribute="trailing" secondItem="qHH-fS-mI0" secondAttribute="trailing" constant="10" id="n8p-x1-1yt"/>
                                                             <constraint firstAttribute="trailing" secondItem="qHH-fS-mI0" secondAttribute="trailing" constant="10" id="ovA-eF-KDR"/>
                                                             <constraint firstItem="flK-wp-5Rg" firstAttribute="centerX" secondItem="hlR-He-aDb" secondAttribute="centerX" id="qRQ-SB-ha4"/>
@@ -2239,7 +2239,7 @@
                             <constraint firstItem="Pdc-H5-u5e" firstAttribute="leading" secondItem="XEi-IM-O3P" secondAttribute="leading" id="xLN-rA-QTE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Armada News" id="IS3-c8-foY" userLabel="News"/>
+                    <navigationItem key="navigationItem" id="IS3-c8-foY" userLabel="News"/>
                     <connections>
                         <outlet property="tableView" destination="Pdc-H5-u5e" id="ugN-zD-D57"/>
                     </connections>
@@ -3419,7 +3419,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="HmL-IU-78Y"/>
         <segue reference="NVI-Nj-Wn8"/>
-        <segue reference="dHJ-dF-k7O"/>
+        <segue reference="RGJ-y3-kDg"/>
         <segue reference="WlV-f9-SYd"/>
         <segue reference="4vG-nW-9OL"/>
         <segue reference="rqO-4i-A8F"/>
