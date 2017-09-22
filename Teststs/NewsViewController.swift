@@ -38,7 +38,7 @@ class NewsViewController: UIViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // fix header
-        let frame = CGRect(x: 0,y: 0, width: 400, height: 100);
+        let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
         let label = UILabel(frame: frame)
         let myMutableString = NSMutableAttributedString(
             string: "N E W S THS Armada 2017",
@@ -50,6 +50,20 @@ class NewsViewController: UIViewController {
         label.attributedText = myMutableString
         self.navigationItem.titleView = label
         
+        // setup header left logo
+        var armadalogo:UIImage = #imageLiteral(resourceName: "armada_round_logo_green.png")
+        let headerHeight:CGFloat = (self.navigationController?.navigationBar.frame.size.height)!
+        let headerImgSize = headerHeight * 0.8
+        
+        // change size of armada logo
+        let newSize = CGSize(width: headerImgSize, height: headerImgSize)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        armadalogo.draw(in: CGRect(x: 0, y: 0, width: headerImgSize, height: headerImgSize))
+        let newarmadalogo = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // add armada logo to header
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:newarmadalogo , style: UIBarButtonItemStyle.plain, target: nil, action: nil)
     }
 }
 
