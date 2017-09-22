@@ -68,6 +68,10 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 whiteH.constant = greyH.constant - 2 * verticalGap
                 whiteW.constant = greyW.constant - 2 * horizontalGap
                 
+                // short on time, minimize greyview height
+                // whiteview height = 88.0
+                greyH.constant = greyH.constant - 2 * verticalGap * 0.5
+                
                 // setup leftview: depend on whiteview
                 leftW.constant = whiteH.constant
                 

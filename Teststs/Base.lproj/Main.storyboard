@@ -2038,7 +2038,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Y6-Poy" userLabel="datelabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="14"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="12"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -2047,7 +2047,7 @@
                                                                     <color key="backgroundColor" red="0.93018535196930097" green="1" blue="0.6777011544958581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="80" id="Doo-Xf-YWx" userLabel="dateviewW"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" id="J4v-U2-0L0"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" constant="2" id="J4v-U2-0L0"/>
                                                                         <constraint firstAttribute="trailing" secondItem="1vG-Y6-Poy" secondAttribute="trailing" id="Peh-X8-x61"/>
                                                                         <constraint firstItem="1vG-Y6-Poy" firstAttribute="top" secondItem="6qH-lF-DjT" secondAttribute="top" id="Y9B-oe-XLO"/>
                                                                         <constraint firstItem="1vG-Y6-Poy" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="hpf-OT-IyD"/>
@@ -2142,7 +2142,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkn-2a-RJd" userLabel="datelabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="14"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="12"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -2150,7 +2150,7 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="hkn-2a-RJd" secondAttribute="bottom" id="GOH-od-nFs"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="hkn-2a-RJd" secondAttribute="bottom" constant="2" id="GOH-od-nFs"/>
                                                                         <constraint firstItem="hkn-2a-RJd" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="Qdu-09-dEI"/>
                                                                         <constraint firstItem="fcX-ve-YYD" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="W1M-xU-Odt" userLabel="dateimg.lead = dateview.lead"/>
                                                                         <constraint firstItem="hkn-2a-RJd" firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" id="jNh-m5-nmS"/>
@@ -2160,8 +2160,8 @@
                                                                         <constraint firstItem="hkn-2a-RJd" firstAttribute="top" secondItem="8nd-0v-ipr" secondAttribute="top" id="yA8-0z-fQ2"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hq0-Oz-rme" userLabel="titlelabel">
-                                                                    <rect key="frame" x="16" y="161" width="281" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hq0-Oz-rme" userLabel="titlelabel">
+                                                                    <rect key="frame" x="8" y="136" width="233" height="18"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -2174,8 +2174,8 @@
                                                                 <constraint firstItem="48w-FX-Ljn" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" id="Fgm-W3-3Hg" userLabel="img.lead"/>
                                                                 <constraint firstItem="48w-FX-Ljn" firstAttribute="top" secondItem="Y2t-SF-9wB" secondAttribute="top" id="OBD-Sn-duf" userLabel="img.top"/>
                                                                 <constraint firstAttribute="width" constant="359" id="Yf0-PA-epn" userLabel="holderW"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Hq0-Oz-rme" secondAttribute="bottom" constant="12" id="k8u-Lh-r5m"/>
-                                                                <constraint firstItem="Hq0-Oz-rme" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" constant="16" id="lLs-0n-H2p" userLabel="title.lead"/>
+                                                                <constraint firstItem="Hq0-Oz-rme" firstAttribute="top" secondItem="48w-FX-Ljn" secondAttribute="bottom" constant="8" id="lDD-od-hEC"/>
+                                                                <constraint firstItem="Hq0-Oz-rme" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" constant="8" id="lLs-0n-H2p" userLabel="title.lead"/>
                                                                 <constraint firstAttribute="bottom" secondItem="8nd-0v-ipr" secondAttribute="bottom" constant="8" id="pjw-pP-9HC"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" id="ye0-r2-Xsp"/>
                                                             </constraints>
@@ -2304,7 +2304,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2434,7 +2434,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="441-F1-9Fi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="441-F1-9Fi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     </navigationBar>
@@ -2457,7 +2457,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qHW-9i-Qpr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qHW-9i-Qpr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2975,7 +2975,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JEf-h2-jwW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JEf-h2-jwW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3072,7 +3072,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oNX-Of-RAF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HpA-x9-gLe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HpA-x9-gLe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3095,7 +3095,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hlx-dR-YYV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hlx-dR-YYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3112,7 +3112,7 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3165,7 +3165,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Values" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-6d-lYx">
-                                    <rect key="frame" x="18" y="55" width="339" height="20.5"/>
+                                    <rect key="frame" x="18" y="55" width="339" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="rWy-WA-NZ7"/>
                                     </constraints>
@@ -3174,7 +3174,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-zK-luL">
-                                    <rect key="frame" x="10" y="106" width="355" height="360"/>
+                                    <rect key="frame" x="10" y="105.5" width="355" height="360"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U6k-wb-iu5">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="120"/>
@@ -3254,7 +3254,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partners" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-TW-3Vq">
-                                    <rect key="frame" x="18" y="486" width="339" height="21.5"/>
+                                    <rect key="frame" x="18" y="485.5" width="339" height="21.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21.5" id="S3e-eo-8bx"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="euY-0v-31t"/>
@@ -3318,7 +3318,7 @@
             <objects>
                 <navigationController title="Info" automaticallyAdjustsScrollViewInsets="NO" id="BG5-9C-bK2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CdP-Hl-062">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CdP-Hl-062">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3337,7 +3337,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3356,7 +3356,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFu-SQ-U48">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

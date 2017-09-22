@@ -56,6 +56,9 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 holderH.constant = greyH.constant - 2 * verticalGap
                 holderW.constant = greyW.constant - 2 * horizontalGap
                 
+                // short on time minimize grey height
+                //whiteH.constant = greyH.constant - 2 * verticalGap * 1.2
+                
                 // setup image
                 do {
                     let url = NSURL(string: newsItem.imageUrlWide)
@@ -89,7 +92,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 dateimgView.alpha = 0.5
                 
                 // resize cell height so that the area under the image has height 56
-                greyH.constant = 56 + imgH.constant + 2 * verticalGap
+                greyH.constant = 56 + imgH.constant + 2 * verticalGap * 0.8
                 holderH.constant = 56 + imgH.constant
                 
                 
