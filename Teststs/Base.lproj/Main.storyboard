@@ -1724,16 +1724,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="247" verticalHuggingPriority="247" horizontalCompressionResistancePriority="747" verticalCompressionResistancePriority="747" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-NL-mot" userLabel="Top View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Bgc-xM-XOL"/>
+                                                    <constraint firstAttribute="height" id="Bgc-xM-XOL"/>
                                                 </constraints>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="uyv-pp-9qP">
-                                                <rect key="frame" x="0.0" y="60" width="375" height="558"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1D6-je-4QG">
+                                                        <rect key="frame" x="0.0" y="10" width="375" height="213"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="213" id="15C-yl-a2U" userLabel="newsimgH"/>
+                                                            <constraint firstAttribute="width" constant="375" id="6bl-TO-JPi" userLabel="newsimgW"/>
+                                                        </constraints>
+                                                    </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hlR-He-aDb" userLabel="Scroll Sub View">
-                                                        <rect key="frame" x="0.0" y="235" width="375" height="136"/>
+                                                        <rect key="frame" x="0.0" y="231" width="375" height="136"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flK-wp-5Rg">
                                                                 <rect key="frame" x="10" y="0.0" width="355" height="42"/>
@@ -1787,25 +1794,15 @@
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="395" id="xpz-qH-3af"/>
                                                         </constraints>
                                                     </view>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1D6-je-4QG">
-                                                        <rect key="frame" x="10" y="10" width="355" height="213"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="6bl-TO-JPi"/>
-                                                            <constraint firstAttribute="width" secondItem="1D6-je-4QG" secondAttribute="height" multiplier="15:9" id="qMc-K5-juT"/>
-                                                        </constraints>
-                                                    </imageView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="hlR-He-aDb" firstAttribute="centerX" secondItem="uyv-pp-9qP" secondAttribute="centerX" id="3sZ-WW-t87"/>
-                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="leading" secondItem="uyv-pp-9qP" secondAttribute="leading" priority="999" constant="10" id="DNV-Xa-IuK"/>
-                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="centerX" secondItem="uyv-pp-9qP" secondAttribute="centerX" id="Kfc-Ua-GKG"/>
-                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="top" secondItem="uyv-pp-9qP" secondAttribute="top" constant="10" id="Lw5-JK-yWS"/>
+                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="top" secondItem="uyv-pp-9qP" secondAttribute="top" constant="10" id="Lw5-JK-yWS" userLabel="newsimg.top = super.top + 10"/>
                                                     <constraint firstItem="hlR-He-aDb" firstAttribute="leading" secondItem="uyv-pp-9qP" secondAttribute="leading" priority="999" id="NCo-Ub-AqO"/>
-                                                    <constraint firstAttribute="trailing" secondItem="1D6-je-4QG" secondAttribute="trailing" priority="999" constant="10" id="W3S-eQ-2Xg"/>
                                                     <constraint firstAttribute="trailing" secondItem="hlR-He-aDb" secondAttribute="trailing" priority="999" id="WxD-7G-dTZ"/>
-                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="centerX" secondItem="uyv-pp-9qP" secondAttribute="centerX" id="dC7-Tb-774"/>
+                                                    <constraint firstItem="1D6-je-4QG" firstAttribute="centerX" secondItem="uyv-pp-9qP" secondAttribute="centerX" id="dC7-Tb-774" userLabel="newsimg.center = super.center"/>
+                                                    <constraint firstItem="hlR-He-aDb" firstAttribute="top" secondItem="1D6-je-4QG" secondAttribute="bottom" constant="8" id="ihq-3M-4Ng"/>
                                                     <constraint firstAttribute="bottom" secondItem="hlR-He-aDb" secondAttribute="bottom" id="qFE-Ke-ngl"/>
-                                                    <constraint firstItem="hlR-He-aDb" firstAttribute="top" secondItem="uyv-pp-9qP" secondAttribute="top" constant="235" id="rt1-Zt-Ylz"/>
                                                 </constraints>
                                             </scrollView>
                                         </subviews>
@@ -1849,6 +1846,8 @@
                         <outlet property="dateLabel" destination="0uL-td-4W2" id="tX2-iA-6sn"/>
                         <outlet property="ingressLabel" destination="dNz-DN-WXe" id="afH-5N-oJW"/>
                         <outlet property="newsImageView" destination="1D6-je-4QG" id="KkK-dp-qV9"/>
+                        <outlet property="newsImgH" destination="15C-yl-a2U" id="o4J-xu-DMy"/>
+                        <outlet property="newsImgW" destination="6bl-TO-JPi" id="g6G-ql-Jbw"/>
                         <outlet property="scrollSubView" destination="hlR-He-aDb" id="HqZ-g6-uPl"/>
                         <outlet property="scrollView" destination="uyv-pp-9qP" id="7FN-d2-GrB"/>
                         <outlet property="titleLabel" destination="flK-wp-5Rg" id="uhV-ku-lY7"/>
@@ -2434,7 +2433,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="441-F1-9Fi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="441-F1-9Fi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     </navigationBar>
@@ -2457,7 +2456,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qHW-9i-Qpr">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="qHW-9i-Qpr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2975,7 +2974,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JEf-h2-jwW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="JEf-h2-jwW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3072,7 +3071,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oNX-Of-RAF" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HpA-x9-gLe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HpA-x9-gLe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3095,7 +3094,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hlx-dR-YYV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hlx-dR-YYV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3112,7 +3111,7 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3165,7 +3164,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Values" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-6d-lYx">
-                                    <rect key="frame" x="18" y="55" width="339" height="20"/>
+                                    <rect key="frame" x="18" y="55" width="339" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="rWy-WA-NZ7"/>
                                     </constraints>
@@ -3174,7 +3173,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-zK-luL">
-                                    <rect key="frame" x="10" y="105.5" width="355" height="360"/>
+                                    <rect key="frame" x="10" y="106" width="355" height="360"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U6k-wb-iu5">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="120"/>
@@ -3254,7 +3253,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partners" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-TW-3Vq">
-                                    <rect key="frame" x="18" y="485.5" width="339" height="21.5"/>
+                                    <rect key="frame" x="18" y="486" width="339" height="21.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21.5" id="S3e-eo-8bx"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="euY-0v-31t"/>
@@ -3318,7 +3317,7 @@
             <objects>
                 <navigationController title="Info" automaticallyAdjustsScrollViewInsets="NO" id="BG5-9C-bK2" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CdP-Hl-062">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CdP-Hl-062">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3337,7 +3336,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3356,7 +3355,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFu-SQ-U48">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -3400,12 +3399,12 @@
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RGJ-y3-kDg"/>
-        <segue reference="TRA-nv-BBS"/>
-        <segue reference="rqO-4i-A8F"/>
-        <segue reference="4vG-nW-9OL"/>
         <segue reference="HmL-IU-78Y"/>
         <segue reference="NVI-Nj-Wn8"/>
+        <segue reference="dHJ-dF-k7O"/>
         <segue reference="WlV-f9-SYd"/>
+        <segue reference="4vG-nW-9OL"/>
+        <segue reference="rqO-4i-A8F"/>
+        <segue reference="TRA-nv-BBS"/>
     </inferredMetricsTieBreakers>
 </document>

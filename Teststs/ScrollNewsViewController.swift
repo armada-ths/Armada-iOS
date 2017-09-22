@@ -16,14 +16,9 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     
     var newTopFrame: CGRect!
     var newScrollFrame: CGRect!
-
-
-
     var scale: CGFloat!
     var previousOffset: CGFloat!
     var defaultTopHeight: CGFloat!
-
-    
     var news: News!
 
     @IBOutlet weak var newsImageView: UIImageView!
@@ -32,17 +27,27 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var ingressLabel: UILabel!
 
+    @IBOutlet weak var newsImgW: NSLayoutConstraint!
+    @IBOutlet weak var newsImgH: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
         do{
             let url =  NSURL(string: news.imageUrlWide)
             let data = try Data(contentsOf: url! as URL)
-            // make catch statement here!
             let tmpImage =  UIImage(data: data)
+            let ratio:CGFloat = (tmpImage!.size.height/tmpImage!.size.width)
+            newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
+            newsImgH.constant = ratio * newsImgW.constant
+            
             newsImageView.image = tmpImage
         }
-        catch{}
+        catch{
+            // if img is unretrievable set img height = 0
+            newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
+            newsImgH.constant = 0.0
+        }
         titleLabel.text = news.title
         titleLabel.font = UIFont(name:"BebasNeueRegular", size: 30.0)
         titleLabel.textColor = ColorScheme.armadaGreen
