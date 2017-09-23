@@ -41,6 +41,11 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 let B:CGFloat = 0.92
                 let C:CGFloat = 0.445634
             
+                // setup greyview: depend on screensize
+                greyView.backgroundColor = designGrey
+                greyH.constant = screenH * C
+                greyW.constant = screenW
+                
                 // setup holderview: depend on greyview
                 whiteView.layer.borderWidth = 0.5
                 whiteH.constant = screenH * A
@@ -49,20 +54,24 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 let ratio:CGFloat = (9.0/15.0)
                 imgH.constant = whiteW.constant * ratio
                 // setup image
-                if newsItem.imageUrlWide != "" {
-                    URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlWide)! as URL, completionHandler: {(data, response, error) -> Void in
-                        if error != nil {
-                            print(error ?? "error is nil in URLSession.shared.dataTask in LargeWhiteCell.swift")
-                            return
-                        }
-                        DispatchQueue.main.async(execute: { () -> Void in
-                            let image = UIImage(data: data!)
-                            self.imgH.constant = self.whiteW.constant * ratio
-                            self.imgView.layer.borderWidth = 0.5
-                            self.imgView.image = image
-                        })
-                    }).resume()
+                
+                if imgView.image == nil {
+                    if newsItem.imageUrlWide != "" {
+                        URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlWide)! as URL, completionHandler: {(data, response, error) -> Void in
+                            if error != nil {
+                                print(error ?? "error is nil in URLSession.shared.dataTask in LargeWhiteCell.swift")
+                                return
+                            }
+                            DispatchQueue.main.async(execute: { () -> Void in
+                                let image = UIImage(data: data!)
+                                self.imgView.image = image
+                                print("img ratio\((self.imgView.image?.size.height)!/(self.imgView.image?.size.width)!)")
+                                print("once again")
+                            })
+                        }).resume()
+                    }
                 }
+                
                 
                 // setup title:
                 titleLabel.text = newsItem.title            
@@ -79,10 +88,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 dateimgView.image = #imageLiteral(resourceName: "dateBanner.png")
                 dateimgView.alpha = 0.5
                 
-                // setup greyview: depend on screensize
-                greyView.backgroundColor = designGrey
-                greyH.constant = screenH * C
-                greyW.constant = screenW                
+                
             }
         }
     }
