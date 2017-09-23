@@ -14,9 +14,9 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var greyW: NSLayoutConstraint!
     @IBOutlet weak var greyH: NSLayoutConstraint!
     
-    @IBOutlet weak var holderView: UIView!
-    @IBOutlet weak var holderW: NSLayoutConstraint!
-    @IBOutlet weak var holderH: NSLayoutConstraint!
+    @IBOutlet weak var whiteView: UIView!
+    @IBOutlet weak var whiteW: NSLayoutConstraint!
+    @IBOutlet weak var whiteH: NSLayoutConstraint!
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgH: NSLayoutConstraint!
@@ -37,44 +37,31 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 let screenW = screenSize.size.width
                 let screenH = screenSize.size.height
                 
-                let A:CGFloat = 2.4
-                let B:CGFloat = 0.04
-                let C:CGFloat = 1.1
-                let D:CGFloat = 0.25
-                
-                // setup verticalGap; horizontalGap: depend on screensize
-                let horizontalGap = screenW * B
-                let verticalGap = horizontalGap
-
-                // setup greyview: depend on screensize
-                greyView.backgroundColor = designGrey
-                greyH.constant = round(screenH / A)
-                greyW.constant = screenW
-                
+                let A:CGFloat = 0.409577
+                let B:CGFloat = 0.92
+                let C:CGFloat = 0.445634
+            
                 // setup holderview: depend on greyview
-                holderView.layer.borderWidth = 0.5
-                holderH.constant = greyH.constant - 2 * verticalGap
-                holderW.constant = greyW.constant - 2 * horizontalGap
+                whiteView.layer.borderWidth = 0.5
+                whiteH.constant = screenH * A
+                whiteW.constant = screenW * B
                 
-                // short on time minimize grey height
-                //whiteH.constant = greyH.constant - 2 * verticalGap * 1.2
-                
+                let ratio:CGFloat = (9.0/15.0)
+                imgH.constant = whiteW.constant * ratio
                 // setup image
-                do {
-                    let url = NSURL(string: newsItem.imageUrlWide)
-                    let data = try Data(contentsOf: url! as URL)
-                    let tmpImage = UIImage(data: data)
-                    // adjust img height
-                    let tmpImageH:CGFloat = (tmpImage?.size.height)!
-                    let tmpImageW:CGFloat = (tmpImage?.size.width)!
-                    let ratio:CGFloat = (tmpImageH/tmpImageW)
-                    imgH.constant = holderW.constant * ratio
-                    imgView.layer.borderWidth = 0.5
-                    imgView.image = tmpImage
-                } catch {
-                    // adjust image height
-                    let ratio:CGFloat = (9.0/15.0)
-                    imgH.constant = holderW.constant * ratio
+                if newsItem.imageUrlWide != "" {
+                    URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlWide)! as URL, completionHandler: {(data, response, error) -> Void in
+                        if error != nil {
+                            print(error ?? "error is nil in URLSession.shared.dataTask in LargeWhiteCell.swift")
+                            return
+                        }
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            let image = UIImage(data: data!)
+                            self.imgH.constant = self.whiteW.constant * ratio
+                            self.imgView.layer.borderWidth = 0.5
+                            self.imgView.image = image
+                        })
+                    }).resume()
                 }
                 
                 // setup title:
@@ -92,11 +79,10 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 dateimgView.image = #imageLiteral(resourceName: "dateBanner.png")
                 dateimgView.alpha = 0.5
                 
-                // resize cell height so that the area under the image has height 56
-                greyH.constant = 56 + imgH.constant + 2 * verticalGap * 0.8
-                holderH.constant = 56 + imgH.constant
-                
-                
+                // setup greyview: depend on screensize
+                greyView.backgroundColor = designGrey
+                greyH.constant = screenH * C
+                greyW.constant = screenW                
             }
         }
     }

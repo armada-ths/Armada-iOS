@@ -48,46 +48,44 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 let screenW = screenSize.size.width
                 let screenH = screenSize.size.height
 
-                let A:CGFloat = 5.5
-                let B:CGFloat = 0.04
-                let C:CGFloat = 1.1
-                let D:CGFloat = 0.8
-                
-                // setup verticalGap; horizontalGap: depend on screensize
-                let horizontalGap = screenW * B
-                let verticalGap = horizontalGap * C
-
+                let A:CGFloat = 0.92
+                let B:CGFloat = 0.131934
+                let C:CGFloat = 0.255072463768116
+                let D:CGFloat = 0.181338
+                let E:CGFloat = 0.8
                 
                 // setup greyview: depend on screensize
+                
                 greyView.backgroundColor = designGrey
-                greyH.constant = round(screenH / A)
+                greyH.constant = screenH * D
                 greyW.constant = screenW
                 
                 // setup whiteview: depend on greyview
                 whiteView.layer.borderWidth = 0.5
-                whiteH.constant = greyH.constant - 2 * verticalGap
-                whiteW.constant = greyW.constant - 2 * horizontalGap
-                
-                // short on time, minimize greyview height
-                // whiteview height = 88.0
-                greyH.constant = greyH.constant - 2 * verticalGap * 0.5
+                whiteW.constant = screenW * A
+                whiteH.constant = screenH * B
                 
                 // setup leftview: depend on whiteview
-                leftW.constant = whiteH.constant
+                leftW.constant = whiteW.constant * C
                 
                 // try to setup image
-                imgH.constant = leftW.constant * D
+                imgH.constant = leftW.constant * E
                 imgW.constant = imgH.constant
                 circleH.constant = imgH.constant
                 circleW.constant = imgH.constant
                 
-                do{
-                    let url =  NSURL(string: newsItem.imageUrlSquare)
-                    let data = try Data(contentsOf: url! as URL)
-                    let tmpImage =  UIImage(data: data)
-                    imgView.image = tmpImage
+                if newsItem.imageUrlSquare != "" {
+                    URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlSquare)! as URL, completionHandler: {(data, response, error) -> Void in
+                        if error != nil {
+                            print(error ?? "error is nil in URLSession.shared.dataTask in SmallWhiteCell.swift")
+                            return
+                        }
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            let image = UIImage(data: data!)
+                            self.imgView.image = image
+                        })
+                    }).resume()
                 }
-                catch{}
                 
                 // setup title:
                 titleLabel.text = newsItem.title        
