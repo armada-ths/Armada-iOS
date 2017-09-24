@@ -14,7 +14,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.backgroundColor = UIColor.red
         
         if dataSource.isEmpty {
             dataSource.refresh()
@@ -54,7 +53,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         // change status bar background color
         let statusGrey = UIColor(hex: 0x999A99)
         let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))
-        statusView.backgroundColor = statusGrey
+        statusView.backgroundColor = .black
         self.navigationController?.view.addSubview(statusView)
 
     }
