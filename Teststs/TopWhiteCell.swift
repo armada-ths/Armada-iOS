@@ -13,16 +13,10 @@ class TopWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var greyView: UIView!
     @IBOutlet weak var greyW: NSLayoutConstraint!
     
-    //@IBOutlet weak var borderView: UIView!
-    
-    @IBOutlet weak var whiteTop: NSLayoutConstraint!
-    @IBOutlet weak var whiteBottom: NSLayoutConstraint!
-    @IBOutlet weak var whiteLead: NSLayoutConstraint!
-    @IBOutlet weak var whiteTrail: NSLayoutConstraint!
+    @IBOutlet weak var borderView: UIView!
     
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var whiteW: NSLayoutConstraint!
-    //@IBOutlet weak var whiteH: NSLayoutConstraint!
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgH: NSLayoutConstraint!
@@ -51,16 +45,10 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 greyW.constant = screenW
                 
                 // setup borderview
-                //borderView.backgroundColor = ColorScheme.navbarBorderGrey
+                borderView.backgroundColor = ColorScheme.navbarBorderGrey
                 
                 // setup whiteview
-                //whiteH.constant = screenH * A
                 whiteW.constant = screenW * B
-                
-                //whiteLead.constant = screenW - whiteW.constant/2.0
-                //whiteTrail.constant = whiteLead.constant
-                //whiteTop.constant = 10.0
-                //whiteBottom.constant = 10.0
                 
                 // setup image
                 let ratio:CGFloat = (9.0/15.0)
