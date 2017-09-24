@@ -65,8 +65,6 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                             DispatchQueue.main.async(execute: { () -> Void in
                                 let image = UIImage(data: data!)
                                 self.imgView.image = image
-                                print("img ratio\((self.imgView.image?.size.height)!/(self.imgView.image?.size.width)!)")
-                                print("once again")
                             })
                         }).resume()
                     }

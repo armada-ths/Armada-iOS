@@ -36,6 +36,7 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         scrollView.delegate = self
         
+        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
         // fix header
         let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
         let label = UILabel(frame: frame)
@@ -50,28 +51,12 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         self.navigationItem.titleView = label
         self.navigationItem.backBarButtonItem?.title = ""
         
-        
-        do{
-            let url =  NSURL(string: news.imageUrlWide)
-            let data = try Data(contentsOf: url! as URL)
-            let tmpImage =  UIImage(data: data)
-            let ratio:CGFloat = (tmpImage!.size.height/tmpImage!.size.width)
-            newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
-            newsImgH.constant = ratio * newsImgW.constant
-            newsImageView.layer.borderWidth = 0.5        
-            newsImageView.image = tmpImage
-        }
-        catch{
-            // if img is unretrievable set img height = 0
-            newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
-            newsImgH.constant = 0.0
-        }
-        
-        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
-        
         // setup ScrollView
         scrollView.backgroundColor = designGrey
         
+        // setup image-width
+        newsImgW.constant = UIScreen.main.bounds.size.width - 2 * 8.0
+        newsImgH.constant = newsImgW.constant * 0.6
         // setup scrollSubView
         scrollsubViewW.constant = newsImgW.constant
         scrollSubView.backgroundColor = .white
@@ -84,15 +69,33 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
         dateLabel.text = news.publishedDate.format("yyyy MMM dd")
         dateLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
-
+        
+        if newsImageView.image == nil {
+            if news.imageUrlWide != "" {
+                URLSession.shared.dataTask(with: NSURL(string: news.imageUrlWide)! as URL, completionHandler: {(data, response, error) -> Void in
+                    if error != nil {
+                        print(error ?? "error is nil in URLSession.shared.dataTask in LargeWhiteCell.swift")
+                        return
+                    }
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        let image = UIImage(data: data!)
+                        self.newsImageView.image = image
+                        let ratio:CGFloat = (image!.size.height/image!.size.width)
+                        self.newsImgH.constant = ratio * self.newsImgW.constant
+                        self.newsImageView.layer.borderWidth = 0.5
+                    })
+                }).resume()
+            }
+        }
+        
         if (news.content == ""){
             ArmadaApi.newsContentFromServer(contentUrl: news.contentUrl) {
                 content in
-                DispatchQueue.main.sync {
+                //DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     self.contentTextView.attributedText = self.setFont(newsString: content)
                 }
             }
-            
         }
         else{
             contentTextView.attributedText = setFont(newsString: news.content)
