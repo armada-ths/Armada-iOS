@@ -2254,18 +2254,18 @@
                                             <segue destination="XDm-sX-m3S" kind="show" id="XAN-qI-yVU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="topWhiteCell" rowHeight="208" id="pAi-Bz-Qct" userLabel="topWhiteCell" customClass="TopWhiteCell" customModule="Armada" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="520" width="375" height="208"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="topWhiteCell" rowHeight="241" id="pAi-Bz-Qct" userLabel="topWhiteCell" customClass="TopWhiteCell" customModule="Armada" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="520" width="375" height="241"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pAi-Bz-Qct" id="Djz-mY-J57">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="240.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcV-cp-CX5" userLabel="greyview">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="242.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6m-CK-DCp" userLabel="whiteview">
-                                                            <rect key="frame" x="8" y="10" width="359" height="179.5"/>
+                                                            <rect key="frame" x="8" y="10" width="359" height="222.5"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e9n-Vk-zGz" userLabel="imgView">
                                                                     <rect key="frame" x="0.0" y="0.0" width="359" height="128"/>
@@ -2274,10 +2274,22 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PV6-zy-uh2" userLabel="lowView">
-                                                                    <rect key="frame" x="0.0" y="128" width="359" height="51.5"/>
+                                                                    <rect key="frame" x="0.0" y="128" width="359" height="94.5"/>
                                                                     <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XON-Th-kqg" userLabel="titlelabel">
+                                                                            <rect key="frame" x="8" y="10" width="359" height="69"/>
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingresslabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aba-6o-4s1" userLabel="ingresslabel">
+                                                                            <rect key="frame" x="8" y="88" width="343" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fjs-JD-p5f" userLabel="dateview">
-                                                                            <rect key="frame" x="279" y="10" width="80" height="18"/>
+                                                                            <rect key="frame" x="279" y="68.5" width="80" height="18"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="33H-0N-Qof" userLabel="dateimg">
                                                                                     <rect key="frame" x="0.0" y="-7" width="92" height="24"/>
@@ -2293,7 +2305,6 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
-                                                                            <color key="backgroundColor" red="0.93018535199999997" green="1" blue="0.67770115450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="bottom" secondItem="ScT-Cl-TOQ" secondAttribute="bottom" id="3op-GW-AAS"/>
                                                                                 <constraint firstItem="ScT-Cl-TOQ" firstAttribute="leading" secondItem="Fjs-JD-p5f" secondAttribute="leading" id="Aot-iT-Edw"/>
@@ -2305,29 +2316,17 @@
                                                                                 <constraint firstAttribute="height" constant="18" id="vMK-6F-S5y" userLabel="dateviewH"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XON-Th-kqg" userLabel="titlelabel">
-                                                                            <rect key="frame" x="8" y="10" width="233" height="1"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingresslabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aba-6o-4s1" userLabel="ingresslabel">
-                                                                            <rect key="frame" x="10" y="21" width="341" height="20.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="Aba-6o-4s1" secondAttribute="bottom" constant="10" id="2uw-UW-12u" userLabel="ingress.bottom"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="Fjs-JD-p5f" secondAttribute="trailing" id="47W-cv-WbA"/>
-                                                                        <constraint firstItem="Fjs-JD-p5f" firstAttribute="top" secondItem="PV6-zy-uh2" secondAttribute="top" constant="10" id="H18-f5-8pf"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="Aba-6o-4s1" secondAttribute="trailing" constant="8" id="Jrz-Ax-cjZ" userLabel="ingress.trail"/>
-                                                                        <constraint firstItem="XON-Th-kqg" firstAttribute="leading" secondItem="PV6-zy-uh2" secondAttribute="leading" priority="998" constant="8" id="URT-JK-aXJ" userLabel="title.lead"/>
-                                                                        <constraint firstItem="Aba-6o-4s1" firstAttribute="top" secondItem="XON-Th-kqg" secondAttribute="bottom" constant="10" id="h6W-JS-ymd"/>
-                                                                        <constraint firstItem="Aba-6o-4s1" firstAttribute="leading" secondItem="PV6-zy-uh2" secondAttribute="leading" constant="10" id="r6u-Zz-2oe" userLabel="ingress.lead"/>
-                                                                        <constraint firstItem="XON-Th-kqg" firstAttribute="top" secondItem="PV6-zy-uh2" secondAttribute="top" priority="998" constant="10" id="y8B-1i-QTY" userLabel="title.top"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Fjs-JD-p5f" secondAttribute="trailing" priority="997" id="47W-cv-WbA"/>
+                                                                        <constraint firstItem="Fjs-JD-p5f" firstAttribute="top" secondItem="Aba-6o-4s1" secondAttribute="bottom" constant="-40" id="4De-5I-hxR" userLabel="ingress.bottom"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Fjs-JD-p5f" secondAttribute="bottom" priority="997" constant="8" id="9FH-kf-8Up"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="Aba-6o-4s1" secondAttribute="trailing" priority="998" constant="8" id="Jrz-Ax-cjZ" userLabel="ingress.trail"/>
+                                                                        <constraint firstItem="XON-Th-kqg" firstAttribute="leading" secondItem="PV6-zy-uh2" secondAttribute="leading" priority="999" constant="8" id="URT-JK-aXJ" userLabel="title.lead"/>
+                                                                        <constraint firstItem="XON-Th-kqg" firstAttribute="trailing" secondItem="PV6-zy-uh2" secondAttribute="trailing" priority="999" constant="8" id="gOv-Kc-e2a" userLabel="title.trail"/>
+                                                                        <constraint firstItem="Aba-6o-4s1" firstAttribute="leading" secondItem="PV6-zy-uh2" secondAttribute="leading" priority="998" constant="8" id="r6u-Zz-2oe" userLabel="ingress.lead"/>
+                                                                        <constraint firstItem="XON-Th-kqg" firstAttribute="top" secondItem="PV6-zy-uh2" secondAttribute="top" priority="999" constant="10" id="y8B-1i-QTY" userLabel="title.top"/>
+                                                                        <constraint firstItem="Aba-6o-4s1" firstAttribute="top" secondItem="XON-Th-kqg" secondAttribute="bottom" priority="998" constant="9" id="zp8-P6-ls1" userLabel="ingress.top"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
@@ -2357,7 +2356,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="topMargin" secondItem="kcV-cp-CX5" secondAttribute="top" priority="999" constant="8" id="6nG-GT-rkP" userLabel="grey.top"/>
-                                                <constraint firstItem="kcV-cp-CX5" firstAttribute="bottom" secondItem="Djz-mY-J57" secondAttribute="bottomMargin" id="7mm-SV-nQF"/>
+                                                <constraint firstItem="kcV-cp-CX5" firstAttribute="bottom" secondItem="Djz-mY-J57" secondAttribute="bottomMargin" constant="10" id="7mm-SV-nQF"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="kcV-cp-CX5" secondAttribute="leading" priority="999" constant="8" id="odL-qk-vzZ" userLabel="grey.lead"/>
                                             </constraints>
                                         </tableViewCellContentView>
