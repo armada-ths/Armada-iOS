@@ -14,6 +14,8 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var greyW: NSLayoutConstraint!
     @IBOutlet weak var greyH: NSLayoutConstraint!
     
+    @IBOutlet weak var borderView: UIView!
+    
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var whiteH: NSLayoutConstraint!
     @IBOutlet weak var whiteW: NSLayoutConstraint!
@@ -42,8 +44,6 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
     var newsItem: News? = nil{
         didSet{
             if let newsItem = newsItem{
-                let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
-                let armadaDarkGreen = UIColor(red: 0x00/255, green: 0xD7/255, blue: 0x09/255, alpha: 0.5)
                 let screenSize: CGRect = UIScreen.main.bounds
                 let screenW = screenSize.size.width
                 let screenH = screenSize.size.height
@@ -51,17 +51,19 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 let A:CGFloat = 0.92
                 let B:CGFloat = 0.131934
                 let C:CGFloat = 0.255072463768116
-                let D:CGFloat = 0.181338
+                //let D:CGFloat = 0.181338
+                let D:CGFloat = 0.16
                 let E:CGFloat = 0.8
                 
-                // setup greyview: depend on screensize
-                
-                greyView.backgroundColor = designGrey
+                // setup greyview: depend on screensize                
+                greyView.backgroundColor = ColorScheme.leilaDesignGrey
                 greyH.constant = screenH * D
                 greyW.constant = screenW
                 
+                // setup borderview:
+                borderView.backgroundColor = ColorScheme.navbarBorderGrey
+                
                 // setup whiteview: depend on greyview
-                whiteView.layer.borderWidth = 0.5
                 whiteW.constant = screenW * A
                 whiteH.constant = screenH * B
                 

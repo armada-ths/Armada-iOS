@@ -2003,96 +2003,108 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsg-a5-YAB" userLabel="greyview">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-D2-P2C" userLabel="whiteview">
-                                                            <rect key="frame" x="8" y="8" width="359" height="154"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WI3-vZ-zVD" userLabel="borderview">
+                                                            <rect key="frame" x="6.5" y="7" width="361" height="156"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-oR-eVr" userLabel="leftview">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="118" height="154"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N3-D2-P2C" userLabel="whiteview">
+                                                                    <rect key="frame" x="1" y="1" width="359" height="154"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xug-R1-azU">
-                                                                            <rect key="frame" x="0.0" y="40" width="118" height="73"/>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-oR-eVr" userLabel="leftview">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="118" height="154"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xug-R1-azU">
+                                                                                    <rect key="frame" x="0.0" y="40" width="118" height="73"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="118" id="yCa-w9-rkT" userLabel="imgW"/>
+                                                                                        <constraint firstAttribute="height" constant="73" id="yEM-gV-P0j" userLabel="imgH"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle_compressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWT-ah-Pb7" userLabel="circleView">
+                                                                                    <rect key="frame" x="0.0" y="40" width="118" height="73"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="118" id="MiN-4d-kbv" userLabel="circleW"/>
+                                                                                        <constraint firstAttribute="height" constant="73" id="pVC-WP-cha" userLabel="circleH"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="118" id="yCa-w9-rkT" userLabel="imgW"/>
-                                                                                <constraint firstAttribute="height" constant="73" id="yEM-gV-P0j" userLabel="imgH"/>
+                                                                                <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="5wU-Ml-EvD"/>
+                                                                                <constraint firstAttribute="width" constant="118" id="8j2-uX-EH8"/>
+                                                                                <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="cSE-yK-z37"/>
+                                                                                <constraint firstItem="Xug-R1-azU" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="ery-MH-Erg" userLabel="img.centery"/>
+                                                                                <constraint firstItem="Xug-R1-azU" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="mhV-Rh-jp6" userLabel="img.centerx"/>
                                                                             </constraints>
-                                                                        </imageView>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle_compressed.png" translatesAutoresizingMaskIntoConstraints="NO" id="SWT-ah-Pb7" userLabel="circleView">
-                                                                            <rect key="frame" x="0.0" y="40" width="118" height="73"/>
+                                                                        </view>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deS-d4-beh">
+                                                                            <rect key="frame" x="126" y="8" width="225" height="70"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" constant="118" id="MiN-4d-kbv" userLabel="circleW"/>
-                                                                                <constraint firstAttribute="height" constant="73" id="pVC-WP-cha" userLabel="circleH"/>
+                                                                                <constraint firstAttribute="height" constant="70" id="16Z-cq-SeX" userLabel="titleH"/>
                                                                             </constraints>
-                                                                        </imageView>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="5wU-Ml-EvD"/>
-                                                                        <constraint firstAttribute="width" constant="118" id="8j2-uX-EH8"/>
-                                                                        <constraint firstItem="SWT-ah-Pb7" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="cSE-yK-z37"/>
-                                                                        <constraint firstItem="Xug-R1-azU" firstAttribute="centerY" secondItem="EVf-oR-eVr" secondAttribute="centerY" id="ery-MH-Erg" userLabel="img.centery"/>
-                                                                        <constraint firstItem="Xug-R1-azU" firstAttribute="centerX" secondItem="EVf-oR-eVr" secondAttribute="centerX" id="mhV-Rh-jp6" userLabel="img.centerx"/>
-                                                                    </constraints>
-                                                                </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deS-d4-beh">
-                                                                    <rect key="frame" x="126" y="8" width="225" height="70"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="70" id="16Z-cq-SeX" userLabel="titleH"/>
-                                                                    </constraints>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-lF-DjT" userLabel="dateview">
-                                                                    <rect key="frame" x="279" y="132" width="80" height="18"/>
-                                                                    <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W1x-9h-v0D" userLabel="dateimg">
-                                                                            <rect key="frame" x="0.0" y="-7" width="92" height="24"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="cF4-Qs-A7B" userLabel="dateimgH"/>
-                                                                                <constraint firstAttribute="width" constant="92" id="sp1-jh-ipv" userLabel="dateimgW"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Y6-Poy" userLabel="datelabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qH-lF-DjT" userLabel="dateview">
+                                                                            <rect key="frame" x="279" y="132" width="80" height="18"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W1x-9h-v0D" userLabel="dateimg">
+                                                                                    <rect key="frame" x="0.0" y="-7" width="92" height="24"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="24" id="cF4-Qs-A7B" userLabel="dateimgH"/>
+                                                                                        <constraint firstAttribute="width" constant="92" id="sp1-jh-ipv" userLabel="dateimgW"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vG-Y6-Poy" userLabel="datelabel">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
+                                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" red="0.93018535196930097" green="1" blue="0.6777011544958581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="80" id="Doo-Xf-YWx" userLabel="dateviewW"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" id="J4v-U2-0L0"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="1vG-Y6-Poy" secondAttribute="trailing" id="Peh-X8-x61"/>
+                                                                                <constraint firstItem="1vG-Y6-Poy" firstAttribute="top" secondItem="6qH-lF-DjT" secondAttribute="top" id="Y9B-oe-XLO"/>
+                                                                                <constraint firstItem="1vG-Y6-Poy" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="hpf-OT-IyD"/>
+                                                                                <constraint firstItem="W1x-9h-v0D" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="iSg-kb-BFJ"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="W1x-9h-v0D" secondAttribute="bottom" constant="1" id="o8u-3T-u15"/>
+                                                                                <constraint firstAttribute="height" constant="18" id="us5-bv-ZJp" userLabel="dateviewH"/>
+                                                                            </constraints>
+                                                                        </view>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" red="0.93018535196930097" green="1" blue="0.6777011544958581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="80" id="Doo-Xf-YWx" userLabel="dateviewW"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="1vG-Y6-Poy" secondAttribute="bottom" id="J4v-U2-0L0"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="1vG-Y6-Poy" secondAttribute="trailing" id="Peh-X8-x61"/>
-                                                                        <constraint firstItem="1vG-Y6-Poy" firstAttribute="top" secondItem="6qH-lF-DjT" secondAttribute="top" id="Y9B-oe-XLO"/>
-                                                                        <constraint firstItem="1vG-Y6-Poy" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="hpf-OT-IyD"/>
-                                                                        <constraint firstItem="W1x-9h-v0D" firstAttribute="leading" secondItem="6qH-lF-DjT" secondAttribute="leading" id="iSg-kb-BFJ"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="W1x-9h-v0D" secondAttribute="bottom" constant="1" id="o8u-3T-u15"/>
-                                                                        <constraint firstAttribute="height" constant="18" id="us5-bv-ZJp" userLabel="dateviewH"/>
+                                                                        <constraint firstItem="deS-d4-beh" firstAttribute="leading" secondItem="EVf-oR-eVr" secondAttribute="trailing" priority="999" constant="8" id="5xB-qO-wjx" userLabel="title.lead"/>
+                                                                        <constraint firstAttribute="height" priority="999" constant="154" id="LnM-QV-h1H" userLabel="whiteH"/>
+                                                                        <constraint firstItem="EVf-oR-eVr" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" priority="999" id="Mls-wo-1ox" userLabel="left.top"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="deS-d4-beh" secondAttribute="trailing" priority="999" constant="8" id="Vwq-RS-vp3" userLabel="title.trail"/>
+                                                                        <constraint firstItem="EVf-oR-eVr" firstAttribute="height" secondItem="8N3-D2-P2C" secondAttribute="height" priority="999" id="YjI-54-UQb" userLabel="left.height"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="6qH-lF-DjT" secondAttribute="trailing" priority="999" id="qJ7-uO-Ybt" userLabel="dateview.trail"/>
+                                                                        <constraint firstItem="EVf-oR-eVr" firstAttribute="leading" secondItem="8N3-D2-P2C" secondAttribute="leading" priority="999" id="qaU-td-je8" userLabel="left.lead"/>
+                                                                        <constraint firstItem="deS-d4-beh" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" priority="999" constant="8" id="tSM-WU-Xw7" userLabel="title.top"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="6qH-lF-DjT" secondAttribute="bottom" priority="999" constant="4" id="uA6-Ch-jxa" userLabel="dateview.bottom"/>
+                                                                        <constraint firstAttribute="width" priority="999" constant="359" id="v2y-Dz-het" userLabel="whiteW"/>
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" red="0.34758619740000002" green="1" blue="0.59047653990000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="deS-d4-beh" firstAttribute="leading" secondItem="EVf-oR-eVr" secondAttribute="trailing" priority="999" constant="8" id="5xB-qO-wjx" userLabel="title.lead"/>
-                                                                <constraint firstAttribute="height" priority="999" constant="154" id="LnM-QV-h1H" userLabel="whiteH"/>
-                                                                <constraint firstItem="EVf-oR-eVr" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" priority="999" id="Mls-wo-1ox" userLabel="left.top"/>
-                                                                <constraint firstAttribute="trailing" secondItem="deS-d4-beh" secondAttribute="trailing" priority="999" constant="8" id="Vwq-RS-vp3" userLabel="title.trail"/>
-                                                                <constraint firstItem="EVf-oR-eVr" firstAttribute="height" secondItem="8N3-D2-P2C" secondAttribute="height" priority="999" id="YjI-54-UQb" userLabel="left.height"/>
-                                                                <constraint firstAttribute="trailing" secondItem="6qH-lF-DjT" secondAttribute="trailing" priority="999" id="qJ7-uO-Ybt" userLabel="dateview.trail"/>
-                                                                <constraint firstItem="EVf-oR-eVr" firstAttribute="leading" secondItem="8N3-D2-P2C" secondAttribute="leading" priority="999" id="qaU-td-je8" userLabel="left.lead"/>
-                                                                <constraint firstItem="deS-d4-beh" firstAttribute="top" secondItem="8N3-D2-P2C" secondAttribute="top" priority="999" constant="8" id="tSM-WU-Xw7" userLabel="title.top"/>
-                                                                <constraint firstAttribute="bottom" secondItem="6qH-lF-DjT" secondAttribute="bottom" priority="999" constant="4" id="uA6-Ch-jxa" userLabel="dateview.bottom"/>
-                                                                <constraint firstAttribute="width" priority="999" constant="359" id="v2y-Dz-het" userLabel="whiteW"/>
+                                                                <constraint firstItem="8N3-D2-P2C" firstAttribute="centerY" secondItem="WI3-vZ-zVD" secondAttribute="centerY" priority="999" id="4yp-uC-y2l"/>
+                                                                <constraint firstAttribute="height" secondItem="8N3-D2-P2C" secondAttribute="height" priority="998" constant="2" id="9W2-Cc-lgI"/>
+                                                                <constraint firstAttribute="width" secondItem="8N3-D2-P2C" secondAttribute="width" priority="998" constant="2" id="Ij5-dI-VI8"/>
+                                                                <constraint firstItem="8N3-D2-P2C" firstAttribute="centerX" secondItem="WI3-vZ-zVD" secondAttribute="centerX" priority="999" id="bzX-U9-Inb"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.76711215101522845" green="0.76711215101522845" blue="0.76711215101522845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="8N3-D2-P2C" firstAttribute="centerY" secondItem="hsg-a5-YAB" secondAttribute="centerY" priority="999" id="40G-f7-sA5"/>
+                                                        <constraint firstItem="WI3-vZ-zVD" firstAttribute="centerX" secondItem="hsg-a5-YAB" secondAttribute="centerX" id="E4z-m8-uSy"/>
                                                         <constraint firstAttribute="width" priority="999" constant="375" id="GlQ-eU-5Z1"/>
                                                         <constraint firstAttribute="height" priority="999" constant="170" id="l2r-IJ-tEb"/>
-                                                        <constraint firstItem="8N3-D2-P2C" firstAttribute="centerX" secondItem="hsg-a5-YAB" secondAttribute="centerX" priority="999" id="wg4-Zn-9Ed"/>
+                                                        <constraint firstItem="WI3-vZ-zVD" firstAttribute="centerY" secondItem="hsg-a5-YAB" secondAttribute="centerY" id="mhO-U2-T9L"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -2103,6 +2115,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="borderView" destination="WI3-vZ-zVD" id="dYG-33-aPk"/>
                                             <outlet property="circleH" destination="pVC-WP-cha" id="MDe-Ob-PGE"/>
                                             <outlet property="circleView" destination="SWT-ah-Pb7" id="yla-eA-9DH"/>
                                             <outlet property="circleW" destination="MiN-4d-kbv" id="QUM-um-55B"/>
@@ -2136,72 +2149,84 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mLV-t7-hfF" userLabel="greyview">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-SF-9wB" userLabel="whiteview">
-                                                            <rect key="frame" x="8" y="8" width="359" height="184"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-ep-cqO" userLabel="borderview">
+                                                            <rect key="frame" x="6.5" y="7" width="361" height="186"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="48w-FX-Ljn" userLabel="imgView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="128"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="128" id="RMA-vZ-0sH" userLabel="imgH"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nd-0v-ipr" userLabel="dateview">
-                                                                    <rect key="frame" x="279" y="162" width="80" height="18"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-SF-9wB" userLabel="whiteview">
+                                                                    <rect key="frame" x="0.5" y="1" width="359" height="184"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcX-ve-YYD" userLabel="dateimgView">
-                                                                            <rect key="frame" x="0.0" y="-7" width="92" height="24"/>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="48w-FX-Ljn" userLabel="imgView">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="128"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="24" id="Bcr-EK-9go" userLabel="dateimgH"/>
-                                                                                <constraint firstAttribute="width" constant="92" id="mTw-1I-wfP" userLabel="dateimgW"/>
+                                                                                <constraint firstAttribute="height" constant="128" id="RMA-vZ-0sH" userLabel="imgH"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkn-2a-RJd" userLabel="datelabel">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nd-0v-ipr" userLabel="dateview">
+                                                                            <rect key="frame" x="279" y="162" width="80" height="18"/>
+                                                                            <subviews>
+                                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcX-ve-YYD" userLabel="dateimgView">
+                                                                                    <rect key="frame" x="0.0" y="-7" width="92" height="24"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="24" id="Bcr-EK-9go" userLabel="dateimgH"/>
+                                                                                        <constraint firstAttribute="width" constant="92" id="mTw-1I-wfP" userLabel="dateimgW"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017 Sep 22" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkn-2a-RJd" userLabel="datelabel">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="18"/>
+                                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="bottom" secondItem="hkn-2a-RJd" secondAttribute="bottom" id="GOH-od-nFs"/>
+                                                                                <constraint firstItem="hkn-2a-RJd" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="Qdu-09-dEI"/>
+                                                                                <constraint firstItem="fcX-ve-YYD" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="W1M-xU-Odt" userLabel="dateimg.lead = dateview.lead"/>
+                                                                                <constraint firstItem="hkn-2a-RJd" firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" id="jNh-m5-nmS"/>
+                                                                                <constraint firstAttribute="height" constant="18" id="rZm-40-Gs0" userLabel="dateviewH"/>
+                                                                                <constraint firstAttribute="bottom" secondItem="fcX-ve-YYD" secondAttribute="bottom" constant="1" id="rvc-8L-DcE" userLabel="bottom = dateimg.bottom + 1"/>
+                                                                                <constraint firstAttribute="width" constant="80" id="vmM-pI-2uO" userLabel="dateviewW"/>
+                                                                                <constraint firstItem="hkn-2a-RJd" firstAttribute="top" secondItem="8nd-0v-ipr" secondAttribute="top" id="yA8-0z-fQ2"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hq0-Oz-rme" userLabel="titlelabel">
+                                                                            <rect key="frame" x="8" y="136" width="263" height="40"/>
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="hkn-2a-RJd" secondAttribute="bottom" id="GOH-od-nFs"/>
-                                                                        <constraint firstItem="hkn-2a-RJd" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="Qdu-09-dEI"/>
-                                                                        <constraint firstItem="fcX-ve-YYD" firstAttribute="leading" secondItem="8nd-0v-ipr" secondAttribute="leading" id="W1M-xU-Odt" userLabel="dateimg.lead = dateview.lead"/>
-                                                                        <constraint firstItem="hkn-2a-RJd" firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" id="jNh-m5-nmS"/>
-                                                                        <constraint firstAttribute="height" constant="18" id="rZm-40-Gs0" userLabel="dateviewH"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="fcX-ve-YYD" secondAttribute="bottom" constant="1" id="rvc-8L-DcE" userLabel="bottom = dateimg.bottom + 1"/>
-                                                                        <constraint firstAttribute="width" constant="80" id="vmM-pI-2uO" userLabel="dateviewW"/>
-                                                                        <constraint firstItem="hkn-2a-RJd" firstAttribute="top" secondItem="8nd-0v-ipr" secondAttribute="top" id="yA8-0z-fQ2"/>
+                                                                        <constraint firstAttribute="height" priority="999" constant="184" id="4mC-UO-iub" userLabel="whiteH"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="48w-FX-Ljn" secondAttribute="trailing" priority="999" id="CS1-rZ-3Ma" userLabel="img.trail"/>
+                                                                        <constraint firstItem="48w-FX-Ljn" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" priority="999" id="Fgm-W3-3Hg" userLabel="img.lead"/>
+                                                                        <constraint firstItem="48w-FX-Ljn" firstAttribute="top" secondItem="Y2t-SF-9wB" secondAttribute="top" priority="999" id="OBD-Sn-duf" userLabel="img.top"/>
+                                                                        <constraint firstItem="8nd-0v-ipr" firstAttribute="leading" secondItem="Hq0-Oz-rme" secondAttribute="trailing" priority="999" constant="8" id="UzY-2T-vxU" userLabel="date.lead"/>
+                                                                        <constraint firstAttribute="width" priority="999" constant="359" id="Yf0-PA-epn" userLabel="whiteW"/>
+                                                                        <constraint firstItem="Hq0-Oz-rme" firstAttribute="top" secondItem="48w-FX-Ljn" secondAttribute="bottom" priority="999" constant="8" id="lDD-od-hEC"/>
+                                                                        <constraint firstItem="Hq0-Oz-rme" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" priority="999" constant="8" id="lLs-0n-H2p" userLabel="title.lead"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="8nd-0v-ipr" secondAttribute="bottom" priority="999" constant="4" id="pjw-pP-9HC" userLabel="date.bottom"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Hq0-Oz-rme" secondAttribute="bottom" priority="999" constant="8" id="sYq-Ha-j9S"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" priority="999" id="ye0-r2-Xsp" userLabel="date.trail"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Master thesis seminar with KTH" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hq0-Oz-rme" userLabel="titlelabel">
-                                                                    <rect key="frame" x="8" y="136" width="263" height="40"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="backgroundColor" red="0.34758619740000002" green="1" blue="0.59047653990000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" priority="999" constant="184" id="4mC-UO-iub" userLabel="whiteH"/>
-                                                                <constraint firstAttribute="trailing" secondItem="48w-FX-Ljn" secondAttribute="trailing" priority="999" id="CS1-rZ-3Ma" userLabel="img.trail"/>
-                                                                <constraint firstItem="48w-FX-Ljn" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" priority="999" id="Fgm-W3-3Hg" userLabel="img.lead"/>
-                                                                <constraint firstItem="48w-FX-Ljn" firstAttribute="top" secondItem="Y2t-SF-9wB" secondAttribute="top" priority="999" id="OBD-Sn-duf" userLabel="img.top"/>
-                                                                <constraint firstItem="8nd-0v-ipr" firstAttribute="leading" secondItem="Hq0-Oz-rme" secondAttribute="trailing" priority="999" constant="8" id="UzY-2T-vxU" userLabel="date.lead"/>
-                                                                <constraint firstAttribute="width" priority="999" constant="359" id="Yf0-PA-epn" userLabel="whiteW"/>
-                                                                <constraint firstItem="Hq0-Oz-rme" firstAttribute="top" secondItem="48w-FX-Ljn" secondAttribute="bottom" priority="999" constant="8" id="lDD-od-hEC"/>
-                                                                <constraint firstItem="Hq0-Oz-rme" firstAttribute="leading" secondItem="Y2t-SF-9wB" secondAttribute="leading" priority="999" constant="8" id="lLs-0n-H2p" userLabel="title.lead"/>
-                                                                <constraint firstAttribute="bottom" secondItem="8nd-0v-ipr" secondAttribute="bottom" priority="999" constant="4" id="pjw-pP-9HC" userLabel="date.bottom"/>
-                                                                <constraint firstAttribute="bottom" secondItem="Hq0-Oz-rme" secondAttribute="bottom" priority="999" constant="8" id="sYq-Ha-j9S"/>
-                                                                <constraint firstAttribute="trailing" secondItem="8nd-0v-ipr" secondAttribute="trailing" priority="999" id="ye0-r2-Xsp" userLabel="date.trail"/>
+                                                                <constraint firstItem="Y2t-SF-9wB" firstAttribute="centerX" secondItem="LhT-ep-cqO" secondAttribute="centerX" id="35y-xK-omq"/>
+                                                                <constraint firstAttribute="width" secondItem="Y2t-SF-9wB" secondAttribute="width" constant="2" id="IKu-12-eRx"/>
+                                                                <constraint firstItem="Y2t-SF-9wB" firstAttribute="centerY" secondItem="LhT-ep-cqO" secondAttribute="centerY" id="duz-Yx-Ob0"/>
+                                                                <constraint firstAttribute="height" secondItem="Y2t-SF-9wB" secondAttribute="height" constant="2" id="wYC-z5-kZt"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89231043781725883" green="0.89231043781725883" blue="0.89231043781725883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="999" constant="200" id="A3v-oF-K3H"/>
-                                                        <constraint firstItem="Y2t-SF-9wB" firstAttribute="centerY" secondItem="mLV-t7-hfF" secondAttribute="centerY" priority="999" id="kcf-f0-VCs"/>
-                                                        <constraint firstItem="Y2t-SF-9wB" firstAttribute="centerX" secondItem="mLV-t7-hfF" secondAttribute="centerX" priority="999" id="mgw-CI-yca"/>
+                                                        <constraint firstItem="LhT-ep-cqO" firstAttribute="centerX" secondItem="mLV-t7-hfF" secondAttribute="centerX" id="Gz2-AO-anR"/>
+                                                        <constraint firstItem="LhT-ep-cqO" firstAttribute="centerY" secondItem="mLV-t7-hfF" secondAttribute="centerY" id="Pc3-Dl-OoW"/>
                                                         <constraint firstAttribute="width" priority="999" constant="375" id="ymI-io-Dql"/>
                                                     </constraints>
                                                 </view>
@@ -2213,6 +2238,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="borderView" destination="LhT-ep-cqO" id="HqI-ZA-zRD"/>
                                             <outlet property="dateLabel" destination="hkn-2a-RJd" id="H7v-ed-ffq"/>
                                             <outlet property="dateView" destination="8nd-0v-ipr" id="AyR-j0-Lau"/>
                                             <outlet property="dateimgView" destination="fcX-ve-YYD" id="L2g-4y-OdW"/>
@@ -2232,7 +2258,7 @@
                                         <rect key="frame" x="0.0" y="520" width="375" height="302"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pAi-Bz-Qct" id="Djz-mY-J57">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="302"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcV-cp-CX5" userLabel="greyview">
@@ -2438,7 +2464,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Armada Run" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-mq-Ob6">
-                                            <rect key="frame" x="30" y="8" width="283" height="22"/>
+                                            <rect key="frame" x="30" y="8" width="282" height="22"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                             <nil key="highlightedColor"/>
                                         </label>

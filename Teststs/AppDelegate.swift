@@ -1,6 +1,7 @@
 import UIKit
 
 struct ColorScheme {
+    static let leilaDesignGrey = UIColor(hex: 0xF8F7F7)
     static let navbarBorderGrey = UIColor(hex: 0x7F7F7F)
     static let darkGrayTextColor = UIColor(hex: 0x1e1e1e)
     static let armadaBlue = UIColor(hex: 0xe73953)

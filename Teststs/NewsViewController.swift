@@ -26,8 +26,7 @@ class NewsViewController: UIViewController {
         
         // set title for back button for cell-segues
         backBarButton.title = ""
-        let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
-        tableView.backgroundColor = designGrey
+        tableView.backgroundColor = ColorScheme.leilaDesignGrey
         tableView.startActivityIndicator()
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -70,7 +69,6 @@ class NewsViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:newarmadalogo , style: UIBarButtonItemStyle.plain, target: nil, action: nil)
         
         // change status bar background color
-        let statusGrey = UIColor(hex: 0x999A99)
         let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))
         statusView.backgroundColor = .black
         self.navigationController?.view.addSubview(statusView)
