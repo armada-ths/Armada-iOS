@@ -15,6 +15,15 @@ class NewsNavigationController: UINavigationController {
         let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
         self.navigationBar.isTranslucent = false
         self.navigationBar.backgroundColor = designGrey
+        
+        // setup header bottom border
+        let headerHeight:CGFloat = self.navigationBar.frame.size.height
+        let bottomBorderH:CGFloat = 0.75
+        let bottomBorderRect = CGRect(x: 0, y: headerHeight, width: UIScreen.main.bounds.width, height: bottomBorderH)
+        let bottomBorderView = UIView(frame: bottomBorderRect)
+        bottomBorderView.backgroundColor = ColorScheme.navbarBorderGrey
+        self.navigationBar.addSubview(bottomBorderView)
+        
     }
 
     override func didReceiveMemoryWarning() {

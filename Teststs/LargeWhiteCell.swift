@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 class LargeWhiteCell: UITableViewCell, NewsCell {
 
@@ -48,6 +49,10 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 
                 // setup holderview: depend on greyview
                 whiteView.layer.borderWidth = 0.5
+                //whiteView.layer.
+                //whiteView.layer.borderColor =
+                //whiteView.layer.borderColor = ColorScheme.navbarBorderGrey as! CGColor
+
                 whiteH.constant = screenH * A
                 whiteW.constant = screenW * B
                 
