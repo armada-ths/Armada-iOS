@@ -143,24 +143,30 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let sponsor = self[indexPath]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "partnerCell", for: indexPath) as! PartnerCollectionViewCell
-            cell.partnerImage.loadImageFromUrl(sponsor.imageUrl.absoluteString)
+           // cell.partnerImage.loadImageFromUrl(sponsor.imageUrl.absoluteString)
             // NOTE:
             // get image height:width ratio
-            var ratio:CGFloat
-            if let data = NSData(contentsOf: sponsor.imageUrl) {
-                let tmpImg = UIImage(data: data as Data)
-                let height = (tmpImg?.size.height)!
-                let width = (tmpImg?.size.width)!
-                ratio = height/width
-            } else {
-                // use default ratio
-                ratio = 1.0
-            }
-            cell.imgHeightConstraint.constant = ratio * cell.frame.width - 2.0 - 5.0
-            cell.imgWidthConstraint.constant = cell.frame.width - 2.0 - 5.0
-            
-           // cell.layer.borderWidth = 1.0
-            
+            URLSession.shared.dataTask(with: sponsor.imageUrl, completionHandler: {(data, response, error) -> Void in
+                        var ratio:CGFloat
+                        if error != nil {
+                            print(error ?? "error is nil in URLSession.shared.dataTask in PartnersCell.swift")
+                            ratio = 1.0
+                            cell.imgHeightConstraint.constant = ratio * cell.frame.width - 2.0 - 5.0
+                            cell.imgWidthConstraint.constant = cell.frame.width - 2.0 - 5.0
+                            return
+                        }
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            var ratio:CGFloat
+                            let image = UIImage(data: data!)
+                            cell.partnerImage.image = image
+                            let height = (image?.size.height)!
+                            let width = (image?.size.width)!
+                            ratio = height/width
+                            cell.imgHeightConstraint.constant = ratio * cell.frame.width - 2.0 - 5.0
+                            cell.imgWidthConstraint.constant = cell.frame.width - 2.0 - 5.0
+                        })
+                    }).resume()
+
             return cell
         }
         
