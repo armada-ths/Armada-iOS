@@ -51,7 +51,6 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 let A:CGFloat = 0.92
                 let B:CGFloat = 0.131934
                 let C:CGFloat = 0.255072463768116
-                //let D:CGFloat = 0.181338
                 let D:CGFloat = 0.16
                 let E:CGFloat = 0.8
                 

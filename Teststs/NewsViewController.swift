@@ -32,7 +32,7 @@ class NewsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
         updateFunc()
@@ -130,8 +130,4 @@ extension NewsViewController: UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    
-    
-    
-    
 }

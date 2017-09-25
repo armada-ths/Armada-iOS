@@ -3,7 +3,7 @@
 //  Armada
 //
 //  Created by Ola Roos on 2017-09-24.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
+//  Copyright © 2017 Ola Roos. All rights reserved.
 //
 
 import UIKit
