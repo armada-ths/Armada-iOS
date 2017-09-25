@@ -117,8 +117,8 @@ extension NewsViewController: UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-
-        if let controller = segue.destination as? ScrollNewsViewController,
+        //ScrollNewsViewController,
+        if let controller = segue.destination as? NewsArticleViewController,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             if (news[indexPath.row].content == ""){
                 ArmadaApi.newsContentFromServer(contentUrl: news[indexPath.row].contentUrl) {

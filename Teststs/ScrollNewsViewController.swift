@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
-    
+class ScrollNewsViewController: UIViewController, UITextViewDelegate {
+        
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollSubView: UIView!
@@ -32,9 +32,15 @@ class ScrollNewsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var newsImgW: NSLayoutConstraint!
     @IBOutlet weak var newsImgH: NSLayoutConstraint!
     
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        print("WTFWTFWTF")
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.delegate = self
+        contentTextView.delegate = self
         
         let designGrey = UIColor(red: 0xF8/255, green: 0xF7/255, blue: 0xF7/255, alpha: 1)
         // fix header

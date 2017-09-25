@@ -269,8 +269,11 @@ open class _ArmadaApi {
     
     //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
+    //let apiUrl = "http://webtest.armada.nu/api"
     let imageUrlBase = "https://github.com/armada-ths/armada.nu/tree/master/content"
-    let newsUrl = "http://webtest.armada.nu"
+    //let newsUrl = "http://webtest.armada.nu"
+    //let newsUrl = "http://ais.armada.nu/api"
+    let newsUrl = "http://armada.nu"
     let rawUrlBase = "https://raw.githubusercontent.com/armada-ths/armada.nu/master/content/news/"
     
     var persistentStoreUrlShm: URL {
