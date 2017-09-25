@@ -21,6 +21,9 @@ class TopWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgH: NSLayoutConstraint!
     
+    @IBOutlet weak var upperborderView: UIView!
+    @IBOutlet weak var upperborderH: NSLayoutConstraint!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var dateView: UIView!
@@ -49,7 +52,8 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 
                 // setup whiteview
                 whiteW.constant = screenW * B
-                
+                upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
+                upperborderH.constant = 1
                 // setup image
                 let ratio:CGFloat = (9.0/15.0)
                 imgH.constant = whiteW.constant * ratio
@@ -88,6 +92,9 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 ingressLabel.text = newsItem.ingress
                 ingressLabel.font = UIFont(name: "Lago-Bold", size: 14.0)
                 
+                whiteW.constant = screenW * B
+                
+                print(whiteW.constant)
             }
         }
     }

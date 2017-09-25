@@ -24,6 +24,9 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var imgH: NSLayoutConstraint!
     
+    @IBOutlet weak var upperborderView: UIView!
+    @IBOutlet weak var upperborderH: NSLayoutConstraint!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var dateView: UIView!
@@ -53,6 +56,8 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 // setup whiteview
                 whiteH.constant = screenH * A
                 whiteW.constant = screenW * B
+                upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
+                upperborderH.constant = 1
                 
                 let ratio:CGFloat = (9.0/15.0)
                 imgH.constant = whiteW.constant * ratio
