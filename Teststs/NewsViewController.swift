@@ -15,7 +15,6 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var news: [News] = []
     var refreshControl: UIRefreshControl!
-
     
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     
@@ -25,6 +24,10 @@ class NewsViewController: UIViewController {
         refreshControl.endRefreshing()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +47,7 @@ class NewsViewController: UIViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         // fix header
-        let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
+        let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
         let label = UILabel(frame: frame)
         let myMutableString = NSMutableAttributedString(
             string: "N E W S THS Armada 2017",
@@ -54,12 +57,14 @@ class NewsViewController: UIViewController {
         myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 8))
         label.textAlignment = .center
         label.attributedText = myMutableString
-        self.navigationItem.titleView = label
+        let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+        newTitleView.addSubview(label)
+        self.navigationItem.titleView = newTitleView
         
         // setup header left logo
         var armadalogo:UIImage = #imageLiteral(resourceName: "armada_round_logo_green.png")
         let headerHeight:CGFloat = (self.navigationController?.navigationBar.frame.size.height)!
-        let headerImgSize = headerHeight * 0.8
+        let headerImgSize = headerHeight * 0.7
         
         // change size of armada logo
         let newSize = CGSize(width: headerImgSize, height: headerImgSize)
@@ -69,9 +74,7 @@ class NewsViewController: UIViewController {
         UIGraphicsEndImageContext()
         
         // add armada logo to header
-        self.navigationItem.titleView?.isUserInteractionEnabled = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:newarmadalogo , style: UIBarButtonItemStyle.done, target: nil, action: nil)
-        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: newarmadalogo, style: UIBarButtonItemStyle.done, target: nil, action: nil)
         
         // change status bar background color
         let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))
