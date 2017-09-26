@@ -10,6 +10,7 @@ import UIKit
 
 class NewsArticleViewController: UIViewController, UITextViewDelegate {
 
+    
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var whiteView: UIView!
@@ -24,6 +25,8 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var ingressLabel: UILabel!
+    
+    @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var whiteW: NSLayoutConstraint!
     @IBOutlet weak var imageH: NSLayoutConstraint!
@@ -44,8 +47,8 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         contentView.backgroundColor = ColorScheme.leilaDesignGrey
-        borderView.backgroundColor = ColorScheme.leilaDesignGrey
-        //upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
+        borderView.backgroundColor = ColorScheme.navbarBorderGrey
+        upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
         
         // setup widths 
         whiteW.constant = screenW * B
@@ -82,6 +85,55 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         // setup ingress
         ingressLabel.text = news.ingress
         ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
+        
+        // setup text
+        textView.delegate = self
+        if (news.content == ""){
+            ArmadaApi.newsContentFromServer(contentUrl: news.contentUrl) {
+                content in
+                DispatchQueue.main.async {
+                    self.textView.attributedText = self.setFont(newsString: content)
+                }
+            }
+        }
+        else{
+            textView.attributedText = setFont(newsString: news.content)
+        }
+    }
+    
+    func setFont(newsString: String) -> NSAttributedString{
+        let newAttributedString = NSMutableAttributedString(attributedString: newsString.attributedHtmlString!)
+        // Enumerate through all the font ranges
+        newAttributedString.enumerateAttribute(NSFontAttributeName, in: NSMakeRange(0, newAttributedString.length), options: []) { value, range, stop in
+            guard let currentFont = value as? UIFont else {
+                return
+            }
+            
+            // An NSFontDescriptor describes the attributes of a font: family name, face name, point size, etc.
+            // Here we describe the replacement font as coming from the "Hoefler Text" family
+            let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
+            
+            // Ask the OS for an actual font that most closely matches the description above
+            
+            
+            if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
+                let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+            }
+            else{
+                let newFont = UIFont(name: "Lato-Regular", size: currentFont.pointSize*0.8)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+            }
+        }
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3 // Whatever line spacing you want in points
+        newAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, newAttributedString.length))
+        return newAttributedString
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {

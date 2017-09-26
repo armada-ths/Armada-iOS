@@ -33,7 +33,6 @@ class ScrollNewsViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var newsImgH: NSLayoutConstraint!
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        print("WTFWTFWTF")
         return true
     }
     
