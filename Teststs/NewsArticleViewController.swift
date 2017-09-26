@@ -93,7 +93,7 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         
         // setup title
         titleLabel.text = news.title
-        titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
+        titleLabel.font = UIFont(name: "BebasNeueRegular", size: 25.0)
 
         // setup ingress
         ingressLabel.text = news.ingress
