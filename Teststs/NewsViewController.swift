@@ -69,7 +69,9 @@ class NewsViewController: UIViewController {
         UIGraphicsEndImageContext()
         
         // add armada logo to header
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:newarmadalogo , style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+        self.navigationItem.titleView?.isUserInteractionEnabled = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:newarmadalogo , style: UIBarButtonItemStyle.done, target: nil, action: nil)
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
         
         // change status bar background color
         let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))

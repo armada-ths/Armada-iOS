@@ -97,7 +97,7 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
 
         // setup ingress
         ingressLabel.text = news.ingress
-        ingressLabel.font = UIFont(name:"Lato-Bold", size: 14.0)
+        ingressLabel.font = UIFont(name:"Lato-Bold", size: 16.0)
         
         // setup text
         textView.delegate = self
