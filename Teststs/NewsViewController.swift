@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol NewsCell {
+    var newsItem:News? {get set};
+}
 
 class NewsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
