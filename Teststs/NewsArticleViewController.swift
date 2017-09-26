@@ -44,6 +44,19 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         let C:CGFloat = 0.445634
         let ratio:CGFloat = (9.0/15.0)
         
+        // fix header
+        let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
+        let label = UILabel(frame: frame)
+        let myMutableString = NSMutableAttributedString(
+            string: "N E W S THS Armada 2017",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeue-Thin",
+                size: 22.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 8))
+        label.textAlignment = .center
+        label.attributedText = myMutableString
+        self.navigationItem.titleView = label
+        
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         contentView.backgroundColor = ColorScheme.leilaDesignGrey
@@ -84,7 +97,7 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
 
         // setup ingress
         ingressLabel.text = news.ingress
-        ingressLabel.font = UIFont(name:"Lato-Bold", size: 17.0)
+        ingressLabel.font = UIFont(name:"Lato-Bold", size: 14.0)
         
         // setup text
         textView.delegate = self
