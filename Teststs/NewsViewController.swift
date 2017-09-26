@@ -15,6 +15,7 @@ class NewsViewController: UIViewController {
 
     
     @IBOutlet weak var backBarButton: UIBarButtonItem!
+    
     func refresh(sender:AnyObject)
     {
         updateFunc()
@@ -32,9 +33,8 @@ class NewsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         refreshControl = UIRefreshControl()
-        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(NewsViewController.refresh), for: .valueChanged)
+        tableView.refreshControl = refreshControl
         updateFunc()
         
         // remove cell borders
