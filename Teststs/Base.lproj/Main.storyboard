@@ -736,17 +736,11 @@
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJF-N0-vNk">
                                     <rect key="frame" x="10" y="8" width="355" height="17.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="4RK-Yt-2Xf"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Values" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-6d-lYx">
                                     <rect key="frame" x="18" y="55" width="339" height="20.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="rWy-WA-NZ7"/>
-                                    </constraints>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -821,7 +815,6 @@
                                     <constraints>
                                         <constraint firstItem="tlq-v8-74v" firstAttribute="top" secondItem="U6k-wb-iu5" secondAttribute="bottom" id="7AC-YJ-Ibw"/>
                                         <constraint firstAttribute="trailing" secondItem="U6k-wb-iu5" secondAttribute="trailing" id="7Mb-Mx-JBk"/>
-                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="E6p-LH-Zp2"/>
                                         <constraint firstItem="w9d-WN-fHu" firstAttribute="top" secondItem="tlq-v8-74v" secondAttribute="bottom" id="Eqc-mr-9m9"/>
                                         <constraint firstAttribute="trailing" secondItem="w9d-WN-fHu" secondAttribute="trailing" id="NU3-t5-72j"/>
                                         <constraint firstItem="U6k-wb-iu5" firstAttribute="leading" secondItem="S8M-zK-luL" secondAttribute="leading" id="T5g-qw-EQ7"/>
@@ -895,7 +888,7 @@
         <scene sceneID="1SE-Rw-dNU">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="About" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
+                    <tabBarItem key="tabBarItem" title="Armada" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
