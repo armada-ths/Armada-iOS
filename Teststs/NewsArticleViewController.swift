@@ -88,12 +88,12 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         
         // setup date
         dateimgView.image = #imageLiteral(resourceName: "dateBanner.png")
-        dateLabel.text = news.publishedDate.format("yyyy MMM dd")
+        dateLabel.text = news.publishedDate.format("dd MMM yyyy")
         dateLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
         
         // setup title
         titleLabel.text = news.title
-        titleLabel.font = UIFont(name: "BebasNeueRegular", size: 25.0)
+        titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
 
         // setup ingress
         ingressLabel.text = news.ingress

@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITableView.appearance().backgroundColor = UIColor.white
         
-        // setup the color of the text for the back button
+        // setup color of back button
         UIProgressView.appearance().tintColor = ColorScheme.armadaDarkMelon
         
         // setup status-bar style

@@ -84,7 +84,7 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 
                 // setup date:
-                dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
+                dateLabel.text = newsItem.publishedDate.format("dd MMM yyyy")
                 dateLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
                 
                 // setup dateView:

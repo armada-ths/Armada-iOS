@@ -94,7 +94,7 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 titleH.constant = whiteH.constant / 2
                 
                 // setup date:
-                dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
+                dateLabel.text = newsItem.publishedDate.format("dd MMM yyyy")
                 dateLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
                 
                 // setup dateView:

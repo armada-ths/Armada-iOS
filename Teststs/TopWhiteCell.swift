@@ -75,10 +75,10 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 
                 // setup title:
                 titleLabel.text = newsItem.title
-                titleLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
+                titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
                 
                 // setup date:
-                dateLabel.text = newsItem.publishedDate.format("yyyy MMM dd")
+                dateLabel.text = newsItem.publishedDate.format("dd MMM yyyy")
                 dateLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
                 
                 // setup dateView:
@@ -90,7 +90,7 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 
                 // setup ingress:
                 ingressLabel.text = newsItem.ingress
-                ingressLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
+                ingressLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 
                 whiteW.constant = screenW * B
                 
