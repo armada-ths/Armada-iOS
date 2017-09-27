@@ -11,17 +11,15 @@ protocol NewsCell {
     var newsItem:News? {get set};
 }
 
-class NewsViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
+class NewsViewController: UITableViewController {
     var news: [News] = []
-    var refreshControl: UIRefreshControl!
     
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     
     func refresh(sender:AnyObject)
     {
         updateFunc()
-        refreshControl.endRefreshing()
+        refreshControl?.endRefreshing()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,8 +37,7 @@ class NewsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(NewsViewController.refresh), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        refreshControl?.addTarget(self, action: #selector(NewsViewController.refresh), for: .valueChanged)
         updateFunc()
         
         // remove cell borders
@@ -82,19 +79,17 @@ class NewsViewController: UIViewController {
         self.navigationController?.view.addSubview(statusView)
     
     }
-}
 
-extension NewsViewController: UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count
     }
     func updateFunc(){
         ArmadaApi.newsFromServer(){
             news, error, errorMessage in
+            print(news)
             OperationQueue.main.addOperation {[weak self] in
                 self?.tableView.stopActivityIndicator()
                 if(error == true){
@@ -111,7 +106,7 @@ extension NewsViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cellIdentifier = ""
         if indexPath.row == 0 {
