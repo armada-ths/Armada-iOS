@@ -206,7 +206,7 @@
         <scene sceneID="fuM-zW-ygR">
             <objects>
                 <collectionViewController id="ofB-FR-WoU" customClass="AboutCollectionViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EAY-80-P6q">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="EAY-80-P6q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -256,13 +256,13 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Core Values" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEU-6d-lYx">
-                                    <rect key="frame" x="18" y="55" width="339" height="20.5"/>
+                                    <rect key="frame" x="18" y="45.5" width="339" height="20.5"/>
                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="S8M-zK-luL">
-                                    <rect key="frame" x="10" y="106" width="355" height="360"/>
+                                    <rect key="frame" x="10" y="96" width="355" height="360"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U6k-wb-iu5">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="120"/>
@@ -341,7 +341,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Partners" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OUb-TW-3Vq">
-                                    <rect key="frame" x="18" y="486" width="339" height="21.5"/>
+                                    <rect key="frame" x="18" y="476" width="339" height="21.5"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21.5" id="S3e-eo-8bx"/>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="euY-0v-31t"/>
@@ -355,7 +355,6 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="S8M-zK-luL" secondAttribute="trailing" constant="10" id="0cl-HB-v3E"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leadingMargin" priority="999" constant="10" id="4J0-BP-5R6"/>
-                                <constraint firstItem="TJF-N0-vNk" firstAttribute="top" secondItem="HC7-cb-OUP" secondAttribute="topMargin" id="5N9-Bf-OjN"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="dEU-6d-lYx" secondAttribute="trailing" priority="999" constant="10" id="5aA-Ma-KPd"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" priority="999" constant="20" id="5ji-Ij-Nz1"/>
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="bottom" secondItem="HC7-cb-OUP" secondAttribute="bottomMargin" priority="250" constant="10" id="8WV-Tl-ZdA"/>
@@ -363,7 +362,6 @@
                                 <constraint firstItem="OUb-TW-3Vq" firstAttribute="top" relation="lessThanOrEqual" secondItem="S8M-zK-luL" secondAttribute="bottom" constant="20" id="AiU-ln-yof"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="DhC-fb-EMj"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="IVz-HZ-ut7"/>
-                                <constraint firstItem="dEU-6d-lYx" firstAttribute="top" relation="lessThanOrEqual" secondItem="TJF-N0-vNk" secondAttribute="bottom" constant="30" id="IvT-QX-opZ"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="lessThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" constant="30" id="KPW-4w-rgH"/>
                                 <constraint firstItem="dEU-6d-lYx" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leadingMargin" priority="999" constant="10" id="KUX-nY-tAi"/>
                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="OUb-TW-3Vq" secondAttribute="bottom" id="VIZ-Y2-hhc"/>
@@ -371,7 +369,7 @@
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leading" priority="999" constant="10" id="m6R-6u-e5n"/>
                                 <constraint firstItem="dEU-6d-lYx" firstAttribute="centerX" secondItem="HC7-cb-OUP" secondAttribute="centerX" id="pdg-al-liW"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dEU-6d-lYx" secondAttribute="bottom" priority="999" constant="15" id="qP1-c1-u7n"/>
-                                <constraint firstItem="dEU-6d-lYx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TJF-N0-vNk" secondAttribute="bottom" constant="5" id="qSh-Or-XD3"/>
+                                <constraint firstItem="dEU-6d-lYx" firstAttribute="top" secondItem="TJF-N0-vNk" secondAttribute="bottom" constant="20" id="qSh-Or-XD3"/>
                                 <constraint firstAttribute="trailing" secondItem="TJF-N0-vNk" secondAttribute="trailing" priority="999" constant="10" id="sth-wA-8fo"/>
                                 <constraint firstItem="TJF-N0-vNk" firstAttribute="top" secondItem="HC7-cb-OUP" secondAttribute="topMargin" id="tQS-s9-8Db"/>
                                 <constraint firstItem="S8M-zK-luL" firstAttribute="leading" secondItem="HC7-cb-OUP" secondAttribute="leading" constant="10" id="x01-50-nKG"/>
@@ -879,7 +877,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Armada" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -898,7 +896,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J7h-B4-S97" userLabel="News" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="News" image="notepad" selectedImage="notepad-1" id="cp8-zd-cXN" userLabel="About"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFu-SQ-U48">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aFu-SQ-U48">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

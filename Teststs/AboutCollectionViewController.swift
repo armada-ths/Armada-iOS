@@ -80,6 +80,10 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
+        return CGSize(width: collectionView.contentSize.width, height: 288000/collectionView.contentSize.width + 60)
+    }
+    
     // DATASOURCE:
     var dataSource: ArmadaSponsorCollectionViewDataSource!
     class ArmadaSponsorCollectionViewDataSource: ArmadaCollectionViewDataSource<Sponsor> {
@@ -102,6 +106,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 }
             }
         }
+
         
         // NOTE:
         // this method deques the header view
@@ -114,13 +119,11 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                                                                                  withReuseIdentifier: "AboutHeaderCollectionReusableView",
                                                                                  for: indexPath) as! AboutHeaderCollectionReusableView
                 let about = "<font size='4.5' style='font-family:Lato-Regular;’ line-height: '0.7'><b>Started in 1981,</b> THS Armada is a part of the student union THS and the largest student driven project at KTH The Royal Institute of Technology. The fair was first organised in 1981 and has been a recurring event at KTH ever since. The project has a turnover of more than 6 million SEK and involves more than 300 students.\n\n<b>Aside from the fair</b>, THS Armada has several other events, all to give you the best possible chance of finding your dream employer.</font>"
-                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>diversity</b> in their organization and/or business and operations.</font>" //Events with this icon will be focused on topics regarding diversity.
+                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>diversity</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding diversity.</font"
                 
-                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>sustainability</b> in their organization and/or business and operations.</font>"
-               // Events with this icon will be focused on topics regarding sustainability."
+                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>sustainability</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding sustainability.</font>"
                 
-                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>quality</b> in their organization and/or business and operations.</font>"
-                //Events with this icon will be focused on topics regarding quality."
+                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>quality</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding quality.</font>"
                 headerView.aboutText.attributedText =  about.attributedHtmlString
                 headerView.aboutText.isScrollEnabled = false
                 headerView.coreValuesLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
@@ -133,6 +136,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 headerView.partnersLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 return headerView
         }
+        
         
         
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
