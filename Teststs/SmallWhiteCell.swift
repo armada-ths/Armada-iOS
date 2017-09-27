@@ -88,6 +88,19 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                     }).resume()
                 }
                 
+                else if newsItem.imageUrlWide != "" {
+                    URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlWide)! as URL, completionHandler: {(data, response, error) -> Void in
+                        if error != nil {
+                            print(error ?? "error is nil in URLSession.shared.dataTask in SmallWhiteCell.swift")
+                            return
+                        }
+                        DispatchQueue.main.async(execute: { () -> Void in
+                            let image = UIImage(data: data!)
+                            self.imgView.image = image
+                        })
+                    }).resume()
+                }
+                
                 // setup title:
                 titleLabel.text = newsItem.title        
                 titleLabel.font = UIFont(name: "Lato-Bold", size: 14.0)
