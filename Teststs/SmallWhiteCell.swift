@@ -84,6 +84,7 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                         DispatchQueue.main.async(execute: { () -> Void in
                             let image = UIImage(data: data!)
                             self.imgView.image = image
+                            self.imgView.contentMode = .scaleAspectFill
                         })
                     }).resume()
                 }
