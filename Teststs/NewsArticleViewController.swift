@@ -123,7 +123,7 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
             }
             
             // An NSFontDescriptor describes the attributes of a font: family name, face name, point size, etc.
-            // Here we describe the replacement font as coming from the "Hoefler Text" family
+            // Here we describe the replacement font as coming from the "Lato" family
             let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
             
             // Ask the OS for an actual font that most closely matches the description above
@@ -140,7 +140,8 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         }
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 3 // Whatever line spacing you want in points
+        paragraphStyle.lineSpacing = 3
+        paragraphStyle.paragraphSpacing = 10
         newAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, newAttributedString.length))
         return newAttributedString
     }
