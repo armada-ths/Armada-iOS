@@ -23,7 +23,7 @@ class NewsViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
     }
     
     override func viewDidLoad() {

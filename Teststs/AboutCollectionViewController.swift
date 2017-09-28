@@ -14,7 +14,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
         if dataSource.isEmpty {
             dataSource.refresh()
         }

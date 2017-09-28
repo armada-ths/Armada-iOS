@@ -45,7 +45,7 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         let ratio:CGFloat = (9.0/15.0)
         
         // fix header
-        let frame = CGRect(x: 0,y: 0, width: 200, height: 100);
+        let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
         let label = UILabel(frame: frame)
         let myMutableString = NSMutableAttributedString(
             string: "N E W S THS Armada 2017",
@@ -55,7 +55,9 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 8))
         label.textAlignment = .center
         label.attributedText = myMutableString
-        self.navigationItem.titleView = label
+        let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+        newTitleView.addSubview(label)
+        self.navigationItem.titleView = newTitleView
         
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
