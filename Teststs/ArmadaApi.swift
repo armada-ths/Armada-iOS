@@ -535,6 +535,11 @@ open class _ArmadaApi {
                 let startDateTimestamp = json["event_start"] as? Int,
                 let endDateTimestamp = json["event_end"] as? Int {
                     let startDate = Date(timeIntervalSince1970: TimeInterval(startDateTimestamp))
+                    let date = Date()
+                    let calendar = Calendar.current
+                if(calendar.component(.year, from: startDate) < calendar.component(.year, from: date)){
+                    return nil
+                }
                     let endDate = Date(timeIntervalSince1970: TimeInterval(endDateTimestamp))
                     let location = json["location"] as? String
                     let summaryWithoutHtml = description.strippedFromHtmlString
