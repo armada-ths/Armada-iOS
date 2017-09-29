@@ -1184,13 +1184,13 @@
                                 <rect key="frame" x="0.0" y="2" width="375" height="1354"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-f5-4Cx" userLabel="contentview">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="258"/>
+                                        <rect key="frame" x="16" y="0.0" width="343" height="238"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccv-ua-K4W" userLabel="borderview">
-                                                <rect key="frame" x="15" y="8" width="313" height="242"/>
+                                                <rect key="frame" x="15" y="8" width="313" height="222"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-SP-Gc4" userLabel="whiteview">
-                                                        <rect key="frame" x="1" y="1" width="311" height="240"/>
+                                                        <rect key="frame" x="1" y="1" width="311" height="220"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8zZ-fG-Vj9" userLabel="imageview">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="100"/>
@@ -1199,7 +1199,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhQ-Is-JuP" userLabel="titlelabel">
-                                                                <rect key="frame" x="10" y="161" width="295" height="21"/>
+                                                                <rect key="frame" x="5" y="141" width="295" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1212,7 +1212,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGG-Mi-gLK">
-                                                                <rect key="frame" x="0.0" y="187" width="311" height="33"/>
+                                                                <rect key="frame" x="0.0" y="167" width="311" height="33"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1230,7 +1230,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTf-c3-jZf">
-                                                                <rect key="frame" x="10" y="131" width="291" height="0.0"/>
+                                                                <rect key="frame" x="5" y="131" width="296" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1240,10 +1240,10 @@
                                                         <constraints>
                                                             <constraint firstItem="h0i-XJ-eaG" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" id="29t-AN-zS2"/>
                                                             <constraint firstItem="8zZ-fG-Vj9" firstAttribute="top" secondItem="BLT-SP-Gc4" secondAttribute="top" id="4tZ-Gp-6Mx" userLabel="image.top = white.top"/>
-                                                            <constraint firstItem="gTf-c3-jZf" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="10" id="5rF-kl-LKq"/>
+                                                            <constraint firstItem="gTf-c3-jZf" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="5" id="5rF-kl-LKq"/>
                                                             <constraint firstItem="Mrw-cV-dlA" firstAttribute="top" secondItem="h0i-XJ-eaG" secondAttribute="bottom" constant="-18" id="AZ8-5C-ziO"/>
-                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="top" secondItem="gTf-c3-jZf" secondAttribute="bottom" constant="30" id="CiV-Wf-Ds0"/>
-                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="10" id="GxW-ez-h8h"/>
+                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="top" secondItem="gTf-c3-jZf" secondAttribute="bottom" constant="10" id="CiV-Wf-Ds0"/>
+                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="5" id="GxW-ez-h8h"/>
                                                             <constraint firstItem="8zZ-fG-Vj9" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" id="IdH-dt-QuF" userLabel="image.lead = white.lead"/>
                                                             <constraint firstItem="RGG-Mi-gLK" firstAttribute="top" secondItem="EhQ-Is-JuP" secondAttribute="bottom" constant="5" id="KKS-Mh-e6V"/>
                                                             <constraint firstItem="Mrw-cV-dlA" firstAttribute="centerX" secondItem="BLT-SP-Gc4" secondAttribute="centerX" id="Nnw-oL-JOM"/>
@@ -1260,7 +1260,7 @@
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER HERE!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8z-1v-bFh" userLabel="Register Label">
-                                                        <rect key="frame" x="31" y="197" width="250" height="35"/>
+                                                        <rect key="frame" x="31" y="177" width="250" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="ADo-iH-QUP"/>
