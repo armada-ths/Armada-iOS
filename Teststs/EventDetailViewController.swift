@@ -99,13 +99,29 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
         
         // setup date
-//        dateLabel.text = news.publishedDate.format("dd MMM yyyy")
-        var dateText = NSMutableAttributedString(string: event.startDate.format("EEEE") + " " + event.startDate.format("HH:mm") + "\n" + event.startDate.format("dd MMMM") + " " + (event.endDate?.format("HH:mm"))!,  attributes: [NSFontAttributeName:UIFont(
+        // setup date
+        //        dateLabel.text = news.publishedDate.format("dd MMM yyyy")
+        var topText = event.startDate.format("EEEE") + " "
+        var bottomText = event.startDate.format("dd MMMM") + " "
+        let diff = bottomText.characters.count - topText.characters.count
+        if diff > 0 {
+            for _ in 1 ... diff{
+                topText += "  "
+            }
+        }
+        topText += event.startDate.format("HH:mm")
+        
+        let dateText = NSMutableAttributedString(string: topText + "\n" + bottomText,  attributes: [NSFontAttributeName:UIFont(
             name: "Lato-Regular",
             size: 14.0)])
         dateText.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Bold", size: 14.0), range:NSRange(location: 0, length: event.startDate.format("EEEE").characters.count))
+        dateText.addAttribute(NSKernAttributeName, value: 1, range: NSRange(location: 0, length: dateText.length - 1))
+        
         dateLabel.attributedText = dateText
         dateLabel.textColor = UIColor.white
+        dateLabel.textAlignment = .left
+        dateLabel.sizeToFit()
+
         
         // setup title
         titleLabel.text = event.title
@@ -113,7 +129,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         
         locationLabel.text = event.location
         locationLabel.font = UIFont(name: "Lato-Regular", size: 14.0)
-        
 
         
         // setup text
