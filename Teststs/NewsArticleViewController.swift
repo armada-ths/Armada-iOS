@@ -35,7 +35,9 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // hide img-logo temporarily
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
+
         let screenSize: CGRect = UIScreen.main.bounds
         let screenW = screenSize.size.width
         let screenH = screenSize.size.height
@@ -44,7 +46,6 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         let C:CGFloat = 0.445634
         let ratio:CGFloat = (9.0/15.0)
         
-        // fix header
         let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
         let label = UILabel(frame: frame)
         let myMutableString = NSMutableAttributedString(

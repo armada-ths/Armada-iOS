@@ -52,7 +52,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="1287"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-PC-AhY" userLabel="contentview">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="226.5"/>
+                                        <rect key="frame" x="16" y="-64" width="343" height="226.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="equ-OW-aEQ" userLabel="borderview">
                                                 <rect key="frame" x="15" y="8" width="313" height="210.5"/>
@@ -165,7 +165,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="wES-PC-AhY" firstAttribute="top" secondItem="oIB-9r-ahw" secondAttribute="top" id="PyV-n8-BLG" userLabel="border.top = scroll.top"/>
+                                    <constraint firstItem="wES-PC-AhY" firstAttribute="top" secondItem="oIB-9r-ahw" secondAttribute="top" constant="-64" id="PyV-n8-BLG" userLabel="border.top = scroll.top"/>
                                     <constraint firstAttribute="trailing" secondItem="wES-PC-AhY" secondAttribute="trailing" constant="16" id="ZUV-aN-zv7"/>
                                     <constraint firstAttribute="bottom" secondItem="wES-PC-AhY" secondAttribute="bottom" id="swC-qc-rxd" userLabel="scroll.bottom = border.bottom"/>
                                 </constraints>
@@ -859,25 +859,25 @@
                             <outlet property="delegate" destination="97u-Pa-zcw" id="qAA-f1-Eg3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ULc-2i-ndR"/>
+                    <navigationItem key="navigationItem" id="ULc-2i-ndR">
+                        <barButtonItem key="backBarButtonItem" title="backbutton" id="Apj-nD-hRC"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="backBarButton" destination="0Sa-74-9vl" id="xim-h1-vnS"/>
+                        <outlet property="backBarButton" destination="Apj-nD-hRC" id="klT-VX-hAp"/>
                     </connections>
                 </tableViewController>
-                <navigationItem id="dsA-le-ul4" userLabel="News">
-                    <barButtonItem key="backBarButtonItem" title="Back bar button" id="0Sa-74-9vl"/>
-                </navigationItem>
+                <navigationItem id="dsA-le-ul4" userLabel="News"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXV-SR-iYT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6394" y="1519"/>
+            <point key="canvasLocation" x="6430" y="1527"/>
         </scene>
         <!--About-->
         <scene sceneID="1SE-Rw-dNU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="AboutNavController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Armada" image="Armada-icon" selectedImage="Armada-icon-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
