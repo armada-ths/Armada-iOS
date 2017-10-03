@@ -1184,13 +1184,13 @@
                                 <rect key="frame" x="0.0" y="2" width="375" height="1354"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-f5-4Cx" userLabel="contentview">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="238"/>
+                                        <rect key="frame" x="16" y="0.0" width="343" height="154"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccv-ua-K4W" userLabel="borderview">
-                                                <rect key="frame" x="15" y="8" width="313" height="222"/>
+                                                <rect key="frame" x="15" y="8" width="313" height="138"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-SP-Gc4" userLabel="whiteview">
-                                                        <rect key="frame" x="1" y="1" width="311" height="220"/>
+                                                        <rect key="frame" x="1" y="1" width="311" height="136"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8zZ-fG-Vj9" userLabel="imageview">
                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="100"/>
@@ -1199,7 +1199,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TITLE " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhQ-Is-JuP" userLabel="titlelabel">
-                                                                <rect key="frame" x="5" y="141" width="295" height="21"/>
+                                                                <rect key="frame" x="5" y="57" width="295" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1212,55 +1212,42 @@
                                                                 </constraints>
                                                             </view>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGG-Mi-gLK">
-                                                                <rect key="frame" x="0.0" y="167" width="311" height="33"/>
+                                                                <rect key="frame" x="0.0" y="83" width="311" height="33"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wednesday     11 October" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mrw-cV-dlA" userLabel="datelabel">
-                                                                <rect key="frame" x="91.5" y="83" width="128" height="37"/>
-                                                                <color key="backgroundColor" red="0.00051923980940000005" green="0.74635171889999996" blue="0.46601521969999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-2" translatesAutoresizingMaskIntoConstraints="NO" id="fOf-NI-Rpf">
+                                                                <rect key="frame" x="-10" y="50" width="341" height="57"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="t6N-Lm-6ex"/>
-                                                                    <constraint firstAttribute="height" constant="37" id="zAl-Ve-gTj"/>
+                                                                    <constraint firstAttribute="height" constant="57" id="0VG-YV-Dch" userLabel="waveH"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTf-c3-jZf">
-                                                                <rect key="frame" x="5" y="131" width="296" height="0.0"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="h0i-XJ-eaG" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" id="29t-AN-zS2"/>
                                                             <constraint firstItem="8zZ-fG-Vj9" firstAttribute="top" secondItem="BLT-SP-Gc4" secondAttribute="top" id="4tZ-Gp-6Mx" userLabel="image.top = white.top"/>
-                                                            <constraint firstItem="gTf-c3-jZf" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="5" id="5rF-kl-LKq"/>
-                                                            <constraint firstItem="Mrw-cV-dlA" firstAttribute="top" secondItem="h0i-XJ-eaG" secondAttribute="bottom" constant="-18" id="AZ8-5C-ziO"/>
-                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="top" secondItem="gTf-c3-jZf" secondAttribute="bottom" constant="10" id="CiV-Wf-Ds0"/>
+                                                            <constraint firstItem="fOf-NI-Rpf" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="-10" id="ARm-UV-XA1"/>
                                                             <constraint firstItem="EhQ-Is-JuP" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" constant="5" id="GxW-ez-h8h"/>
                                                             <constraint firstItem="8zZ-fG-Vj9" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" id="IdH-dt-QuF" userLabel="image.lead = white.lead"/>
                                                             <constraint firstItem="RGG-Mi-gLK" firstAttribute="top" secondItem="EhQ-Is-JuP" secondAttribute="bottom" constant="5" id="KKS-Mh-e6V"/>
-                                                            <constraint firstItem="Mrw-cV-dlA" firstAttribute="centerX" secondItem="BLT-SP-Gc4" secondAttribute="centerX" id="Nnw-oL-JOM"/>
+                                                            <constraint firstAttribute="trailing" secondItem="fOf-NI-Rpf" secondAttribute="trailing" constant="-20" id="Rzn-R6-2gX"/>
                                                             <constraint firstItem="8zZ-fG-Vj9" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" id="Sfy-wB-ZWG" userLabel="imageW = whiteW"/>
                                                             <constraint firstItem="h0i-XJ-eaG" firstAttribute="top" secondItem="8zZ-fG-Vj9" secondAttribute="bottom" id="TqN-w3-whI"/>
-                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" constant="-16" id="Xp2-Ng-NUc" userLabel="titleW = whiteW"/>
+                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" constant="-16" id="Xp2-Ng-NUc"/>
+                                                            <constraint firstItem="EhQ-Is-JuP" firstAttribute="top" secondItem="fOf-NI-Rpf" secondAttribute="bottom" constant="-50" id="YhE-ym-Rtg"/>
                                                             <constraint firstAttribute="width" constant="311" id="foJ-Sn-8YF" userLabel="whiteW"/>
                                                             <constraint firstItem="RGG-Mi-gLK" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" id="inQ-2b-Vlt"/>
-                                                            <constraint firstAttribute="trailing" secondItem="gTf-c3-jZf" secondAttribute="trailing" constant="10" id="izO-Hj-A8q"/>
-                                                            <constraint firstItem="gTf-c3-jZf" firstAttribute="top" secondItem="h0i-XJ-eaG" secondAttribute="bottom" constant="30" id="jlf-fa-1o2"/>
                                                             <constraint firstItem="RGG-Mi-gLK" firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" id="lR0-Ox-mLE"/>
+                                                            <constraint firstItem="fOf-NI-Rpf" firstAttribute="top" secondItem="BLT-SP-Gc4" secondAttribute="top" constant="50" id="spN-Y6-kDd"/>
                                                             <constraint firstItem="h0i-XJ-eaG" firstAttribute="leading" secondItem="BLT-SP-Gc4" secondAttribute="leading" id="wJa-jw-PAg"/>
                                                             <constraint firstAttribute="bottom" secondItem="RGG-Mi-gLK" secondAttribute="bottom" constant="20" id="zyU-fS-KNO"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REGISTER HERE!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8z-1v-bFh" userLabel="Register Label">
-                                                        <rect key="frame" x="31" y="177" width="250" height="35"/>
+                                                        <rect key="frame" x="31" y="93" width="250" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="35" id="ADo-iH-QUP"/>
@@ -1312,14 +1299,16 @@
                     <connections>
                         <outlet property="borderView" destination="Ccv-ua-K4W" id="Leo-68-4yS"/>
                         <outlet property="contentView" destination="H1i-f5-4Cx" id="g8f-zn-aUa"/>
-                        <outlet property="dateLabel" destination="Mrw-cV-dlA" id="dbR-hA-jEg"/>
                         <outlet property="imageH" destination="RV4-uk-uxM" id="Hzi-ky-u7e"/>
                         <outlet property="imageView" destination="8zZ-fG-Vj9" id="61b-7v-b1h"/>
-                        <outlet property="locationLabel" destination="gTf-c3-jZf" id="ibG-bK-oLh"/>
                         <outlet property="registerLabel" destination="g8z-1v-bFh" id="bng-4j-Fg7"/>
                         <outlet property="textView" destination="RGG-Mi-gLK" id="qhh-Ld-5fp"/>
                         <outlet property="titleLabel" destination="EhQ-Is-JuP" id="uJo-s7-1Q6"/>
+                        <outlet property="titleLabelD" destination="YhE-ym-Rtg" id="O7W-rj-Z4G"/>
                         <outlet property="upperborderView" destination="h0i-XJ-eaG" id="2kP-Vt-FMv"/>
+                        <outlet property="waveH" destination="0VG-YV-Dch" id="4y1-pU-Crb"/>
+                        <outlet property="waveImage" destination="fOf-NI-Rpf" id="RiM-5i-bTA"/>
+                        <outlet property="waveImageD" destination="spN-Y6-kDd" id="ZbH-Bg-5q6"/>
                         <outlet property="whiteView" destination="BLT-SP-Gc4" id="AyZ-WG-81a"/>
                         <outlet property="whiteW" destination="foJ-Sn-8YF" id="7Pu-BW-eAr"/>
                     </connections>
@@ -1332,6 +1321,7 @@
     <resources>
         <image name="Armada-icon" width="30" height="30"/>
         <image name="Armada-icon-1" width="30" height="30"/>
+        <image name="background-2" width="1325" height="505"/>
         <image name="calendar_2-1" width="16" height="16"/>
         <image name="calendar_2-2" width="16" height="16"/>
         <image name="circle_compressed.png" width="800" height="800"/>

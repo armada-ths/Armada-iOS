@@ -16,10 +16,11 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var upperborderView: UIView!
-    
+    @IBOutlet weak var waveImage: UIImageView!
     @IBOutlet weak var upperH: NSLayoutConstraint!
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var waveH: NSLayoutConstraint!
+    @IBOutlet weak var waveImageD: NSLayoutConstraint!
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -27,6 +28,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var titleLabelD: NSLayoutConstraint!
     @IBOutlet weak var whiteW: NSLayoutConstraint!
     @IBOutlet weak var imageH: NSLayoutConstraint!
     
@@ -72,11 +74,12 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         contentView.backgroundColor = ColorScheme.leilaDesignGrey
-        borderView.backgroundColor = ColorScheme.navbarBorderGrey
+        borderView.backgroundColor = ColorScheme.leilaDesignGrey
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
+        whiteView.backgroundColor = ColorScheme.leilaDesignGrey
         
         // setup widths
-        whiteW.constant = screenW * B
+        whiteW.constant = screenW
         
         // setup image
         imageH.constant = whiteW.constant * ratio
@@ -95,45 +98,29 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             }
         }
         
+        //Setup whitewave
+        waveH.constant = whiteW.constant/(1325/505)
+        waveImageD.constant =  imageH.constant - waveH.constant
+        
         // setup border
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
         
-        // setup date
-        // setup date
-        //        dateLabel.text = news.publishedDate.format("dd MMM yyyy")
-        var topText = event.startDate.format("EEEE") + " "
-        var bottomText = event.startDate.format("dd MMMM") + " "
-        let diff = bottomText.characters.count - topText.characters.count
-        if diff > 0 {
-            for _ in 1 ... diff{
-                topText += "  "
-            }
-        }
-        topText += event.startDate.format("HH:mm")
-        
-        let dateText = NSMutableAttributedString(string: topText + "\n" + bottomText,  attributes: [NSFontAttributeName:UIFont(
-            name: "Lato-Regular",
-            size: 14.0)])
-        dateText.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Bold", size: 14.0), range:NSRange(location: 0, length: event.startDate.format("EEEE").characters.count))
-        dateText.addAttribute(NSKernAttributeName, value: 1, range: NSRange(location: 0, length: dateText.length - 1))
-        
-        dateLabel.attributedText = dateText
-        dateLabel.textColor = UIColor.white
-        dateLabel.textAlignment = .left
-        dateLabel.sizeToFit()
+        // setup colour of textView
+        textView.backgroundColor = ColorScheme.leilaDesignGrey
+
 
         
         // setup title
         titleLabel.text = event.title
         titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
-        
-        locationLabel.text = event.location
-        locationLabel.font = UIFont(name: "Lato-Regular", size: 14.0)
-
+        titleLabelD.constant = -(waveImageD.constant/1.25)
+        titleLabel.layer.zPosition = 1
         
         // setup text
         textView.delegate = self
         textView.attributedText = self.setFont(newsString: event.summary)
+        textView.layer.zPosition = 1
+
 
     }
     
