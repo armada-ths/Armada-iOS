@@ -22,6 +22,11 @@ class NewsNavigationController: UINavigationController {
         
         // set navigationBar size
         self.navigationBar.frame = CGRect(x:0, y:0, width:headerW, height: statusH + headerH)
+        
+        // make navigationbar solid
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.backgroundColor = ColorScheme.leilaDesignGrey
+        
         // remove navigationbar-border
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)

@@ -26,6 +26,8 @@ class NewsViewController: UITableViewController {
         // change backbar button from "Back" to ""
         backBarButton.title = ""
         
+        
+        
         // reveal logo-image
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
         
