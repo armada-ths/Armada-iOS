@@ -73,6 +73,7 @@ class NewsViewController: UITableViewController {
             news, error, errorMessage in
             print(news)
             OperationQueue.main.addOperation {[weak self] in
+                self?.tableView.showEmptyMessage("")
                 self?.tableView.stopActivityIndicator()
                 if(error == true){
                     self?.tableView.showEmptyMessage(errorMessage)
