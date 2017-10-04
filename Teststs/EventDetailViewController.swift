@@ -16,11 +16,29 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var upperborderView: UIView!
-    @IBOutlet weak var waveImage: UIImageView!
     @IBOutlet weak var upperH: NSLayoutConstraint!
     
-    @IBOutlet weak var waveH: NSLayoutConstraint!
-    @IBOutlet weak var waveImageD: NSLayoutConstraint!
+    @IBOutlet weak var eventPin: UIImageView!
+    @IBOutlet weak var eventCalendar: UIImageView!
+    
+    //Waves
+    //White wave
+    @IBOutlet weak var wave100H: NSLayoutConstraint!
+    @IBOutlet weak var waveImage100D: NSLayoutConstraint!
+    @IBOutlet weak var waveImage100: UIImageView!
+
+    
+    ///Op 50 wave
+    
+    @IBOutlet weak var wave50: UIImageView!
+    @IBOutlet weak var wave50H: NSLayoutConstraint!
+    @IBOutlet weak var wave50D: NSLayoutConstraint!
+    @IBOutlet weak var wave50W: NSLayoutConstraint!
+    
+    //Op 25 wave
+    @IBOutlet weak var wave25: UIImageView!
+    @IBOutlet weak var wave25d: NSLayoutConstraint!
+    @IBOutlet weak var wave25H: NSLayoutConstraint!
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -102,8 +120,18 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         }
         
         //Setup whitewave
-        waveH.constant = whiteW.constant/(1325/505)
-        waveImageD.constant = 5 + imageH.constant - waveH.constant
+        wave100H.constant = whiteW.constant/(1325/505) - 20
+        waveImage100D.constant = 5 + imageH.constant - wave100H.constant
+        
+        //Setup wave with 50% opacity
+        wave50H.constant = wave100H.constant + 10
+        wave50D.constant = waveImage100D.constant - 15
+        wave50W.constant = whiteW.constant/CGFloat(4)
+        
+        
+        //Setup wave with 25% opacity
+        wave25H.constant = wave100H.constant
+        wave25d.constant = waveImage100D.constant - 20
         
         // setup border
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
@@ -116,17 +144,21 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         // setup title
         titleLabel.text = event.title
         titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
-        titleLabelD.constant = -(waveImageD.constant/1.25)
+        titleLabelD.constant = -(waveImage100D.constant/1.8)
         titleLabel.layer.zPosition = 1
         
         
         //Setup Date
         dateLabel.text = event.startDate.format("dd MMMM")
         dateLabel.font = UIFont(name: "Lato-Regular", size: 14)
-        
+        dateLabel.layer.zPosition = 1
+        eventCalendar.layer.zPosition = 1
+
         //Setup Location
         locationLabel.text = event.location
         locationLabel.font = UIFont(name: "Lato-Regular", size: 14)
+        locationLabel.layer.zPosition = 1
+        eventPin.layer.zPosition = 1
         
         // setup text
         textView.delegate = self
