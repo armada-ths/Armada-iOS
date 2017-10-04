@@ -1,0 +1,141 @@
+//
+//  ArmadaEventTableViewController.swift
+//  Armada
+//
+//  Created by Rebecca Forstén Klinc on 2017-09-05.
+//  Copyright © 2017 Rebecca Forstén Klinc. All rights reserved.
+
+import UIKit
+
+class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
+
+    class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
+        
+        var images:[String:UIImage] = [:]
+        
+        override init(tableViewController: UITableViewController) {
+            super.init(tableViewController: tableViewController)
+        }
+        
+        
+        var isFirstLoad = true
+        
+        override func updateFunc(_ callback: @escaping (Response<[[ArmadaEvent]]>) -> Void) {
+            ArmadaApi.eventsFromServer { response in
+                OperationQueue.main.addOperation {
+                    callback(response.map { [$0] })
+                    self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
+                    self.isFirstLoad = false
+                }
+            }
+        }
+        
+        func scrollToNearestUpcomingEventAnimated(_ animated: Bool) {
+            var row = 0
+            let dateFormat = "yyyy-MM-dd"
+            let now = Date().format(dateFormat)
+            let events = values.joined()
+            for (i, event) in events.enumerated() {
+                if event.startDate.format(dateFormat) >= now {
+                    row = i
+                    break
+                }
+            }
+            if row != 0 {
+                self.tableViewController?.tableView.scrollToRow(at: IndexPath(item: row, section: 0), at: .top, animated: animated)
+            }
+        }
+        
+        
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let armadaEvent = values[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ArmadaEventTableViewCell", for: indexPath) as! ArmadaEventTableViewCell
+            cell.titleLabel.text = armadaEvent.title
+            cell.dateLabel.text = armadaEvent.startDate.format("d")  + "\n" +
+                armadaEvent.startDate.format("MMM") + "\n" +
+                armadaEvent.startDate.format("y")
+            cell.descriptionLabel.text = armadaEvent.signupStateString
+            //print(armadaEvent.startDate.format("y"))
+            if let imageUrl = armadaEvent.imageUrl {
+                if let image = images[imageUrl.absoluteString] {
+                    cell.eventImageView.image = image
+                } else{
+                    cell.eventImageView.image = nil
+                    imageUrl.getImage() { response in
+                        OperationQueue.main.addOperation {
+                            if case .success(let image) = response {
+                                self.images[imageUrl.absoluteString] = image
+                                if let cell = tableView.cellForRow(at: indexPath) as? ArmadaEventTableViewCell {
+                                    cell.eventImageView.image = image
+                                    cell.setNeedsLayout()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return cell
+        }
+    }
+    
+    var dataSource: ArmadaEventTableViewDataSource!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource = ArmadaEventTableViewDataSource(tableViewController: self)
+        tableView.dataSource = dataSource
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        splitViewController?.delegate = self
+        // fix header
+        let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+        let label = UILabel(frame: frame)
+        let myMutableString = NSMutableAttributedString(
+            string: "E V E N T S THS Armada 2017",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeue-Thin",
+                size: 22.0)!])
+        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
+        label.textAlignment = .center
+        label.attributedText = myMutableString
+        let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+        newTitleView.addSubview(label)
+        self.navigationItem.titleView = newTitleView
+        
+        // setup header left logo
+        var armadalogo:UIImage = #imageLiteral(resourceName: "armada_round_logo_green.png")
+        let headerHeight:CGFloat = (self.navigationController?.navigationBar.frame.size.height)!
+        let headerImgSize = headerHeight * 0.7
+        
+        // change size of armada logo
+        let newSize = CGSize(width: headerImgSize, height: headerImgSize)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        armadalogo.draw(in: CGRect(x: 0, y: 0, width: headerImgSize, height: headerImgSize))
+        let newarmadalogo = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // add armada logo to header
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: newarmadalogo, style: UIBarButtonItemStyle.done, target: nil, action: nil)
+        
+        // change status bar background color
+        let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))
+        statusView.backgroundColor = .black
+        self.navigationController?.view.addSubview(statusView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        if let controller = segue.destination as? EventDetailViewController,
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+            let armadaEvent = dataSource[indexPath]
+            controller.event = armadaEvent
+            deselectSelectedCell()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        super.viewWillAppear(animated)
+        if dataSource.isEmpty {
+            dataSource.refresh()
+        }
+    }
+}

@@ -535,6 +535,11 @@ open class _ArmadaApi {
                 let startDateTimestamp = json["event_start"] as? Int,
                 let endDateTimestamp = json["event_end"] as? Int {
                     let startDate = Date(timeIntervalSince1970: TimeInterval(startDateTimestamp))
+                    let date = Date()
+                    let calendar = Calendar.current
+                if(calendar.component(.year, from: startDate) < calendar.component(.year, from: date)){
+                    return nil
+                }
                     let endDate = Date(timeIntervalSince1970: TimeInterval(endDateTimestamp))
                     let location = json["location"] as? String
                     let summaryWithoutHtml = description.strippedFromHtmlString
@@ -554,7 +559,7 @@ open class _ArmadaApi {
                     let name = name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     let imageUrlString = json["image_url"] as? String
                     let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
-                    let summary = description.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
+                    let summary = description
                     let registrationRequired = json["registration_required"] as? Bool ?? true
                     return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
