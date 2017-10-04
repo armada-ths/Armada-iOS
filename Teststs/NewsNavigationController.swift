@@ -12,7 +12,13 @@ class NewsNavigationController: UINavigationController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
         // constants
         let extraH:CGFloat = 0
         let headerW = self.navigationBar.bounds.width
@@ -21,7 +27,7 @@ class NewsNavigationController: UINavigationController {
         let logoOffset:CGFloat = 10
         
         // set navigationBar size
-        self.navigationBar.frame = CGRect(x:0, y:0, width:headerW, height: statusH + headerH)
+        self.navigationBar.frame = CGRect(x:0, y:0, width:headerW, height: headerH)
         
         // make navigationbar solid
         self.navigationBar.isTranslucent = false
@@ -32,7 +38,7 @@ class NewsNavigationController: UINavigationController {
         self.navigationBar.setBackgroundImage(UIImage(), for: .default)
         
         // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:headerW, height: statusH))
+        let statusView = UIView(frame: CGRect(x:0, y:-statusH, width:headerW, height: statusH))
         statusView.backgroundColor = .black
         statusView.tag = 0
         self.navigationBar.addSubview(statusView)
@@ -65,14 +71,8 @@ class NewsNavigationController: UINavigationController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //self.navigationBar.isTranslucent = false
-        // Do any additional setup after loading the view.
-    }
-    
     func yoffset(_ statusH: CGFloat, _ headerH: CGFloat, _ itemH: CGFloat ) -> CGFloat {
-        return (statusH + headerH / 2.0 - itemH / 2.0)
+        return (headerH / 2.0 - itemH / 2.0)
     }
     
     override func didReceiveMemoryWarning() {

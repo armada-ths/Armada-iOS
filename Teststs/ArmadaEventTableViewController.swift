@@ -9,6 +9,9 @@ import UIKit
 
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
+    
+    
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
         var images:[String:UIImage] = [:]
@@ -85,41 +88,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         dataSource = ArmadaEventTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        splitViewController?.delegate = self
-        // fix header
-        let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
-        let label = UILabel(frame: frame)
-        let myMutableString = NSMutableAttributedString(
-            string: "E V E N T S THS Armada 2017",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeue-Thin",
-                size: 22.0)!])
-        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
-        label.textAlignment = .center
-        label.attributedText = myMutableString
-        let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
-        newTitleView.addSubview(label)
-        self.navigationItem.titleView = newTitleView
-        
-        // setup header left logo
-        var armadalogo:UIImage = #imageLiteral(resourceName: "armada_round_logo_green.png")
-        let headerHeight:CGFloat = (self.navigationController?.navigationBar.frame.size.height)!
-        let headerImgSize = headerHeight * 0.7
-        
-        // change size of armada logo
-        let newSize = CGSize(width: headerImgSize, height: headerImgSize)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
-        armadalogo.draw(in: CGRect(x: 0, y: 0, width: headerImgSize, height: headerImgSize))
-        let newarmadalogo = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        // add armada logo to header
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: newarmadalogo, style: UIBarButtonItemStyle.done, target: nil, action: nil)
-        
-        // change status bar background color
-        let statusView = UIView(frame: CGRect(x:0, y:0, width: 500, height: 20))
-        statusView.backgroundColor = .black
-        self.navigationController?.view.addSubview(statusView)
+        splitViewController?.delegate = self        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
@@ -132,10 +101,34 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isUserInteractionEnabled = false
+        //self.navigationController?.navigationBar.isUserInteractionEnabled = false
         super.viewWillAppear(animated)
         if dataSource.isEmpty {
             dataSource.refresh()
         }
+        
+        // change backbar button from "Back" to ""
+        backBarButton.title = ""
+        
+        // reveal logo-image
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
+        
+        // set title if not set
+        if self.navigationItem.titleView == nil {
+            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let label = UILabel(frame: frame)
+            let myMutableString = NSMutableAttributedString(
+                string: "E V E N T S THS Armada 2017",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeue-Thin",
+                    size: 22.0)!])
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
+            label.textAlignment = .center
+            label.attributedText = myMutableString
+            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+            newTitleView.addSubview(label)
+            self.navigationItem.titleView = newTitleView
+        }
+
     }
 }
