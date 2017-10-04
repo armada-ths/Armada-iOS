@@ -147,6 +147,19 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         paragraphStyle.lineSpacing = 3
         paragraphStyle.paragraphSpacing = 10
         newAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, newAttributedString.length))
+
+        newAttributedString.enumerateAttribute(NSAttachmentAttributeName, in: NSMakeRange(0, newAttributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
+            if let attachement = value as? NSTextAttachment {
+                let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                let screenSize: CGRect = UIScreen.main.bounds
+                if image.size.width > screenSize.width-50 {
+                    let resizedImage = resizeImage(image: image, targetSize: CGSize(width: screenSize.width - 50, height: (screenSize.width - 50)*(image.size.height/image.size.width)))
+                    let newAttribut = NSTextAttachment()
+                    newAttribut.image = resizedImage
+                    newAttributedString.addAttribute(NSAttachmentAttributeName, value: newAttribut, range: range)
+                }
+            }
+        })
         return newAttributedString
     }
     
@@ -169,5 +182,29 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x:0, y:0, width:newSize.width, height:newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 }
