@@ -30,23 +30,26 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var titleLabelD: NSLayoutConstraint!
     @IBOutlet weak var whiteW: NSLayoutConstraint!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var imageH: NSLayoutConstraint!
     
-    @IBOutlet weak var registerLabel: UILabel!
+    @IBOutlet weak var registerButton: UIButton!
     
     var event: ArmadaEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerLabel.layer.masksToBounds = true
-        registerLabel.layer.cornerRadius = 10
-        registerLabel.text = event.signupStateString
-        if event.signupState == .now {
-            registerLabel.isEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(self.registerClicked))
-            registerLabel.isUserInteractionEnabled = true
-            registerLabel.addGestureRecognizer(tap)
+
+        registerButton.setTitle(event.signupStateString, for: .normal)
+        registerButton.titleLabel?.font = UIFont(name: "Lato-Bold", size: 16)!
+        if event.signupState != .now {
+            registerButton.isEnabled = false
+            registerButton.isHidden = true
         }
+        registerButton.layer.shadowColor = UIColor.black.cgColor
+        registerButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        registerButton.layer.shadowRadius = 5
+        registerButton.layer.shadowOpacity = 0.5
         
         let screenSize: CGRect = UIScreen.main.bounds
         let screenW = screenSize.size.width
@@ -100,7 +103,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         
         //Setup whitewave
         waveH.constant = whiteW.constant/(1325/505)
-        waveImageD.constant =  imageH.constant - waveH.constant
+        waveImageD.constant = 5 + imageH.constant - waveH.constant
         
         // setup border
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
@@ -116,19 +119,33 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         titleLabelD.constant = -(waveImageD.constant/1.25)
         titleLabel.layer.zPosition = 1
         
+        
+        //Setup Date
+        dateLabel.text = event.startDate.format("dd MMMM")
+        dateLabel.font = UIFont(name: "Lato-Regular", size: 14)
+        
+        //Setup Location
+        locationLabel.text = event.location
+        locationLabel.font = UIFont(name: "Lato-Regular", size: 14)
+        
         // setup text
         textView.delegate = self
         textView.attributedText = self.setFont(newsString: event.summary)
         textView.layer.zPosition = 1
+        
+        
 
 
     }
     
     func setFont(newsString: String) -> NSAttributedString{
-        let newAttributedString = NSMutableAttributedString(attributedString: newsString.attributedHtmlString!)
+        let newAttributedString = NSMutableAttributedString(string: newsString)
         // Enumerate through all the font ranges
         newAttributedString.enumerateAttribute(NSFontAttributeName, in: NSMakeRange(0, newAttributedString.length), options: []) { value, range, stop in
+ 
             guard let currentFont = value as? UIFont else {
+                let newFont = UIFont(name: "Lato-Regular", size: 14)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
                 return
             }
             
@@ -137,7 +154,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
             
             // Ask the OS for an actual font that most closely matches the description above
-            
             
             if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
                 let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)

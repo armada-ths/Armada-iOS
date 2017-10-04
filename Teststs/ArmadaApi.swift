@@ -559,7 +559,7 @@ open class _ArmadaApi {
                     let name = name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     let imageUrlString = json["image_url"] as? String
                     let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
-                    let summary = description.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil)
+                    let summary = description
                     let registrationRequired = json["registration_required"] as? Bool ?? true
                     return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
             }
