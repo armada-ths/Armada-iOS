@@ -57,7 +57,9 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // hide img-logo temporarily
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
+        
         registerButton.setTitle(event.signupStateString, for: .normal)
         registerButton.titleLabel?.font = UIFont(name: "Lato-Bold", size: 16)!
         if event.signupState != .now {
@@ -77,21 +79,24 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         let C:CGFloat = 0.445634
         let ratio:CGFloat = (9.0/15.0)
         
-        // fix header
-        let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
-        let label = UILabel(frame: frame)
-        let myMutableString = NSMutableAttributedString(
-            string: "E V E N T S THS Armada 2017",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeue-Thin",
-                size: 22.0)!])
-        myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
-        label.textAlignment = .center
-        label.attributedText = myMutableString
-        let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
-        newTitleView.addSubview(label)
-        self.navigationItem.titleView = newTitleView
-        
+        // set title if not set
+        if self.navigationItem.titleView == nil {
+            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let label = UILabel(frame: frame)
+            let myMutableString = NSMutableAttributedString(
+                string: "E V E N T S THS Armada 2017",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeue-Thin",
+                    size: 22.0)!])
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
+            label.textAlignment = .center
+            label.attributedText = myMutableString
+            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+            newTitleView.addSubview(label)
+            self.navigationItem.titleView = newTitleView
+        }
+
+ 
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         contentView.backgroundColor = ColorScheme.leilaDesignGrey

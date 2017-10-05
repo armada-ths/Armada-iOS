@@ -1063,10 +1063,15 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Events" id="fuV-k9-ZOw"/>
+                    <navigationItem key="navigationItem" title="Events" id="fuV-k9-ZOw">
+                        <barButtonItem key="backBarButtonItem" title="backBarButton" id="LWq-ht-60g"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="900"/>
+                    <connections>
+                        <outlet property="backBarButton" destination="LWq-ht-60g" id="ooX-Wd-0zg"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDv-kl-vxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1075,14 +1080,14 @@
         <!--Events-->
         <scene sceneID="ISi-dp-FFg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CCD-dD-QcT" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CCD-dD-QcT" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" image="calendar_2-2" selectedImage="calendar_2-1" id="aSJ-Rh-D8F">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="calendar_2-1"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tCc-7g-Hfi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tCc-7g-Hfi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1181,10 +1186,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jp-MP-h3i" userLabel="scrollview">
-                                <rect key="frame" x="0.0" y="2" width="375" height="1354"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1356"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-f5-4Cx" userLabel="contentview">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="224"/>
+                                        <rect key="frame" x="16" y="-10" width="343" height="224"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccv-ua-K4W" userLabel="borderview">
                                                 <rect key="frame" x="15" y="8" width="313" height="208"/>
@@ -1325,7 +1330,6 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.34758619740000002" green="1" blue="0.59047653990000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" secondItem="BLT-SP-Gc4" secondAttribute="height" constant="2" id="Ary-UV-jWM" userLabel="borderH = whiteH + 2"/>
                                                     <constraint firstAttribute="width" secondItem="BLT-SP-Gc4" secondAttribute="width" constant="2" id="WXh-9M-6uN" userLabel="borderW = whiteW + 2"/>
@@ -1343,7 +1347,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="H1i-f5-4Cx" firstAttribute="top" secondItem="4jp-MP-h3i" secondAttribute="top" id="Fob-qX-kKs" userLabel="border.top = scroll.top"/>
+                                    <constraint firstItem="H1i-f5-4Cx" firstAttribute="top" secondItem="4jp-MP-h3i" secondAttribute="top" constant="-10" id="Fob-qX-kKs" userLabel="border.top = scroll.top"/>
                                     <constraint firstAttribute="trailing" secondItem="H1i-f5-4Cx" secondAttribute="trailing" constant="16" id="Za5-aj-osy"/>
                                     <constraint firstAttribute="bottom" secondItem="H1i-f5-4Cx" secondAttribute="bottom" id="mTt-Ch-iKA" userLabel="scroll.bottom = border.bottom"/>
                                 </constraints>
@@ -1356,7 +1360,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="H1i-f5-4Cx" secondAttribute="trailing" id="Pd0-fK-Bb1"/>
                             <constraint firstItem="H1i-f5-4Cx" firstAttribute="leading" secondItem="MnO-Oh-fea" secondAttribute="leadingMargin" id="Wt4-JG-DIn"/>
                             <constraint firstItem="6tq-nw-Ahr" firstAttribute="top" secondItem="4jp-MP-h3i" secondAttribute="bottom" id="Xbv-xb-5gK" userLabel="scrollview.bottom = view.bottom"/>
-                            <constraint firstItem="4jp-MP-h3i" firstAttribute="top" secondItem="MnO-Oh-fea" secondAttribute="top" constant="2" id="xgl-eh-w7O"/>
+                            <constraint firstItem="4jp-MP-h3i" firstAttribute="top" secondItem="MnO-Oh-fea" secondAttribute="top" id="xgl-eh-w7O"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -1391,7 +1395,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zL-xx-2FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2565.5999999999999" y="2108.5457271364321"/>
+            <point key="canvasLocation" x="3986" y="3044"/>
         </scene>
     </scenes>
     <resources>
