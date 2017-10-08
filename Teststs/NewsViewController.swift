@@ -71,7 +71,6 @@ class NewsViewController: UITableViewController {
     func updateFunc(){
         ArmadaApi.newsFromServer(){
             news, error, errorMessage in
-            print(news)
             OperationQueue.main.addOperation {[weak self] in
                 self?.tableView.showEmptyMessage("")
                 self?.tableView.stopActivityIndicator()
