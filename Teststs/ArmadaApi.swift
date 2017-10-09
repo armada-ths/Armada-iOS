@@ -702,7 +702,7 @@ open class _ArmadaApi {
         let newsArticle = json[(url.components(separatedBy: newsUrl)[1])] as! [String: AnyObject]
         var news = newsArticle["body"] as! String
         news = news.replacingOccurrences(of: ">#<", with: "><")
-        news = news.replacingOccurrences(of: "img src=\"", with: "img src=\"https://armada.nu")
+        news = news.replacingOccurrences(of: "img src=\"/assets", with: "img src=\"https://armada.nu")
         return news
     }
     

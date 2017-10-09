@@ -207,4 +207,9 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         
         return newImage!
     }
+    
+    
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool{
+        return false
+    }
 }
