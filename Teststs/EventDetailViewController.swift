@@ -56,8 +56,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         // hide img-logo temporarily
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
         
-        registerButton.setTitle(event.signupStateString, for: .normal)
-        registerButton.titleLabel?.font = UIFont(name: "Lato-Bold", size: 16)!
         if event.signupState != .now {
             registerButton.isEnabled = false
             registerButton.isHidden = true
