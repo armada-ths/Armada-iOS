@@ -16,11 +16,14 @@ class matchStart: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
    // @IBOutlet weak var matchBackButton:UIBarButtonItem!
-    override func viewDidLoad() {        
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.viewWithTag(666)?.removeFromSuperview()
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         
-        self.navigationController?.navigationItem.backBarButtonItem = UIBarButtonItem()
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
             let label = UILabel(frame: frame)
@@ -85,7 +88,6 @@ class matchStart: UIViewController {
         matchData.currentview += 1
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLooking") as! matchLooking
         rightViewController.matchData = self.matchData
-        rightViewController.matchBackButton = (self.navigationController?.navigationItem.backBarButtonItem)!
         self.navigationController?.pushViewController(rightViewController, animated: true)
     }
     

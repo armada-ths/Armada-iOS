@@ -13,6 +13,7 @@ class matchLooking: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchBackButton: UIBarButtonItem = UIBarButtonItem()
     
+    @IBOutlet weak var lookingLabel: UILabel!
     @IBAction func partjobPush(_ sender: Any) {
         if partjobButton.isSelected {
             partjobButton.isSelected = false
@@ -51,13 +52,25 @@ class matchLooking: UIViewController {
     @IBOutlet weak var thesisButton: UIButton!
     @IBOutlet weak var traineeButton: UIButton!
     
+    override func viewWillAppear(_ animated: Bool) {
+        let blockview = UIView(frame: CGRect(x:0, y:0, width: 100, height:(self.navigationController?.navigationBar.frame.height)! - 2))
+        blockview.backgroundColor = ColorScheme.leilaDesignGrey
+        blockview.tag = 666
+        self.navigationController?.navigationBar.addSubview(blockview)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
         
-        let blockview = UIView(frame: CGRect(x:0, y:0, width: 50, height:(self.navigationController?.navigationBar.frame.height)! - 2))
-        blockview.backgroundColor = ColorScheme.leilaDesignGrey
-        self.navigationController?.navigationBar.addSubview(blockview)
-        
+        let lookingstring = NSMutableAttributedString(
+            string: "What are you looking for?",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeueRegular",
+                size: 22.0)!])
+        lookingLabel.textAlignment = .center
+        lookingLabel.attributedText = lookingstring
+                
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
             let label = UILabel(frame: frame)
@@ -122,6 +135,9 @@ class matchLooking: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.viewWithTag(666)?.removeFromSuperview()
     }
     
 }

@@ -12,8 +12,22 @@ class matchSweden: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
     
+    override func viewWillAppear(_ animated: Bool) {
+        let blockview = UIView(frame: CGRect(x:0, y:0, width: 100, height:(self.navigationController?.navigationBar.frame.height)! - 2))
+        blockview.backgroundColor = ColorScheme.leilaDesignGrey
+        blockview.tag = 666
+        self.navigationController?.navigationBar.addSubview(blockview)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
+        
+        let blockview = UIView(frame: CGRect(x:0, y:0, width: 100, height:(self.navigationController?.navigationBar.frame.height)! - 2))
+        blockview.backgroundColor = ColorScheme.leilaDesignGrey
+        blockview.tag = 666
+        self.navigationController?.navigationBar.addSubview(blockview)
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
@@ -57,6 +71,10 @@ class matchSweden: UIViewController {
         matchData.currentview -= 1
         self.navigationController?.popViewController(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: matchData)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.navigationBar.viewWithTag(666)?.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {

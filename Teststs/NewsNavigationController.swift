@@ -12,12 +12,14 @@ class NewsNavigationController: UINavigationController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        //if let blockView = self.navigationController?.navigationBar.viewWithTag(<#T##tag: Int##Int#>)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
+        
         self.navigationBar.backgroundColor = ColorScheme.leilaDesignGrey
         
         // constants
