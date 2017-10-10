@@ -34,11 +34,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var wave50H: NSLayoutConstraint!
     @IBOutlet weak var wave50D: NSLayoutConstraint!
     @IBOutlet weak var wave50W: NSLayoutConstraint!
-    
-    //Op 25 wave
-    @IBOutlet weak var wave25: UIImageView!
-    @IBOutlet weak var wave25d: NSLayoutConstraint!
-    @IBOutlet weak var wave25H: NSLayoutConstraint!
+
     
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -78,7 +74,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         let B:CGFloat = 0.92
         let C:CGFloat = 0.445634
         let ratio:CGFloat = (9.0/15.0)
-        
         // set title if not set
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
@@ -129,14 +124,10 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         waveImage100D.constant = 5 + imageH.constant - wave100H.constant
         
         //Setup wave with 50% opacity
-        wave50H.constant = wave100H.constant + 10
-        wave50D.constant = waveImage100D.constant - 15
-        wave50W.constant = whiteW.constant/CGFloat(4)
-        
-        
-        //Setup wave with 25% opacity
-        wave25H.constant = wave100H.constant
-        wave25d.constant = waveImage100D.constant - 20
+        wave50H.constant = wave100H.constant - 5
+        wave50D.constant = waveImage100D.constant
+
+
         
         // setup border
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
