@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // setup status-bar style
         UIApplication.shared.statusBarStyle = .lightContent
-
         
 //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
 //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]

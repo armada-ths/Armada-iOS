@@ -17,7 +17,8 @@ class NewsNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+        self.navigationBar.backgroundColor = ColorScheme.leilaDesignGrey
         
         // constants
         let extraH:CGFloat = 0
@@ -31,7 +32,8 @@ class NewsNavigationController: UINavigationController {
         
         // make navigationbar solid
         self.navigationBar.isTranslucent = false
-        self.navigationBar.backgroundColor = ColorScheme.leilaDesignGrey
+        self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
+
         
         // remove navigationbar-border
         self.navigationBar.shadowImage = UIImage()
