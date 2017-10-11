@@ -13,37 +13,38 @@ class matchStart: UIViewController {
     
     @IBOutlet weak var label1:UILabel!
     @IBOutlet weak var label2:UILabel!
+    let viewNumber = 0
     var matchData: matchDataClass = matchDataClass()
-
-    
-   // @IBOutlet weak var matchBackButton:UIBarButtonItem!
-    override func viewWillAppear(_ animated: Bool) {
-        print(self.matchData.currentview)
-    }
+    let label1title = NSMutableAttributedString(
+        string: "Swipe to",
+        attributes: [NSFontAttributeName:UIFont(
+            name: "BebasNeueRegular",
+            size: 22.0)!])
+    let label2title = NSMutableAttributedString(
+        string: "start",
+        attributes: [NSFontAttributeName:UIFont(
+            name: "BebasNeueRegular",
+            size: 22.0)!])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = ColorScheme.leilaDesignGrey
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
-
-        self.view.backgroundColor = ColorScheme.leilaDesignGrey
         
-        var label1title = NSMutableAttributedString(
-            string: "Swipe to",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 22.0)!])
+        
+        if let match = self.matchData.load() {
+            self.matchData = match
+            print(matchData.currentview)
+            if viewNumber < matchData.currentview {
+                goRightWithoutAnimation()
+            }
+        }
+        
         label1.textAlignment = .center
         label1.attributedText = label1title
-        
-        var label2title = NSMutableAttributedString(
-            string: "start",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 22.0)!])
         label2.textAlignment = .center
         label2.attributedText = label2title
 
@@ -53,34 +54,18 @@ class matchStart: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.recieveData), name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: nil)
-        
-        
-        // load old data if exists
-        /*
-         if let match = self.matchData.load() {
-         self.matchData = match
-         print(matchData.time)
-         }
-         */
     }
     
-    
-    func recieveData(notification: NSNotification){
-        
-//        print("recieved data")
-//        let data = notification.object as! matchDataClass
-//        self.matchData = data
-//        print("matchData.currentview is \(matchData.currentview)")
-//        print(matchData.time)
-        
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLooking") as! matchLooking
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
     }
-    
 
     func goRight(){
-        print("swiping left")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLooking") as! matchLooking
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = self

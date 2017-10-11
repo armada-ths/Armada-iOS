@@ -13,45 +13,19 @@ class matchLooking: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchBackButton: UIBarButtonItem = UIBarButtonItem()
     var matchStart: matchStart?
+    let viewNumber = 1
     
     @IBOutlet weak var lookingLabel: UILabel!
-    @IBAction func partjobPush(_ sender: Any) {
-        if partjobButton.isSelected {
-            partjobButton.isSelected = false
-            
-        } else {
-            partjobButton.isSelected = true
-        }
-        self.matchData.lookingBool["part-time job"] = partjobButton.isSelected
-    }
-    @IBAction func summerjobPush(_ sender: Any) {
-        if summerjobButton.isSelected {
-            summerjobButton.isSelected = false
-        } else {
-            summerjobButton.isSelected = true
-        }
-        self.matchData.lookingBool["summer job"] = summerjobButton.isSelected
-    }
-    @IBAction func thesisPush(_ sender: Any) {
-        if thesisButton.isSelected {
-            thesisButton.isSelected = false
-        } else {
-            thesisButton.isSelected = true
-        }
-        self.matchData.lookingBool["thesis"] = thesisButton.isSelected
-    }
-    @IBAction func traineePush(_ sender: Any) {
-        if traineeButton.isSelected {
-            traineeButton.isSelected = false
-        } else {
-            traineeButton.isSelected = true
-        }
-        self.matchData.lookingBool["trainee"] = traineeButton.isSelected
-    }
     @IBOutlet weak var partjobButton: UIButton!
     @IBOutlet weak var summerjobButton: UIButton!
     @IBOutlet weak var thesisButton: UIButton!
     @IBOutlet weak var traineeButton: UIButton!
+    
+    let lookingstring = NSMutableAttributedString(
+        string: "What are you looking for?",
+        attributes: [NSFontAttributeName:UIFont(
+            name: "BebasNeueRegular",
+            size: 22.0)!])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,14 +33,14 @@ class matchLooking: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
         
-        
-        let lookingstring = NSMutableAttributedString(
-            string: "What are you looking for?",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 22.0)!])
         lookingLabel.textAlignment = .center
         lookingLabel.attributedText = lookingstring
         
@@ -76,7 +50,7 @@ class matchLooking: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        // do stuff with matchLooking
+        
         self.setButtons()
         
     }
@@ -89,9 +63,17 @@ class matchLooking: UIViewController {
         traineeButton.isSelected = self.matchData.lookingBool["trainee"]!
     }
     
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSweden") as! matchSweden
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self.matchStart
+        rightViewController.matchLooking = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
+    }
+    
     func goRight(){
-        print("going to matchSweden")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSweden") as! matchSweden
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = self.matchStart
@@ -100,18 +82,51 @@ class matchLooking: UIViewController {
     }
     
     func goBack(){
-        print("going back to matchStart")
         matchData.currentview -= 1
+        matchData.save()
         self.matchStart?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func partjobPush(_ sender: Any) {
+        if partjobButton.isSelected {
+            partjobButton.isSelected = false
+            
+        } else {
+            partjobButton.isSelected = true
+        }
+        self.matchData.lookingBool["part-time job"] = partjobButton.isSelected
+        matchData.save()
+    }
+    @IBAction func summerjobPush(_ sender: Any) {
+        if summerjobButton.isSelected {
+            summerjobButton.isSelected = false
+        } else {
+            summerjobButton.isSelected = true
+        }
+        self.matchData.lookingBool["summer job"] = summerjobButton.isSelected
+        matchData.save()
+    }
+    @IBAction func thesisPush(_ sender: Any) {
+        if thesisButton.isSelected {
+            thesisButton.isSelected = false
+        } else {
+            thesisButton.isSelected = true
+        }
+        self.matchData.lookingBool["thesis"] = thesisButton.isSelected
+        matchData.save()
+    }
+    @IBAction func traineePush(_ sender: Any) {
+        if traineeButton.isSelected {
+            traineeButton.isSelected = false
+        } else {
+            traineeButton.isSelected = true
+        }
+        self.matchData.lookingBool["trainee"] = traineeButton.isSelected
+        matchData.save()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.viewWithTag(666)?.removeFromSuperview()
-    }
-    
+    }    
 }

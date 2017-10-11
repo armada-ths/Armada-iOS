@@ -13,7 +13,7 @@ class matchSelectInterest: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTeam: matchTeam?
-    
+    let viewNumber = 7
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,12 @@ class matchSelectInterest: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -29,27 +35,44 @@ class matchSelectInterest: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
         // do stuff with matchSelectInterest
         
+        /*
         self.matchData.interestBools["it"]              = false
         self.matchData.interestBools["chemistry"]       = true
         self.matchData.interestBools["finance"]         = false
         self.matchData.interestBools["infrastructure"]  = true
         self.matchData.interestBools["management"]      = true
         self.matchData.interestBools["innovation"]      = false
+         */
         
     }
     
+    func goRightWithoutAnimation(){
+        if matchData.interestList.count == 0 {
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
+            rightViewController.matchData = self.matchData
+            rightViewController.matchStart = matchStart
+            rightViewController.matchSelectInterest = self
+            self.navigationController?.pushViewController(rightViewController, animated: false)
+        } else {
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
+            rightViewController.matchData = self.matchData
+            rightViewController.matchStart = matchStart
+            rightViewController.matchSelectInterest = self
+            self.navigationController?.pushViewController(rightViewController, animated: false)
+        }
+    }
+
     func goRight(){
-        print("going forward")
         matchData.currentview += 1
-        // reset interestList to empty array
         matchData.interestList = []
         for (key, value) in matchData.interestBools {
             if value == true{
                 matchData.interestList.append(key)
             }
         }
+        matchData.save()
         if matchData.interestList.count == 0 {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchEnd
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
@@ -64,8 +87,8 @@ class matchSelectInterest: UIViewController {
     }
     
     func goBack(){
-        print("going back")
         matchData.currentview -= 1
+        matchData.save()
         // send data back to previous view-controller
         self.matchTeam?.matchData = matchData
         self.navigationController?.popViewController(animated: true)

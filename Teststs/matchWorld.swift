@@ -13,9 +13,33 @@ class matchWorld: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchSweden: matchSweden?
+    let viewNumber = 3
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
+        
         print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+                
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeRight)
+        self.view.addGestureRecognizer(swipeLeft)
+//        
+//        self.matchData.worldBool["europe"]      = false
+//        self.matchData.worldBool["asia"]        = false
+//        self.matchData.worldBool["americaN"]    = false
+//        self.matchData.worldBool["americaS"]    = false
+//        self.matchData.worldBool["australia"]   = false
     }
     
     @IBAction func reset(_ sender: Any) {
@@ -25,31 +49,17 @@ class matchWorld: UIViewController {
         )
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
-        statusView.backgroundColor = .black
-        self.view.addSubview(statusView)
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeRight)
-        self.view.addGestureRecognizer(swipeLeft)
-        
-        self.matchData.worldBool["europe"]      = false
-        self.matchData.worldBool["asia"]        = false
-        self.matchData.worldBool["americaN"]    = false
-        self.matchData.worldBool["americaS"]    = false
-        self.matchData.worldBool["australia"]   = false
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEurope") as! matchEurope
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchWorld = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
     }
     
-    
     func goRight(){
-        print("going to matchEurope")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEurope") as! matchEurope
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
@@ -58,8 +68,8 @@ class matchWorld: UIViewController {
     }
     
     func goBack(){
-        print("going back to matchSweden")
         matchData.currentview -= 1
+        matchData.save()
         self.matchSweden?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }

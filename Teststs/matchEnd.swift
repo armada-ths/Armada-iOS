@@ -18,6 +18,18 @@ class matchEnd: UIViewController {
     var matchInterest: matchInterest?
     var matchSelectInterest: matchSelectInterest?
     
+    let summarystring = NSMutableAttributedString(
+        string: "SUMMARY",
+        attributes: [NSFontAttributeName:UIFont(
+            name: "BebasNeueRegular",
+            size: 22.0)!])
+    let titlestring = NSMutableAttributedString(
+        string: "You are interrested in",
+        attributes: [NSFontAttributeName:UIFont(
+            name: "BebasNeueRegular",
+            size: 22.0)!])
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup status bar
@@ -26,22 +38,13 @@ class matchEnd: UIViewController {
         self.view.addSubview(statusView)
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         
-        let summarystring = NSMutableAttributedString(
-            string: "SUMMARY",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 22.0)!])
+        print(matchData.currentview)
+        
         summaryLabel.textAlignment = .center
         summaryLabel.attributedText = summarystring
         
-        let titlestring = NSMutableAttributedString(
-            string: "You are interrested in",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 22.0)!])
         titleLabel.textAlignment = .center
         titleLabel.attributedText = titlestring
-        
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -49,8 +52,8 @@ class matchEnd: UIViewController {
     }
     
     func goBack(){
-        print("going back")
         matchData.currentview -= 1
+        matchData.save()
         if matchData.currentInterest > 0 {
             self.matchInterest?.matchData = matchData
         } else {

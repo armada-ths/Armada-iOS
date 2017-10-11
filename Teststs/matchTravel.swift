@@ -13,13 +13,21 @@ class matchTravel: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchEurope: matchEurope?
+    let viewNumber = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -28,9 +36,17 @@ class matchTravel: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
     }
 
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchTravel = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
+    }
+    
     func goRight(){
-        print("going to matchTeam")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
@@ -39,8 +55,8 @@ class matchTravel: UIViewController {
     }
     
     func goBack(){
-        print("going back to matchEurope")
         matchData.currentview -= 1
+        matchData.save()
         // send data back to previous view-controller
         self.matchEurope?.matchData = matchData
         self.navigationController?.popViewController(animated: true)

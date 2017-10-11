@@ -13,6 +13,7 @@ class matchEurope: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchWorld: matchWorld?
+    let viewNumber = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,12 @@ class matchEurope: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -27,11 +34,10 @@ class matchEurope: UIViewController {
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
         
-        self.matchData.europeBool["europe"]      = false
-        self.matchData.europeBool["asia"]        = false
-        self.matchData.europeBool["americaN"]    = false
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.recieveData), name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: nil)
+//        self.matchData.europeBool["europe"]      = false
+//        self.matchData.europeBool["asia"]        = false
+//        self.matchData.europeBool["americaN"]    = false
+
     }
     
     func recieveData(notification: NSNotification){
@@ -40,9 +46,17 @@ class matchEurope: UIViewController {
         print("matchData.currentview is \(matchData.currentview)")
     }
     
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchEurope = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
+    }
+    
     func goRight(){
-        print("going to matchTravel")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
@@ -51,8 +65,8 @@ class matchEurope: UIViewController {
     }
     
     func goBack(){
-        print("going back to matchWorld")
         matchData.currentview -= 1
+        matchData.save()
         self.navigationController?.popViewController(animated: true)
         // send data back to previous view-controller
         self.matchWorld?.matchData = matchData
