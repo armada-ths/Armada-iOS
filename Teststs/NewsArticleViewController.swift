@@ -110,15 +110,19 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
                 content in
                 DispatchQueue.main.async {
                     self.textView.attributedText = self.setFont(newsString: content)
+                    self.setArticle(newsString: content)
                 }
             }
         }
         else{
             textView.attributedText = setFont(newsString: news.content)
+            setArticle(newsString: news.content)
+            
         }
     }
     
     func setFont(newsString: String) -> NSAttributedString{
+        let newsString = newsString.replacingOccurrences(of: "<p><img[^>]+></p>", with: "", options: String.CompareOptions.regularExpression, range: nil)
         let newAttributedString = NSMutableAttributedString(attributedString: newsString.attributedHtmlString!)
         // Enumerate through all the font ranges
         newAttributedString.enumerateAttribute(NSFontAttributeName, in: NSMakeRange(0, newAttributedString.length), options: []) { value, range, stop in
@@ -147,20 +151,54 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
         paragraphStyle.lineSpacing = 3
         paragraphStyle.paragraphSpacing = 10
         newAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, newAttributedString.length))
-
-        newAttributedString.enumerateAttribute(NSAttachmentAttributeName, in: NSMakeRange(0, newAttributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
-            if let attachement = value as? NSTextAttachment {
-                let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
-                let screenSize: CGRect = UIScreen.main.bounds
-                if image.size.width > screenSize.width-50 {
-                    let resizedImage = resizeImage(image: image, targetSize: CGSize(width: screenSize.width - 50, height: (screenSize.width - 50)*(image.size.height/image.size.width)))
-                    let newAttribut = NSTextAttachment()
-                    newAttribut.image = resizedImage
-                    newAttributedString.addAttribute(NSAttachmentAttributeName, value: newAttribut, range: range)
+        return newAttributedString
+    }
+    
+    func setArticle(newsString: String){
+        DispatchQueue.main.async {
+            let newAttributedString = NSMutableAttributedString(attributedString: newsString.attributedHtmlString!)
+        // Enumerate through all the font ranges
+            newAttributedString.enumerateAttribute(NSFontAttributeName, in: NSMakeRange(0, newAttributedString.length), options: []) { value, range, stop in
+                guard let currentFont = value as? UIFont else {
+                    return
+                }
+            
+                // An NSFontDescriptor describes the attributes of a font: family name, face name, point size, etc.
+                // Here we describe the replacement font as coming from the "Lato" family
+                let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
+            
+                // Ask the OS for an actual font that most closely matches the description above
+            
+            
+                if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
+                    let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+                }
+                else{
+                    let newFont = UIFont(name: "Lato-Regular", size: currentFont.pointSize*0.8)
+                    newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
                 }
             }
-        })
-        return newAttributedString
+        
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 3
+            paragraphStyle.paragraphSpacing = 10
+            newAttributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, newAttributedString.length))
+
+            newAttributedString.enumerateAttribute(NSAttachmentAttributeName, in: NSMakeRange(0, newAttributedString.length), options: .init(rawValue: 0), using: { (value, range, stop) in
+                if let attachement = value as? NSTextAttachment {
+                    let image = attachement.image(forBounds: attachement.bounds, textContainer: NSTextContainer(), characterIndex: range.location)!
+                    let screenSize: CGRect = UIScreen.main.bounds
+                    if image.size.width > screenSize.width-50 {
+                        let resizedImage = self.resizeImage(image: image, targetSize: CGSize(width: screenSize.width - 50, height: (screenSize.width - 50)*(image.size.height/image.size.width)))
+                        let newAttribut = NSTextAttachment()
+                        newAttribut.image = resizedImage
+                        newAttributedString.addAttribute(NSAttachmentAttributeName, value: newAttribut, range: range)
+                    }
+                }
+            })
+            self.textView.attributedText = newAttributedString
+        }
     }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
