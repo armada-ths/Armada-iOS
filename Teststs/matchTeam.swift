@@ -11,10 +11,15 @@ import UIKit
 class matchTeam: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
+    var matchStart: matchStart?
+    var matchTravel: matchTravel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -22,16 +27,7 @@ class matchTeam: UIViewController {
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
         // do stuff
-        
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.recieveData), name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: nil)
-    }
-    
-    func recieveData(notification: NSNotification){
-        let data = notification.object as! matchDataClass
-        self.matchData = data
-        print("matchData.currentview is \(matchData.currentview)")
+
     }
     
     func goRight(){
@@ -39,12 +35,16 @@ class matchTeam: UIViewController {
         matchData.currentview += 1
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
         rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchTeam = self
         self.navigationController?.pushViewController(rightViewController, animated: true)
     }
     
     func goBack(){
         print("going back to matchTravel")
         matchData.currentview -= 1
+        // send data back to previous view-controller
+        self.matchTravel?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: matchData)
     }

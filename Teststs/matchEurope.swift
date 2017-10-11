@@ -11,25 +11,21 @@ import UIKit
 class matchEurope: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
+    var matchStart: matchStart?
+    var matchWorld: matchWorld?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        // do stuff
-        
-        /*
-         europeBool = [
-         "germany":  false,
-         "italy":    false,
-         "france":   false
-         ]
-         */
         
         self.matchData.europeBool["europe"]      = false
         self.matchData.europeBool["asia"]        = false
@@ -49,6 +45,8 @@ class matchEurope: UIViewController {
         matchData.currentview += 1
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
         rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchEurope = self
         self.navigationController?.pushViewController(rightViewController, animated: true)
     }
     
@@ -56,7 +54,8 @@ class matchEurope: UIViewController {
         print("going back to matchWorld")
         matchData.currentview -= 1
         self.navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: matchData)
+        // send data back to previous view-controller
+        self.matchWorld?.matchData = matchData
     }
     
     override func didReceiveMemoryWarning() {

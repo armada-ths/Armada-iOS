@@ -11,10 +11,16 @@ import UIKit
 class matchSelectInterest: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
+    var matchStart: matchStart?
+    var matchTeam: matchTeam?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -23,17 +29,6 @@ class matchSelectInterest: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
         // do stuff with matchSelectInterest
         
-        /*
-         interestBools = [
-         "it":               false,
-         "chemistry":        false,
-         "finance":          false,
-         "infrastructure":   false,
-         "management":       false,
-         "innovation":       false
-         ]
-         */
-        
         self.matchData.interestBools["it"]              = false
         self.matchData.interestBools["chemistry"]       = true
         self.matchData.interestBools["finance"]         = false
@@ -41,21 +36,11 @@ class matchSelectInterest: UIViewController {
         self.matchData.interestBools["management"]      = true
         self.matchData.interestBools["innovation"]      = false
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.recieveData), name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: nil)
-    }
-    
-    func recieveData(notification: NSNotification){
-        print("in matchSelectInterest view")
-        let data = notification.object as! matchDataClass
-        self.matchData = data
-        print("recieved data from first match interest view")
-        matchData.currentInterest = 0
-        print("matchData.currentview is \(matchData.currentview)")
     }
     
     func goRight(){
         print("going forward")
+        matchData.currentview += 1
         // reset interestList to empty array
         matchData.interestList = []
         for (key, value) in matchData.interestBools {
@@ -64,12 +49,16 @@ class matchSelectInterest: UIViewController {
             }
         }
         if matchData.interestList.count == 0 {
-            // jump to view after matchInterest
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchEnd
+            rightViewController.matchData = self.matchData
+            rightViewController.matchStart = matchStart
+            rightViewController.matchSelectInterest = self
+            self.navigationController?.pushViewController(rightViewController, animated: true)
         } else {
-            // jump into first matchInterest
-            matchData.currentview += 1
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
             rightViewController.matchData = self.matchData
+            rightViewController.matchStart = matchStart
+            rightViewController.matchSelectInterest = self
             self.navigationController?.pushViewController(rightViewController, animated: true)
         }
     }
@@ -77,23 +66,14 @@ class matchSelectInterest: UIViewController {
     func goBack(){
         print("going back")
         matchData.currentview -= 1
+        // send data back to previous view-controller
+        self.matchTeam?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: matchData)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
