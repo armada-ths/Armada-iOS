@@ -11,23 +11,23 @@ import UIKit
 class matchSweden: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        let blockview = UIView(frame: CGRect(x:0, y:0, width: 100, height:(self.navigationController?.navigationBar.frame.height)! - 2))
-        blockview.backgroundColor = ColorScheme.leilaDesignGrey
-        blockview.tag = 666
-        self.navigationController?.navigationBar.addSubview(blockview)
-    }
+    var matchStart: matchStart?
+    var matchLooking: matchLooking?
+    let viewNumber = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
         
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
-        
-        let blockview = UIView(frame: CGRect(x:0, y:0, width: 100, height:(self.navigationController?.navigationBar.frame.height)! - 2))
-        blockview.backgroundColor = ColorScheme.leilaDesignGrey
-        blockview.tag = 666
-        self.navigationController?.navigationBar.addSubview(blockview)
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
@@ -35,46 +35,32 @@ class matchSweden: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        // do stuff with matchLooking
         
-        /*
-         swedenBool = [
-         "area1": false,
-         "area2": false,
-         "area3": false
-         ]
-         */
-        
-        self.matchData.swedenBool["area1"]     = false
-        self.matchData.swedenBool["area2"]     = false
-        self.matchData.swedenBool["area3"]     = false
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.recieveData), name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: nil)
     }
     
-    func recieveData(notification: NSNotification){
-        let data = notification.object as! matchDataClass
-        self.matchData = data
-        print("matchData.currentview is \(matchData.currentview)")
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchWorld") as! matchWorld
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self.matchStart
+        rightViewController.matchSweden = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
     }
     
     func goRight(){
-        print("going to matchWorld")
         matchData.currentview += 1
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchWorld") as! matchWorld
         rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self.matchStart
+        rightViewController.matchSweden = self
         self.navigationController?.pushViewController(rightViewController, animated: true)
     }
     
     func goBack(){
-        print("going back to matchLooking")
         matchData.currentview -= 1
+        matchData.save()
+        self.matchLooking?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: String(matchData.currentview + 1)), object: matchData)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.navigationBar.viewWithTag(666)?.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {
