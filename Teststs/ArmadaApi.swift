@@ -680,7 +680,7 @@ open class _ArmadaApi {
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 let newsJson = self.parseHTML(HTMLContent: responseString! as String)
                 var newsObjects = self.newsFromJson(newsJson as AnyObject)
-                if(newsObjects[0].featured != true){
+                if(newsObjects[0].featured != true && newsObjects.count > 1){
                     for i in 1 ... newsObjects.count{
                         if(newsObjects[i].featured == true){
                             let tempNews = newsObjects[i]
