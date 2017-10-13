@@ -26,10 +26,6 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
     @IBOutlet weak var imgW: NSLayoutConstraint!
     @IBOutlet weak var imgH: NSLayoutConstraint!
     
-    @IBOutlet weak var circleView: UIImageView!
-    @IBOutlet weak var circleW: NSLayoutConstraint!
-    @IBOutlet weak var circleH: NSLayoutConstraint!
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleH: NSLayoutConstraint!
     
@@ -72,8 +68,11 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 // try to setup image
                 imgH.constant = leftW.constant * E
                 imgW.constant = imgH.constant
-                circleH.constant = imgH.constant
-                circleW.constant = imgH.constant
+                if imgView != nil {
+                    print(imgView.frame.size)
+                    imgView.layer.cornerRadius = imgW.constant / 2
+                  //  imgView.clipsToBounds = true
+                }
                 
                 if newsItem.imageUrlSquare != "" {
                     URLSession.shared.dataTask(with: NSURL(string: newsItem.imageUrlSquare)! as URL, completionHandler: {(data, response, error) -> Void in
@@ -84,7 +83,7 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                         DispatchQueue.main.async(execute: { () -> Void in
                             let image = UIImage(data: data!)
                             self.imgView.image = image
-                            self.imgView.contentMode = .scaleAspectFill
+                           // self.imgView.contentMode = .scaleAspectFill
                         })
                     }).resume()
                 }
@@ -119,7 +118,6 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 dateImgView.alpha = 0.5
                 
                 // setup circle img:
-                circleView.image = #imageLiteral(resourceName: "circle_compressed.png")
                 
             }
         }
