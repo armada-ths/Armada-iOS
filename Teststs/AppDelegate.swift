@@ -10,6 +10,7 @@ struct ColorScheme {
     static let armadaDarkMelon = UIColor(hex: 0x00be77)
     static let armadaGrape = UIColor(hex: 0xe73953)
     static let armadaLicorice = UIColor(hex: 0x2d2d2d)
+    static let armadaRed = UIColor(hex: 0xE73953)
 }
 
 //0x00d790 Melon

@@ -14,7 +14,7 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
     
     
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
-        let armadaColours = [ColorScheme.armadaRed, ColorScheme.armadaGreen, ColorScheme.armadaLicorice]
+        let armadaColours = [ ColorScheme.armadaLicorice, ColorScheme.armadaGreen, ColorScheme.armadaRed]
         var images:[String:UIImage] = [:]
         
         override init(tableViewController: UITableViewController) {
