@@ -16,15 +16,15 @@ class matchStart: UIViewController {
     let viewNumber = 0
     var matchData: matchDataClass = matchDataClass()
     let label1title = NSMutableAttributedString(
-        string: "Swipe to",
+        string: "There are more than 200 exhibitors at \nArmada Fair 21-22 November, \nwe will help you find the five best for you!",
         attributes: [NSFontAttributeName:UIFont(
-            name: "BebasNeueRegular",
-            size: 22.0)!])
+            name: "Lato-Light",
+            size: 18.0)!])
     let label2title = NSMutableAttributedString(
-        string: "start",
+        string: "Start by swiping left",
         attributes: [NSFontAttributeName:UIFont(
-            name: "BebasNeueRegular",
-            size: 22.0)!])
+            name: "Lato-Medium",
+            size: 18.0)!])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +37,7 @@ class matchStart: UIViewController {
         
         if let match = self.matchData.load() {
             self.matchData = match
+            self.matchData.currentview = 1
             print(matchData.currentview)
             if viewNumber < matchData.currentview {
                 goRightWithoutAnimation()
@@ -47,7 +48,7 @@ class matchStart: UIViewController {
         label1.attributedText = label1title
         label2.textAlignment = .center
         label2.attributedText = label2title
-
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -62,7 +63,7 @@ class matchStart: UIViewController {
         rightViewController.matchStart = self
         self.navigationController?.pushViewController(rightViewController, animated: false)
     }
-
+    
     func goRight(){
         matchData.currentview += 1
         matchData.save()

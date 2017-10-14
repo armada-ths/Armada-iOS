@@ -9,23 +9,49 @@
 import UIKit
 
 class matchLooking: UIViewController {
-
+    
     var matchData: matchDataClass = matchDataClass()
     var matchBackButton: UIBarButtonItem = UIBarButtonItem()
     var matchStart: matchStart?
     let viewNumber = 1
     
-    @IBOutlet weak var lookingLabel: UILabel!
-    @IBOutlet weak var partjobButton: UIButton!
-    @IBOutlet weak var summerjobButton: UIButton!
-    @IBOutlet weak var thesisButton: UIButton!
-    @IBOutlet weak var traineeButton: UIButton!
+    let latoDict:[Bool: String] = [false: "Lato-Thin", true: "Lato-Bold"]
     
-    let lookingstring = NSMutableAttributedString(
-        string: "What are you looking for?",
-        attributes: [NSFontAttributeName:UIFont(
-            name: "BebasNeueRegular",
-            size: 22.0)!])
+    @IBOutlet weak var lookingLabel: UILabel!
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
+    @IBOutlet weak var label4: UILabel!
+    
+    @IBOutlet weak var headerview: UILabel!
+    @IBOutlet weak var selectImg: UIImageView!
+    @IBOutlet weak var dotsImg: UIImageView!
+    
+    @IBOutlet weak var b1tc: NSLayoutConstraint!
+    @IBOutlet weak var b1lc: NSLayoutConstraint!
+    @IBOutlet weak var b1w: NSLayoutConstraint!
+    
+    @IBOutlet weak var b2tc: NSLayoutConstraint!
+    @IBOutlet weak var b2lc: NSLayoutConstraint!
+    @IBOutlet weak var b2w: NSLayoutConstraint!
+    
+    @IBOutlet weak var b3tc: NSLayoutConstraint!
+    @IBOutlet weak var b3lc: NSLayoutConstraint!
+    @IBOutlet weak var b3w: NSLayoutConstraint!
+    
+    @IBOutlet weak var b4tc: NSLayoutConstraint!
+    @IBOutlet weak var b4lc: NSLayoutConstraint!
+    @IBOutlet weak var b4w: NSLayoutConstraint!
+    
+    var label1string: NSMutableAttributedString?
+    var label2string: NSMutableAttributedString?
+    var label3string: NSMutableAttributedString?
+    var label4string: NSMutableAttributedString?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +68,22 @@ class matchLooking: UIViewController {
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
         
         lookingLabel.textAlignment = .center
+        let lookingstring = NSMutableAttributedString(
+            string: "What are you looking for?",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Lato-Bold",
+                size: 22.0)!])
+        
         lookingLabel.attributedText = lookingstring
+        
+        button1.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
+        button2.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
+        button3.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
+        button4.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
+        button1.setImage(nil, for: UIControlState.normal)
+        button2.setImage(nil, for: UIControlState.normal)
+        button3.setImage(nil, for: UIControlState.normal)
+        button4.setImage(nil, for: UIControlState.normal)
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
@@ -52,15 +93,68 @@ class matchLooking: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
         
         self.setButtons()
+        label1string = NSMutableAttributedString(
+            string: "Internship",
+            attributes: [NSFontAttributeName:UIFont(
+                name: latoDict[button1.isSelected]!,
+                size: 18.0)!])
+        label2string = NSMutableAttributedString(
+            string: "Summer job",
+            attributes: [NSFontAttributeName:UIFont(
+                name: latoDict[button2.isSelected]!,
+                size: 18.0)!])
+        label3string = NSMutableAttributedString(
+            string: "Part time job",
+            attributes: [NSFontAttributeName:UIFont(
+                name: latoDict[button3.isSelected]!,
+                size: 18.0)!])
+        label4string = NSMutableAttributedString(
+            string: "Master thesis",
+            attributes: [NSFontAttributeName:UIFont(
+                name: latoDict[button4.isSelected]!,
+                size: 18.0)!])
+        label1.attributedText = label1string
+        label2.attributedText = label2string
+        label3.attributedText = label3string
+        label4.attributedText = label4string
         
+        let offset = CGFloat(20 + 20 + 14)
+        repositionButtons(UIScreen.main.bounds.size.height -  offset - headerview.frame.height - dotsImg.frame.height)
+        
+        
+    }
+    
+    
+    func repositionButtons(_ height: CGFloat){
+        
+        print("the height of the image is \(height)")
+        
+        let buttonimageW = height*0.071
+        
+        b1w.constant = buttonimageW
+        b2w.constant = buttonimageW
+        b3w.constant = buttonimageW
+        b4w.constant = buttonimageW
+        
+        b1tc.constant = height*0.191  - buttonimageW/2.0
+        b1lc.constant = height*0.0465 - buttonimageW/2.0
+        
+        b2tc.constant = height*0.3765 - buttonimageW/2.0
+        b2lc.constant = height*0.1548  - buttonimageW/2.0
+        
+        b3tc.constant = height*0.586  - buttonimageW/2.0
+        b3lc.constant = height*0.2987 - buttonimageW/2.0
+        
+        b4tc.constant = height*0.77175  - buttonimageW/2.0
+        b4lc.constant = height*0.1117 - buttonimageW/2.0
     }
     
     func setButtons(){
         print(self.matchData.lookingBool)
-        partjobButton.isSelected = self.matchData.lookingBool["part-time job"]!
-        summerjobButton.isSelected = self.matchData.lookingBool["summer job"]!
-        thesisButton.isSelected = self.matchData.lookingBool["thesis"]!
-        traineeButton.isSelected = self.matchData.lookingBool["trainee"]!
+        button1.isSelected = self.matchData.lookingBool["part-time job"]!
+        button2.isSelected = self.matchData.lookingBool["summer job"]!
+        button3.isSelected = self.matchData.lookingBool["thesis"]!
+        button4.isSelected = self.matchData.lookingBool["trainee"]!
     }
     
     func goRightWithoutAnimation(){
@@ -88,45 +182,60 @@ class matchLooking: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func partjobPush(_ sender: Any) {
-        if partjobButton.isSelected {
-            partjobButton.isSelected = false
-            
+    @IBAction func button1Push(_ sender: Any) {
+        if button1.isSelected {
+            button1.isSelected = false
         } else {
-            partjobButton.isSelected = true
+            button1.isSelected = true
         }
-        self.matchData.lookingBool["part-time job"] = partjobButton.isSelected
+        self.matchData.lookingBool["part-time job"] = button1.isSelected
+        label1string?.addAttributes([NSFontAttributeName:UIFont(
+            name: latoDict[button1.isSelected]!,
+            size: 18.0)!], range: NSRange(location: 0,length: (label1string?.length)!))
+        label1.attributedText = label1string
         matchData.save()
     }
-    @IBAction func summerjobPush(_ sender: Any) {
-        if summerjobButton.isSelected {
-            summerjobButton.isSelected = false
+    @IBAction func button2Push(_ sender: Any) {
+        if button2.isSelected {
+            button2.isSelected = false
         } else {
-            summerjobButton.isSelected = true
+            button2.isSelected = true
         }
-        self.matchData.lookingBool["summer job"] = summerjobButton.isSelected
+        self.matchData.lookingBool["summer job"] = button2.isSelected
+        label2string?.addAttributes([NSFontAttributeName:UIFont(
+            name: latoDict[button2.isSelected]!,
+            size: 18.0)!], range: NSRange(location: 0,length: (label2string?.length)!))
+        label2.attributedText = label2string
         matchData.save()
     }
-    @IBAction func thesisPush(_ sender: Any) {
-        if thesisButton.isSelected {
-            thesisButton.isSelected = false
+    @IBAction func button3Push(_ sender: Any) {
+        if button3.isSelected {
+            button3.isSelected = false
         } else {
-            thesisButton.isSelected = true
+            button3.isSelected = true
         }
-        self.matchData.lookingBool["thesis"] = thesisButton.isSelected
+        self.matchData.lookingBool["thesis"] = button3.isSelected
+        label3string?.addAttributes([NSFontAttributeName:UIFont(
+            name: latoDict[button3.isSelected]!,
+            size: 18.0)!], range: NSRange(location: 0,length: (label3string?.length)!))
+        label3.attributedText = label3string
         matchData.save()
     }
-    @IBAction func traineePush(_ sender: Any) {
-        if traineeButton.isSelected {
-            traineeButton.isSelected = false
+    @IBAction func button4Push(_ sender: Any) {
+        if button4.isSelected {
+            button4.isSelected = false
         } else {
-            traineeButton.isSelected = true
+            button4.isSelected = true
         }
-        self.matchData.lookingBool["trainee"] = traineeButton.isSelected
+        self.matchData.lookingBool["trainee"] = button4.isSelected
+        label4string?.addAttributes([NSFontAttributeName:UIFont(
+            name: latoDict[button4.isSelected]!,
+            size: 18.0)!], range: NSRange(location: 0,length: (label4string?.length)!))
+        label4.attributedText = label4string
         matchData.save()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }    
+    }
 }
