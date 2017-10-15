@@ -84,7 +84,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
     var dataSource: ArmadaEventTableViewDataSource!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
         dataSource = ArmadaEventTableViewDataSource(tableViewController: self)
         tableView.dataSource = dataSource
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none

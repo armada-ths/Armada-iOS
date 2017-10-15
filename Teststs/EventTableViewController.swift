@@ -109,9 +109,11 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         
         // reveal logo-image
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
+
         
         // set title if not set
         if self.navigationItem.titleView == nil {
+            
             let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(

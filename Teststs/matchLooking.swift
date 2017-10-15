@@ -17,7 +17,6 @@ class matchLooking: UIViewController {
     
     let latoDict:[Bool: String] = [false: "Lato-Thin", true: "Lato-Bold"]
     
-    @IBOutlet weak var lookingLabel: UILabel!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
@@ -27,8 +26,8 @@ class matchLooking: UIViewController {
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var label4: UILabel!
-    
-    @IBOutlet weak var headerview: UILabel!
+        
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var selectImg: UIImageView!
     @IBOutlet weak var dotsImg: UIImageView!
     
@@ -66,15 +65,6 @@ class matchLooking: UIViewController {
         }
         
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
-        
-        lookingLabel.textAlignment = .center
-        let lookingstring = NSMutableAttributedString(
-            string: "What are you looking for?",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "Lato-Bold",
-                size: 22.0)!])
-        
-        lookingLabel.attributedText = lookingstring
         
         button1.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
         button2.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
@@ -119,7 +109,7 @@ class matchLooking: UIViewController {
         label4.attributedText = label4string
         
         let offset = CGFloat(20 + 20 + 14)
-        repositionButtons(UIScreen.main.bounds.size.height -  offset - headerview.frame.height - dotsImg.frame.height)
+        repositionButtons(UIScreen.main.bounds.size.height -  offset - headerView.frame.height - dotsImg.frame.height)
         
         
     }
