@@ -42,12 +42,18 @@ class EventTableViewCell: UITableViewCell {
                 let calendar = Calendar.current
                 let date2 = calendar.startOfDay(for: eventItem.startDate)
                 let date1 = calendar.startOfDay(for: Date())
-                let start = calendar.ordinality(of: .day, in: .era, for: date1)!
-                let end = calendar.ordinality(of: .day, in: .era, for: date2)!
-                diff = end - start
+                var diffEnd = -1
+                let now = calendar.ordinality(of: .day, in: .era, for: date1)!
+                let start = calendar.ordinality(of: .day, in: .era, for: date2)!
+                diff = start - now
+                if let  date3 = calendar.startOfDay(for: eventItem.endDate!) as? Date{
+                    let end = calendar.ordinality(of: .day, in: .era, for: date3)!
+                    diffEnd = end - now
+                    
+                }
                // daysLeftLabel.text
                 var myMutableString: NSMutableAttributedString
-                if(diff > 0){
+                if(diff > 0 ){
                     myMutableString = NSMutableAttributedString(
                     string: "Days left" + "\n" + "\(diff)",
                     attributes: [NSFontAttributeName:UIFont(
@@ -56,7 +62,7 @@ class EventTableViewCell: UITableViewCell {
                 myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 15.0), range:NSRange(location: 0, length: 9))                    
                 }
                 
-                else if (diff == 0){
+                else if (diff == 0 || (diff < 0 && diffEnd >= 0)){
                     myMutableString = NSMutableAttributedString(
                         string: "TODAY",
                         attributes: [NSFontAttributeName:UIFont(
