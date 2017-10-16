@@ -868,7 +868,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Tp-TM-GpC" userLabel="About" customClass="NewsNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Armada" image="aboutLogo" selectedImage="aboutLogo-1" id="5g9-Qd-xfr"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fwz-3A-S74">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fwz-3A-S74">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1075,7 +1076,8 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tCc-7g-Hfi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tCc-7g-Hfi">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1817,7 +1819,7 @@
                                     <constraint firstAttribute="bottom" secondItem="igh-0s-7ad" secondAttribute="bottom" id="Sb2-Vs-4w2"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="select.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZwF-gf-o0b" userLabel="selectimg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="match2select" translatesAutoresizingMaskIntoConstraints="NO" id="ZwF-gf-o0b" userLabel="selectimg">
                                 <rect key="frame" x="20" y="115" width="176" height="517"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZwF-gf-o0b" secondAttribute="height" multiplier="541:1589" id="NvR-13-PXm"/>
@@ -1897,7 +1899,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="dots2.png" translatesAutoresizingMaskIntoConstraints="NO" id="mfQ-iI-5NP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match2dots" translatesAutoresizingMaskIntoConstraints="NO" id="mfQ-iI-5NP">
                                 <rect key="frame" x="100" y="602" width="175" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2wo-6O-126"/>
@@ -1984,7 +1986,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" image="Group81.png" translatesAutoresizingMaskIntoConstraints="NO" id="qbL-t2-HIM" userLabel="topimg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="747" image="match1group81" translatesAutoresizingMaskIntoConstraints="NO" id="qbL-t2-HIM" userLabel="topimg">
                                 <rect key="frame" x="0.0" y="14" width="375" height="351.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qbL-t2-HIM" secondAttribute="height" multiplier="1125:1054" id="Ah8-Ow-cyg"/>
@@ -2002,14 +2004,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="dots.png" translatesAutoresizingMaskIntoConstraints="NO" id="20H-22-XDh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="match1dots" translatesAutoresizingMaskIntoConstraints="NO" id="20H-22-XDh">
                                 <rect key="frame" x="99.5" y="553" width="175" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="20H-22-XDh" secondAttribute="height" multiplier="462:132" id="hQ2-RV-JHJ"/>
                                     <constraint firstAttribute="height" constant="50" id="rkQ-XO-dwL"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="match_text.png" translatesAutoresizingMaskIntoConstraints="NO" id="Syg-Lo-mqE" userLabel="headerimg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="748" image="match1text" translatesAutoresizingMaskIntoConstraints="NO" id="Syg-Lo-mqE" userLabel="headerimg">
                                 <rect key="frame" x="35" y="375.5" width="305" height="99"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="305" id="NCn-Ny-kCW"/>
@@ -2048,25 +2050,25 @@
     <resources>
         <image name="EventCalendar" width="322" height="316"/>
         <image name="EventPin" width="218" height="317"/>
-        <image name="Group81.png" width="1125" height="1054"/>
         <image name="aboutLogo" width="32" height="32"/>
         <image name="aboutLogo-1" width="32" height="32"/>
         <image name="background-2" width="1325" height="505"/>
         <image name="backwave" width="933" height="316"/>
         <image name="calendar_2-1" width="32" height="32"/>
         <image name="diversity" width="867" height="922"/>
-        <image name="dots.png" width="462" height="132"/>
-        <image name="dots2.png" width="438" height="132"/>
         <image name="eventFeed" width="17" height="17"/>
         <image name="eventLogo" width="32" height="32"/>
         <image name="match" width="48" height="32"/>
         <image name="match-1" width="45" height="30"/>
+        <image name="match1dots" width="16" height="16"/>
+        <image name="match1group81" width="16" height="16"/>
+        <image name="match1text" width="16" height="16"/>
+        <image name="match2dots" width="16" height="16"/>
+        <image name="match2select" width="16" height="16"/>
         <image name="match2text" width="16" height="16"/>
-        <image name="match_text.png" width="905" height="297"/>
         <image name="newsLogo" width="33" height="32"/>
         <image name="newsLogo-1" width="33" height="32"/>
         <image name="quality" width="868" height="922"/>
-        <image name="select.png" width="541" height="1589"/>
         <image name="sustainability" width="868" height="921"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -66,10 +66,10 @@ class matchLooking: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
         
-        button1.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
-        button2.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
-        button3.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
-        button4.setImage(#imageLiteral(resourceName: "armadamatch2.png"), for: UIControlState.selected)
+        button1.setImage(#imageLiteral(resourceName: "match2pushedbutton"), for: UIControlState.selected)
+        button2.setImage(#imageLiteral(resourceName: "match2pushedbutton"), for: UIControlState.selected)
+        button3.setImage(#imageLiteral(resourceName: "match2pushedbutton"), for: UIControlState.selected)
+        button4.setImage(#imageLiteral(resourceName: "match2pushedbutton"), for: UIControlState.selected)
         button1.setImage(nil, for: UIControlState.normal)
         button2.setImage(nil, for: UIControlState.normal)
         button3.setImage(nil, for: UIControlState.normal)
