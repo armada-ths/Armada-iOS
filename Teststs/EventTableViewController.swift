@@ -28,27 +28,11 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
             ArmadaApi.eventsFromServer { response in
                 OperationQueue.main.addOperation {
                     callback(response.map { [$0] })
-                    self.scrollToNearestUpcomingEventAnimated(!self.isFirstLoad)
                     self.isFirstLoad = false
                 }
             }
         }
         
-        func scrollToNearestUpcomingEventAnimated(_ animated: Bool) {
-            var row = 0
-            let dateFormat = "yyyy-MM-dd"
-            let now = Date().format(dateFormat)
-            let events = values.joined()
-            for (i, event) in events.enumerated() {
-                if event.startDate.format(dateFormat) >= now {
-                    row = i
-                    break
-                }
-            }
-            if row != 0 {
-                self.tableViewController?.tableView.scrollToRow(at: IndexPath(item: row, section: 0), at: .top, animated: animated)
-            }
-        }
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return values[section].count + 1
