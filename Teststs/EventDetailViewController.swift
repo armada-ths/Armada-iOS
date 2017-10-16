@@ -118,8 +118,8 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         }
         
         //Setup whitewave
-        wave100H.constant = whiteW.constant/(1325/505) - 20
-        waveImage100D.constant = 5 + imageH.constant - wave100H.constant
+        wave100H.constant = whiteW.constant/(1625/505)
+        waveImage100D.constant = 30 + imageH.constant - wave100H.constant
         
         //Setup wave with 50% opacity
         wave50H.constant = wave100H.constant - 5
@@ -138,7 +138,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         // setup title
         titleLabel.text = event.title
         titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
-        titleLabelD.constant = -(waveImage100D.constant/1.8)
+        titleLabelD.constant = -(waveImage100D.constant/2.3)
         titleLabel.layer.zPosition = 1
         
         
