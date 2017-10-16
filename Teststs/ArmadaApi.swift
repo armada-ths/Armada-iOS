@@ -13,6 +13,7 @@ public struct ArmadaEvent {
     public let signupEndDate: Date?
     public let imageUrl: URL?
     public let registrationRequired: Bool
+    public let passedDays: Int
     
     enum SignupState {
         case passed, notRequired, notAvailable, now, future
@@ -545,6 +546,14 @@ open class _ArmadaApi {
                     let summaryWithoutHtml = description.strippedFromHtmlString
                     let signupLink = json["signup_link"] as? String
                     let registrationStartDate: Date?
+                    let date2 = calendar.startOfDay(for: endDate)
+                    let date1 = calendar.startOfDay(for: Date())
+                    let start = calendar.ordinality(of: .day, in: .era, for: date1)!
+                    let end = calendar.ordinality(of: .day, in: .era, for: date2)!
+                    var diff = end - start
+                    if(diff > 0){
+                        diff = 0
+                    }
                     if let registrationStartDateTimestamp = json["registration_start"] as? Int {
                         registrationStartDate = Date(timeIntervalSince1970: TimeInterval(registrationStartDateTimestamp))
                     } else {
@@ -561,14 +570,12 @@ open class _ArmadaApi {
                     let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
                     let summary = description
                     let registrationRequired = json["registration_required"] as? Bool ?? true
-                    return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired)
+                print(json)
+                return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired, passedDays: diff)
             }
             return nil
-            } ?? []).sorted(by: { $0.startDate.timeIntervalSince1970 > $1.startDate.timeIntervalSince1970 })
-        let lastDate = events.first?.startDate ?? Date()
-        let filteredEvents = events.filter{ $0.startDate.format("yyyy") == lastDate.format("yyyy") }
-        if (filteredEvents.count < 3) {return events}
-        return filteredEvents
+            } ?? []).sorted(by: { $0.startDate.timeIntervalSince1970 < $1.startDate.timeIntervalSince1970 }).sorted(by: { $0.passedDays > $1.passedDays })
+        return events
     }
     
 
