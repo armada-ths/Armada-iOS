@@ -118,7 +118,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         }
         
         //Setup whitewave
-        wave100H.constant = whiteW.constant/(1325/505) - 20
+        wave100H.constant = whiteW.constant/(1625/505)
         waveImage100D.constant = 30 + imageH.constant - wave100H.constant
         
         //Setup wave with 50% opacity
