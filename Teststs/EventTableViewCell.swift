@@ -130,8 +130,12 @@ class EventTableViewCell: UITableViewCell {
                     dateText = startDate.format("dd MMMM YYYY")
                     
                 }
-                else{
+                else if (sMonth == eMonth){
                     dateText = startDate.format("dd-") + endDate!.format("dd MMMM YYYY")
+                }
+                else{
+                    dateText = startDate.format("dd MMMM") + endDate!.format("-dd MMMM YYYY")
+
                 }
 
 
@@ -141,8 +145,10 @@ class EventTableViewCell: UITableViewCell {
 
                 dateLabel.sizeToFit()
                 dateView.frame = CGRect(x: 20, y: 20, width: 200, height: 200)
-
                 dateView.sizeToFit()
+                self.bringSubview(toFront: dateView)
+                dateView.layer.zPosition = 1
+
             }
         }
     }
