@@ -63,15 +63,13 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-        print(collectionView.contentSize.width)
-        print(UIScreen.main.bounds.size.width)
         if(UIScreen.main.bounds.size.width <= 320){
             return CGSize(width: collectionView.contentSize.width, height: 228000/collectionView.contentSize.width + 120)
         }
         if(UIScreen.main.bounds.size.width <= 390){
             return CGSize(width: collectionView.contentSize.width, height: 262000/collectionView.contentSize.width + 120)
         }
-       return CGSize(width: collectionView.contentSize.width, height: 242000/collectionView.contentSize.width + 120) //This is for plus
+       return CGSize(width: collectionView.contentSize.width, height: 242000/collectionView.contentSize.width + 120)
     }
     
     // DATASOURCE:
