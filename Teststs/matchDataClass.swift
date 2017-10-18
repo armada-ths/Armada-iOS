@@ -13,43 +13,7 @@ class matchDataClass: NSObject{
     
     
     /* ---- view-descriptions ---- */
-    
-    /*     travel-view struct      */
-     
-    var slider_spec:[String: AnyObject]
-    
-    /*
-    def serialize_slider(question):
-    '''
-    Serialize a SLIDER question.
-    '''
-    question = question.studentquestionslider
-    return OrderedDict([
-    ('question', question.question),
-    ('type', question.question_type),
-    ('min', question.min_value),
-    ('max', question.max_value),
-    ('step', question.step)
-    ])
-     */
-    
-    /*   team-view struct   */
-    
-    var grader_spec:[String: AnyObject]
-    
-    /*
-    def serialize_grading(question):
-    '''
-    Serialize a GRADING question.
-    '''
-    question = question.studentquestiongrading
-    return OrderedDict([
-    ('question', question.question),
-    ('type', question.question_type),
-    ('steps', question.grading_size)
-    ])
-     */
- 
+    var backendData:[String: Array<[String: AnyObject]>]
     /* ---- data to save ---- */
     var currentview:Int
     
@@ -104,18 +68,35 @@ class matchDataClass: NSObject{
     override init() {
         currentview = 0
         
-        slider_spec = [
-            "question": "String" as AnyObject,
-            "type":     "string" as AnyObject,
-            "min":      0 as AnyObject,
-            "max":      10 as AnyObject,
-            "linlog":   false as AnyObject
+        backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
+        backendData["questions"] = [[
+            "id": 1 as AnyObject,
+             "type": "slider" as AnyObject,
+             "question": "How big company would you like to work in?" as AnyObject,
+             "min": 5.0 as AnyObject,
+             "max": 1000.0 as AnyObject,
+             "logarithmic": true as AnyObject,
+             "units": "UNITS" as AnyObject
+            ],
+            ["id": 2 as AnyObject,
+             "type": "grading" as AnyObject,
+             "question": "How happy are you today?" as AnyObject,
+             "count": 5 as AnyObject]
         ]
         
-        grader_spec = [
-            "question": "question" as AnyObject,
-            "type":     "type" as AnyObject,
-            "step":     "step" as AnyObject
+        backendData["Areas"] = [[
+            "id": 1 as AnyObject,
+            "work_field": "loT" as AnyObject,
+            "area": "IT" as AnyObject ],[
+            "id": 2 as AnyObject,
+            "work_field": "Machine Learning" as AnyObject,
+            "area": "IT" as AnyObject],[
+            "id": 3 as AnyObject,
+            "work_field": "Real Estate" as AnyObject,
+            "area": "Finance" as AnyObject],[
+            "id": 4 as AnyObject,
+            "work_field": "Bookkeeping" as AnyObject,
+            "area": "Finance" as AnyObject]
         ]
         
         lookingBool = [
@@ -170,18 +151,37 @@ class matchDataClass: NSObject{
     init(_ json: JSON){
         
         /* properties BELOW not saved in defaults YET! */
-        slider_spec = [
-            "question": "String" as AnyObject,
-            "type":     "string" as AnyObject,
-            "min":      0 as AnyObject,
-            "max":      10 as AnyObject,
-            "linlog":   false as AnyObject
+        self.backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
+        self.backendData["questions"] = [[
+            "id": 1 as AnyObject,
+            "type": "slider" as AnyObject,
+            "question": "How big company would you like to work in?" as AnyObject,
+            "min": 5.0 as AnyObject,
+            "max": 1000.0 as AnyObject,
+            "logarithmic": true as AnyObject,
+            "units": "UNITS" as AnyObject
+            ],
+                                    ["id": 2 as AnyObject,
+                                     "type": "grading" as AnyObject,
+                                     "question": "How happy are you today?" as AnyObject,
+                                     "count": 5 as AnyObject]
         ]
-        grader_spec = [
-            "question": "question" as AnyObject,
-            "type":     "type" as AnyObject,
-            "step":     "step" as AnyObject
+        
+        self.backendData["Areas"] = [[
+            "id": 1 as AnyObject,
+            "work_field": "loT" as AnyObject,
+            "area": "IT" as AnyObject ],[
+                "id": 2 as AnyObject,
+                "work_field": "Machine Learning" as AnyObject,
+                "area": "IT" as AnyObject],[
+                    "id": 3 as AnyObject,
+                    "work_field": "Real Estate" as AnyObject,
+                    "area": "Finance" as AnyObject],[
+                        "id": 4 as AnyObject,
+                        "work_field": "Bookkeeping" as AnyObject,
+                        "area": "Finance" as AnyObject]
         ]
+        
         /* properties ABOVE not saved in defaults YET! */
         
         self.travel =          json["travel"].doubleValue

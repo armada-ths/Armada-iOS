@@ -24,6 +24,8 @@ class matchTravel: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buildViewFromData()
+        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -74,6 +76,13 @@ class matchTravel: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    func buildViewFromData(){
+        let something = self.matchData.backendData["questions"]
+        for val in something! {
+            print(val)
+        }
     }
     
     func goRightWithoutAnimation(){

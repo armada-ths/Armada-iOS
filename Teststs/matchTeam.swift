@@ -54,9 +54,6 @@ class matchTeam: UIViewController {
         slider.minimumTrackTintColor = ColorScheme.armadaGreen        
         sliderLead.constant = -middleView.frame.width/2.6
         
-        for (key, val) in self.matchData.slider_spec {
-            print(val)
-        }
         
         
     }
