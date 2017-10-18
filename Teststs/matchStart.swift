@@ -32,7 +32,7 @@ class matchStart: UIViewController {
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
-        self.view.addSubview(statusView)
+        self.view.addSubview(statusView)    
         
         
         if let match = self.matchData.load() {

@@ -50,7 +50,7 @@ class matchWorld: UIViewController {
     }
     
     func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEurope") as! matchEurope
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
         rightViewController.matchWorld = self
@@ -60,7 +60,7 @@ class matchWorld: UIViewController {
     func goRight(){
         matchData.currentview += 1
         matchData.save()
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEurope") as! matchEurope
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
         rightViewController.matchWorld = self

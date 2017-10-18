@@ -13,7 +13,17 @@ class matchTeam: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTravel: matchTravel?
-    let viewNumber = 6
+    let viewNumber = 5
+    
+    
+    @IBOutlet weak var middleView: UIView!
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var sliderLead: NSLayoutConstraint!
+    
+    @IBAction func changeValue(_ sender: UISlider) {
+        slider.value = roundf(slider.value)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +37,14 @@ class matchTeam: UIViewController {
             goRightWithoutAnimation()
         }
         
+        // setup slider
+        
+        slider.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+        slider.minimumTrackTintColor = ColorScheme.armadaGreen
+        
+        sliderLead.constant = -middleView.frame.width/2.6
+        
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -34,7 +52,7 @@ class matchTeam: UIViewController {
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
         // do stuff
-
+        
     }
     
     func goRightWithoutAnimation(){

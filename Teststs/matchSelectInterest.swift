@@ -13,7 +13,7 @@ class matchSelectInterest: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTeam: matchTeam?
-    let viewNumber = 7
+    let viewNumber = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
