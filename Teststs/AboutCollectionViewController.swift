@@ -63,7 +63,13 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
-        return CGSize(width: collectionView.contentSize.width, height: 288000/collectionView.contentSize.width + 60)
+        if(UIScreen.main.bounds.size.width <= 320){
+            return CGSize(width: collectionView.contentSize.width, height: 228000/collectionView.contentSize.width + 120)
+        }
+        if(UIScreen.main.bounds.size.width <= 390){
+            return CGSize(width: collectionView.contentSize.width, height: 262000/collectionView.contentSize.width + 120)
+        }
+       return CGSize(width: collectionView.contentSize.width, height: 242000/collectionView.contentSize.width + 120)
     }
     
     // DATASOURCE:
@@ -100,12 +106,12 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                                  withReuseIdentifier: "AboutHeaderCollectionReusableView",
                                                                                  for: indexPath) as! AboutHeaderCollectionReusableView
-                let about = "<font size='4.5' style='font-family:Lato-Regular;’ line-height: '0.7'><b>Started in 1981,</b> THS Armada is a part of the student union THS and the largest student driven project at KTH The Royal Institute of Technology. The fair was first organised in 1981 and has been a recurring event at KTH ever since. The project has a turnover of more than 6 million SEK and involves more than 300 students.\n\n<b>Aside from the fair</b>, THS Armada has several other events, all to give you the best possible chance of finding your dream employer.</font>"
-                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>diversity</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding diversity.</font"
+                let about = "<font size='4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>THS Armada arranges Scandinavia's largest career fair at KTH Royal Institute of Technology. Every year, more than 12,000 of Sweden's top engineering and architectural students flock to visit the fair to meet their future employers.</font>"
+                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We are an organization that truly believes in everyone's equal worth and right to equal opportunities. Our exclusive area at the fair is called <b>Diversity Room</b> and is located in KTHB.</font>"
                 
-                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>sustainability</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding sustainability.</font>"
+                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Our belief in a green future motivates us to continuously make improvements towards a more sustainable fair. THS Armada has been climate neutral since 2015. We have chosen to dedicate a specific area at the fair called <b>Green Room</b>, which is located in Nymble.</font>"
                 
-                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Exhibitors with this icon have expressed a focus on <b>quality</b> in their organization and/or business and operations. Events with this icon will be focused on topics regarding quality.</font>"
+                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We put great emphasis on matchmaking the right students with the right companies. This is done by including a matchmaking algorithm in our Android and iOS applications. We want to maximize the value from your THS Armada-participation.</font>"
                 headerView.aboutText.attributedText =  about.attributedHtmlString
                 headerView.aboutText.isScrollEnabled = false
                 headerView.coreValuesLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
