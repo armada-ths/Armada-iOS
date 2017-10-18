@@ -11,7 +11,46 @@ import SwiftyJSON
 
 class matchDataClass: NSObject{
     
-    /* ------ elements ------ */
+    
+    /* ---- view-descriptions ---- */
+    
+    /*     travel-view struct      */
+     
+    var slider_spec:[String: AnyObject]
+    
+    /*
+    def serialize_slider(question):
+    '''
+    Serialize a SLIDER question.
+    '''
+    question = question.studentquestionslider
+    return OrderedDict([
+    ('question', question.question),
+    ('type', question.question_type),
+    ('min', question.min_value),
+    ('max', question.max_value),
+    ('step', question.step)
+    ])
+     */
+    
+    /*   team-view struct   */
+    
+    var grader_spec:[String: AnyObject]
+    
+    /*
+    def serialize_grading(question):
+    '''
+    Serialize a GRADING question.
+    '''
+    question = question.studentquestiongrading
+    return OrderedDict([
+    ('question', question.question),
+    ('type', question.question_type),
+    ('steps', question.grading_size)
+    ])
+     */
+ 
+    /* ---- data to save ---- */
     var currentview:Int
     
     var lookingBool:[String: Bool]
@@ -65,6 +104,20 @@ class matchDataClass: NSObject{
     override init() {
         currentview = 0
         
+        slider_spec = [
+            "question": "String" as AnyObject,
+            "type":     "string" as AnyObject,
+            "min":      0 as AnyObject,
+            "max":      10 as AnyObject,
+            "linlog":   false as AnyObject
+        ]
+        
+        grader_spec = [
+            "question": "question" as AnyObject,
+            "type":     "type" as AnyObject,
+            "step":     "step" as AnyObject
+        ]
+        
         lookingBool = [
             "part-time job": false,
             "summer job":    false,
@@ -99,6 +152,7 @@ class matchDataClass: NSObject{
         teamSizeMin = 0
         
         currentInterest = 0
+        
         interestBools = [
             "it":               false,
             "chemistry":        false,
@@ -114,6 +168,21 @@ class matchDataClass: NSObject{
     }
     
     init(_ json: JSON){
+        
+        /* properties BELOW not saved in defaults YET! */
+        slider_spec = [
+            "question": "String" as AnyObject,
+            "type":     "string" as AnyObject,
+            "min":      0 as AnyObject,
+            "max":      10 as AnyObject,
+            "linlog":   false as AnyObject
+        ]
+        grader_spec = [
+            "question": "question" as AnyObject,
+            "type":     "type" as AnyObject,
+            "step":     "step" as AnyObject
+        ]
+        /* properties ABOVE not saved in defaults YET! */
         
         self.travel =          json["travel"].doubleValue
         
@@ -170,7 +239,7 @@ class matchDataClass: NSObject{
         
         var jsonArray = [String:JSON]()
         let mirrored_object = Mirror(reflecting: self)
-        for (index, attr) in mirrored_object.children.enumerated() {
+        for (_, attr) in mirrored_object.children.enumerated() {
             if let property_name = attr.label as String! {
                 let jsonObject = JSON(attr.value)
                 jsonArray[property_name] = jsonObject

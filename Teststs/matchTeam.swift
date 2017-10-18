@@ -25,12 +25,24 @@ class matchTeam: UIViewController {
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // setup status bar
+    func setupSwipe(){
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeRight)
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    func setupStatusBar(){
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupSwipe()
+        self.setupStatusBar()
         
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
@@ -38,20 +50,14 @@ class matchTeam: UIViewController {
         }
         
         // setup slider
-        
         slider.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-        slider.minimumTrackTintColor = ColorScheme.armadaGreen
-        
+        slider.minimumTrackTintColor = ColorScheme.armadaGreen        
         sliderLead.constant = -middleView.frame.width/2.6
         
+        for (key, val) in self.matchData.slider_spec {
+            print(val)
+        }
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeRight)
-        self.view.addGestureRecognizer(swipeLeft)
-        // do stuff
         
     }
     
