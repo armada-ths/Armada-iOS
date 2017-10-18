@@ -13,28 +13,49 @@ class matchTeam: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTravel: matchTravel?
-    let viewNumber = 6
+    let viewNumber = 5
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
-        statusView.backgroundColor = .black
-        self.view.addSubview(statusView)
+    
+    @IBOutlet weak var middleView: UIView!
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var sliderLead: NSLayoutConstraint!
+    
+    @IBAction func changeValue(_ sender: UISlider) {
+        slider.value = roundf(slider.value)
         
-        print(matchData.currentview)
-        if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
-        }
-        
+    }
+    
+    func setupSwipe(){
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        // do stuff
-
+    }
+    
+    func setupStatusBar(){
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupSwipe()
+        self.setupStatusBar()
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
+        // setup slider
+        slider.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+        slider.minimumTrackTintColor = ColorScheme.armadaGreen        
+        sliderLead.constant = -middleView.frame.width/2.6
+        
+        
+        
     }
     
     func goRightWithoutAnimation(){

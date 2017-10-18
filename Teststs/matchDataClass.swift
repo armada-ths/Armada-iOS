@@ -11,7 +11,10 @@ import SwiftyJSON
 
 class matchDataClass: NSObject{
     
-    /* ------ elements ------ */
+    
+    /* ---- view-descriptions ---- */
+    var backendData:[String: Array<[String: AnyObject]>]
+    /* ---- data to save ---- */
     var currentview:Int
     
     var lookingBool:[String: Bool]
@@ -65,6 +68,37 @@ class matchDataClass: NSObject{
     override init() {
         currentview = 0
         
+        backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
+        backendData["questions"] = [[
+            "id": 1 as AnyObject,
+             "type": "slider" as AnyObject,
+             "question": "How big company would you like to work in?" as AnyObject,
+             "min": 5.0 as AnyObject,
+             "max": 1000.0 as AnyObject,
+             "logarithmic": true as AnyObject,
+             "units": "UNITS" as AnyObject
+            ],
+            ["id": 2 as AnyObject,
+             "type": "grading" as AnyObject,
+             "question": "How happy are you today?" as AnyObject,
+             "count": 5 as AnyObject]
+        ]
+        
+        backendData["Areas"] = [[
+            "id": 1 as AnyObject,
+            "work_field": "loT" as AnyObject,
+            "area": "IT" as AnyObject ],[
+            "id": 2 as AnyObject,
+            "work_field": "Machine Learning" as AnyObject,
+            "area": "IT" as AnyObject],[
+            "id": 3 as AnyObject,
+            "work_field": "Real Estate" as AnyObject,
+            "area": "Finance" as AnyObject],[
+            "id": 4 as AnyObject,
+            "work_field": "Bookkeeping" as AnyObject,
+            "area": "Finance" as AnyObject]
+        ]
+        
         lookingBool = [
             "part-time job": false,
             "summer job":    false,
@@ -99,6 +133,7 @@ class matchDataClass: NSObject{
         teamSizeMin = 0
         
         currentInterest = 0
+        
         interestBools = [
             "it":               false,
             "chemistry":        false,
@@ -114,6 +149,40 @@ class matchDataClass: NSObject{
     }
     
     init(_ json: JSON){
+        
+        /* properties BELOW not saved in defaults YET! */
+        self.backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
+        self.backendData["questions"] = [[
+            "id": 1 as AnyObject,
+            "type": "slider" as AnyObject,
+            "question": "How big company would you like to work in?" as AnyObject,
+            "min": 5.0 as AnyObject,
+            "max": 1000.0 as AnyObject,
+            "logarithmic": true as AnyObject,
+            "units": "UNITS" as AnyObject
+            ],
+                                    ["id": 2 as AnyObject,
+                                     "type": "grading" as AnyObject,
+                                     "question": "How happy are you today?" as AnyObject,
+                                     "count": 5 as AnyObject]
+        ]
+        
+        self.backendData["Areas"] = [[
+            "id": 1 as AnyObject,
+            "work_field": "loT" as AnyObject,
+            "area": "IT" as AnyObject ],[
+                "id": 2 as AnyObject,
+                "work_field": "Machine Learning" as AnyObject,
+                "area": "IT" as AnyObject],[
+                    "id": 3 as AnyObject,
+                    "work_field": "Real Estate" as AnyObject,
+                    "area": "Finance" as AnyObject],[
+                        "id": 4 as AnyObject,
+                        "work_field": "Bookkeeping" as AnyObject,
+                        "area": "Finance" as AnyObject]
+        ]
+        
+        /* properties ABOVE not saved in defaults YET! */
         
         self.travel =          json["travel"].doubleValue
         
@@ -170,7 +239,7 @@ class matchDataClass: NSObject{
         
         var jsonArray = [String:JSON]()
         let mirrored_object = Mirror(reflecting: self)
-        for (index, attr) in mirrored_object.children.enumerated() {
+        for (_, attr) in mirrored_object.children.enumerated() {
             if let property_name = attr.label as String! {
                 let jsonObject = JSON(attr.value)
                 jsonArray[property_name] = jsonObject

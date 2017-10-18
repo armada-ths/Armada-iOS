@@ -12,6 +12,15 @@ struct ColorScheme {
     static let armadaLicorice = UIColor(hex: 0x2d2d2d)
     static let armadaRed = UIColor(hex: 0xE73953)
 }
+struct emojiStruct {
+    static let emojiDict:Array<String> = [
+        "😭",
+        "☹️",
+        "😐",
+        "😀",
+        "😍"
+    ]
+}
 
 //0x00d790 Melon
 //0xe73953 Grape

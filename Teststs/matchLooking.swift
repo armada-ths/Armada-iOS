@@ -15,7 +15,7 @@ class matchLooking: UIViewController {
     var matchStart: matchStart?
     let viewNumber = 1
     
-    let latoDict:[Bool: String] = [false: "Lato-Thin", true: "Lato-Bold"]
+    let latoDict:[Bool: String] = [false: "Lato-Regular", true: "Lato-Bold"]
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!

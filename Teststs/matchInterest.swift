@@ -14,7 +14,7 @@ class matchInterest: UIViewController {
     var matchStart: matchStart?
     var matchInterest: matchInterest?
     var matchSelectInterest: matchSelectInterest?
-    let viewNumber = 8
+    let viewNumber = 7
     
     @IBOutlet weak var interestLabel: UILabel!
     
