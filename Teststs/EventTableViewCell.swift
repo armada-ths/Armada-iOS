@@ -72,7 +72,7 @@ class EventTableViewCell: UITableViewCell {
                 }
                 else{
                  myMutableString = NSMutableAttributedString(
-                        string: "PASSED",
+                        string: "PAST",
                         attributes: [NSFontAttributeName:UIFont(
                             name: "Lato-Regular",
                             size: 15.0)!])
