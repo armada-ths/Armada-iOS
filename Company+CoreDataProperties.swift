@@ -16,6 +16,7 @@ extension Company {
     @NSManaged var employeesWorld: Int
     @NSManaged var contactName: String
     @NSManaged var contactEmail: String
+    @NSManaged var booth: Int
     @NSManaged var contactPhone: String
     @NSManaged var countries: Int
     @NSManaged var workFields: Set<WorkField>
