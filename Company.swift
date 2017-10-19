@@ -14,24 +14,25 @@ open class Company: NSManagedObject {
     
     class func companyFromJson(_ json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
-        if let name = json["name"] as? String , !name.isEmpty,
+        if let name = json["company"] as? String , !name.isEmpty{
             
 
+                let website = json["company_website"] as? String ?? ""
             
-            let workFields = json["work_fields"] as? [[String:AnyObject]],
-            let programmes = json["programs"] as? [[String:AnyObject]],
-            let jobTypes = json["job_types"] as? [[String:AnyObject]],
-            let continents = json["continents"] as? [[String:AnyObject]],
-            //            let image = UIImage(named: name),
-            let companyValues = json["values"] as? [[String:AnyObject]] {
-                let website = json["website_url"] as? String ?? ""
-                
+            
+            let workFields = json["work_fields"] as? [[String:AnyObject]]
+            let programmes = json["programs"] as? [[String:AnyObject]]
+            let jobTypes = json["job_types"] as? [[String:AnyObject]]
+            let continents = json["continents"] as? [[String:AnyObject]]
+            let image = UIImage(named: name)
+            let companyValues = json["values"] as? [[String:AnyObject]]
                 let countries = json["countries"] as? Int ?? 0
                 let locationUrl = json["map_location_url"] as? String ?? ""// TODO: finns inte än?
                 let videoUrl = json["video_url"] as? String ?? ""// TODO: finns inte än?
                 let employeesSweden = json["employees_sweden"] as? Int ?? 0
                 let employeesWorld = json["employees_world"] as? Int ?? 0
-                let description = json["description"] as? String ?? ""
+                let description = json["about"] as? String ?? ""
+                let booth = json["booth_number"] as? Int ?? 0
                 let keywords = json["keywords"] as? String ?? ""// TODO: Bort?
                 let contactName = json["contact_name"] as? String ?? ""// TODO: Bort?
                 let contactEmail = json["contact_email"] as? String ?? ""// TODO: Bort?
@@ -39,18 +40,19 @@ open class Company: NSManagedObject {
                 let isStartup = json["startup"] as? Bool ?? false// TODO: Finns inte med än?
                 let likesEquality = json["diversity"] as? Bool ?? false
                 let likesEnvironment = json["sustainability"] as? Bool ?? false
-                let locationDescription = json["location"] as? String ?? ""// TODO: Sannorligt rätt men finns inte än
+                let locationDescription = json["exhibitor_location"] as? String ?? ""// TODO: Sannorligt rätt men finns inte än
                 let facebook = json["facebook_url"] as? String ?? ""
                 let linkedin = json["linkedin_url"] as? String ?? ""
                 let twitter = json["twitter_url"] as? String ?? ""
                 let primaryWorkField = (json["main_work_field"] as? [String:AnyObject])?["name"] as? String ?? ""
-                
+            
                 let adUrl = json["ad_url"] as? String ?? ""
                 let logoUrl = json["logo_url"] as? String ?? ""
             
             
                 let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 company.name = name
+                company.booth = booth
                 company.companyDescription = description
                 company.website = website
                 company.facebook = facebook
@@ -59,7 +61,7 @@ open class Company: NSManagedObject {
                 company.employeesSweden = employeesSweden
                 company.employeesWorld = employeesWorld
                 company.locationDescription = locationDescription
-                company.locationUrl = locationUrl
+//                company.locationUrl = locationUrl
                 company.contactName = contactName
                 company.contactEmail = contactEmail
                 company.contactPhone = contactPhone
@@ -72,77 +74,6 @@ open class Company: NSManagedObject {
                 company.keywords = keywords
                 company.primaryWorkField = primaryWorkField
                 company.videoUrl = videoUrl
-            
-            _ = {
-                    let fetchRequest = NSFetchRequest<WorkField>()
-                    let entityName = "WorkField"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest) )
-                    let workFields = Array.removeNils(workFields.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for workField in workFields {
-                        let managedObject = existingObjects.filter({ $0.workField == workField }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! WorkField
-                        managedObject.workField = workField
-                        existingObjects.insert(managedObject)
-                        company.workFields.insert(managedObject)
-                    }
-                    }()
-                
-                _ = {
-                    let fetchRequest = NSFetchRequest<JobType>()
-                    let entityName = "JobType"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
-                    let jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for jobType in jobTypes {
-                        let managedObject = existingObjects.filter({ $0.jobType == jobType }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! JobType
-                        managedObject.jobType = jobType
-                        existingObjects.insert(managedObject)
-                        company.jobTypes.insert(managedObject)
-                    }
-                    }()
-                
-                _ = {
-                    let fetchRequest = NSFetchRequest<Continent>()
-                    let entityName = "Continent"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
-                    let continents = Array.removeNils(continents.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for continent in continents {
-                        let managedObject = existingObjects.filter({ $0.continent == continent }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! Continent
-                        managedObject.continent = continent
-                        existingObjects.insert(managedObject)
-                        company.continents.insert(managedObject)
-                    }
-                    }()
-                
-                _ = {
-                    let fetchRequest = NSFetchRequest<CompanyValue>()
-                    let entityName = "CompanyValue"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
-                    let companyValues = Array.removeNils(companyValues.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for companyValue in companyValues {
-                        let managedObject = existingObjects.filter({ $0.companyValue == companyValue }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! CompanyValue
-                        managedObject.companyValue = companyValue
-                        existingObjects.insert(managedObject)
-                        company.companyValues.insert(managedObject)
-                    }
-                    }()
-                
-                _ = {
-                    let fetchRequest = NSFetchRequest<Programme>()
-                    let entityName = "Programme"
-                    fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
-                    var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
-                    let programmes = Array.removeNils(programmes.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
-                    for programme in programmes {
-                        let managedObject = existingObjects.filter({ $0.programme == programme }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! Programme
-                        managedObject.programme = programme
-                        existingObjects.insert(managedObject)
-                        company.programmes.insert(managedObject)
-                    }
-                    }()
-                
                 return company
         } else {
             print("Failed to parse company")
@@ -164,14 +95,14 @@ open class Company: NSManagedObject {
         return UIImage(named: imageName)
     }
     
-    open var map: UIImage {
-        if let url = URL(string: "http://www.armada.nu" + self.locationUrl),
-            let data = try? Data(contentsOf: url),
-            let image = UIImage(data: data){
-                return image
-        }
-        return UIImage()
-    }
+//    open var map: UIImage {
+//        if let url = URL(string: "http://www.armada.nu" + self.locationUrl),
+//            let data = try? Data(contentsOf: url),
+//            let image = UIImage(data: data){
+//                return image
+//        }
+//        return UIImage()
+//    }
     
     var shortName: String {
         return ([" sverige", " ab", " sweden"].reduce(name) {
