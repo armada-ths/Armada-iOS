@@ -10,6 +10,8 @@ import UIKit
 
 class matchSelectInterest: UIViewController {
     
+    @IBOutlet weak var stackHolder: UIView!
+    //@IBOutlet weak var stackView: UIStackView!
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTeam: matchTeam?
@@ -17,33 +19,68 @@ class matchSelectInterest: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
-        statusView.backgroundColor = .black
-        self.view.addSubview(statusView)
-        
-        print(matchData.currentview)
+        addStatusbar()
+        swipes()
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
         
+        var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, AnyObject>>
+        var filtered = Dictionary<String, Bool>()
+        for item in unfiltered{
+            filtered[item["area"] as! String] = false
+        }
+        
+        var stackView = UIStackView()        
+        stackView.axis = UILayoutConstraintAxis.vertical
+        stackView.distribution = UIStackViewDistribution.equalSpacing
+        stackView.alignment = UIStackViewAlignment.center
+        stackView.spacing = 30
+        for (key, _) in filtered{
+            let area = createAreaView(text: key)
+            print("adding \(area) to stackView")
+            stackView.addArrangedSubview(area)
+        }
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackHolder.addSubview(stackView)
+        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
+        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
+    }
+    func createAreaView(text:String) -> UIView {
+        var areaView = UIView()
+        
+        let areaTitle = UILabel()
+        let areaText = NSMutableAttributedString(
+            string: text,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Lato-Regular",
+                size: 22.0)!])
+        areaTitle.attributedText = areaText
+        areaTitle.textAlignment = .center
+        areaTitle.translatesAutoresizingMaskIntoConstraints = false
+        areaView.addSubview(areaTitle)
+        let horizontalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let verticalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        areaView.addConstraints([horizontalConstraint, verticalConstraint])
+        areaView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        areaView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        areaView.backgroundColor = .white
+        return areaView
+    }
+    
+    func addStatusbar() {
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
+    }
+    
+    func swipes(){
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        // do stuff with matchSelectInterest
-        
-        /*
-        self.matchData.interestBools["it"]              = false
-        self.matchData.interestBools["chemistry"]       = true
-        self.matchData.interestBools["finance"]         = false
-        self.matchData.interestBools["infrastructure"]  = true
-        self.matchData.interestBools["management"]      = true
-        self.matchData.interestBools["innovation"]      = false
-         */
-        
     }
     
     func goRightWithoutAnimation(){

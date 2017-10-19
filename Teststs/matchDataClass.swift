@@ -84,7 +84,7 @@ class matchDataClass: NSObject{
              "count": 5 as AnyObject]
         ]
         
-        backendData["Areas"] = [[
+        backendData["areas"] = [[
             "id": 1 as AnyObject,
             "work_field": "loT" as AnyObject,
             "area": "IT" as AnyObject ],[
@@ -167,7 +167,7 @@ class matchDataClass: NSObject{
                                      "count": 5 as AnyObject]
         ]
         
-        self.backendData["Areas"] = [[
+        self.backendData["areas"] = [[
             "id": 1 as AnyObject,
             "work_field": "loT" as AnyObject,
             "area": "IT" as AnyObject ],[
