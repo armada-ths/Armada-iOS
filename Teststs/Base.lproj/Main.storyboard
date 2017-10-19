@@ -1403,13 +1403,6 @@
                                     <constraint firstItem="ug2-lU-GBj" firstAttribute="top" secondItem="Yw5-kV-ATQ" secondAttribute="top" constant="3" id="yWa-Ju-cqy"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match5dots" translatesAutoresizingMaskIntoConstraints="NO" id="30d-0V-bm7">
-                                <rect key="frame" x="100" y="597" width="175" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="30d-0V-bm7" secondAttribute="height" multiplier="462:132" id="DTZ-s8-LeL"/>
-                                    <constraint firstAttribute="height" constant="50" id="nf6-mE-Dfb"/>
-                                </constraints>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JiK-bj-ceZ" userLabel="stackholder">
                                 <rect key="frame" x="16" y="128" width="343" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1417,6 +1410,13 @@
                                     <constraint firstAttribute="width" constant="343" id="5ae-PW-LIA"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match5dots" translatesAutoresizingMaskIntoConstraints="NO" id="30d-0V-bm7">
+                                <rect key="frame" x="100" y="597" width="175" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="30d-0V-bm7" secondAttribute="height" multiplier="462:132" id="DTZ-s8-LeL"/>
+                                    <constraint firstAttribute="height" constant="50" id="nf6-mE-Dfb"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90613611309999997" green="1" blue="0.72837994620000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1450,25 +1450,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="default" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-v8-dBf">
-                                <rect key="frame" x="0.0" y="289" width="375" height="89"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Match Interrest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cF8-Xi-7r2">
-                                <rect key="frame" x="0.0" y="90" width="375" height="89"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0a9-Ol-Bve" userLabel="headerview">
+                                <rect key="frame" x="0.0" y="20" width="375" height="95"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="biD-qj-wGp">
+                                        <rect key="frame" x="4" y="15" width="368" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="biD-qj-wGp" secondAttribute="height" multiplier="1008:219" id="5mh-Wg-3v4"/>
+                                            <constraint firstAttribute="height" constant="80" id="Kya-u2-qoG"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="subareaLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ux-gY-daZ" userLabel="subAreaLabel">
+                                        <rect key="frame" x="23" y="3" width="336" height="89"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="biD-qj-wGp" firstAttribute="top" secondItem="0a9-Ol-Bve" secondAttribute="top" constant="15" id="3xk-ND-X0c"/>
+                                    <constraint firstAttribute="height" constant="95" id="7n1-LI-AD0"/>
+                                    <constraint firstItem="2Ux-gY-daZ" firstAttribute="top" secondItem="0a9-Ol-Bve" secondAttribute="top" constant="3" id="eBd-NO-7pU"/>
+                                    <constraint firstAttribute="bottom" secondItem="2Ux-gY-daZ" secondAttribute="bottom" constant="3" id="fXO-cN-aI4"/>
+                                    <constraint firstItem="biD-qj-wGp" firstAttribute="centerX" secondItem="0a9-Ol-Bve" secondAttribute="centerX" id="jOI-oD-oWN"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Ux-gY-daZ" secondAttribute="trailing" constant="16" id="qUD-zk-B9G"/>
+                                    <constraint firstAttribute="bottom" secondItem="biD-qj-wGp" secondAttribute="bottom" id="tlP-Yt-DJB"/>
+                                    <constraint firstItem="2Ux-gY-daZ" firstAttribute="leading" secondItem="0a9-Ol-Bve" secondAttribute="leading" constant="23" id="vNU-Am-z97"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5A-Od-d9H" userLabel="stackholder">
+                                <rect key="frame" x="16" y="120" width="343" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="eSn-v2-XUo"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match6dots" translatesAutoresizingMaskIntoConstraints="NO" id="q7q-89-PPv">
+                                <rect key="frame" x="100" y="607" width="175" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="q7q-89-PPv" secondAttribute="height" multiplier="462:132" id="CqA-jX-zDN"/>
+                                    <constraint firstAttribute="height" constant="50" id="x6Q-K6-dvU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.84585085910000002" green="0.77486873940000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0a9-Ol-Bve" firstAttribute="top" secondItem="X0C-mL-hdz" secondAttribute="bottom" id="9N3-c2-iRt"/>
+                            <constraint firstItem="v5A-Od-d9H" firstAttribute="bottom" secondItem="q7q-89-PPv" secondAttribute="top" constant="5" id="C1X-qj-2sm"/>
+                            <constraint firstItem="0a9-Ol-Bve" firstAttribute="leading" secondItem="IXo-ZV-6DO" secondAttribute="leading" id="GIt-Gg-NIf"/>
+                            <constraint firstItem="v5A-Od-d9H" firstAttribute="centerX" secondItem="IXo-ZV-6DO" secondAttribute="centerX" id="QyC-tc-Uuw"/>
+                            <constraint firstItem="q7q-89-PPv" firstAttribute="width" secondItem="q7q-89-PPv" secondAttribute="height" multiplier="462:132" id="XS6-nf-R7E"/>
+                            <constraint firstItem="q7q-89-PPv" firstAttribute="centerX" secondItem="IXo-ZV-6DO" secondAttribute="centerX" id="XXS-Vf-Cpu"/>
+                            <constraint firstItem="S40-Qz-nY5" firstAttribute="top" secondItem="q7q-89-PPv" secondAttribute="bottom" constant="10" id="liu-hC-tTM"/>
+                            <constraint firstItem="v5A-Od-d9H" firstAttribute="top" secondItem="0a9-Ol-Bve" secondAttribute="bottom" constant="5" id="qDa-WN-MeU"/>
+                            <constraint firstAttribute="trailing" secondItem="0a9-Ol-Bve" secondAttribute="trailing" id="sf6-ut-I7f"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="interestLabel" destination="Zon-v8-dBf" id="gq2-7w-3nS"/>
+                        <outlet property="stackHolder" destination="v5A-Od-d9H" id="PPA-DW-rdR"/>
+                        <outlet property="subAreaLabel" destination="2Ux-gY-daZ" id="cig-AT-V6A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFW-wN-JJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2152,8 +2193,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="fIe-SL-0os"/>
                                                     <exclude reference="ALl-wW-Obs"/>
+                                                    <exclude reference="fIe-SL-0os"/>
                                                 </mask>
                                             </variation>
                                         </imageView>
@@ -2166,8 +2207,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="hvs-da-KRz"/>
                                                     <exclude reference="EbB-lE-pJL"/>
+                                                    <exclude reference="hvs-da-KRz"/>
                                                 </mask>
                                             </variation>
                                         </imageView>
@@ -2217,18 +2258,18 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="sgF-xL-HV3"/>
                                             <exclude reference="91F-nG-37z"/>
-                                            <exclude reference="ffZ-8c-P7F"/>
                                             <exclude reference="Exd-aH-ReZ"/>
                                             <exclude reference="Rcw-md-kE0"/>
-                                            <exclude reference="OGm-ob-IGs"/>
+                                            <exclude reference="ffZ-8c-P7F"/>
+                                            <exclude reference="sgF-xL-HV3"/>
                                             <exclude reference="2Yd-rA-IRH"/>
+                                            <exclude reference="4fr-oZ-577"/>
+                                            <exclude reference="OGm-ob-IGs"/>
+                                            <exclude reference="a7v-iS-xAa"/>
+                                            <exclude reference="aaf-gs-R6e"/>
                                             <exclude reference="fbh-o2-3nt"/>
                                             <exclude reference="mJ9-sR-c2U"/>
-                                            <exclude reference="aaf-gs-R6e"/>
-                                            <exclude reference="a7v-iS-xAa"/>
-                                            <exclude reference="4fr-oZ-577"/>
                                             <exclude reference="cxS-gq-Q9p"/>
                                             <exclude reference="6Gf-dn-WTW"/>
                                             <exclude reference="M9J-pO-4rG"/>
@@ -2353,13 +2394,13 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="m45-0r-sCr"/>
                                             <exclude reference="Ii8-Ck-kcw"/>
+                                            <exclude reference="m45-0r-sCr"/>
                                             <exclude reference="qus-n0-vaB"/>
-                                            <exclude reference="JXQ-WQ-UZf"/>
-                                            <exclude reference="GGS-3H-PTa"/>
-                                            <exclude reference="Zai-aB-KGS"/>
                                             <exclude reference="5RI-Fc-A01"/>
+                                            <exclude reference="GGS-3H-PTa"/>
+                                            <exclude reference="JXQ-WQ-UZf"/>
+                                            <exclude reference="Zai-aB-KGS"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -2487,12 +2528,12 @@
                                                     <exclude reference="J3k-gD-jiG"/>
                                                     <exclude reference="mpA-or-toW"/>
                                                     <exclude reference="rDB-qc-xNA"/>
-                                                    <exclude reference="7Lg-sr-PS4"/>
                                                     <exclude reference="1Mh-OD-VmZ"/>
-                                                    <exclude reference="lT5-mM-pPE"/>
+                                                    <exclude reference="7Lg-sr-PS4"/>
                                                     <exclude reference="gn2-Td-j9u"/>
-                                                    <exclude reference="lre-6X-cY6"/>
+                                                    <exclude reference="lT5-mM-pPE"/>
                                                     <exclude reference="Zzj-kI-u2h"/>
+                                                    <exclude reference="lre-6X-cY6"/>
                                                     <exclude reference="0e1-Zv-Ga9"/>
                                                 </mask>
                                             </variation>
@@ -2589,24 +2630,24 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="Gq3-mP-fzY"/>
+                                                    <exclude reference="TTW-wB-QMc"/>
                                                     <exclude reference="TUU-L9-iTy"/>
                                                     <exclude reference="gba-Lg-bLA"/>
-                                                    <exclude reference="Gq3-mP-fzY"/>
                                                     <exclude reference="wWn-E0-Pra"/>
-                                                    <exclude reference="TTW-wB-QMc"/>
-                                                    <exclude reference="HFi-Yc-hXu"/>
-                                                    <exclude reference="qbb-UA-BBy"/>
-                                                    <exclude reference="HOm-G9-Fvm"/>
-                                                    <exclude reference="X3L-o7-49V"/>
+                                                    <exclude reference="240-1T-Uhn"/>
                                                     <exclude reference="3Mv-pX-Xeu"/>
                                                     <exclude reference="7v9-Ih-49t"/>
                                                     <exclude reference="8a3-cz-fXK"/>
                                                     <exclude reference="BzT-wL-CBh"/>
-                                                    <exclude reference="240-1T-Uhn"/>
-                                                    <exclude reference="Qx0-W8-v4w"/>
+                                                    <exclude reference="HFi-Yc-hXu"/>
+                                                    <exclude reference="HOm-G9-Fvm"/>
                                                     <exclude reference="HWB-GK-O1z"/>
-                                                    <exclude reference="aLK-VE-Alb"/>
+                                                    <exclude reference="Qx0-W8-v4w"/>
                                                     <exclude reference="UzZ-3k-foe"/>
+                                                    <exclude reference="X3L-o7-49V"/>
+                                                    <exclude reference="aLK-VE-Alb"/>
+                                                    <exclude reference="qbb-UA-BBy"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2653,19 +2694,19 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="Onf-t1-6eM"/>
                                                     <exclude reference="AEO-8w-JcB"/>
+                                                    <exclude reference="HxC-FK-9hB"/>
+                                                    <exclude reference="Onf-t1-6eM"/>
                                                     <exclude reference="SUa-6Z-4ls"/>
                                                     <exclude reference="pJW-l4-ugJ"/>
-                                                    <exclude reference="HxC-FK-9hB"/>
-                                                    <exclude reference="akc-PJ-z54"/>
-                                                    <exclude reference="BD0-UE-Xq4"/>
-                                                    <exclude reference="dDX-sP-BOU"/>
                                                     <exclude reference="5YO-LJ-TsY"/>
-                                                    <exclude reference="V0M-4K-LA7"/>
+                                                    <exclude reference="BD0-UE-Xq4"/>
                                                     <exclude reference="KEo-Y7-eto"/>
+                                                    <exclude reference="V0M-4K-LA7"/>
                                                     <exclude reference="aWJ-2x-NyT"/>
+                                                    <exclude reference="akc-PJ-z54"/>
                                                     <exclude reference="cSo-hP-rfy"/>
+                                                    <exclude reference="dDX-sP-BOU"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2712,19 +2753,19 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="ttT-bc-rf3"/>
-                                                    <exclude reference="XKo-OB-tBd"/>
                                                     <exclude reference="6jj-54-vKn"/>
-                                                    <exclude reference="qCM-GF-Nv1"/>
+                                                    <exclude reference="XKo-OB-tBd"/>
                                                     <exclude reference="YWT-aK-1bN"/>
-                                                    <exclude reference="afe-4w-HJv"/>
-                                                    <exclude reference="aCx-mk-oEy"/>
-                                                    <exclude reference="Fmp-fo-oSx"/>
-                                                    <exclude reference="afw-P7-Iqy"/>
-                                                    <exclude reference="n6h-7c-uAr"/>
-                                                    <exclude reference="QWf-mY-taA"/>
-                                                    <exclude reference="cX2-Lq-7CB"/>
+                                                    <exclude reference="qCM-GF-Nv1"/>
+                                                    <exclude reference="ttT-bc-rf3"/>
                                                     <exclude reference="D59-8h-4j5"/>
+                                                    <exclude reference="Fmp-fo-oSx"/>
+                                                    <exclude reference="QWf-mY-taA"/>
+                                                    <exclude reference="aCx-mk-oEy"/>
+                                                    <exclude reference="afe-4w-HJv"/>
+                                                    <exclude reference="afw-P7-Iqy"/>
+                                                    <exclude reference="cX2-Lq-7CB"/>
+                                                    <exclude reference="n6h-7c-uAr"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2771,19 +2812,19 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="Eud-yk-wwW"/>
                                                     <exclude reference="5cl-Yg-p3O"/>
+                                                    <exclude reference="Eud-yk-wwW"/>
+                                                    <exclude reference="fEz-Ak-wfA"/>
                                                     <exclude reference="lUC-Qg-M12"/>
                                                     <exclude reference="voM-8Z-O8M"/>
-                                                    <exclude reference="fEz-Ak-wfA"/>
+                                                    <exclude reference="3Aq-ck-3av"/>
+                                                    <exclude reference="BKf-sx-pkY"/>
+                                                    <exclude reference="EHY-Cl-hGB"/>
+                                                    <exclude reference="Qet-HV-tku"/>
                                                     <exclude reference="QfW-uU-9Bw"/>
+                                                    <exclude reference="Wvl-ux-FD0"/>
                                                     <exclude reference="pCR-sf-RkA"/>
                                                     <exclude reference="u0v-fw-4hh"/>
-                                                    <exclude reference="Qet-HV-tku"/>
-                                                    <exclude reference="Wvl-ux-FD0"/>
-                                                    <exclude reference="BKf-sx-pkY"/>
-                                                    <exclude reference="3Aq-ck-3av"/>
-                                                    <exclude reference="EHY-Cl-hGB"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2812,10 +2853,10 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="tzE-J8-gZo"/>
                                                             <exclude reference="0FW-Mk-ZF0"/>
-                                                            <exclude reference="vfU-Qs-x0Q"/>
                                                             <exclude reference="FKg-Dt-meI"/>
+                                                            <exclude reference="tzE-J8-gZo"/>
+                                                            <exclude reference="vfU-Qs-x0Q"/>
                                                         </mask>
                                                     </variation>
                                                 </webView>
@@ -3110,7 +3151,7 @@
         <image name="book" width="32" height="32"/>
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
-        <image name="diversity" width="867" height="922"/>
+        <image name="diversity" width="118" height="124"/>
         <image name="ericsson-logo" width="280" height="248"/>
         <image name="eventFeed" width="17" height="17"/>
         <image name="eventLogo" width="32" height="32"/>
@@ -3126,11 +3167,11 @@
         <image name="match2select" width="180" height="529"/>
         <image name="match2text" width="336" height="73"/>
         <image name="match5dots" width="146" height="44"/>
-        <image name="match6dots" width="16" height="16"/>
+        <image name="match6dots" width="146" height="44"/>
         <image name="newsLogo" width="33" height="32"/>
         <image name="newsLogo-1" width="33" height="32"/>
-        <image name="quality" width="868" height="922"/>
-        <image name="sustainability" width="868" height="921"/>
+        <image name="quality" width="116" height="125"/>
+        <image name="sustainability" width="118" height="124"/>
         <image name="twitter" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>

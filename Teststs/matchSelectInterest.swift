@@ -48,6 +48,7 @@ class matchSelectInterest: UIViewController {
             newItem["bool"] = false
             filteredSubAreas[item["area"] as! String]?.append(newItem)
         }
+        self.matchData.interrestList = filteredSubAreas
         // setup stack-view
         var stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
@@ -95,6 +96,7 @@ class matchSelectInterest: UIViewController {
         
         return areaView
     }
+    
     func someAction(sender: UITapGestureRecognizer){
         print("like flipping a flipping flipswitch broh!")
         let matchInt = sender.view!.tag as! Int
@@ -154,6 +156,7 @@ class matchSelectInterest: UIViewController {
                 matchData.areaListDynamic.append(key)
             }
         }
+        matchData.currentArea = 0
         matchData.areaListDynamic = matchData.areaListDynamic.reversed()
         matchData.save()
         if matchData.areaListDynamic.count == 0 {
