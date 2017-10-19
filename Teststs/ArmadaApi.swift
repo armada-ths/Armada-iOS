@@ -594,7 +594,8 @@ open class _ArmadaApi {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     let publishedDate = dateFormatter.date(from: dateTimestamp)!
-                    let date = Date()
+                    var date = Date()
+                    date = date.addingTimeInterval(7200)
                     if (date < publishedDate){
                         return nil
                     }
@@ -687,8 +688,8 @@ open class _ArmadaApi {
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 let newsJson = self.parseHTML(HTMLContent: responseString! as String)
                 var newsObjects = self.newsFromJson(newsJson as AnyObject)
-                if(newsObjects[0].featured != true){
-                    for i in 1 ... newsObjects.count{
+                 if(newsObjects[0].featured != true && newsObjects.count > 1){
+                    for i in 1 ... newsObjects.count-1{
                         if(newsObjects[i].featured == true){
                             let tempNews = newsObjects[i]
                             newsObjects.remove(at: i)
