@@ -54,7 +54,7 @@ class matchEnd: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        if matchData.currentInterest > 0 {
+        if matchData.currentArea > 0 {
             self.matchInterest?.matchData = matchData
         } else {
             self.matchSelectInterest?.matchData = matchData

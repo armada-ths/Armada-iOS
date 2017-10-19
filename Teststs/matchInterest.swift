@@ -27,9 +27,9 @@ class matchInterest: UIViewController {
         self.view.addSubview(statusView)
         
         print(matchData.currentview)
-        print("matchData.currentInterest: \(matchData.currentInterest)")
+        print("matchData.currentInterest: \(matchData.currentArea)")
         
-        if (viewNumber + matchData.currentInterest < matchData.currentview) {
+        if (viewNumber + matchData.currentArea < matchData.currentview) {
             goRightWithoutAnimation()
         }
         
@@ -40,12 +40,12 @@ class matchInterest: UIViewController {
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
         
-        let attribute:String = matchData.interestList[matchData.currentInterest]
+        let attribute:String = matchData.areaListDynamic[matchData.currentArea]
         interestLabel.text = attribute        
     }
     
     func goRightWithoutAnimation(){
-        if matchData.interestList.count != (matchData.currentInterest + 1) {
+        if matchData.areaListDynamic.count != (matchData.currentArea + 1) {
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
@@ -62,8 +62,8 @@ class matchInterest: UIViewController {
     
     func goRight(){
         matchData.currentview += 1        
-        if matchData.interestList.count != (matchData.currentInterest + 1) {
-            matchData.currentInterest += 1
+        if matchData.areaListDynamic.count != (matchData.currentArea + 1) {
+            matchData.currentArea += 1
             matchData.save()
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
             rightViewController.matchData = self.matchData
@@ -82,11 +82,11 @@ class matchInterest: UIViewController {
     
     func goBack(){
         matchData.currentview -= 1
-        if self.matchData.currentInterest == 0 {
+        if self.matchData.currentArea == 0 {
             self.matchSelectInterest?.matchData = matchData
             matchData.save()
         } else {
-            matchData.currentInterest -= 1
+            matchData.currentArea -= 1
             matchData.save()
             self.matchInterest?.matchData = matchData
         }        

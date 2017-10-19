@@ -20,7 +20,6 @@ class matchDataClass: NSObject{
     var lookingBool:[String: Bool]
     var swedenBool:[String: Bool]
     var worldBool:[String: Bool]
-    var europeBool:[String: Bool]
     
     var travel:Double
     
@@ -28,11 +27,12 @@ class matchDataClass: NSObject{
     var teamSizeMax:Int
     var teamSizeMin:Int
     
-    var currentInterest:Int
-    var interestBools:[String: Bool]
-    var interestList:Array<String>
-    var interestInts:Array<Int>
-    
+    var currentArea:Int
+    var areaBools:[String: Bool]
+    var areaList:Array<String>
+    var areaListDynamic:Array<String>
+    var interrestList:Dictionary<String, Array<Dictionary<String, Any>>>
+
     var time:String
     /* ---------------------- */
     
@@ -40,29 +40,25 @@ class matchDataClass: NSObject{
     //         lookingBool:[String: Bool],
     //         swedenBool:[String: Bool],
     //         worldBool:[String: Bool],
-    //         europeBool:[String: Bool],
     //         travel:Double,
     //         teamSize:Int,
     //         teamSizeMax:Int,
     //         teamSizeMin:Int,
-    //         currentInterest:Int,
-    //         interestBools:[String: Bool],
-    //         interestList:Array<String>,
-    //         interestInts:Array<Int>){
+    //         currentArea:Int,
+    //         areaBools:[String: Bool],
+    //         areaList:Array<String>,{
     //
     //        self.currentview = currentview
     //        self.lookingBool = lookingBool
     //        self.swedenBool = swedenBool
     //        self.worldBool = worldBool
-    //        self.europeBool = europeBool
     //        self.travel = travel
     //        self.teamSize = teamSize
     //        self.teamSizeMax = teamSizeMax
     //        self.teamSizeMin = teamSizeMin
-    //        self.currentInterest = currentInterest
-    //        self.interestBools = interestBools
-    //        self.interestList = interestList
-    //        self.interestInts = interestInts
+    //        self.currentArea = currentArea
+    //        self.areaBools = areaBools
+    //        self.areaList = areaList
     //    }
     
     override init() {
@@ -120,30 +116,18 @@ class matchDataClass: NSObject{
             "australia":false
         ]
         
-        europeBool = [
-            "germany":  false,
-            "italy":    false,
-            "france":   false
-        ]
-        
         travel = 0.0
         
         teamSize = 0
         teamSizeMax = 10
         teamSizeMin = 0
         
-        currentInterest = 0
+        currentArea = 0
         
-        interestBools = [
-            "it":               false,
-            "chemistry":        false,
-            "finance":          false,
-            "infrastructure":   false,
-            "management":       false,
-            "innovation":       false
-        ]
-        interestList = []
-        interestInts = Array(repeatElement(0, count: interestBools.count))
+        areaBools = [:]
+        areaList = Array<String>()
+        areaListDynamic = Array<String>()
+        interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
         
         time = String(describing: Date())
     }
@@ -171,15 +155,18 @@ class matchDataClass: NSObject{
             "id": 1 as AnyObject,
             "work_field": "loT" as AnyObject,
             "area": "IT" as AnyObject ],[
-                "id": 2 as AnyObject,
-                "work_field": "Machine Learning" as AnyObject,
-                "area": "IT" as AnyObject],[
-                    "id": 3 as AnyObject,
-                    "work_field": "Real Estate" as AnyObject,
-                    "area": "Finance" as AnyObject],[
-                        "id": 4 as AnyObject,
-                        "work_field": "Bookkeeping" as AnyObject,
-                        "area": "Finance" as AnyObject]
+                
+            "id": 2 as AnyObject,
+            "work_field": "Machine Learning" as AnyObject,
+            "area": "IT" as AnyObject],[
+            
+            "id": 3 as AnyObject,
+            "work_field": "Real Estate" as AnyObject,
+            "area": "Finance" as AnyObject],[
+            
+            "id": 4 as AnyObject,
+            "work_field": "Bookkeeping" as AnyObject,
+            "area": "Finance" as AnyObject]
         ]
         
         /* properties ABOVE not saved in defaults YET! */
@@ -190,17 +177,14 @@ class matchDataClass: NSObject{
         self.teamSize =        json["teamSize"].intValue
         self.teamSizeMax =     json["teamSizeMax"].intValue
         self.teamSizeMin =     json["teamSizeMin"].intValue
-        self.currentInterest = json["currentInterest"].intValue
+        self.currentArea = json["currentArea"].intValue
         
         var lookingBool:[String: Bool] = [:]
         var swedenBool:[String: Bool] = [:]
         var worldBool:[String: Bool] = [:]
-        var europeBool:[String: Bool] = [:]
-        var interestBools:[String: Bool] = [:]
         
-        var interestList:Array<String> = Array<String>()
-        
-        var interestInts:Array<Int> = Array<Int>()
+        var areaBools:[String: Bool] = [:]
+        var areaList:Array<String> = Array<String>()
         
         for (key, val):(String, JSON) in json["lookingBool"] {
             lookingBool[key] = val.boolValue
@@ -214,24 +198,20 @@ class matchDataClass: NSObject{
             worldBool[key] = val.boolValue
         }
         self.worldBool = worldBool
-        for (key, val):(String, JSON) in json["europeBool"] {
-            europeBool[key] = val.boolValue
+        for (key, val):(String, JSON) in json["areaBools"] {
+            areaBools[key] = val.boolValue
         }
-        self.europeBool = europeBool
-        for (key, val):(String, JSON) in json["interestBools"] {
-            interestBools[key] = val.boolValue
-        }
-        self.interestBools = interestBools
+        self.areaBools = areaBools
         
-        for (_, val):(String, JSON) in json["interestList"] {
-            interestList.append(val.stringValue)
+        for (_, val):(String, JSON) in json["areaList"] {
+            areaList.append(val.stringValue)
         }
-        self.interestList = interestList
+        self.areaList = areaList
         
-        for (_, val):(String, JSON) in json["interestInts"] {
-            interestInts.append(val.intValue)
-        }
-        self.interestInts = interestInts
+        // NEED INITIALIZER
+        self.areaListDynamic = Array<String>()
+        self.interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
+        
         self.time = json["time"].stringValue
     }
     
