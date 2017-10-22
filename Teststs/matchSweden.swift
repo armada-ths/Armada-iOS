@@ -33,12 +33,13 @@ class matchSweden: UIViewController {
         let buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8]
         let buttonNameArray = ["North norrland", "South norrland", "Svealand", "Stockholm", "Region West", "Region East", "Göteborg", "Region South", "Malmö"]
         
-        let title = NSMutableAttributedString(
+        let titleText = NSMutableAttributedString(
             string: "WHERE IN SWEDEN DO YOU WANT TO WORK?\n SELECT THE REGIONS",
             attributes: [NSFontAttributeName:UIFont(
-                name: "Lato-Light",
-                size: 16)!, NSForegroundColorAttributeName: UIColor.black])
-        titleLabel.attributedText = title
+                name: "BebasNeue-Thin",
+                size: 26)!, NSForegroundColorAttributeName: UIColor.black])
+        titleText.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 26.0), range:NSRange(location: 0, length: 36))
+        titleLabel.attributedText = titleText
         for idx in 0...(buttonArray.count - 1) {
             let tmpButton = buttonArray[idx] as! UIButton
             let title = NSMutableAttributedString(
@@ -61,11 +62,6 @@ class matchSweden: UIViewController {
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
-        let titleText = NSMutableAttributedString(
-            string: "There are more than 200 exhibitors at \nArmada Fair 21-22 November, \nwe will help you find the five best for you!",
-            attributes: [NSFontAttributeName:UIFont(
-                name: "Lato-Light",
-                size: 18.0)!])
     }
     
     func statusBar(){
