@@ -56,7 +56,7 @@ class matchWorld: UIViewController {
         stack1X.constant = stackWidth
         stack2X.constant = stackWidth
         stack3X.constant = stackWidth
-
+        intrestAbroad.onTintColor = ColorScheme.armadaGreen
         if (matchData.worldIntrest == true){
             intrestAbroad.isOn = true
             for area in areaArray{
