@@ -17,16 +17,60 @@ class matchWorld: UIViewController {
     let viewNumber = 3
     @IBOutlet weak var intrestAbroad: UISwitch!
     @IBOutlet weak var europeButton: UIButton!
+    @IBOutlet var europeLabel: UILabel!
     @IBOutlet weak var asiaButton: UIButton!
+    @IBOutlet var asiaLabel: UILabel!
     @IBOutlet weak var sAmericaButton: UIButton!
+    @IBOutlet var sAmericaLabel: UILabel!
     @IBOutlet weak var oceaniaButton: UIButton!
+    @IBOutlet var oceaniaLabel: UILabel!
     @IBOutlet weak var nAmericaButton: UIButton!
+    @IBOutlet var nAmericaLabel: UILabel!
     @IBOutlet weak var africaButton: UIButton!
+    @IBOutlet var africaLabel: UILabel!
+    @IBOutlet var stackHeight: NSLayoutConstraint!
+    
+    @IBOutlet var stack1: NSLayoutConstraint!
+    @IBOutlet var stack2: NSLayoutConstraint!
+    @IBOutlet var stack3: NSLayoutConstraint!
+    @IBOutlet var mapH: NSLayoutConstraint!
+    @IBOutlet var mapW: NSLayoutConstraint!
+    @IBOutlet var header: UIImageView!
+    var labelArray = Array<UILabel>()
+    var buttonArray = Array<UIButton>()
+    
+    @IBOutlet var buttonsDistance: NSLayoutConstraint!
+    @IBOutlet var mapDistance: NSLayoutConstraint!
     var europe = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        labelArray = [europeLabel, asiaLabel, sAmericaLabel, oceaniaLabel, nAmericaLabel, africaLabel]
+        buttonArray = [europeButton, asiaButton, sAmericaButton, oceaniaButton, nAmericaButton, africaButton]
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+       // let screenHeight = screenSize.height*(100/375)
+        if(!intrestAbroad.isOn){
+            for label in labelArray{
+                label.alpha = 0.34
+            }
+            for button in buttonArray{
+                button.alpha = 0.34
+                button.layer.backgroundColor = UIColor.white.cgColor
+                button.isEnabled = false
+            }
+        }
         
+        headerHeight.constant = screenSize.width*(100/375)
+        mapW.constant = screenSize.width * 0.8
+        mapH.constant = mapW.constant * (179/385)
+        buttonsDistance.constant = ((screenSize.width/320) - 1) * 100
+      //  mapDistance.constant = ((screenSize.width/320) - 1) * 100
+        stackHeight.constant = ((screenSize.width/320)) * 180
+        stack1.constant = stackHeight.constant/3
+        stack2.constant = stackHeight.constant/3
+        stack3.constant = stackHeight.constant/3
+
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -107,11 +151,39 @@ class matchWorld: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func checkBox(_ sender: UIButton) {
+        let tag = sender.tag
         if(sender.layer.backgroundColor == ColorScheme.worldMatchGrey.cgColor){
             sender.layer.backgroundColor = UIColor.white.cgColor
+            labelArray[tag].font = UIFont(name: "Lato-Light", size: 20)
         }
         else{
             sender.layer.backgroundColor = ColorScheme.worldMatchGrey.cgColor
+            labelArray[tag].font = UIFont(name: "Lato-Regular", size: 20)
+            
+        }
+    }
+    
+    @IBAction func switchState(_ sender: UISwitch) {
+        if (sender.isOn == true){
+            for label in labelArray{
+                label.alpha = 1
+            }
+            for button in buttonArray{
+                button.alpha = 1
+                button.isEnabled = true
+            }
+        }
+        else{
+            for label in labelArray{
+                label.alpha = 0.34
+                label.font = UIFont(name: "Lato-Light", size: 20)
+
+            }
+            for button in buttonArray{
+                button.alpha = 0.34
+                button.layer.backgroundColor = UIColor.white.cgColor
+                button.isEnabled = false
+            }
         }
     }
 }
