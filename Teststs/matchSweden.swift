@@ -16,18 +16,46 @@ class matchSweden: UIViewController {
     let viewNumber = 2
 
     @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
+    @IBOutlet weak var button6: UIButton!
+    @IBOutlet weak var button7: UIButton!
+    @IBOutlet weak var button8: UIButton!
+    
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         statusBar()
         swipe()
         
-        button1.backgroundColor = .white
-        button1.layer.cornerRadius = 5
-        button1.layer.borderWidth = 0.75
-        button1.layer.borderColor = UIColor.darkGray.cgColor
-        button1.layer.shadowOpacity = 0.12
-        button1.layer.shadowOffset = CGSize(width: -1, height: 3)
+        let buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8]
+        let buttonNameArray = ["North norrland", "South norrland", "Svealand", "Stockholm", "Region West", "Region East", "Göteborg", "Region South", "Malmö"]
+        
+        let title = NSMutableAttributedString(
+            string: "WHERE IN SWEDEN DO YOU WANT TO WORK?\n SELECT THE REGIONS",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Lato-Light",
+                size: 16)!, NSForegroundColorAttributeName: UIColor.black])
+        titleLabel.attributedText = title
+        for idx in 0...(buttonArray.count - 1) {
+            let tmpButton = buttonArray[idx] as! UIButton
+            let title = NSMutableAttributedString(
+                string: buttonNameArray[idx],
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "Lato-Light",
+                    size: 20)!, NSForegroundColorAttributeName: UIColor.black])
+            tmpButton.setAttributedTitle(title, for: UIControlState.normal)
+            tmpButton.setAttributedTitle(title, for: UIControlState.selected)
+            tmpButton.backgroundColor = .white
+            tmpButton.layer.cornerRadius = 5
+            tmpButton.layer.borderWidth = 0.75
+            tmpButton.layer.borderColor = UIColor.darkGray.cgColor
+            tmpButton.layer.shadowOpacity = 0.12
+            tmpButton.layer.shadowOffset = CGSize(width: -1, height: 3)
+            tmpButton.titleColor(for: UIControlState.normal)
+        }
         
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
