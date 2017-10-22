@@ -15,11 +15,19 @@ class matchSweden: UIViewController {
     var matchLooking: matchLooking?
     let viewNumber = 2
 
+    @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         statusBar()
         swipe()
+        
+        button1.backgroundColor = .white
+        button1.layer.cornerRadius = 5
+        button1.layer.borderWidth = 0.75
+        button1.layer.borderColor = UIColor.darkGray.cgColor
+        button1.layer.shadowOpacity = 0.12
+        button1.layer.shadowOffset = CGSize(width: -1, height: 3)
         
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
