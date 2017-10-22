@@ -19,6 +19,7 @@ class matchDataClass: NSObject{
     
     var lookingBool:[String: Bool]
     var swedenBool:[String: Bool]
+    var worldIntrest: Bool
     var worldBool:[String: Bool]
     
     var travel:Double
@@ -32,7 +33,7 @@ class matchDataClass: NSObject{
     var areaList:Array<String>
     var areaListDynamic:Array<String>
     var interrestList:Dictionary<String, Array<Dictionary<String, Any>>>
-
+    
     var time:String
     /* ---------------------- */
     
@@ -108,12 +109,15 @@ class matchDataClass: NSObject{
             "area3": false
         ]
         
+        worldIntrest = false
+        
         worldBool = [
             "europe":   false,
             "asia":     false,
             "americaN": false,
-            "americaS": false,
-            "australia":false
+            "oceania": false,
+            "americaS":  false,
+            "africa":   false
         ]
         
         travel = 0.0
@@ -197,6 +201,8 @@ class matchDataClass: NSObject{
         for (key, val):(String, JSON) in json["worldBool"] {
             worldBool[key] = val.boolValue
         }
+        
+        self.worldIntrest = json["worldIntrest"].boolValue
         self.worldBool = worldBool
         for (key, val):(String, JSON) in json["areaBools"] {
             areaBools[key] = val.boolValue
