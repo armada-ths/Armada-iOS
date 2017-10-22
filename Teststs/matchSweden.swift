@@ -14,28 +14,39 @@ class matchSweden: UIViewController {
     var matchStart: matchStart?
     var matchLooking: matchLooking?
     let viewNumber = 2
-    
+
+    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
-        statusView.backgroundColor = .black
-        self.view.addSubview(statusView)
+        statusBar()
+        swipe()
         
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
+        let titleText = NSMutableAttributedString(
+            string: "There are more than 200 exhibitors at \nArmada Fair 21-22 November, \nwe will help you find the five best for you!",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Lato-Light",
+                size: 18.0)!])
+    }
+    
+    func statusBar(){
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         
-        self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
-        
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
+    }
+    
+    func swipe(){
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-        
     }
     
     func goRightWithoutAnimation(){

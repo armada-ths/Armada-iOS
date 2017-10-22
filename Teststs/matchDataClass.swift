@@ -13,7 +13,7 @@ class matchDataClass: NSObject{
     
     
     /* ---- view-descriptions ---- */
-    var backendData:[String: Array<[String: AnyObject]>]
+    var backendData:[String: Array<[String: Any]>]
     /* ---- data to save ---- */
     var currentview:Int
     
@@ -64,35 +64,35 @@ class matchDataClass: NSObject{
     override init() {
         currentview = 0
         
-        backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
+        backendData = Dictionary<String, Array<Dictionary<String, Any>>>()
         backendData["questions"] = [[
-            "id": 1 as AnyObject,
-             "type": "slider" as AnyObject,
-             "question": "How big company would you like to work in?" as AnyObject,
-             "min": 5.0 as AnyObject,
-             "max": 1000.0 as AnyObject,
-             "logarithmic": true as AnyObject,
-             "units": "UNITS" as AnyObject
+            "id": 1 as Any,
+             "type": "slider" as Any,
+             "question": "How big company would you like to work in?" as Any,
+             "min": 5.0 as Any,
+             "max": 1000.0 as Any,
+             "logarithmic": true as Any,
+             "units": "UNITS" as Any
             ],
-            ["id": 2 as AnyObject,
-             "type": "grading" as AnyObject,
-             "question": "How happy are you today?" as AnyObject,
-             "count": 5 as AnyObject]
+            ["id": 2 as Any,
+             "type": "grading" as Any,
+             "question": "How happy are you today?" as Any,
+             "count": 5 as Any]
         ]
         
         backendData["areas"] = [[
-            "id": 1 as AnyObject,
-            "work_field": "loT" as AnyObject,
-            "area": "IT" as AnyObject ],[
-            "id": 2 as AnyObject,
-            "work_field": "Machine Learning" as AnyObject,
-            "area": "IT" as AnyObject],[
-            "id": 3 as AnyObject,
-            "work_field": "Real Estate" as AnyObject,
-            "area": "Finance" as AnyObject],[
-            "id": 4 as AnyObject,
-            "work_field": "Bookkeeping" as AnyObject,
-            "area": "Finance" as AnyObject]
+            "id": 1 as Any,
+            "work_field": "loT" as Any,
+            "area": "IT" as Any ],[
+            "id": 2 as Any,
+            "work_field": "Machine Learning" as Any,
+            "area": "IT" as Any],[
+            "id": 3 as Any,
+            "work_field": "Real Estate" as Any,
+            "area": "Finance" as Any],[
+            "id": 4 as Any,
+            "work_field": "Bookkeeping" as Any,
+            "area": "Finance" as Any]
         ]
         
         lookingBool = [
@@ -135,38 +135,35 @@ class matchDataClass: NSObject{
     init(_ json: JSON){
         
         /* properties BELOW not saved in defaults YET! */
-        self.backendData = Dictionary<String, Array<Dictionary<String, AnyObject>>>()
-        self.backendData["questions"] = [[
-            "id": 1 as AnyObject,
-            "type": "slider" as AnyObject,
-            "question": "How big company would you like to work in?" as AnyObject,
-            "min": 5.0 as AnyObject,
-            "max": 1000.0 as AnyObject,
-            "logarithmic": true as AnyObject,
-            "units": "UNITS" as AnyObject
+        self.backendData = Dictionary<String, Array<Dictionary<String, Any>>>()
+        backendData["questions"] = [[
+            "id": 1 as Any,
+            "type": "slider" as Any,
+            "question": "How big company would you like to work in?" as Any,
+            "min": 5.0 as Any,
+            "max": 1000.0 as Any,
+            "logarithmic": true as Any,
+            "units": "UNITS" as Any
             ],
-                                    ["id": 2 as AnyObject,
-                                     "type": "grading" as AnyObject,
-                                     "question": "How happy are you today?" as AnyObject,
-                                     "count": 5 as AnyObject]
+                                    ["id": 2 as Any,
+                                     "type": "grading" as Any,
+                                     "question": "How happy are you today?" as Any,
+                                     "count": 5 as Any]
         ]
         
-        self.backendData["areas"] = [[
-            "id": 1 as AnyObject,
-            "work_field": "loT" as AnyObject,
-            "area": "IT" as AnyObject ],[
-                
-            "id": 2 as AnyObject,
-            "work_field": "Machine Learning" as AnyObject,
-            "area": "IT" as AnyObject],[
-            
-            "id": 3 as AnyObject,
-            "work_field": "Real Estate" as AnyObject,
-            "area": "Finance" as AnyObject],[
-            
-            "id": 4 as AnyObject,
-            "work_field": "Bookkeeping" as AnyObject,
-            "area": "Finance" as AnyObject]
+        backendData["areas"] = [[
+            "id": 1 as Any,
+            "work_field": "loT" as Any,
+            "area": "IT" as Any ],[
+                "id": 2 as Any,
+                "work_field": "Machine Learning" as Any,
+                "area": "IT" as Any],[
+                    "id": 3 as Any,
+                    "work_field": "Real Estate" as Any,
+                    "area": "Finance" as Any],[
+                        "id": 4 as Any,
+                        "work_field": "Bookkeeping" as Any,
+                        "area": "Finance" as Any]
         ]
         
         /* properties ABOVE not saved in defaults YET! */
