@@ -14,6 +14,7 @@ class matchSweden: UIViewController {
     var matchStart: matchStart?
     var matchLooking: matchLooking?
     let viewNumber = 2
+    var buttonArray: Array<UIButton> = []
 
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -24,15 +25,87 @@ class matchSweden: UIViewController {
     @IBOutlet weak var button7: UIButton!
     @IBOutlet weak var button8: UIButton!
     
+    
+    func colorButton(_ button:UIButton){
+        if button.isSelected {
+            button.backgroundColor = ColorScheme.armadaGreen
+        } else {
+            button.backgroundColor = .white
+        }
+    }
+    func pressButton(_ button:UIButton){
+        if button.isSelected {
+            button.isSelected = false
+            button.backgroundColor = .white
+        } else {
+            button.isSelected = true
+            button.backgroundColor = ColorScheme.armadaGreen
+        }
+    }
+    
+    func saveButtonValues(){
+        for idx in 0...(self.buttonArray.count-1) {
+            let key = self.buttonArray[idx].currentAttributedTitle?.string
+            let val = self.buttonArray[idx].isSelected as! Bool
+            matchData.swedenBool[key!] = val
+        }
+    }
+    
+    func loadButtonValues(){
+        for idx in 0...(self.buttonArray.count-1) {
+            let key = self.buttonArray[idx].currentAttributedTitle
+            let button = self.buttonArray[idx]
+            button.isSelected = matchData.swedenBool[(key?.string)!] as! Bool
+            colorButton(button)
+        }        
+    }
+    
+    @IBAction func button1action(_ sender: Any) {
+        pressButton(button1)
+        saveButtonValues()
+    }
+    @IBAction func button2action(_ sender: Any) {
+        pressButton(button2)
+        saveButtonValues()
+    }
+    @IBAction func button3action(_ sender: Any) {
+        pressButton(button3)
+        saveButtonValues()
+    }
+    @IBAction func button4action(_ sender: Any) {
+        pressButton(button4)
+        saveButtonValues()
+    }
+    @IBAction func button5action(_ sender: Any) {
+        pressButton(button5)
+        saveButtonValues()
+    }
+    @IBAction func button6action(_ sender: Any) {
+        pressButton(button6)
+        saveButtonValues()
+    }
+    @IBAction func button7action(_ sender: Any) {
+        pressButton(button7)
+        saveButtonValues()
+    }
+    @IBAction func button8action(_ sender: Any) {
+        pressButton(button8)
+        saveButtonValues()
+    }
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
         statusBar()
         swipe()
         
-        let buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8]
+        buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8]
         let buttonNameArray = ["North norrland", "South norrland", "Svealand", "Stockholm", "Region West", "Region East", "Göteborg", "Region South", "Malmö"]
         
+        // setup title
         let titleText = NSMutableAttributedString(
             string: "WHERE IN SWEDEN DO YOU WANT TO WORK?\n SELECT THE REGIONS",
             attributes: [NSFontAttributeName:UIFont(
@@ -40,6 +113,8 @@ class matchSweden: UIViewController {
                 size: 26)!, NSForegroundColorAttributeName: UIColor.black])
         titleText.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 26.0), range:NSRange(location: 0, length: 36))
         titleLabel.attributedText = titleText
+        
+        // setup buttons
         for idx in 0...(buttonArray.count - 1) {
             let tmpButton = buttonArray[idx] as! UIButton
             let title = NSMutableAttributedString(
@@ -56,11 +131,12 @@ class matchSweden: UIViewController {
             tmpButton.layer.shadowOpacity = 0.12
             tmpButton.layer.shadowOffset = CGSize(width: -1, height: 3)
             tmpButton.titleColor(for: UIControlState.normal)
+            colorButton(tmpButton)
         }
         
-        print(matchData.currentview)
-        if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+        if matchData.swedenBool.count != 0 {
+            print("loading")
+            loadButtonValues()
         }
     }
     
