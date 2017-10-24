@@ -103,11 +103,16 @@ class matchDataClass: NSObject{
             "trainee":       false
         ]
         
-        swedenBool = [
-            "area1": false,
-            "area2": false,
-            "area3": false
-        ]
+        swedenBool = [:]
+        //     "area1": false,
+        //     "area2": false,
+        //     "area3": false,
+        //     "area4": false,
+        //     "area5": false,
+        //     "area6": false,
+        //     "area7": false,
+        //     "area8": false
+        // ]
         
         worldIntrest = false
         
