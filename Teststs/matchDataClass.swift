@@ -22,6 +22,8 @@ class matchDataClass: NSObject{
     var worldIntrest: Bool
     var worldBool:[String: Bool]
     
+    var smileyInt:Int
+    
     var travel:Double
     
     var teamSize:Int
@@ -102,6 +104,8 @@ class matchDataClass: NSObject{
             "thesis":        false,
             "trainee":       false
         ]
+        
+        smileyInt = 0
         
         swedenBool = [:]
         //     "area1": false,
@@ -219,7 +223,8 @@ class matchDataClass: NSObject{
         // NEED INITIALIZER
         self.areaListDynamic = Array<String>()
         self.interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
-        
+        self.smileyInt = Int()
+        // -----------------
         self.time = json["time"].stringValue
     }
     

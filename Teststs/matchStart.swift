@@ -28,6 +28,9 @@ class matchStart: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let something = matchGetPut()
+        something.test()
+        
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
