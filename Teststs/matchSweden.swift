@@ -24,7 +24,17 @@ class matchSweden: UIViewController {
     @IBOutlet weak var button6: UIButton!
     @IBOutlet weak var button7: UIButton!
     @IBOutlet weak var button8: UIButton!
+    @IBOutlet weak var button9: UIButton!
     
+    @IBOutlet weak var area1: UIImageView!
+    @IBOutlet weak var area2: UIImageView!
+    @IBOutlet weak var area3: UIImageView!
+    @IBOutlet weak var area4: UIImageView!
+    @IBOutlet weak var area5: UIImageView!
+    @IBOutlet weak var area6: UIImageView!
+    @IBOutlet weak var areasthlm: UIImageView!
+    @IBOutlet weak var areagbg: UIImageView!
+    @IBOutlet weak var areamalmo: UIImageView!
     
     func colorButton(_ button:UIButton){
         if button.isSelected {
@@ -62,36 +72,50 @@ class matchSweden: UIViewController {
     
     @IBAction func button1action(_ sender: Any) {
         pressButton(button1)
+        area6.isHidden = !button1.isSelected
         saveButtonValues()
     }
     @IBAction func button2action(_ sender: Any) {
         pressButton(button2)
+        area5.isHidden = !button2.isSelected
         saveButtonValues()
     }
     @IBAction func button3action(_ sender: Any) {
         pressButton(button3)
+        area3.isHidden = !button3.isSelected
         saveButtonValues()
     }
     @IBAction func button4action(_ sender: Any) {
         pressButton(button4)
+        areasthlm.isHidden = !button4.isSelected
         saveButtonValues()
     }
     @IBAction func button5action(_ sender: Any) {
         pressButton(button5)
+        area2.isHidden = !button5.isSelected
         saveButtonValues()
     }
     @IBAction func button6action(_ sender: Any) {
         pressButton(button6)
+        area4.isHidden = !button6.isSelected
         saveButtonValues()
     }
     @IBAction func button7action(_ sender: Any) {
         pressButton(button7)
+        areagbg.isHidden = !button7.isSelected
         saveButtonValues()
     }
     @IBAction func button8action(_ sender: Any) {
         pressButton(button8)
+        area1.isHidden = !button8.isSelected
         saveButtonValues()
     }
+    @IBAction func button9action(_ sender: Any) {
+        pressButton(button9)
+        areamalmo.isHidden = !button9.isSelected
+        saveButtonValues()
+    }
+    
     @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +126,7 @@ class matchSweden: UIViewController {
         statusBar()
         swipe()
         
-        buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8]
+        buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8, button9]
         let buttonNameArray = ["North norrland", "South norrland", "Svealand", "Stockholm", "Region West", "Region East", "Göteborg", "Region South", "Malmö"]
         
         // setup title
@@ -131,13 +155,25 @@ class matchSweden: UIViewController {
             tmpButton.layer.shadowOpacity = 0.12
             tmpButton.layer.shadowOffset = CGSize(width: -1, height: 3)
             tmpButton.titleColor(for: UIControlState.normal)
-            colorButton(tmpButton)
         }
         
         if matchData.swedenBool.count != 0 {
             print("loading")
             loadButtonValues()
+            for button in buttonArray{
+                button.isSelected = !button.isSelected
+            }
+            button1action(self)
+            button2action(self)
+            button3action(self)
+            button4action(self)
+            button5action(self)
+            button6action(self)
+            button7action(self)
+            button8action(self)
+            button9action(self)
         }
+        
     }
     
     func statusBar(){

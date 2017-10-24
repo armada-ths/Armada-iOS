@@ -34,6 +34,7 @@ class matchStart: UIViewController {
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)    
         
+        // self.matchData.save()
         if let match = self.matchData.load() {
             self.matchData = match
             self.matchData.currentview = 0
