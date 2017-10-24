@@ -83,7 +83,6 @@ class NewsViewController: UITableViewController {
                     self?.news = news as! [News]
                     self?.tableView.reloadData()
                 }
-
             }
         }
     }
