@@ -36,14 +36,15 @@ class matchGetPut {
         
         // questions – grader
         // get grader id in some way
-        let grader_id = 0
+        let grader_id = 1
         var grader = ["id": grader_id, "answer": matchData.smileyInt]
         // questions – slider
         // get slider id in some way
-//        var slider = ["id": slider_id, "answer": ["min": matchData.min, "max" matchData.max]
-        var slider = [String: Any]()
-        
+        //        var slider = [String: Any]()
+        let slider_id = 2
+        var slider = ["id": slider_id, "answer": ["min": matchData.teamSizeMin, "max": matchData.teamSizeMax]] as [String : Any]
         self.questions = [grader, slider]
+        
         // areas
     }
     

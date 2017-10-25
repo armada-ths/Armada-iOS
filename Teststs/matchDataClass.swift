@@ -124,8 +124,8 @@ class matchDataClass: NSObject{
             "europe":   false,
             "asia":     false,
             "americaN": false,
-            "oceania": false,
-            "americaS":  false,
+            "oceania":  false,
+            "americaS":     false,
             "africa":   false
         ]
         
