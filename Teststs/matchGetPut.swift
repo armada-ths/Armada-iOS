@@ -77,22 +77,38 @@ class matchGetPut {
         print(json)
     }
     
-    func buildForPut() -> JSON {
+    func buildForPut() -> Dictionary<String, Any> {
         var toPost = ["looking_for": self.looking_for,
                       "regions":     self.regions,
                       "continents":  self.continents,
                       "questions":   self.questions,
                       "areas":       self.areas] as [String : Any]
-        let json = JSON(toPost)
-        return json
+        return toPost
     }
     
     func put(student_id: Int) {
-        let url = "http://ais2.armada."
+        let toPost = buildForPut()
+        let dict = ["nickname": toPost]
+        let url = URL(string: urlString + String(student_id))
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "put"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
+            print(response)
+        }
+        task.resume()
     }
     
     func getStudentID() -> Int {
-        
         return 0
     }
     
@@ -100,7 +116,6 @@ class matchGetPut {
         let url = URL(string: urlString + String(student_id))
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             guard let data = data, error == nil else { return }
-            
             print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
         }
         task.resume()

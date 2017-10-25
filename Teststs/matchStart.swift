@@ -29,10 +29,10 @@ class matchStart: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let something = matchGetPut()
-        something.test()
+        something.put(student_id: 3)
         
-        let handler = matchGetPut()
-        let result = handler.get(student_id: 1)
+//        let handler = matchGetPut()
+//        let result = handler.get(student_id: 1)
         
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         // setup status bar
