@@ -179,11 +179,13 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         matchData.save()
     
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
+
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
             print("going to matchEnd from roRight()")
             self.navigationController?.pushViewController(rightViewController, animated: true)
+
     }
     
     func goBack(){

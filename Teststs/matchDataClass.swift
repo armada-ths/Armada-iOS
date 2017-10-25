@@ -187,7 +187,7 @@ class matchDataClass: NSObject{
         self.teamSize =        json["teamSize"].intValue
         self.teamSizeMax =     json["teamSizeMax"].intValue
         self.teamSizeMin =     json["teamSizeMin"].intValue
-        self.currentArea = json["currentArea"].intValue
+        self.currentArea =     json["currentArea"].intValue
         
         var lookingBool:[String: Bool] = [:]
         var swedenBool:[String: Bool] = [:]
