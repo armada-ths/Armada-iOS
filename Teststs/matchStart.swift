@@ -26,6 +26,14 @@ class matchStart: UIViewController {
             name: "Lato-Medium",
             size: 18.0)!])
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("matchData.currentview is \(matchData.currentview)")
+        // if screens are already loaded this will prevent crash
+        if viewNumber < matchData.currentview {
+            self.goRightWithoutAnimation()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let something = matchGetPut()
@@ -35,9 +43,9 @@ class matchStart: UIViewController {
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
-        self.view.addSubview(statusView)    
+        self.view.addSubview(statusView)
         
-        // self.matchData.save()
+        self.matchData.save()
         if let match = self.matchData.load() {
             self.matchData = match
             self.matchData.currentview = 0

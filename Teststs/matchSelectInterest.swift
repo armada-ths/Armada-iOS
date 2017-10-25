@@ -28,9 +28,6 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         areas.dataSource = self
         addStatusbar()
         swipes()
-        if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
-        }
         
         var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
         //var filteredAreas = Dictionary<String, Bool>()
@@ -66,6 +63,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         self.matchData.interrestList = filteredSubAreas
         areas.reloadData()
         // setup stack-view
+
 //        var stackView = UIStackView()
 //        stackView.axis = UILayoutConstraintAxis.vertical
 //        stackView.distribution = UIStackViewDistribution.equalSpacing
@@ -83,6 +81,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
 //        stackHolder.addSubview(stackView)
 //        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
 //        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
+
     }
     
     
@@ -149,10 +148,12 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     
     func goRightWithoutAnimation(){
      //   if matchData.areaList.count == 0 {
+
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
+            print("going to matchEnd from withoutanimation")
             self.navigationController?.pushViewController(rightViewController, animated: false)
 //        } else {
 //            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
@@ -161,6 +162,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
 //            rightViewController.matchSelectInterest = self
 //            self.navigationController?.pushViewController(rightViewController, animated: false)
 //        }
+
     }
 
     func goRight(){
@@ -180,6 +182,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
+            print("going to matchEnd from roRight()")
             self.navigationController?.pushViewController(rightViewController, animated: true)
         } else {
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest

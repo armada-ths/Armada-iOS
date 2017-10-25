@@ -39,6 +39,8 @@ class matchTeam: UIViewController {
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
     }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupSwipe()

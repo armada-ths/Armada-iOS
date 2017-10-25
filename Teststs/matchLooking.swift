@@ -51,7 +51,7 @@ class matchLooking: UIViewController {
     var label2string: NSMutableAttributedString?
     var label3string: NSMutableAttributedString?
     var label4string: NSMutableAttributedString?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup status bar
@@ -168,6 +168,7 @@ class matchLooking: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
+        print("going back to view #\(matchData.currentview)")
         self.matchStart?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }

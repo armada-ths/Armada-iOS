@@ -45,9 +45,15 @@ class matchWorld: UIViewController {
     @IBOutlet var buttonsDistance: NSLayoutConstraint!
     @IBOutlet var mapDistance: NSLayoutConstraint!
     var areaArray = ["europe", "asia", "americaS", "oceania", "americaN", "africa"]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
+        
         labelArray = ["europe": europeLabel, "asia": asiaLabel, "americaS": sAmericaLabel, "oceania": oceaniaLabel, "americaN": nAmericaLabel, "africa": africaLabel]
         buttonArray = ["europe": europeButton, "asia": asiaButton, "americaS": sAmericaButton, "oceania": oceaniaButton, "americaN": nAmericaButton, "africa": africaButton]
         let screenSize = UIScreen.main.bounds
@@ -96,10 +102,7 @@ class matchWorld: UIViewController {
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
         
-        print(matchData.currentview)
-        if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
-        }
+        
                 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
@@ -162,6 +165,7 @@ class matchWorld: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
+        print("going back to view #\(matchData.currentview)")
         self.matchSweden?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
