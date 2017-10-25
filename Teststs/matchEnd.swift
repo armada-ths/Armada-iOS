@@ -15,8 +15,8 @@ class matchEnd: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
-    var matchInterest: matchInterest?
-    var matchSelectInterest: matchSelectInterest?
+    var matchDone: matchDoneViewController?
+   /// var matchSelectInterest: matchSelectInterest?
     
     let summarystring = NSMutableAttributedString(
         string: "SUMMARY",
@@ -54,11 +54,7 @@ class matchEnd: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        if matchData.areaListDynamic.count > 0 {
-            self.matchInterest?.matchData = matchData
-        } else {
-            self.matchSelectInterest?.matchData = matchData
-        }
+        self.matchDone?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
     

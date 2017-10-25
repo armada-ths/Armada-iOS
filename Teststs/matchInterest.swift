@@ -35,7 +35,7 @@ class matchInterest: UIViewController {
         subAreaLabel.text = attribute
         
         // setup stack-view
-        var stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = UILayoutConstraintAxis.vertical
         stackView.distribution = UIStackViewDistribution.equalSpacing
         stackView.alignment = UIStackViewAlignment.center
@@ -116,39 +116,11 @@ class matchInterest: UIViewController {
     }
         
     func goRightWithoutAnimation(){
-        if matchData.areaListDynamic.count != (matchData.currentArea + 1) {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: false)
-        } else {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: false)
-        }
+
     }
     
     func goRight(){
-        matchData.currentview += 1        
-        if matchData.areaListDynamic.count != (matchData.currentArea + 1) {
-            matchData.currentArea += 1
-            matchData.save()
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: true)
-        } else {
-            matchData.save()
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: true)
-        }
+
     }
     
     func goBack(){

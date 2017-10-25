@@ -149,7 +149,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     func goRightWithoutAnimation(){
      //   if matchData.areaList.count == 0 {
 
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
@@ -177,20 +177,13 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         matchData.currentArea = 0
         matchData.areaListDynamic = matchData.areaListDynamic.reversed()
         matchData.save()
-        if matchData.areaListDynamic.count == 0 {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
+    
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
             print("going to matchEnd from roRight()")
             self.navigationController?.pushViewController(rightViewController, animated: true)
-        } else {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchSelectInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: true)
-        }
     }
     
     func goBack(){
