@@ -83,11 +83,10 @@ class matchTravel: UIViewController {
             pushedButton.isSelected = true
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        buildViewFromData()
-        
+        buildViewFromData()        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black

@@ -21,9 +21,6 @@ class matchSelectInterest: UIViewController {
         super.viewDidLoad()
         addStatusbar()
         swipes()
-        if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
-        }
         
         var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
         var filteredAreas = Dictionary<String, Bool>()
@@ -67,6 +64,11 @@ class matchSelectInterest: UIViewController {
         stackHolder.addSubview(stackView)
         stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
         stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
+        
+        print(matchData.currentview)
+        if viewNumber < matchData.currentview {
+            goRightWithoutAnimation()
+        }
     }
     
     
@@ -132,13 +134,16 @@ class matchSelectInterest: UIViewController {
     }
     
     func goRightWithoutAnimation(){
-        if matchData.areaList.count == 0 {
+        if matchData.areaListDynamic.count == 0 {
+            print("areaListDynamic.count is \(matchData.areaListDynamic.count)")
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
+            print("going to matchEnd from withoutanimation")
             self.navigationController?.pushViewController(rightViewController, animated: false)
         } else {
+            print("areaListDynamic.count is \(matchData.areaListDynamic.count)")
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
@@ -164,6 +169,7 @@ class matchSelectInterest: UIViewController {
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
+            print("going to matchEnd from roRight()")
             self.navigationController?.pushViewController(rightViewController, animated: true)
         } else {
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest

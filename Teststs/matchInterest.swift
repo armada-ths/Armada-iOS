@@ -20,6 +20,7 @@ class matchInterest: UIViewController {
     @IBOutlet weak var subAreaLabel: UILabel!
     
     override func viewDidLoad() {
+        print("in matchInterrest!!!!")
         super.viewDidLoad()
         addStatusbar()
         swipes()

@@ -36,6 +36,9 @@ class matchSweden: UIViewController {
     @IBOutlet weak var areagbg: UIImageView!
     @IBOutlet weak var areamalmo: UIImageView!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
     func colorButton(_ button:UIButton){
         if button.isSelected {
             button.backgroundColor = ColorScheme.armadaGreen
@@ -52,7 +55,6 @@ class matchSweden: UIViewController {
             button.backgroundColor = ColorScheme.armadaGreen
         }
     }
-    
     func saveButtonValues(){
         for idx in 0...(self.buttonArray.count-1) {
             let key = self.buttonArray[idx].currentAttributedTitle?.string
@@ -60,7 +62,6 @@ class matchSweden: UIViewController {
             matchData.swedenBool[key!] = val
         }
     }
-    
     func loadButtonValues(){
         for idx in 0...(self.buttonArray.count-1) {
             let key = self.buttonArray[idx].currentAttributedTitle
@@ -69,7 +70,6 @@ class matchSweden: UIViewController {
             colorButton(button)
         }        
     }
-    
     @IBAction func button1action(_ sender: Any) {
         pressButton(button1)
         area6.isHidden = !button1.isSelected
@@ -116,7 +116,6 @@ class matchSweden: UIViewController {
         saveButtonValues()
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         print(matchData.currentview)
@@ -214,6 +213,7 @@ class matchSweden: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
+        print("going back to view #\(matchData.currentview)")
         self.matchLooking?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
