@@ -10,8 +10,10 @@ import Foundation
 
 class matchGetPut {
     
-    let urlString = "http://ais2.armada.nu/api/student_profile?student_id="
-    var matchResult = Dictionary<String, Any>()
+    let putURLString = "http://ais2.armada.nu/api/student_profile?student_id="
+    let getURLString = "http://ais2.armada.nu/api/matching_result?student_id="
+    
+    var matchResult = Array<Dictionary<String, Any>>()
     
     var looking_for = Array<Int>()
     var regions = Array<Int>()
@@ -86,10 +88,10 @@ class matchGetPut {
         return toPost
     }
     
-    func put(student_id: Int) {
+    func putAnswer(student_id: Int) {
         let toPost = buildForPut()
         let dict = ["nickname": toPost]
-        let url = URL(string: urlString + String(student_id))
+        let url = URL(string: putURLString + String(student_id))
         
         var request = URLRequest(url: url!)
         request.httpMethod = "put"
@@ -112,22 +114,21 @@ class matchGetPut {
         return 0
     }
     
-    func get(student_id: Int) -> Dictionary<String, Any>{
-        let url = URL(string: urlString + String(student_id))
+    func getResult(student_id: Int){
+        let url = URL(string: getURLString + String(student_id))
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
+            do {
+                if let data = data {
+                    //[{"company_id": Int, "percent": Double, "3array": ["string1", "string2", "string3"], }, ...]
+                    let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, Any>>
+                    self.matchResult = response
+                } else {
+                    // Data is nil.
+                }
+            } catch let error as NSError {
+                print("json error: \(error.localizedDescription)")
+            }
         }
         task.resume()
-        
-        //{"company_id": Int, "percent": Double, "3array": ["string1", "string2", "string3"], }
-        
-        // parse json to result
-        
-        var result = Dictionary<String, Any>()
-        
-        return result
     }
-    
-    
 }
