@@ -8,17 +8,24 @@
 
 import UIKit
 
-class matchSelectInterest: UIViewController {
+class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+ 
     
-    @IBOutlet weak var stackHolder: UIView!
+    
+    
+    @IBOutlet var areas: UICollectionView!
     //@IBOutlet weak var stackView: UIStackView!
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchTeam: matchTeam?
     let viewNumber = 6
+    var filteredAreas = [String: Bool]()
+    var areaKeys = [Int: String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        areas.delegate = self
+        areas.dataSource = self
         addStatusbar()
         swipes()
         if viewNumber < matchData.currentview {
@@ -26,13 +33,21 @@ class matchSelectInterest: UIViewController {
         }
         
         var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
-        var filteredAreas = Dictionary<String, Bool>()
+        //var filteredAreas = Dictionary<String, Bool>()
         var filteredSubAreas = Dictionary<String, Array<Dictionary<String, Any>>>()
         
         // filter areas
+        var i = 0
         for item in unfiltered{
-            filteredAreas[item["area"] as! String] = false
+                filteredAreas[item["area"] as! String] =  false
+            if(!areaKeys.values.contains(item["area"] as! String)){
+                areaKeys[i] = item["area"] as! String
+                i += 1
+
+            }
+
         }
+        
         self.matchData.areaList = []
         for (key, _) in filteredAreas{
             filteredSubAreas[key] = []
@@ -49,53 +64,54 @@ class matchSelectInterest: UIViewController {
             filteredSubAreas[item["area"] as! String]?.append(newItem)
         }
         self.matchData.interrestList = filteredSubAreas
+        areas.reloadData()
         // setup stack-view
-        var stackView = UIStackView()
-        stackView.axis = UILayoutConstraintAxis.vertical
-        stackView.distribution = UIStackViewDistribution.equalSpacing
-        stackView.alignment = UIStackViewAlignment.center
-        stackView.spacing = 30
-        
-        var count = matchData.areaList.count - 1
-        for (key, _) in filteredAreas{
-            let area = createAreaView(text: key, tag: count)
-            count -= 1
-            print("adding \(area) to stackView")
-            stackView.addArrangedSubview(area)
-        }
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackHolder.addSubview(stackView)
-        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
+//        var stackView = UIStackView()
+//        stackView.axis = UILayoutConstraintAxis.vertical
+//        stackView.distribution = UIStackViewDistribution.equalSpacing
+//        stackView.alignment = UIStackViewAlignment.center
+//        stackView.spacing = 30
+//
+//        var count = matchData.areaList.count - 1
+//        for (key, _) in filteredAreas{
+//            let area = createAreaView(text: key, tag: count)
+//            count -= 1
+//            print("adding \(area) to stackView")
+//            stackView.addArrangedSubview(area)
+//        }
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackHolder.addSubview(stackView)
+//        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
+//        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
     }
     
     
-    func createAreaView(text:String, tag:Int) -> UIView {
-        var areaView = UIView()
-        let areaTitle = UILabel()
-        let areaText = NSMutableAttributedString(
-            string: text,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "Lato-Regular",
-                size: 22.0)!])
-        areaTitle.attributedText = areaText
-        areaTitle.textAlignment = .center
-        areaTitle.translatesAutoresizingMaskIntoConstraints = false
-        areaView.addSubview(areaTitle)
-        let horizontalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
-        areaView.addConstraints([horizontalConstraint, verticalConstraint])
-        areaView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        areaView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        areaView.backgroundColor = .white
-        
-        // add tag and click-function
-        areaView.tag = tag
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (someAction))
-        areaView.addGestureRecognizer(gesture)
-        
-        return areaView
-    }
+//    func createAreaView(text:String, tag:Int) -> UIView {
+//        var areaView = UIView()
+//        let areaTitle = UILabel()
+//        let areaText = NSMutableAttributedString(
+//            string: text,
+//            attributes: [NSFontAttributeName:UIFont(
+//                name: "Lato-Regular",
+//                size: 22.0)!])
+//        areaTitle.attributedText = areaText
+//        areaTitle.textAlignment = .center
+//        areaTitle.translatesAutoresizingMaskIntoConstraints = false
+//        areaView.addSubview(areaTitle)
+//        let horizontalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+//        let verticalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+//        areaView.addConstraints([horizontalConstraint, verticalConstraint])
+//        areaView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        areaView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//        areaView.backgroundColor = .white
+//
+//        // add tag and click-function
+//        areaView.tag = tag
+//        let gesture = UITapGestureRecognizer(target: self, action:  #selector (someAction))
+//        areaView.addGestureRecognizer(gesture)
+//
+//        return areaView
+//    }
     
     func someAction(sender: UITapGestureRecognizer){
         print("like flipping a flipping flipswitch broh!")
@@ -132,19 +148,19 @@ class matchSelectInterest: UIViewController {
     }
     
     func goRightWithoutAnimation(){
-        if matchData.areaList.count == 0 {
+     //   if matchData.areaList.count == 0 {
             let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
             rightViewController.matchSelectInterest = self
             self.navigationController?.pushViewController(rightViewController, animated: false)
-        } else {
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchSelectInterest = self
-            self.navigationController?.pushViewController(rightViewController, animated: false)
-        }
+//        } else {
+//            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
+//            rightViewController.matchData = self.matchData
+//            rightViewController.matchStart = matchStart
+//            rightViewController.matchSelectInterest = self
+//            self.navigationController?.pushViewController(rightViewController, animated: false)
+//        }
     }
 
     func goRight(){
@@ -187,4 +203,61 @@ class matchSelectInterest: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
+        
+        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(200/750))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! UICollectionReusableView
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return filteredAreas.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(indexPath.row)
+        let cell = areas.dequeueReusableCell(withReuseIdentifier: "areasCell", for: indexPath as IndexPath) as! IntrestCollectionViewCell
+        //cell.intrest = filteredAreas.keys[indexPath.row]
+        cell.intrest.text = areaKeys[indexPath.row]
+        cell.selectionButton.layer.cornerRadius = 0.5 * cell.selectionButton.bounds.size.width
+        cell.selectionButton.layer.borderWidth = 1
+        cell.selectionButton.layer.borderColor = UIColor.black.cgColor
+        cell.selectionButton.tag = indexPath.row
+        cell.tag = indexPath.row
+        cell.intrest.font = UIFont(name: "Lato-Light", size: 20)
+        if (filteredAreas[areaKeys[indexPath.row]!]! == true){
+            cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
+            cell.intrest.font = UIFont(name: "Lato-Regular", size: 20)
+            }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // NOTE:
+        // The left inset and right inset is set to 20 pixels in Storyboard.
+        let sqWidth:CGFloat = UIScreen.main.bounds.width
+        return CGSize(width: sqWidth, height: 50);
+    }
+
+    @IBAction func selectIntrest(_ sender: UIButton) {
+        let intrestId = sender.tag
+        let areaOfintrest = areaKeys[intrestId]
+        if (filteredAreas[areaOfintrest!] == false){
+            sender.backgroundColor = ColorScheme.worldMatchGrey
+            filteredAreas[areaOfintrest!] = true
+            matchData.areaList.append(areaOfintrest!)
+            
+        }
+        else{
+            sender.backgroundColor = UIColor.clear
+            filteredAreas[areaOfintrest!] = false
+        }
+    }
+    
 }
+
