@@ -31,6 +31,9 @@ class matchStart: UIViewController {
         let something = matchGetPut()
         something.test()
         
+        let handler = matchGetPut()
+        let result = handler.get(student_id: 1)
+        
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))

@@ -182,9 +182,8 @@ class matchWorld: UIViewController {
             sender.layer.backgroundColor = ColorScheme.worldMatchGrey.cgColor
             labelArray[key]?.font = UIFont(name: "Lato-Regular", size: 20)
             matchData.worldBool[key] = true
-
-            
         }
+        
     }
     
     @IBAction func switchState(_ sender: UISwitch) {
@@ -212,5 +211,6 @@ class matchWorld: UIViewController {
                 button.value.isEnabled = false
             }
         }
+        matchData.save()
     }
 }
