@@ -19,7 +19,7 @@ open class Company: NSManagedObject {
 
                 let website = json["company_website"] as? String ?? ""
             
-            
+            let id = json["id"] as? Int ?? 0
             let workFields = json["work_fields"] as? [[String:AnyObject]]
             let programmes = json["programs"] as? [[String:AnyObject]]
             let jobTypes = json["job_types"] as? [[String:AnyObject]]
@@ -52,6 +52,7 @@ open class Company: NSManagedObject {
             
                 let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 company.name = name
+                company.id = id
                 company.booth = booth
                 company.companyDescription = description
                 company.website = website
