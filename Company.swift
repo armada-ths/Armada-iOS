@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import SwiftyJSON
 
 open class Company: NSManagedObject {
     
@@ -36,7 +37,7 @@ open class Company: NSManagedObject {
                 let keywords = json["keywords"] as? String ?? ""// TODO: Bort?
                 let contactName = json["contact_name"] as? String ?? ""// TODO: Bort?
                 let contactEmail = json["contact_email"] as? String ?? ""// TODO: Bort?
-                let contactPhone = json["contact_number"] as? String ?? ""// TODO: Bort?
+                let contactPhone = json["phone_numbe"] as? String ?? ""// TODO: Bort?
                 let isStartup = json["startup"] as? Bool ?? false// TODO: Finns inte med än?
                 let likesEquality = json["diversity"] as? Bool ?? false
                 let likesEnvironment = json["sustainability"] as? Bool ?? false
@@ -48,7 +49,23 @@ open class Company: NSManagedObject {
             
                 let adUrl = json["ad_url"] as? String ?? ""
                 let logoUrl = json["logo_url"] as? String ?? ""
+                var hostName: String
+                var hostEmail: String
+                var hostId: Int
+            if((json["hosts"] as! NSArray).count > 0){
+                let hostJson =  JSON((json["hosts"] as! NSArray)[0])
+                let host = hostJson.dictionaryObject
+                hostEmail = host!["email"] as! String
+                hostId = host!["id"] as! Int
+                hostName = host!["name"] as! String
+            }
+            else{
+                hostEmail = ""
+                hostId = -1
+                hostName = ""
+            }
             
+
             
                 let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: managedObjectContext) as! Company
                 company.name = name
@@ -75,6 +92,10 @@ open class Company: NSManagedObject {
                 company.keywords = keywords
                 company.primaryWorkField = primaryWorkField
                 company.videoUrl = videoUrl
+                company.hostName = hostName
+                company.hostId = hostId
+                company.hostEmail = hostEmail
+
                 return company
         } else {
             print("Failed to parse company")

@@ -168,9 +168,13 @@ class NewsArticleViewController: UIViewController, UITextViewDelegate {
                 let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
             
                 // Ask the OS for an actual font that most closely matches the description above
+                if(String(describing: value).contains("bold")){
+                    let newFont = UIFont(name: "Lato-Bold", size: currentFont.pointSize*0.8)
+                    newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+                    
+                }
             
-            
-                if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
+                else if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
                     let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)
                 newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
                 }
