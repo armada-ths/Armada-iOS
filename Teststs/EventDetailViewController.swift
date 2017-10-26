@@ -165,7 +165,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func setFont(newsString: String) -> NSAttributedString{
-        let newAttributedString = NSMutableAttributedString(string: newsString)
+        let newAttributedString = NSMutableAttributedString(attributedString: newsString.attributedHtmlString!)
         // Enumerate through all the font ranges
         newAttributedString.enumerateAttribute(NSFontAttributeName, in: NSMakeRange(0, newAttributedString.length), options: []) { value, range, stop in
  
@@ -180,8 +180,12 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             let fontDescriptor = currentFont.fontDescriptor.addingAttributes([UIFontDescriptorFamilyAttribute: "Lato"])
             
             // Ask the OS for an actual font that most closely matches the description above
-            
-            if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
+            if(String(describing: value).contains("bold")){
+                let newFont = UIFont(name: "Lato-Bold", size: currentFont.pointSize*0.8)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+                
+            }
+            else if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
                 let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)
                 newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
             }
