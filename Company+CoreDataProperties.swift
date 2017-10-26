@@ -4,6 +4,7 @@ import CoreData
 
 extension Company {
     @NSManaged var name: String
+    @NSManaged var id: Int
     @NSManaged var primaryWorkField: String
     @NSManaged var companyDescription: String
     @NSManaged var website: String
