@@ -86,7 +86,7 @@ class matchTravel: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        buildViewFromData()        
+        //buildViewFromData()        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -206,14 +206,14 @@ class matchTravel: UIViewController {
     }
     
     func buildViewFromData(){
-        let something = self.matchData.backendData["questions"]
-        let sliderData = something![0]
-        let titleAttributedText = NSMutableAttributedString(
-            string: sliderData["question"] as! String,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 35)!])
-        titleLabel.attributedText = titleAttributedText
+//        let something = self.matchData.backendData["questions"]
+//        let sliderData = something![0]
+//        let titleAttributedText = NSMutableAttributedString(
+//            string: sliderData["question"] as! String,
+//            attributes: [NSFontAttributeName:UIFont(
+//                name: "BebasNeueRegular",
+//                size: 35)!])
+//        titleLabel.attributedText = titleAttributedText
     }
     
     func goRightWithoutAnimation(){

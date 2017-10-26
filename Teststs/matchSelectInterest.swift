@@ -29,21 +29,21 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         addStatusbar()
         swipes()
         
-        var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
+//        var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
         //var filteredAreas = Dictionary<String, Bool>()
         var filteredSubAreas = Dictionary<String, Array<Dictionary<String, Any>>>()
         
         // filter areas
         var i = 0
-        for item in unfiltered{
-                filteredAreas[item["area"] as! String] =  false
-            if(!areaKeys.values.contains(item["area"] as! String)){
-                areaKeys[i] = item["area"] as! String
-                i += 1
-
-            }
-
-        }
+//        for item in unfiltered{
+//                filteredAreas[item["area"] as! String] =  false
+//            if(!areaKeys.values.contains(item["area"] as! String)){
+//                areaKeys[i] = item["area"] as! String
+//                i += 1
+//
+//            }
+//
+//        }
         
         self.matchData.areaList = []
         for (key, _) in filteredAreas{
@@ -53,13 +53,13 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         }
         self.matchData.areaList = self.matchData.areaList.reversed()
         // filter sub-areas
-        for item in unfiltered{
-            var newItem = Dictionary<String, Any>()
-            newItem["id"] = item["id"] as! Int
-            newItem["work_field"] = item["work_field"] as! String
-            newItem["bool"] = false
-            filteredSubAreas[item["area"] as! String]?.append(newItem)
-        }
+//        for item in unfiltered{
+//            var newItem = Dictionary<String, Any>()
+//            newItem["id"] = item["id"] as! Int
+//            newItem["work_field"] = item["work_field"] as! String
+//            newItem["bool"] = false
+//            filteredSubAreas[item["area"] as! String]?.append(newItem)
+//        }
         self.matchData.interrestList = filteredSubAreas
         areas.reloadData()
         // setup stack-view

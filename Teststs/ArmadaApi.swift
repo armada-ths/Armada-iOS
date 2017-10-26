@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import SwiftyJSON
 
 public struct ArmadaEvent {
     public let title: String
@@ -80,6 +81,13 @@ public struct ArmadaMember: Equatable {
     let imageUrl: URL?
     let role: String
 }
+
+//public struct matchBackendData {
+//    let data: Dictionary<String, Array<Dictionary<String, Any>>>
+//    public init?(json: AnyObject){
+//
+//    }
+//}
 
 public struct ArmadaBanquetPlacement {
     let firstName: String
@@ -271,6 +279,7 @@ open class _ArmadaApi {
     //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
     let newsUrl = "http://armada.nu"
+    let matchUrl = "http://ais2.armada.nu/api/questions?student_id="
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -287,8 +296,6 @@ open class _ArmadaApi {
         try FileManager.default.removeItem(at: persistentStoreUrlShm)
         try FileManager.default.removeItem(at: persistentStoreUrlWal)
     }
-    
-
     
     func copyDatabaseFromBundle() throws {
         let sqliteUrl = Bundle(for: type(of: self)).url(forResource: "Companies", withExtension: "sqlite")!
@@ -307,6 +314,12 @@ open class _ArmadaApi {
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
+    
+    /* ADDING matchBackendData getter here */
+    
+    func getMatchBackendData() {
+        
+    }
     
     func generateMap() {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
@@ -675,6 +688,63 @@ open class _ArmadaApi {
 
         }
         return []
+    }
+    
+    func matchFromServer(_ student_id: Int,_ callback: @escaping (Dictionary<String, Any>, Bool, String) -> Void) {
+        let request = NSMutableURLRequest(url: (URL(string: (matchUrl + String(student_id))))!)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            if (data == nil){
+                callback(Dictionary<String, Any>(), true, (error?.localizedDescription)!)
+            }
+            else {
+                print("data in format data \(data)")
+                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+                do {
+                    let parsedjson = JSON.init(parseJSON: responseString as! String)
+                    
+                    var tmpid = 0
+                    var areas = Array<Dictionary<String, Any>>()
+                    for (_, val) in parsedjson["areas"] {
+                        for field in val["fields"]{
+                            print(field.1.rawString()!)
+                            areas.append(["id": tmpid, "field": field.1.rawString(), "area": val["title"].string])
+                            tmpid += 1
+                        }
+                    }
+                    var slider = Dictionary<String, Any>()
+                    var grader = Dictionary<String, Any>()
+                    for (_, val) in parsedjson["questions"] {
+                        if val["type"].string == "slider" {
+                            slider["step"] = val["step"].int
+                            slider["min"] = val["min"].int
+                            slider["max"] = val["max"].int
+                            slider["question"] = val["question"].string
+                            slider["type"] = val["type"].string
+                        }
+                        if val["type"].string == "grading" {
+                            print("wtf")
+                            grader["question"] = val["question"].string
+                            grader["type"] = val["type"].string
+                            grader["steps"] = val["steps"].int
+                        }
+                    }
+                    // save to phone defaults
+                    var match: matchDataClass
+                    if matchDataClass().load() == nil {
+                        match = matchDataClass()
+                    } else {
+                        match = matchDataClass().load()!
+                    }
+                    match.grader = grader
+                    match.slider = slider
+                    match.areas = areas
+                    match.save()
+                } catch {
+                    print("something went wrong in matchFromServer")
+                }
+            }
+        }.resume()
     }
     
     func newsFromServer(_ callback: @escaping (Array<News>, Bool, String) -> Void) {
