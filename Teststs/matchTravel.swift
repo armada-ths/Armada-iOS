@@ -233,13 +233,16 @@ class matchTravel: UIViewController {
     }
     
     func goRight(){
-        matchData.currentview += 1
-        matchData.save()
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchTravel = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
+        if !(button1.isSelected == false && button2.isSelected == false &&  button3.isSelected == false && button4.isSelected == false && button5.isSelected == false){
+            matchData.currentview += 1
+            matchData.save()
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
+            rightViewController.matchData = self.matchData
+            rightViewController.matchStart = matchStart
+            rightViewController.matchTravel = self
+            self.navigationController?.pushViewController(rightViewController, animated: true)
+        }
+        
     }
     
     func goBack(){
