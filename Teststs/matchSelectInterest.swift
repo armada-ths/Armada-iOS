@@ -20,101 +20,25 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     var matchTeam: matchTeam?
     let viewNumber = 6
     var areaKeys = [Int: String]()
+    var numInterests = 0
     
+    @IBOutlet var imageH: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         areas.delegate = self
         areas.dataSource = self
         addStatusbar()
         swipes()
-        
-//        var unfiltered = matchData.backendData["areas"] as! Array<Dictionary<String, Any>>
-        //var filteredAreas = Dictionary<String, Bool>()
-        var filteredSubAreas = Dictionary<String, Array<Dictionary<String, Any>>>()
-        
-        // filter areas
-//        for item in unfiltered{
-//                filteredAreas[item["area"] as! String] =  false
-//            if(!areaKeys.values.contains(item["area"] as! String)){
-//                areaKeys[i] = item["area"] as! String
-//                i += 1
-//
-//            }
-//
-//        }
-        
-//        self.matchData.areaList = []
-//        for (key, _) in filteredAreas{
-//            filteredSubAreas[key] = []
-//            self.matchData.areaList.append(key)
-//            self.matchData.areaBools[key] = false
-//        }
-//        self.matchData.areaList = self.matchData.areaList.reversed()
-        // filter sub-areas
-//        for item in unfiltered{
-//            var newItem = Dictionary<String, Any>()
-//            newItem["id"] = item["id"] as! Int
-//            newItem["work_field"] = item["work_field"] as! String
-//            newItem["bool"] = false
-//            filteredSubAreas[item["area"] as! String]?.append(newItem)
-//        }
-        
         var i = 0
         for item in matchData.mainAreas{
             areaKeys[i] = item.key
             i += 1
+            if(item.value == true){
+                numInterests += 1
+            }
         }
-       // self.matchData.mainAreas = filteredSubAreas
-       // areas.reloadData()
-        // setup stack-view
-
-//        var stackView = UIStackView()
-//        stackView.axis = UILayoutConstraintAxis.vertical
-//        stackView.distribution = UIStackViewDistribution.equalSpacing
-//        stackView.alignment = UIStackViewAlignment.center
-//        stackView.spacing = 30
-//
-//        var count = matchData.areaList.count - 1
-//        for (key, _) in filteredAreas{
-//            let area = createAreaView(text: key, tag: count)
-//            count -= 1
-//            print("adding \(area) to stackView")
-//            stackView.addArrangedSubview(area)
-//        }
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackHolder.addSubview(stackView)
-//        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
-//        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
-
     }
-    
-    
-//    func createAreaView(text:String, tag:Int) -> UIView {
-//        var areaView = UIView()
-//        let areaTitle = UILabel()
-//        let areaText = NSMutableAttributedString(
-//            string: text,
-//            attributes: [NSFontAttributeName:UIFont(
-//                name: "Lato-Regular",
-//                size: 22.0)!])
-//        areaTitle.attributedText = areaText
-//        areaTitle.textAlignment = .center
-//        areaTitle.translatesAutoresizingMaskIntoConstraints = false
-//        areaView.addSubview(areaTitle)
-//        let horizontalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-//        let verticalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
-//        areaView.addConstraints([horizontalConstraint, verticalConstraint])
-//        areaView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        areaView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-//        areaView.backgroundColor = .white
-//
-//        // add tag and click-function
-//        areaView.tag = tag
-//        let gesture = UITapGestureRecognizer(target: self, action:  #selector (someAction))
-//        areaView.addGestureRecognizer(gesture)
-//
-//        return areaView
-//    }
+
     
     func someAction(sender: UITapGestureRecognizer){
         print("like flipping a flipping flipswitch broh!")
@@ -151,25 +75,27 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func goRightWithoutAnimation(){
-     //   if matchData.areaList.count == 0 {
-
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
-            rightViewController.matchSelectInterest = self
+        rightViewController.matchSelectInterest = self
             print("going to matchEnd from withoutanimation")
             self.navigationController?.pushViewController(rightViewController, animated: false)
-//        } else {
-//            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
-//            rightViewController.matchData = self.matchData
-//            rightViewController.matchStart = matchStart
-//            rightViewController.matchSelectInterest = self
-//            self.navigationController?.pushViewController(rightViewController, animated: false)
-//        }
 
     }
 
     func goRight(){
+        matchData.save()
+        if(numInterests < 1 || numInterests > 4){
+            let alertController = UIAlertController(title: "Error", message: "You need to select between 1 and 4 interests", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            for subArea in matchData.subAreas{
+                matchData.subAreas[subArea.key]!["select"] = false
+            }
+
+            return
+        }
         matchData.currentview += 1
         matchData.areaListDynamic = []
         for (key, value) in matchData.areaBools {
@@ -180,9 +106,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         }
         matchData.currentArea = 0
         matchData.areaListDynamic = matchData.areaListDynamic.reversed()
-        matchData.save()
-    
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
+            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchInterest") as! matchInterest
 
             rightViewController.matchData = self.matchData
             rightViewController.matchStart = matchStart
@@ -253,11 +177,14 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
             sender.backgroundColor = ColorScheme.worldMatchGrey
             matchData.mainAreas[areaOfintrest!] = true
             matchData.areaList.append(areaOfintrest!)
+            numInterests += 1
             
         }
         else{
             sender.backgroundColor = UIColor.clear
             matchData.mainAreas[areaOfintrest!] = false
+            numInterests -= 1
+
         }
     }
     
