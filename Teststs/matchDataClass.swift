@@ -89,7 +89,7 @@ class matchDataClass: NSObject{
         }
         self.subAreas = Dictionary<String, Dictionary<String, Any>>()
         for item in json["subAreas"] {
-            let subareaObj = ["id": item.1["id"].int!, "field": item.1["field"].stringValue, "parent": item.1["area"].stringValue, "select": item.1["select"].boolValue] as [String : Any]
+            let subareaObj = ["id": item.1["id"].int!, "field": item.1["field"].stringValue, "parent": item.1["parent"].stringValue, "select": item.1["select"].boolValue] as [String : Any]
             self.subAreas[item.1["id"].stringValue] = subareaObj
         }
         self.areas = Array<Dictionary<String, Any>>()
