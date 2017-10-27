@@ -79,7 +79,7 @@ open class Company: NSManagedObject {
                 company.employeesSweden = employeesSweden
                 company.employeesWorld = employeesWorld
                 company.locationDescription = locationDescription
-//                company.locationUrl = locationUrl
+                company.locationUrl = locationUrl
                 company.contactName = contactName
                 company.contactEmail = contactEmail
                 company.contactPhone = contactPhone

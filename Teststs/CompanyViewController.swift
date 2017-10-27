@@ -1,7 +1,10 @@
 import UIKit
 
 class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
+    @IBOutlet var mapH: NSLayoutConstraint!
     
+    @IBOutlet var mapImage: UIImageView!
+    @IBOutlet var imageHeight: NSLayoutConstraint!
     @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var jobLabel: UILabel!
@@ -31,7 +34,14 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     let infoRow = 10
     
     override func viewDidLoad() {
-        headerHeight = UIScreen.main.bounds.width * 3 / 4
+        if(company.image != nil){
+            headerHeight = UIScreen.main.bounds.width * (company.image!.size.height/company.image!.size.width)
+            imageHeight.constant = headerHeight
+            headerImageView.image = company.image
+        }
+        else{
+            headerHeight = 0
+        }
         super.viewDidLoad()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 300
@@ -87,8 +97,21 @@ class CompanyViewController: FixedHeaderTableViewController, UIWebViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        headerImageView.image = company.image
         locationLabel.text = company.locationDescription + "\nBooth:" +  String(company.booth)
+        if(company.locationUrl == ""){
+            return
+        }
+        URLSession.shared.dataTask(with: URL(string: company.locationUrl)!, completionHandler: {(data, response, error) -> Void in
+            if error != nil {
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                var ratio:CGFloat
+                let image = UIImage(data: data!)
+                self.mapH.constant = 300*((image?.size.height)!/(image?.size.width)!)
+                self.mapImage.image = image
+            })
+        }).resume()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

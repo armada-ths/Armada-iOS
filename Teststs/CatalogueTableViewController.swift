@@ -54,6 +54,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.rowHeight = 75
         searchBar.delegate = self
         //        refreshControl = UIRefreshControl()
         //        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -96,7 +97,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             companies = companies.filter({ $0.name.lowercased().hasPrefix(searchText.lowercased())})
         }
         updateCompaniesByLetters(companies)
-        showEmptyMessage(companies.isEmpty, message:  "No company matches\nyour filter")
+      //  showEmptyMessage(companies.isEmpty, message:  "No company matches\nyour filter")
         searchBar.isHidden = companies.isEmpty  && (searchBar.text ?? "").isEmpty
         tableView.reloadData()
     }
@@ -129,13 +130,13 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.primaryWorkField
+        cell.descriptionLabel.sizeToFit()
         if let image = company.image {
             cell.logoImageView.image = image
             cell.companyNameLabel.isHidden = true
         } else {
             cell.logoImageView.image = nil
-            cell.companyNameLabel.isHidden = false
-            cell.companyNameLabel.text = company.name
+            cell.companyNameLabel.isHidden = true
         }
         
         
@@ -203,6 +204,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             tableView.endUpdates()
         }
     }
+ 
 }
 
 extension CatalogueTableViewController: UISearchBarDelegate {
