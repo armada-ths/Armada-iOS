@@ -9,21 +9,6 @@
 import UIKit
 import SwiftyJSON
 
-struct AreaObject {
-    
-    var id: Int
-    var field: String
-    var parentArea: String
-    var select: Bool
-    
-    init(id: Int, field: String, parent: String, select: Bool){
-        self.id = id
-        self.field = field
-        self.parentArea = parent
-        self.select = select
-    }
-}
-
 class matchDataClass: NSObject{
     
     /* view-descriptions */
@@ -32,7 +17,7 @@ class matchDataClass: NSObject{
     var areas: Array<Dictionary<String, Any>>
     /* to be saved */
     var mainAreas: Dictionary<String, Bool>
-    var subAreas: Dictionary<String, AreaObject>
+    var subAreas: Dictionary<String, Dictionary<String, Any>>
     /* (-1) filling out form, (0) waiting for result, (1) got match result */
     var matchResultStatus: Int
     
@@ -59,7 +44,7 @@ class matchDataClass: NSObject{
         slider = Dictionary<String, Any>()
         areas = Array<Dictionary<String, Any>>()
         mainAreas = Dictionary<String, Bool>()
-        subAreas = Dictionary<String, AreaObject>()
+        subAreas = Dictionary<String, Dictionary<String, Any>>()
         matchResultStatus = -1
         smileyInt = 0
         currentview = 0
@@ -93,16 +78,23 @@ class matchDataClass: NSObject{
     
     init(_ json: JSON){
         
-        self.mainAreas = Dictionary<String, Bool>()
-        self.subAreas = Dictionary<String, AreaObject>()
         self.areaListDynamic = Array<String>()
         self.interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
-        self.smileyInt = Int()
+        
         /* properties ABOVE not loaded from defaults YET! */
         
+        self.mainAreas = Dictionary<String, Bool>()
+        for (key, val) in json["mainAreas"] {
+            self.mainAreas[String(key)] = val.boolValue
+        }
+        self.subAreas = Dictionary<String, Dictionary<String, Any>>()
+        for item in json["subAreas"] {
+            let subareaObj = ["id": item.1["id"].int!, "field": item.1["field"].stringValue, "parent": item.1["area"].stringValue, "select": item.1["select"].boolValue] as [String : Any]
+            self.subAreas[item.1["id"].stringValue] = subareaObj
+        }
         self.areas = Array<Dictionary<String, Any>>()
         for (_, val) in json["areas"] {
-            self.areas.append(["id": val["id"].int, "field": val["field"].string, "area": val["area"].string])
+            self.areas.append(["id": val["id"].int!, "field": val["field"].string!, "area": val["area"].string!])
         }
         self.slider = Dictionary<String, Any>()
         self.slider["step"] = json["slider"]["step"].int
@@ -115,6 +107,7 @@ class matchDataClass: NSObject{
         self.grader["type"] = json["grader"]["type"].string
         self.grader["steps"] = json["grader"]["steps"].int
         
+        self.smileyInt = json["smileyInt"].intValue
         self.matchResultStatus = json["matchResultStatus"].intValue
         self.travel =          json["travel"].doubleValue
         
@@ -123,33 +116,28 @@ class matchDataClass: NSObject{
         self.teamSizeMax =     json["teamSizeMax"].intValue
         self.teamSizeMin =     json["teamSizeMin"].intValue
         self.currentArea =     json["currentArea"].intValue
-        
-        var lookingBool:[String: Bool] = [:]
-        var swedenBool:[String: Bool] = [:]
-        var worldBool:[String: Bool] = [:]
-        var areaBools:[String: Bool] = [:]
-        var areaList:Array<String> = Array<String>()
-        for (key, val):(String, JSON) in json["lookingBool"] {
-            lookingBool[key] = val.boolValue
-        }
-        self.lookingBool = lookingBool
-        for (key, val):(String, JSON) in json["swedenBool"] {
-            swedenBool[key] = val.boolValue
-        }
-        self.swedenBool = swedenBool
-        for (key, val):(String, JSON) in json["worldBool"] {
-            worldBool[key] = val.boolValue
-        }
+
         self.worldIntrest = json["worldIntrest"].boolValue
-        self.worldBool = worldBool
+        self.lookingBool = [:]
+        for (key, val):(String, JSON) in json["lookingBool"] {
+            self.lookingBool[key] = val.boolValue
+        }
+        self.swedenBool = [:]
+        for (key, val):(String, JSON) in json["swedenBool"] {
+            self.swedenBool[key] = val.boolValue
+        }
+        self.worldBool = [:]
+        for (key, val):(String, JSON) in json["worldBool"] {
+            self.worldBool[key] = val.boolValue
+        }
+        self.areaBools = [:]
         for (key, val):(String, JSON) in json["areaBools"] {
-            areaBools[key] = val.boolValue
+            self.areaBools[key] = val.boolValue
         }
-        self.areaBools = areaBools
+        self.areaList = Array<String>()
         for (_, val):(String, JSON) in json["areaList"] {
-            areaList.append(val.stringValue)
+            self.areaList.append(val.stringValue)
         }
-        self.areaList = areaList
         self.time = json["time"].stringValue
     }
     func toJSON() -> JSON {
@@ -170,8 +158,8 @@ class matchDataClass: NSObject{
                 // setup main areas
                 self.mainAreas[item["area"] as! String] = false
                 // setup sub areas
-                let subareaObj = AreaObject(id: item["id"] as! Int, field: item["field"] as! String, parent: item["area"] as! String, select: false)
-                self.subAreas[item["id"] as! String] = subareaObj
+                let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
+                self.subAreas[String(item["id"] as! Int)] = subareaObj
             }
         }
     }

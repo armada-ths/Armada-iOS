@@ -47,16 +47,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup status-bar style
         UIApplication.shared.statusBarStyle = .lightContent
         
-//UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
-//UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
-//        window!.tintColor = ColorScheme.armadaGreen
-//        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
-//        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
-//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
-//        UITableView.appearance().backgroundColor = UIColor.whiteColor()
+        /* fetch the matchBackendData if not already done */
+        let currentIDKEY = 1
+        guard let loaded = matchDataClass().load() else {
+            ArmadaApi.matchFromServer(currentIDKEY){
+                data, error, errormessage in
+            }
+            return false
+        }
+        
+//        loadMatchBackendData()
+        //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
+        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
+        //        window!.tintColor = ColorScheme.armadaGreen
+        //        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        //        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
+        //        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
+        //        UITableView.appearance().backgroundColor = UIColor.whiteColor()
         return true
     }
 
+    func loadMatchBackendData() {
+        
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

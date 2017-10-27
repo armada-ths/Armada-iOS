@@ -82,13 +82,6 @@ public struct ArmadaMember: Equatable {
     let role: String
 }
 
-//public struct matchBackendData {
-//    let data: Dictionary<String, Array<Dictionary<String, Any>>>
-//    public init?(json: AnyObject){
-//
-//    }
-//}
-
 public struct ArmadaBanquetPlacement {
     let firstName: String
     let lastName: String
@@ -314,12 +307,6 @@ open class _ArmadaApi {
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
-    
-    /* ADDING matchBackendData getter here */
-    
-    func getMatchBackendData() {
-        
-    }
     
     func generateMap() {
         var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
@@ -698,7 +685,6 @@ open class _ArmadaApi {
                 callback(Dictionary<String, Any>(), true, (error?.localizedDescription)!)
             }
             else {
-                print("data in format data \(data)")
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 do {
                     let parsedjson = JSON.init(parseJSON: responseString as! String)
@@ -723,7 +709,6 @@ open class _ArmadaApi {
                             slider["type"] = val["type"].string
                         }
                         if val["type"].string == "grading" {
-                            print("wtf")
                             grader["question"] = val["question"].string
                             grader["type"] = val["type"].string
                             grader["steps"] = val["steps"].int
@@ -771,7 +756,6 @@ open class _ArmadaApi {
                 callback(newsObjects, false, "")
             }
         }.resume()
-        
     }
     
     func getNewsContent(_ json: Any, url: String) -> String{
@@ -812,10 +796,8 @@ open class _ArmadaApi {
             else{
             let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
             callback(self.parseNewsContent(content: responseString! as String, urlString: contentUrl))
-
             }
         }.resume()
-        
     }
     
     func sponsorsFromServer(_ callback: @escaping (Response<[Sponsor]>) -> Void) {
@@ -886,8 +868,6 @@ open class _ArmadaApi {
             }
         }
     }
-    
-    
 }
 
 extension Array {
