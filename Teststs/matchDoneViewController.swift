@@ -20,11 +20,11 @@ class matchDoneViewController: UIViewController {
     
     func setupSwipe(){
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
+       // let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+       // swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
-        self.view.addGestureRecognizer(swipeLeft)
+        //self.view.addGestureRecognizer(swipeLeft)
     }
     
     func setupStatusBar(){
@@ -40,7 +40,7 @@ class matchDoneViewController: UIViewController {
         self.setupStatusBar()
         almostDone.font = UIFont(name: "BebasNeueBold", size: 30)
         doubleCheck.text = "You can swipe right and double check your answers\n\n and when you are done:"
-        doubleCheck.font = UIFont(name: "BebasNeueThin", size: 30)
+        doubleCheck.font = UIFont(name: "BebasNeue-Thin", size: 30)
         
   
         
@@ -54,6 +54,17 @@ class matchDoneViewController: UIViewController {
         self.navigationController?.pushViewController(rightViewController, animated: false)
     }
     
+    @IBAction func loading(_ sender: Any) {
+        
+        //First send data to server
+        matchData.currentview += 1
+        matchData.save()
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchDone = self
+        self.navigationController?.pushViewController(rightViewController, animated: true)
+    }
     func goRight(){
         matchData.currentview += 1
         matchData.save()
