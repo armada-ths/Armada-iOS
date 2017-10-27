@@ -46,7 +46,7 @@ class matchDataClass: NSObject{
         mainAreas = Dictionary<String, Bool>()
         subAreas = Dictionary<String, Dictionary<String, Any>>()
         matchResultStatus = -1
-        smileyInt = 0
+        smileyInt = 666
         currentview = 0
         lookingBool = [
             "part-time job": false,

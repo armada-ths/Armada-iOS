@@ -30,6 +30,7 @@ class matchTravel: UIViewController {
             button3.isSelected = false
             button4.isSelected = false
             button5.isSelected = false
+            self.matchData.smileyInt = 0
             updateButtons()
         }
     }
@@ -40,6 +41,7 @@ class matchTravel: UIViewController {
             button3.isSelected = false
             button4.isSelected = false
             button5.isSelected = false
+            self.matchData.smileyInt = 1
             updateButtons()
         }
     }
@@ -50,6 +52,7 @@ class matchTravel: UIViewController {
             button3.isSelected = true
             button4.isSelected = false
             button5.isSelected = false
+            self.matchData.smileyInt = 2
             updateButtons()
         }
     }
@@ -60,6 +63,7 @@ class matchTravel: UIViewController {
             button3.isSelected = false
             button4.isSelected = true
             button5.isSelected = false
+            self.matchData.smileyInt = 3
             updateButtons()
         }
     }
@@ -70,6 +74,7 @@ class matchTravel: UIViewController {
             button3.isSelected = false
             button4.isSelected = false
             button5.isSelected = true
+            self.matchData.smileyInt = 4
             updateButtons()
         }
     }
@@ -86,7 +91,7 @@ class matchTravel: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //buildViewFromData()        
+        buildViewFromData()        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -161,7 +166,6 @@ class matchTravel: UIViewController {
         button4.setAttributedTitle(title4selected, for: UIControlState.selected)
         button5.setAttributedTitle(title5normal, for: UIControlState.normal)
         button5.setAttributedTitle(title5selected, for: UIControlState.selected)
-        
         updateButtons()
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
@@ -203,17 +207,21 @@ class matchTravel: UIViewController {
         if !button5.isSelected {
             button5.alpha = 0.4
         }
+        self.matchData.save()
     }
     
     func buildViewFromData(){
-//        let something = self.matchData.backendData["questions"]
-//        let sliderData = something![0]
-//        let titleAttributedText = NSMutableAttributedString(
-//            string: sliderData["question"] as! String,
-//            attributes: [NSFontAttributeName:UIFont(
-//                name: "BebasNeueRegular",
-//                size: 35)!])
-//        titleLabel.attributedText = titleAttributedText
+        let titleAttributedText = NSMutableAttributedString(
+            string: self.matchData.grader["question"] as! String,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeueRegular",
+                size: 35)!])
+        titleLabel.attributedText = titleAttributedText
+        let buttonarray = [button1, button2, button3, button4, button5]
+        if !(self.matchData.smileyInt > buttonarray.count) {
+            buttonarray[self.matchData.smileyInt]?.isSelected = true
+        }
+        updateButtons()
     }
     
     func goRightWithoutAnimation(){

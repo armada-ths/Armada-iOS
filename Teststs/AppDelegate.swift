@@ -47,16 +47,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup status-bar style
         UIApplication.shared.statusBarStyle = .lightContent
         
-        /* fetch the matchBackendData if not already done */
+        /* fetch the matchBackendData if not already done
+         this will be done in a non-main thread so don't try
+         to access matchDataClass objects "to soon"... */
         let currentIDKEY = 1
-        guard let loaded = matchDataClass().load() else {
+        if let loaded = matchDataClass().load() {
+            if loaded.grader.count == 0 {
+                ArmadaApi.matchFromServer(currentIDKEY){
+                    data, error, errormessage in
+                }
+                return false
+            }
+        } else {
             ArmadaApi.matchFromServer(currentIDKEY){
                 data, error, errormessage in
             }
             return false
         }
         
-//        loadMatchBackendData()
         //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
         //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
         //        window!.tintColor = ColorScheme.armadaGreen
