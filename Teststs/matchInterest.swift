@@ -2,87 +2,81 @@
 //  matchInterest.swift
 //  matchingExp
 //
-//  Created by Ola Roos on 2017-10-04.
-//  Copyright © 2017 Ola Roos. All rights reserved.
+//  Created by Rebecca Forstén Klinc on 2017-10-27.
+//  Copyright © 2017 Rebecca Forstén Klinc. All rights reserved.
 //
 
 import UIKit
 
-class matchInterest: UIViewController {
+class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet var areas: UICollectionView!
+    //@IBOutlet weak var stackView: UIStackView!
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
-    var matchInterest: matchInterest?
     var matchSelectInterest: matchSelectInterest?
     let viewNumber = 7
+    var mainAreas = [String]()
+    var areaKeys = [Int: String]()
+    var keys = [Int: String]()
+    var numInterests = 0
     
-    @IBOutlet weak var stackHolder: UIView!
-    @IBOutlet weak var subAreaLabel: UILabel!
-    
+    @IBOutlet var imageH: NSLayoutConstraint!
     override func viewDidLoad() {
-        print("in matchInterrest!!!!")
         super.viewDidLoad()
+        areas.delegate = self
+        areas.dataSource = self
         addStatusbar()
         swipes()
-        print(matchData.currentview)
-        print("matchData.currentArea: \(matchData.currentArea)")
-        
-        if (viewNumber + matchData.currentArea < matchData.currentview) {
-            goRightWithoutAnimation()
+        var i = 0
+        for item in matchData.mainAreas{
+            if (item.value == true){
+                mainAreas.append(item.key)
+            }
         }
-        
-        let attribute:String = matchData.areaListDynamic[matchData.currentArea]
-        subAreaLabel.text = attribute
-        
-        // setup stack-view
-        let stackView = UIStackView()
-        stackView.axis = UILayoutConstraintAxis.vertical
-        stackView.distribution = UIStackViewDistribution.equalSpacing
-        stackView.alignment = UIStackViewAlignment.center
-        stackView.spacing = 30
-        
-        let area = self.matchData.areaList[self.matchData.currentArea]
-        print(area)
-        var count = 0
-        for subareaDict in self.matchData.interrestList[area]!{
-            let subarea = createSubAreaView(text: subareaDict["work_field"] as! String, tag: count)
-            count += 1
-            print("adding \(subarea) to stackView")
-            stackView.addArrangedSubview(subarea)
+        var index = 0
+        var found = false
+        for area in matchData.subAreas{
+            found = false
+            for mainArea in mainAreas{
+                let areaObj = area.value as [String: Any]
+                if(areaObj["parent"] as! String == mainArea){
+                    found = true
+                    areaKeys[areaObj["id"] as! Int] = areaObj["field"] as! String
+                    keys[index] = String(describing: areaObj["id"]!)
+                    index += 1
+                    if(areaObj["select"] as! Bool == true){
+                        numInterests += 1
+                    }
+                }
+
+            }
+            if(found == false) {
+                matchData.subAreas[area.key]!["select"] = false
+            }
         }
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackHolder.addSubview(stackView)
-        stackView.centerYAnchor.constraint(equalTo: stackHolder.centerYAnchor).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: stackHolder.centerXAnchor).isActive = true
     }
     
-    func createSubAreaView(text:String, tag:Int) -> UIView {
-        var areaView = UIView()
-        let areaTitle = UILabel()
-        let areaText = NSMutableAttributedString(
-            string: text,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "Lato-Regular",
-                size: 22.0)!])
-        areaTitle.attributedText = areaText
-        areaTitle.textAlignment = .center
-        areaTitle.translatesAutoresizingMaskIntoConstraints = false
-        areaView.addSubview(areaTitle)
-        let horizontalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
-        let verticalConstraint = NSLayoutConstraint(item: areaTitle, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: areaView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
-        areaView.addConstraints([horizontalConstraint, verticalConstraint])
-        areaView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        areaView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        areaView.backgroundColor = .white
+    
+    func someAction(sender: UITapGestureRecognizer){
+        print("like flipping a flipping flipswitch broh!")
+        let matchInt = sender.view!.tag as! Int
+        print("sender.view!.tag \(sender.view!.tag)")
+        print("matchInt \(matchInt)")
+        let boolean = self.matchData.areaBools[self.matchData.areaList[matchInt]] as! Bool
+        print("boolean \(boolean)")
+        let area = self.matchData.areaList[matchInt]
+        print("area \(area)")
+        if boolean {
+            self.matchData.areaBools[self.matchData.areaList[matchInt]] = false
+        } else {
+            self.matchData.areaBools[self.matchData.areaList[matchInt]] = true
+        }
         
-        // add tag and click-function
-        areaView.tag = tag
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (someAction))
-        areaView.addGestureRecognizer(gesture)
+        print(self.matchData.areaBools[self.matchData.areaList[matchInt]])
         
-        return areaView
     }
-        
+    
     func addStatusbar() {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -98,41 +92,50 @@ class matchInterest: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
     }
     
-    func someAction(sender: UITapGestureRecognizer){
-        let area = subAreaLabel.text
-        print("like flipping a little flippin flipswitch broh!")
-        let tag = sender.view!.tag as! Int
-        print("sender.view!.tag \(sender.view!.tag)")
-        let boolean = self.matchData.interrestList[area!]![tag]["bool"] as! Bool
-        print("boolean \(boolean)")
-        let subarea = self.matchData.interrestList[area!]![tag]["work_field"]
-        print("area \(subarea)")
-        if boolean {
-            self.matchData.interrestList[area!]![tag]["bool"] = false
-        } else {
-            self.matchData.interrestList[area!]![tag]["bool"] = true
-        }
-        print(self.matchData.interrestList[area!]![tag]["bool"])
-    }
-        
     func goRightWithoutAnimation(){
-
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+        rightViewController.matchInterest = self
+        print("going to matchEnd from withoutanimation")
+        self.navigationController?.pushViewController(rightViewController, animated: false)
+        
     }
     
     func goRight(){
-
+        matchData.save()
+        if(numInterests < 1){
+            let alertController = UIAlertController(title: "Error", message: "You need to select more than 1 interest", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        matchData.currentview += 1
+        matchData.areaListDynamic = []
+        for (key, value) in matchData.areaBools {
+            print("key is \(key)")
+            if value == true{
+                matchData.areaListDynamic.append(key)
+            }
+        }
+        matchData.currentArea = 0
+        matchData.areaListDynamic = matchData.areaListDynamic.reversed()
+        
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
+        
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = matchStart
+       // rightViewController.matchSelectInterest = self
+        print("going to matchEnd from roRight()")
+        self.navigationController?.pushViewController(rightViewController, animated: true)
+        
     }
     
     func goBack(){
         matchData.currentview -= 1
-        if self.matchData.currentArea == 0 {
-            self.matchSelectInterest?.matchData = matchData
-            matchData.save()
-        } else {
-            matchData.currentArea -= 1
-            matchData.save()
-            self.matchInterest?.matchData = matchData
-        }        
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchSelectInterest?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -140,4 +143,62 @@ class matchInterest: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
+        
+        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(200/750))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! UICollectionReusableView
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return areaKeys.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = areas.dequeueReusableCell(withReuseIdentifier: "areasCell", for: indexPath as IndexPath) as! IntrestCollectionViewCell
+        cell.intrest.text = matchData.subAreas[keys[indexPath.row]!]!["field"] as! String
+        cell.selectionButton.layer.cornerRadius = 0.5 * cell.selectionButton.bounds.size.width
+        cell.selectionButton.layer.borderWidth = 1
+        cell.selectionButton.layer.borderColor = UIColor.black.cgColor
+        cell.selectionButton.tag = Int(keys[indexPath.row]!)!
+        cell.tag = indexPath.row
+        cell.intrest.font = UIFont(name: "Lato-Light", size: 20)
+        if (matchData.subAreas[keys[indexPath.row]!]!["select"] as! Bool == true){
+            cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
+            cell.intrest.font = UIFont(name: "Lato-Regular", size: 20)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // NOTE:
+        // The left inset and right inset is set to 20 pixels in Storyboard.
+        let sqWidth:CGFloat = UIScreen.main.bounds.width
+        return CGSize(width: sqWidth, height: 50);
+    }
+    
+    @IBAction func selectIntrest(_ sender: UIButton) {
+        let intrestId = String(describing: sender.tag)
+        if (matchData.subAreas[intrestId]!["select"] as! Bool == false){
+            sender.backgroundColor = ColorScheme.worldMatchGrey
+            matchData.subAreas[intrestId]!["select"] = true
+            numInterests += 1
+
+        }
+        else{
+            sender.backgroundColor = UIColor.clear
+            matchData.subAreas[intrestId]!["select"] = false
+            numInterests -= 1
+
+        }
+    }
+    
 }
+
+

@@ -14,8 +14,8 @@ class matchDoneViewController: UIViewController {
     @IBOutlet var almostDone: UILabel!
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
-    var matchSelectInterest: matchSelectInterest?
-    let viewNumber = 7
+    var matchInterest: matchInterest?
+    let viewNumber = 8
     @IBOutlet var doneButton: UIButton!
     
     func setupSwipe(){
@@ -78,7 +78,7 @@ class matchDoneViewController: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        self.matchSelectInterest?.matchData = matchData
+        self.matchInterest?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }
     
