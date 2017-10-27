@@ -19,7 +19,6 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     var matchStart: matchStart?
     var matchTeam: matchTeam?
     let viewNumber = 6
-    var filteredAreas = [String: Bool]()
     var areaKeys = [Int: String]()
     
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         var filteredSubAreas = Dictionary<String, Array<Dictionary<String, Any>>>()
         
         // filter areas
-        var i = 0
 //        for item in unfiltered{
 //                filteredAreas[item["area"] as! String] =  false
 //            if(!areaKeys.values.contains(item["area"] as! String)){
@@ -45,13 +43,13 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
 //
 //        }
         
-        self.matchData.areaList = []
-        for (key, _) in filteredAreas{
-            filteredSubAreas[key] = []
-            self.matchData.areaList.append(key)
-            self.matchData.areaBools[key] = false
-        }
-        self.matchData.areaList = self.matchData.areaList.reversed()
+//        self.matchData.areaList = []
+//        for (key, _) in filteredAreas{
+//            filteredSubAreas[key] = []
+//            self.matchData.areaList.append(key)
+//            self.matchData.areaBools[key] = false
+//        }
+//        self.matchData.areaList = self.matchData.areaList.reversed()
         // filter sub-areas
 //        for item in unfiltered{
 //            var newItem = Dictionary<String, Any>()
@@ -60,8 +58,14 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
 //            newItem["bool"] = false
 //            filteredSubAreas[item["area"] as! String]?.append(newItem)
 //        }
-        self.matchData.interrestList = filteredSubAreas
-        areas.reloadData()
+        
+        var i = 0
+        for item in matchData.mainAreas{
+            areaKeys[i] = item.key
+            i += 1
+        }
+       // self.matchData.mainAreas = filteredSubAreas
+       // areas.reloadData()
         // setup stack-view
 
 //        var stackView = UIStackView()
@@ -214,7 +218,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return filteredAreas.count
+       return matchData.mainAreas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -228,7 +232,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         cell.selectionButton.tag = indexPath.row
         cell.tag = indexPath.row
         cell.intrest.font = UIFont(name: "Lato-Light", size: 20)
-        if (filteredAreas[areaKeys[indexPath.row]!]! == true){
+        if (matchData.mainAreas[areaKeys[indexPath.row]!]! == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
             cell.intrest.font = UIFont(name: "Lato-Regular", size: 20)
             }
@@ -245,15 +249,15 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     @IBAction func selectIntrest(_ sender: UIButton) {
         let intrestId = sender.tag
         let areaOfintrest = areaKeys[intrestId]
-        if (filteredAreas[areaOfintrest!] == false){
+        if (matchData.mainAreas[areaOfintrest!] == false){
             sender.backgroundColor = ColorScheme.worldMatchGrey
-            filteredAreas[areaOfintrest!] = true
+            matchData.mainAreas[areaOfintrest!] = true
             matchData.areaList.append(areaOfintrest!)
             
         }
         else{
             sender.backgroundColor = UIColor.clear
-            filteredAreas[areaOfintrest!] = false
+            matchData.mainAreas[areaOfintrest!] = false
         }
     }
     
