@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftRangeSlider
 class matchTeam: UIViewController {
     
     var matchData: matchDataClass = matchDataClass()
@@ -15,7 +15,14 @@ class matchTeam: UIViewController {
     var matchTravel: matchTravel?
     let viewNumber = 5
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var rangeslider: RangeSlider!
     
+    @IBAction func rangesliderAction(_ sender: Any) {
+        print("uppervalue is: \(rangeslider.upperValue)")
+        print("lowervalue is: \(rangeslider.lowerValue)")
+        
+    }
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var sliderLead: NSLayoutConstraint!
@@ -39,7 +46,7 @@ class matchTeam: UIViewController {
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +58,21 @@ class matchTeam: UIViewController {
             goRightWithoutAnimation()
         }
         
+        
+        matchData.slider = ["max": 400, "min": 0, "question": "Do you want to work for a smaller or larger employer?", "logarithmic":false, "units": false]
+        
         // setup slider
-        slider.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
-        slider.minimumTrackTintColor = ColorScheme.armadaGreen        
-        sliderLead.constant = -middleView.frame.width/2.6
-        
-        
-        
+        rangeslider.labelFontSize = 30
+        rangeslider.maximumValue = Double(matchData.slider["max"] as! Int)
+        rangeslider.minimumValue = Double(matchData.slider["min"] as! Int)
+        let attributedTitel = NSMutableAttributedString(
+            string: self.matchData.slider["question"] as! String,
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeueRegular",
+                size: 35)!])
+        titleLabel.attributedText = attributedTitel
+        //        rangeslider.trackTintColor = ColorScheme.armadaGreen
+        rangeslider.trackHighlightTintColor = ColorScheme.armadaGreen
     }
     
     func goRightWithoutAnimation(){
@@ -90,3 +105,4 @@ class matchTeam: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+
