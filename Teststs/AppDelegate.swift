@@ -51,7 +51,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          this will be done in a non-main thread so don't try
          to access matchDataClass objects "to soon"... */
         let currentIDKEY = 1
-        if let loaded = matchDataClass().load() {
+        if var loaded = matchDataClass().load() {
+            // fipple with time
+            let c = NSDateComponents()
+            c.year = 2017
+            c.month = 10
+            c.day = 28
+            let datelimit:NSDate = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)?.date(from: c as DateComponents) as! NSDate
+            if (datelimit.compare(NSDate() as Date).rawValue < 0) {
+                // remove old matchData because it causes crashes when we update
+                // areas in Sweden and old values are still left in Defaults.
+                loaded = matchDataClass()
+                loaded.save()
+            }
             if loaded.grader.count == 0 {
                 ArmadaApi.matchFromServer(currentIDKEY){
                     data, error, errormessage in
