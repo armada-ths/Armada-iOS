@@ -1700,13 +1700,13 @@
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-bc-9XZ">
-                                        <rect key="frame" x="204.5" y="15.5" width="37" height="30"/>
+                                        <rect key="frame" x="204.5" y="16" width="37" height="30"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-NJ-b7I">
-                                        <rect key="frame" x="82.5" y="15.5" width="33" height="30"/>
+                                        <rect key="frame" x="82.5" y="16" width="33" height="30"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2092,26 +2092,29 @@
                                                         <action selector="selectIntrest:" destination="kwY-u0-2Vg" eventType="touchUpInside" id="tdS-No-zHt"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqb-Dw-Uts">
-                                                    <rect key="frame" x="40" y="0.0" width="135" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="FeV-fi-Onm">
+                                                    <rect key="frame" x="35" y="0.0" width="140" height="50"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="changeButtonFont:" destination="8qa-tW-VAl" eventType="touchUpInside" id="XSl-Az-c3N"/>
+                                                        <action selector="selectIntrest:" destination="kwY-u0-2Vg" eventType="touchUpInside" id="4uU-DD-rup"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="FeV-fi-Onm" firstAttribute="leading" secondItem="Cdq-rb-swu" secondAttribute="trailing" constant="5" id="67b-bH-Zl5"/>
+                                            <constraint firstItem="FeV-fi-Onm" firstAttribute="top" secondItem="8qa-tW-VAl" secondAttribute="topMargin" id="8Fp-ea-2K1"/>
                                             <constraint firstItem="Cdq-rb-swu" firstAttribute="centerY" secondItem="8qa-tW-VAl" secondAttribute="centerY" id="ADH-vq-fHF"/>
-                                            <constraint firstAttribute="bottom" secondItem="gqb-Dw-Uts" secondAttribute="bottom" id="cFt-VI-BuD"/>
+                                            <constraint firstAttribute="trailing" secondItem="FeV-fi-Onm" secondAttribute="trailing" id="KQq-ee-vMb"/>
                                             <constraint firstItem="Cdq-rb-swu" firstAttribute="leading" secondItem="8qa-tW-VAl" secondAttribute="leadingMargin" constant="5" id="cw6-8e-jbT"/>
-                                            <constraint firstItem="gqb-Dw-Uts" firstAttribute="top" secondItem="8qa-tW-VAl" secondAttribute="top" id="epY-Gg-txX"/>
-                                            <constraint firstItem="gqb-Dw-Uts" firstAttribute="centerY" secondItem="8qa-tW-VAl" secondAttribute="centerY" id="hh0-un-gvN"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="gqb-Dw-Uts" secondAttribute="trailing" id="m7g-Ek-lXe"/>
-                                            <constraint firstItem="gqb-Dw-Uts" firstAttribute="leading" secondItem="Cdq-rb-swu" secondAttribute="trailing" constant="10" id="nl3-Bi-NFI"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="FeV-fi-Onm" secondAttribute="bottom" id="wia-K1-Fdx"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="intrest" destination="gqb-Dw-Uts" id="QfR-1q-NEM"/>
+                                            <outlet property="interest" destination="FeV-fi-Onm" id="VWc-Xj-Zjx"/>
                                             <outlet property="selectionButton" destination="Cdq-rb-swu" id="xdg-nv-i8N"/>
                                         </connections>
                                     </collectionViewCell>
@@ -3767,46 +3770,54 @@
                                                         <action selector="selectIntrest:" destination="4gZ-NL-Kla" eventType="touchUpInside" id="ujY-Lc-wSC"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1N-eM-j7O">
-                                                    <rect key="frame" x="40" y="0.0" width="135" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="iLK-x9-Fbe">
+                                                    <rect key="frame" x="35" y="0.0" width="140" height="50"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="changeButtonFont:" destination="wkh-jm-JqZ" eventType="touchUpInside" id="1AS-A5-Wnt"/>
+                                                        <action selector="selectIntrest:" destination="4gZ-NL-Kla" eventType="touchUpInside" id="uYa-OX-ihH"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="R1N-eM-j7O" firstAttribute="top" secondItem="wkh-jm-JqZ" secondAttribute="top" id="0oz-4S-8or"/>
-                                            <constraint firstAttribute="bottom" secondItem="R1N-eM-j7O" secondAttribute="bottom" id="68B-fH-kAo"/>
                                             <constraint firstItem="wW5-UU-woF" firstAttribute="leading" secondItem="wkh-jm-JqZ" secondAttribute="leadingMargin" constant="5" id="A9p-KL-uUf"/>
+                                            <constraint firstItem="iLK-x9-Fbe" firstAttribute="top" secondItem="wkh-jm-JqZ" secondAttribute="topMargin" id="CQf-Ib-3xG"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="iLK-x9-Fbe" secondAttribute="bottom" id="CYX-kd-Fsx"/>
                                             <constraint firstItem="wW5-UU-woF" firstAttribute="centerY" secondItem="wkh-jm-JqZ" secondAttribute="centerY" id="EtE-ZP-s6A"/>
-                                            <constraint firstItem="R1N-eM-j7O" firstAttribute="leading" secondItem="wW5-UU-woF" secondAttribute="trailing" constant="10" id="FfR-jt-Fu0"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="R1N-eM-j7O" secondAttribute="trailing" id="TDm-qp-bQY"/>
-                                            <constraint firstItem="R1N-eM-j7O" firstAttribute="centerY" secondItem="wkh-jm-JqZ" secondAttribute="centerY" id="h6z-sF-nTM"/>
+                                            <constraint firstItem="iLK-x9-Fbe" firstAttribute="leading" secondItem="wW5-UU-woF" secondAttribute="trailing" constant="5" id="Euo-ug-p8D"/>
+                                            <constraint firstItem="iLK-x9-Fbe" firstAttribute="centerY" secondItem="wkh-jm-JqZ" secondAttribute="centerY" id="Qdd-eo-h98"/>
+                                            <constraint firstAttribute="trailing" secondItem="iLK-x9-Fbe" secondAttribute="trailing" id="n1I-v6-V14"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="intrest" destination="R1N-eM-j7O" id="fbe-t6-Wd0"/>
+                                            <outlet property="interest" destination="iLK-x9-Fbe" id="FZP-TF-3y3"/>
                                             <outlet property="selectionButton" destination="wW5-UU-woF" id="Yee-IM-ukz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="intrestCollectionReusableView" id="Ot9-A1-K3C">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="intrestCollectionReusableView" id="Ot9-A1-K3C" customClass="interestHeader" customModule="Armada" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Which of the following Subareas are you interrested in?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mii-lR-EUF">
-                                            <rect key="frame" x="4" y="-15" width="336" height="80"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which of the following areas are you interrested in?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mii-lR-EUF">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z6W-o3-IHE">
-                                            <rect key="frame" x="-29" y="-35" width="400" height="120"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mii-lR-EUF" firstAttribute="top" secondItem="Ot9-A1-K3C" secondAttribute="top" id="IcC-lv-9rY"/>
+                                        <constraint firstAttribute="bottom" secondItem="mii-lR-EUF" secondAttribute="bottom" id="Nfd-lq-THK"/>
+                                        <constraint firstAttribute="trailing" secondItem="mii-lR-EUF" secondAttribute="trailing" id="tBy-p9-nBo"/>
+                                        <constraint firstItem="mii-lR-EUF" firstAttribute="leading" secondItem="Ot9-A1-K3C" secondAttribute="leading" id="xDY-ub-Gge"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="headerText" destination="mii-lR-EUF" id="02p-81-hRl"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match5dots" translatesAutoresizingMaskIntoConstraints="NO" id="joB-Rm-FVM">

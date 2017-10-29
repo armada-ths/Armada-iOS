@@ -10,15 +10,19 @@ import UIKit
 
 class IntrestCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var intrest: UILabel!    
+    @IBOutlet var interest: UIButton!
     @IBOutlet var selectionButton: UIButton!
    // var rootInterst: Bool!
     @IBAction func changeButtonFont(_ sender: UIButton) {
         if(selectionButton.backgroundColor == ColorScheme.worldMatchGrey){
-            intrest.font = UIFont(name: "Lato-Light", size: 20)
+            interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
+            selectionButton.backgroundColor = UIColor.white
+            
         }
         else{
-            intrest.font = UIFont(name: "Lato-Regular", size: 20)
+            interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
+            selectionButton.backgroundColor = ColorScheme.worldMatchGrey
+
             
         }
     }

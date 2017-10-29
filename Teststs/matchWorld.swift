@@ -57,7 +57,7 @@ class matchWorld: UIViewController {
         labelArray = ["europe": europeLabel, "asia": asiaLabel, "americaS": sAmericaLabel, "oceania": oceaniaLabel, "americaN": nAmericaLabel, "africa": africaLabel]
         buttonArray = ["europe": europeButton, "asia": asiaButton, "americaS": sAmericaButton, "oceania": oceaniaButton, "americaN": nAmericaButton, "africa": africaButton]
         for label in labelArray{
-            label.value.titleLabel?.textAlignment = .left
+            label.value.contentHorizontalAlignment = .left
         }
 
         let screenSize = UIScreen.main.bounds
@@ -83,6 +83,7 @@ class matchWorld: UIViewController {
         if(!intrestAbroad.isOn){
             for label in labelArray{
                 label.value.alpha = 0.34
+                label.value.isEnabled = false
             }
             for button in buttonArray{
                 button.value.alpha = 0.34
@@ -200,6 +201,7 @@ class matchWorld: UIViewController {
             matchData.worldIntrest = true
             for label in labelArray{
                 label.value.alpha = 1
+                label.value.isEnabled = true
             }
             for button in buttonArray{
                 button.value.alpha = 1
@@ -212,6 +214,7 @@ class matchWorld: UIViewController {
                 matchData.worldBool[label.key] = false
                 label.value.alpha = 0.34
                 label.value.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
+                label.value.isEnabled = false
 
             }
             for button in buttonArray{
