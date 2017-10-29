@@ -17,8 +17,8 @@ class matchLoading: UIViewController {
     @IBOutlet var activity: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingLabel.font = UIFont(name:"BebasNeueRegular", size: 30)
-        let transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        loadingLabel.font = UIFont(name:"BebasNeueRegular", size: 40)
+        let transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
         activity.transform = transform
 
         // Do any additional setup after loading the view.

@@ -10,6 +10,9 @@ import UIKit
 
 class matchDoneViewController: UIViewController {
     //@IBOutlet weak var stackView: UIStackView!
+    @IBOutlet var bottomHeight: NSLayoutConstraint!
+    @IBOutlet var whenLabel: UILabel!
+    @IBOutlet var topHeight: NSLayoutConstraint!
     @IBOutlet var doubleCheck: UILabel!
     @IBOutlet var almostDone: UILabel!
     var matchData: matchDataClass = matchDataClass()
@@ -38,9 +41,17 @@ class matchDoneViewController: UIViewController {
         super.viewDidLoad()
         self.setupSwipe()
         self.setupStatusBar()
-        almostDone.font = UIFont(name: "BebasNeueBold", size: 30)
-        doubleCheck.text = "You can swipe right and double check your answers\n\n and when you are done:"
-        doubleCheck.font = UIFont(name: "BebasNeue-Thin", size: 30)
+        almostDone.font = UIFont(name: "BebasNeueRegular", size: 40)
+        topHeight.constant = UIScreen.main.bounds.width * (367/392)
+     //   doubleCheck.text = "You can swipe right and double check your answers\n\n and when you are done:"
+        bottomHeight.constant = topHeight.constant
+        doubleCheck.font = UIFont(name: "BebasNeueLight", size: 30)
+        whenLabel.font = UIFont(name: "BebasNeueLight", size: 30)
+        doneButton.titleLabel?.font = UIFont(name: "BebasNeueRegular", size: 25)
+        doneButton.layer.shadowColor = UIColor.black.cgColor
+        doneButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        doneButton.layer.shadowRadius = 5
+
         
   
         
