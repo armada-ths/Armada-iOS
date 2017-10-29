@@ -131,13 +131,15 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         
-        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(200/750))
+        return CGSize(width: UIScreen.main.bounds.width, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! UICollectionReusableView
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! interestHeader
+        cell.headerText.font = UIFont(name: "BebasNeueRegular", size: 35)
+        return cell
         
     }
     
@@ -165,9 +167,8 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
-        // The left inset and right inset is set to 20 pixels in Storyboard.
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: sqWidth, height: 50);
+        return CGSize(width: (sqWidth-5)/2, height: 50);
     }
 
     @IBAction func selectIntrest(_ sender: UIButton) {

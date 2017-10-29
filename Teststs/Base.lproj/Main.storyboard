@@ -2116,22 +2116,26 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="intrestCollectionReusableView" id="IvS-Hc-3JB">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="intrestCollectionReusableView" id="IvS-Hc-3JB" customClass="interestHeader" customModule="Armada" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Which of the following areas are you interrested in?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ug2-lU-GBj">
-                                            <rect key="frame" x="4" y="-15" width="336" height="80"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Which of the following areas are you interrested in?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ug2-lU-GBj">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2zE-Zg-EcY">
-                                            <rect key="frame" x="-29" y="-35" width="400" height="120"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ug2-lU-GBj" firstAttribute="leading" secondItem="IvS-Hc-3JB" secondAttribute="leading" id="Aja-bp-xzX"/>
+                                        <constraint firstItem="ug2-lU-GBj" firstAttribute="top" secondItem="IvS-Hc-3JB" secondAttribute="top" id="NeK-o6-rpk"/>
+                                        <constraint firstAttribute="bottom" secondItem="ug2-lU-GBj" secondAttribute="bottom" id="SwR-dB-8Rm"/>
+                                        <constraint firstAttribute="trailing" secondItem="ug2-lU-GBj" secondAttribute="trailing" id="vrs-SR-Z0r"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="headerText" destination="ug2-lU-GBj" id="MQM-mx-uQD"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match5dots" translatesAutoresizingMaskIntoConstraints="NO" id="30d-0V-bm7">
