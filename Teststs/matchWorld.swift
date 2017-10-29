@@ -20,17 +20,17 @@ class matchWorld: UIViewController {
     let viewNumber = 3
     @IBOutlet weak var intrestAbroad: UISwitch!
     @IBOutlet weak var europeButton: UIButton!
-    @IBOutlet var europeLabel: UILabel!
+    @IBOutlet var europeLabel: UIButton!
     @IBOutlet weak var asiaButton: UIButton!
-    @IBOutlet var asiaLabel: UILabel!
+    @IBOutlet var asiaLabel: UIButton!
     @IBOutlet weak var sAmericaButton: UIButton!
-    @IBOutlet var sAmericaLabel: UILabel!
+    @IBOutlet var sAmericaLabel: UIButton!
     @IBOutlet weak var oceaniaButton: UIButton!
-    @IBOutlet var oceaniaLabel: UILabel!
+    @IBOutlet var oceaniaLabel: UIButton!
     @IBOutlet weak var nAmericaButton: UIButton!
-    @IBOutlet var nAmericaLabel: UILabel!
+    @IBOutlet var nAmericaLabel: UIButton!
     @IBOutlet weak var africaButton: UIButton!
-    @IBOutlet var africaLabel: UILabel!
+    @IBOutlet var africaLabel: UIButton!
     @IBOutlet var stackHeight: NSLayoutConstraint!
     
     @IBOutlet var stack1: NSLayoutConstraint!
@@ -39,7 +39,7 @@ class matchWorld: UIViewController {
     @IBOutlet var mapH: NSLayoutConstraint!
     @IBOutlet var mapW: NSLayoutConstraint!
     @IBOutlet var header: UIImageView!
-    var labelArray = [String: UILabel]()
+    var labelArray = [String: UIButton]()
     var buttonArray = [String: UIButton]()
     
     @IBOutlet var buttonsDistance: NSLayoutConstraint!
@@ -56,6 +56,10 @@ class matchWorld: UIViewController {
         
         labelArray = ["europe": europeLabel, "asia": asiaLabel, "americaS": sAmericaLabel, "oceania": oceaniaLabel, "americaN": nAmericaLabel, "africa": africaLabel]
         buttonArray = ["europe": europeButton, "asia": asiaButton, "americaS": sAmericaButton, "oceania": oceaniaButton, "americaN": nAmericaButton, "africa": africaButton]
+        for label in labelArray{
+            label.value.contentHorizontalAlignment = .left
+        }
+
         let screenSize = UIScreen.main.bounds
        // let screenHeight = screenSize.height*(100/375)
         let stackWidth = (screenSize.width/320) * 50
@@ -71,7 +75,7 @@ class matchWorld: UIViewController {
                 }
                 if((matchData.worldBool[area]))!{
                     buttonArray[area]?.layer.backgroundColor = ColorScheme.worldMatchGrey.cgColor
-                    labelArray[area]?.font = UIFont(name: "Lato-Regular", size: 20)
+                    labelArray[area]?.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
                     
                 }
             }
@@ -79,6 +83,7 @@ class matchWorld: UIViewController {
         if(!intrestAbroad.isOn){
             for label in labelArray{
                 label.value.alpha = 0.34
+                label.value.isEnabled = false
             }
             for button in buttonArray{
                 button.value.alpha = 0.34
@@ -174,17 +179,17 @@ class matchWorld: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func checkBox(_ sender: UIButton) {
+    @IBAction func checkBox(_ sender: AnyObject) {
         let tag = sender.tag
-        let key = areaArray[tag]
+        let key = areaArray[tag!]
         if(matchData.worldBool[key] == true){
-            sender.layer.backgroundColor = UIColor.white.cgColor
-            labelArray[key]?.font = UIFont(name: "Lato-Light", size: 20)
+            buttonArray[key]?.layer.backgroundColor = UIColor.white.cgColor
+            labelArray[key]?.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
             matchData.worldBool[key] = false
         }
         else{
-            sender.layer.backgroundColor = ColorScheme.worldMatchGrey.cgColor
-            labelArray[key]?.font = UIFont(name: "Lato-Regular", size: 20)
+            buttonArray[key]?.layer.backgroundColor = ColorScheme.worldMatchGrey.cgColor
+            labelArray[key]?.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
             matchData.worldBool[key] = true
 
             
@@ -196,6 +201,7 @@ class matchWorld: UIViewController {
             matchData.worldIntrest = true
             for label in labelArray{
                 label.value.alpha = 1
+                label.value.isEnabled = true
             }
             for button in buttonArray{
                 button.value.alpha = 1
@@ -207,7 +213,8 @@ class matchWorld: UIViewController {
             for label in labelArray{
                 matchData.worldBool[label.key] = false
                 label.value.alpha = 0.34
-                label.value.font = UIFont(name: "Lato-Light", size: 20)
+                label.value.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
+                label.value.isEnabled = false
 
             }
             for button in buttonArray{

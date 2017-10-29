@@ -131,13 +131,15 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         
-        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(200/750))
+        return CGSize(width: UIScreen.main.bounds.width, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! UICollectionReusableView
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "intrestCollectionReusableView", for: indexPath) as! interestHeader
+        cell.headerText.font = UIFont(name: "BebasNeueRegular", size: 35)
+        return cell
         
     }
     
@@ -149,39 +151,38 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         print(indexPath.row)
         let cell = areas.dequeueReusableCell(withReuseIdentifier: "areasCell", for: indexPath as IndexPath) as! IntrestCollectionViewCell
         //cell.intrest = filteredAreas.keys[indexPath.row]
-        cell.intrest.text = areaKeys[indexPath.row]
+        cell.interest.setTitle(areaKeys[indexPath.row]!, for: .normal)
+        cell.interest.contentHorizontalAlignment = .left
+        cell.interest.tag = indexPath.row
         cell.selectionButton.layer.cornerRadius = 0.5 * cell.selectionButton.bounds.size.width
         cell.selectionButton.layer.borderWidth = 1
         cell.selectionButton.layer.borderColor = UIColor.black.cgColor
         cell.selectionButton.tag = indexPath.row
         cell.tag = indexPath.row
-        cell.intrest.font = UIFont(name: "Lato-Light", size: 20)
+        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
         if (matchData.mainAreas[areaKeys[indexPath.row]!]! == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
-            cell.intrest.font = UIFont(name: "Lato-Regular", size: 20)
+            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
             }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
-        // The left inset and right inset is set to 20 pixels in Storyboard.
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: sqWidth, height: 50);
+        return CGSize(width: (sqWidth-5)/2, height: 100);
     }
 
     @IBAction func selectIntrest(_ sender: UIButton) {
         let intrestId = sender.tag
         let areaOfintrest = areaKeys[intrestId]
         if (matchData.mainAreas[areaOfintrest!] == false){
-            sender.backgroundColor = ColorScheme.worldMatchGrey
             matchData.mainAreas[areaOfintrest!] = true
             matchData.areaList.append(areaOfintrest!)
             numInterests += 1
             
         }
         else{
-            sender.backgroundColor = UIColor.clear
             matchData.mainAreas[areaOfintrest!] = false
             numInterests -= 1
 
