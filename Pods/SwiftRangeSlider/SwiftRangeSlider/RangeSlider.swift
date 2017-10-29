@@ -71,7 +71,7 @@ import QuartzCore
   }
   
   ///The thickness of the track bar. `0.05` by default.
-  @IBInspectable open var trackThickness: CGFloat = 0.05 {
+  @IBInspectable open var trackThickness: CGFloat = 0.3 {
     didSet {
       updateTrackLayerFrameAndKnobPositions()
     }
@@ -187,6 +187,9 @@ import QuartzCore
   let upperKnob = RangeSliderKnob()
   let lowerLabel = CATextLayer()
   let upperLabel = CATextLayer()
+  // OLAS VARS
+  let upperCenterLabel = CATextLayer()
+  let lowerCenterLabel = CATextLayer()
 
     // ORIGINAL
 //  var TrackThickness: CGFloat {
@@ -209,6 +212,9 @@ import QuartzCore
     // OLA Y
     var KnobSize: CGFloat {
         get {
+          // experiment 
+            // return knobSize * 
+
             return trueKnobSize ? knobSize : knobSize * bounds.width
         }
     }
@@ -264,12 +270,15 @@ import QuartzCore
     lowerKnob.contentsScale = UIScreen.main.scale
     layer.addSublayer(lowerKnob)
     
+    // upperKnob.frame = CGRect(x: 0, y: 0, width: KnobSize, height: KnobSize)
     upperKnob.frame = CGRect(x: 0, y: 0, width: KnobSize, height: KnobSize)
     upperKnob.rangeSlider = self
     upperKnob.contentsScale = UIScreen.main.scale
     layer.addSublayer(upperKnob)
     
     // NEW
+    lowerKnob.isUpperKnob = false
+    upperKnob.isUpperKnob = true
     
     
     lowerLabel.alignmentMode = kCAAlignmentCenter
@@ -292,8 +301,8 @@ import QuartzCore
   // MARK: Member Functions
   
   open func updateLayerFramesAndPositions() {
-    lowerKnob.frame = CGRect(x: 0, y: 0, width: KnobSize, height: KnobSize)
-    upperKnob.frame = CGRect(x: 0, y: 0, width: KnobSize, height: KnobSize)
+    lowerKnob.frame = CGRect(x: 0, y: 0, width: KnobSize * 1.55, height: KnobSize * 1.55)
+    upperKnob.frame = CGRect(x: 0, y: 0, width: KnobSize * 1.55, height: KnobSize * 1.55)
     updateTrackLayerFrameAndKnobPositions()
   }
   
@@ -336,7 +345,9 @@ import QuartzCore
         
         updateLabelText()
         updateLabelPositions()
+        print("before commit")
         CATransaction.commit()
+        print("after commit")
     }
     /**
      Get the label text for a given value.
@@ -357,6 +368,19 @@ import QuartzCore
          return labelText
     }
   
+    open func calcReverseValues() -> (Double, Double){
+        let max = self.maximumValue
+        let min = self.minimumValue
+        
+        let reverseUpperValue = (self.maximumValue - upperValue)
+        let reverseLowerValue = (self.maximumValue - lowerValue)
+        
+        print("reverseUpperValue \(reverseUpperValue)")
+        print("reverseLowerValue \(reverseLowerValue)")
+        return (reverseLowerValue, reverseUpperValue)
+    }
+    
+    
   ///Updates the labels text content.
   open func updateLabelText() {
     if hideLabels {
@@ -365,14 +389,31 @@ import QuartzCore
       return
     }
     
-    lowerLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
-    upperLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
+    let maxfontsize = CGFloat(26.0)
+    let scale = CGFloat(maximumValue - minimumValue)
+    let constant = CGFloat(6.0)
     
-    lowerLabel.fontSize = labelFontSize
-    upperLabel.fontSize = labelFontSize
+    // calculate reverse values
+    let lowhigh = calcReverseValues()
+    let lowFontSize = maxfontsize - constant + constant * CGFloat(lowhigh.1) / scale
+    let highFontSize = maxfontsize - constant + constant * CGFloat(lowhigh.0) / scale
+    
+    lowerLabel.font = UIFont(name: "BebasNeueRegular", size: maxfontsize)
+    upperLabel.font = UIFont(name: "BebasNeueRegular", size: maxfontsize)
+    
+    lowerLabel.fontSize = CGFloat(highFontSize)
+    upperLabel.fontSize = CGFloat(lowFontSize)
 
-    lowerLabel.string = getLabelText(forValue: lowerValue)
-    upperLabel.string = getLabelText(forValue: upperValue)
+    
+    
+//    lowerLabel.string = getLabelText(forValue: lowerValue)
+//    upperLabel.string = getLabelText(forValue: upperValue)
+
+    let lowerString = getLabelText(forValue: lowhigh.0) + "\n collegues"
+    let upperString = getLabelText(forValue: lowhigh.1) + "\n collegues"
+    
+    lowerLabel.string = lowerString
+    upperLabel.string = upperString
     
     lowerLabel.foregroundColor = labelColor.cgColor
     upperLabel.foregroundColor = labelColor.cgColor
@@ -392,8 +433,8 @@ import QuartzCore
 //    var newUpperLabelCenter = CGPoint(x: upperKnobCenter.x, y: upperKnob.frame.origin.y - (upperLabel.frame.size.height / 2))
 //
     // OLA Y
-    var newLowerLabelCenter = CGPoint(x: lowerKnob.frame.origin.x - 45 , y: lowerKnobCenter.y)
-    var newUpperLabelCenter = CGPoint(x: upperKnob.frame.origin.x + 80, y: upperKnobCenter.y)
+    var newLowerLabelCenter = CGPoint(x: lowerKnob.frame.origin.x - 60 , y: lowerKnobCenter.y + 10)
+    var newUpperLabelCenter = CGPoint(x: upperKnob.frame.origin.x + 160, y: upperKnobCenter.y + 10)
     
     lowerLabel.frame = CGRect(x: 0, y: 0, width: lowerLabelTextSize.width, height: lowerLabelTextSize.height)
     upperLabel.frame = CGRect(x: 0, y: 0, width: upperLabelTextSize.width, height: upperLabelTextSize.height)

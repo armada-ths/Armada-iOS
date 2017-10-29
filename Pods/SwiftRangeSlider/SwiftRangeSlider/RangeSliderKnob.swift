@@ -23,7 +23,7 @@ public enum KnobAnchorPosition {
 
 class RangeSliderKnob: CALayer {
   static var KnobDelta: CGFloat = 2.0
-    
+  var isUpperKnob: Bool = true
   var highlighted: Bool = false {
     didSet {
       if let superLayer = superlayer, highlighted {
@@ -37,7 +37,16 @@ class RangeSliderKnob: CALayer {
   
   override func draw(in ctx: CGContext) {
     if let slider = rangeSlider {
-      let knobFrame = bounds.insetBy(dx: RangeSliderKnob.KnobDelta, dy: RangeSliderKnob.KnobDelta)
+      
+      // var knobFrame = bounds.insetBy(dx: RangeSliderKnob.KnobDelta, dy: RangeSliderKnob.KnobDelta)
+      var shift = RangeSliderKnob.KnobDelta
+      if self.isUpperKnob {
+        shift = CGFloat((rangeSlider?.upperValue)!)/CGFloat(18.0) + 1.2
+      }
+      if !self.isUpperKnob {
+        shift = CGFloat((rangeSlider?.lowerValue)!)/CGFloat(18.0) + 1.2
+      }
+      let knobFrame = bounds.insetBy(dx: shift, dy: shift)
       let cornerRadius = knobFrame.height * slider.curvaceousness / 2
       let knobPath = UIBezierPath(roundedRect: knobFrame, cornerRadius: cornerRadius)
       
