@@ -13,6 +13,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class CatalogueTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -110,6 +111,31 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCompanies()
+        
+        // change backbar button from "Back" to ""
+        backBarButton.title = ""
+        
+        // reveal logo-image
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
+        
+        
+        // set title if not set
+        if self.navigationItem.titleView == nil {
+            
+            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let label = UILabel(frame: frame)
+            let myMutableString = NSMutableAttributedString(
+                string: "C A T A L O U G E THS Armada 2017",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeue-Thin",
+                    size: 22.0)!])
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 18))
+            label.textAlignment = .center
+            label.attributedText = myMutableString
+            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+            newTitleView.addSubview(label)
+            self.navigationItem.titleView = newTitleView
+        }
     }
     
     @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {}
