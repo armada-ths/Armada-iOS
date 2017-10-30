@@ -159,25 +159,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.primaryWorkField
         cell.descriptionLabel.sizeToFit()
-        if let image = company.image {
-            cell.logoImageView.backgroundColor = UIColor.white
-            if(image.size.width > image.size.height){
-                cell.imageWidth.constant = 70
-                cell.imageHeight.constant = 70 * (image.size.height/image.size.width )
-            }
-            else{
-                cell.imageWidth.constant = 70 * (image.size.width/image.size.height )
-                cell.imageHeight.constant = 70
-
-            }
-            cell.logoImageView.image = image
-            cell.companyNameLabel.isHidden = true
-        } else {
-            cell.logoImageView.backgroundColor = cellColours[indexPath.row % 3]
-            cell.logoImageView.image = nil
-            cell.companyNameLabel.isHidden = true
-        }
-        
+        cell.logoImageView.backgroundColor = cellColours[indexPath.row % 3]
+        cell.setLogo(company)
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         

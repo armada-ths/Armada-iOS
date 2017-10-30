@@ -12,6 +12,7 @@ import CoreData
 import SwiftyJSON
 
 open class Company: NSManagedObject {
+    fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     
     class func companyFromJson(_ json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
         
@@ -114,7 +115,22 @@ open class Company: NSManagedObject {
     }
     
     open var image: UIImage? {
-        return UIImage(named: imageName)
+            let imageDirectory = applicationDocumentsDirectory.appendingPathComponent("logos")
+//            for company in companies {
+//                print(company.name)
+//                print(company.imageName)
+//                try! FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true, attributes: nil)
+//                if let url = URL(string: company.logoUrl) {
+//                    url.getData() {
+//                        if case .success(let data) = $0 {
+//                            try? data.write(to: imageDirectory.appendingPathComponent(company.imageName + ".png"), options: [.atomic])
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        let image = imageDirectory.appendingPathComponent(imageName + ".png")
+        return UIImage(contentsOfFile: image.path)
     }
     
 //    open var map: UIImage {

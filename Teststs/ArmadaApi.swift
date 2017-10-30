@@ -423,6 +423,7 @@ open class _ArmadaApi {
                                                 self.companies.append(company)
                                             }
                                         }
+                                        self.storeLogos()
                                         if let count = self.managedObjectContext.persistentStoreCoordinator?.persistentStores.count
                                             , count > 0 {
                                         try? self.managedObjectContext.save()
@@ -455,7 +456,8 @@ open class _ArmadaApi {
     func storeLogos() {
         let imageDirectory = applicationDocumentsDirectory.appendingPathComponent("logos")
         for company in companies {
-            
+            print(company.name)
+            print(company.imageName)
             try! FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true, attributes: nil)
             if let url = URL(string: company.logoUrl) {
                 url.getData() {

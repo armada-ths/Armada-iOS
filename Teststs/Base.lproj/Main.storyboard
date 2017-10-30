@@ -61,7 +61,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIB-9r-ahw" userLabel="scrollview">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1287"/>
+                                <rect key="frame" x="0.0" y="68" width="375" height="1283"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-PC-AhY" userLabel="contentview">
                                         <rect key="frame" x="16" y="2" width="343" height="226.5"/>
@@ -1736,13 +1736,13 @@
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-bc-9XZ">
-                                        <rect key="frame" x="204.5" y="15.5" width="39.5" height="29.5"/>
+                                        <rect key="frame" x="204.5" y="16" width="39.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agg-NJ-b7I">
-                                        <rect key="frame" x="83" y="15.5" width="32.5" height="29.5"/>
+                                        <rect key="frame" x="83" y="16" width="32.5" height="29.5"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2764,12 +2764,6 @@
                                                 <constraint firstAttribute="height" constant="70" id="FsC-fL-kjS"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KOK-UU-nl0">
-                                            <rect key="frame" x="16" y="117.5" width="70" height="22"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="highlightedColor" red="0.086274509799999996" green="0.65098039220000004" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interaction Design" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhd-Th-2Rh">
                                             <rect key="frame" x="90" y="245.5" width="171" height="15"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -2840,7 +2834,6 @@
                                         <constraint firstItem="hpE-gk-xQ5" firstAttribute="height" secondItem="TuC-m0-mAq" secondAttribute="height" id="8R4-5t-MAq"/>
                                         <constraint firstItem="hht-uR-usk" firstAttribute="leading" secondItem="hGO-Dl-lb6" secondAttribute="leadingMargin" constant="8" id="91F-nG-37z"/>
                                         <constraint firstItem="ziG-hz-0UC" firstAttribute="height" secondItem="TuC-m0-mAq" secondAttribute="height" id="A9M-p6-7FL"/>
-                                        <constraint firstItem="hht-uR-usk" firstAttribute="centerX" secondItem="KOK-UU-nl0" secondAttribute="centerX" id="CFG-Ju-8Kq"/>
                                         <constraint firstItem="TuC-m0-mAq" firstAttribute="top" secondItem="hGO-Dl-lb6" secondAttribute="topMargin" id="DO4-VW-HGz"/>
                                         <constraint firstItem="hht-uR-usk" firstAttribute="top" secondItem="Lej-lG-cpM" secondAttribute="top" constant="-10" id="Exd-aH-ReZ"/>
                                         <constraint firstItem="Lej-lG-cpM" firstAttribute="top" secondItem="hGO-Dl-lb6" secondAttribute="topMargin" id="Hcm-hr-6ss"/>
@@ -2870,9 +2863,7 @@
                                         <constraint firstItem="oWT-hJ-QAX" firstAttribute="width" secondItem="hht-uR-usk" secondAttribute="width" priority="250" id="mB5-7Z-wnO"/>
                                         <constraint firstItem="Lej-lG-cpM" firstAttribute="leading" secondItem="hGO-Dl-lb6" secondAttribute="leadingMargin" constant="3" id="mJ9-sR-c2U"/>
                                         <constraint firstItem="hht-uR-usk" firstAttribute="leading" secondItem="hGO-Dl-lb6" secondAttribute="leadingMargin" constant="2" id="sgF-xL-HV3"/>
-                                        <constraint firstItem="hht-uR-usk" firstAttribute="centerY" secondItem="KOK-UU-nl0" secondAttribute="centerY" id="tTL-v0-aho"/>
                                         <constraint firstItem="hpE-gk-xQ5" firstAttribute="top" secondItem="ziG-hz-0UC" secondAttribute="bottom" constant="2" id="tvy-es-tk8"/>
-                                        <constraint firstItem="hht-uR-usk" firstAttribute="width" secondItem="KOK-UU-nl0" secondAttribute="width" id="vJ4-lp-yDP"/>
                                         <constraint firstItem="ziG-hz-0UC" firstAttribute="centerX" secondItem="TuC-m0-mAq" secondAttribute="centerX" id="wLS-Iw-dGb"/>
                                         <constraint firstItem="hht-uR-usk" firstAttribute="leading" secondItem="hGO-Dl-lb6" secondAttribute="leadingMargin" id="xtH-9Q-g3S"/>
                                     </constraints>
@@ -2899,7 +2890,6 @@
                                 <color key="backgroundColor" red="0.00051923980940000005" green="0.74635171889999996" blue="0.46601521969999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="companyNameLabel" destination="KOK-UU-nl0" id="Q7I-pL-rCo"/>
                                     <outlet property="descriptionLabel" destination="Lej-lG-cpM" id="FFT-3n-fm9"/>
                                     <outlet property="firstIcon" destination="TuC-m0-mAq" id="FDB-e4-8Dl"/>
                                     <outlet property="imageHeight" destination="FsC-fL-kjS" id="End-vd-AKq"/>
