@@ -69,7 +69,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             let cell = tableView.cellForRow(at: highlightedIndexPath) else  { return nil }
         let company = companiesByLetters[(highlightedIndexPath as NSIndexPath).section].companies[(highlightedIndexPath as NSIndexPath).row]
         highlightedCompany = company
-        let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
+        let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyView") as! CompanyViewController
         companyViewController.company = company
         previewingContext.sourceRect = cell.frame
         return companyViewController
@@ -103,10 +103,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         tableView.reloadData()
     }
     
-    @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
-        updateCompanies()
-        tableView.reloadData()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
