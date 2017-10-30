@@ -39,29 +39,27 @@ class matchGetPut {
     
     init(matchData: matchDataClass){
         // looking_for
-        // REMEMBER TO DOUBLE CHECK ORDER WITH BACKEND
-        var idx = 0
-        for (_, val) in matchData.lookingBool{
-            if val {
-                self.looking_for.append(idx)
-            }
-            idx += 1
+        for (key, val) in matchData.lookingBool{
+            if key == "thesis" { self.looking_for.append(1) }
+            if key == "part-time job" { self.looking_for.append(2) }
+            if key == "trainee" { self.looking_for.append(3) }
+            if key == "summer job" { self.looking_for.append(4) }
+        }
+        // continents
+        for (key, val) in matchData.worldBool{
+            if key == "africa"   { self.continents.append(1) }
+            if key == "asia"     { self.continents.append(2) }
+            if key == "oceania"  { self.continents.append(3) }
+            if key == "europe"   { self.continents.append(4) }
+            if key == "americaN" { self.continents.append(5) }
+            if key == "ameicaS"  { self.continents.append(6) }
         }
         // regions
         // REMEMBER TO DOUBLE CHECK ORDER WITH BACKEND
-        idx = 0
+        var idx = 0
         for (_, val) in matchData.swedenBool{
             if val {
                 self.regions.append(idx)
-            }
-            idx += 1
-        }
-        // continents
-        // REMEMBER TO DOUBLE CHECK ORDER WITH BACKEND
-        idx = 0
-        for (_, val) in matchData.worldBool{
-            if val {
-                self.continents.append(idx)
             }
             idx += 1
         }
@@ -72,8 +70,7 @@ class matchGetPut {
         // slider
         let slider_id = 2 // get slider id in some way
         var slider = ["id": slider_id, "answer": ["min": matchData.teamSizeMin, "max": matchData.teamSizeMax]] as [String : Any]
-        self.questions = [grader, slider]
-        
+        self.questions = [grader, slider]        
         // areas
         // get the selected area ids in some way
         var areas = [0, 1, 2, 3, 4]
