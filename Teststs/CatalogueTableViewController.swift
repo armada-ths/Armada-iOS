@@ -16,13 +16,15 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
+    var cellColours = [ColorScheme.armadaGreen, ColorScheme.armadaRed, ColorScheme.armadaLicorice]
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
+    var companiesArray = Array <Company> ()
     var highlightedCompany: Company?
     
     var selectedCompany: Company? {
         if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
+            return companiesArray[indexPath.row] //[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         }
         return nil
     }
@@ -49,12 +51,15 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     func updateCompaniesByLetters(_ companies: [Company]) {
         let stopWatch = StopWatch()
+        companiesArray = companies.sorted(by: ({swedishOrdering($0.name, y: $1.name)}))
         companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercased() })).sorted(by: swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercased().hasPrefix(letter) })) }
         stopWatch.print("Updating letters")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorStyle = .none
         self.tableView.rowHeight = 75
         searchBar.delegate = self
         //        refreshControl = UIRefreshControl()
@@ -139,28 +144,39 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return companiesByLetters.count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companiesByLetters[section].companies.count
+        return companiesArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyTableViewCell", for: indexPath) as! CompanyTableViewCell
-        let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
+        let company = companiesArray[indexPath.row]
+        cell.backgroundColor = cellColours[indexPath.row % 3]
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.primaryWorkField
         cell.descriptionLabel.sizeToFit()
         if let image = company.image {
+            cell.logoImageView.backgroundColor = UIColor.white
+            if(image.size.width > image.size.height){
+                cell.imageWidth.constant = 70
+                cell.imageHeight.constant = 70 * (image.size.height/image.size.width )
+            }
+            else{
+                cell.imageWidth.constant = 70 * (image.size.width/image.size.height )
+                cell.imageHeight.constant = 70
+
+            }
             cell.logoImageView.image = image
             cell.companyNameLabel.isHidden = true
         } else {
+            cell.logoImageView.backgroundColor = cellColours[indexPath.row % 3]
             cell.logoImageView.image = nil
             cell.companyNameLabel.isHidden = true
         }
-        
         
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
@@ -185,13 +201,13 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         return cell
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return companiesByLetters.map { $0.letter }
-    }
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return companiesByLetters.map { $0.letter }
+//    }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return companiesByLetters[section].letter
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return companiesByLetters[section].letter
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
