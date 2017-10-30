@@ -456,8 +456,6 @@ open class _ArmadaApi {
     func storeLogos() {
         let imageDirectory = applicationDocumentsDirectory.appendingPathComponent("logos")
         for company in companies {
-            print(company.name)
-            print(company.imageName)
             try! FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true, attributes: nil)
             if let url = URL(string: company.logoUrl) {
                 url.getData() {

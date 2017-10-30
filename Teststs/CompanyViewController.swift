@@ -8,6 +8,10 @@ class CompanyViewController: UIViewController {
    // @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet var aboutText: UITextView!
     
+    @IBOutlet var backgroundImage: UIImageView!
+    @IBOutlet var backView: UIView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var whiteView: UIView!
     @IBOutlet var locationLabel: UILabel!
     @IBOutlet var companyName: UILabel!
     // @IBOutlet weak var aboutLabel: UILabel!
@@ -34,11 +38,36 @@ class CompanyViewController: UIViewController {
 
     
     override func viewDidLoad() {
-        if(company.image != nil){
+        if(company.localImage != nil){
            // headerHeight = UIScreen.main.bounds.width * (company.image!.size.height/company.image!.size.width)
            /// imageHeight.constant = headerHeight
-            headerImageView.image = company.image
+            let image = company.localImage
+//            if(Float((image?.size.width)!) > Float((image?.size.height)!)){
+////                headerW.constant = 150
+////                headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
+//            }
+//        else{
+////            headerH.constant = 50
+////            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
+//            }
+        headerImageView.image = image
         }
+    else{
+        let image = company.image
+//        if(Float((image?.size.width)!) > Float((image?.size.height)!)){
+////            headerW.constant = 150
+////            headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
+//        }
+//        else{
+//            headerH.constant = 50
+//            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
+//            }
+        headerImageView.image = image
+        }
+           // whiteView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "companyBackground"))
+           // backgroundView.backgroundColor = ColorScheme.armadaLicorice
+            self.whiteView.sendSubview(toBack: backgroundImage)
+            backView.backgroundColor = ColorScheme.armadaLicorice
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
@@ -77,12 +106,12 @@ class CompanyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        parent?.title = company.name
+        //parent?.title = company.name
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        locationLabel.text = company.locationDescription + " Booth:" +  String(company.booth)
+        locationLabel.text = company.locationDescription
 //        if(company.locationUrl == ""){
 //            return
 //        }
@@ -99,7 +128,11 @@ class CompanyViewController: UIViewController {
     }
 
     
+    
+    @IBAction func openWebsite(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: company.website)!)
 
+    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if let viewController = segue.destination as? LocationViewController {

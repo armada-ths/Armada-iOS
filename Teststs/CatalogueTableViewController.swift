@@ -24,7 +24,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     var selectedCompany: Company? {
         if let indexPath = tableView.indexPathForSelectedRow {
-            return companiesArray[indexPath.row] //[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
+            return companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         }
         return nil
     }
@@ -144,43 +144,49 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return companiesByLetters.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return companiesArray.count
+        return companiesByLetters[section].companies.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompanyTableViewCell", for: indexPath) as! CompanyTableViewCell
-        let company = companiesArray[indexPath.row]
-        cell.backgroundColor = cellColours[indexPath.row % 3]
+        let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
         cell.workFieldLabel.text = company.primaryWorkField
         cell.descriptionLabel.sizeToFit()
-        cell.logoImageView.backgroundColor = cellColours[indexPath.row % 3]
-        cell.setLogo(company)
+        if (company.localImage != nil){
+            let image = company.localImage!
+            cell.logoImageView.backgroundColor = UIColor.white
+            if(image.size.width > image.size.height){
+               cell.imageHeight.constant = 70 * (image.size.height/image.size.width )
+                cell.imageWidth.constant = 70
+            }
+            else{
+                cell.imageWidth.constant = 70 * (image.size.width/image.size.height )
+                cell.imageHeight.constant = 70
+                
+            }
+            cell.logoImageView.image = image
+        }
+        else{
+            cell.setLogo(company)
+        }
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
         cell.secondIcon.isHidden = true
         cell.firstIcon.isHidden = true
         cell.thirdIcon.isHidden = true
-        /*for i in 0..<stuff.count {
-         if stuff[i] {
-         if cell.firstIcon.isHidden {
-         cell.firstIcon.image = icons[i].image
-         cell.firstIcon.isHidden = false
-         } else if cell.secondIcon.isHidden {
-         cell.secondIcon.image = icons[i].image
-         cell.secondIcon.isHidden = false
-         } else {
-         cell.thirdIcon.image = icons[i].image
-         cell.thirdIcon.isHidden = false
-         }
-         }
-         }*/
+//        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        cell.layer.shadowColor = UIColor.black.cgColor
+//        //self.viewBg!.layer.shadowRadius = 4
+//        cell.layer.shadowOpacity = 0.25
+//        cell.layer.masksToBounds = false;
+//        cell.clipsToBounds = false;
         return cell
     }
     
@@ -208,7 +214,13 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         view.endEditing(true)
     }
     
-
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return companiesByLetters.map { $0.letter }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return companiesByLetters[section].letter
+    }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

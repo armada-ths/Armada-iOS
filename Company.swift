@@ -133,6 +133,10 @@ open class Company: NSManagedObject {
         return UIImage(contentsOfFile: image.path)
     }
     
+    open var localImage: UIImage? {
+        return UIImage(named: imageName)
+    }
+    
 //    open var map: UIImage {
 //        if let url = URL(string: "http://www.armada.nu" + self.locationUrl),
 //            let data = try? Data(contentsOf: url),
