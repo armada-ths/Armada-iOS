@@ -9,6 +9,18 @@
 import UIKit
 import SwiftyJSON
 
+//struct matchResultObject {
+//    var reasons: Array<String>
+//    let percent: Double
+//    let exhibitor: Int
+//
+//    init(reasons: Array<String>, percent: Double, exhibitor: Int) {
+//        self.reasons = reasons
+//        self.percent = percent
+//        self.exhibitor = exhibitor
+//    }
+//}
+
 class matchDataClass: NSObject{
     
     /* view-descriptions */
@@ -20,6 +32,7 @@ class matchDataClass: NSObject{
     var subAreas: Dictionary<String, Dictionary<String, Any>>
     /* (-1) filling out form, (0) waiting for result, (1) got match result */
     var matchResultStatus: Int
+    var matchResult: Array<Dictionary<String, Any>>
     
     var currentview:Int
     var lookingBool:[String: Bool]
@@ -38,6 +51,8 @@ class matchDataClass: NSObject{
     var interrestList:Dictionary<String, Array<Dictionary<String, Any>>>
     var time:String
     
+    
+    
     override init() {
 
         grader = Dictionary<String, Any>()
@@ -45,6 +60,7 @@ class matchDataClass: NSObject{
         areas = Array<Dictionary<String, Any>>()
         mainAreas = Dictionary<String, Bool>()
         subAreas = Dictionary<String, Dictionary<String, Any>>()
+        matchResult = Array<Dictionary<String, Any>>()
         matchResultStatus = -1
         smileyInt = 666
         currentview = 0
@@ -102,12 +118,23 @@ class matchDataClass: NSObject{
         self.slider["max"] = json["slider"]["max"].int
         self.slider["question"] = json["slider"]["question"].string
         self.slider["type"] = json["slider"]["type"].string
+        
         self.grader = Dictionary<String, Any>()
         self.grader["question"] = json["grader"]["question"].string
         self.grader["type"] = json["grader"]["type"].string
         self.grader["steps"] = json["grader"]["steps"].int
         
         self.smileyInt = json["smileyInt"].intValue
+        self.matchResult = Array<Dictionary<String, Any>>()
+        
+        for item in json["matchResult"] {
+            var reasons = Array<String>()
+            for json in item.1["reasons"] {
+                reasons.append(json.1.stringValue)
+            }
+            self.matchResult.append(["reasons": reasons, "percent": item.1["percent"].doubleValue, "exhibitor": item.1["exhibitor"].intValue] as Dictionary<String, Any>)
+        }
+        
         self.matchResultStatus = json["matchResultStatus"].intValue
         self.travel =          json["travel"].doubleValue
         

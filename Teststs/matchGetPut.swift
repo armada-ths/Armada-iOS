@@ -3,10 +3,22 @@
 //  Armada
 //
 //  Created by Ola Roos on 2017-10-24.
-//  Copyright © 2017 Sami Purmonen. All rights reserved.
+//  Copyright © 2017 Ola Roos. All rights reserved.
 //
 import SwiftyJSON
 import Foundation
+
+struct matchResultObject {
+    var reasons: Array<String>
+    let percent: Double
+    let exhibitor: Int
+    
+    init(reasons: Array<String>, percent: Double, exhibitor: Int) {
+        self.reasons = reasons
+        self.percent = percent
+        self.exhibitor = exhibitor
+    }
+}
 
 class matchGetPut {
     
@@ -105,7 +117,6 @@ class matchGetPut {
                 print(error?.localizedDescription ?? "No data")
                 return
             }
-            print(response)
         }
         task.resume()
     }
@@ -119,9 +130,27 @@ class matchGetPut {
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             do {
                 if let data = data {
+                    
                     //[{"company_id": Int, "percent": Double, "3array": ["string1", "string2", "string3"], }, ...]
-                    let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, Any>>
-                    self.matchResult = response
+                    let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+                    
+                    var resultArray = Array<Dictionary<String, Any>>()
+                    for item in response{
+                        var reasons = Array<String>()
+                        if let array = item["reasons"] as? Array<String> {
+                            for string in array {
+                                reasons.append(string)
+                            }
+                        }
+                        let percent = item["percent"] as! Double
+                        let exhibitor = item["exhibitor"] as! Int
+
+                        resultArray.append(["reasons": reasons, "percent": percent, "exhibitor": exhibitor] as Dictionary<String, Any>)
+                    }
+                    let match = matchDataClass().load()
+                    match?.matchResultStatus = 1
+                    match?.matchResult = resultArray
+                    match?.save()
                 } else {
                     // Data is nil.
                 }
