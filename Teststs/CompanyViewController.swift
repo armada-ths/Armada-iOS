@@ -67,7 +67,6 @@ class CompanyViewController: UIViewController {
            // whiteView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "companyBackground"))
            // backgroundView.backgroundColor = ColorScheme.armadaLicorice
             self.whiteView.sendSubview(toBack: backgroundImage)
-            backView.backgroundColor = ColorScheme.armadaLicorice
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
@@ -106,6 +105,18 @@ class CompanyViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if(company.likesEquality){
+            backView.backgroundColor = ColorScheme.diversityRed
+        }
+        else if (company.likesEnvironment){
+            backView.backgroundColor = ColorScheme.sustainabilityGreen
+
+        }
+        else{
+            backView.backgroundColor = ColorScheme.armadaLicorice
+        }
+
+        
         //parent?.title = company.name
     }
     

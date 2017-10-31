@@ -156,7 +156,6 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
-        cell.workFieldLabel.text = company.primaryWorkField
         cell.descriptionLabel.sizeToFit()
         if (company.localImage != nil){
             let image = company.localImage!
@@ -178,9 +177,22 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
         
-        cell.secondIcon.isHidden = true
-        cell.firstIcon.isHidden = true
-        cell.thirdIcon.isHidden = true
+        if (company.likesEnvironment){
+            cell.backgroundColor = ColorScheme.sustainabilityGreen
+            cell.firstIcon.isHidden = false
+            cell.secondIcon.isHidden = true
+        }
+        else if (company.likesEquality){
+            cell.backgroundColor = ColorScheme.diversityRed
+            cell.firstIcon.isHidden = true
+            cell.secondIcon.isHidden = false
+        }
+        else{
+            cell.backgroundColor = UIColor.white
+            cell.secondIcon.isHidden = true
+            cell.firstIcon.isHidden = true
+        }
+
 //        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
 //        cell.layer.shadowColor = UIColor.black.cgColor
 //        //self.viewBg!.layer.shadowRadius = 4
