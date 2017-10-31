@@ -6,9 +6,9 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
     var selectedCompany: Company!
     
     func viewControllerForCompany(_ company: Company) -> UIViewController {
-        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: "CompanyView") as! CompanyViewController
         viewController.company = company
-        viewController.companies = companies
+       // viewController.companies = companies
         return viewController
     }
     
@@ -17,10 +17,15 @@ class CompaniesPageViewController: UIPageViewController, UIPageViewControllerDat
         delegate = self
         dataSource = self
         setViewControllers([viewControllerForCompany(selectedCompany)], direction: .forward, animated: true, completion: {done in })
+        for view in self.view.subviews {
+            if let subView = view as? UIScrollView {
+                subView.isScrollEnabled = false
+            }
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let index = (companies.index(of: (viewController as! CompanyViewController).company)! + 1) % companies.count
+        let index = (companies.index(of: (viewController as! CompanyViewController).company)!) % companies.count
         return viewControllerForCompany(companies[index])
     }
     

@@ -13,10 +13,13 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 class CatalogueTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     
+    @IBOutlet weak var backBarButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
+    var cellColours = [ColorScheme.armadaGreen, ColorScheme.armadaRed, ColorScheme.armadaLicorice]
     
     var companiesByLetters: [(letter: String, companies: [Company])] = []
+    var companiesArray = Array <Company> ()
     var highlightedCompany: Company?
     
     var selectedCompany: Company? {
@@ -48,12 +51,15 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     
     func updateCompaniesByLetters(_ companies: [Company]) {
         let stopWatch = StopWatch()
+        companiesArray = companies.sorted(by: ({swedishOrdering($0.name, y: $1.name)}))
         companiesByLetters = Array(Set(companies.map { String($0.name[$0.name.startIndex]).uppercased() })).sorted(by: swedishOrdering).map { letter in (letter: letter, companies: companies.filter({ $0.name.uppercased().hasPrefix(letter) })) }
         stopWatch.print("Updating letters")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorStyle = .none
         self.tableView.rowHeight = 75
         searchBar.delegate = self
         //        refreshControl = UIRefreshControl()
@@ -68,7 +74,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             let cell = tableView.cellForRow(at: highlightedIndexPath) else  { return nil }
         let company = companiesByLetters[(highlightedIndexPath as NSIndexPath).section].companies[(highlightedIndexPath as NSIndexPath).row]
         highlightedCompany = company
-        let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyViewController") as! CompanyViewController
+        let companyViewController = storyboard!.instantiateViewController(withIdentifier: "CompanyView") as! CompanyViewController
         companyViewController.company = company
         previewingContext.sourceRect = cell.frame
         return companyViewController
@@ -102,14 +108,35 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         tableView.reloadData()
     }
     
-    @IBAction func segmentedControlDidChange(_ sender: UISegmentedControl) {
-        updateCompanies()
-        tableView.reloadData()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCompanies()
+        
+        // change backbar button from "Back" to ""
+        backBarButton.title = ""
+        
+        // reveal logo-image
+        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
+        
+        
+        // set title if not set
+        if self.navigationItem.titleView == nil {
+            
+            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let label = UILabel(frame: frame)
+            let myMutableString = NSMutableAttributedString(
+                string: "C A T A L O U G E THS Armada 2017",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeue-Thin",
+                    size: 22.0)!])
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 18))
+            label.textAlignment = .center
+            label.attributedText = myMutableString
+            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
+            newTitleView.addSubview(label)
+            self.navigationItem.titleView = newTitleView
+        }
     }
     
     @IBAction func unwind(_ unwindSegue: UIStoryboardSegue) {}
@@ -129,47 +156,62 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         let company = companiesByLetters[(indexPath as NSIndexPath).section].companies[(indexPath as NSIndexPath).row]
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
-        cell.workFieldLabel.text = company.primaryWorkField
         cell.descriptionLabel.sizeToFit()
-        if let image = company.image {
+        cell.arrow.image = #imageLiteral(resourceName: "wArrow")
+        if (company.localImage != nil){
+            let image = company.localImage!
+            cell.logoImageView.backgroundColor = UIColor.white
+            if(image.size.width > image.size.height){
+               cell.imageHeight.constant = 70 * (image.size.height/image.size.width )
+                cell.imageWidth.constant = 70
+            }
+            else{
+                cell.imageWidth.constant = 70 * (image.size.width/image.size.height )
+                cell.imageHeight.constant = 70
+                
+            }
             cell.logoImageView.image = image
-            cell.companyNameLabel.isHidden = true
-        } else {
-            cell.logoImageView.image = nil
-            cell.companyNameLabel.isHidden = true
         }
-        
-        
+        else{
+            cell.setLogo(company)
+        }
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
+        cell.descriptionLabel.textColor = UIColor.white
+        if (company.likesEnvironment){
+            cell.backgroundColor = ColorScheme.sustainabilityGreen
+            cell.firstIcon.isHidden = false
+            cell.secondIcon.isHidden = true
+        }
+        else if (company.likesEquality){
+            cell.backgroundColor = ColorScheme.diversityRed
+            cell.firstIcon.isHidden = true
+            cell.secondIcon.isHidden = false
+        }
+        else{
+            cell.descriptionLabel.textColor = UIColor.black
+            cell.arrow.image = #imageLiteral(resourceName: "gArrow")
+            cell.backgroundColor = UIColor.white
+            cell.secondIcon.isHidden = true
+            cell.firstIcon.isHidden = true
+        }
+//        cell.layer.shadowOffset = CGSize(width: 1, height: 1)
+//        cell.layer.shadowColor = UIColor.black.cgColor
+//        //self.viewBg!.layer.shadowRadius = 4
+//        cell.layer.shadowOpacity = 0.25
+//        cell.layer.masksToBounds = false;
+//        cell.clipsToBounds = false;
         
-        cell.secondIcon.isHidden = true
-        cell.firstIcon.isHidden = true
-        cell.thirdIcon.isHidden = true
-        /*for i in 0..<stuff.count {
-         if stuff[i] {
-         if cell.firstIcon.isHidden {
-         cell.firstIcon.image = icons[i].image
-         cell.firstIcon.isHidden = false
-         } else if cell.secondIcon.isHidden {
-         cell.secondIcon.image = icons[i].image
-         cell.secondIcon.isHidden = false
-         } else {
-         cell.thirdIcon.image = icons[i].image
-         cell.thirdIcon.isHidden = false
-         }
-         }
-         }*/
         return cell
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return companiesByLetters.map { $0.letter }
-    }
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return companiesByLetters.map { $0.letter }
+//    }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return companiesByLetters[section].letter
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return companiesByLetters[section].letter
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         searchBar.resignFirstResponder()
@@ -187,7 +229,13 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         view.endEditing(true)
     }
     
-
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return companiesByLetters.map { $0.letter }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return companiesByLetters[section].letter
+    }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
