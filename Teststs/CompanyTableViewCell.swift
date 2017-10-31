@@ -11,6 +11,7 @@ class CompanyTableViewCell: UITableViewCell {
     @IBOutlet weak var thirdIcon: UIImageView!
     @IBOutlet var imageWidth: NSLayoutConstraint!
     @IBOutlet var imageHeight: NSLayoutConstraint!
+    @IBOutlet var arrow: UIImageView!
     
     func setLogo(_ company: Company){
         let image = company.image

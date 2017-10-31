@@ -3,16 +3,20 @@ import UIKit
 class CompanyViewController: UIViewController {
    // @IBOutlet var mapH: NSLayoutConstraint!
     
+    @IBOutlet var contentview: UIView!
     @IBOutlet var mapImage: UIImageView!
    // @IBOutlet var imageHeight: NSLayoutConstraint!
    // @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet var aboutText: UITextView!
     
-    @IBOutlet var backgroundImage: UIImageView!
-    @IBOutlet var backView: UIView!
-    @IBOutlet var backgroundView: UIView!
-    @IBOutlet var whiteView: UIView!
+    @IBOutlet var headerW: NSLayoutConstraint!
+    @IBOutlet var headerH: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
+    @IBOutlet var coreIcon: UIImageView!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var borderview: UIView!
+    @IBOutlet var whiteView: UIView!
     @IBOutlet var companyName: UILabel!
     // @IBOutlet weak var aboutLabel: UILabel!
 //    @IBOutlet weak var jobLabel: UILabel!
@@ -39,34 +43,34 @@ class CompanyViewController: UIViewController {
     
     override func viewDidLoad() {
         if(company.localImage != nil){
-           // headerHeight = UIScreen.main.bounds.width * (company.image!.size.height/company.image!.size.width)
-           /// imageHeight.constant = headerHeight
+//            headerHeight = UIScreen.main.bounds.width * (company.image!.size.height/company.image!.size.width)
+           // imageHeight.constant = headerHeight
             let image = company.localImage
-//            if(Float((image?.size.width)!) > Float((image?.size.height)!)){
-////                headerW.constant = 150
-////                headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
-//            }
-//        else{
-////            headerH.constant = 50
-////            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
-//            }
+            if(Float((image?.size.width)!) > Float((image?.size.height)!)){
+                headerW.constant = 100
+                headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
+            }
+        else{
+            headerH.constant = 100
+            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
+            }
         headerImageView.image = image
         }
     else{
         let image = company.image
-//        if(Float((image?.size.width)!) > Float((image?.size.height)!)){
-////            headerW.constant = 150
-////            headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
-//        }
-//        else{
-//            headerH.constant = 50
-//            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
-//            }
+        if(Float((image?.size.width)!) > Float((image?.size.height)!)){
+            headerW.constant = 100
+            headerH.constant = headerW.constant * ((image?.size.height)! / (image?.size.width)!)
+        }
+        else{
+            headerH.constant = 100
+            headerW.constant = headerH.constant * ((image?.size.width)! / (image?.size.height)!)
+            }
         headerImageView.image = image
         }
            // whiteView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "companyBackground"))
            // backgroundView.backgroundColor = ColorScheme.armadaLicorice
-            self.whiteView.sendSubview(toBack: backgroundImage)
+         //   self.whiteView.sendSubview(toBack: backgroundImage)
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
@@ -106,14 +110,22 @@ class CompanyViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if(company.likesEquality){
-            backView.backgroundColor = ColorScheme.diversityRed
+            backgroundView.backgroundColor = ColorScheme.diversityRed
+            scrollView.backgroundColor = ColorScheme.diversityRed
+            coreIcon.image = #imageLiteral(resourceName: "div")
+
         }
         else if (company.likesEnvironment){
-            backView.backgroundColor = ColorScheme.sustainabilityGreen
+           backgroundView.backgroundColor = ColorScheme.sustainabilityGreen
+            scrollView.backgroundColor = ColorScheme.sustainabilityGreen
+            coreIcon.image = #imageLiteral(resourceName: "sus")
+
 
         }
         else{
-            backView.backgroundColor = ColorScheme.armadaLicorice
+            backgroundView.backgroundColor = ColorScheme.armadaLicorice
+            scrollView.backgroundColor = ColorScheme.armadaLicorice
+
         }
 
         
@@ -123,9 +135,10 @@ class CompanyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationLabel.text = company.locationDescription
-//        if(company.locationUrl == ""){
-//            return
-//        }
+        if(company.locationUrl == "" || company.locationUrl == "https://ais.armada.nu/static/missing.png"){
+            self.mapImage.isHidden = true
+            return
+        }
         URLSession.shared.dataTask(with: URL(string: company.locationUrl)!, completionHandler: {(data, response, error) -> Void in
             if error != nil {
                 return

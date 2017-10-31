@@ -157,6 +157,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         cell.descriptionLabel.text = company.description.substring(to: company.description.characters.index(company.description.endIndex, offsetBy: -1))
         cell.descriptionLabel.text = company.name
         cell.descriptionLabel.sizeToFit()
+        cell.arrow.image = #imageLiteral(resourceName: "wArrow")
         if (company.localImage != nil){
             let image = company.localImage!
             cell.logoImageView.backgroundColor = UIColor.white
@@ -176,7 +177,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         }
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
-        
+        cell.descriptionLabel.textColor = UIColor.white
         if (company.likesEnvironment){
             cell.backgroundColor = ColorScheme.sustainabilityGreen
             cell.firstIcon.isHidden = false
@@ -188,17 +189,19 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             cell.secondIcon.isHidden = false
         }
         else{
+            cell.descriptionLabel.textColor = UIColor.black
+            cell.arrow.image = #imageLiteral(resourceName: "gArrow")
             cell.backgroundColor = UIColor.white
             cell.secondIcon.isHidden = true
             cell.firstIcon.isHidden = true
         }
-
-//        cell.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        cell.layer.shadowOffset = CGSize(width: 1, height: 1)
 //        cell.layer.shadowColor = UIColor.black.cgColor
 //        //self.viewBg!.layer.shadowRadius = 4
 //        cell.layer.shadowOpacity = 0.25
 //        cell.layer.masksToBounds = false;
 //        cell.clipsToBounds = false;
+        
         return cell
     }
     
