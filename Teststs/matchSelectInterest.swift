@@ -22,6 +22,9 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     @IBOutlet var imageH: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         areas.delegate = self
         areas.dataSource = self
         addStatusbar()
@@ -79,6 +82,12 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
             print("going to matchEnd from withoutanimation")
             self.navigationController?.pushViewController(rightViewController, animated: false)
 
+    }
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchTeam?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
     }
 
     func goRight(){

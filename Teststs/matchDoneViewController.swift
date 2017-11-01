@@ -51,6 +51,9 @@ class matchDoneViewController: UIViewController {
         doneButton.layer.shadowColor = UIColor.black.cgColor
         doneButton.layer.shadowOffset = CGSize(width: 5, height: 5)
         doneButton.layer.shadowRadius = 5
+        if ( matchData.currentview  < viewNumber){
+            goBackWithoutAnimation()
+        }
 
     }
     
@@ -110,6 +113,13 @@ class matchDoneViewController: UIViewController {
         matchData.save()
         self.matchInterest?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchInterest?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
     }
     
     override func didReceiveMemoryWarning() {

@@ -10,6 +10,12 @@ import UIKit
 
 class matchExhibitors: UITableViewController {
     
+    
+    var matchData: matchDataClass?
+    var matchStart: matchStart?
+    var matchLoading: matchLoading?
+    let viewNumber = 10
+    
     //HeaderCell
     @IBOutlet var headerCell: UITableViewCell!
     @IBOutlet var headerLabel: UILabel!
@@ -87,6 +93,9 @@ class matchExhibitors: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
+        let statusBar = statWindow.subviews[0] as UIView
+        statusBar.backgroundColor = UIColor.black
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -109,8 +118,12 @@ class matchExhibitors: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
     func reload(_ sender:AnyObject){
-        
         let companies = CatalogueFilter.filteredCompanies
         let id1 = 431//Get from match
         let id2 = 378
@@ -118,24 +131,20 @@ class matchExhibitors: UITableViewController {
         let id4 = 532
         let id5 = 451
         company1 = companies.filter{$0.id == id1}.first
-        companiesMatch.append(company1!)
         percent1 = 98
         company2 = companies.filter{$0.id == id2}.first
         percent2 = 90
-        companiesMatch.append(company2!)
         company3 = companies.filter{$0.id == id3}.first
         percent3 = 89
-        companiesMatch.append(company3!)
         company4 = companies.filter{$0.id == id4}.first
         percent4 = 80
-        companiesMatch.append(company4!)
         company5 = companies.filter{$0.id == id5}.first
         percent5 = 70
-        companiesMatch.append(company5!)
         
         //Setup cell 1
         
         if(company1 != nil){
+            companiesMatch.append(company1!)
             titleLabel1.text = company1?.name
             setUpLogo(logo1, imageWidth1, imageHeight1, company1!)
             susLogo1.isHidden = true
@@ -161,6 +170,7 @@ class matchExhibitors: UITableViewController {
         
         //Setup Cell2
         if(company2 != nil){
+            companiesMatch.append(company2!)
             titleLabel2.text = company2?.name
             setUpLogo(logo2, imageWidth2, imageHeight2, company2!)
             susLogo2.isHidden = true
@@ -186,6 +196,7 @@ class matchExhibitors: UITableViewController {
         
         //Setup Cell3
         if(company3 != nil){
+            companiesMatch.append(company3!)
             titleLabel3.text = company3?.name
             setUpLogo(logo3, imageWidth3, imageHeight3, company3!)
             susLogo3.isHidden = true
@@ -212,6 +223,7 @@ class matchExhibitors: UITableViewController {
         
         //Setup Cell4
         if(company4 != nil){
+            companiesMatch.append(company4!)
             titleLabel4.text = company4?.name
             setUpLogo(logo4, imageWidth4, imageHeight4, company4!)
             susLogo4.isHidden = true
@@ -237,6 +249,7 @@ class matchExhibitors: UITableViewController {
         //Setup Cell5
         
         if(company5 != nil){
+            companiesMatch.append(company5!)
             titleLabel5.text = company5?.name
             setUpLogo(logo5, imageWidth5, imageHeight5, company5!)
             susLogo5.isHidden = true
@@ -267,7 +280,6 @@ class matchExhibitors: UITableViewController {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             let company = companiesMatch[indexPath.row-1]
            controller.company = company
-            print(matchLEvels)
             controller.match = matchLEvels[indexPath.row-1]
             deselectSelectedCell()
         }
@@ -329,13 +341,10 @@ class matchExhibitors: UITableViewController {
         return 7
     }
     @IBAction func redoMatch(_ sender: Any) {
-        print("Redo")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myAlert = storyboard.instantiateViewController(withIdentifier: "alert")
-        myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(myAlert, animated: true, completion: nil)
-        //Will redo matching
+        matchData?.currentview = 0
+        var viewControllers = navigationController?.viewControllers
+        viewControllers?.removeLast(10) // views to pop
+        navigationController?.setViewControllers(viewControllers!, animated: true)
     }
     
     /*

@@ -48,6 +48,9 @@ class matchWorld: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
@@ -148,6 +151,12 @@ class matchWorld: UIViewController {
         africaButton.layer.borderColor = UIColor.black.cgColor
     }
 
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchSweden?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
     
     func goRightWithoutAnimation(){
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel

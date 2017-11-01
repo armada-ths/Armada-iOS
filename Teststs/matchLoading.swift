@@ -13,10 +13,15 @@ class matchLoading: UIViewController {
     var matchData: matchDataClass = matchDataClass()
     var matchStart: matchStart?
     var matchDone: matchDoneViewController?
+    let viewNumber = 9
 
     @IBOutlet var activity: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
         loadingLabel.font = UIFont(name:"BebasNeueRegular", size: 40)
         let transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
         activity.transform = transform
@@ -34,11 +39,20 @@ class matchLoading: UIViewController {
         let getput = matchGetPut(matchData: self.matchData)
         getput.getResult(student_id: student_id, finished: { isSuccess in
             if isSuccess {
-                print("we got the data, no exhibitor list exists so you get a pop-up instead")
-                let alertController = UIAlertController(title: "SUCCESS", message: "we got the data, no exhibitor list exists so you get a pop-up instead", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                self.goBack()
+                DispatchQueue.main.async {
+                    self.matchData.currentview += 1
+                    self.matchData.save()
+                    let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchResult") as! matchExhibitors
+                    rightViewController.matchData = self.matchData
+                    rightViewController.matchStart = self.matchStart
+                    rightViewController.matchLoading = self
+                    self.navigationController?.pushViewController(rightViewController, animated: true)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let myAlert = storyboard.instantiateViewController(withIdentifier: "alert")
+                myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(myAlert, animated: true, completion: nil)
+                }
             } else {
                 let alertController = UIAlertController(title: "NO ANSWER", message: "wait for 10 seconds and try to fetch again", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -48,9 +62,20 @@ class matchLoading: UIViewController {
             }
         })
     }
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchDone?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if ( matchData.currentview  < viewNumber){
+            goBackWithoutAnimation()
+            return
+        }
+
         self.askForResult()
     }
     
@@ -58,7 +83,7 @@ class matchLoading: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
     
 

@@ -118,6 +118,9 @@ class matchSweden: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
@@ -216,6 +219,12 @@ class matchSweden: UIViewController {
         print("going back to view #\(matchData.currentview)")
         self.matchLooking?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
+    }
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchLooking?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
     }
     
     override func didReceiveMemoryWarning() {

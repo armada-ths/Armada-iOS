@@ -89,8 +89,19 @@ class matchTravel: UIViewController {
         }
     }
     
+    func goBackWithoutAnimation(){
+        matchData.currentview -= 1
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchWorld?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         buildViewFromData()        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))

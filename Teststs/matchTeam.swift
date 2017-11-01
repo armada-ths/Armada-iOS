@@ -46,10 +46,19 @@ class matchTeam: UIViewController {
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
     }
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchTravel?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         self.setupSwipe()
         self.setupStatusBar()
         
