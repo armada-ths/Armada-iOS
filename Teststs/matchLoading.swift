@@ -18,6 +18,10 @@ class matchLoading: UIViewController {
     @IBOutlet var activity: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if(matchData.currentview > viewNumber){
+            goRightWithoutAnimation()
+            return
+        }
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
@@ -33,8 +37,18 @@ class matchLoading: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func goRightWithoutAnimation(){
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchResult") as! matchExhibitors
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self.matchStart
+        rightViewController.matchLoading = self
+        self.navigationController?.pushViewController(rightViewController, animated: false)
+    }
     
     func askForResult(){
+        if(matchData.currentview > viewNumber){
+            return
+        }
         let student_id = 1
         let getput = matchGetPut(matchData: self.matchData)
         getput.getResult(student_id: student_id, finished: { isSuccess, newMatchInstance in

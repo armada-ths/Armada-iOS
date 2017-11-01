@@ -27,6 +27,9 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         if ( matchData.currentview  < viewNumber){
             goBackWithoutAnimation()
         }
+        if ( matchData.currentview  > viewNumber){
+            goRightWithoutAnimation()
+        }
         areas.delegate = self
         areas.dataSource = self
         addStatusbar()
@@ -100,7 +103,6 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
         rightViewController.matchInterest = self
-        print("going to matchEnd from withoutanimation")
         self.navigationController?.pushViewController(rightViewController, animated: false)
         
     }
