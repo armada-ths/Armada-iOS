@@ -115,7 +115,6 @@ class matchGetPut {
                 } else {
                     finished(false)
                 }
-                
             }
         }
         task.resume()
@@ -125,35 +124,36 @@ class matchGetPut {
         return 0
     }
     
-    func getResult(student_id: Int){
+    func getResult(student_id: Int, finished: @escaping ((_ isSuccess: Bool) -> Void)) {
         let url = URL(string: getURLString + String(student_id))
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             do {
-                if let data = data {
-                    
-                    //[{"company_id": Int, "percent": Double, "3array": ["string1", "string2", "string3"], }, ...]
-                    let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
-                    
-                    var resultArray = Array<Dictionary<String, Any>>()
-                    for item in response{
-                        var reasons = Array<String>()
-                        if let array = item["reasons"] as? Array<String> {
-                            for string in array {
-                                reasons.append(string)
+                if let response = response {
+                    if let data = data {
+                        let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+                        var resultArray = Array<Dictionary<String, Any>>()
+                        for item in response{
+                            var reasons = Array<String>()
+                            if let array = item["reasons"] as? Array<String> {
+                                for string in array {
+                                    reasons.append(string)
+                                }
                             }
+                            let percent = item["percent"] as! Double
+                            let exhibitor = item["exhibitor"] as! Int
+                            resultArray.append(["reasons": reasons, "percent": percent, "exhibitor": exhibitor] as Dictionary<String, Any>)
                         }
-                        let percent = item["percent"] as! Double
-                        let exhibitor = item["exhibitor"] as! Int
-
-                        resultArray.append(["reasons": reasons, "percent": percent, "exhibitor": exhibitor] as Dictionary<String, Any>)
+                        let match = matchDataClass().load()
+                        match?.matchResultStatus = 1
+                        match?.matchResult = resultArray
+                        match?.save()
+                        finished(true)
+                    } else {
+                        finished(false)
                     }
-                    let match = matchDataClass().load()
-                    match?.matchResultStatus = 1
-                    match?.matchResult = resultArray
-                    match?.save()
-                } else {
-                    // Data is nil.
+                    
                 }
+                
             } catch let error as NSError {
                 print("json error: \(error.localizedDescription)")
             }

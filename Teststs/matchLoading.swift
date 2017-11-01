@@ -29,12 +29,29 @@ class matchLoading: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func askForResult(){
+        let student_id = 1
+        let getput = matchGetPut(matchData: self.matchData)
+        getput.getResult(student_id: student_id, finished: { isSuccess in
+            if isSuccess {
+                print("we got the data, no exhibitor list exists so you get a pop-up instead")
+                let alertController = UIAlertController(title: "SUCCESS", message: "we got the data, no exhibitor list exists so you get a pop-up instead", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                self.goBack()
+            } else {
+                let alertController = UIAlertController(title: "NO ANSWER", message: "wait for 10 seconds and try to fetch again", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                sleep(10)
+                self.askForResult()
+            }
+        })
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        sleep(10)
-        goBack()
-
+        self.askForResult()
     }
     
     

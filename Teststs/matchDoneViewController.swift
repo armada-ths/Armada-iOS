@@ -72,13 +72,19 @@ class matchDoneViewController: UIViewController {
         getput.putAnswer(student_id: student_id, finished: {isSuccess in
             if isSuccess {
                 print("we got 200 back")
-                self.matchData.currentview += 1
-                self.matchData.save()
-                let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
-                rightViewController.matchData = self.matchData
-                rightViewController.matchStart = self.matchStart
-                rightViewController.matchDone = self
-                self.navigationController?.pushViewController(rightViewController, animated: true)
+                
+                // execute in main thread
+                
+                DispatchQueue.main.async {
+                    self.matchData.currentview += 1
+                    self.matchData.save()
+                    let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
+                    rightViewController.matchData = self.matchData
+                    rightViewController.matchStart = self.matchStart
+                    rightViewController.matchDone = self
+                    self.navigationController?.pushViewController(rightViewController, animated: true)
+                }
+                
             } else {
                 let alertController = UIAlertController(title: "Server Error", message: "Something went wrong when sending data to the server ☹️ \n push button to try again 😘", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
