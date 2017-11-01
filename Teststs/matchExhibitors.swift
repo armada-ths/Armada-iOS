@@ -83,13 +83,35 @@ class matchExhibitors: UITableViewController {
     
     
     var companiesMatch = Array <Company>()
+    var matchLEvels = Array <UILabel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: "reload:", for: UIControlEvents.valueChanged)
+       // tableView.addSubview(refreshControl!) // not required when using UITableViewController
+        
+        //Load companies
+        ArmadaApi.updateCompanies {
+            OperationQueue.main.addOperation {
+                self.reload("Nothing" as AnyObject)
+            }
+        }
+       
+
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func reload(_ sender:AnyObject){
+        
         let companies = CatalogueFilter.filteredCompanies
-        
-        
         let id1 = 431//Get from match
         let id2 = 378
         let id3 = 544
@@ -99,14 +121,18 @@ class matchExhibitors: UITableViewController {
         companiesMatch.append(company1!)
         percent1 = 98
         company2 = companies.filter{$0.id == id2}.first
+        percent2 = 90
         companiesMatch.append(company2!)
         company3 = companies.filter{$0.id == id3}.first
+        percent3 = 89
         companiesMatch.append(company3!)
         company4 = companies.filter{$0.id == id4}.first
+        percent4 = 80
         companiesMatch.append(company4!)
         company5 = companies.filter{$0.id == id5}.first
+        percent5 = 70
         companiesMatch.append(company5!)
-
+        
         //Setup cell 1
         
         if(company1 != nil){
@@ -114,8 +140,9 @@ class matchExhibitors: UITableViewController {
             setUpLogo(logo1, imageWidth1, imageHeight1, company1!)
             susLogo1.isHidden = true
             divLogo1.isHidden = true
-           // machLevel1.text = percent1
-
+            machLevel1.text = String(describing: percent1!) + "%"
+            matchLEvels.append(machLevel1)
+            
             if(company1!.likesEquality){
                 arrow1.image = #imageLiteral(resourceName: "wArrow")
                 divLogo1.isHidden = false
@@ -138,8 +165,10 @@ class matchExhibitors: UITableViewController {
             setUpLogo(logo2, imageWidth2, imageHeight2, company2!)
             susLogo2.isHidden = true
             divLogo2.isHidden = true
-            // machLevel1.text = percent1
-            
+            matchLevel2.text = String(describing: percent2!) + "%"
+            matchLEvels.append(matchLevel2)
+
+
             if(company2!.likesEquality){
                 arrow2.image = #imageLiteral(resourceName: "wArrow")
                 divLogo2.isHidden = false
@@ -161,8 +190,10 @@ class matchExhibitors: UITableViewController {
             setUpLogo(logo3, imageWidth3, imageHeight3, company3!)
             susLogo3.isHidden = true
             divLogo3.isHidden = true
-            // machLevel1.text = percent1
-            
+            matchLevel3.text = String(describing: percent3!) + "%"
+            matchLEvels.append(matchLevel3)
+
+
             if(company3!.likesEquality){
                 arrow3.image = #imageLiteral(resourceName: "wArrow")
                 divLogo3.isHidden = false
@@ -185,8 +216,9 @@ class matchExhibitors: UITableViewController {
             setUpLogo(logo4, imageWidth4, imageHeight4, company4!)
             susLogo4.isHidden = true
             divLogo4.isHidden = true
-            // machLevel1.text = percent1
-            
+            matchLevel4.text = String(describing: percent4!) + "%"
+            matchLEvels.append(matchLevel4)
+
             if(company4!.likesEquality){
                 arrow4.image = #imageLiteral(resourceName: "wArrow")
                 divLogo4.isHidden = false
@@ -209,8 +241,9 @@ class matchExhibitors: UITableViewController {
             setUpLogo(logo5, imageWidth5, imageHeight5, company5!)
             susLogo5.isHidden = true
             divLogo5.isHidden = true
-            // machLevel1.text = percent1
-            
+            matchLevel5.text = String(describing: percent5!) + "%"
+            matchLEvels.append(matchLevel5)
+
             if(company5!.likesEquality){
                 arrow5.image = #imageLiteral(resourceName: "wArrow")
                 divLogo5.isHidden = false
@@ -225,21 +258,17 @@ class matchExhibitors: UITableViewController {
         else{
             cell5.isHidden = true
         }
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        if (refreshControl?.isRefreshing)!{
+            refreshControl?.endRefreshing()
+        }
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        if let controller = segue.destination as? UIViewController,
+        if let controller = segue.destination as? matchDetailExhibitor,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-            print(indexPath.row)
             let company = companiesMatch[indexPath.row-1]
-           // controller.event = armadaEvent
+           controller.company = company
+            print(matchLEvels)
+            controller.match = matchLEvels[indexPath.row-1]
             deselectSelectedCell()
         }
     }
@@ -249,12 +278,12 @@ class matchExhibitors: UITableViewController {
             let image = company.localImage!
             logo1.backgroundColor = UIColor.white
             if(image.size.width > image.size.height){
-                height.constant = 70 * (image.size.height/image.size.width )
-                width.constant = 70
+                height.constant = 100 * (image.size.height/image.size.width )
+                width.constant = 100
             }
             else{
-                width.constant = 70 * (image.size.width/image.size.height )
-                height.constant = 70
+                width.constant = 100 * (image.size.width/image.size.height )
+                height.constant = 100
                 
             }
             logo.image = image
@@ -301,6 +330,11 @@ class matchExhibitors: UITableViewController {
     }
     @IBAction func redoMatch(_ sender: Any) {
         print("Redo")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myAlert = storyboard.instantiateViewController(withIdentifier: "alert")
+        myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myAlert, animated: true, completion: nil)
         //Will redo matching
     }
     
