@@ -24,6 +24,9 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet var imageH: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
+        if ( matchData.currentview  < viewNumber){
+            goBackWithoutAnimation()
+        }
         areas.delegate = self
         areas.dataSource = self
         addStatusbar()
@@ -139,6 +142,12 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.navigationController?.popViewController(animated: true)
     }
     
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchSelectInterest?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

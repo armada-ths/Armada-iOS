@@ -58,7 +58,9 @@ class matchLooking: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
-        
+        if(matchData.currentview < viewNumber){
+            goBackWithoutAnimation()
+        }
         print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
@@ -114,6 +116,12 @@ class matchLooking: UIViewController {
         
     }
     
+    func goBackWithoutAnimation(){
+        matchData.save()
+        // send data back to previous view-controller
+        self.matchStart?.matchData = matchData
+        self.navigationController?.popViewController(animated: false)
+    }
     
     func repositionButtons(_ height: CGFloat){
         

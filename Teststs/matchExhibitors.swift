@@ -10,6 +10,12 @@ import UIKit
 
 class matchExhibitors: UITableViewController {
     
+    
+    var matchData: matchDataClass?
+    var matchStart: matchStart?
+    var matchLoading: matchLoading?
+    let viewNumber = 10
+    
     //HeaderCell
     @IBOutlet var headerCell: UITableViewCell!
     @IBOutlet var headerLabel: UILabel!
@@ -329,13 +335,10 @@ class matchExhibitors: UITableViewController {
         return 7
     }
     @IBAction func redoMatch(_ sender: Any) {
-        print("Redo")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myAlert = storyboard.instantiateViewController(withIdentifier: "alert")
-        myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(myAlert, animated: true, completion: nil)
-        //Will redo matching
+        matchData?.currentview = 0
+        var viewControllers = navigationController?.viewControllers
+        viewControllers?.removeLast(10) // views to pop
+        navigationController?.setViewControllers(viewControllers!, animated: true)
     }
     
     /*
