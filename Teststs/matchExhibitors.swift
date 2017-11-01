@@ -29,7 +29,8 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var divLogo1: UIImageView!
     @IBOutlet var susLogo1: UIImageView!
     var company1: Company?
-    var percent1: Int?
+    var percent1: Double?
+    var id1: Int?
     @IBOutlet var imageHeight1: NSLayoutConstraint!
     @IBOutlet var imageWidth1: NSLayoutConstraint!
     
@@ -41,8 +42,9 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var susLogo2: UIImageView!
     @IBOutlet var matchLevel2: UILabel!
     @IBOutlet var arrow2: UIImageView!
+    var id2: Int?
     var company2: Company?
-    var percent2: Int?
+    var percent2: Double?
     @IBOutlet var imageHeight2: NSLayoutConstraint!
     @IBOutlet var imageWidth2: NSLayoutConstraint!
     
@@ -55,7 +57,8 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var susLogo3: UIImageView!
     @IBOutlet var logo3: UIImageView!
     var company3: Company?
-    var percent3: Int?
+    var percent3: Double?
+    var id3: Int?
     
     @IBOutlet var imageHeight3: NSLayoutConstraint!
     @IBOutlet var imageWidth3: NSLayoutConstraint!
@@ -70,7 +73,8 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var susLogo4: UIImageView!
     @IBOutlet var logo4: UIImageView!
     var company4: Company?
-    var percent4: Int?
+    var percent4: Double?
+    var id4: Int?
     @IBOutlet var imageWidth4: NSLayoutConstraint!
     @IBOutlet var imageHeight4: NSLayoutConstraint!
     
@@ -83,7 +87,8 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var susLogo5: UIImageView!
     @IBOutlet var logo5: UIImageView!
     var company5: Company?
-    var percent5: Int?
+    var percent5: Double?
+    var id5: Int?
     @IBOutlet var imageWidth5: NSLayoutConstraint!
     @IBOutlet var imageHeight5: NSLayoutConstraint!
     
@@ -93,7 +98,30 @@ class matchExhibitors: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
+        self.matchStart?.matchData = matchData!
+        if (matchData?.matchResult.isEmpty)!{
+            matchData?.currentview -= 1
+            matchData?.save()
+            // send data back to previous view-controller
+            self.matchLoading?.matchData = matchData!
+            self.navigationController?.popViewController(animated: false)
+        }
+        
+        print(type(of: matchData?.matchResult[0]["percent"]))
+        print(matchData?.matchResult[0])
+        id1 = matchData?.matchResult[0]["exhibitor"] as? Int ?? nil
+        percent1 = matchData?.matchResult[0]["percent"] as? Double ?? nil
+        print(percent1)
+        id2 = matchData?.matchResult[1]["exhibitor"] as? Int ?? nil
+        percent2 = matchData?.matchResult[1]["percent"] as? Double ?? nil
+        id3 = matchData?.matchResult[2]["exhibitor"] as? Int ?? nil
+        percent3 = matchData?.matchResult[2]["percent"] as? Double ?? nil
+        id4 = matchData?.matchResult[3]["exhibitor"] as? Int ?? nil
+        percent4 = matchData?.matchResult[3]["percent"] as? Double ?? nil
+        id5 = matchData?.matchResult[4]["exhibitor"] as? Int ?? nil
+        percent5 = matchData?.matchResult[4]["percent"] as? Double ?? nil
+
+       let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
         let statusBar = statWindow.subviews[0] as UIView
         statusBar.backgroundColor = UIColor.black
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
@@ -125,22 +153,21 @@ class matchExhibitors: UITableViewController {
     }
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
-        let id1 = 431//Get from match
-        let id2 = 378
-        let id3 = 544
-        let id4 = 532
-        let id5 = 451
-        company1 = companies.filter{$0.id == id1}.first
-        percent1 = 98
-        company2 = companies.filter{$0.id == id2}.first
-        percent2 = 90
-        company3 = companies.filter{$0.id == id3}.first
-        percent3 = 89
-        company4 = companies.filter{$0.id == id4}.first
-        percent4 = 80
-        company5 = companies.filter{$0.id == id5}.first
-        percent5 = 70
-        
+        if(id1 != nil){
+            company1 = companies.filter{$0.id == id1!}.first
+        }
+        if(id2 != nil){
+            company2 = companies.filter{$0.id == id2!}.first
+        }
+        if(id3 != nil){
+            company3 = companies.filter{$0.id == id3!}.first
+        }
+        if (id4 != nil){
+            company4 = companies.filter{$0.id == id4!}.first
+        }
+        if(id5 != nil){
+        company5 = companies.filter{$0.id == id5!}.first
+        }
         //Setup cell 1
         
         if(company1 != nil){
@@ -290,12 +317,12 @@ class matchExhibitors: UITableViewController {
             let image = company.localImage!
             logo1.backgroundColor = UIColor.white
             if(image.size.width > image.size.height){
-                height.constant = 100 * (image.size.height/image.size.width )
-                width.constant = 100
+                height.constant = 70 * (image.size.height/image.size.width )
+                width.constant = 70
             }
             else{
-                width.constant = 100 * (image.size.width/image.size.height )
-                height.constant = 100
+                width.constant = 70 * (image.size.width/image.size.height )
+                height.constant = 70
                 
             }
             logo.image = image
@@ -342,6 +369,8 @@ class matchExhibitors: UITableViewController {
     }
     @IBAction func redoMatch(_ sender: Any) {
         matchData?.currentview = 0
+        matchData?.save()
+        matchStart?.matchData = matchData!
         var viewControllers = navigationController?.viewControllers
         viewControllers?.removeLast(10) // views to pop
         navigationController?.setViewControllers(viewControllers!, animated: true)

@@ -39,6 +39,10 @@ class matchDoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(matchData.currentview)
+        if ( matchData.currentview  > viewNumber){
+            goRightWithoutAnimation()
+        }
         self.setupSwipe()
         self.setupStatusBar()
         almostDone.font = UIFont(name: "BebasNeueRegular", size: 40)
@@ -58,7 +62,7 @@ class matchDoneViewController: UIViewController {
     }
     
     func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
         rightViewController.matchDone = self
@@ -97,16 +101,16 @@ class matchDoneViewController: UIViewController {
         }
     )}
     
-    
-    func goRight(){
-        matchData.currentview += 1
-        matchData.save()
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchDone = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
-    }
+//
+//    func goRight(){
+//        matchData.currentview += 1
+//        matchData.save()
+//        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
+//        rightViewController.matchData = self.matchData
+//        rightViewController.matchStart = matchStart
+//        rightViewController.matchDone = self
+//        self.navigationController?.pushViewController(rightViewController, animated: true)
+//    }
     
     func goBack(){
         matchData.currentview -= 1
