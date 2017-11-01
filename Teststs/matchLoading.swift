@@ -42,7 +42,6 @@ class matchLoading: UIViewController {
                 DispatchQueue.main.async {
                     self.matchData.currentview += 1
                     self.matchData.save()
-                    print("HEJ")
                     let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchResult") as! matchExhibitors
                     rightViewController.matchData = self.matchData
                     rightViewController.matchStart = self.matchStart

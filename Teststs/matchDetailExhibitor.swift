@@ -71,7 +71,7 @@ class matchDetailExhibitor: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        matchLevel.layer.cornerRadius = 20
+        matchLevel.layer.cornerRadius = 30
         matchLevel.layer.masksToBounds = true
         if(company.likesEquality){
             backgroundView.backgroundColor = ColorScheme.diversityRed
