@@ -124,7 +124,7 @@ class matchGetPut {
         return 0
     }
     
-    func getResult(student_id: Int, finished: @escaping ((_ isSuccess: Bool) -> Void)) {
+    func getResult(student_id: Int, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void)) {
         let url = URL(string: getURLString + String(student_id))
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             do {
@@ -147,9 +147,11 @@ class matchGetPut {
                         match?.matchResultStatus = 1
                         match?.matchResult = resultArray
                         match?.save()
-                        finished(true)
+                        print(match?.matchResult)
+                        finished(true, match!)
+                        
                     } else {
-                        finished(false)
+                        finished(false, matchDataClass())
                     }
                     
                 }

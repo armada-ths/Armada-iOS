@@ -37,9 +37,12 @@ class matchLoading: UIViewController {
     func askForResult(){
         let student_id = 1
         let getput = matchGetPut(matchData: self.matchData)
-        getput.getResult(student_id: student_id, finished: { isSuccess in
+        getput.getResult(student_id: student_id, finished: { isSuccess, newMatchInstance in
             if isSuccess {
                 DispatchQueue.main.async {
+                    // newMatchInstance should contain matchResult
+                    assert(newMatchInstance.matchResult.count != 0)
+                    self.matchData = newMatchInstance
                     self.matchData.currentview += 1
                     self.matchData.save()
                     let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchResult") as! matchExhibitors
