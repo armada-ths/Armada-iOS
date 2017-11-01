@@ -93,6 +93,9 @@ class matchExhibitors: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
+        let statusBar = statWindow.subviews[0] as UIView
+        statusBar.backgroundColor = UIColor.black
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -115,8 +118,12 @@ class matchExhibitors: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
+    }
     func reload(_ sender:AnyObject){
-        
         let companies = CatalogueFilter.filteredCompanies
         let id1 = 431//Get from match
         let id2 = 378
@@ -273,7 +280,6 @@ class matchExhibitors: UITableViewController {
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             let company = companiesMatch[indexPath.row-1]
            controller.company = company
-            print(matchLEvels)
             controller.match = matchLEvels[indexPath.row-1]
             deselectSelectedCell()
         }

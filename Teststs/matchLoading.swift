@@ -18,6 +18,10 @@ class matchLoading: UIViewController {
     @IBOutlet var activity: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        // setup status bar
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
+        statusView.backgroundColor = .black
+        self.view.addSubview(statusView)
         loadingLabel.font = UIFont(name:"BebasNeueRegular", size: 40)
         let transform = CGAffineTransform(scaleX: 4.0, y: 4.0)
         activity.transform = transform

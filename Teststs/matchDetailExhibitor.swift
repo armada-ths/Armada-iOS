@@ -58,8 +58,9 @@ class matchDetailExhibitor: UIViewController {
             headerImageView.image = image
         }
         super.viewDidLoad()
-        self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
-        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationItem.backBarButtonItem?.title = "Back"
+        navigationController?.navigationBar.tintColor = ColorScheme.armadaGreen
         aboutText.text = company.companyDescription.strippedFromHtmlString
         if company.companyDescription.isEmpty {
             aboutText.text = "To be announced"
@@ -67,7 +68,7 @@ class matchDetailExhibitor: UIViewController {
         companyName.text = company.name
       
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         matchLevel.layer.cornerRadius = 20

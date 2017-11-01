@@ -2216,10 +2216,18 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Pb-Z4-Zgt" userLabel="Match" customClass="MatchNavigationController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Match" image="match-1" selectedImage="match" id="QI5-Vt-4xN" userLabel="select name here"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" misplaced="YES" id="zmO-gP-3gs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zmO-gP-3gs">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.97254770994186401" green="0.96867221593856812" blue="0.96846562623977661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.0" green="0.84467357399999998" blue="0.56503295899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.0" green="0.84467357399999998" blue="0.56503295899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qiK-Gn-I9e">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="eZG-oH-4yJ" kind="relationship" relationship="rootViewController" id="PLH-Do-R6j"/>
                     </connections>
@@ -3240,7 +3248,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cgb-Sf-Xle" kind="show" id="rvY-1O-M6j"/>
+                                            <segue destination="cgb-Sf-Xle" kind="show" identifier="cell2Segue" id="rvY-1O-M6j"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="K9U-iP-f3y">
@@ -3318,7 +3326,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cgb-Sf-Xle" kind="show" id="CUt-iY-uh7"/>
+                                            <segue destination="cgb-Sf-Xle" kind="show" identifier="cell1Segue" id="CUt-iY-uh7"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="DY5-jG-GNK">
@@ -3396,7 +3404,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cgb-Sf-Xle" kind="show" id="5S9-vl-rvy"/>
+                                            <segue destination="cgb-Sf-Xle" kind="show" identifier="cell4Segue" id="5S9-vl-rvy"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="CWt-om-App">
@@ -3474,7 +3482,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cgb-Sf-Xle" kind="show" id="AZX-c0-HkH"/>
+                                            <segue destination="cgb-Sf-Xle" kind="show" identifier="cell3Segue" id="AZX-c0-HkH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="89" id="nRy-xJ-Ay9">
@@ -3552,7 +3560,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cgb-Sf-Xle" kind="show" id="QZc-dt-Iph"/>
+                                            <segue destination="cgb-Sf-Xle" kind="show" identifier="cell5Segue" id="QZc-dt-Iph"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="redo" rowHeight="91" id="5fP-h0-Oh4">
@@ -3704,7 +3712,7 @@
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-yu-v4u">
-                                                                <rect key="frame" x="121" y="327" width="70" height="31"/>
+                                                                <rect key="frame" x="121.33333333333334" y="327" width="70" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <state key="normal" title="WEBSITE">
                                                                     <color key="titleColor" red="0.0" green="0.84467357397079468" blue="0.565032958984375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3887,7 +3895,7 @@
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8w-UR-WkO">
-                                                                <rect key="frame" x="121" y="327" width="70" height="31"/>
+                                                                <rect key="frame" x="121.33333333333334" y="327" width="70" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <state key="normal" title="WEBSITE">
                                                                     <color key="titleColor" red="0.0" green="0.84467357399999998" blue="0.56503295899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4143,7 +4151,7 @@
         <image name="sustainability" width="118" height="124"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5S9-vl-rvy"/>
-        <segue reference="Nlx-ZI-rwW"/>
+        <segue reference="QZc-dt-Iph"/>
+        <segue reference="QNk-7M-UpQ"/>
     </inferredMetricsTieBreakers>
 </document>
