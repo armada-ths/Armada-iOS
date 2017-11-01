@@ -10,9 +10,6 @@ import UIKit
 
 class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
  
-    
-    
-    
     @IBOutlet var areas: UICollectionView!
     //@IBOutlet weak var stackView: UIStackView!
     var matchData: matchDataClass = matchDataClass()
@@ -93,7 +90,6 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
             for subArea in matchData.subAreas{
                 matchData.subAreas[subArea.key]!["select"] = false
             }
-
             return
         }
         matchData.currentview += 1

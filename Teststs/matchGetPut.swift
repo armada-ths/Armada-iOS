@@ -40,10 +40,10 @@ class matchGetPut {
     init(matchData: matchDataClass){
         // looking_for
         for (key, val) in matchData.lookingBool{
-            if key == "thesis" { self.looking_for.append(1) }
-            if key == "part-time job" { self.looking_for.append(2) }
-            if key == "trainee" { self.looking_for.append(3) }
-            if key == "summer job" { self.looking_for.append(4) }
+            if key == "thesis"          { self.looking_for.append(1) }
+            if key == "part-time job"   { self.looking_for.append(2) }
+            if key == "trainee"         { self.looking_for.append(3) }
+            if key == "summer job"      { self.looking_for.append(4) }
         }
         // continents
         for (key, val) in matchData.worldBool{
@@ -77,17 +77,6 @@ class matchGetPut {
         self.areas = areas
     }
     
-    func test(){
-        var toPost = ["looking_for": self.looking_for,
-                      "regions":     self.regions,
-                      "continents":  self.continents,
-                      "questions":   self.questions,
-                      "areas":       self.areas] as [String : Any]
-        
-        let json = JSON(toPost)
-        print(json)
-    }
-    
     func buildForPut() -> Dictionary<String, Any> {
         var toPost = ["looking_for": self.looking_for,
                       "regions":     self.regions,
@@ -97,8 +86,9 @@ class matchGetPut {
         return toPost
     }
     
-    func putAnswer(student_id: Int) {
+    func putAnswer(student_id: Int,  finished: @escaping ((_ isSuccess: Bool) -> Void)) {
         let toPost = buildForPut()
+        print("toPost \(toPost)")
         let dict = ["nickname": toPost]
         let url = URL(string: putURLString + String(student_id))
         
@@ -106,6 +96,7 @@ class matchGetPut {
         request.httpMethod = "put"
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
+            print("request.httpBody \(request.httpBody)")
         } catch let error {
             print(error.localizedDescription)
         }
@@ -113,6 +104,18 @@ class matchGetPut {
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 return
+            }
+            if let response = response {
+                print(response.url)
+                print(response)
+                let httpResponse = response as! HTTPURLResponse
+                print(httpResponse.statusCode)
+                if httpResponse.statusCode == 200{
+                    finished(true)
+                } else {
+                    finished(false)
+                }
+                
             }
         }
         task.resume()

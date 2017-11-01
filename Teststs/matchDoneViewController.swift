@@ -52,9 +52,6 @@ class matchDoneViewController: UIViewController {
         doneButton.layer.shadowOffset = CGSize(width: 5, height: 5)
         doneButton.layer.shadowRadius = 5
 
-        
-  
-        
     }
     
     func goRightWithoutAnimation(){
@@ -66,16 +63,32 @@ class matchDoneViewController: UIViewController {
     }
     
     @IBAction func loading(_ sender: Any) {
+        // get or create UUID()
         
-        //First send data to server
-        matchData.currentview += 1
-        matchData.save()
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchDone = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
-    }
+        let student_id = 666
+        // send data to server
+        
+        let getput = matchGetPut(matchData: self.matchData)
+        getput.putAnswer(student_id: student_id, finished: {isSuccess in
+            if isSuccess {
+                print("we got 200 back")
+                self.matchData.currentview += 1
+                self.matchData.save()
+                let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
+                rightViewController.matchData = self.matchData
+                rightViewController.matchStart = self.matchStart
+                rightViewController.matchDone = self
+                self.navigationController?.pushViewController(rightViewController, animated: true)
+            } else {
+                let alertController = UIAlertController(title: "Server Error", message: "Something went wrong when sending data to the server ☹️ \n push button to try again 😘", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                print("we got something else back")
+            }
+        }
+    )}
+    
+    
     func goRight(){
         matchData.currentview += 1
         matchData.save()
