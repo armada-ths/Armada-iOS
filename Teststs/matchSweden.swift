@@ -22,22 +22,15 @@ class matchSweden: UIViewController {
     @IBOutlet weak var button4: UIButton!
     @IBOutlet weak var button5: UIButton!
     @IBOutlet weak var button6: UIButton!
-    @IBOutlet weak var button7: UIButton!
-    @IBOutlet weak var button8: UIButton!
-    @IBOutlet weak var button9: UIButton!
     
     @IBOutlet weak var area1: UIImageView!
     @IBOutlet weak var area2: UIImageView!
     @IBOutlet weak var area3: UIImageView!
-    @IBOutlet weak var area4: UIImageView!
-    @IBOutlet weak var area5: UIImageView!
-    @IBOutlet weak var area6: UIImageView!
     @IBOutlet weak var areasthlm: UIImageView!
     @IBOutlet weak var areagbg: UIImageView!
     @IBOutlet weak var areamalmo: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     
     func colorButton(_ button:UIButton){
         if button.isSelected {
@@ -72,22 +65,22 @@ class matchSweden: UIViewController {
     }
     @IBAction func button1action(_ sender: Any) {
         pressButton(button1)
-        area6.isHidden = !button1.isSelected
+        areasthlm.isHidden = !button1.isSelected
         saveButtonValues()
     }
     @IBAction func button2action(_ sender: Any) {
         pressButton(button2)
-        area5.isHidden = !button2.isSelected
+        areagbg.isHidden = !button2.isSelected
         saveButtonValues()
     }
     @IBAction func button3action(_ sender: Any) {
         pressButton(button3)
-        area3.isHidden = !button3.isSelected
+        areamalmo.isHidden = !button3.isSelected
         saveButtonValues()
     }
     @IBAction func button4action(_ sender: Any) {
         pressButton(button4)
-        areasthlm.isHidden = !button4.isSelected
+        area1.isHidden = !button4.isSelected
         saveButtonValues()
     }
     @IBAction func button5action(_ sender: Any) {
@@ -97,22 +90,7 @@ class matchSweden: UIViewController {
     }
     @IBAction func button6action(_ sender: Any) {
         pressButton(button6)
-        area4.isHidden = !button6.isSelected
-        saveButtonValues()
-    }
-    @IBAction func button7action(_ sender: Any) {
-        pressButton(button7)
-        areagbg.isHidden = !button7.isSelected
-        saveButtonValues()
-    }
-    @IBAction func button8action(_ sender: Any) {
-        pressButton(button8)
-        area1.isHidden = !button8.isSelected
-        saveButtonValues()
-    }
-    @IBAction func button9action(_ sender: Any) {
-        pressButton(button9)
-        areamalmo.isHidden = !button9.isSelected
+        area3.isHidden = !button6.isSelected
         saveButtonValues()
     }
     
@@ -121,15 +99,14 @@ class matchSweden: UIViewController {
         if(matchData.currentview < viewNumber){
             goBackWithoutAnimation()
         }
-        print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
         statusBar()
         swipe()
         
-        buttonArray = [button1, button2, button3, button4, button5, button6, button7, button8, button9]
-        let buttonNameArray = ["North norrland", "South norrland", "Svealand", "Stockholm", "Region West", "Region East", "Göteborg", "Region South", "Malmö"]
+        buttonArray = [button1, button2, button3, button4, button5, button6]
+        let buttonNameArray = ["Stockholm", "Göteborg", "Malmö", "Norrland", "Svealand", "Götaland"]
         
         // setup title
         let titleText = NSMutableAttributedString(
@@ -159,8 +136,14 @@ class matchSweden: UIViewController {
             tmpButton.titleColor(for: UIControlState.normal)
         }
         
-        if matchData.swedenBool.count != 0 {
-            print("loading")
+        // make sure all keys from buttonNameArray exists
+        var exists = true
+        for str in buttonNameArray {
+            if self.matchData.swedenBool[str] == nil{
+                exists = false
+            }
+        }
+        if exists {
             loadButtonValues()
             for button in buttonArray{
                 button.isSelected = !button.isSelected
@@ -171,9 +154,6 @@ class matchSweden: UIViewController {
             button4action(self)
             button5action(self)
             button6action(self)
-            button7action(self)
-            button8action(self)
-            button9action(self)
         }
         
     }
