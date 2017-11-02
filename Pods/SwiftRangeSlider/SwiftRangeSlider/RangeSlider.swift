@@ -389,6 +389,7 @@ import QuartzCore
       return
     }
     
+    print("updating text!")
     let maxfontsize = CGFloat(26.0)
     let scale = CGFloat(maximumValue - minimumValue)
     let constant = CGFloat(6.0)
@@ -415,8 +416,12 @@ import QuartzCore
     lowerLabel.string = lowerString
     upperLabel.string = upperString
     
-    lowerLabel.foregroundColor = labelColor.cgColor
-    upperLabel.foregroundColor = labelColor.cgColor
+//    lowerLabel.foregroundColor = labelColor.cgColor
+//    upperLabel.foregroundColor = labelColor.cgColor
+    lowerLabel.foregroundColor = UIColor.black.cgColor
+    upperLabel.foregroundColor = UIColor.black.cgColor
+    print("lowerLabel.bounds.height \(lowerLabel.bounds.height)")
+    print("lowerLabel.bounds.width \(lowerLabel.bounds.width)")
     
     lowerLabelTextSize = (lowerLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
     upperLabelTextSize = (upperLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
@@ -436,8 +441,9 @@ import QuartzCore
     var newLowerLabelCenter = CGPoint(x: lowerKnob.frame.origin.x - 60 , y: lowerKnobCenter.y + 10)
     var newUpperLabelCenter = CGPoint(x: upperKnob.frame.origin.x + 160, y: upperKnobCenter.y + 10)
     
-    lowerLabel.frame = CGRect(x: 0, y: 0, width: lowerLabelTextSize.width, height: lowerLabelTextSize.height)
-    upperLabel.frame = CGRect(x: 0, y: 0, width: upperLabelTextSize.width, height: upperLabelTextSize.height)
+//    lowerLabel.frame = CGRect(x: 0, y: 0, width: lowerLabelTextSize.width, height: lowerLabelTextSize.height)
+    lowerLabel.frame = CGRect(x: 0, y: 0, width: lowerLabelTextSize.width + 50, height: lowerLabelTextSize.height + 50)
+    upperLabel.frame = CGRect(x: 0, y: 0, width: upperLabelTextSize.width + 50, height: upperLabelTextSize.height + 50)
     
     let rightMostXInLowerLabel = newLowerLabelCenter.x + lowerLabelTextSize.width / 2
     let leftMostXInUpperLabel = newUpperLabelCenter.x - upperLabelTextSize.width / 2
@@ -450,7 +456,9 @@ import QuartzCore
     }
     
     lowerLabel.position = newLowerLabelCenter
+    print("lowerLabel.position \(lowerLabel.position)")
     upperLabel.position = newUpperLabelCenter
+    print("upperLabel.position \(upperLabel.position)")
   }
   
   // MARK: Touch Tracking
