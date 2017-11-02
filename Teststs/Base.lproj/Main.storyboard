@@ -3016,34 +3016,6 @@
                                     <constraint firstItem="h5X-2f-hdG" firstAttribute="width" secondItem="ZCM-8h-i7S" secondAttribute="width" id="rVc-mI-DYV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lus-KM-iJp" userLabel="rangeslider" customClass="RangeSlider" customModule="SwiftRangeSlider">
-                                <rect key="frame" x="339.66666666666669" y="326" width="35" height="320"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="nDD-YC-bUa"/>
-                                    <constraint firstAttribute="width" constant="35" id="rLc-0k-5fB"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="knobSize">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="lowerValue">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumDistance">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="labelFontSize">
-                                        <real key="value" value="13"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideLabels" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="labelColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="rangesliderAction:" destination="ful-Lq-5VW" eventType="valueChanged" id="FE3-ce-wQF"/>
-                                </connections>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="match6dots" translatesAutoresizingMaskIntoConstraints="NO" id="eKx-iH-hpN">
                                 <rect key="frame" x="119.66666666666669" y="666" width="175" height="50"/>
                                 <constraints>
@@ -3054,12 +3026,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="eKx-iH-hpN" firstAttribute="top" secondItem="lus-KM-iJp" secondAttribute="bottom" constant="20" id="1sW-fs-rDj"/>
                             <constraint firstItem="eKx-iH-hpN" firstAttribute="centerX" secondItem="CTj-uz-Bfz" secondAttribute="centerX" id="2Fg-0g-7y4"/>
                             <constraint firstItem="eKx-iH-hpN" firstAttribute="width" secondItem="eKx-iH-hpN" secondAttribute="height" multiplier="462:132" id="6Mm-lz-1fh"/>
                             <constraint firstItem="ZCM-8h-i7S" firstAttribute="width" secondItem="CTj-uz-Bfz" secondAttribute="width" id="UBA-cY-QJN"/>
                             <constraint firstItem="ZCM-8h-i7S" firstAttribute="centerX" secondItem="CTj-uz-Bfz" secondAttribute="centerX" id="Wi0-fU-eGo"/>
-                            <constraint firstItem="lus-KM-iJp" firstAttribute="centerX" secondItem="CTj-uz-Bfz" secondAttribute="centerX" constant="150" id="iAo-ew-6Pp"/>
                             <constraint firstItem="ZCM-8h-i7S" firstAttribute="top" secondItem="3gO-FK-bqZ" secondAttribute="bottom" constant="20" id="w7S-3y-Bup"/>
                             <constraint firstItem="lTT-9q-vMb" firstAttribute="top" secondItem="eKx-iH-hpN" secondAttribute="bottom" constant="20" id="yqI-s4-exh"/>
                         </constraints>
@@ -3067,7 +3037,6 @@
                     <connections>
                         <outlet property="dotsimage" destination="eKx-iH-hpN" id="weL-X4-xmx"/>
                         <outlet property="headerview" destination="ZCM-8h-i7S" id="SMp-tg-bCu"/>
-                        <outlet property="rangeslider" destination="lus-KM-iJp" id="5Tr-AO-Kav"/>
                         <outlet property="titleLabel" destination="h5X-2f-hdG" id="bT0-Ur-zHa"/>
                     </connections>
                 </viewController>
@@ -3655,7 +3624,7 @@
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dd-yu-v4u">
-                                                                <rect key="frame" x="121.33333333333334" y="327" width="70" height="31"/>
+                                                                <rect key="frame" x="120.66666666666666" y="327" width="70" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <state key="normal" title="WEBSITE">
                                                                     <color key="titleColor" red="0.0" green="0.84467357397079468" blue="0.565032958984375" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3838,7 +3807,7 @@
                                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8w-UR-WkO">
-                                                                <rect key="frame" x="121.33333333333334" y="327" width="70" height="31"/>
+                                                                <rect key="frame" x="120.66666666666666" y="327" width="70" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <state key="normal" title="WEBSITE">
                                                                     <color key="titleColor" red="0.0" green="0.84467357399999998" blue="0.56503295899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
