@@ -3,12 +3,15 @@ import UIKit
 class CompanyViewController: UIViewController {
    // @IBOutlet var mapH: NSLayoutConstraint!
     
+    @IBOutlet var webButton: UIButton!
     @IBOutlet var contentview: UIView!
     @IBOutlet var mapImage: UIImageView!
    // @IBOutlet var imageHeight: NSLayoutConstraint!
    // @IBOutlet weak var favoritesButton: UIButton!
     @IBOutlet var aboutText: UITextView!
     
+    @IBOutlet var mapWidth: NSLayoutConstraint!
+    @IBOutlet var mapHeight: NSLayoutConstraint!
     @IBOutlet var headerW: NSLayoutConstraint!
     @IBOutlet var headerH: NSLayoutConstraint!
     @IBOutlet var locationLabel: UILabel!
@@ -80,31 +83,9 @@ class CompanyViewController: UIViewController {
             aboutText.text = "To be announced"
         }
         companyName.text = company.name
-//        jobLabel.text = Array(company.jobTypes.map({"● " + $0.jobType})).sorted().joined(separator: "\n")
-//        fieldsLabel.text = Array(company.workFields.map { "● " + $0.workField }).sorted().joined(separator: "\n")
-//        companyValuesLabel.text = Array(company.companyValues.map { "● " + $0.companyValue }).sorted().joined(separator: "\n")
-//        websiteLabel.text = company.website
-//        websiteLabel.textColor = ColorScheme.armadaDarkMelon
-//        videoLabel.text = company.videoUrl
-//        videoLabel.textColor = ColorScheme.armadaDarkMelon
-//        countriesLabel.text = "\(company.countries) " + (company.countries == 1 ?  "Country" : "Countries")
-//        employeeLabel.text = "\(company.employeesWorld.thousandsSeparatedString) Employees"
-//
-//        let socialMediaButtons = [facebookButton, linkedinButton, twitterButton]
-//        let socialMediaUrls = [company.facebook, company.linkedin, company.twitter]
-//        for (index, url) in socialMediaUrls.enumerated() {
-//            socialMediaButtons[index]?.isEnabled = false
-//            if let url = URL(string: url) , UIApplication.shared.canOpenURL(url) {
-//                socialMediaButtons[index]?.isEnabled = true
-//            }
-//        }
-        
-//        let armadaFieldsImageViews = [isStartupImageView, likesEnvironmentImageView, likesDiversityImageView]
-//        let companyArmadaFields = [company.isStartup, company.likesEnvironment, company.likesEquality]
-//
-//        for (i, boolish) in companyArmadaFields.enumerated() {
-//            armadaFieldsImageViews[i]?.alpha = boolish ? 1 : 0.1
-//        }
+        if(company.website == nil || company.website == ""){
+            webButton.isHidden = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +93,8 @@ class CompanyViewController: UIViewController {
         if(company.likesEquality){
             backgroundView.backgroundColor = ColorScheme.diversityRed
             scrollView.backgroundColor = ColorScheme.diversityRed
+            companyName.textColor = ColorScheme.diversityRed
+            webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
 
         }
@@ -127,9 +110,6 @@ class CompanyViewController: UIViewController {
             scrollView.backgroundColor = ColorScheme.armadaLicorice
 
         }
-
-        
-        //parent?.title = company.name
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,8 +124,11 @@ class CompanyViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async(execute: { () -> Void in
-                var ratio:CGFloat
                 let image = UIImage(data: data!)
+                let width = image?.size.width
+                let height = image?.size.height
+                self.mapWidth.constant = 250
+                self.mapHeight.constant = 250 * (height! / width!)
                 self.mapImage.image = image
             })
         }).resume()
@@ -154,16 +137,9 @@ class CompanyViewController: UIViewController {
     
     
     @IBAction func openWebsite(_ sender: Any) {
-        UIApplication.shared.openURL(URL(string: company.website)!)
-
+        if(UIApplication.shared.canOpenURL(URL(string: company.website)!)){
+            UIApplication.shared.openURL(URL(string: company.website)!)
+        }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let viewController = segue.destination as? LocationViewController {
-//            viewController.company = company
-//            deselectSelectedCell()
-//        }
-//    }
-    
 }
 

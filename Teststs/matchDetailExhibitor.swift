@@ -11,6 +11,9 @@ import UIKit
 class matchDetailExhibitor: UIViewController {
     // @IBOutlet var mapH: NSLayoutConstraint!
     
+    @IBOutlet var mapWidth: NSLayoutConstraint!
+    @IBOutlet var mapHeight: NSLayoutConstraint!
+    @IBOutlet var webButton: UIButton!
     @IBOutlet var contentview: UIView!
     @IBOutlet var mapImage: UIImageView!
     @IBOutlet var aboutText: UITextView!
@@ -66,6 +69,9 @@ class matchDetailExhibitor: UIViewController {
             aboutText.text = "To be announced"
         }
         companyName.text = company.name
+        if(company.website == nil || company.website == ""){
+            webButton.isHidden = true
+        }
       
     }
 
@@ -77,6 +83,8 @@ class matchDetailExhibitor: UIViewController {
             backgroundView.backgroundColor = ColorScheme.diversityRed
             scrollView.backgroundColor = ColorScheme.diversityRed
             matchLevel.backgroundColor = ColorScheme.diversityRed
+            companyName.textColor = ColorScheme.diversityRed
+            webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
             
         }
@@ -113,8 +121,11 @@ class matchDetailExhibitor: UIViewController {
                 return
             }
             DispatchQueue.main.async(execute: { () -> Void in
-                var ratio:CGFloat
                 let image = UIImage(data: data!)
+                let width = image?.size.width
+                let height = image?.size.height
+                self.mapWidth.constant = 250
+                self.mapHeight.constant = 250 * (height! / width!)
                 self.mapImage.image = image
             })
         }).resume()
@@ -123,10 +134,10 @@ class matchDetailExhibitor: UIViewController {
     
     
     @IBAction func openWebsite(_ sender: Any) {
-        UIApplication.shared.openURL(URL(string: company.website)!)
-        
+        if(UIApplication.shared.canOpenURL(URL(string: company.website)!)){
+            UIApplication.shared.openURL(URL(string: company.website)!)
+        }
     }
-    
 }
 
 
