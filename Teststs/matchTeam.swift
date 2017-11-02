@@ -17,19 +17,18 @@ class matchTeam: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var rangeslider: RangeSlider!
-    
     @IBAction func rangesliderAction(_ sender: Any) {
         print("uppervalue is: \(rangeslider.upperValue)")
         print("lowervalue is: \(rangeslider.lowerValue)")
-        
     }
-    @IBOutlet weak var middleView: UIView!
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var sliderLead: NSLayoutConstraint!
     
-    @IBAction func changeValue(_ sender: UISlider) {
-        slider.value = roundf(slider.value)
-        
+    @IBOutlet weak var headerview: UIView!
+    // sliderview goes here
+    @IBOutlet weak var dotsimage: UIImageView!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("headerview.bounds.height = \(headerview.bounds.height)")
+        addSlider()
     }
     
     func setupSwipe(){
@@ -67,21 +66,62 @@ class matchTeam: UIViewController {
             goRightWithoutAnimation()
         }
         
-        
+//        addSlider()
+        print("headerview.bounds.height = \(headerview.bounds.height)")
         matchData.slider = ["max": 400, "min": 0, "question": "Do you want to work for a smaller or larger employer?", "logarithmic":false, "units": false]
-        
+//
         // setup slider
-        rangeslider.labelFontSize = 30
-        rangeslider.maximumValue = Double(matchData.slider["max"] as! Int)
-        rangeslider.minimumValue = Double(matchData.slider["min"] as! Int)
+//        rangeslider.labelFontSize = 30
+//        rangeslider.maximumValue = Double(matchData.slider["max"] as! Int)
+//        rangeslider.minimumValue = Double(matchData.slider["min"] as! Int)
         let attributedTitel = NSMutableAttributedString(
             string: self.matchData.slider["question"] as! String,
             attributes: [NSFontAttributeName:UIFont(
                 name: "BebasNeueRegular",
                 size: 35)!])
         titleLabel.attributedText = attributedTitel
-        //        rangeslider.trackTintColor = ColorScheme.armadaGreen
-        rangeslider.trackHighlightTintColor = ColorScheme.armadaGreen
+        print("headerview.bounds.height = \(headerview.bounds.height)")
+//        //        rangeslider.trackTintColor = ColorScheme.armadaGreen
+//        rangeslider.trackHighlightTintColor = ColorScheme.armadaGreen
+    }
+    
+    func addSlider(){
+        // insert custom view with constraints
+        let screenwidth = UIScreen.main.bounds.width
+        let screenheight = UIScreen.main.bounds.height
+        let statusheight = CGFloat(20)
+        let footerheight = CGFloat(60)
+        let constoffsetsum = CGFloat(50)
+        
+        let sliderheight = screenheight - headerview.bounds.height - dotsimage.bounds.height - constoffsetsum - statusheight - footerheight
+        
+        let frame = CGRect(x:(screenwidth - 35)/2,y:(statusheight+headerview.bounds.height+40),width:35,height:sliderheight)
+//        var sliderview = UIView(frame: CGRect.zero)
+        var sliderview:RangeSlider = RangeSlider(frame: frame)
+        print(sliderview.bounds.width)
+        print(sliderview.bounds.height)
+//        var sliderview = UIView(frame:frame)
+        sliderview.maximumValue = 200
+        sliderview.minimumValue = 0
+        sliderview.upperValue = 200
+        sliderview.lowerValue = 0
+        sliderview.knobSize = 2
+        sliderview.trackHighlightTintColor = ColorScheme.armadaGreen
+        sliderview.hideLabels = false
+        self.view.addSubview(sliderview)
+//        print("ONEONEONE")
+//        sliderview.translatesAutoresizingMaskIntoConstraints = false
+//        let margins = self.view.layoutMarginsGuide
+//        sliderview.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
+//        sliderview.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
+//        sliderview.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//        sliderview.heightAnchor.constraint(equalToConstant: 400).isActive = true
+//        print("TWOTWOTWOTWO")
+        
+        
+//        sliderview.backgroundColor = .black
+        
+        
     }
     
     func goRightWithoutAnimation(){

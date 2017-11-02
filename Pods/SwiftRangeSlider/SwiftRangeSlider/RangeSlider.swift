@@ -389,6 +389,7 @@ import QuartzCore
       return
     }
     
+    print("updating text!")
     let maxfontsize = CGFloat(26.0)
     let scale = CGFloat(maximumValue - minimumValue)
     let constant = CGFloat(6.0)
@@ -417,6 +418,8 @@ import QuartzCore
     
     lowerLabel.foregroundColor = labelColor.cgColor
     upperLabel.foregroundColor = labelColor.cgColor
+    print("lowerLabel.bounds.height \(lowerLabel.bounds.height)")
+    print("lowerLabel.bounds.width \(lowerLabel.bounds.width)")
     
     lowerLabelTextSize = (lowerLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
     upperLabelTextSize = (upperLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
@@ -449,8 +452,11 @@ import QuartzCore
       newUpperLabelCenter = CGPoint(x: upperKnobCenter.x + increaseAmount / 2, y: newUpperLabelCenter.y)
     }
     
+    upperLabel.backgroundColor = UIColor.black.cgColor
     lowerLabel.position = newLowerLabelCenter
+    print("lowerLabel.position \(lowerLabel.position)")
     upperLabel.position = newUpperLabelCenter
+    print("upperLabel.position \(upperLabel.position)")
   }
   
   // MARK: Touch Tracking
