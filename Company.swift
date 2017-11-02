@@ -19,8 +19,10 @@ open class Company: NSManagedObject {
         if let name = json["company"] as? String , !name.isEmpty{
             
 
-                let website = json["company_website"] as? String ?? ""
-            
+            var website = json["company_website"] as? String ?? ""
+            if (!website.starts(with: "http://") && !website.starts(with:"https://") && website != ""){
+                website = "http://" + website;
+            }
             let id = json["id"] as? Int ?? 0
             let workFields = json["work_fields"] as? [[String:AnyObject]]
             let programmes = json["programs"] as? [[String:AnyObject]]
