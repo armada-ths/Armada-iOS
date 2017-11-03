@@ -692,7 +692,6 @@ open class _ArmadaApi {
                     var tmpid = 0
                     var areas = Array<Dictionary<String, Any>>()
                     for (_, val) in parsedjson["areas"] {
-                            print(val)
                             areas.append(["id": val["id"].int, "field": val["field"].rawString(), "area": val["area"].string])
 
                     }

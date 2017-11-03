@@ -93,8 +93,6 @@ class TopWhiteCell: UITableViewCell, NewsCell {
                 ingressLabel.font = UIFont(name: "Lato-Bold", size: 16.0)
                 
                 whiteW.constant = screenW * B
-                
-                print(whiteW.constant)
             }
         }
     }

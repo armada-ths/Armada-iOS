@@ -222,17 +222,22 @@ class matchTravel: UIViewController {
     }
     
     func buildViewFromData(){
-        let titleAttributedText = NSMutableAttributedString(
-            string: self.matchData.grader["question"] as! String,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 35)!])
-        titleLabel.attributedText = titleAttributedText
-        let buttonarray = [button1, button2, button3, button4, button5]
-        if !(self.matchData.smileyInt > buttonarray.count) {
-            buttonarray[self.matchData.smileyInt]?.isSelected = true
+        if !self.matchData.grader.isEmpty {
+            let titleAttributedText = NSMutableAttributedString(
+                string: self.matchData.grader["question"] as! String,
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeueRegular",
+                    size: 35)!])
+            titleLabel.attributedText = titleAttributedText
+            let buttonarray = [button1, button2, button3, button4, button5]
+            if !(self.matchData.smileyInt > buttonarray.count) {
+                buttonarray[self.matchData.smileyInt]?.isSelected = true
+            }
+            updateButtons()
+        } else {
+            // INSERT HARDCODED VALUES HERE
         }
-        updateButtons()
+        
     }
     
     func goRightWithoutAnimation(){
