@@ -129,9 +129,8 @@ class matchTeam: UIViewController {
     
     func goRight(){
         if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
-            let reverseValues = sliderview.calcReverseValues()
-            matchData.sliderValues["max"] = reverseValues.0
-            matchData.sliderValues["min"] = reverseValues.1
+            matchData.sliderValues["max"] = sliderview.lowerValue
+            matchData.sliderValues["min"] = sliderview.upperValue
         }
         matchData.currentview += 1
         matchData.save()
@@ -144,14 +143,8 @@ class matchTeam: UIViewController {
     
     func goBack(){
         if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
-            let reverseValues = sliderview.calcReverseValues()
             matchData.sliderValues["max"] = sliderview.lowerValue
             matchData.sliderValues["min"] = sliderview.upperValue
-//            matchData.sliderValues["max"] = (reverseValues.0 as! Double).rounded()
-//            matchData.sliderValues["min"] = (reverseValues.1 as! Double).rounded()
-            print("trying to save to matchData.sliderValues")
-            print("matchData.sliderValues[max] \(matchData.sliderValues["max"])")
-            print("matchData.sliderValues[min] \(matchData.sliderValues["min"])")
         }
         matchData.currentview -= 1
         matchData.save()
