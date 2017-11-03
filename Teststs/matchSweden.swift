@@ -15,6 +15,7 @@ class matchSweden: UIViewController {
     var matchLooking: matchLooking?
     let viewNumber = 2
     var buttonArray: Array<UIButton> = []
+    var buttonKeyArray: Array<String> = ["sthlm", "gothenburg", "malmo", "norrland", "svealand", "gotaland"]
 
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
@@ -50,16 +51,21 @@ class matchSweden: UIViewController {
     }
     func saveButtonValues(){
         for idx in 0...(self.buttonArray.count-1) {
-            let key = self.buttonArray[idx].currentAttributedTitle?.string
+            let key = self.buttonKeyArray[idx]
             let val = self.buttonArray[idx].isSelected as! Bool
-            matchData.swedenBool[key!] = val
+            matchData.swedenBool[key] = val
+            matchData.swedenIntKey[key] = idx + 1
         }
     }
     func loadButtonValues(){
         for idx in 0...(self.buttonArray.count-1) {
-            let key = self.buttonArray[idx].currentAttributedTitle
+            let key = self.buttonKeyArray[idx]
             let button = self.buttonArray[idx]
-            button.isSelected = matchData.swedenBool[(key?.string)!] as! Bool
+            if matchData.swedenBool[key] != nil {
+                button.isSelected = matchData.swedenBool[key]!
+            } else {
+                button.isSelected = false
+            }
             colorButton(button)
         }        
     }

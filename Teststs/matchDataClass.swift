@@ -31,6 +31,7 @@ class matchDataClass: NSObject{
     var mainAreas: Dictionary<String, Bool>
     var subAreas: Dictionary<String, Dictionary<String, Any>>
     var sliderValues: Dictionary<String, Double>
+    var swedenIntKey: Dictionary<String, Int>
     /* (-1) filling out form, (0) waiting for result, (1) got match result */
     var matchResultStatus: Int
     var matchResult: Array<Dictionary<String, Any>>
@@ -62,6 +63,7 @@ class matchDataClass: NSObject{
         mainAreas = Dictionary<String, Bool>()
         subAreas = Dictionary<String, Dictionary<String, Any>>()
         sliderValues = Dictionary<String, Double>()
+        swedenIntKey = Dictionary<String, Int>()
         matchResult = Array<Dictionary<String, Any>>()
         matchResultStatus = -1
         smileyInt = 666
@@ -157,6 +159,10 @@ class matchDataClass: NSObject{
         self.swedenBool = [:]
         for (key, val):(String, JSON) in json["swedenBool"] {
             self.swedenBool[key] = val.boolValue
+        }
+        self.swedenIntKey = Dictionary<String, Int>()
+        for (key, val):(String, JSON) in json["swedenIntKey"] {
+            self.swedenIntKey[key] = val.intValue
         }
         self.worldBool = [:]
         for (key, val):(String, JSON) in json["worldBool"] {

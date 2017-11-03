@@ -56,12 +56,10 @@ class matchGetPut {
         }
         // regions
         // REMEMBER TO DOUBLE CHECK ORDER WITH BACKEND
-        var idx = 0
-        for (_, val) in matchData.swedenBool{
+        for (key, val) in matchData.swedenBool{
             if val {
-                self.regions.append(idx)
+                self.regions.append(matchData.swedenIntKey[key]!)
             }
-            idx += 1
         }
         // questions
         // grader
