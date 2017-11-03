@@ -49,8 +49,9 @@ class matchLoading: UIViewController {
         if(matchData.currentview > viewNumber){
             return
         }
-        let student_id = 1
+        
         let getput = matchGetPut(matchData: self.matchData)
+        let student_id = getput.getStudentID()
         getput.getResult(student_id: student_id, finished: { isSuccess, newMatchInstance in
             if isSuccess {
                 DispatchQueue.main.async {

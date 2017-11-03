@@ -72,10 +72,11 @@ class matchDoneViewController: UIViewController {
     @IBAction func loading(_ sender: Any) {
         // get or create UUID()
         
-        let student_id = 666
+        
         // send data to server
         
         let getput = matchGetPut(matchData: self.matchData)
+        let student_id = getput.getStudentID()
         getput.putAnswer(student_id: student_id, finished: {isSuccess in
             if isSuccess {
                 print("we got 200 back")

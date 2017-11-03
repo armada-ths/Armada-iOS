@@ -86,11 +86,11 @@ class matchGetPut {
         return toPost
     }
     
-    func putAnswer(student_id: Int,  finished: @escaping ((_ isSuccess: Bool) -> Void)) {
+    func putAnswer(student_id: String,  finished: @escaping ((_ isSuccess: Bool) -> Void)) {
         let toPost = buildForPut()
         print("toPost \(toPost)")
         let dict = ["nickname": toPost]
-        let url = URL(string: putURLString + String(student_id))
+        let url = URL(string: putURLString + student_id)
         
         var request = URLRequest(url: url!)
         request.httpMethod = "put"
@@ -120,12 +120,20 @@ class matchGetPut {
         task.resume()
     }
     
-    func getStudentID() -> Int {
-        return 0
+    func getStudentID() -> String {
+        let defaults = UserDefaults.standard
+        if let uuid = defaults.value(forKey: "uuid") {
+            return uuid as! String
+        } else {
+            let uuid = UUID().uuidString
+            defaults.set(uuid, forKey: "uuid")
+            print("created a uuid: \(uuid)")
+            return uuid
+        }
     }
     
-    func getResult(student_id: Int, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void)) {
-        let url = URL(string: getURLString + String(student_id))
+    func getResult(student_id: String, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void)) {
+        let url = URL(string: getURLString + student_id)
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             do {
                 if let response = response {
