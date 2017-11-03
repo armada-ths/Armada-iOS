@@ -30,6 +30,7 @@ class matchDataClass: NSObject{
     /* to be saved */
     var mainAreas: Dictionary<String, Bool>
     var subAreas: Dictionary<String, Dictionary<String, Any>>
+    var sliderValues: Dictionary<String, Double>
     /* (-1) filling out form, (0) waiting for result, (1) got match result */
     var matchResultStatus: Int
     var matchResult: Array<Dictionary<String, Any>>
@@ -60,6 +61,7 @@ class matchDataClass: NSObject{
         areas = Array<Dictionary<String, Any>>()
         mainAreas = Dictionary<String, Bool>()
         subAreas = Dictionary<String, Dictionary<String, Any>>()
+        sliderValues = Dictionary<String, Double>()
         matchResult = Array<Dictionary<String, Any>>()
         matchResultStatus = -1
         smileyInt = 666
@@ -108,6 +110,9 @@ class matchDataClass: NSObject{
             let subareaObj = ["id": item.1["id"].int!, "field": item.1["field"].stringValue, "parent": item.1["parent"].stringValue, "select": item.1["select"].boolValue] as [String : Any]
             self.subAreas[item.1["id"].stringValue] = subareaObj
         }
+        self.sliderValues = Dictionary<String, Double>()
+        self.sliderValues["max"] = json["sliderValues"]["max"].doubleValue
+        self.sliderValues["min"] = json["sliderValues"]["min"].doubleValue        
         self.areas = Array<Dictionary<String, Any>>()
         for (_, val) in json["areas"] {
             self.areas.append(["id": val["id"].int!, "field": val["field"].string!, "area": val["area"].string!])

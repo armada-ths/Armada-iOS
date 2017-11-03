@@ -16,17 +16,13 @@ class matchTeam: UIViewController {
     let viewNumber = 5
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var headerview: UIView!
-    // sliderview goes here
     @IBOutlet weak var dotsimage: UIImageView!
     
     override func viewDidAppear(_ animated: Bool) {
-        print("headerview.bounds.height = \(headerview.bounds.height)")
         if self.view.viewWithTag(666) == nil {
             addSlider()
         }
-        
     }
     
     func setupSwipe(){
@@ -52,6 +48,7 @@ class matchTeam: UIViewController {
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         if(matchData.currentview < viewNumber){
             goBackWithoutAnimation()
@@ -63,12 +60,34 @@ class matchTeam: UIViewController {
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
-        let attributedTitel = NSMutableAttributedString(
-            string: self.matchData.slider["question"] as! String,
-            attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeueRegular",
-                size: 35)!])
-        titleLabel.attributedText = attributedTitel
+        
+        // if there is no matchDataInstructions use hardcoded values instead
+        if !self.matchData.slider.isEmpty{
+            let attributedTitel = NSMutableAttributedString(
+                string: self.matchData.slider["question"] as! String,
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "BebasNeueRegular",
+                    size: 35)!])
+            titleLabel.attributedText = attributedTitel
+        } else {
+            // INSERT HARDCODED VALUES HERE
+            print("there is no matchData.slider values")
+        }
+                
+    }
+    
+    func updateSlider(sliderview: RangeSlider){
+        if !self.matchData.sliderValues.isEmpty {
+            print("getting data from matchData.sliderValues")
+            sliderview.lowerValue = (self.matchData.sliderValues["max"])!
+            sliderview.upperValue = (self.matchData.sliderValues["min"])!
+        } else {
+            print("updating values from updateSlider")
+            print("sliderview.maximumValue \(sliderview.maximumValue)")
+            print("sliderview.minimumValue \(sliderview.minimumValue)")
+            sliderview.upperValue = sliderview.maximumValue
+            sliderview.lowerValue = sliderview.minimumValue
+        }
     }
     
     func addSlider(){
@@ -83,21 +102,21 @@ class matchTeam: UIViewController {
         let frame = CGRect(x:(screenwidth - 35)/2,y:(statusheight+headerview.bounds.height+40),width:35,height:sliderheight)
         var sliderview:RangeSlider = RangeSlider(frame: frame)
 //        sliderview.labelFontSize = 30
-        sliderview.maximumValue = Double(self.matchData.slider["max"] as! Int)
-        sliderview.minimumValue = Double(self.matchData.slider["min"] as! Int)
-        sliderview.upperValue = 200
-        sliderview.lowerValue = 0
+        if !self.matchData.slider.isEmpty {
+            sliderview.maximumValue = Double(self.matchData.slider["max"] as! Int)
+            sliderview.minimumValue = Double(self.matchData.slider["min"] as! Int)
+        } else {
+            print("setting sliderview.maximumValue")
+            sliderview.maximumValue = 100
+            sliderview.minimumValue = 0
+            // USER HARDCODED VALUES HERE
+        }
         sliderview.knobSize = 2
         sliderview.trackHighlightTintColor = ColorScheme.armadaGreen
         sliderview.hideLabels = false
         sliderview.tag = 666
+        updateSlider(sliderview: sliderview)
         self.view.addSubview(sliderview)
-        //        sliderview.translatesAutoresizingMaskIntoConstraints = false
-        //        let margins = self.view.layoutMarginsGuide
-        //        sliderview.centerXAnchor.constraint(equalTo: margins.centerXAnchor).isActive = true
-        //        sliderview.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
-        //        sliderview.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        //        sliderview.heightAnchor.constraint(equalToConstant: 400).isActive = true
     }
     
     func goRightWithoutAnimation(){
@@ -109,6 +128,11 @@ class matchTeam: UIViewController {
     }
     
     func goRight(){
+        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
+            let reverseValues = sliderview.calcReverseValues()
+            matchData.sliderValues["max"] = reverseValues.0
+            matchData.sliderValues["min"] = reverseValues.1
+        }
         matchData.currentview += 1
         matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
@@ -119,6 +143,16 @@ class matchTeam: UIViewController {
     }
     
     func goBack(){
+        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
+            let reverseValues = sliderview.calcReverseValues()
+            matchData.sliderValues["max"] = sliderview.lowerValue
+            matchData.sliderValues["min"] = sliderview.upperValue
+//            matchData.sliderValues["max"] = (reverseValues.0 as! Double).rounded()
+//            matchData.sliderValues["min"] = (reverseValues.1 as! Double).rounded()
+            print("trying to save to matchData.sliderValues")
+            print("matchData.sliderValues[max] \(matchData.sliderValues["max"])")
+            print("matchData.sliderValues[min] \(matchData.sliderValues["min"])")
+        }
         matchData.currentview -= 1
         matchData.save()
         self.matchTravel?.matchData = matchData

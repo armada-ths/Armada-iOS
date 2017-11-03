@@ -214,8 +214,9 @@ import QuartzCore
         get {
           // experiment 
             // return knobSize * 
-
+            // print("bounds.width: \(bounds.width)")
             return trueKnobSize ? knobSize : knobSize * bounds.width
+
         }
     }
   ///The frame of the `RangeSlider` instance.
@@ -345,9 +346,7 @@ import QuartzCore
         
         updateLabelText()
         updateLabelPositions()
-        print("before commit")
         CATransaction.commit()
-        print("after commit")
     }
     /**
      Get the label text for a given value.
@@ -375,8 +374,6 @@ import QuartzCore
         let reverseUpperValue = (self.maximumValue - upperValue)
         let reverseLowerValue = (self.maximumValue - lowerValue)
         
-        print("reverseUpperValue \(reverseUpperValue)")
-        print("reverseLowerValue \(reverseLowerValue)")
         return (reverseLowerValue, reverseUpperValue)
     }
     
@@ -389,7 +386,6 @@ import QuartzCore
       return
     }
     
-    print("updating text!")
     let maxfontsize = CGFloat(26.0)
     let scale = CGFloat(maximumValue - minimumValue)
     let constant = CGFloat(6.0)
@@ -420,8 +416,6 @@ import QuartzCore
 //    upperLabel.foregroundColor = labelColor.cgColor
     lowerLabel.foregroundColor = UIColor.black.cgColor
     upperLabel.foregroundColor = UIColor.black.cgColor
-    print("lowerLabel.bounds.height \(lowerLabel.bounds.height)")
-    print("lowerLabel.bounds.width \(lowerLabel.bounds.width)")
     
     lowerLabelTextSize = (lowerLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
     upperLabelTextSize = (upperLabel.string as! NSString).size(attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: labelFontSize)])
@@ -456,9 +450,7 @@ import QuartzCore
     }
     
     lowerLabel.position = newLowerLabelCenter
-    print("lowerLabel.position \(lowerLabel.position)")
     upperLabel.position = newUpperLabelCenter
-    print("upperLabel.position \(upperLabel.position)")
   }
   
   // MARK: Touch Tracking

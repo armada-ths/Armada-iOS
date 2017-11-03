@@ -41,10 +41,11 @@ class RangeSliderKnob: CALayer {
       // var knobFrame = bounds.insetBy(dx: RangeSliderKnob.KnobDelta, dy: RangeSliderKnob.KnobDelta)
       var shift = RangeSliderKnob.KnobDelta
       if self.isUpperKnob {
-        shift = CGFloat((rangeSlider?.upperValue)!)/CGFloat(18.0) + 1.2
+        // shift = CGFloat((rangeSlider?.upperValue)!)/CGFloat(18.0) + 1.2
+        shift = CGFloat((rangeSlider?.upperValue)!/((rangeSlider?.maximumValue)! * 0.05) ) + 1.2
       }
       if !self.isUpperKnob {
-        shift = CGFloat((rangeSlider?.lowerValue)!)/CGFloat(18.0) + 1.2
+        shift = CGFloat((rangeSlider?.lowerValue)!/((rangeSlider?.maximumValue)! * 0.05) ) + 1.2
       }
       let knobFrame = bounds.insetBy(dx: shift, dy: shift)
       let cornerRadius = knobFrame.height * slider.curvaceousness / 2
