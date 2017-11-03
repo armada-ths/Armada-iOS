@@ -40,22 +40,25 @@ class matchGetPut {
     init(matchData: matchDataClass){
         // looking_for
         for (key, val) in matchData.lookingBool{
-            if key == "thesis"          { self.looking_for.append(1) }
-            if key == "part-time job"   { self.looking_for.append(2) }
-            if key == "trainee"         { self.looking_for.append(3) }
-            if key == "summer job"      { self.looking_for.append(4) }
+            if val {
+                if key == "thesis"          { self.looking_for.append(1) }
+                if key == "part-time job"   { self.looking_for.append(2) }
+                if key == "trainee"         { self.looking_for.append(3) }
+                if key == "summer job"      { self.looking_for.append(4) }
+            }
         }
         // continents
         for (key, val) in matchData.worldBool{
-            if key == "africa"   { self.continents.append(1) }
-            if key == "asia"     { self.continents.append(2) }
-            if key == "oceania"  { self.continents.append(3) }
-            if key == "europe"   { self.continents.append(4) }
-            if key == "americaN" { self.continents.append(5) }
-            if key == "ameicaS"  { self.continents.append(6) }
+            if val {
+                if key == "africa"   { self.continents.append(1) }
+                if key == "asia"     { self.continents.append(2) }
+                if key == "oceania"  { self.continents.append(3) }
+                if key == "europe"   { self.continents.append(4) }
+                if key == "americaN" { self.continents.append(5) }
+                if key == "ameicaS"  { self.continents.append(6) }
+            }
         }
         // regions
-        // REMEMBER TO DOUBLE CHECK ORDER WITH BACKEND
         for (key, val) in matchData.swedenBool{
             if val {
                 self.regions.append(matchData.swedenIntKey[key]!)
@@ -67,8 +70,9 @@ class matchGetPut {
         var grader = ["id": grader_id, "answer": matchData.smileyInt]
         // slider
         let slider_id = 2 // get slider id in some way
-        var slider = ["id": slider_id, "answer": ["min": matchData.teamSizeMin, "max": matchData.teamSizeMax]] as [String : Any]
-        self.questions = [grader, slider]        
+        var slider = ["id": slider_id, "answer": ["min": matchData.sliderValues["minTrue"]!, "max": matchData.sliderValues["maxTrue"]!]] as [String : Any]
+//        var slider = ["id": slider_id, "answer": ["min": 1, "max": 5]] as [String : Any]
+        self.questions = [grader, slider]
         // areas
         // get the selected area ids in some way
         var areas = [0, 1, 2, 3, 4]
@@ -94,7 +98,9 @@ class matchGetPut {
         request.httpMethod = "put"
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
-            print("request.httpBody \(request.httpBody)")
+            let theJSONText = try String(data: request.httpBody!,
+                                     encoding: .ascii)
+            print("request.httpBody \(theJSONText)")
         } catch let error {
             print(error.localizedDescription)
         }
@@ -104,6 +110,7 @@ class matchGetPut {
                 return
             }
             if let response = response {
+                print("data \(data)")
                 print(response.url)
                 print(response)
                 let httpResponse = response as! HTTPURLResponse

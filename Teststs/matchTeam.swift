@@ -131,6 +131,9 @@ class matchTeam: UIViewController {
         if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
             matchData.sliderValues["max"] = sliderview.lowerValue
             matchData.sliderValues["min"] = sliderview.upperValue
+            let minmax = sliderview.calcReverseValues()
+            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
+            matchData.sliderValues["minTrue"] = minmax.1.rounded()
         }
         matchData.currentview += 1
         matchData.save()
@@ -145,6 +148,9 @@ class matchTeam: UIViewController {
         if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
             matchData.sliderValues["max"] = sliderview.lowerValue
             matchData.sliderValues["min"] = sliderview.upperValue
+            let minmax = sliderview.calcReverseValues()
+            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
+            matchData.sliderValues["minTrue"] = minmax.1.rounded()
         }
         matchData.currentview -= 1
         matchData.save()
