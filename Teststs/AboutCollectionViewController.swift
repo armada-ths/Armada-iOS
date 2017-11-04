@@ -28,7 +28,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
 
         // set title if not set
         if self.navigationItem.titleView == nil {
-            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let frame = CGRect(x: 0,y: 9, width: 200, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(
                 string: "A B O U T THS Armada 2017",
