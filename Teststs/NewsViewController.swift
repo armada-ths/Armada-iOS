@@ -28,10 +28,18 @@ class NewsViewController: UITableViewController {
         
         // reveal logo-image
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
+        // changing
+        self.navigationController?.navigationBar.backgroundColor = ColorScheme.darkGrey
+        self.navigationController?.navigationBar.viewWithTag(2)?.backgroundColor = ColorScheme.darkGrey
+        self.navigationController?.navigationBar.backgroundColor = ColorScheme.darkGrey
+        print(self.navigationController?.view.viewWithTag(3))
+        self.navigationController?.view.viewWithTag(3)?.backgroundColor = ColorScheme.darkGrey
+        self.navigationItem.titleView?.backgroundColor = ColorScheme.darkGrey
         
         // set title if not set
         if self.navigationItem.titleView == nil {
-            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+//            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let frame = CGRect(x: 0,y: 9, width: 200, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(
                 string: "N E W S THS Armada 2017",
@@ -49,7 +57,8 @@ class NewsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()                
-        tableView.backgroundColor = ColorScheme.leilaDesignGrey
+//        tableView.backgroundColor = ColorScheme.leilaDesignGrey
+        tableView.backgroundColor = ColorScheme.darkGrey
         tableView.startActivityIndicator()
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension

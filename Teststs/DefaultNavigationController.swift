@@ -1,15 +1,15 @@
 //
-//  NewsNavigationController.swift
+//  DefaultNavigationController.swift
 //  Armada
 //
-//  Created by Ola Roos on 2017-09-22.
+//  Created by Ola Roos on 2017-11-04.
 //  Copyright © 2017 Ola Roos. All rights reserved.
 //
 
 import UIKit
 
-class NewsNavigationController: UINavigationController {
-
+class DefaultNavigationController: UINavigationController {
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //if let blockView = self.navigationController?.navigationBar.viewWithTag(<#T##tag: Int##Int#>)
@@ -17,7 +17,7 @@ class NewsNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.navigationBar.backgroundColor = ColorScheme.leilaDesignGrey
         
         // constants
@@ -32,8 +32,7 @@ class NewsNavigationController: UINavigationController {
         
         // make navigationbar solid
         self.navigationBar.isTranslucent = false
-//        self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
-        self.navigationBar.barTintColor = ColorScheme.darkGrey
+        self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
         self.navigationBar.tag = 3
         
         // remove navigationbar-border
@@ -69,8 +68,7 @@ class NewsNavigationController: UINavigationController {
             let bottomBorderH:CGFloat = 0.75
             let bottomBorderRect = CGRect(x: 0, y: headerHeight, width: UIScreen.main.bounds.width, height: bottomBorderH)
             let bottomBorderView = UIView(frame: bottomBorderRect)
-//            bottomBorderView.backgroundColor = ColorScheme.navbarBorderGrey
-            bottomBorderView.backgroundColor = ColorScheme.darkGrey
+            bottomBorderView.backgroundColor = ColorScheme.navbarBorderGrey
             bottomBorderView.tag = 2
             self.navigationBar.addSubview(bottomBorderView)
         }
@@ -84,5 +82,6 @@ class NewsNavigationController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
+import Foundation

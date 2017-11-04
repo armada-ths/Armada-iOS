@@ -46,12 +46,14 @@ class LargeWhiteCell: UITableViewCell, NewsCell {
                 let C:CGFloat = 0.445634
             
                 // setup greyview: depend on screensize
-                greyView.backgroundColor = ColorScheme.leilaDesignGrey
+//                greyView.backgroundColor = ColorScheme.leilaDesignGrey
+                greyView.backgroundColor = ColorScheme.darkGrey
                 greyH.constant = screenH * C
                 greyW.constant = screenW
                 
                 // setup borderview
-                borderView.backgroundColor = ColorScheme.navbarBorderGrey
+//                borderView.backgroundColor = ColorScheme.navbarBorderGrey
+                borderView.backgroundColor = ColorScheme.darkGrey
                 
                 // setup whiteview
                 whiteH.constant = screenH * A
