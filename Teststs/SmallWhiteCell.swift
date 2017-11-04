@@ -51,12 +51,14 @@ class SmallWhiteCell: UITableViewCell, NewsCell {
                 let E:CGFloat = 0.8
                 
                 // setup greyview: depend on screensize                
-                greyView.backgroundColor = ColorScheme.leilaDesignGrey
+//                greyView.backgroundColor = ColorScheme.leilaDesignGrey
+                greyView.backgroundColor = ColorScheme.darkGrey
                 greyH.constant = screenH * D
                 greyW.constant = screenW
                 
                 // setup borderview:
-                borderView.backgroundColor = ColorScheme.navbarBorderGrey
+//                borderView.backgroundColor = ColorScheme.navbarBorderGrey
+                borderView.backgroundColor = ColorScheme.darkGrey
                 
                 // setup whiteview: depend on greyview
                 whiteW.constant = screenW * A
