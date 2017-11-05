@@ -74,10 +74,10 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         let ratio:CGFloat = (9.0/15.0)
         // set title if not set
         if self.navigationItem.titleView == nil {
-            let frame = CGRect(x: 0,y: 13, width: 200, height: 30);
+            let frame = CGRect(x: 0,y: 9, width: 200, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(
-                string: "E V E N T S THS Armada 2017",
+                string: "E V E N T S",
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Thin",
                     size: 22.0)!])

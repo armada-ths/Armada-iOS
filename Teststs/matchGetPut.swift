@@ -22,7 +22,7 @@ struct matchResultObject {
 
 class matchGetPut {
     
-    let putURLString = "http://ais2.armada.nu/api/student_profile?student_id="
+    let putURLString = "http://ais2.armada.nu/api/questions?student_id="
     let getURLString = "http://ais2.armada.nu/api/matching_result?student_id="
     
     var matchResult = Array<Dictionary<String, Any>>()
@@ -70,12 +70,12 @@ class matchGetPut {
         var grader = ["id": grader_id, "answer": matchData.smileyInt]
         // slider
         let slider_id = 2 // get slider id in some way
-        var slider = ["id": slider_id, "answer": ["min": matchData.sliderValues["minTrue"]!, "max": matchData.sliderValues["maxTrue"]!]] as [String : Any]
+        var slider = ["id": slider_id, "answer": ["min": CGFloat(matchData.sliderValues["minTrue"]!), "max": CGFloat(matchData.sliderValues["maxTrue"]!)]] as [String : Any]
 //        var slider = ["id": slider_id, "answer": ["min": 1, "max": 5]] as [String : Any]
         self.questions = [grader, slider]
         // areas
         // get the selected area ids in some way
-        var areas = [0, 1, 2, 3, 4]
+        var areas = [1, 2, 3, 4]
         self.areas = areas
     }
     
@@ -90,14 +90,11 @@ class matchGetPut {
     
     func putAnswer(student_id: String,  finished: @escaping ((_ isSuccess: Bool) -> Void)) {
         let toPost = buildForPut()
-        print("toPost \(toPost)")
-        let dict = ["nickname": toPost]
         let url = URL(string: putURLString + student_id)
-        
         var request = URLRequest(url: url!)
         request.httpMethod = "put"
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
+            request.httpBody = try JSONSerialization.data(withJSONObject: toPost, options: .prettyPrinted) // pass dictionary to nsdata
             let theJSONText = try String(data: request.httpBody!,
                                      encoding: .ascii)
             print("request.httpBody \(theJSONText)")

@@ -80,6 +80,8 @@ class matchTeam: UIViewController {
         if !self.matchData.sliderValues.isEmpty {
             print("getting data from matchData.sliderValues")
             sliderview.lowerValue = (self.matchData.sliderValues["max"])!
+            print(sliderview.lowerValue)
+            print(sliderview.upperValue)
             sliderview.upperValue = (self.matchData.sliderValues["min"])!
         } else {
             print("updating values from updateSlider")

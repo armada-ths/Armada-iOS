@@ -143,24 +143,23 @@ class matchSweden: UIViewController {
         }
         
         // make sure all keys from buttonNameArray exists
-        var exists = true
         for str in buttonNameArray {
             if self.matchData.swedenBool[str] == nil{
-                exists = false
+                self.matchData.swedenBool[str] = false
             }
         }
-        if exists {
-            loadButtonValues()
-            for button in buttonArray{
-                button.isSelected = !button.isSelected
-            }
-            button1action(self)
-            button2action(self)
-            button3action(self)
-            button4action(self)
-            button5action(self)
-            button6action(self)
+        print("exists")
+        loadButtonValues()
+        for button in buttonArray{
+            button.isSelected = !button.isSelected
         }
+        button1action(self)
+        button2action(self)
+        button3action(self)
+        button4action(self)
+        button5action(self)
+        button6action(self)
+        
         
     }
     

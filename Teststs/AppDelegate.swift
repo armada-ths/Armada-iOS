@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         let defaults = UserDefaults.standard
-        if let uuid = defaults.value(forKey: "uuid") {
+        if let _ = defaults.value(forKey: "uuid") {
         } else {
             let uuid = UUID().uuidString
             defaults.set(uuid, forKey: "uuid")
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* fetch the matchBackendData if not already done
          this will be done in a non-main thread so don't try
          to access matchDataClass objects "to soon"... */
-        if var loaded = matchDataClass().load() {
+        if let loaded = matchDataClass().load() {
             if loaded.grader.count == 0 {
                 ArmadaApi.matchFromServer(1){
                     data, error, errormessage in
