@@ -51,8 +51,6 @@ class matchWorld: UIViewController {
         if (matchData.currentview < viewNumber){
             goBackWithoutAnimation()
         }
-        
-        print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
@@ -179,7 +177,6 @@ class matchWorld: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        print("going back to view #\(matchData.currentview)")
         self.matchSweden?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }

@@ -61,7 +61,6 @@ class matchLooking: UIViewController {
         if(matchData.currentview < viewNumber){
             goBackWithoutAnimation()
         }
-        print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
@@ -124,9 +123,6 @@ class matchLooking: UIViewController {
     }
     
     func repositionButtons(_ height: CGFloat){
-        
-        print("the height of the image is \(height)")
-        
         let buttonimageW = height*0.071
         
         b1w.constant = buttonimageW
@@ -148,7 +144,6 @@ class matchLooking: UIViewController {
     }
     
     func setButtons(){
-        print(self.matchData.lookingBool)
         button1.isSelected = self.matchData.lookingBool["part-time job"]!
         button2.isSelected = self.matchData.lookingBool["summer job"]!
         button3.isSelected = self.matchData.lookingBool["thesis"]!
@@ -176,7 +171,6 @@ class matchLooking: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        print("going back to view #\(matchData.currentview)")
         self.matchStart?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }

@@ -148,7 +148,6 @@ class matchSweden: UIViewController {
                 self.matchData.swedenBool[str] = false
             }
         }
-        print("exists")
         loadButtonValues()
         for button in buttonArray{
             button.isSelected = !button.isSelected
@@ -159,8 +158,6 @@ class matchSweden: UIViewController {
         button4action(self)
         button5action(self)
         button6action(self)
-        
-        
     }
     
     func statusBar(){
@@ -201,7 +198,6 @@ class matchSweden: UIViewController {
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
-        print("going back to view #\(matchData.currentview)")
         self.matchLooking?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
     }

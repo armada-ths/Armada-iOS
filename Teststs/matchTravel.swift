@@ -107,8 +107,6 @@ class matchTravel: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
-        
-        print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }

@@ -55,8 +55,6 @@ class matchTeam: UIViewController {
         }
         self.setupSwipe()
         self.setupStatusBar()
-        
-        print(matchData.currentview)
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
@@ -78,15 +76,9 @@ class matchTeam: UIViewController {
     
     func updateSlider(sliderview: RangeSlider){
         if !self.matchData.sliderValues.isEmpty {
-            print("getting data from matchData.sliderValues")
             sliderview.lowerValue = (self.matchData.sliderValues["max"])!
-            print(sliderview.lowerValue)
-            print(sliderview.upperValue)
             sliderview.upperValue = (self.matchData.sliderValues["min"])!
         } else {
-            print("updating values from updateSlider")
-            print("sliderview.maximumValue \(sliderview.maximumValue)")
-            print("sliderview.minimumValue \(sliderview.minimumValue)")
             sliderview.upperValue = sliderview.maximumValue
             sliderview.lowerValue = sliderview.minimumValue
         }
@@ -108,7 +100,7 @@ class matchTeam: UIViewController {
             sliderview.maximumValue = Double(self.matchData.slider["max"] as! Int)
             sliderview.minimumValue = Double(self.matchData.slider["min"] as! Int)
         } else {
-            print("setting sliderview.maximumValue")
+            print("somethings wrong using hardcoded values maximumValue = 100 minimumValue = 0")
             sliderview.maximumValue = 100
             sliderview.minimumValue = 0
             // USER HARDCODED VALUES HERE
