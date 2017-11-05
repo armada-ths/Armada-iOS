@@ -27,6 +27,7 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         override func updateFunc(_ callback: @escaping (Response<[[ArmadaEvent]]>) -> Void) {
             ArmadaApi.eventsFromServer { response in
                 OperationQueue.main.addOperation {
+                    print("from updateFunc")
                     callback(response.map { [$0] })
                     self.isFirstLoad = false
                 }
@@ -87,7 +88,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         if dataSource.isEmpty {
             dataSource.refresh()
         }
-        
         // change backbar button from "Back" to ""
         backBarButton.title = ""
         
@@ -97,7 +97,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         
         // set title if not set
         if self.navigationItem.titleView == nil {
-            
             let frame = CGRect(x: 0,y: 9, width: 200, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(
@@ -105,13 +104,14 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Thin",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 0))
 //            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 0))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
             newTitleView.addSubview(label)
             self.navigationItem.titleView = newTitleView
+            
         }
         
     }
