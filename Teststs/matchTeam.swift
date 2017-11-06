@@ -160,14 +160,14 @@ class matchTeam: UIViewController {
     }
     
     func goRightWithoutAnimation(){
-        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
-            matchData.sliderValues["max"] = sliderview.lowerValue
-            matchData.sliderValues["min"] = sliderview.upperValue
-            let minmax = sliderview.calcReverseValues()
-            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
-            matchData.sliderValues["minTrue"] = minmax.1.rounded()
-        }
-        matchData.save()
+//        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
+//            matchData.sliderValues["max"] = sliderview.lowerValue
+//            matchData.sliderValues["min"] = sliderview.upperValue
+//            let minmax = sliderview.calcReverseValues()
+//            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
+//            matchData.sliderValues["minTrue"] = minmax.1.rounded()
+//        }
+//        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
