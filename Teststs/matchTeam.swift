@@ -76,8 +76,21 @@ class matchTeam: UIViewController {
     
     func updateSlider(sliderview: RangeSlider){
         if !self.matchData.sliderValues.isEmpty {
-            sliderview.lowerValue = (self.matchData.sliderValues["max"])!
-            sliderview.upperValue = (self.matchData.sliderValues["min"])!
+            // REMEMBER THAT YOU HAVE TO REVERSE THESE VALUES!!!! THEY ARE TAKEN FROM
+            // reverseValues() function!!!! FFS!
+            print("updateSlider")
+            if (self.matchData.sliderValues["max"]! < sliderview.maximumValue){
+                sliderview.lowerValue = sliderview.maximumValue
+            } else {
+                sliderview.lowerValue = (self.matchData.sliderValues["max"])!
+            }
+            if (self.matchData.sliderValues["min"]! > sliderview.minimumValue){
+                sliderview.lowerValue = sliderview.minimumValue
+            } else {
+                sliderview.lowerValue = (self.matchData.sliderValues["min"])!
+            }
+            print(sliderview.lowerValue)
+            print(sliderview.upperValue)
         } else {
             sliderview.upperValue = sliderview.maximumValue
             sliderview.lowerValue = sliderview.minimumValue
@@ -97,6 +110,9 @@ class matchTeam: UIViewController {
         var sliderview:RangeSlider = RangeSlider(frame: frame)
 //        sliderview.labelFontSize = 30
         if !self.matchData.slider.isEmpty {
+            print("addSlider")
+            print(Double(self.matchData.slider["max"] as! Int))
+            print(Double(self.matchData.slider["min"] as! Int))
             sliderview.maximumValue = Double(self.matchData.slider["max"] as! Int)
             sliderview.minimumValue = Double(self.matchData.slider["min"] as! Int)
         } else {
