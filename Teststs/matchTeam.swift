@@ -74,21 +74,51 @@ class matchTeam: UIViewController {
                 
     }
     
+//    open func calcReverseValues() -> (Double, Double){
+//        let max = self.maximumValue
+//        let min = self.minimumValue
+//
+//        let reverseUpperValue = (self.maximumValue - upperValue + 1)
+//        let reverseLowerValue = (self.maximumValue - lowerValue + 1)
+//
+//        return (reverseLowerValue, reverseUpperValue)
+//    }
+    func reReverseValues(sliderview: RangeSlider) -> (Double, Double){
+        let max = sliderview.maximumValue
+        print("maxTrue and minTrue")
+        print(self.matchData.sliderValues["maxTrue"])
+        print(self.matchData.sliderValues["minTrue"])
+        if self.matchData.sliderValues["maxTrue"] != nil && self.matchData.sliderValues["minTrue"] != nil {
+            print("yes")
+            let reReversedUpperValue = (max - self.matchData.sliderValues["maxTrue"]! - 1)
+            let reReversedLowerValue = (max - self.matchData.sliderValues["minTrue"]! - 1)
+            return (reReversedUpperValue, reReversedLowerValue)
+        } else {
+          return (sliderview.minimumValue, sliderview.maximumValue)
+        }
+    }
     func updateSlider(sliderview: RangeSlider){
         if !self.matchData.sliderValues.isEmpty {
             // REMEMBER THAT YOU HAVE TO REVERSE THESE VALUES!!!! THEY ARE TAKEN FROM
             // reverseValues() function!!!! FFS!
+            let minmax = reReverseValues(sliderview: sliderview)
             print("updateSlider")
-            if (self.matchData.sliderValues["max"]! < sliderview.maximumValue){
-                sliderview.lowerValue = sliderview.maximumValue
-            } else {
-                sliderview.lowerValue = (self.matchData.sliderValues["max"])!
-            }
-            if (self.matchData.sliderValues["min"]! > sliderview.minimumValue){
-                sliderview.lowerValue = sliderview.minimumValue
-            } else {
-                sliderview.lowerValue = (self.matchData.sliderValues["min"])!
-            }
+            print("minmax")
+            print(minmax.0)
+            print(minmax.1)
+            sliderview.lowerValue = minmax.0
+            sliderview.upperValue = minmax.1
+            
+//            if (self.matchData.sliderValues["max"]! < sliderview.maximumValue){
+//                sliderview.lowerValue = sliderview.maximumValue
+//            } else {
+//                sliderview.lowerValue = (self.matchData.sliderValues["max"])!
+//            }
+//            if (self.matchData.sliderValues["min"]! > sliderview.minimumValue){
+//                sliderview.lowerValue = sliderview.minimumValue
+//            } else {
+//                sliderview.lowerValue = (self.matchData.sliderValues["min"])!
+//            }
             print(sliderview.lowerValue)
             print(sliderview.upperValue)
         } else {

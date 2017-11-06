@@ -196,7 +196,7 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: (sqWidth-10)/2, height: 75);
+        return CGSize(width: (sqWidth-10)/2, height: 90);
     }
     
     

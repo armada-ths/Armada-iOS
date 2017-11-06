@@ -114,7 +114,9 @@ class matchDataClass: NSObject{
         }
         self.sliderValues = Dictionary<String, Double>()
         self.sliderValues["max"] = json["sliderValues"]["max"].doubleValue
-        self.sliderValues["min"] = json["sliderValues"]["min"].doubleValue        
+        self.sliderValues["min"] = json["sliderValues"]["min"].doubleValue
+        self.sliderValues["maxTrue"] = json["sliderValues"]["maxTrue"].doubleValue
+        self.sliderValues["minTrue"] = json["sliderValues"]["minTrue"].doubleValue
         self.areas = Array<Dictionary<String, Any>>()
         for (_, val) in json["areas"] {
             self.areas.append(["id": val["id"].int!, "field": val["field"].string!, "area": val["area"].string!])
