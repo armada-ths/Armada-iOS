@@ -371,8 +371,8 @@ import QuartzCore
         let max = self.maximumValue
         let min = self.minimumValue
         
-        let reverseUpperValue = (self.maximumValue - upperValue)
-        let reverseLowerValue = (self.maximumValue - lowerValue)
+        let reverseUpperValue = (self.maximumValue - upperValue + 1)
+        let reverseLowerValue = (self.maximumValue - lowerValue + 1)
         
         return (reverseLowerValue, reverseUpperValue)
     }
@@ -401,13 +401,15 @@ import QuartzCore
     lowerLabel.fontSize = CGFloat(highFontSize)
     upperLabel.fontSize = CGFloat(lowFontSize)
 
-    
-    
 //    lowerLabel.string = getLabelText(forValue: lowerValue)
 //    upperLabel.string = getLabelText(forValue: upperValue)
-
-    let lowerString = getLabelText(forValue: lowhigh.0) + "\n collegues"
     let upperString = getLabelText(forValue: lowhigh.1) + "\n collegues"
+    var lowerString = ""
+    if lowhigh.0 == self.maximumValue{
+        lowerString = getLabelText(forValue: lowhigh.0) + "+\n collegues"
+    } else {
+        lowerString = getLabelText(forValue: lowhigh.0) + "\n collegues"
+    }
     
     lowerLabel.string = lowerString
     upperLabel.string = upperString
