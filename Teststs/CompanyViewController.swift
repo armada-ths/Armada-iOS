@@ -3,6 +3,10 @@ import UIKit
 class CompanyViewController: UIViewController {
    // @IBOutlet var mapH: NSLayoutConstraint!
     
+    
+    
+    @IBOutlet var jobLabel: UILabel!
+    @IBOutlet var jobTitleLabel: UILabel!
     @IBOutlet var webButton: UIButton!
     @IBOutlet var contentview: UIView!
     @IBOutlet var mapImage: UIImageView!
@@ -77,7 +81,15 @@ class CompanyViewController: UIViewController {
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
-        
+        if (company.jobTypes.count == 0){
+            jobTitleLabel.removeFromSuperview()
+            jobLabel.removeFromSuperview()
+            
+        }
+        else{
+            jobLabel.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
+            jobLabel.font=UIFont(name: "Lato-Regular", size: 14)
+        }
         aboutText.text = company.companyDescription.strippedFromHtmlString
         if company.companyDescription.isEmpty {
             aboutText.text = "To be announced"
@@ -96,6 +108,7 @@ class CompanyViewController: UIViewController {
             companyName.textColor = ColorScheme.diversityRed
             webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
+            jobTitleLabel.textColor = ColorScheme.diversityRed
 
         }
         else if (company.likesEnvironment){
