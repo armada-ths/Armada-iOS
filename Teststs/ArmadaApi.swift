@@ -272,7 +272,7 @@ open class _ArmadaApi {
     //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
     let newsUrl = "http://armada.nu"
-    let matchUrl = "http://ais2.armada.nu/api/questions?student_id="
+    let matchUrl = "http://gotham.armada.nu/api/questions?student_id="
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
