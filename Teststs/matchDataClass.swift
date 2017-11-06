@@ -190,19 +190,16 @@ class matchDataClass: NSObject{
         let finalJSON = JSON(jsonArray)
         return finalJSON
     }
-    func createAreas() {
-        if self.mainAreas.count == 0 {
-            for item in self.areas {
-                // setup main areas
-                self.mainAreas[item["area"] as! String] = false
-                // setup sub areas
-                let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
-                self.subAreas[String(item["id"] as! Int)] = subareaObj
-            }
+    func createAreasForced() {
+        for item in self.areas {
+            // setup main areas
+            self.mainAreas[item["area"] as! String] = false
+            // setup sub areas
+            let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
+            self.subAreas[String(item["id"] as! Int)] = subareaObj
         }
     }
     func save() {
-        createAreas()
         let defaults = UserDefaults.standard
         self.time = String(describing: Date())
         defaults.set(self.toJSON().rawString()!, forKey: "json")

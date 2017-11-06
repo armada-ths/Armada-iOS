@@ -721,6 +721,7 @@ open class _ArmadaApi {
                     match.grader = grader
                     match.slider = slider
                     match.areas = areas
+                    match.createAreasForced()
                     match.save()
                 } catch {
                     print("something went wrong in matchFromServer")
