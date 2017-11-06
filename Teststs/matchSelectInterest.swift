@@ -8,7 +8,7 @@
 
 import UIKit
 
-class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
  
     @IBOutlet var areas: UICollectionView!
     //@IBOutlet weak var stackView: UIStackView!
@@ -157,7 +157,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         print(indexPath.row)
         let cell = areas.dequeueReusableCell(withReuseIdentifier: "areasCell", for: indexPath as IndexPath) as! IntrestCollectionViewCell
         //cell.intrest = filteredAreas.keys[indexPath.row]
-        cell.interest.setTitle(areaKeys[indexPath.row]!, for: .normal)
+        cell.interest.setTitle(areaKeys[indexPath.row], for: .normal)
         cell.interest.contentHorizontalAlignment = .left
         cell.interest.tag = indexPath.row
         cell.selectionButton.layer.cornerRadius = 0.5 * cell.selectionButton.bounds.size.width
@@ -165,10 +165,10 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         cell.selectionButton.layer.borderColor = UIColor.black.cgColor
         cell.selectionButton.tag = indexPath.row
         cell.tag = indexPath.row
-        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
+        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 19)
         if (matchData.mainAreas[areaKeys[indexPath.row]!]! == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
-            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
+            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 19)
             }
         return cell
     }
@@ -176,7 +176,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: (sqWidth-5)/2, height: 100);
+        return CGSize(width: (sqWidth-20)/2, height: 75);
     }
 
     @IBAction func selectIntrest(_ sender: UIButton) {
