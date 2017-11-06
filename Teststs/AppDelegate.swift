@@ -63,19 +63,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* fetch the matchBackendData if not already done
          this will be done in a non-main thread so don't try
          to access matchDataClass objects "to soon"... */
-        if let loaded = matchDataClass().load() {
-            if loaded.grader.count == 0 {
-                ArmadaApi.matchFromServer(1){
-                    data, error, errormessage in
-                }
-                return false
-            }
-        } else {
-            ArmadaApi.matchFromServer(1){
-                data, error, errormessage in
-            }
-            return false
+        ArmadaApi.matchFromServer(1){
+            data, error, errormessage in
         }
+//        return false
+//        if let loaded = matchDataClass().load() {
+//            if loaded.grader.count == 0 {
+//                
+//            }
+//        } else {
+//            ArmadaApi.matchFromServer(1){
+//                data, error, errormessage in
+//            }
+//            return false
+//        }
         
         //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
         //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
