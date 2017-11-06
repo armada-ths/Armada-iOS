@@ -8,7 +8,7 @@
 
 import UIKit
 
-class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet var areas: UICollectionView!
     //@IBOutlet weak var stackView: UIStackView!
@@ -184,10 +184,10 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         cell.selectionButton.layer.borderColor = UIColor.black.cgColor
         cell.selectionButton.tag = Int(keys[indexPath.row]!)!
         cell.tag = indexPath.row
-        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 20)
+        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 19)
         if (matchData.subAreas[keys[indexPath.row]!]!["select"] as! Bool == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
-            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 20)
+            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 19)
         }
         return cell
     }
@@ -196,7 +196,7 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: (sqWidth-5)/2, height: 100);
+        return CGSize(width: (sqWidth-10)/2, height: 75);
     }
     
     
