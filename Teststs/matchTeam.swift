@@ -121,6 +121,7 @@ class matchTeam: UIViewController {
             matchData.sliderValues["maxTrue"] = minmax.0.rounded()
             matchData.sliderValues["minTrue"] = minmax.1.rounded()
         }
+        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
