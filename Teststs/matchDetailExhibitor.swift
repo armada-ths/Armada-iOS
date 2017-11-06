@@ -84,8 +84,8 @@ class matchDetailExhibitor: UIViewController {
             scrollView.backgroundColor = ColorScheme.diversityRed
             matchLevel.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
-            webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
+            webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
             
         }
         else if (company.likesEnvironment){

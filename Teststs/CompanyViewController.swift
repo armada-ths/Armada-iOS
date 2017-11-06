@@ -94,7 +94,7 @@ class CompanyViewController: UIViewController {
             backgroundView.backgroundColor = ColorScheme.diversityRed
             scrollView.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
-            webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
+            webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
 
         }
@@ -102,6 +102,7 @@ class CompanyViewController: UIViewController {
            backgroundView.backgroundColor = ColorScheme.sustainabilityGreen
             scrollView.backgroundColor = ColorScheme.sustainabilityGreen
             coreIcon.image = #imageLiteral(resourceName: "sus")
+
 
 
         }
