@@ -95,6 +95,7 @@ class matchExhibitors: UITableViewController {
     
     var companiesMatch = Array <Company>()
     var matchLEvels = Array <UILabel>()
+    var companiesScore = [[String: AnyObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +121,7 @@ class matchExhibitors: UITableViewController {
         percent4 = matchData?.matchResult[3]["percent"] as? Double ?? nil
         id5 = matchData?.matchResult[4]["exhibitor"] as? Int ?? nil
         percent5 = matchData?.matchResult[4]["percent"] as? Double ?? nil
+
 
        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
         let statusBar = statWindow.subviews[0] as UIView
@@ -154,30 +156,60 @@ class matchExhibitors: UITableViewController {
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
         if(id1 != nil){
-            company1 = companies.filter{$0.id == id1!}.first
+            if let company1 = (companies.filter{$0.id == id1!}.first) as? Company{
+                companiesScore.append(["score": percent1 as AnyObject, "company": company1])
+                self.company1 = company1
+            }
+            else{
+                self.company1 = nil
+            }
         }
         if(id2 != nil){
-            company2 = companies.filter{$0.id == id2!}.first
-        }
+            if let company2 = (companies.filter{$0.id == id2!}.first) as? Company{
+                companiesScore.append(["score": percent2 as AnyObject, "company": company2])
+                self.company2 = company2
+            }
+            else{
+                self.company2 = nil
+            }        }
         if(id3 != nil){
-            company3 = companies.filter{$0.id == id3!}.first
-        }
+            if let company3 = (companies.filter{$0.id == id3!}.first) as? Company{
+                companiesScore.append(["score": percent3 as AnyObject, "company": company3])
+                self.company3 = company3
+            }
+            else{
+                self.company3 = nil
+            }        }
         if (id4 != nil){
-            company4 = companies.filter{$0.id == id4!}.first
-        }
+            if let company4 = (companies.filter{$0.id == id4!}.first) as? Company{
+                companiesScore.append(["score": percent4 as AnyObject, "company": company4])
+                self.company4 = company4
+            }
+            else{
+                self.company4 = nil
+            }        }
         if(id5 != nil){
-        company5 = companies.filter{$0.id == id5!}.first
+            if let company5 = (companies.filter{$0.id == id5!}.first) as? Company{
+                companiesScore.append(["score": percent5 as AnyObject, "company": company5])
+                self.company5 = company5
+            }
+            else{
+                self.company5 = nil
+            }
+            
         }
         //Setup cell 1
-        
-        if(company1 != nil){
-            companiesMatch.append(company1!)
+        var index = 0
+        if(index < companiesScore.count){
+            //companiesMatch.append(company1!)
+            company1 = companiesScore[index]["company"] as! Company
             titleLabel1.text = company1?.name
             setUpLogo(logo1, imageWidth1, imageHeight1, company1!)
             susLogo1.isHidden = true
             divLogo1.isHidden = true
-            machLevel1.text = String(describing: percent1!) + "%"
+            machLevel1.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(machLevel1)
+            index += 1
             
             if(company1!.likesEquality){
                 arrow1.image = #imageLiteral(resourceName: "wArrow")
@@ -196,15 +228,17 @@ class matchExhibitors: UITableViewController {
         
         
         //Setup Cell2
-        if(company2 != nil){
-            companiesMatch.append(company2!)
+        if(index < companiesScore.count){
+            //companiesMatch.append(company1!)
+            company2 = companiesScore[index]["company"] as! Company
             titleLabel2.text = company2?.name
             setUpLogo(logo2, imageWidth2, imageHeight2, company2!)
             susLogo2.isHidden = true
             divLogo2.isHidden = true
-            matchLevel2.text = String(describing: percent2!) + "%"
+            matchLevel2.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel2)
-
+            index += 1
+            
 
             if(company2!.likesEquality){
                 arrow2.image = #imageLiteral(resourceName: "wArrow")
@@ -222,16 +256,17 @@ class matchExhibitors: UITableViewController {
         }
         
         //Setup Cell3
-        if(company3 != nil){
-            companiesMatch.append(company3!)
+        if(index < companiesScore.count){
+            //companiesMatch.append(company1!)
+            company3 = companiesScore[index]["company"] as! Company
             titleLabel3.text = company3?.name
             setUpLogo(logo3, imageWidth3, imageHeight3, company3!)
             susLogo3.isHidden = true
             divLogo3.isHidden = true
-            matchLevel3.text = String(describing: percent3!) + "%"
+            matchLevel3.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel3)
-
-
+            index += 1
+            
             if(company3!.likesEquality){
                 arrow3.image = #imageLiteral(resourceName: "wArrow")
                 divLogo3.isHidden = false
@@ -249,14 +284,16 @@ class matchExhibitors: UITableViewController {
         
         
         //Setup Cell4
-        if(company4 != nil){
-            companiesMatch.append(company4!)
+        if(index < companiesScore.count){
+//            companiesMatch.append(company4!)
+            company4 = companiesScore[index]["company"] as! Company
             titleLabel4.text = company4?.name
             setUpLogo(logo4, imageWidth4, imageHeight4, company4!)
             susLogo4.isHidden = true
             divLogo4.isHidden = true
-            matchLevel4.text = String(describing: percent4!) + "%"
+            matchLevel4.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel4)
+            index += 1
 
             if(company4!.likesEquality){
                 arrow4.image = #imageLiteral(resourceName: "wArrow")
@@ -271,19 +308,22 @@ class matchExhibitors: UITableViewController {
         }
         else{
             cell4.isHidden = true
+
         }
         
         //Setup Cell5
         
-        if(company5 != nil){
-            companiesMatch.append(company5!)
+        if(index < companiesScore.count){
+            //companiesMatch.append(company1!)
+            company5 = companiesScore[index]["company"] as! Company
             titleLabel5.text = company5?.name
             setUpLogo(logo5, imageWidth5, imageHeight5, company5!)
             susLogo5.isHidden = true
             divLogo5.isHidden = true
-            matchLevel5.text = String(describing: percent5!) + "%"
+            matchLevel5.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel5)
-
+           // index +=1
+            
             if(company5!.likesEquality){
                 arrow5.image = #imageLiteral(resourceName: "wArrow")
                 divLogo5.isHidden = false
@@ -305,7 +345,7 @@ class matchExhibitors: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if let controller = segue.destination as? matchDetailExhibitor,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-            let company = companiesMatch[indexPath.row-1]
+            let company = companiesScore[indexPath.row-1]["company"] as! Company
            controller.company = company
             controller.match = matchLEvels[indexPath.row-1]
             deselectSelectedCell()
