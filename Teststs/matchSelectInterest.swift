@@ -165,10 +165,10 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         cell.selectionButton.layer.borderColor = UIColor.black.cgColor
         cell.selectionButton.tag = indexPath.row
         cell.tag = indexPath.row
-        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 19)
+        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 18)
         if (matchData.mainAreas[areaKeys[indexPath.row]!]! == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
-            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 19)
+            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 18)
             }
         return cell
     }
