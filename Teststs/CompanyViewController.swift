@@ -3,10 +3,6 @@ import UIKit
 class CompanyViewController: UIViewController {
    // @IBOutlet var mapH: NSLayoutConstraint!
     
-    
-    
-    @IBOutlet var jobLabel: UILabel!
-    @IBOutlet var jobTitleLabel: UILabel!
     @IBOutlet var webButton: UIButton!
     @IBOutlet var contentview: UIView!
     @IBOutlet var mapImage: UIImageView!
@@ -75,18 +71,13 @@ class CompanyViewController: UIViewController {
             }
         headerImageView.image = image
         }
+           // whiteView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "companyBackground"))
+           // backgroundView.backgroundColor = ColorScheme.armadaLicorice
+         //   self.whiteView.sendSubview(toBack: backgroundImage)
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
-        if (company.jobTypes.count == 0){
-            jobTitleLabel.removeFromSuperview()
-            jobLabel.removeFromSuperview()
-            
-        }
-        else{
-            jobLabel.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
-            jobLabel.font=UIFont(name: "Lato-Regular", size: 14)
-        }
+        
         aboutText.text = company.companyDescription.strippedFromHtmlString
         if company.companyDescription.isEmpty {
             aboutText.text = "To be announced"
@@ -103,16 +94,14 @@ class CompanyViewController: UIViewController {
             backgroundView.backgroundColor = ColorScheme.diversityRed
             scrollView.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
-            webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
+            webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
-            jobTitleLabel.textColor = ColorScheme.diversityRed
 
         }
         else if (company.likesEnvironment){
            backgroundView.backgroundColor = ColorScheme.sustainabilityGreen
             scrollView.backgroundColor = ColorScheme.sustainabilityGreen
             coreIcon.image = #imageLiteral(resourceName: "sus")
-
 
 
         }
