@@ -11,6 +11,8 @@ import UIKit
 class matchDetailExhibitor: UIViewController {
     // @IBOutlet var mapH: NSLayoutConstraint!
     
+    @IBOutlet var jobTypes: UILabel!
+    @IBOutlet var jobTitleLabel: UILabel!
     @IBOutlet var mapWidth: NSLayoutConstraint!
     @IBOutlet var mapHeight: NSLayoutConstraint!
     @IBOutlet var webButton: UIButton!
@@ -61,6 +63,18 @@ class matchDetailExhibitor: UIViewController {
             headerImageView.image = image
         }
         super.viewDidLoad()
+        
+        if (company.jobTypes.count == 0){
+            // jobTitleLabel.removeFromSuperview()
+            jobTypes.removeFromSuperview()
+            
+        }
+        else{
+            jobTypes.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
+            jobTypes.font=UIFont(name: "Lato-Regular", size: 14)
+        }
+        
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationItem.backBarButtonItem?.title = "Back"
         navigationController?.navigationBar.tintColor = ColorScheme.armadaGreen
@@ -84,6 +98,7 @@ class matchDetailExhibitor: UIViewController {
             scrollView.backgroundColor = ColorScheme.diversityRed
             matchLevel.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
+            jobTitleLabel.textColor = ColorScheme.diversityRed
             webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
             
