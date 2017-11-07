@@ -57,7 +57,6 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         } else {
             self.matchData.areaBools[self.matchData.areaList[matchInt]] = true
         }
-        
         print(self.matchData.areaBools[self.matchData.areaList[matchInt]])
         
     }
@@ -165,10 +164,10 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
         cell.selectionButton.layer.borderColor = UIColor.black.cgColor
         cell.selectionButton.tag = indexPath.row
         cell.tag = indexPath.row
-        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 18)
+        cell.interest.titleLabel?.font = UIFont(name: "Lato-Light", size: 14)
         if (matchData.mainAreas[areaKeys[indexPath.row]!]! == true){
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
-            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 18)
+            cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 14)
             }
         return cell
     }

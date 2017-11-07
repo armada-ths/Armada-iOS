@@ -193,13 +193,32 @@ class matchDataClass: NSObject{
         return finalJSON
     }
     func createAreasForced() {
+        // kolla gamla listan
+        // spara dem som finns i nya listan
+        var tmpMainAreas = Dictionary<String, Bool>()
+        var tmpSubAreas = Dictionary<String, Dictionary<String, Any>>()
         for item in self.areas {
-            // setup main areas
-            self.mainAreas[item["area"] as! String] = false
-            // setup sub areas
-            let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
-            self.subAreas[String(item["id"] as! Int)] = subareaObj
+            if self.mainAreas[item["area"] as! String] != nil {
+                tmpMainAreas[item["area"] as! String] = self.mainAreas[item["area"] as! String]
+                
+            } else {
+                tmpMainAreas[item["area"] as! String] = false
+            }
+            
+            var subareaObj:[String: Any]
+            if self.subAreas[String(item["id"] as! Int)] != nil {
+                tmpSubAreas[String(item["id"] as! Int)] = self.subAreas[String(item["id"] as! Int)]!
+            } else {
+                tmpSubAreas[String(item["id"] as! Int)] = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
+            }
         }
+        self.subAreas = tmpSubAreas
+        self.mainAreas = tmpMainAreas
+//        print(self.mainAreas)
+        print(self.subAreas)
+//        print(self.mainAreas)
+//        print("loading in new match data")
+//        print(self.subAreas)
     }
     func save() {
         let defaults = UserDefaults.standard

@@ -272,7 +272,7 @@ open class _ArmadaApi {
     //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
     let newsUrl = "http://armada.nu"
-    let matchUrl = "http://gotham.armada.nu/api/questions?student_id="
+    let matchUrl = "http://gotham.armada.nu/api/questions"
     
     var persistentStoreUrlShm: URL {
         return URL(string: persistentStoreUrl.absoluteString + "-shm")!
@@ -678,7 +678,7 @@ open class _ArmadaApi {
     }
     
     func matchFromServer(_ student_id: Int,_ callback: @escaping (Dictionary<String, Any>, Bool, String) -> Void) {
-        let request = NSMutableURLRequest(url: (URL(string: (matchUrl + String(student_id))))!)
+        let request = NSMutableURLRequest(url: (URL(string: (matchUrl)))!)
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             if (data == nil){
@@ -695,6 +695,7 @@ open class _ArmadaApi {
                             areas.append(["id": val["id"].int, "field": val["field"].rawString(), "area": val["area"].string])
 
                     }
+                    //print(areas)
                     var slider = Dictionary<String, Any>()
                     var grader = Dictionary<String, Any>()
                     for (_, val) in parsedjson["questions"] {
@@ -720,9 +721,10 @@ open class _ArmadaApi {
                     }
                     match.grader = grader
                     match.slider = slider
-                    match.areas = areas
+                    match.areas = areas                    
                     match.createAreasForced()
                     match.save()
+                    
                 } catch {
                     print("something went wrong in matchFromServer")
                 }
