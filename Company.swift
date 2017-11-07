@@ -98,7 +98,23 @@ open class Company: NSManagedObject {
                 company.hostName = hostName
                 company.hostId = hostId
                 company.hostEmail = hostEmail
-
+            _ = {
+                let fetchRequest = NSFetchRequest<JobType>()
+                let entityName = "JobType"
+                fetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: managedObjectContext)!
+                var existingObjects = Set(try! managedObjectContext.fetch(fetchRequest))
+              //  let jobTypes = Array.removeNils(jobTypes.map{($0["name"] as? String)?.components(separatedBy: " | ").last})
+                var jobTypeList = Array<String>()
+                for jobType in jobTypes!{
+                    jobTypeList.append(jobType["name"] as! String)
+                }
+                for jobType in jobTypeList {
+                    let managedObject = existingObjects.filter({ $0.jobType == jobType }).first ?? NSEntityDescription.insertNewObject(forEntityName: entityName, into: managedObjectContext) as! JobType
+                    managedObject.jobType = jobType
+                    existingObjects.insert(managedObject)
+                    company.jobTypes.insert(managedObject)
+                }
+            }()
                 return company
         } else {
             print("Failed to parse company")
