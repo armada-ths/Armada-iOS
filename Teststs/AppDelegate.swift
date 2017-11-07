@@ -1,4 +1,6 @@
 import UIKit
+import OneSignal
+
 
 struct ColorScheme {
     static let leilaDesignGrey = UIColor(hex: 0xF8F7F7)
@@ -93,6 +95,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
         //        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
         //        UITableView.appearance().backgroundColor = UIColor.whiteColor()
+        
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        
+        // Replace 'YOUR_APP_ID' with your OneSignal App ID.
+        OneSignal.initWithLaunchOptions(launchOptions,
+                                        appId: "f2daf00e-b2f0-4da6-a30e-dc90e3791222",
+                                        handleNotificationAction: nil,
+                                        settings: onesignalInitSettings)
+        
+        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        // Recommend moving the below line to prompt for push after informing the user about
+        //   how your app will use them.
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
+        
+        // Sync hashed email if you have a login system or collect it.
+        //   Will be used to reach the user at the most optimal time of day.
+        // OneSignal.syncHashedEmail(userEmail)
         return true
     }
 
