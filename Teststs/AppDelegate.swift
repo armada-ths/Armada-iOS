@@ -76,18 +76,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ArmadaApi.matchFromServer(1){
             data, error, errormessage in
         }
-//        return false
-//        if let loaded = matchDataClass().load() {
-//            if loaded.grader.count == 0 {
-//                
-//            }
-//        } else {
-//            ArmadaApi.matchFromServer(1){
-//                data, error, errormessage in
-//            }
-//            return false
-//        }
+
+        ABNotifier.start(
+            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
+            projectID: "163539",
+            environmentName: ABNotifierAutomaticEnvironment,
+            useSSL: true
+        )
         
+//        ABNotifier.writeTestNotice()
         //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
         //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
         //        window!.tintColor = ColorScheme.armadaGreen
