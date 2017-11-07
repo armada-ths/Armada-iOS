@@ -22,8 +22,8 @@ struct matchResultObject {
 
 class matchGetPut {
     
-    let putURLString = "http://ais2.armada.nu/api/questions?student_id="
-    let getURLString = "http://ais2.armada.nu/api/matching_result?student_id="
+    let putURLString = "http://gotham.armada.nu/api/questions?student_id="
+    let getURLString = "http://gotham.armada.nu/api/matching_result?student_id="
     
     var matchResult = Array<Dictionary<String, Any>>()
     

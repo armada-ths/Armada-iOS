@@ -176,7 +176,7 @@ class matchSelectInterest: UIViewController, UICollectionViewDelegate, UICollect
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // NOTE:
         let sqWidth:CGFloat = UIScreen.main.bounds.width
-        return CGSize(width: (sqWidth-20)/2, height: 75);
+        return CGSize(width: (sqWidth-20)/2, height: 85);
     }
 
     @IBAction func selectIntrest(_ sender: UIButton) {

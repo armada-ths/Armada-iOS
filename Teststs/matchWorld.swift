@@ -10,6 +10,7 @@ import UIKit
 
 class matchWorld: UIViewController {
     
+    @IBOutlet weak var titlelabel: UILabel!
     @IBOutlet var stack3X: NSLayoutConstraint!
     @IBOutlet var stack2X: NSLayoutConstraint!
     @IBOutlet var stack1X: NSLayoutConstraint!
@@ -54,6 +55,13 @@ class matchWorld: UIViewController {
         if viewNumber < matchData.currentview {
             goRightWithoutAnimation()
         }
+        
+        let attributedTitel = NSMutableAttributedString(
+            string: "ARE YOU INTERESTED IN WORKING ABROAD?",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "BebasNeueRegular",
+                size: 30)!])
+        titlelabel.attributedText = attributedTitel
         
         labelArray = ["europe": europeLabel, "asia": asiaLabel, "americaS": sAmericaLabel, "oceania": oceaniaLabel, "americaN": nAmericaLabel, "africa": africaLabel]
         buttonArray = ["europe": europeButton, "asia": asiaButton, "americaS": sAmericaButton, "oceania": oceaniaButton, "americaN": nAmericaButton, "africa": africaButton]

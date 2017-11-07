@@ -102,7 +102,7 @@ class NewsViewController: UITableViewController {
         if indexPath.row == 0 {
             cellIdentifier = "topWhiteCell"
         } else {
-            cellIdentifier = news[indexPath.row].featured == true ? "largeWhiteCell" : "smallWhiteCell"
+            cellIdentifier = news[indexPath.row].featured == true ? "topWhiteCell" : "smallWhiteCell"
         }
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! NewsCell
         cell.newsItem = news[indexPath.row]

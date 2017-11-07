@@ -3,5 +3,5 @@ use_frameworks!
 
 target 'Armada' do
 	pod 'SwiftyJSON'
-	pod 'SwiftRangeSlider', :git => 'https://github.com/armada-ths/SwiftRangeSlider', :commit => '7fac9b9145c64840a10bcbe0059041e98c53dc6b'
+	pod 'SwiftRangeSlider', :git => 'https://github.com/armada-ths/SwiftRangeSlider', :commit => 'ba768727b239cdd19ffb56cc8f2f2fd41ee2ed06'
 end

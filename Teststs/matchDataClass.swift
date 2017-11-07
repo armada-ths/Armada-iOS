@@ -114,7 +114,9 @@ class matchDataClass: NSObject{
         }
         self.sliderValues = Dictionary<String, Double>()
         self.sliderValues["max"] = json["sliderValues"]["max"].doubleValue
-        self.sliderValues["min"] = json["sliderValues"]["min"].doubleValue        
+        self.sliderValues["min"] = json["sliderValues"]["min"].doubleValue
+        self.sliderValues["maxTrue"] = json["sliderValues"]["maxTrue"].doubleValue
+        self.sliderValues["minTrue"] = json["sliderValues"]["minTrue"].doubleValue
         self.areas = Array<Dictionary<String, Any>>()
         for (_, val) in json["areas"] {
             self.areas.append(["id": val["id"].int!, "field": val["field"].string!, "area": val["area"].string!])
@@ -190,19 +192,16 @@ class matchDataClass: NSObject{
         let finalJSON = JSON(jsonArray)
         return finalJSON
     }
-    func createAreas() {
-        if self.mainAreas.count == 0 {
-            for item in self.areas {
-                // setup main areas
-                self.mainAreas[item["area"] as! String] = false
-                // setup sub areas
-                let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
-                self.subAreas[String(item["id"] as! Int)] = subareaObj
-            }
+    func createAreasForced() {
+        for item in self.areas {
+            // setup main areas
+            self.mainAreas[item["area"] as! String] = false
+            // setup sub areas
+            let subareaObj = ["id": item["id"] as! Int, "field": item["field"] as! String, "parent": item["area"] as! String, "select": false] as [String : Any]
+            self.subAreas[String(item["id"] as! Int)] = subareaObj
         }
     }
     func save() {
-        createAreas()
         let defaults = UserDefaults.standard
         self.time = String(describing: Date())
         defaults.set(self.toJSON().rawString()!, forKey: "json")
