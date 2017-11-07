@@ -102,10 +102,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Airbrake-iOS/Airbrake_iOS.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Airbrake-iOS/Airbrake_iOS.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
