@@ -75,9 +75,6 @@ class CompanyViewController: UIViewController {
             }
         headerImageView.image = image
         }
-           // whiteView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "companyBackground"))
-           // backgroundView.backgroundColor = ColorScheme.armadaLicorice
-         //   self.whiteView.sendSubview(toBack: backgroundImage)
 
         super.viewDidLoad()
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
