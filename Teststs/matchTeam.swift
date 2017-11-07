@@ -90,8 +90,8 @@ class matchTeam: UIViewController {
         print(self.matchData.sliderValues["minTrue"])
         if self.matchData.sliderValues["maxTrue"] != nil && self.matchData.sliderValues["minTrue"] != nil {
             print("yes")
-            let reReversedUpperValue = (max - self.matchData.sliderValues["maxTrue"]! - 1)
-            let reReversedLowerValue = (max - self.matchData.sliderValues["minTrue"]! - 1)
+            let reReversedUpperValue = (max - self.matchData.sliderValues["maxTrue"]! + 1)
+            let reReversedLowerValue = (max - self.matchData.sliderValues["minTrue"]! + 1)
             return (reReversedUpperValue, reReversedLowerValue)
         } else {
           return (sliderview.minimumValue, sliderview.maximumValue)
