@@ -77,12 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             data, error, errormessage in
         }
 
-        ABNotifier.start(
-            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
-            projectID: "163539",
-            environmentName: ABNotifierAutomaticEnvironment,
-            useSSL: true
-        )
+//        ABNotifier.start(
+//            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
+//            projectID: "163539",
+//            environmentName: ABNotifierAutomaticEnvironment,
+//            useSSL: true
+//        )
         
 //        ABNotifier.writeTestNotice()
         //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG

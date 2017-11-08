@@ -13,6 +13,7 @@ class CompanyTableViewCell: UITableViewCell {
     @IBOutlet var imageHeight: NSLayoutConstraint!
     @IBOutlet var arrow: UIImageView!
     
+    @IBOutlet var shadow: UIView!
     func setLogo(_ company: Company){
         let image = company.image
             DispatchQueue.main.async(execute: { () -> Void in
