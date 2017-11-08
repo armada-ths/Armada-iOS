@@ -158,6 +158,8 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         cell.descriptionLabel.text = company.name
         cell.descriptionLabel.sizeToFit()
         cell.arrow.image = #imageLiteral(resourceName: "wArrow")
+        cell.shadow.layer.cornerRadius = 1
+        cell.layer.zPosition = CGFloat(companiesByLetters[(indexPath as NSIndexPath).section].companies.count-indexPath.row)
         if (company.localImage != nil){
             let image = company.localImage!
             cell.logoImageView.backgroundColor = UIColor.white
