@@ -99,6 +99,13 @@ class matchExhibitors: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cell1.layer.zPosition = 5
+        cell2.layer.zPosition = 4
+        cell3.layer.zPosition = 3
+        cell4.layer.zPosition = 2
+        cell5.layer.zPosition = 1
+
+
         self.matchStart?.matchData = matchData!
         if (matchData?.matchResult.isEmpty)!{
             matchData?.currentview -= 1
