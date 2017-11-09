@@ -49,9 +49,9 @@ class matchDoneViewController: UIViewController {
         topHeight.constant = UIScreen.main.bounds.width * (367/392)
      //   doubleCheck.text = "You can swipe right and double check your answers\n\n and when you are done:"
         bottomHeight.constant = topHeight.constant
-        doubleCheck.font = UIFont(name: "BebasNeueLight", size: 30)
-        whenLabel.font = UIFont(name: "BebasNeueLight", size: 30)
-        doneButton.titleLabel?.font = UIFont(name: "BebasNeueRegular", size: 25)
+        doubleCheck.font = UIFont(name: "BebasNeue-Light", size: 30)
+        whenLabel.font = UIFont(name: "BebasNeue-Light", size: 30)
+        doneButton.titleLabel?.font = UIFont(name: "BebasNeueRegular", size: 40)
         doneButton.layer.shadowColor = UIColor.black.cgColor
         doneButton.layer.shadowOffset = CGSize(width: 5, height: 5)
         doneButton.layer.shadowRadius = 5
