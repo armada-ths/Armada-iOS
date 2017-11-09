@@ -118,7 +118,7 @@ class matchSweden: UIViewController {
         let titleText = NSMutableAttributedString(
             string: "WHERE IN SWEDEN DO YOU WANT TO WORK?\n SELECT THE REGIONS",
             attributes: [NSFontAttributeName:UIFont(
-                name: "BebasNeue-Thin",
+                name: "BebasNeue-Light",
                 size: 26)!, NSForegroundColorAttributeName: UIColor.black])
         titleText.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 26.0), range:NSRange(location: 0, length: 36))
         titleLabel.attributedText = titleText

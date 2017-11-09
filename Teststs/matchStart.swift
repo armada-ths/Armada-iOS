@@ -46,6 +46,7 @@ class matchStart: UIViewController {
         
         if let match = self.matchData.load() {
             self.matchData = match
+            matchData.currentview = 8
             if viewNumber < matchData.currentview {
                 goRightWithoutAnimation()
             }

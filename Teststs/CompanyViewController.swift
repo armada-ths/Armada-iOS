@@ -89,8 +89,19 @@ class CompanyViewController: UIViewController {
             jobTypes.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
             jobTypes.font=UIFont(name: "Lato-Regular", size: 14)
         }
-        
-        aboutText.text = company.companyDescription.strippedFromHtmlString
+//        print("wtf")
+//        print(company.companyDescription.strippedFromHtmlString)
+//        var vals = (company.companyDescription).split(separator: "\n")
+//        var result = ""
+//        for item in vals{
+//            print(item)
+//            print("----")
+//            result = result + item + "\r\n"
+//        }
+//        print(result)
+//        print("wtf")
+//        print(company.companyDescription.strippedFromHtmlString)
+        aboutText.text = company.companyDescription
         if company.companyDescription.isEmpty {
             aboutText.text = "To be announced"
         }

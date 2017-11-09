@@ -114,12 +114,16 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We put great emphasis on matchmaking the right students with the right companies. This is done by including a matchmaking algorithm in our Android and iOS applications. We want to maximize the value from your THS Armada-participation.</font>"
                 headerView.aboutText.attributedText =  about.attributedHtmlString
                 headerView.aboutText.isScrollEnabled = false
+                headerView.aboutText.textAlignment = NSTextAlignment.center
                 headerView.coreValuesLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 headerView.diversityText.attributedText = diversity.attributedHtmlString
                 headerView.diversityText.isScrollEnabled = false
+                headerView.diversityText.textAlignment = NSTextAlignment.center
                 headerView.sustainabilityText.attributedText = sustainability.attributedHtmlString
                 headerView.sustainabilityText.isScrollEnabled = false
+                headerView.sustainabilityText.textAlignment = NSTextAlignment.center
                 headerView.qualityText.attributedText = quality.attributedHtmlString
+                headerView.qualityText.textAlignment = NSTextAlignment.center
                 headerView.qualityText.isScrollEnabled = false
                 headerView.partnersLabel.font = UIFont(name: "BebasNeueRegular", size: 20.0)
                 return headerView
