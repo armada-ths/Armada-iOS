@@ -65,11 +65,12 @@ class matchDetailExhibitor: UIViewController {
         super.viewDidLoad()
         
         if (company.jobTypes.count == 0){
-            // jobTitleLabel.removeFromSuperview()
+            jobTitleLabel.isHidden = true
             jobTypes.removeFromSuperview()
             
         }
         else{
+            jobTitleLabel.isHidden = false
             jobTypes.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
             jobTypes.font=UIFont(name: "Lato-Regular", size: 14)
         }

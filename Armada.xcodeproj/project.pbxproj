@@ -200,6 +200,7 @@
 		9F88F3131FB4EF2D00D1EAA8 /* BebasNeue-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Book.ttf"; path = "../../../../experimentfont/BebasNeue-Book.ttf"; sourceTree = "<group>"; };
 		9F88F3141FB4EF3200D1EAA8 /* BebasNeue-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Light.ttf"; path = "../../../../experimentfont/BebasNeue-Light.ttf"; sourceTree = "<group>"; };
 		9F88F3151FB4EF3300D1EAA8 /* BebasNeue-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue-Thin.ttf"; path = "../../../../experimentfont/BebasNeue-Thin.ttf"; sourceTree = "<group>"; };
+		9F88F31B1FB4FB5B00D1EAA8 /* Armada.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Armada.entitlements; sourceTree = SOURCE_ROOT; };
 		9F8B09E81F8CB7E800FEA704 /* matchWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = matchWorld.swift; sourceTree = "<group>"; };
 		9F8B09EC1F8CB86500FEA704 /* matchEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = matchEnd.swift; sourceTree = "<group>"; };
 		9F8B09EE1F8CB87E00FEA704 /* matchInterest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = matchInterest.swift; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 		265B7DDE1B053A080074450B /* Armada */ = {
 			isa = PBXGroup;
 			children = (
+				9F88F31B1FB4FB5B00D1EAA8 /* Armada.entitlements */,
 				9F8B09BB1F8CB51800FEA704 /* Match */,
 				914823A41F7ED80C007037F3 /* Event */,
 				91E701C41F7A2BCB00422500 /* ArmadaViewController.swift */,
@@ -570,6 +572,11 @@
 						DevelopmentTeam = 8E2ZH84HHV;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					265B7DF21B053A080074450B = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -912,6 +919,7 @@
 			baseConfigurationReference = 6B671CB0C8CEC3C4830CACBB /* Pods-Armada.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = Armada.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
@@ -931,6 +939,7 @@
 			baseConfigurationReference = F0087BC68241597157F34BCB /* Pods-Armada.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = Armada.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
