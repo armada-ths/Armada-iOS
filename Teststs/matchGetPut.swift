@@ -73,9 +73,16 @@ class matchGetPut {
         var slider = ["id": slider_id, "answer": ["min": CGFloat(matchData.sliderValues["minTrue"]!), "max": CGFloat(matchData.sliderValues["maxTrue"]!)]] as [String : Any]
 //        var slider = ["id": slider_id, "answer": ["min": 1, "max": 5]] as [String : Any]
         self.questions = [grader, slider]
-        // areas
+        
+        var areas = Array<Int>()
         // get the selected area ids in some way
-        var areas = [1, 2, 3, 4]
+        for (key, val) in matchData.subAreas {
+            if val["select"] as! Bool == true {
+                areas.append(Int(key)!)
+                print(val)
+            }
+        }
+//        print(areas)
         self.areas = areas
     }
     
@@ -125,6 +132,7 @@ class matchGetPut {
     func getStudentID() -> String {
         let defaults = UserDefaults.standard
         if let uuid = defaults.value(forKey: "uuid") {
+            print("uuid: \(uuid)")
             return uuid as! String
         } else {
             let uuid = UUID().uuidString
