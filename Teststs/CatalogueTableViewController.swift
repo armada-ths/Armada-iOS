@@ -126,9 +126,9 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             let frame = CGRect(x: 0,y: 9, width: 240, height: 30);
             let label = UILabel(frame: frame)
             let myMutableString = NSMutableAttributedString(
-                string: "C A T A L O U G E   THS Armada 2017",
+                string: "C A T A L O U G E THS Armada 2017",
                 attributes: [NSFontAttributeName:UIFont(
-                    name: "BebasNeue-Thin",
+                    name: "BebasNeue-Light",
                     size: 22.0)!])
             myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 18))
             label.textAlignment = .center

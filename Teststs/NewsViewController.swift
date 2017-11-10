@@ -44,7 +44,7 @@ class NewsViewController: UITableViewController {
             let myMutableString = NSMutableAttributedString(
                 string: "N E W S   THS Armada 2017",
                 attributes: [NSFontAttributeName:UIFont(
-                    name: "BebasNeue-Thin",
+                    name: "BebasNeue-Light",
                     size: 22.0)!])
             myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 8))
             label.textAlignment = .center

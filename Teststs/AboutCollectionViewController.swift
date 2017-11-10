@@ -33,7 +33,7 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
             let myMutableString = NSMutableAttributedString(
                 string: "A B O U T   THS Armada 2017",
                 attributes: [NSFontAttributeName:UIFont(
-                    name: "BebasNeue-Thin",
+                    name: "BebasNeue-Light",
                     size: 22.0)!])
             myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 9))
             label.textAlignment = .center
