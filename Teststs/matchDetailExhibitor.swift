@@ -111,6 +111,7 @@ class matchDetailExhibitor: UIViewController {
             matchLevel.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
             jobTitleLabel.textColor = ColorScheme.diversityRed
+            reasonsTitle.textColor = ColorScheme.diversityRed
             webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
             //webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
