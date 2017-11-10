@@ -32,6 +32,10 @@ class matchDetailExhibitor: UIViewController {
     var match: UILabel?
     @IBOutlet weak var headerImageView: UIImageView!
     
+    @IBOutlet var reasonsTitle: UILabel!
+    var reasons = [String]()
+    
+    @IBOutlet var reasonsLabel: UILabel!
     @IBOutlet var matchLevel: UILabel!
     var company: Company!
     
@@ -73,6 +77,13 @@ class matchDetailExhibitor: UIViewController {
             jobTitleLabel.isHidden = false
             jobTypes.text = Array(company.jobTypes.map({$0.jobType})).sorted().joined(separator: "\n")
             jobTypes.font=UIFont(name: "Lato-Regular", size: 14)
+        }
+        
+        reasonsLabel.text = reasons.filter{return !$0.isEmpty}.joined(separator: "\n")
+        reasonsLabel.font = UIFont(name:"Lato-Regular", size: 14)
+        if(reasonsLabel.text!.isEmpty){
+            reasonsLabel.isHidden = true
+            reasonsTitle.isHidden = true
         }
         
         
