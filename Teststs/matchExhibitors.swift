@@ -33,6 +33,7 @@ class matchExhibitors: UITableViewController {
     var id1: Int?
     @IBOutlet var imageHeight1: NSLayoutConstraint!
     @IBOutlet var imageWidth1: NSLayoutConstraint!
+    var reasons1: [String]?
     
     //Cell 2
     @IBOutlet var cell2: UITableViewCell!
@@ -47,7 +48,8 @@ class matchExhibitors: UITableViewController {
     var percent2: Double?
     @IBOutlet var imageHeight2: NSLayoutConstraint!
     @IBOutlet var imageWidth2: NSLayoutConstraint!
-    
+    var reasons2: [String]?
+
     //Cell 3
     @IBOutlet var cell3: UITableViewCell!
     @IBOutlet var matchLevel3: UILabel!
@@ -59,7 +61,8 @@ class matchExhibitors: UITableViewController {
     var company3: Company?
     var percent3: Double?
     var id3: Int?
-    
+    var reasons3: [String]?
+
     @IBOutlet var imageHeight3: NSLayoutConstraint!
     @IBOutlet var imageWidth3: NSLayoutConstraint!
     
@@ -77,6 +80,8 @@ class matchExhibitors: UITableViewController {
     var id4: Int?
     @IBOutlet var imageWidth4: NSLayoutConstraint!
     @IBOutlet var imageHeight4: NSLayoutConstraint!
+    var reasons4: [String]?
+
     
     //Cell 5
     @IBOutlet var cell5: UITableViewCell!
@@ -91,11 +96,13 @@ class matchExhibitors: UITableViewController {
     var id5: Int?
     @IBOutlet var imageWidth5: NSLayoutConstraint!
     @IBOutlet var imageHeight5: NSLayoutConstraint!
-    
+    var reasons5: [String]?
+
     
     var companiesMatch = Array <Company>()
     var matchLEvels = Array <UILabel>()
     var companiesScore = [[String: AnyObject]]()
+    var reasons = [[String]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,16 +125,25 @@ class matchExhibitors: UITableViewController {
         print(type(of: matchData?.matchResult[0]["percent"]))
         print(matchData?.matchResult[0])
         id1 = matchData?.matchResult[0]["exhibitor"] as? Int ?? nil
+        reasons1 = matchData?.matchResult[0]["reasons"] as? [String] ?? nil
         percent1 = matchData?.matchResult[0]["percent"] as? Double ?? nil
-        print(percent1)
+        
         id2 = matchData?.matchResult[1]["exhibitor"] as? Int ?? nil
         percent2 = matchData?.matchResult[1]["percent"] as? Double ?? nil
+        reasons2 = matchData?.matchResult[1]["reasons"] as? [String] ?? nil
+
         id3 = matchData?.matchResult[2]["exhibitor"] as? Int ?? nil
         percent3 = matchData?.matchResult[2]["percent"] as? Double ?? nil
+        reasons3 = matchData?.matchResult[2]["reasons"] as? [String] ?? nil
+
         id4 = matchData?.matchResult[3]["exhibitor"] as? Int ?? nil
         percent4 = matchData?.matchResult[3]["percent"] as? Double ?? nil
+        reasons4 = matchData?.matchResult[3]["reasons"] as? [String] ?? nil
+
         id5 = matchData?.matchResult[4]["exhibitor"] as? Int ?? nil
         percent5 = matchData?.matchResult[4]["percent"] as? Double ?? nil
+        reasons5 = matchData?.matchResult[4]["reasons"] as? [String] ?? nil
+
 
 
        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
@@ -165,6 +181,7 @@ class matchExhibitors: UITableViewController {
         if(id1 != nil){
             if let company1 = (companies.filter{$0.id == id1!}.first) as? Company{
                 companiesScore.append(["score": percent1 as AnyObject, "company": company1])
+                reasons.append(reasons1!)
                 self.company1 = company1
             }
             else{
@@ -175,6 +192,8 @@ class matchExhibitors: UITableViewController {
             if let company2 = (companies.filter{$0.id == id2!}.first) as? Company{
                 companiesScore.append(["score": percent2 as AnyObject, "company": company2])
                 self.company2 = company2
+                reasons.append(reasons2!)
+
             }
             else{
                 self.company2 = nil
@@ -183,6 +202,8 @@ class matchExhibitors: UITableViewController {
             if let company3 = (companies.filter{$0.id == id3!}.first) as? Company{
                 companiesScore.append(["score": percent3 as AnyObject, "company": company3])
                 self.company3 = company3
+                reasons.append(reasons3!)
+
             }
             else{
                 self.company3 = nil
@@ -191,6 +212,8 @@ class matchExhibitors: UITableViewController {
             if let company4 = (companies.filter{$0.id == id4!}.first) as? Company{
                 companiesScore.append(["score": percent4 as AnyObject, "company": company4])
                 self.company4 = company4
+                reasons.append(reasons4!)
+
             }
             else{
                 self.company4 = nil
@@ -199,6 +222,8 @@ class matchExhibitors: UITableViewController {
             if let company5 = (companies.filter{$0.id == id5!}.first) as? Company{
                 companiesScore.append(["score": percent5 as AnyObject, "company": company5])
                 self.company5 = company5
+                reasons.append(reasons5!)
+
             }
             else{
                 self.company5 = nil
@@ -355,6 +380,7 @@ class matchExhibitors: UITableViewController {
             let company = companiesScore[indexPath.row-1]["company"] as! Company
            controller.company = company
             controller.match = matchLEvels[indexPath.row-1]
+            controller.reasons = reasons[indexPath.row-1]
             deselectSelectedCell()
         }
     }

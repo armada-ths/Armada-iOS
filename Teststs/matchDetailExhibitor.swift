@@ -32,6 +32,10 @@ class matchDetailExhibitor: UIViewController {
     var match: UILabel?
     @IBOutlet weak var headerImageView: UIImageView!
     
+    @IBOutlet var reasonsTitle: UILabel!
+    var reasons = [String]()
+    
+    @IBOutlet var reasonsLabel: UILabel!
     @IBOutlet var matchLevel: UILabel!
     var company: Company!
     
@@ -75,6 +79,13 @@ class matchDetailExhibitor: UIViewController {
             jobTypes.font=UIFont(name: "Lato-Regular", size: 14)
         }
         
+        reasonsLabel.text = reasons.filter{return !$0.isEmpty}.joined(separator: "\n")
+        reasonsLabel.font = UIFont(name:"Lato-Regular", size: 14)
+        if(reasonsLabel.text!.isEmpty){
+            reasonsLabel.isHidden = true
+            reasonsTitle.isHidden = true
+        }
+        
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationItem.backBarButtonItem?.title = "Back"
@@ -100,6 +111,7 @@ class matchDetailExhibitor: UIViewController {
             matchLevel.backgroundColor = ColorScheme.diversityRed
             companyName.textColor = ColorScheme.diversityRed
             jobTitleLabel.textColor = ColorScheme.diversityRed
+            reasonsTitle.textColor = ColorScheme.diversityRed
             webButton.setImage(#imageLiteral(resourceName: "redWeb"), for: .normal)
             //webButton.setTitleColor(ColorScheme.diversityRed, for: .normal)
             coreIcon.image = #imageLiteral(resourceName: "div")
