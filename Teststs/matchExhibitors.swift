@@ -106,6 +106,7 @@ class matchExhibitors: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        headerLabel.layer.zPosition = 1
         cell1.layer.zPosition = 5
         cell2.layer.zPosition = 4
         cell3.layer.zPosition = 3
@@ -390,12 +391,12 @@ class matchExhibitors: UITableViewController {
             let image = company.localImage!
             logo1.backgroundColor = UIColor.white
             if(image.size.width > image.size.height){
-                height.constant = 70 * (image.size.height/image.size.width )
-                width.constant = 70
+                height.constant = 50 * (image.size.height/image.size.width )
+                width.constant = 50
             }
             else{
-                width.constant = 70 * (image.size.width/image.size.height )
-                height.constant = 70
+                width.constant = 50 * (image.size.width/image.size.height )
+                height.constant = 50
                 
             }
             logo.image = image
