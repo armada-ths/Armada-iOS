@@ -237,9 +237,9 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         view.endEditing(true)
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return companiesByLetters.map { $0.letter }
-    }
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return companiesByLetters.map { $0.letter }
+//    }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter
