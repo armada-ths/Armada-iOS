@@ -66,6 +66,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         //        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         refresh()
         registerForPreviewing(with: self, sourceView: view)
+        
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
@@ -164,12 +165,12 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
             let image = company.localImage!
             cell.logoImageView.backgroundColor = UIColor.white
             if(image.size.width > image.size.height){
-               cell.imageHeight.constant = 70 * (image.size.height/image.size.width )
-                cell.imageWidth.constant = 70
+               cell.imageHeight.constant = 50 * (image.size.height/image.size.width )
+                cell.imageWidth.constant = 50
             }
             else{
-                cell.imageWidth.constant = 70 * (image.size.width/image.size.height )
-                cell.imageHeight.constant = 70
+                cell.imageWidth.constant = 50 * (image.size.width/image.size.height )
+                cell.imageHeight.constant = 50
                 
             }
             cell.logoImageView.image = image
@@ -179,7 +180,7 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         }
         //let icons = [ArmadaField.Startup, ArmadaField.Sustainability, ArmadaField.Diversity]
         //let stuff = [company.isStartup, company.likesEnvironment, company.likesEquality]
-        cell.descriptionLabel.textColor = UIColor.white
+     //   cell.descriptionLabel.textColor = UIColor.white
         if (company.likesEnvironment){
             cell.backgroundColor = ColorScheme.sustainabilityGreen
             cell.firstIcon.isHidden = false
@@ -207,6 +208,11 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 100.0;//Choose your custom row height
+    }
+    
 //    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
 //        return companiesByLetters.map { $0.letter }
 //    }
@@ -231,9 +237,9 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
         view.endEditing(true)
     }
     
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return companiesByLetters.map { $0.letter }
-    }
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return companiesByLetters.map { $0.letter }
+//    }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter
