@@ -20,12 +20,12 @@ class CompanyTableViewCell: UITableViewCell {
                 if(image != nil){
                 self.logoImageView.backgroundColor = UIColor.white
                 if(image!.size.width > image!.size.height){
-                    self.imageHeight.constant = 70 * (image!.size.height/image!.size.width )
-                    self.imageWidth.constant = 70
+                    self.imageHeight.constant = 50 * (image!.size.height/image!.size.width )
+                    self.imageWidth.constant = 50
                 }
                 else{
-                    self.imageWidth.constant = 70 * (image!.size.width/image!.size.height )
-                    self.imageHeight.constant = 70
+                    self.imageWidth.constant = 50 * (image!.size.width/image!.size.height )
+                    self.imageHeight.constant = 50
                         
                     }
                  self.logoImageView.image = image
