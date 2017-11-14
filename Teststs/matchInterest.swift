@@ -189,6 +189,9 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
             cell.selectionButton.backgroundColor = ColorScheme.worldMatchGrey
             cell.interest.titleLabel?.font = UIFont(name: "Lato-Regular", size: 14)
         }
+        else{
+            cell.selectionButton.backgroundColor = UIColor.clear
+        }
         return cell
     }
     
