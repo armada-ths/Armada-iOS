@@ -1,4 +1,5 @@
 import UIKit
+import Airbrake_iOS
 
 extension String {
     func containsWordWithPrefix(_ prefix: String) -> Bool {
@@ -76,6 +77,7 @@ extension URL {
                     let json = try JSONSerialization.jsonObject(with: data, options: []) as AnyObject
                     return .success(json)
                 } catch {
+                    ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: CommonExtensions.getJson()"), reason: error.localizedDescription, userInfo: [:]))
                     return .error(error)
                 }
                 })

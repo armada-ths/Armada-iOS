@@ -236,6 +236,7 @@ open class _ArmadaApi {
             
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
         } catch {
+            ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function in ArmadaApi: persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)"), reason: error.localizedDescription, userInfo: [:]))
             try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
             do {
                 //throw NSError(domain: "fake error", code: 2, userInfo: nil)
@@ -247,11 +248,13 @@ open class _ArmadaApi {
                 try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
             } catch {
                 print("persistentStoreCoordinator - the bundle sucked too")
+                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function in ArmadaApi try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)"), reason: error.localizedDescription, userInfo: [:]))
                 try? self.deleteDatabase() // Silently fail and hope the coming operations work if we cant delete the db
                 do {
                     //throw NSError(domain: "fake error", code: 3, userInfo: nil)
                     try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)
                 } catch {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function in ArmadaApi try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.persistentStoreUrl, options: nil)"), reason: error.localizedDescription, userInfo: [:]))
                     print("persistentStoreCoordinator oh god - we messed up - goodbye")
                     debugPrint(error)
                     print("This might not be as bad as we think, lets try without a persistent store. Exciting!")
@@ -671,7 +674,7 @@ open class _ArmadaApi {
                 return json
         }
         catch{
-
+            ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function:  ArmadaApi.parseHTML()"), reason: error.localizedDescription, userInfo: [:]))
         }
         return []
     }
@@ -725,7 +728,7 @@ open class _ArmadaApi {
                     match.save()
                     
                 } catch {
-                    print("something went wrong in matchFromServer")
+                                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function:  ArmadaApi.matchFromServer()"), reason: error.localizedDescription, userInfo: [:]))
                 }
             }
         }.resume()
@@ -742,7 +745,8 @@ open class _ArmadaApi {
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                 let newsJson = self.parseHTML(HTMLContent: responseString! as String)
                 var newsObjects = self.newsFromJson(newsJson as AnyObject)
-                 if(newsObjects[0].featured != true && newsObjects.count > 1){
+                if (newsObjects.count == 0){}
+                 else if(newsObjects[0].featured != true && newsObjects.count > 1){
                     for i in 1 ... newsObjects.count-1{
                         if(newsObjects[i].featured == true){
                             let tempNews = newsObjects[i]
@@ -780,7 +784,7 @@ open class _ArmadaApi {
             return getNewsContent(json, url: urlString)
         }
         catch{
-            print("ERROR")
+            ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function:  ArmadaApi.parseNewsContent()"), reason: error.localizedDescription, userInfo: [:]))
         }
         return ""       
     }

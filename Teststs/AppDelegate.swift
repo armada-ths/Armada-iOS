@@ -47,7 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             environmentName: ABNotifierAutomaticEnvironment,
             useSSL: true
         )
-        
       //  ABNotifier.writeTestNotice()
 //        for family: String in UIFont.familyNames
 //        {
