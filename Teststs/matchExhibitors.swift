@@ -123,8 +123,6 @@ class matchExhibitors: UITableViewController {
             self.navigationController?.popViewController(animated: false)
         }
         
-        print(type(of: matchData?.matchResult[0]["percent"]))
-        print(matchData?.matchResult[0])
         id1 = matchData?.matchResult[0]["exhibitor"] as? Int ?? nil
         reasons1 = matchData?.matchResult[0]["reasons"] as? [String] ?? nil
         percent1 = matchData?.matchResult[0]["percent"] as? Double ?? nil

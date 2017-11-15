@@ -85,11 +85,11 @@ class matchTeam: UIViewController {
 //    }
     func reReverseValues(sliderview: RangeSlider) -> (Double, Double){
         let max = sliderview.maximumValue
-        print("maxTrue and minTrue")
-        print(self.matchData.sliderValues["maxTrue"])
-        print(self.matchData.sliderValues["minTrue"])
+      //  print("maxTrue and minTrue")
+//        print(self.matchData.sliderValues["maxTrue"])
+//        print(self.matchData.sliderValues["minTrue"])
         if self.matchData.sliderValues["maxTrue"] != nil && self.matchData.sliderValues["minTrue"] != nil {
-            print("yes")
+           // print("yes")
             let reReversedUpperValue = (max - self.matchData.sliderValues["maxTrue"]! + 1)
             let reReversedLowerValue = (max - self.matchData.sliderValues["minTrue"]! + 1)
             return (reReversedUpperValue, reReversedLowerValue)
@@ -102,10 +102,10 @@ class matchTeam: UIViewController {
             // REMEMBER THAT YOU HAVE TO REVERSE THESE VALUES!!!! THEY ARE TAKEN FROM
             // reverseValues() function!!!! FFS!
             let minmax = reReverseValues(sliderview: sliderview)
-            print("updateSlider")
-            print("minmax")
-            print(minmax.0)
-            print(minmax.1)
+//            print("updateSlider")
+//            print("minmax")
+//            print(minmax.0)
+//            print(minmax.1)
             sliderview.lowerValue = minmax.0
             sliderview.upperValue = minmax.1
             
@@ -119,8 +119,8 @@ class matchTeam: UIViewController {
 //            } else {
 //                sliderview.lowerValue = (self.matchData.sliderValues["min"])!
 //            }
-            print(sliderview.lowerValue)
-            print(sliderview.upperValue)
+//            print(sliderview.lowerValue)
+//            print(sliderview.upperValue)
         } else {
             sliderview.upperValue = sliderview.maximumValue
             sliderview.lowerValue = sliderview.minimumValue
@@ -140,9 +140,9 @@ class matchTeam: UIViewController {
         var sliderview:RangeSlider = RangeSlider(frame: frame)
 //        sliderview.labelFontSize = 30
         if !self.matchData.slider.isEmpty {
-            print("addSlider")
-            print(Double(self.matchData.slider["max"] as! Int))
-            print(Double(self.matchData.slider["min"] as! Int))
+//            print("addSlider")
+//            print(Double(self.matchData.slider["max"] as! Int))
+//            print(Double(self.matchData.slider["min"] as! Int))
             sliderview.maximumValue = Double(self.matchData.slider["max"] as! Int)
             sliderview.minimumValue = Double(self.matchData.slider["min"] as! Int)
         } else {

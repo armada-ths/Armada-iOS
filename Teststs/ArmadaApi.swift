@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import SwiftyJSON
+import Airbrake_iOS
 
 public struct ArmadaEvent {
     public let title: String
@@ -529,7 +530,6 @@ open class _ArmadaApi {
     }
     
     open func eventsFromJson( _ json: AnyObject) -> [ArmadaEvent] {
-        
         let events =  Array.removeNils((json as? [[String: AnyObject]])?.map { json -> ArmadaEvent? in
             if let name = json["name"] as? String,
                 let description = json["description"] as? String,
@@ -570,7 +570,6 @@ open class _ArmadaApi {
                     let imageUrl: URL? = imageUrlString != nil ? URL(string: imageUrlString!) : nil
                     let summary = description
                     let registrationRequired = json["registration_required"] as? Bool ?? true
-                print(json)
                 return ArmadaEvent(title: name, summary: summary, summaryWithoutHtml: summaryWithoutHtml, location: location, startDate: startDate, endDate: endDate, signupLink: signupLink, signupStartDate: registrationStartDate, signupEndDate: registrationEndDate, imageUrl: imageUrl, registrationRequired: registrationRequired, passedDays: diff)
             }
             return nil

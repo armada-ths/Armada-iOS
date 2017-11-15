@@ -1,6 +1,6 @@
 import UIKit
 import OneSignal
-
+import Airbrake_iOS
 
 struct ColorScheme {
     static let leilaDesignGrey = UIColor(hex: 0xF8F7F7)
@@ -41,15 +41,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ArmadaApi.updateCompanies {
 
         }
-
-        for family: String in UIFont.familyNames
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNames(forFamilyName: family)
-            {
-                print("== \(names)")
-            }
-        }
+        ABNotifier.start(
+            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
+            projectID: "163539",
+            environmentName: ABNotifierAutomaticEnvironment,
+            useSSL: true
+        )
+        
+      //  ABNotifier.writeTestNotice()
+//        for family: String in UIFont.familyNames
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNames(forFamilyName: family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
         UITabBar.appearance().tintColor = ColorScheme.armadaDarkMelon
         window!.tintColor = ColorScheme.armadaDarkMelon
         
@@ -84,7 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            useSSL: true
 //        )
         
-//        ABNotifier.writeTestNotice()
         //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
         //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
         //        window!.tintColor = ColorScheme.armadaGreen

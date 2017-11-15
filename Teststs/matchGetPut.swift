@@ -7,6 +7,7 @@
 //
 import SwiftyJSON
 import Foundation
+import Airbrake_iOS
 
 struct matchResultObject {
     var reasons: Array<String>
@@ -148,7 +149,10 @@ class matchGetPut {
             do {
                 if let response = response {
                     if let data = data {
-                        let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+                        let string = "NOT JSON"
+                        let testdata = string.data(using: .utf8)
+                        let response = try JSONSerialization.jsonObject(with: testdata!, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+                        //let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
                         var resultArray = Array<Dictionary<String, Any>>()
                         for item in response{
                             var reasons = Array<String>()
@@ -174,7 +178,9 @@ class matchGetPut {
                     
                 }
                 
-            } catch let error as NSError {
+            }
+            catch let error as Error {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.getResult()"), reason: error.localizedDescription, userInfo: [:]))
                 print("json error: \(error.localizedDescription)")
             }
         }
