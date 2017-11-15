@@ -88,6 +88,8 @@
 		9FB92B801F752B5200671E5F /* armada_round_logo_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB92B7F1F752B5200671E5F /* armada_round_logo_green.png */; };
 		9FB92B821F75349800671E5F /* NewsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB92B811F75349800671E5F /* NewsNavigationController.swift */; };
 		9FB92B841F753A2F00671E5F /* circle_compressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FB92B831F753A2F00671E5F /* circle_compressed.png */; };
+		9FCF82E51FBCC529002455BE /* LinkedinWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCF82E41FBCC529002455BE /* LinkedinWebViewController.swift */; };
+		9FCF82E91FBCC72F002455BE /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FCF82E81FBCC72E002455BE /* linkedin-sdk.framework */; };
 		9FF3C54E1F725CDC00822128 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C53C1F725CDC00822128 /* Lato-Black.ttf */; };
 		9FF3C54F1F725CDC00822128 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C53D1F725CDC00822128 /* Lato-BlackItalic.ttf */; };
 		9FF3C5501F725CDC00822128 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C53E1F725CDC00822128 /* Lato-Bold.ttf */; };
@@ -215,6 +217,9 @@
 		9FB92B7F1F752B5200671E5F /* armada_round_logo_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = armada_round_logo_green.png; sourceTree = "<group>"; };
 		9FB92B811F75349800671E5F /* NewsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsNavigationController.swift; sourceTree = "<group>"; };
 		9FB92B831F753A2F00671E5F /* circle_compressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_compressed.png; sourceTree = "<group>"; };
+		9FCF82E41FBCC529002455BE /* LinkedinWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinWebViewController.swift; sourceTree = "<group>"; };
+		9FCF82E71FBCC61B002455BE /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = SOURCE_ROOT; };
+		9FCF82E81FBCC72E002455BE /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
 		9FF3C53C1F725CDC00822128 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		9FF3C53D1F725CDC00822128 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		9FF3C53E1F725CDC00822128 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -247,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E801595648C89AF709AF00C2 /* Pods_Armada.framework in Frameworks */,
+				9FCF82E91FBCC72F002455BE /* linkedin-sdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +278,8 @@
 		265B7DD31B053A080074450B = {
 			isa = PBXGroup;
 			children = (
+				9FCF82E71FBCC61B002455BE /* Header.h */,
+				9FCF82E81FBCC72E002455BE /* linkedin-sdk.framework */,
 				265EABFF1BEC143F009CEDCD /* Core Data */,
 				265B7DDE1B053A080074450B /* Armada */,
 				265B7DF61B053A080074450B /* ArmadaTests */,
@@ -494,6 +502,7 @@
 				9128CEDB1FA9B247008D0704 /* matchExhibitors.swift */,
 				91C4D8DE1FA9F1D30048944E /* alertController.swift */,
 				91596E551FAA139D005AF33F /* matchDetailExhibitor.swift */,
+				9FCF82E41FBCC529002455BE /* LinkedinWebViewController.swift */,
 			);
 			name = Match;
 			sourceTree = "<group>";
@@ -754,6 +763,7 @@
 				9F793D6F1ED360A0002C36E3 /* NewsViewController.swift in Sources */,
 				26BD3D3D1B1607D800CD0572 /* CommonExtensions.swift in Sources */,
 				91E701C51F7A2BCB00422500 /* ArmadaViewController.swift in Sources */,
+				9FCF82E51FBCC529002455BE /* LinkedinWebViewController.swift in Sources */,
 				2601191C1BA600D500540ED5 /* WorkWay+CoreDataProperties.swift in Sources */,
 				9F8B09EF1F8CB87E00FEA704 /* matchInterest.swift in Sources */,
 				269C0CFA1B8E8D18008FB633 /* CompanyModel.xcdatamodeld in Sources */,
@@ -926,12 +936,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -947,12 +962,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

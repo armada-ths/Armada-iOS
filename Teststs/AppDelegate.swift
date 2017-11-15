@@ -47,6 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             environmentName: ABNotifierAutomaticEnvironment,
             useSSL: true
         )
+        // REMOVE LINKEDIN FILES
+        UserDefaults.standard.set(nil, forKey: "webAccessToken")
+        UserDefaults.standard.set(nil, forKey: "appAccessToken")
+        UserDefaults.standard.set(nil, forKey: "LIprofile")
+        
       //  ABNotifier.writeTestNotice()
 //        for family: String in UIFont.familyNames
 //        {

@@ -6,6 +6,9 @@
 //  Copyright © 2017 Rebecca Forstén Klinc. All rights reserved.
 //
 
+
+
+
 import UIKit
 
 class matchExhibitors: UITableViewController {
@@ -49,7 +52,7 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var imageHeight2: NSLayoutConstraint!
     @IBOutlet var imageWidth2: NSLayoutConstraint!
     var reasons2: [String]?
-
+    
     //Cell 3
     @IBOutlet var cell3: UITableViewCell!
     @IBOutlet var matchLevel3: UILabel!
@@ -62,7 +65,7 @@ class matchExhibitors: UITableViewController {
     var percent3: Double?
     var id3: Int?
     var reasons3: [String]?
-
+    
     @IBOutlet var imageHeight3: NSLayoutConstraint!
     @IBOutlet var imageWidth3: NSLayoutConstraint!
     
@@ -81,7 +84,7 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var imageWidth4: NSLayoutConstraint!
     @IBOutlet var imageHeight4: NSLayoutConstraint!
     var reasons4: [String]?
-
+    
     
     //Cell 5
     @IBOutlet var cell5: UITableViewCell!
@@ -97,7 +100,12 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var imageWidth5: NSLayoutConstraint!
     @IBOutlet var imageHeight5: NSLayoutConstraint!
     var reasons5: [String]?
-
+    
+    //Cell Linkedin
+    
+    @IBAction func liButtonPush(_ sender: Any) {
+        pushLIbutton()
+    }
     
     var companiesMatch = Array <Company>()
     var matchLEvels = Array <UILabel>()
@@ -112,8 +120,8 @@ class matchExhibitors: UITableViewController {
         cell3.layer.zPosition = 3
         cell4.layer.zPosition = 2
         cell5.layer.zPosition = 1
-
-
+        
+        
         self.matchStart?.matchData = matchData!
         if (matchData?.matchResult.isEmpty)!{
             matchData?.currentview -= 1
@@ -130,29 +138,29 @@ class matchExhibitors: UITableViewController {
         id2 = matchData?.matchResult[1]["exhibitor"] as? Int ?? nil
         percent2 = matchData?.matchResult[1]["percent"] as? Double ?? nil
         reasons2 = matchData?.matchResult[1]["reasons"] as? [String] ?? nil
-
+        
         id3 = matchData?.matchResult[2]["exhibitor"] as? Int ?? nil
         percent3 = matchData?.matchResult[2]["percent"] as? Double ?? nil
         reasons3 = matchData?.matchResult[2]["reasons"] as? [String] ?? nil
-
+        
         id4 = matchData?.matchResult[3]["exhibitor"] as? Int ?? nil
         percent4 = matchData?.matchResult[3]["percent"] as? Double ?? nil
         reasons4 = matchData?.matchResult[3]["reasons"] as? [String] ?? nil
-
+        
         id5 = matchData?.matchResult[4]["exhibitor"] as? Int ?? nil
         percent5 = matchData?.matchResult[4]["percent"] as? Double ?? nil
         reasons5 = matchData?.matchResult[4]["reasons"] as? [String] ?? nil
-
-
-
-       let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
+        
+        
+        
+        let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
         let statusBar = statWindow.subviews[0] as UIView
         statusBar.backgroundColor = UIColor.black
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: "reload:", for: UIControlEvents.valueChanged)
-       // tableView.addSubview(refreshControl!) // not required when using UITableViewController
+        // tableView.addSubview(refreshControl!) // not required when using UITableViewController
         
         //Load companies
         ArmadaApi.updateCompanies {
@@ -160,21 +168,16 @@ class matchExhibitors: UITableViewController {
                 self.reload("Nothing" as AnyObject)
             }
         }
-       
-
-
+        
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-
-    }
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
         if(id1 != nil){
@@ -192,7 +195,7 @@ class matchExhibitors: UITableViewController {
                 companiesScore.append(["score": percent2 as AnyObject, "company": company2])
                 self.company2 = company2
                 reasons.append(reasons2!)
-
+                
             }
             else{
                 self.company2 = nil
@@ -202,7 +205,7 @@ class matchExhibitors: UITableViewController {
                 companiesScore.append(["score": percent3 as AnyObject, "company": company3])
                 self.company3 = company3
                 reasons.append(reasons3!)
-
+                
             }
             else{
                 self.company3 = nil
@@ -212,7 +215,7 @@ class matchExhibitors: UITableViewController {
                 companiesScore.append(["score": percent4 as AnyObject, "company": company4])
                 self.company4 = company4
                 reasons.append(reasons4!)
-
+                
             }
             else{
                 self.company4 = nil
@@ -222,7 +225,7 @@ class matchExhibitors: UITableViewController {
                 companiesScore.append(["score": percent5 as AnyObject, "company": company5])
                 self.company5 = company5
                 reasons.append(reasons5!)
-
+                
             }
             else{
                 self.company5 = nil
@@ -270,7 +273,7 @@ class matchExhibitors: UITableViewController {
             matchLEvels.append(matchLevel2)
             index += 1
             
-
+            
             if(company2!.likesEquality){
                 arrow2.image = #imageLiteral(resourceName: "wArrow")
                 divLogo2.isHidden = false
@@ -316,7 +319,7 @@ class matchExhibitors: UITableViewController {
         
         //Setup Cell4
         if(index < companiesScore.count){
-//            companiesMatch.append(company4!)
+            //            companiesMatch.append(company4!)
             company4 = companiesScore[index]["company"] as! Company
             titleLabel4.text = company4?.name
             setUpLogo(logo4, imageWidth4, imageHeight4, company4!)
@@ -325,7 +328,7 @@ class matchExhibitors: UITableViewController {
             matchLevel4.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel4)
             index += 1
-
+            
             if(company4!.likesEquality){
                 arrow4.image = #imageLiteral(resourceName: "wArrow")
                 divLogo4.isHidden = false
@@ -339,7 +342,7 @@ class matchExhibitors: UITableViewController {
         }
         else{
             cell4.isHidden = true
-
+            
         }
         
         //Setup Cell5
@@ -353,7 +356,7 @@ class matchExhibitors: UITableViewController {
             divLogo5.isHidden = true
             matchLevel5.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel5)
-           // index +=1
+            // index +=1
             
             if(company5!.likesEquality){
                 arrow5.image = #imageLiteral(resourceName: "wArrow")
@@ -377,7 +380,7 @@ class matchExhibitors: UITableViewController {
         if let controller = segue.destination as? matchDetailExhibitor,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
             let company = companiesScore[indexPath.row-1]["company"] as! Company
-           controller.company = company
+            controller.company = company
             controller.match = matchLEvels[indexPath.row-1]
             controller.reasons = reasons[indexPath.row-1]
             deselectSelectedCell()
@@ -413,7 +416,7 @@ class matchExhibitors: UITableViewController {
                         height.constant = 70
                         
                     }
-                   logo.image = image
+                    logo.image = image
                 }
                 else{
                     logo.image = nil
@@ -422,19 +425,19 @@ class matchExhibitors: UITableViewController {
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 7
@@ -448,59 +451,221 @@ class matchExhibitors: UITableViewController {
         navigationController?.setViewControllers(viewControllers!, animated: true)
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    // LINKEDIN STUFF
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        // check for liprofile
+        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
+            // MAKE CALL TO API HERE
+            print("NO!")
+        } else if let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken") {
+            print("running webGetProfile")
+            self.webGetProfile(accessToken: webAccessToken as! String)
+        }
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func pushLIbutton(){
+        var haveLIinfo: Bool = false
+        if let profileString = UserDefaults.standard.value(forKey: "LIprofile") {
+            haveLIinfo = true
+            print("profileString is \(profileString)")
+        }
+        if haveLIinfo {
+            print("you already logged in :)")
+            print(UserDefaults.standard.value(forKey: "LIprofile"))
+        } else {
+            let haveApp = LinkedinAppExists()
+            print("haveApp")
+            print("\(haveApp)")
+            if haveApp {
+                // TRY TO GET APP TOKEN
+                getAppToken()
+            } else {
+                // TRY TO GET WEB TOKEN
+                getWebToken()
+            }
+            
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func LinkedinAppExists() -> Bool {
+        let appName = "LinkedIn"
+        let appScheme = "\(appName)://app"
+        let appUrl = URL(string: appScheme)
+        if UIApplication.shared.canOpenURL(appUrl! as URL)
+        {
+            return true
+            
+        } else {
+            return false
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    func getAppToken() -> String {
+        LISDKSessionManager.createSession(withAuth: [LISDK_BASIC_PROFILE_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {(returnState) -> Void in
+            print("success called!")
+            if LISDKSessionManager.hasValidSession() {
+                let accessToken = LISDKSessionManager.sharedInstance().session.accessToken.accessTokenValue
+                UserDefaults.standard.set(accessToken, forKey: "appAccessToken")
+                self.appGetProfile(accessToken: accessToken as! String)
+            }
+        }, errorBlock: {(error) -> Void in
+            print("Error: \(error)")
+        })
+        return ""
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func appGetProfile(accessToken: String) {
+        // Specify the URL string that we'll get the profile info from.
+        let targetURLString = "https://api.linkedin.com/v1/people/~:(public-profile-url)?format=json"
+        
+        // Initialize a mutable URL request object.
+        let request = NSMutableURLRequest(url: NSURL(string: targetURLString)! as URL)
+        
+        // Indicate that this is a GET request.
+        request.httpMethod = "GET"
+        
+        // Add the access token as an HTTP header field.
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("it-IT", forHTTPHeaderField: "Accept-Language")
+        request.addValue("msdk", forHTTPHeaderField: "x-li-src")
+        print(request.httpBody)
+        // Initialize a NSURLSession object.
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        
+        // Make the request.
+        let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            
+            // Get the HTTP status code of the request.
+            let statusCode = (response as! HTTPURLResponse).statusCode
+            print(statusCode)
+            if statusCode == 200 {
+                // Convert the received JSON data into a dictionary.
+                do {
+                    let dataDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: AnyObject]
+                    print(dataDictionary)
+                    let profileURLString = dataDictionary["publicProfileUrl"] as! String
+                    
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
+                        // CALL FUNCTION HERE THAT SENDS DATA TO API
+                    })
+                }
+                catch {
+                    print("Could not convert JSON data into a dictionary.")
+                }
+            }
+        }
+        task.resume()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func getWebToken() {
+        print("bugg1")
+        let webview = self.storyboard?.instantiateViewController(withIdentifier: "liwebview") as! LinkedinWebViewController
+        print("bugg2")
+        self.present(webview, animated: true, completion: nil)
+        print("bugg3")
     }
-    */
-
+    
+    func webGetProfile(accessToken: String) {
+        // Specify the URL string that we'll get the profile info from.
+        let targetURLString = "https://api.linkedin.com/v1/people/~:(public-profile-url)?format=json"
+        
+        // Initialize a mutable URL request object.
+        let request = NSMutableURLRequest(url: NSURL(string: targetURLString)! as URL)
+        
+        // Indicate that this is a GET request.
+        request.httpMethod = "GET"
+        
+        // Add the access token as an HTTP header field.
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addValue("it-IT", forHTTPHeaderField: "Accept-Language")
+        // Initialize a NSURLSession object.
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        
+        // Make the request.
+        let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            
+            // Get the HTTP status code of the request.
+            let statusCode = (response as! HTTPURLResponse).statusCode
+            
+            if statusCode == 200 {
+                // Convert the received JSON data into a dictionary.
+                do {
+                    let dataDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: AnyObject]
+                    print(dataDictionary)
+                    let profileURLString = dataDictionary["publicProfileUrl"] as! String
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
+                    })
+                }
+                catch {
+                    print("Could not convert JSON data into a dictionary.")
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    
+    /*
+     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
+    
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
