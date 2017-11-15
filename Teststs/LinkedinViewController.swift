@@ -51,7 +51,7 @@ class LinkedinViewController: UIViewController {
             if LISDKSessionManager.hasValidSession() {
                 let accessToken = LISDKSessionManager.sharedInstance().session.accessToken.accessTokenValue
                 UserDefaults.standard.set(accessToken, forKey: "appAccessToken")
-                self.appGetProfile(accessToken)
+                self.appGetProfile(accessToken: accessToken as! String)
             }
         }, errorBlock: {(error) -> Void in
             print("Error: \(error)")

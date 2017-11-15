@@ -3702,6 +3702,7 @@
                         <outlet property="titleLabel3" destination="yEr-5W-nrR" id="wTX-w6-KMO"/>
                         <outlet property="titleLabel4" destination="aBb-fR-BSO" id="dsH-mV-TNJ"/>
                         <outlet property="titleLabel5" destination="1aR-2v-0EN" id="zii-cc-gxq"/>
+                        <segue destination="q82-ln-6lx" kind="presentation" id="7uQ-Ml-9LM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CZe-Jb-21R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3914,6 +3915,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2BK-q3-6YH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3070.289855072464" y="2464.4021739130435"/>
+        </scene>
+        <!--Linkedin Web View Controller-->
+        <scene sceneID="8fG-dt-PIj">
+            <objects>
+                <viewController storyboardIdentifier="liwebview" id="q82-ln-6lx" customClass="LinkedinWebViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QWR-Tr-81z"/>
+                        <viewControllerLayoutGuide type="bottom" id="QeN-T6-jYe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rfK-Ho-YZS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9SC-Hd-hDP">
+                                <rect key="frame" x="0.0" y="20" width="414" height="708"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="9SC-Hd-hDP" id="H4d-Pf-jA1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kd0-Jt-GwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12217.391304347828" y="2926.630434782609"/>
         </scene>
         <!--Match Detail Exhibitor-->
         <scene sceneID="ZxW-Mc-uyg">

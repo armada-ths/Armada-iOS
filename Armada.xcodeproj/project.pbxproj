@@ -109,6 +109,7 @@
 		9FF8E85F1FADD04600529D40 /* DefaultNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF8E85E1FADD04600529D40 /* DefaultNavigationController.swift */; };
 		9FFB4A6F1FBC467C005A381C /* LinkedinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFB4A6E1FBC467C005A381C /* LinkedinViewController.swift */; };
 		9FFB4A711FBC4695005A381C /* LinkedinWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFB4A701FBC4695005A381C /* LinkedinWebViewController.swift */; };
+		9FFB4A731FBC4A53005A381C /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFB4A721FBC4A53005A381C /* linkedin-sdk.framework */; };
 		E3FCCC5F1DCEA82100A8FA02 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */; };
 		E3FCCC601DCEA82100A8FA02 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */; };
 		E3FCCC611DCEA82100A8FA02 /* Companies.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5D1DCEA82100A8FA02 /* Companies.sqlite-shm */; };
@@ -238,6 +239,8 @@
 		9FF8E85E1FADD04600529D40 /* DefaultNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationController.swift; sourceTree = "<group>"; };
 		9FFB4A6E1FBC467C005A381C /* LinkedinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinViewController.swift; sourceTree = "<group>"; };
 		9FFB4A701FBC4695005A381C /* LinkedinWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinWebViewController.swift; sourceTree = "<group>"; };
+		9FFB4A721FBC4A53005A381C /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
+		9FFB4A741FBC4A5D005A381C /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		C1BF929418D7AD19D30D7CF2 /* Pods_Armada.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armada.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Companies.sqlite; sourceTree = "<group>"; };
 		E3FCCC5D1DCEA82100A8FA02 /* Companies.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-shm"; sourceTree = "<group>"; };
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E801595648C89AF709AF00C2 /* Pods_Armada.framework in Frameworks */,
+				9FFB4A731FBC4A53005A381C /* linkedin-sdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +280,7 @@
 		265B7DD31B053A080074450B = {
 			isa = PBXGroup;
 			children = (
+				9FFB4A741FBC4A5D005A381C /* Header.h */,
 				265EABFF1BEC143F009CEDCD /* Core Data */,
 				265B7DDE1B053A080074450B /* Armada */,
 				265B7DF61B053A080074450B /* ArmadaTests */,
@@ -297,6 +302,7 @@
 		265B7DDE1B053A080074450B /* Armada */ = {
 			isa = PBXGroup;
 			children = (
+				9FFB4A721FBC4A53005A381C /* linkedin-sdk.framework */,
 				9F88F31B1FB4FB5B00D1EAA8 /* Armada.entitlements */,
 				9F8B09BB1F8CB51800FEA704 /* Match */,
 				914823A41F7ED80C007037F3 /* Event */,
@@ -932,12 +938,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Teststs",
+				);
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -953,12 +964,17 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Teststs",
+				);
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
