@@ -109,42 +109,35 @@ class LinkedinWebViewController: UIViewController, UIWebViewDelegate {
         // Make the request.
         print("requestForAcessToken")
         
-        let parentview = self.parent
-        print(parentview)
-        //                        let parentview = self.parent as! matchExhibitors
-        
-        //                        parentview.webGetProfile(accessToken: accessToken)
-        // CALL FUNCTION THAT WRITES TO API HERE
-        self.dismiss(animated: true, completion: nil)
-//        let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-//            let statusCode = (response as! HTTPURLResponse).statusCode
-//
-//            if statusCode == 200 {
-//                // Convert the received JSON data into a dictionary.
-//                do {
-//                    let dataDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: AnyObject]
-//
-//                    let accessToken = dataDictionary?["access_token"] as! String
-//
-//                    UserDefaults.standard.set(accessToken, forKey: "webAccessToken")
-//                    UserDefaults.standard.synchronize()
-//
-//                    DispatchQueue.main.async(execute: { () -> Void in
-//                        let parentview = self.parent
-//                        print(parentview)
-////                        let parentview = self.parent as! matchExhibitors
-//
-////                        parentview.webGetProfile(accessToken: accessToken)
-//                        // CALL FUNCTION THAT WRITES TO API HERE
-//                        self.dismiss(animated: true, completion: nil)
-//                    })
-//                }
-//                catch {
-//                    print("Could not convert JSON data into a dictionary.")
-//                }
-//            }
-//        }
-//        task.resume()
+
+        let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            let statusCode = (response as! HTTPURLResponse).statusCode
+
+            if statusCode == 200 {
+                
+                // Convert the received JSON data into a dictionary.
+                print(statusCode)
+                do {
+                    let dataDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: AnyObject]
+                    
+                    let accessToken = dataDictionary?["access_token"] as! String
+                    
+                    UserDefaults.standard.set(accessToken, forKey: "webAccessToken")
+                    UserDefaults.standard.synchronize()
+                    print("accessToken is \(accessToken)")
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        // CALL FUNCTION THAT WRITES TO API HERE
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+                catch {
+                    print("Could not convert JSON data into a dictionary.")
+                }
+            } else {
+                print(statusCode)
+            }
+        }
+        task.resume()
     }
 }
 

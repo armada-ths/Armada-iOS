@@ -174,12 +174,7 @@ class matchExhibitors: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
 
-    }
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
         if(id1 != nil){
@@ -454,6 +449,20 @@ class matchExhibitors: UITableViewController {
     }
     
     // LINKEDIN STUFF
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        // check for liprofile
+        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
+            // MAKE CALL TO API HERE
+            print("NO!")
+        } else if let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken") {
+            print("running webGetProfile")
+            self.webGetProfile(accessToken: webAccessToken as! String)
+        }
+    }
     
     func pushLIbutton(){
         var haveLIinfo: Bool = false

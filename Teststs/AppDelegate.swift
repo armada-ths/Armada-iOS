@@ -84,6 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             data, error, errormessage in
         }
 
+        UserDefaults.standard.set(nil, forKey: "webAccessToken")
+        UserDefaults.standard.set(nil, forKey: "appAccessToken")
+        UserDefaults.standard.set(nil, forKey: "LIprofile")
+        
 //        ABNotifier.start(
 //            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
 //            projectID: "163539",

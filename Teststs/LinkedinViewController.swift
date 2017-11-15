@@ -156,9 +156,19 @@ class LinkedinViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // check for liprofile
-        //        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
-        //            // MAKE CALL TO API HERE
-        //        }
+        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
+            // MAKE CALL TO API HERE
+            print("NO!")
+        }
+        let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken")
+        print("viewWillAppear")
+        print(webAccessToken)
+        print("viewWillAppear2")
+        if webAccessToken != nil {
+            print("running webGetProfile")
+            self.webGetProfile(accessToken: webAccessToken as! String)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
