@@ -27,7 +27,7 @@ class matchStart: UIViewController {
             size: 18.0)!])
     
     override func viewWillAppear(_ animated: Bool) {
-        print("matchData.currentview is \(matchData.currentview)")
+      //  print("matchData.currentview is \(matchData.currentview)")
         // if screens are already loaded this will prevent crash
         if viewNumber < matchData.currentview {
             self.goRightWithoutAnimation()

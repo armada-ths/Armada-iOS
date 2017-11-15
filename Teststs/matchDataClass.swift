@@ -215,7 +215,7 @@ class matchDataClass: NSObject{
         self.subAreas = tmpSubAreas
         self.mainAreas = tmpMainAreas
 //        print(self.mainAreas)
-        print(self.subAreas)
+        //print(self.subAreas)
 //        print(self.mainAreas)
 //        print("loading in new match data")
 //        print(self.subAreas)

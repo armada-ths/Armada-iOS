@@ -58,7 +58,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 armadaEvent.startDate.format("MMM") + "\n" +
                 armadaEvent.startDate.format("y")
             cell.descriptionLabel.text = armadaEvent.signupStateString
-            //print(armadaEvent.startDate.format("y"))
             if let imageUrl = armadaEvent.imageUrl {
                 if let image = images[imageUrl.absoluteString] {
                     cell.eventImageView.image = image

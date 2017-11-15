@@ -21,7 +21,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.navigationController?.navigationBar)
         // setup datasource = SponsorCollectionViewDataSource
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
