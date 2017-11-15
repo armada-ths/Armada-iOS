@@ -107,6 +107,8 @@
 		9FF3C55E1F725CDC00822128 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C54C1F725CDC00822128 /* Lato-Thin.ttf */; };
 		9FF3C55F1F725CDC00822128 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FF3C54D1F725CDC00822128 /* Lato-ThinItalic.ttf */; };
 		9FF8E85F1FADD04600529D40 /* DefaultNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF8E85E1FADD04600529D40 /* DefaultNavigationController.swift */; };
+		9FFB4A6F1FBC467C005A381C /* LinkedinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFB4A6E1FBC467C005A381C /* LinkedinViewController.swift */; };
+		9FFB4A711FBC4695005A381C /* LinkedinWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFB4A701FBC4695005A381C /* LinkedinWebViewController.swift */; };
 		E3FCCC5F1DCEA82100A8FA02 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */; };
 		E3FCCC601DCEA82100A8FA02 /* Companies.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */; };
 		E3FCCC611DCEA82100A8FA02 /* Companies.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = E3FCCC5D1DCEA82100A8FA02 /* Companies.sqlite-shm */; };
@@ -234,6 +236,8 @@
 		9FF3C54C1F725CDC00822128 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		9FF3C54D1F725CDC00822128 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
 		9FF8E85E1FADD04600529D40 /* DefaultNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationController.swift; sourceTree = "<group>"; };
+		9FFB4A6E1FBC467C005A381C /* LinkedinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinViewController.swift; sourceTree = "<group>"; };
+		9FFB4A701FBC4695005A381C /* LinkedinWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedinWebViewController.swift; sourceTree = "<group>"; };
 		C1BF929418D7AD19D30D7CF2 /* Pods_Armada.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Armada.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FCCC5C1DCEA82100A8FA02 /* Companies.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Companies.sqlite; sourceTree = "<group>"; };
 		E3FCCC5D1DCEA82100A8FA02 /* Companies.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Companies.sqlite-shm"; sourceTree = "<group>"; };
@@ -494,6 +498,8 @@
 				9128CEDB1FA9B247008D0704 /* matchExhibitors.swift */,
 				91C4D8DE1FA9F1D30048944E /* alertController.swift */,
 				91596E551FAA139D005AF33F /* matchDetailExhibitor.swift */,
+				9FFB4A6E1FBC467C005A381C /* LinkedinViewController.swift */,
+				9FFB4A701FBC4695005A381C /* LinkedinWebViewController.swift */,
 			);
 			name = Match;
 			sourceTree = "<group>";
@@ -784,6 +790,8 @@
 				9F8B09F11F8CB89300FEA704 /* matchLooking.swift in Sources */,
 				269C0D021B8E9BDE008FB633 /* WorkField.swift in Sources */,
 				91010B631F98C50F007054B7 /* CompanyViewController.swift in Sources */,
+				9FFB4A711FBC4695005A381C /* LinkedinWebViewController.swift in Sources */,
+				9FFB4A6F1FBC467C005A381C /* LinkedinViewController.swift in Sources */,
 				9F8B09F71F8CB8D300FEA704 /* matchSweden.swift in Sources */,
 				9F8B09E91F8CB7E800FEA704 /* matchWorld.swift in Sources */,
 				269C0D061B8EAE5B008FB633 /* JobType.swift in Sources */,
@@ -923,6 +931,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -943,6 +952,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8E2ZH84HHV;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

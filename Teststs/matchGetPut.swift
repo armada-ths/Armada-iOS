@@ -151,8 +151,8 @@ class matchGetPut {
                     if let data = data {
                         let string = "NOT JSON"
                         let testdata = string.data(using: .utf8)
-                        let response = try JSONSerialization.jsonObject(with: testdata!, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
-                        //let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+//                        let response = try JSONSerialization.jsonObject(with: testdata!, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
+                        let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
                         var resultArray = Array<Dictionary<String, Any>>()
                         for item in response{
                             var reasons = Array<String>()

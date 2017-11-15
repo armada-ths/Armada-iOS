@@ -98,6 +98,11 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var imageHeight5: NSLayoutConstraint!
     var reasons5: [String]?
 
+    //Cell Linkedin
+    
+    @IBAction func liButtonPush(_ sender: Any) {
+        print("hahaha")
+    }
     
     var companiesMatch = Array <Company>()
     var matchLEvels = Array <UILabel>()
