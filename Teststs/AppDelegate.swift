@@ -48,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             useSSL: true
         )
         // REMOVE LINKEDIN FILES
-        UserDefaults.standard.set(nil, forKey: "webAccessToken")
-        UserDefaults.standard.set(nil, forKey: "appAccessToken")
-        UserDefaults.standard.set(nil, forKey: "LIprofile")
+//        UserDefaults.standard.set(nil, forKey: "webAccessToken")
+//        UserDefaults.standard.set(nil, forKey: "appAccessToken")
+//        UserDefaults.standard.set(nil, forKey: "LIprofile")
         
       //  ABNotifier.writeTestNotice()
 //        for family: String in UIFont.familyNames
@@ -125,6 +125,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // This handles thecallback from LinkedinApp
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        if LISDKCallbackHandler.shouldHandle(url) {
+            return LISDKCallbackHandler.application(application, open: url, sourceApplication:options [UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        }
+        return true
+    }
+
+    
     func loadMatchBackendData() {
         
     }

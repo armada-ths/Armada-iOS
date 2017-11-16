@@ -126,7 +126,7 @@ class matchExhibitors: UITableViewController {
             string: "We really want to know who you are. Sign in with your LinkedIn® and share your profile with exhibitors at the fair.",
             attributes: [NSFontAttributeName:UIFont(
                 name: "Lato",
-                size: 20)!, NSForegroundColorAttributeName: UIColor.black])
+                size: 17)!, NSForegroundColorAttributeName: UIColor.black])
         liLabel.attributedText = liText
         
         self.matchStart?.matchData = matchData!
@@ -459,15 +459,19 @@ class matchExhibitors: UITableViewController {
     }
     
     // LINKEDIN STUFF
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         // check for liprofile
         if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
-            // MAKE CALL TO API HERE
-            print("NO!")
+            let liText = NSMutableAttributedString(
+                string: "You are logged in with LinkedIn®",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "Lato-Bold",
+                    size: 17)!, NSForegroundColorAttributeName: UIColor.black])
+            liLabel.attributedText = liText
+            liButton.isHidden = true
         } else if let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken") {
             print("running webGetProfile")
             self.webGetProfile(accessToken: webAccessToken as! String)
@@ -489,6 +493,7 @@ class matchExhibitors: UITableViewController {
             print("\(haveApp)")
             if haveApp {
                 // TRY TO GET APP TOKEN
+                print("try to get app token")
                 getAppToken()
             } else {
                 // TRY TO GET WEB TOKEN
@@ -512,12 +517,15 @@ class matchExhibitors: UITableViewController {
     }
     
     func getAppToken() -> String {
+        print("inside getapptoken")
         LISDKSessionManager.createSession(withAuth: [LISDK_BASIC_PROFILE_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {(returnState) -> Void in
             print("success called!")
             if LISDKSessionManager.hasValidSession() {
                 let accessToken = LISDKSessionManager.sharedInstance().session.accessToken.accessTokenValue
                 UserDefaults.standard.set(accessToken, forKey: "appAccessToken")
+                print("appAccessToken \(accessToken)")
                 self.appGetProfile(accessToken: accessToken as! String)
+                
             }
         }, errorBlock: {(error) -> Void in
             print("Error: \(error)")
@@ -539,7 +547,6 @@ class matchExhibitors: UITableViewController {
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         request.addValue("it-IT", forHTTPHeaderField: "Accept-Language")
         request.addValue("msdk", forHTTPHeaderField: "x-li-src")
-        print(request.httpBody)
         // Initialize a NSURLSession object.
         let session = URLSession(configuration: URLSessionConfiguration.default)
         
@@ -559,6 +566,13 @@ class matchExhibitors: UITableViewController {
                     DispatchQueue.main.async(execute: { () -> Void in
                         UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
                         self.sendLItoServer(LIprofile: profileURLString)
+                        let liText = NSMutableAttributedString(
+                            string: "You are logged in with LinkedIn®",
+                            attributes: [NSFontAttributeName:UIFont(
+                                name: "Lato-Bold",
+                                size: 17)!, NSForegroundColorAttributeName: UIColor.black])
+                        self.liLabel.attributedText = liText
+                        self.liButton.isHidden = true
                     })
                 }
                 catch {
@@ -630,6 +644,13 @@ class matchExhibitors: UITableViewController {
                     DispatchQueue.main.async(execute: { () -> Void in
                         UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
                         self.sendLItoServer(LIprofile: profileURLString)
+                        let liText = NSMutableAttributedString(
+                            string: "You are logged in with LinkedIn®",
+                            attributes: [NSFontAttributeName:UIFont(
+                                name: "Lato-Bold",
+                                size: 17)!, NSForegroundColorAttributeName: UIColor.black])
+                        self.liLabel.attributedText = liText
+                        self.liButton.isHidden = true
                     })
                 }
                 catch {
