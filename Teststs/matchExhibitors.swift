@@ -103,6 +103,8 @@ class matchExhibitors: UITableViewController {
     
     //Cell Linkedin
     
+    @IBOutlet weak var liLabel: UILabel!
+    @IBOutlet weak var liButton: UIButton!
     @IBAction func liButtonPush(_ sender: Any) {
         pushLIbutton()
     }
@@ -120,7 +122,12 @@ class matchExhibitors: UITableViewController {
         cell3.layer.zPosition = 3
         cell4.layer.zPosition = 2
         cell5.layer.zPosition = 1
-        
+        let liText = NSMutableAttributedString(
+            string: "We really want to know who you are. Sign in with your LinkedIn® and share your profile with exhibitors at the fair.",
+            attributes: [NSFontAttributeName:UIFont(
+                name: "Lato",
+                size: 20)!, NSForegroundColorAttributeName: UIColor.black])
+        liLabel.attributedText = liText
         
         self.matchStart?.matchData = matchData!
         if (matchData?.matchResult.isEmpty)!{
@@ -551,12 +558,34 @@ class matchExhibitors: UITableViewController {
                     
                     DispatchQueue.main.async(execute: { () -> Void in
                         UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
-                        // CALL FUNCTION HERE THAT SENDS DATA TO API
+                        self.sendLItoServer(LIprofile: profileURLString)
                     })
                 }
                 catch {
                     print("Could not convert JSON data into a dictionary.")
                 }
+            }
+        }
+        task.resume()
+    }
+    
+    func sendLItoServer(LIprofile: String) {
+        let putURLString = "http://gotham.armada.nu/api/student_profile?student_id="
+        let student_id = UserDefaults.standard.value(forKey: "uuid") as! String
+        let dict = ["linkedin_profile": LIprofile, "nickname": student_id]
+        let url = URL(string: putURLString + student_id)
+        print("student_id is \(student_id)")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "put"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
+                return
             }
         }
         task.resume()
@@ -600,6 +629,7 @@ class matchExhibitors: UITableViewController {
                     let profileURLString = dataDictionary["publicProfileUrl"] as! String
                     DispatchQueue.main.async(execute: { () -> Void in
                         UserDefaults.standard.set(profileURLString, forKey: "LIprofile")
+                        self.sendLItoServer(LIprofile: profileURLString)
                     })
                 }
                 catch {
