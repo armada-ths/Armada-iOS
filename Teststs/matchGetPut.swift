@@ -67,12 +67,11 @@ class matchGetPut {
         }
         // questions
         // grader
-        let grader_id = 1 // get grader id in some way
+        let grader_id = 1
         var grader = ["id": grader_id, "answer": matchData.smileyInt]
         // slider
-        let slider_id = 2 // get slider id in some way
+        let slider_id = 2
         var slider = ["id": slider_id, "answer": ["min": CGFloat(matchData.sliderValues["minTrue"]!), "max": CGFloat(matchData.sliderValues["maxTrue"]!)]] as [String : Any]
-//        var slider = ["id": slider_id, "answer": ["min": 1, "max": 5]] as [String : Any]
         self.questions = [grader, slider]
         
         var areas = Array<Int>()
@@ -83,7 +82,6 @@ class matchGetPut {
                 print(val)
             }
         }
-//        print(areas)
         self.areas = areas
     }
     
@@ -112,13 +110,11 @@ class matchGetPut {
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer()"), reason: error?.localizedDescription, userInfo: [:]))
                 print(error?.localizedDescription ?? "No data")
                 return
             }
             if let response = response {
-                print("data \(data)")
-                print(response.url)
-                print(response)
                 let httpResponse = response as! HTTPURLResponse
                 print(httpResponse.statusCode)
                 if httpResponse.statusCode == 200{
@@ -126,6 +122,8 @@ class matchGetPut {
                 } else {
                     finished(false)
                 }
+            } else {
+                finished(false)
             }
         }
         task.resume()
@@ -150,9 +148,6 @@ class matchGetPut {
             do {
                 if let response = response {
                     if let data = data {
-                        let string = "NOT JSON"
-                        let testdata = string.data(using: .utf8)
-                        //let response = try JSONSerialization.jsonObject(with: testdata!, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
                         let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! Array<Dictionary<String, AnyObject>>
                         var resultArray = Array<Dictionary<String, Any>>()
                         for item in response{
@@ -170,20 +165,21 @@ class matchGetPut {
                         match?.matchResultStatus = 1
                         match?.matchResult = resultArray
                         match?.save()
-                        print(match?.matchResult)
                         finished(true, match!)
-                        
+
                     } else {
                         finished(false, matchDataClass())
                     }
-                    
+                } else {
+                    finished(false, matchDataClass())
                 }
-                
             }
             catch let error as Error {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.getResult()"), reason: error.localizedDescription, userInfo: [:]))
                 print("json error: \(error.localizedDescription)")
+                
             }
+            finished(false, matchDataClass())
         }
         task.resume()
     }
