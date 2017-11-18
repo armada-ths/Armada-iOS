@@ -179,7 +179,6 @@ class matchGetPut {
                 print("json error: \(error.localizedDescription)")
                 
             }
-            finished(false, matchDataClass())
         }
         task.resume()
     }
