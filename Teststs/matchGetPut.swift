@@ -32,8 +32,8 @@ class matchGetPut {
     var regions = Array<Int>()
     var continents = Array<Int>()
     var questions = Array<Any>()
-        // "grading": Array<Int>
-        // "slider": Int
+    // "grading": Array<Int>
+    // "slider": Int
     var areas = Array<Int>()
     
     init(){}
@@ -102,7 +102,7 @@ class matchGetPut {
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: toPost, options: .prettyPrinted) // pass dictionary to nsdata
             let theJSONText = try String(data: request.httpBody!,
-                                     encoding: .ascii)
+                                         encoding: .ascii)
             print("request.httpBody \(theJSONText)")
         } catch let error {
             ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer()"), reason: error.localizedDescription, userInfo: [:]))
@@ -166,7 +166,7 @@ class matchGetPut {
                         match?.matchResult = resultArray
                         match?.save()
                         finished(true, match!)
-
+                        
                     } else {
                         finished(false, matchDataClass())
                     }
@@ -184,3 +184,4 @@ class matchGetPut {
         task.resume()
     }
 }
+
