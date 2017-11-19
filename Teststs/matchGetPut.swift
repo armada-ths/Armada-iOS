@@ -106,11 +106,14 @@ class matchGetPut {
         } catch let error {
             ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer() trying to serialize JSON failed"), reason: error.localizedDescription, userInfo: [:]))
             print(error.localizedDescription)
+            finished(false)
+            return
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer()"), reason: error?.localizedDescription, userInfo: [:]))
                 print(error?.localizedDescription ?? "No data")
+                finished(false)
                 return
             }
             if let response = response {
@@ -147,6 +150,7 @@ class matchGetPut {
             if let error = error as NSError? {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: getResult(student_id: String, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void))"), reason: error.localizedDescription, userInfo: [:]))
                 print(error.localizedDescription ?? "No data")
+                finished(false, matchDataClass())
                 return
             }
             do {
@@ -178,10 +182,10 @@ class matchGetPut {
                     finished(false, matchDataClass())
                 }
             }
-            catch let error as Error {
+            catch let error {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.getResult()"), reason: error.localizedDescription, userInfo: [:]))
                 print("json error: \(error.localizedDescription)")
-                
+                finished(false, matchDataClass())
             }
         }
         task.resume()
