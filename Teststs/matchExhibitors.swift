@@ -10,6 +10,7 @@
 
 
 import UIKit
+import Airbrake_iOS
 
 class matchExhibitors: UITableViewController {
     
@@ -552,7 +553,11 @@ class matchExhibitors: UITableViewController {
         
         // Make the request.
         let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-            
+            if let error = error as NSError? {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: appGetProfile(accessToken: String)"), reason: error.localizedDescription, userInfo: [:]))
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
             // Get the HTTP status code of the request.
             let statusCode = (response as! HTTPURLResponse).statusCode
             print(statusCode)
@@ -588,7 +593,6 @@ class matchExhibitors: UITableViewController {
         let student_id = UserDefaults.standard.value(forKey: "uuid") as! String
         let dict = ["linkedin_profile": LIprofile, "nickname": student_id]
         let url = URL(string: putURLString + student_id)
-        print("student_id is \(student_id)")
         var request = URLRequest(url: url!)
         request.httpMethod = "put"
         do {
@@ -598,19 +602,19 @@ class matchExhibitors: UITableViewController {
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                return
+                if let error = error as NSError? {
+                    ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: sendLItoServer(LIprofile: String)"), reason: error.localizedDescription, userInfo: [:]))
+                    print(error?.localizedDescription ?? "No data")
+                    return
+                }
             }
         }
         task.resume()
     }
     
     func getWebToken() {
-        print("bugg1")
         let webview = self.storyboard?.instantiateViewController(withIdentifier: "liwebview") as! LinkedinWebViewController
-        print("bugg2")
         self.present(webview, animated: true, completion: nil)
-        print("bugg3")
     }
     
     func webGetProfile(accessToken: String) {
@@ -631,7 +635,11 @@ class matchExhibitors: UITableViewController {
         
         // Make the request.
         let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
-            
+            if let error = error as NSError? {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: webGetProfile(accessToken: String)"), reason: error.localizedDescription, userInfo: [:]))
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
             // Get the HTTP status code of the request.
             let statusCode = (response as! HTTPURLResponse).statusCode
             

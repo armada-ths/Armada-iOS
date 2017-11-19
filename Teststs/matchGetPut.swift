@@ -103,9 +103,8 @@ class matchGetPut {
             request.httpBody = try JSONSerialization.data(withJSONObject: toPost, options: .prettyPrinted) // pass dictionary to nsdata
             let theJSONText = try String(data: request.httpBody!,
                                          encoding: .ascii)
-            print("request.httpBody \(theJSONText)")
         } catch let error {
-            ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer()"), reason: error.localizedDescription, userInfo: [:]))
+            ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: matchGetPut.putAnswer() trying to serialize JSON failed"), reason: error.localizedDescription, userInfo: [:]))
             print(error.localizedDescription)
         }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -145,6 +144,11 @@ class matchGetPut {
     func getResult(student_id: String, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void)) {
         let url = URL(string: getURLString + student_id)
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
+            if let error = error as NSError? {
+                ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: getResult(student_id: String, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void))"), reason: error.localizedDescription, userInfo: [:]))
+                print(error?.localizedDescription ?? "No data")
+                return
+            }
             do {
                 if let response = response {
                     if let data = data {
