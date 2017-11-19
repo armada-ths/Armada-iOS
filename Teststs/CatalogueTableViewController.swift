@@ -244,6 +244,10 @@ class CatalogueTableViewController: UITableViewController, UIViewControllerPrevi
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return companiesByLetters[section].letter
     }
+    override func tableView(_ tableView: UITableView,
+                            canEditRowAt indexPath: IndexPath) -> Bool{
+        return false
+    }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
