@@ -146,7 +146,7 @@ class matchGetPut {
         let task = URLSession.shared.dataTask(with: url! as URL) { data, response, error in
             if let error = error as NSError? {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: getResult(student_id: String, finished: @escaping ((_ isSuccess: Bool,_ newMatchInstance: matchDataClass) -> Void))"), reason: error.localizedDescription, userInfo: [:]))
-                print(error?.localizedDescription ?? "No data")
+                print(error.localizedDescription ?? "No data")
                 return
             }
             do {

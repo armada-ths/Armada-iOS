@@ -167,7 +167,7 @@ class matchExhibitors: UITableViewController {
         headerLabel.font = UIFont(name: "BebasNeueRegular", size: 35)
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.addTarget(self, action: "reload:", for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(matchExhibitors.reload(_:)), for: UIControlEvents.valueChanged)
         // tableView.addSubview(refreshControl!) // not required when using UITableViewController
         
         //Load companies
@@ -555,7 +555,7 @@ class matchExhibitors: UITableViewController {
         let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
             if let error = error as NSError? {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: appGetProfile(accessToken: String)"), reason: error.localizedDescription, userInfo: [:]))
-                print(error?.localizedDescription ?? "No data")
+                print(error.localizedDescription)
                 return
             }
             // Get the HTTP status code of the request.
@@ -604,9 +604,10 @@ class matchExhibitors: UITableViewController {
             guard let data = data, error == nil else {
                 if let error = error as NSError? {
                     ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: sendLItoServer(LIprofile: String)"), reason: error.localizedDescription, userInfo: [:]))
-                    print(error?.localizedDescription ?? "No data")
+                    print(error.localizedDescription ?? "No data")
                     return
                 }
+                return
             }
         }
         task.resume()
@@ -637,7 +638,7 @@ class matchExhibitors: UITableViewController {
         let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
             if let error = error as NSError? {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: webGetProfile(accessToken: String)"), reason: error.localizedDescription, userInfo: [:]))
-                print(error?.localizedDescription ?? "No data")
+                print(error.localizedDescription ?? "No data")
                 return
             }
             // Get the HTTP status code of the request.
