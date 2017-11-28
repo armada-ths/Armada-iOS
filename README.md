@@ -1,26 +1,26 @@
 # Armada-iOS
 To gain editing access to this project, you need to be added to the organisation https://github.com/armada-ths from your head of IT. 
 
-# Xcode
-Download the latest Xcode-version (not the Beta version). Either from App-store or via https://developer.apple.com/xcode/.  
+## Xcode and Swift
+Download the latest Xcode-version (not the Beta version). Either from App-store or via https://developer.apple.com/xcode/. At the moment the project is guaranteed to work for Xcode 9.0 and 9.1. The projects is implemented in Swift 3.  
 
 There are two project files Armada.xcodeproj and Armada.xcworkspace. To be able to build the third-party “Pod” libraries you have to open the Armada.xcworkspace file. 
 
-# Pods
+## Pods
 Install the Pod terminal-application at https://cocoapods.org
 Pods are used to add external libraries. Pod is a application run in terminal with the command “pod”. “pod install” runs the “Podfile” in the current directory. This file installs the listed external libraries and uninstalls all external libraries that are installed but not listed in the “Podfile”  
 
-# Using Xcode 
+## Using Xcode 
 Clone the github repository to your hard-drive: https://github.com/armada-ths/Armada-iOS 
 To build the project in choose a iphone-version to simulate by changing the “Generic iOS Device” (top left corner) to any device you want to simulate.. Then CMD + R or push the “play” icon (top left corner), if anything fails to build, make sure everything is up-to-date in your sdk manager.
 
-# Pushing to Test-flight and App-Store
+## Pushing to Test-flight and App-Store
 In Xcode -> “Preferences..” 
 Accounts
 Add the Apple ID: armada@ths.kth.se // (ask your IT-teamleader for the password) 
 
 
-# Project Structure
+## Project Structure
 ### Core data:
 The database, of exhibitors, is kept up to date with backend with the help of the classes in the data/api directory. This means that the exhibitor list completely decoupled from the network and that it can be used offline (as long as the data has been fetched once). Currently ETags are used when querying the backend so that old data isn't fetched unnecessarily.
 ### Matching:
