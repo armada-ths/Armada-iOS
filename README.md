@@ -12,7 +12,7 @@ Pods are used to add external libraries. Pod is a application run in terminal wi
 
 ## Using Xcode 
 Clone the github repository to your hard-drive: https://github.com/armada-ths/Armada-iOS 
-To build the project in choose a iphone-version to simulate by changing the “Generic iOS Device” (top left corner) to any device you want to simulate.. Then CMD + R or push the “play” icon (top left corner), if anything fails to build, make sure everything is up-to-date in your sdk manager.
+To build the project in choose a iphone-version to simulate by changing the “Generic iOS Device” (top left corner) to any device you want to simulate.. Then CMD + R or push the “play” icon (top left corner), if anything fails to build, make sure everything is up-to-date in your projects "Build Phases".
 
 ## Pushing to Test-flight and App-Store
 In Xcode -> “Preferences..” 
