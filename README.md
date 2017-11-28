@@ -31,3 +31,6 @@ Getting news is made by a GET request to armada.nu (and not AIS, this is a big d
 ### Catalogue: 
 The data is from the database (core data) in the device.
 ### About
+
+# Licence Information 
+Please check out [LICENSE](LICENSE) for information. for information.
