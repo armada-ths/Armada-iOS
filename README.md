@@ -21,9 +21,13 @@ Add the Apple ID: armada@ths.kth.se // (ask your IT-teamleader for the password)
 
 
 # Project Structure
-Core data:The database, of exhibitors, is kept up to date with backend with the help of the classes in the data/api directory. This means that the exhibitor list completely decoupled from the network and that it can be used offline (as long as the data has been fetched once). Currently ETags are used when querying the backend so that old data isn't fetched unnecessarily.
-Matching:
-Events: The events are made by a GET request to the AIS. An issue which should be changed is that event don’t get labeled as “PAST” until the day has passed (e.g an event which ended 02.00 on the 23 november, will be set as “TODAY” until midnight, this should be changed)
-News: Getting news is made by a GET request to armada.nu (and not AIS, this is a big difference from the rest of the project!). The articles are then formatted with the html from the webpage. At the moment the images in the article are retrieved every time you open the article, this is due to the fact that we are using attributedHTMLStrings (this should be changed)
-Catalogue: The data is from the database (core data) in the device.
-About
+### Core data:
+The database, of exhibitors, is kept up to date with backend with the help of the classes in the data/api directory. This means that the exhibitor list completely decoupled from the network and that it can be used offline (as long as the data has been fetched once). Currently ETags are used when querying the backend so that old data isn't fetched unnecessarily.
+### Matching:
+### Events: 
+The events are made by a GET request to the AIS. An issue which should be changed is that event don’t get labeled as “PAST” until the day has passed (e.g an event which ended 02.00 on the 23 november, will be set as “TODAY” until midnight, this should be changed)
+### News: 
+Getting news is made by a GET request to armada.nu (and not AIS, this is a big difference from the rest of the project!). The articles are then formatted with the html from the webpage. At the moment the images in the article are retrieved every time you open the article, this is due to the fact that we are using attributedHTMLStrings (this should be changed)
+### Catalogue: 
+The data is from the database (core data) in the device.
+### About
