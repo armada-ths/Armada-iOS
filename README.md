@@ -17,7 +17,7 @@ To build the project in choose a iphone-version to simulate by changing the “G
 ## Pushing to Test-flight and App-Store
 In Xcode -> “Preferences..” 
 Accounts
-Add the Apple ID: armada@ths.kth.se // (ask your IT-teamleader for the password) 
+Add the Apple ID of your developer account.
 
 
 ## Project Structure
