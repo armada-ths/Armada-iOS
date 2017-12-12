@@ -29,7 +29,6 @@ class LinkedinWebViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
     func startAuthorization() {
         // Specify the response type which should always be "code".
         let responseType = "code"
@@ -42,7 +41,6 @@ class LinkedinWebViewController: UIViewController, UIWebViewDelegate {
         // Set preferred scope.
         let scope = "r_basicprofile"
         //        let scope = "r_fullprofile"
-        
         
         // Create the authorization URL string.
         var authorizationURL: String = "\(authorizationEndPoint)?"

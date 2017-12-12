@@ -86,7 +86,6 @@ class matchExhibitors: UITableViewController {
     @IBOutlet var imageHeight4: NSLayoutConstraint!
     var reasons4: [String]?
     
-    
     //Cell 5
     @IBOutlet var cell5: UITableViewCell!
     @IBOutlet var matchLevel5: UILabel!
@@ -103,7 +102,6 @@ class matchExhibitors: UITableViewController {
     var reasons5: [String]?
     
     //Cell Linkedin
-    
     @IBOutlet weak var liLabel: UILabel!
     @IBOutlet weak var liButton: UIButton!
     @IBAction func liButtonPush(_ sender: Any) {
@@ -114,6 +112,27 @@ class matchExhibitors: UITableViewController {
     var matchLEvels = Array <UILabel>()
     var companiesScore = [[String: AnyObject]]()
     var reasons = [[String]]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        // if we have the profile, display it for user
+        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
+            let liText = NSMutableAttributedString(
+                string: "You are logged in with LinkedIn®",
+                attributes: [NSFontAttributeName:UIFont(
+                    name: "Lato-Bold",
+                    size: 17)!, NSForegroundColorAttributeName: UIColor.black])
+            liLabel.attributedText = liText
+            liButton.isHidden = true
+        }
+        
+        // if we reload this view after running getWebToken
+        else if let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken") {
+            self.webGetProfile(accessToken: webAccessToken as! String)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,8 +178,6 @@ class matchExhibitors: UITableViewController {
         percent5 = matchData?.matchResult[4]["percent"] as? Double ?? nil
         reasons5 = matchData?.matchResult[4]["reasons"] as? [String] ?? nil
         
-        
-        
         let statWindow = UIApplication.shared.value(forKey:"statusBarWindow") as! UIView
         let statusBar = statWindow.subviews[0] as UIView
         statusBar.backgroundColor = UIColor.black
@@ -176,9 +193,7 @@ class matchExhibitors: UITableViewController {
                 self.reload("Nothing" as AnyObject)
             }
         }
-        
-        
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -189,7 +204,7 @@ class matchExhibitors: UITableViewController {
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
         if(id1 != nil){
-            if let company1 = (companies.filter{$0.id == id1!}.first) as? Company{
+            if let company1 = (companies.filter{$0.id == id1!}.first){
                 companiesScore.append(["score": percent1 as AnyObject, "company": company1])
                 reasons.append(reasons1!)
                 self.company1 = company1
@@ -199,7 +214,7 @@ class matchExhibitors: UITableViewController {
             }
         }
         if(id2 != nil){
-            if let company2 = (companies.filter{$0.id == id2!}.first) as? Company{
+            if let company2 = (companies.filter{$0.id == id2!}.first){
                 companiesScore.append(["score": percent2 as AnyObject, "company": company2])
                 self.company2 = company2
                 reasons.append(reasons2!)
@@ -209,7 +224,7 @@ class matchExhibitors: UITableViewController {
                 self.company2 = nil
             }        }
         if(id3 != nil){
-            if let company3 = (companies.filter{$0.id == id3!}.first) as? Company{
+            if let company3 = (companies.filter{$0.id == id3!}.first){
                 companiesScore.append(["score": percent3 as AnyObject, "company": company3])
                 self.company3 = company3
                 reasons.append(reasons3!)
@@ -219,7 +234,7 @@ class matchExhibitors: UITableViewController {
                 self.company3 = nil
             }        }
         if (id4 != nil){
-            if let company4 = (companies.filter{$0.id == id4!}.first) as? Company{
+            if let company4 = (companies.filter{$0.id == id4!}.first){
                 companiesScore.append(["score": percent4 as AnyObject, "company": company4])
                 self.company4 = company4
                 reasons.append(reasons4!)
@@ -229,7 +244,7 @@ class matchExhibitors: UITableViewController {
                 self.company4 = nil
             }        }
         if(id5 != nil){
-            if let company5 = (companies.filter{$0.id == id5!}.first) as? Company{
+            if let company5 = (companies.filter{$0.id == id5!}.first){
                 companiesScore.append(["score": percent5 as AnyObject, "company": company5])
                 self.company5 = company5
                 reasons.append(reasons5!)
@@ -240,11 +255,12 @@ class matchExhibitors: UITableViewController {
             }
             
         }
+        
         //Setup cell 1
         var index = 0
         if(index < companiesScore.count){
             //companiesMatch.append(company1!)
-            company1 = companiesScore[index]["company"] as! Company
+            company1 = companiesScore[index]["company"] as? Company
             titleLabel1.text = company1?.name
             setUpLogo(logo1, imageWidth1, imageHeight1, company1!)
             susLogo1.isHidden = true
@@ -268,11 +284,10 @@ class matchExhibitors: UITableViewController {
             cell1.isHidden = true
         }
         
-        
         //Setup Cell2
         if(index < companiesScore.count){
             //companiesMatch.append(company1!)
-            company2 = companiesScore[index]["company"] as! Company
+            company2 = companiesScore[index]["company"] as? Company
             titleLabel2.text = company2?.name
             setUpLogo(logo2, imageWidth2, imageHeight2, company2!)
             susLogo2.isHidden = true
@@ -280,8 +295,6 @@ class matchExhibitors: UITableViewController {
             matchLevel2.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel2)
             index += 1
-            
-            
             if(company2!.likesEquality){
                 arrow2.image = #imageLiteral(resourceName: "wArrow")
                 divLogo2.isHidden = false
@@ -300,7 +313,7 @@ class matchExhibitors: UITableViewController {
         //Setup Cell3
         if(index < companiesScore.count){
             //companiesMatch.append(company1!)
-            company3 = companiesScore[index]["company"] as! Company
+            company3 = companiesScore[index]["company"] as? Company
             titleLabel3.text = company3?.name
             setUpLogo(logo3, imageWidth3, imageHeight3, company3!)
             susLogo3.isHidden = true
@@ -308,7 +321,6 @@ class matchExhibitors: UITableViewController {
             matchLevel3.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel3)
             index += 1
-            
             if(company3!.likesEquality){
                 arrow3.image = #imageLiteral(resourceName: "wArrow")
                 divLogo3.isHidden = false
@@ -323,12 +335,11 @@ class matchExhibitors: UITableViewController {
         else{
             cell3.isHidden = true
         }
-        
-        
+    
         //Setup Cell4
         if(index < companiesScore.count){
             //            companiesMatch.append(company4!)
-            company4 = companiesScore[index]["company"] as! Company
+            company4 = companiesScore[index]["company"] as? Company
             titleLabel4.text = company4?.name
             setUpLogo(logo4, imageWidth4, imageHeight4, company4!)
             susLogo4.isHidden = true
@@ -354,10 +365,9 @@ class matchExhibitors: UITableViewController {
         }
         
         //Setup Cell5
-        
         if(index < companiesScore.count){
             //companiesMatch.append(company1!)
-            company5 = companiesScore[index]["company"] as! Company
+            company5 = companiesScore[index]["company"] as? Company
             titleLabel5.text = company5?.name
             setUpLogo(logo5, imageWidth5, imageHeight5, company5!)
             susLogo5.isHidden = true
@@ -365,7 +375,6 @@ class matchExhibitors: UITableViewController {
             matchLevel5.text = String(describing: companiesScore[index]["score"]!) + "%"
             matchLEvels.append(matchLevel5)
             // index +=1
-            
             if(company5!.likesEquality){
                 arrow5.image = #imageLiteral(resourceName: "wArrow")
                 divLogo5.isHidden = false
@@ -384,6 +393,7 @@ class matchExhibitors: UITableViewController {
             refreshControl?.endRefreshing()
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if let controller = segue.destination as? matchDetailExhibitor,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
@@ -431,7 +441,6 @@ class matchExhibitors: UITableViewController {
                 }
             })
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -440,7 +449,6 @@ class matchExhibitors: UITableViewController {
     }
     
     // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -459,51 +467,6 @@ class matchExhibitors: UITableViewController {
         navigationController?.setViewControllers(viewControllers!, animated: true)
     }
     
-    // LINKEDIN STUFF
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        // check for liprofile
-        if let _ = UserDefaults.standard.object(forKey: "LIprofile"){
-            let liText = NSMutableAttributedString(
-                string: "You are logged in with LinkedIn®",
-                attributes: [NSFontAttributeName:UIFont(
-                    name: "Lato-Bold",
-                    size: 17)!, NSForegroundColorAttributeName: UIColor.black])
-            liLabel.attributedText = liText
-            liButton.isHidden = true
-        } else if let webAccessToken = UserDefaults.standard.object(forKey: "webAccessToken") {
-            print("running webGetProfile")
-            self.webGetProfile(accessToken: webAccessToken as! String)
-        }
-    }
-    
-    func pushLIbutton(){
-        var haveLIinfo: Bool = false
-        if let profileString = UserDefaults.standard.value(forKey: "LIprofile") {
-            haveLIinfo = true
-            print("profileString is \(profileString)")
-        }
-        if haveLIinfo {
-            print("you already logged in :)")
-            print(UserDefaults.standard.value(forKey: "LIprofile"))
-        } else {
-            let haveApp = LinkedinAppExists()
-            print("haveApp")
-            print("\(haveApp)")
-            if haveApp {
-                // TRY TO GET APP TOKEN
-                print("try to get app token")
-                getAppToken()
-            } else {
-                // TRY TO GET WEB TOKEN
-                getWebToken()
-            }
-            
-        }
-    }
-    
     func LinkedinAppExists() -> Bool {
         let appName = "LinkedIn"
         let appScheme = "\(appName)://app"
@@ -511,27 +474,69 @@ class matchExhibitors: UITableViewController {
         if UIApplication.shared.canOpenURL(appUrl! as URL)
         {
             return true
-            
         } else {
             return false
         }
     }
     
-    func getAppToken() -> String {
-        print("inside getapptoken")
+    func pushLIbutton(){
+        var haveLIinfo: Bool = false
+        if UserDefaults.standard.value(forKey: "LIprofile") != nil {
+            haveLIinfo = true
+        }
+        if !haveLIinfo {
+            let haveApp = LinkedinAppExists()
+            print("haveApp")
+            print("\(haveApp)")
+            if haveApp {
+                getAppToken()
+            } else {
+                getWebToken()
+            }
+            
+        }
+    }
+
+    func sendLItoServer(LIprofile: String) {
+        let putURLString = "http://gotham.armada.nu/api/student_profile?student_id="
+        let student_id = UserDefaults.standard.value(forKey: "uuid") as! String
+        let dict = ["linkedin_profile": LIprofile, "nickname": student_id]
+        let url = URL(string: putURLString + student_id)
+        var request = URLRequest(url: url!)
+        request.httpMethod = "put"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let _ = data, error == nil else {
+                if let error = error as NSError? {
+                    ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: sendLItoServer(LIprofile: String)"), reason: error.localizedDescription, userInfo: [:]))
+                    print(error.localizedDescription )
+                    return
+                }
+                return
+            }
+        }
+        task.resume()
+    }
+    
+    func getAppToken() {
         LISDKSessionManager.createSession(withAuth: [LISDK_BASIC_PROFILE_PERMISSION], state: nil, showGoToAppStoreDialog: true, successBlock: {(returnState) -> Void in
-            print("success called!")
             if LISDKSessionManager.hasValidSession() {
                 let accessToken = LISDKSessionManager.sharedInstance().session.accessToken.accessTokenValue
                 UserDefaults.standard.set(accessToken, forKey: "appAccessToken")
-                print("appAccessToken \(accessToken)")
-                self.appGetProfile(accessToken: accessToken as! String)
-                
+                self.appGetProfile(accessToken: accessToken as String!)
             }
         }, errorBlock: {(error) -> Void in
-            print("Error: \(error)")
+            print("Error: \(String(describing: error))")
         })
-        return ""
+    }
+    
+    func getWebToken() {
+        let webview = self.storyboard?.instantiateViewController(withIdentifier: "liwebview") as! LinkedinWebViewController
+        self.present(webview, animated: true, completion: nil)
     }
     
     func appGetProfile(accessToken: String) {
@@ -565,7 +570,6 @@ class matchExhibitors: UITableViewController {
                 // Convert the received JSON data into a dictionary.
                 do {
                     let dataDictionary = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String: AnyObject]
-                    print(dataDictionary)
                     let profileURLString = dataDictionary["publicProfileUrl"] as! String
                     
                     DispatchQueue.main.async(execute: { () -> Void in
@@ -588,36 +592,6 @@ class matchExhibitors: UITableViewController {
         task.resume()
     }
     
-    func sendLItoServer(LIprofile: String) {
-        let putURLString = "http://gotham.armada.nu/api/student_profile?student_id="
-        let student_id = UserDefaults.standard.value(forKey: "uuid") as! String
-        let dict = ["linkedin_profile": LIprofile, "nickname": student_id]
-        let url = URL(string: putURLString + student_id)
-        var request = URLRequest(url: url!)
-        request.httpMethod = "put"
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) // pass dictionary to nsdata
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                if let error = error as NSError? {
-                    ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: sendLItoServer(LIprofile: String)"), reason: error.localizedDescription, userInfo: [:]))
-                    print(error.localizedDescription ?? "No data")
-                    return
-                }
-                return
-            }
-        }
-        task.resume()
-    }
-    
-    func getWebToken() {
-        let webview = self.storyboard?.instantiateViewController(withIdentifier: "liwebview") as! LinkedinWebViewController
-        self.present(webview, animated: true, completion: nil)
-    }
-    
     func webGetProfile(accessToken: String) {
         // Specify the URL string that we'll get the profile info from.
         let targetURLString = "https://api.linkedin.com/v1/people/~:(public-profile-url)?format=json"
@@ -638,7 +612,7 @@ class matchExhibitors: UITableViewController {
         let task: URLSessionDataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
             if let error = error as NSError? {
                 ABNotifier.logException(NSException(name: NSExceptionName(rawValue: "Function: webGetProfile(accessToken: String)"), reason: error.localizedDescription, userInfo: [:]))
-                print(error.localizedDescription ?? "No data")
+                print(error.localizedDescription )
                 return
             }
             // Get the HTTP status code of the request.

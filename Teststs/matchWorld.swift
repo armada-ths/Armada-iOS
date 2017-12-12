@@ -49,11 +49,8 @@ class matchWorld: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if (matchData.currentview < viewNumber){
-            goBackWithoutAnimation()
-        }
         if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         
         let attributedTitel = NSMutableAttributedString(
@@ -124,12 +121,6 @@ class matchWorld: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-//        
-//        self.matchData.worldBool["europe"]      = false
-//        self.matchData.worldBool["asia"]        = false
-//        self.matchData.worldBool["americaN"]    = false
-//        self.matchData.worldBool["americaS"]    = false
-//        self.matchData.worldBool["australia"]   = false
         
         //Setup buttons
         europeButton.layer.cornerRadius = 0.5 * europeButton.bounds.size.width
@@ -157,29 +148,20 @@ class matchWorld: UIViewController {
         africaButton.layer.borderColor = UIColor.black.cgColor
     }
 
-    func goBackWithoutAnimation(){
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchSweden?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
-    }
-    
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchWorld = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
-    }
-    
     func goRight(){
-        matchData.currentview += 1
-        matchData.save()
+        nextView(isAnimated: true)
+    }
+    
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTravel") as! matchTravel
         rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
+        rightViewController.matchStart = self.matchStart
         rightViewController.matchWorld = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     func goBack(){

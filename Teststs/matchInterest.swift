@@ -24,11 +24,8 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
     @IBOutlet var imageH: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if ( matchData.currentview  < viewNumber){
-            goBackWithoutAnimation()
-        }
         if ( matchData.currentview  > viewNumber){
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         areas.delegate = self
         areas.dataSource = self
@@ -55,32 +52,11 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
                         numInterests += 1
                     }
                 }
-
             }
             if(found == false) {
                 matchData.subAreas[area.key]!["select"] = false
             }
         }
-    }
-    
-    
-    func someAction(sender: UITapGestureRecognizer){
-        print("like flipping a flipping flipswitch broh!")
-        let matchInt = sender.view!.tag as! Int
-        print("sender.view!.tag \(sender.view!.tag)")
-        print("matchInt \(matchInt)")
-        let boolean = self.matchData.areaBools[self.matchData.areaList[matchInt]] as! Bool
-        print("boolean \(boolean)")
-        let area = self.matchData.areaList[matchInt]
-        print("area \(area)")
-        if boolean {
-            self.matchData.areaBools[self.matchData.areaList[matchInt]] = false
-        } else {
-            self.matchData.areaBools[self.matchData.areaList[matchInt]] = true
-        }
-        
-        print(self.matchData.areaBools[self.matchData.areaList[matchInt]])
-        
     }
     
     func addStatusbar() {
@@ -98,42 +74,26 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.view.addGestureRecognizer(swipeLeft)
     }
     
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchInterest = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
-        
+
+    func goRight(){
+        nextView(isAnimated: true)
     }
     
-    func goRight(){
-        matchData.save()
-        if(numInterests < 1){
-            let alertController = UIAlertController(title: "Error", message: "You need to select more than 1 interest", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
-            return
-        }
-        matchData.currentview += 1
-        matchData.areaListDynamic = []
-        for (key, value) in matchData.areaBools {
-            print("key is \(key)")
-            if value == true{
-                matchData.areaListDynamic.append(key)
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            if(numInterests < 1){
+                let alertController = UIAlertController(title: "Error", message: "You need to select more than 1 interest", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
             }
+            matchData.currentview += 1
+            matchData.save()
         }
-        matchData.currentArea = 0
-        matchData.areaListDynamic = matchData.areaListDynamic.reversed()
-        
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchDone") as! matchDoneViewController
-        
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = matchStart
-       // rightViewController.matchSelectInterest = self
-        print("going to matchEnd from roRight()")
         self.navigationController?.pushViewController(rightViewController, animated: true)
-        
     }
     
     func goBack(){
@@ -144,12 +104,6 @@ class matchInterest: UIViewController, UICollectionViewDelegate, UICollectionVie
         self.navigationController?.popViewController(animated: true)
     }
     
-    func goBackWithoutAnimation(){
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchSelectInterest?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

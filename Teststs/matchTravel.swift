@@ -89,28 +89,18 @@ class matchTravel: UIViewController {
         }
     }
     
-    func goBackWithoutAnimation(){
-        matchData.currentview -= 1
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchWorld?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(matchData.currentview < viewNumber){
-            goBackWithoutAnimation()
-        }
-        buildViewFromData()        
         // setup status bar
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
+        
         if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         
+        buildViewFromData()
         
         let emojiFontSize = CGFloat(40.0)
         let title1normal = NSMutableAttributedString(
@@ -232,31 +222,25 @@ class matchTravel: UIViewController {
                 buttonarray[self.matchData.smileyInt]?.isSelected = true
             }
             updateButtons()
-        } else {
-            // INSERT HARDCODED VALUES HERE
         }
-        
-    }
-    
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchTravel = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
     }
     
     func goRight(){
         if !(button1.isSelected == false && button2.isSelected == false &&  button3.isSelected == false && button4.isSelected == false && button5.isSelected == false){
-            matchData.currentview += 1
-            matchData.save()
-            let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
-            rightViewController.matchData = self.matchData
-            rightViewController.matchStart = matchStart
-            rightViewController.matchTravel = self
-            self.navigationController?.pushViewController(rightViewController, animated: true)
+            nextView(isAnimated: true)
         }
-        
+    }
+    
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
+        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchTeam") as! matchTeam
+        rightViewController.matchData = self.matchData
+        rightViewController.matchStart = self.matchStart
+        rightViewController.matchTravel = self
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     func goBack(){

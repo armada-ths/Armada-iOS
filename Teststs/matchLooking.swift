@@ -58,11 +58,9 @@ class matchLooking: UIViewController {
         let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
-        if(matchData.currentview < viewNumber){
-            goBackWithoutAnimation()
-        }
+
         if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         
         self.navigationController?.navigationBar.tintColor = ColorScheme.leilaDesignGrey
@@ -111,15 +109,6 @@ class matchLooking: UIViewController {
         
         let offset = CGFloat(20 + 20 + 14)
         repositionButtons(UIScreen.main.bounds.size.height -  offset - headerView.frame.height - dotsImg.frame.height)
-        
-        
-    }
-    
-    func goBackWithoutAnimation(){
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchStart?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
     }
     
     func repositionButtons(_ height: CGFloat){
@@ -150,22 +139,20 @@ class matchLooking: UIViewController {
         button4.isSelected = self.matchData.lookingBool["trainee"]!
     }
     
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSweden") as! matchSweden
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = self.matchStart
-        rightViewController.matchLooking = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
+    func goRight(){
+        nextView(isAnimated: true)
     }
     
-    func goRight(){
-        matchData.currentview += 1
-        matchData.save()
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSweden") as! matchSweden
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = self.matchStart
         rightViewController.matchLooking = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     func goBack(){

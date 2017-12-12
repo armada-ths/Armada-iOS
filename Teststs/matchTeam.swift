@@ -47,16 +47,12 @@ class matchTeam: UIViewController {
     }
     
     
-    override func viewDidLoad() {
-        
+    override func viewDidLoad() {        
         super.viewDidLoad()
-        if(matchData.currentview < viewNumber){
-            goBackWithoutAnimation()
-        }
         self.setupSwipe()
         self.setupStatusBar()
         if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         
         // if there is no matchDataInstructions use hardcoded values instead
@@ -159,37 +155,27 @@ class matchTeam: UIViewController {
         self.view.addSubview(sliderview)
     }
     
-    func goRightWithoutAnimation(){
-//        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
-//            matchData.sliderValues["max"] = sliderview.lowerValue
-//            matchData.sliderValues["min"] = sliderview.upperValue
-//            let minmax = sliderview.calcReverseValues()
-//            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
-//            matchData.sliderValues["minTrue"] = minmax.1.rounded()
-//        }
-//        matchData.save()
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
-        rightViewController.matchTeam = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
+    func goRight(){
+        nextView(isAnimated: true)
     }
     
-    func goRight(){
-        if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
-            matchData.sliderValues["max"] = sliderview.lowerValue
-            matchData.sliderValues["min"] = sliderview.upperValue
-            let minmax = sliderview.calcReverseValues()
-            matchData.sliderValues["maxTrue"] = minmax.0.rounded()
-            matchData.sliderValues["minTrue"] = minmax.1.rounded()
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            if let sliderview = self.view.viewWithTag(666) as? RangeSlider {
+                matchData.sliderValues["max"] = sliderview.lowerValue
+                matchData.sliderValues["min"] = sliderview.upperValue
+                let minmax = sliderview.calcReverseValues()
+                matchData.sliderValues["maxTrue"] = minmax.0.rounded()
+                matchData.sliderValues["minTrue"] = minmax.1.rounded()
+            }
+            matchData.currentview += 1
+            matchData.save()
         }
-        matchData.currentview += 1
-        matchData.save()
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchSelectInterest") as! matchSelectInterest
         rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
+        rightViewController.matchStart = self.matchStart
         rightViewController.matchTeam = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     func goBack(){

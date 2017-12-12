@@ -102,11 +102,8 @@ class matchSweden: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(matchData.currentview < viewNumber){
-            goBackWithoutAnimation()
-        }
         if viewNumber < matchData.currentview {
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         statusBar()
         swipe()
@@ -162,8 +159,7 @@ class matchSweden: UIViewController {
     
     func statusBar(){
         // setup status bar
-        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))
-        
+        let statusView = UIView(frame: CGRect(x:0, y:0, width:UIScreen.main.bounds.size.width, height: 20.0))        
         statusView.backgroundColor = .black
         self.view.addSubview(statusView)
     }
@@ -177,22 +173,20 @@ class matchSweden: UIViewController {
         self.view.addGestureRecognizer(swipeLeft)
     }
     
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchWorld") as! matchWorld
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = self.matchStart
-        rightViewController.matchSweden = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
+    func goRight(){
+        nextView(isAnimated: true)
     }
     
-    func goRight(){
-        matchData.currentview += 1
-        matchData.save()
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchWorld") as! matchWorld
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = self.matchStart
         rightViewController.matchSweden = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     func goBack(){
@@ -200,12 +194,6 @@ class matchSweden: UIViewController {
         matchData.save()
         self.matchLooking?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
-    }
-    func goBackWithoutAnimation(){
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchLooking?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
     }
     
     override func didReceiveMemoryWarning() {

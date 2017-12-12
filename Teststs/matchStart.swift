@@ -27,13 +27,11 @@ class matchStart: UIViewController {
             size: 18.0)!])
     
     override func viewWillAppear(_ animated: Bool) {
-      //  print("matchData.currentview is \(matchData.currentview)")
-        // if screens are already loaded this will prevent crash
+        // if screens are already loaded jump ahead
         if viewNumber < matchData.currentview {
-            self.goRightWithoutAnimation()
+            self.nextView(isAnimated: false)
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +45,7 @@ class matchStart: UIViewController {
         if let match = self.matchData.load() {
             self.matchData = match
             if viewNumber < matchData.currentview {
-                goRightWithoutAnimation()
+                nextView(isAnimated: false)
             }
         }
         
@@ -56,32 +54,24 @@ class matchStart: UIViewController {
         label2.textAlignment = .center
         label2.attributedText = label2title
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(goBack))
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(goRight))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
     }
     
-    func goRightWithoutAnimation(){
-        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLooking") as! matchLooking
-        rightViewController.matchData = self.matchData
-        rightViewController.matchStart = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
-    }
-    
     func goRight(){
-        matchData.currentview += 1
-        matchData.save()
+        nextView(isAnimated: true)
+    }
+    
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLooking") as! matchLooking
         rightViewController.matchData = self.matchData
         rightViewController.matchStart = self
-        self.navigationController?.pushViewController(rightViewController, animated: true)
-    }
-    
-    func goBack(){
-        print("can't go back more, this is the initial view")
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     override func didReceiveMemoryWarning() {

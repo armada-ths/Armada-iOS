@@ -46,10 +46,8 @@ class matchDataClass: NSObject{
     var teamSize:Int
     var teamSizeMax:Int
     var teamSizeMin:Int
-    var currentArea:Int
     var areaBools:[String: Bool]
     var areaList:Array<String>
-    var areaListDynamic:Array<String>
     var interrestList:Dictionary<String, Array<Dictionary<String, Any>>>
     var time:String
     
@@ -88,17 +86,14 @@ class matchDataClass: NSObject{
         teamSize = 0
         teamSizeMax = 10
         teamSizeMin = 0
-        currentArea = 0
         areaBools = [:]
         areaList = Array<String>()
-        areaListDynamic = Array<String>()
         interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
         time = String(describing: Date())
     }
     
     init(_ json: JSON){
         
-        self.areaListDynamic = Array<String>()
         self.interrestList = Dictionary<String, Array<Dictionary<String, Any>>>()
         
         /* properties ABOVE not loaded from defaults YET! */
@@ -151,7 +146,6 @@ class matchDataClass: NSObject{
         self.teamSize =        json["teamSize"].intValue
         self.teamSizeMax =     json["teamSizeMax"].intValue
         self.teamSizeMin =     json["teamSizeMin"].intValue
-        self.currentArea =     json["currentArea"].intValue
 
         self.worldIntrest = json["worldIntrest"].boolValue
         self.lookingBool = [:]

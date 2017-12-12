@@ -36,12 +36,11 @@ class matchDoneViewController: UIViewController {
         self.view.addSubview(statusView)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(matchData.currentview)
         if ( matchData.currentview  > viewNumber){
-            goRightWithoutAnimation()
+            nextView(isAnimated: false)
         }
         self.setupSwipe()
         self.setupStatusBar()
@@ -55,44 +54,32 @@ class matchDoneViewController: UIViewController {
         doneButton.layer.shadowColor = UIColor.black.cgColor
         doneButton.layer.shadowOffset = CGSize(width: 5, height: 5)
         doneButton.layer.shadowRadius = 5
-        if ( matchData.currentview  < viewNumber){
-            goBackWithoutAnimation()
-        }
-
     }
     
-    func goRightWithoutAnimation(){
+    func nextView(isAnimated: Bool){
+        if isAnimated {
+            self.matchData.currentview += 1
+            self.matchData.save()
+        }
         let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
         rightViewController.matchData = self.matchData
-        rightViewController.matchStart = matchStart
+        rightViewController.matchStart = self.matchStart
         rightViewController.matchDone = self
-        self.navigationController?.pushViewController(rightViewController, animated: false)
+        self.navigationController?.pushViewController(rightViewController, animated: isAnimated)
     }
     
     @IBAction func loading(_ sender: Any) {
         // get or create UUID()
-        
-        
         // send data to server
-        
         let getput = matchGetPut(matchData: self.matchData)
         let student_id = getput.getStudentID()
         getput.putAnswer(student_id: student_id, finished: {isSuccess in
             if isSuccess {
                 print("we got 200 back")
-                
                 // execute in main thread
-                
                 DispatchQueue.main.async {
-                    self.matchData.currentview += 1
-                    self.matchData.save()
-                    let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchLoading") as! matchLoading
-                    rightViewController.matchData = self.matchData
-                    rightViewController.matchStart = self.matchStart
-                    rightViewController.matchDone = self
-                    self.navigationController?.pushViewController(rightViewController, animated: true)
-                }
-                
+                    self.nextView(isAnimated: true)
+                }                
             } else {
                 let alertController = UIAlertController(title: "Server Error", message: "Something went wrong when sending data to the server ☹️ \n push button to try again 😘", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -102,29 +89,11 @@ class matchDoneViewController: UIViewController {
         }
     )}
     
-//
-//    func goRight(){
-//        matchData.currentview += 1
-//        matchData.save()
-//        let rightViewController = self.storyboard?.instantiateViewController(withIdentifier: "matchEnd") as! matchEnd
-//        rightViewController.matchData = self.matchData
-//        rightViewController.matchStart = matchStart
-//        rightViewController.matchDone = self
-//        self.navigationController?.pushViewController(rightViewController, animated: true)
-//    }
-    
     func goBack(){
         matchData.currentview -= 1
         matchData.save()
         self.matchInterest?.matchData = matchData
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    func goBackWithoutAnimation(){
-        matchData.save()
-        // send data back to previous view-controller
-        self.matchInterest?.matchData = matchData
-        self.navigationController?.popViewController(animated: false)
     }
     
     override func didReceiveMemoryWarning() {
