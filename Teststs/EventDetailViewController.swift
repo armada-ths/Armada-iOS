@@ -10,7 +10,6 @@ import UIKit
 
 class EventDetailViewController: UIViewController, UITextViewDelegate {
     
-    
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var whiteView: UIView!
@@ -26,20 +25,15 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var wave100H: NSLayoutConstraint!
     @IBOutlet weak var waveImage100D: NSLayoutConstraint!
     @IBOutlet weak var waveImage100: UIImageView!
-
     
     ///Op 50 wave
-    
     @IBOutlet weak var wave50: UIImageView!
     @IBOutlet weak var wave50H: NSLayoutConstraint!
     @IBOutlet weak var wave50D: NSLayoutConstraint!
     @IBOutlet weak var wave50W: NSLayoutConstraint!
-
     
     @IBOutlet weak var titleLabel: UILabel!
-    
-    @IBOutlet weak var locationLabel: UILabel!
-    
+    @IBOutlet weak var locationLabel: UILabel!    
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var titleLabelD: NSLayoutConstraint!
@@ -53,7 +47,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // hide img-logo temporarily
+        // hide img-logo to display back-button
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = true
         
         if event.signupState != .now {
@@ -68,7 +62,8 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         let screenSize: CGRect = UIScreen.main.bounds
         let screenW = screenSize.size.width
         let ratio:CGFloat = (9.0/15.0)
-        // set title if not set
+        
+        // setup title (if not set)
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 9, width: 250, height: 30);
             let label = UILabel(frame: frame)
@@ -84,7 +79,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             newTitleView.addSubview(label)
             self.navigationItem.titleView = newTitleView
         }
-
  
         // setup colors
         self.view.backgroundColor = ColorScheme.leilaDesignGrey
@@ -113,11 +107,11 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             }
         }
         
-        //Setup whitewave
+        // setup whitewave
         wave100H.constant = whiteW.constant/(1625/505)
         waveImage100D.constant = 30 + imageH.constant - wave100H.constant
         
-        //Setup wave with 50% opacity
+        // setup wave with 50% opacity
         wave50H.constant = wave100H.constant - 5
         wave50D.constant = waveImage100D.constant
         
@@ -133,13 +127,13 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         titleLabelD.constant = -(waveImage100D.constant/2.3)
         titleLabel.layer.zPosition = 1
         
-        //Setup Date
+        // setup Date
         dateLabel.text = event.startDate.format("dd MMMM")
         dateLabel.font = UIFont(name: "Lato-Regular", size: 14)
         dateLabel.layer.zPosition = 1
         eventCalendar.layer.zPosition = 1
 
-        //Setup Location
+        // setup Location
         locationLabel.text = event.location
         locationLabel.font = UIFont(name: "Lato-Regular", size: 14)
         locationLabel.layer.zPosition = 1
@@ -149,7 +143,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         textView.attributedText = self.setFont(newsString: event.summary)
         textView.layer.zPosition = 1
-
     }
     
     func setFont(newsString: String) -> NSAttributedString{
@@ -159,7 +152,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
  
             guard let currentFont = value as? UIFont else {
                 let newFont = UIFont(name: "Lato-Regular", size: 14)
-                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont!], range: range)
                 return
             }
             
@@ -170,8 +163,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             // Ask the OS for an actual font that most closely matches the description above
             if(String(describing: value).contains("bold")){
                 let newFont = UIFont(name: "Lato-Bold", size: currentFont.pointSize*0.8)
-                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
-                
+                newAttributedString.addAttributes([NSFontAttributeName: newFont!], range: range)
             }
             else if let newFontDescriptor = fontDescriptor.matchingFontDescriptors(withMandatoryKeys: [UIFontDescriptorFamilyAttribute]).first {
                 let newFont = UIFont(descriptor: newFontDescriptor, size: currentFont.pointSize*0.8)
@@ -179,7 +171,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
             }
             else{
                 let newFont = UIFont(name: "Lato-Regular", size: currentFont.pointSize*0.8)
-                newAttributedString.addAttributes([NSFontAttributeName: newFont], range: range)
+                newAttributedString.addAttributes([NSFontAttributeName: newFont!], range: range)
             }
         }
         

@@ -38,7 +38,7 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
     
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             if(indexPath.row >= values[(indexPath as NSIndexPath).section].count){
-                let cell = tableView.dequeueReusableCell(withIdentifier: "bottomCell", for: indexPath) as! UITableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "bottomCell", for: indexPath)
                 cell.sizeToFit()
                 return cell
             }
@@ -48,7 +48,7 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
             let eventColour = armadaColours[indexPath.row % 3]
             cell.backgroundColor = eventColour
             cell.daysLeftLabel.backgroundColor = eventColour
-           cell.layer.zPosition = CGFloat(values[(indexPath as NSIndexPath).section].count - indexPath.row)
+            cell.layer.zPosition = CGFloat(values[(indexPath as NSIndexPath).section].count - indexPath.row)
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             cell.dateView.backgroundColor = eventColour
             cell.dateLabel.backgroundColor = eventColour
@@ -79,12 +79,10 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.navigationController?.navigationBar.isUserInteractionEnabled = false
         super.viewWillAppear(animated)
         if dataSource.isEmpty {
             dataSource.refresh()
         }
-        // change backbar button from "Back" to ""
         backBarButton.title = ""
         
         // reveal logo-image
@@ -99,7 +97,7 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Light",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 11))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0)!, range:NSRange(location: 0, length: 11))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 240, height: 50))
