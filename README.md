@@ -22,12 +22,15 @@ In Xcode -> “Preferences..”
 Accounts
 Add the Apple ID of your developer account.
 
+To push an  app to App Store you need to have the role of app manager (not just developer)
+
+
 
 ## Project Structure
 ### Core data:
 The database, of exhibitors, is kept up to date with backend with the help of the classes in the data/api directory. This means that the exhibitor list completely decoupled from the network and that it can be used offline (as long as the data has been fetched once). Currently ETags are used when querying the backend so that old data isn't fetched unnecessarily.
 ### Matching:
-Swiping between pages in the matchmaking view is made possible with the matchDataClass. This class holds the information of which view the user is currently interacting with and the selections made in each of the match-making views. When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack. Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes. 
+Swiping between pages in the matchmaking view is made possible with the matchDataClass. This class holds the information of which view the user is currently interacting with and the selections made in each of the match-making views. When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack. Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes. On matching interest it's not clear that the view is scrollable (this is an UX issue, but worth righting here). The second page ("What are you looking for") is not iPhone X compatible at the moment. Page 6 ("How big is your future employer") is on the verge of not being iPhone X compatible.
 
 
 ### Events: 
@@ -35,8 +38,20 @@ The events are made by a GET request to the AIS. An issue which should be change
 ### News: 
 Getting news is made by a GET request to armada.nu (and not AIS, this is a big difference from the rest of the project!). The articles are then formatted with the html from the webpage. At the moment the images in the article are retrieved every time you open the article, this is due to the fact that we are using attributedHTMLStrings (this should be changed)
 ### Catalogue: 
-The data is from the database (core data) in the device.
+The data is from the database (core data) in the device. Company objects saved to the sql database has several attributes which aren’t used this year, you might want to remove them or use them as inspiration in knowing what to ask from the ais team. The rendering of the background image in Company should be redone, since the size of the image depends on the content size of the company attributes.
 ### About
+The about page loads the partners, but doesn’t take the ”main partner” attribute into account, this might need to change. The images aren’t clickable.
 
-# Licence Information 
-Please check out [LICENSE](LICENSE) for information. for information.
+### General
+All the details view (news, event, company) are based on the same scrollview which alters in the width of the inner white area. (try to run the code on an iPhone 7 plus and an iPhone SE) and compare.
+
+The code has FilterCode (file: CompanyFilterTableViewController.swift) (which can work with a view to filter companies on certain criteria) however no View for this is implemented in the latest release version.
+
+All the details view (news, event, company) are based on the same scrollview which alters in the width of the inner white area. (try to run the code on an iPhone 7 plus and an iPhone SE) and compare.
+
+Get a beta test group NOW! and get them to try the existing version
+Understand the errors from airbrake
+
+
+## Licence Information 
+Please check out [LICENSE](LICENSE) for information. 
