@@ -7,8 +7,8 @@
 //
 
 import UIKit
-// UICollectionViewDelegateFlowLayout add to handle custom cell size
 
+// UICollectionViewDelegateFlowLayout added to handle custom cell sizes
 class AboutCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet var aboutView: UICollectionView!
     
@@ -21,11 +21,10 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // setup datasource = SponsorCollectionViewDataSource
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
 
-        // set title if not set
+        // set title (if not set)
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 9, width: 240, height: 30);
             let label = UILabel(frame: frame)
@@ -59,8 +58,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         return CGSize(width: sqWidth, height: sqWidth);
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize{
         if(UIScreen.main.bounds.size.width <= 320){
             return CGSize(width: collectionView.contentSize.width, height: 228000/collectionView.contentSize.width + 120)
@@ -71,10 +68,9 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
        return CGSize(width: collectionView.contentSize.width, height: 242000/collectionView.contentSize.width + 120)
     }
     
-    // DATASOURCE:
+    // DATASOURCE methods:
     var dataSource: ArmadaSponsorCollectionViewDataSource!
     class ArmadaSponsorCollectionViewDataSource: ArmadaCollectionViewDataSource<Sponsor> {
-        
         
         // NOTE:
         // Override this function to tweak handling of the Sponsor data.
@@ -128,14 +124,13 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                 return headerView
         }
         
-        
-        
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let sponsor = self[indexPath]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "partnerCell", for: indexPath) as! PartnerCollectionViewCell
-           // cell.partnerImage.loadImageFromUrl(sponsor.imageUrl.absoluteString)
             // NOTE:
-            // get image height:width ratio
+            /* loading the image from url
+                2018 developers could save these images localy,
+                a.t.m the app requests these everytime the app has been restarted */
             URLSession.shared.dataTask(with: sponsor.imageUrl, completionHandler: {(data, response, error) -> Void in
                         var ratio:CGFloat
                         if error != nil {

@@ -15,7 +15,5 @@ class AboutHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var qualityText: UITextView!
     @IBOutlet weak var partnersLabel: UILabel!
     @IBOutlet weak var coreValuesLabel: UILabel!
-    
-    
 }
 
