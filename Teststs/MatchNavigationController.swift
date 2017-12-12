@@ -12,7 +12,6 @@ class MatchNavigationController: UINavigationController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //if let blockView = self.navigationController?.navigationBar.viewWithTag(<#T##tag: Int##Int#>)
     }
     
     override func viewDidLoad() {
@@ -28,12 +27,13 @@ class MatchNavigationController: UINavigationController {
         let logoOffset:CGFloat = 10
         
         // set navigationBar size
+        // hide navigationBar when in match-views
         self.navigationBar.frame = CGRect(x:0, y:0, width:headerW, height: headerH)
         
         // make navigationbar solid
         self.navigationBar.isTranslucent = false
-//        self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
-//        self.navigationBar.backgroundColor = .black
+        // self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
+        // self.navigationBar.backgroundColor = .black
         
         // remove navigationbar-border
         self.navigationBar.shadowImage = UIImage()
@@ -44,13 +44,9 @@ class MatchNavigationController: UINavigationController {
         statusView.backgroundColor = .black
         statusView.tag = 0
         self.navigationBar.addSubview(statusView)
-
         
-        // Don't load this more than once
+        // don't load this more than once
         if self.navigationBar.viewWithTag(1) == nil {
-
-            //self.navigationItem.titleView = newTitleView
-            
             // setup header bottom border
             let headerHeight:CGFloat = self.navigationBar.frame.size.height
             let bottomBorderH:CGFloat = 0.75
@@ -58,8 +54,7 @@ class MatchNavigationController: UINavigationController {
             let bottomBorderView = UIView(frame: bottomBorderRect)
             bottomBorderView.backgroundColor = ColorScheme.navbarBorderGrey
             self.navigationBar.addSubview(bottomBorderView)
-        }
- 
+        } 
     }
     
     func yoffset(_ statusH: CGFloat, _ headerH: CGFloat, _ itemH: CGFloat ) -> CGFloat {

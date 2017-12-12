@@ -10,6 +10,7 @@ import UIKit
 
 class EventDetailViewController: UIViewController, UITextViewDelegate {
     
+    
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var whiteView: UIView!
@@ -25,15 +26,18 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var wave100H: NSLayoutConstraint!
     @IBOutlet weak var waveImage100D: NSLayoutConstraint!
     @IBOutlet weak var waveImage100: UIImageView!
+
     
     ///Op 50 wave
+    
     @IBOutlet weak var wave50: UIImageView!
     @IBOutlet weak var wave50H: NSLayoutConstraint!
     @IBOutlet weak var wave50D: NSLayoutConstraint!
     @IBOutlet weak var wave50W: NSLayoutConstraint!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!    
+    @IBOutlet weak var titleLabel: UILabel!    
+    @IBOutlet weak var locationLabel: UILabel!
+    
     @IBOutlet weak var textView: UITextView!
     
     @IBOutlet weak var titleLabelD: NSLayoutConstraint!
@@ -72,7 +76,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Light",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0) ?? <#default value#>, range:NSRange(location: 0, length: 11))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0)!, range: NSRange(location: 0, length: 11))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 250, height: 50))

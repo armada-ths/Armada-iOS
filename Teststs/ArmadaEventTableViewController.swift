@@ -118,7 +118,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Thin",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0) ?? <#default value#>, range:NSRange(location: 0, length: 12))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0)!, range: NSRange(location: 0, length: 12))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))

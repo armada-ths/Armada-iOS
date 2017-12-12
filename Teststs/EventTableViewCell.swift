@@ -51,7 +51,7 @@ class EventTableViewCell: UITableViewCell {
                     attributes: [NSFontAttributeName:UIFont(
                         name: "Lato-Regular",
                         size: 25.0)!])
-                    myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 15.0) ?? <#default value#>, range:NSRange(location: 0, length: 9))
+                    myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 15.0)!, range:NSRange(location: 0, length: 9))
                 }
                 
                 else if (diff == 0 || (diff < 0 && diffEnd >= 0)){

@@ -32,7 +32,6 @@ class NewsNavigationController: UINavigationController {
         
         // make navigationbar solid
         self.navigationBar.isTranslucent = false
-//        self.navigationBar.barTintColor = ColorScheme.leilaDesignGrey
         self.navigationBar.barTintColor = ColorScheme.darkGrey
         self.navigationBar.tag = 3
         
@@ -46,12 +45,11 @@ class NewsNavigationController: UINavigationController {
         statusView.tag = 0
         self.navigationBar.addSubview(statusView)
         
-        // Don't load this more than once
+        // don't load this more than once
         if self.navigationBar.viewWithTag(1) == nil {
             
             // setup left logo
             let logoimg = #imageLiteral(resourceName: "armada_round_logo_green.png")
-            //let logoimg = #imageLiteral(resourceName: "THSarmada_logo.png")
             let logorawW = logoimg.size.width
             let logorawH = logoimg.size.height
             let logoratioWH:CGFloat = logorawW/logorawH
@@ -62,14 +60,12 @@ class NewsNavigationController: UINavigationController {
             logoImageView.image = logoimg
             logoImageView.tag = 1
             self.navigationBar.addSubview(logoImageView)
-            //self.navigationItem.titleView = newTitleView
             
             // setup header bottom border
             let headerHeight:CGFloat = self.navigationBar.frame.size.height
             let bottomBorderH:CGFloat = 0.75
             let bottomBorderRect = CGRect(x: 0, y: headerHeight, width: UIScreen.main.bounds.width, height: bottomBorderH)
             let bottomBorderView = UIView(frame: bottomBorderRect)
-//            bottomBorderView.backgroundColor = ColorScheme.navbarBorderGrey
             bottomBorderView.backgroundColor = ColorScheme.darkGrey
             bottomBorderView.tag = 2
             self.navigationBar.addSubview(bottomBorderView)
