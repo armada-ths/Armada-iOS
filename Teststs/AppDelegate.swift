@@ -18,6 +18,8 @@ struct ColorScheme {
     static let sustainabilityGreen = UIColor(hex: 0x00D790)
     static let darkGrey = UIColor(hex: 0xe4e4e4)
 }
+
+// used by matchTeam.swift
 struct emojiStruct {
     static let emojiDict:Array<String> = [
         "😭",
@@ -47,25 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             environmentName: ABNotifierAutomaticEnvironment,
             useSSL: true
         )
-        // REMOVE LINKEDIN FILES
-//        UserDefaults.standard.set(nil, forKey: "webAccessToken")
-//        UserDefaults.standard.set(nil, forKey: "appAccessToken")
-//        UserDefaults.standard.set(nil, forKey: "LIprofile")
         
-      //  ABNotifier.writeTestNotice()
-//        for family: String in UIFont.familyNames
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNames(forFamilyName: family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
         UITabBar.appearance().tintColor = ColorScheme.armadaDarkMelon
         window!.tintColor = ColorScheme.armadaDarkMelon
-        
         UINavigationBar.appearance().tintColor = ColorScheme.armadaDarkMelon
-        
         UITableView.appearance().backgroundColor = UIColor.white
         
         // setup color of back button
@@ -74,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // setup status-bar style
         UIApplication.shared.statusBarStyle = .lightContent
         
+        /*  The unique user id is a randomized string.
+            Consider replacing this with device unique user id */
         let defaults = UserDefaults.standard
         if let _ = defaults.value(forKey: "uuid") {
         } else {
@@ -81,27 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.set(uuid, forKey: "uuid")
             print("created a uuid: \(uuid)")
         }
-        /* fetch the matchBackendData if not already done
-         this will be done in a non-main thread so don't try
-         to access matchDataClass objects "to soon"... */
+        
+        /*  This function downloads match-describing data and saves it locally
+         
+            2018 developers should consider making this function
+            not update the data if it has not changed on the server. */
         ArmadaApi.matchFromServer(1){
             data, error, errormessage in
         }
-
-//        ABNotifier.start(
-//            withAPIKey: "37ef077df22ab8ff96ca8ebeddc5a81b",
-//            projectID: "163539",
-//            environmentName: ABNotifierAutomaticEnvironment,
-//            useSSL: true
-//        )
-        
-        //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
-        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
-        //        window!.tintColor = ColorScheme.armadaGreen
-        //        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
-        //        UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
-        //        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
-        //        UITableView.appearance().backgroundColor = UIColor.whiteColor()
         
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
         
@@ -120,8 +96,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         // Sync hashed email if you have a login system or collect it.
-        //   Will be used to reach the user at the most optimal time of day.
+        // Will be used to reach the user at the most optimal time of day.
         // OneSignal.syncHashedEmail(userEmail)
+        
+        //UINavigationBar.appearance().barTintColor = ColorScheme.armadaG
+        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor(hex: 0x2d2d2d)]
+        //window!.tintColor = ColorScheme.armadaGreen
+        //UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        //UINavigationBar.appearance().tintColor = ColorScheme.armadaGreen
+        //UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : ColorScheme.armadaGreen]
+        //UITableView.appearance().backgroundColor = UIColor.whiteColor()
+        
         return true
     }
 
@@ -133,11 +118,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return LISDKCallbackHandler.application(application, open: url, sourceApplication:options [UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         }
         return true
-    }
-
-    
-    func loadMatchBackendData() {
-        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
