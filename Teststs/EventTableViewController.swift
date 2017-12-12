@@ -12,7 +12,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
     
     @IBOutlet weak var backBarButton: UIBarButtonItem!
     
-    
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         let armadaColours = [ ColorScheme.armadaLicorice, ColorScheme.armadaGreen, ColorScheme.armadaRed]
         var images:[String:UIImage] = [:]
@@ -20,7 +19,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
-        
         
         var isFirstLoad = true
         
@@ -33,7 +31,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
                 }
             }
         }
-        
         
         override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return values[section].count + 1
@@ -70,7 +67,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
@@ -94,7 +90,6 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
         // reveal logo-image
         self.navigationController?.navigationBar.viewWithTag(1)?.isHidden = false
 
-        
         // set title if not set
         if self.navigationItem.titleView == nil {
             let frame = CGRect(x: 0,y: 9, width: 240, height: 30);
@@ -105,14 +100,11 @@ class EventTableViewController: UITableViewController, UISplitViewControllerDele
                     name: "BebasNeue-Light",
                     size: 22.0)!])
             myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 11))
-//            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 0))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 240, height: 50))
             newTitleView.addSubview(label)
             self.navigationItem.titleView = newTitleView
-            
         }
-        
     }
 }

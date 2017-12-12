@@ -11,22 +11,16 @@ import CoreGraphics
 
 class EventTableViewCell: UITableViewCell {
     
-    
     @IBOutlet weak var shadowLayer: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dateView: UIView!
     var diff = 0
-    // @IBOutlet weak var dateView: UIView!
-    
- //   @IBOutlet weak var dateimgView: UIImageView!
     @IBOutlet weak var daysLeftLabel: UILabel!
     
     var eventItem: ArmadaEvent? = nil{
         didSet{
             if let eventItem = eventItem{
-                let screenSize: CGRect = UIScreen.main.bounds
-                
                 if let viewWithTag = self.viewWithTag(100){
                     viewWithTag.removeFromSuperview()
                 }
@@ -46,12 +40,10 @@ class EventTableViewCell: UITableViewCell {
                 let now = calendar.ordinality(of: .day, in: .era, for: date1)!
                 let start = calendar.ordinality(of: .day, in: .era, for: date2)!
                 diff = start - now
-                if let  date3 = calendar.startOfDay(for: eventItem.endDate!) as? Date{
+                if let  date3 = calendar.startOfDay(for: eventItem.endDate!) as Date!{
                     let end = calendar.ordinality(of: .day, in: .era, for: date3)!
                     diffEnd = end - now
-                    
                 }
-               // daysLeftLabel.text
                 var myMutableString: NSMutableAttributedString
                 if(diff > 0 ){
                     myMutableString = NSMutableAttributedString(
@@ -59,7 +51,7 @@ class EventTableViewCell: UITableViewCell {
                     attributes: [NSFontAttributeName:UIFont(
                         name: "Lato-Regular",
                         size: 25.0)!])
-                myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 15.0), range:NSRange(location: 0, length: 9))                    
+                    myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "Lato-Regular", size: 15.0) ?? <#default value#>, range:NSRange(location: 0, length: 9))
                 }
                 
                 else if (diff == 0 || (diff < 0 && diffEnd >= 0)){
@@ -68,7 +60,6 @@ class EventTableViewCell: UITableViewCell {
                         attributes: [NSFontAttributeName:UIFont(
                             name: "Lato-Regular",
                             size: 15.0)!])
-                    
                 }
                 else{
                  myMutableString = NSMutableAttributedString(
@@ -90,13 +81,12 @@ class EventTableViewCell: UITableViewCell {
                     blurRound.alpha = 0.5
                     blurRound.tag = 101
                     let start = CGFloat(0)
-                    let end = start + CGFloat(M_PI)
+                    let end = start + CGFloat(CGFloat.pi)
                     let circlePath = UIBezierPath.init(arcCenter: CGPoint(x: daysLeftLabel.bounds.size.width / 2, y: (daysLeftLabel.bounds.size.height / 2)), radius: daysLeftLabel.bounds.size.height, startAngle: start, endAngle: end, clockwise: true)
                     let circleShape = CAShapeLayer()
                     circleShape.path = circlePath.cgPath
                     blurRound.layer.mask = circleShape
                     daysLeftLabel.addSubview(blurRound)
-
                 }
                 daysLeftLabel.attributedText = myMutableString
                 daysLeftLabel.textAlignment = NSTextAlignment.center
@@ -114,30 +104,25 @@ class EventTableViewCell: UITableViewCell {
                 shadowLayer.layer.cornerRadius = shadowLayer.frame.size.width/2
                 shadowLayer.bringSubview(toFront: daysLeftLabel)
                 daysLeftLabel.layer.zPosition = 1
-                //self.bringSubview(toFront: daysLeftLabel)
-                
-                
+
                 //Setup Date
                 let startDate = eventItem.startDate
                 let endDate = eventItem.endDate
                 let sMonth = calendar.component(.month, from: startDate)
                 let sDay = calendar.component(.day, from: startDate)
                 let eMonth = calendar.component(.month, from: endDate!)
-                let eDay = calendar.component(.day, from: endDate!)
+                // let eDay = calendar.component(.day, from: endDate!)
                 
                 var dateText: String
                 if( (sMonth == eMonth && sDay == sDay) || endDate == nil){
                     dateText = startDate.format("dd MMMM YYYY")
-                    
                 }
                 else if (sMonth == eMonth){
                     dateText = startDate.format("dd-") + endDate!.format("dd MMMM YYYY")
                 }
                 else{
                     dateText = startDate.format("dd MMMM") + endDate!.format("-dd MMMM YYYY")
-
                 }
-
 
                 dateLabel.text = dateText
                 dateLabel.font = UIFont(name: "Lato-Regular", size: 14)
@@ -148,7 +133,6 @@ class EventTableViewCell: UITableViewCell {
                 dateView.sizeToFit()
                 self.bringSubview(toFront: dateView)
                 dateView.layer.zPosition = 1
-
             }
         }
     }
@@ -160,7 +144,6 @@ class EventTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
 }

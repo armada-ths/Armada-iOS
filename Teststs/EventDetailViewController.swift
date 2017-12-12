@@ -67,10 +67,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         
         let screenSize: CGRect = UIScreen.main.bounds
         let screenW = screenSize.size.width
-        let screenH = screenSize.size.height
-        let A:CGFloat = 0.409577
-        let B:CGFloat = 0.92
-        let C:CGFloat = 0.445634
         let ratio:CGFloat = (9.0/15.0)
         // set title if not set
         if self.navigationItem.titleView == nil {
@@ -81,7 +77,7 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Light",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 11))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0) ?? <#default value#>, range:NSRange(location: 0, length: 11))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 250, height: 50))
@@ -124,8 +120,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         //Setup wave with 50% opacity
         wave50H.constant = wave100H.constant - 5
         wave50D.constant = waveImage100D.constant
-
-
         
         // setup border
         upperborderView.backgroundColor = ColorScheme.navbarBorderGrey
@@ -133,14 +127,11 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         // setup colour of textView
         textView.backgroundColor = ColorScheme.leilaDesignGrey
 
-
-        
         // setup title
         titleLabel.text = event.title
         titleLabel.font = UIFont(name: "BebasNeueRegular", size: 30.0)
         titleLabelD.constant = -(waveImage100D.constant/2.3)
         titleLabel.layer.zPosition = 1
-        
         
         //Setup Date
         dateLabel.text = event.startDate.format("dd MMMM")
@@ -158,9 +149,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         textView.delegate = self
         textView.attributedText = self.setFont(newsString: event.summary)
         textView.layer.zPosition = 1
-        
-        
-
 
     }
     
@@ -210,7 +198,6 @@ class EventDetailViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     @IBAction func registerClicked(_ sender: Any) {
         if let signupUrl = event.signupLink,

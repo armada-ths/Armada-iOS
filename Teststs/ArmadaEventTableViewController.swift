@@ -10,8 +10,7 @@ import UIKit
 class ArmadaEventTableViewController: UITableViewController, UISplitViewControllerDelegate {
 
     @IBOutlet weak var backBarButton: UIBarButtonItem!
-    
-    
+
     class ArmadaEventTableViewDataSource: ArmadaTableViewDataSource<ArmadaEvent> {
         
         var images:[String:UIImage] = [:]
@@ -19,8 +18,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
         override init(tableViewController: UITableViewController) {
             super.init(tableViewController: tableViewController)
         }
-        
-        
+
         var isFirstLoad = true
         
         override func updateFunc(_ callback: @escaping (Response<[[ArmadaEvent]]>) -> Void) {
@@ -48,7 +46,6 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 self.tableViewController?.tableView.scrollToRow(at: IndexPath(item: row, section: 0), at: .top, animated: animated)
             }
         }
-        
         
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let armadaEvent = values[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
@@ -121,7 +118,7 @@ class ArmadaEventTableViewController: UITableViewController, UISplitViewControll
                 attributes: [NSFontAttributeName:UIFont(
                     name: "BebasNeue-Thin",
                     size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 12))
+            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0) ?? <#default value#>, range:NSRange(location: 0, length: 12))
             label.textAlignment = .center
             label.attributedText = myMutableString
             let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 200, height: 50))
