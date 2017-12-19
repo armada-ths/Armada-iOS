@@ -53,9 +53,9 @@ Get a beta test group NOW! and get them to try the existing version
 Understand the errors from airbrake
 
 ### Usable links
-Multiple good swift topics \n
-http://roadfiresoftware.com/blog/ \n
-http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/ \n
+Multiple good swift topics  
+http://roadfiresoftware.com/blog/  
+http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/  
 
 Never tried to use this but seems interresting. \n
 https://packagecontrol.io/packages/Swift \n
