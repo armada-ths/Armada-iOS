@@ -55,6 +55,27 @@ All the details view (news, event, company) are based on the same scrollview whi
 Get a beta test group NOW! and get them to try the existing version
 Understand the errors from airbrake
 
+### Tutorials I used /Ola
+
+www.udacity.com  
+
+"Intro to iOS..." slightly overlaps with "UIKit Fundamentals". I highly encourage you to do the "Grand Central Dispatch"-tutorial, queues are very(!) important in Swift. "iOS Persistence and Core Data" touches on creating your own datamodel using the Xcode equivalent to SQL-database models – very difficult stuff.  
+
+#### Intro to iOS App Development with Swift  
+Absolute basics  
+https://classroom.udacity.com/courses/ud585  
+
+#### UIKit Fundamentals  
+Outlets and Actions – connect graphical elements with code.  
+https://classroom.udacity.com/courses/ud788  
+
+#### Grand Central Dispatch (GCD)  
+very good intro to queues and closures in Swift  
+https://classroom.udacity.com/courses/ud576  
+
+#### iOS Persistence and Core Data
+https://classroom.udacity.com/courses/ud325
+
 ## Practical links
 
 Keyboard-shortcuts in Xcode  
