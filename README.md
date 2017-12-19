@@ -138,19 +138,22 @@ let json = JSON.init(parseJSON: string)
 
 2. add bridgingheaderfile.h which will make the sdk available.  
 
-3. change build settings: 	
-	Install objective-c compatibility header : YES  
-	objective-C briding header : set path of your bridging header like "projectname/briding header file bridgingheaderfile.h"  
-	problem? --> https://stackoverflow.com/questions/37268368/swift-bridging-header-file-wont-work  
+3. change build settings:  
+	
+Install objective-c compatibility header : YES  
+objective-C briding header : set path of your bridging header like "projectname/briding header file bridgingheaderfile.h"  
+
+problem? --> https://stackoverflow.com/questions/37268368/swift-bridging-header-file-wont-work  
 
 4. add Bundle Identifier to your developer.linkedin.com account and update  
 
 5. make changes in info.plist  
+
 info.plist  
 	LIAppId: {Application Id}  
 	URL types  
-		Item 0  
-			URL Schemes  
+		Item 0:  
+			URL Schemes:
 				Item 0: li{Application Id}  
 
 	LSApplicationQueriesSchemes:  
