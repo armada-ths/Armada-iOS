@@ -132,5 +132,31 @@ let json = JSON.init(parseJSON: string)
 
 4. Resize cell to match the stretchViews margins
 
+#### Setup linkedin-sdk
+
+1. Download sdk package and drag into project.  
+
+2. add bridgingheaderfile.h which will make the sdk available.  
+
+3. change build settings: 	
+	Install objective-c compatibility header : YES  
+	objective-C briding header : set path of your bridging header like "projectname/briding header file bridgingheaderfile.h"  
+	problem? --> https://stackoverflow.com/questions/37268368/swift-bridging-header-file-wont-work  
+
+4. add Bundle Identifier to your developer.linkedin.com account and update  
+
+5. make changes in info.plist  
+info.plist  
+	LIAppId: {Application Id}  
+	URL types  
+		Item 0  
+			URL Schemes  
+				Item 0: li{Application Id}  
+
+	LSApplicationQueriesSchemes:  
+		Item 0: linkedin  
+		Item 1: linkedin-sdk  
+		Item 2:	linkedin-sdk2  
+
 ## Licence Information 
 Please check out [LICENSE](LICENSE) for information. 
