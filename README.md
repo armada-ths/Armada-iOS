@@ -87,9 +87,9 @@ https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift
 Problem building on real iphone after adding SDK  
 https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
 
-### Practical Tips 
+## Practical Tips 
 
-# Setting up a ScrollView  
+### Setting up a ScrollView  
 https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implementation-for-only-vertical-scrolling  
 
 1. Create your UIScrollView *scrollView.  
@@ -114,7 +114,7 @@ https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implemen
 
 (7.) If you want text view to push the parent views bounds you should deselect scrolling in Storyboard.  
 
-# Using SwiftyJSON
+#### Using SwiftyJSON
 
 let json = JSON(data: string.data(using: String.Encoding.utf8)!)  
 print(json["key"])      --> value   
@@ -123,7 +123,7 @@ or
  
 let json = JSON.init(parseJSON: string)  
 
-# Make cell-size follow content  
+### Make cell-size follow content  
 
 1. You need to set the StretchView margin constraints that is stretching the cell to be equal to the contentView of the cell.  
 2. Add Stretch-View: Height- and Width-constraints  
