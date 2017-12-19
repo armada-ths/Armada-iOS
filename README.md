@@ -152,10 +152,9 @@ problem? --> https://stackoverflow.com/questions/37268368/swift-bridging-header-
 info.plist  
 	LIAppId: {Application Id}  
 	URL types  
-		Item 0:  
-			URL Schemes:
+		Item 0  
+			URL Schemes  
 				Item 0: li{Application Id}  
-
 	LSApplicationQueriesSchemes:  
 		Item 0: linkedin  
 		Item 1: linkedin-sdk  
