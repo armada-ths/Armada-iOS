@@ -32,8 +32,7 @@ The database, of exhibitors, is kept up to date with backend with the help of th
 ### Matching:
 Swiping between pages in the matchmaking view is made possible with the matchDataClass. This class holds the information of which view the user is currently interacting with and the selections made in each of the match-making views.  
 
-When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack.   
-Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes.  
+When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack. Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes.  
 
 On matching interest it's not clear that the view is scrollable (this is an UX issue, but worth writing here).  
 The second page ("What are you looking for") is not iPhone X compatible at the moment. Page 6 ("How big is your future employer") is on the verge of not being iPhone X compatible.  
@@ -71,10 +70,10 @@ https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift
 Multiple good swift topics  
 http://roadfiresoftware.com/blog/  
 
-Never tried to use this swift-sublime-package
+Never tried to use this swift-sublime-package  
 https://packagecontrol.io/packages/Swift  
 
-Iphone resolutions
+Iphone resolutions  
 https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions  
 https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
 
