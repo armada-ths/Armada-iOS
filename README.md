@@ -53,46 +53,67 @@ Get a beta test group NOW! and get them to try the existing version
 Understand the errors from airbrake
 
 ### Usable links
-Multiple good swift topics 
-http://roadfiresoftware.com/blog/  
-http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/
+Multiple good swift topics \n
+http://roadfiresoftware.com/blog/ \n
+http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/ \n
 
-Never tried to use this but seems interresting. 
-https://packagecontrol.io/packages/Swift       
+Never tried to use this but seems interresting. \n
+https://packagecontrol.io/packages/Swift \n
 
-Iphone X compatability to be implemented 2018.
-https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions 
+Iphone X compatability to be implemented 2018. \n
+https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions \n
 
-Saving stuff localy
-https://www.hackingwithswift.com/read/12/2/reading-and-writing-basics-userdefaults  
-custom saving
-https://www.hackingwithswift.com/read/12/3/fixing-project-10-nscoding 
+Saving stuff localy. \n
+https://www.hackingwithswift.com/read/12/2/reading-and-writing-basics-userdefaults  \n
+custom saving. \n
+https://www.hackingwithswift.com/read/12/3/fixing-project-10-nscoding \n
 
-Collection view tutorial
-http://www.brianjcoleman.com/tutorial-collection-view-using-swift 
-https://www.raywenderlich.com/136161/uicollectionview-tutorial-reusable-views-selection-reordering
+Collection view tutorial \n
+http://www.brianjcoleman.com/tutorial-collection-view-using-swift \n
+https://www.raywenderlich.com/136161/uicollectionview-tutorial-reusable-views-selection-reordering \n
 
-http://fuckingswiftblocksyntax.com/
-http://goshdarnclosuresyntax.com/
+http://fuckingswiftblocksyntax.com/ \n
+http://goshdarnclosuresyntax.com/ \n
 
-It's possible to use Objective-C code in your Swift project. This requires a "bridging header" 
-https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_80
-http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/
+It's possible to use Objective-C code in your Swift project. This requires a "bridging header" \n
+https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_80 \n
+http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/ \n
 
-Using scroll-views
-When using scroll view, don’t set height in scroll view
-set margins equal to super container for both scrollview and its subview. Then choose height for subview, this will stretch the scrollview. 
-NO horizontal or vertical centering for either scrollview or it’s subview is needed. But you should set the width of both these elements equal to the tableview so that it works for all iphone sizes.
-https://fizzbuzzer.com/understanding-the-contentoffset-and-contentinset-properties-of-the-uiscrollview-class/
+SETTING UP SCROLLVIEW :[ \n
+https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implementation-for-only-vertical-scrolling \n
 
-http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html
-https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size
-https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property
-https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift
+1. Create your UIScrollView *scrollView. \n
 
-Problem building on real iphone after adding SDK
+2. You want to create one UIView *contentView which you will put the rest of your view elements into. \n
+    [self.view addSubview:scrollView]; \n
+    [scrollView addSubview:contentView]; \n
+    [contentView addSubview:_label1];\n
+    [contentView addSubview:_label2];\n
+    [contentView addSubview:_label3];\n
+    [contentView addSubview:_label4];\n
+    [contentView addSubview:_label5];\n
+    [contentView addSubview:_label6];\n
+
+3. Pin the 4 edges of scrollView to the 4 edges of self.view \n
+
+4. Pin the top and bottom edges of contentView to the top and bottom of scrollView. \n
+
+5. This is the tricky part. To set the horizontal sizing, you want the leading (right) and trailing(left) edges of the contentView to be pinned to the leading and trailing edges self.view instead of scrollView. Even though contenView is a sub view of scrollView its horizontal constraints are going to reach outside of the scrollView and connect to self.view. \n
+
+6. Pin any other view elements to contentView as you normally would. \n
+
+ADDING TEXT VIEW INSIDE SCROLL VIEW \n
+    If you want text view to push the parent views bounds you should \n
+    deselect scrolling in Storyboard.\n
+
+http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html \n
+https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size \n
+https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property \n
+https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift \n
+
+Problem building on real iphone after adding SDK \n
 https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
-stackoverflow.com
+stackoverflow.com \n
 
 ## Licence Information 
 Please check out [LICENSE](LICENSE) for information. 
