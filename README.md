@@ -52,7 +52,7 @@ All the details view (news, event, company) are based on the same scrollview whi
 Get a beta test group NOW! and get them to try the existing version
 Understand the errors from airbrake
 
-### Usable links
+## Practical links
 Multiple good swift topics  
 http://roadfiresoftware.com/blog/  
 http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/  
@@ -79,7 +79,17 @@ It's possible to use Objective-C code in your Swift project. This requires a "br
 https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_80  
 http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/  
 
-SETTING UP SCROLLVIEW :[  
+http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html  
+https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
+https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property  
+https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift  
+
+Problem building on real iphone after adding SDK  
+https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
+
+### Practical Tips 
+
+Setting up a ScrollView
 https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implementation-for-only-vertical-scrolling  
 
 1. Create your UIScrollView *scrollView.  
@@ -102,18 +112,21 @@ https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implemen
 
 6. Pin any other view elements to contentView as you normally would.  
 
-ADDING TEXT VIEW INSIDE SCROLL VIEW :]  
-   If you want text view to push the parent views bounds you should  
-   deselect scrolling in Storyboard.  
+(7.) If you want text view to push the parent views bounds you should deselect scrolling in Storyboard.  
 
-http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html  
-https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
-https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property  
-https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift  
+Using SwiftyJSON!  
+    let json = JSON(data: string.data(using: String.Encoding.utf8)!)  
+    print(json["key"])      --> value   
+    OR  
+    let json = JSON.init(parseJSON: string)  
 
-Problem building on real iphone after adding SDK  
-https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
+Make cell-size follow content  
+1. You need to set the StretchView margin constraints that is stretching the cell to be equal to the contentView of the cell.  
+2. Add Stretch-View: Height- and Width-constraints  
 
+3. Add Stretch-View: top-, leading- and bottom-margin constraints to 0  
+
+4. Resize cell to match the stretchViews margins
 
 ## Licence Information 
 Please check out [LICENSE](LICENSE) for information. 
