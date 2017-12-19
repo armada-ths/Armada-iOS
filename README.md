@@ -102,9 +102,9 @@ https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implemen
 
 6. Pin any other view elements to contentView as you normally would.  
 
-ADDING TEXT VIEW INSIDE SCROLL VIEW :] 
-    If you want text view to push the parent views bounds you should  
-    deselect scrolling in Storyboard.  
+ADDING TEXT VIEW INSIDE SCROLL VIEW :]  
+   If you want text view to push the parent views bounds you should  
+   deselect scrolling in Storyboard.  
 
 http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html  
 https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
