@@ -59,7 +59,7 @@ Understand the errors from airbrake
 
 www.udacity.com  
 
-"Intro to iOS..." slightly overlaps with "UIKit Fundamentals". I highly encourage you to do the "Grand Central Dispatch"-tutorial, queues are very(!) important in Swift. "iOS Persistence and Core Data" touches on creating your own datamodel using the Xcode equivalent to SQL-database models – very difficult stuff.  
+"Intro to iOS..." slightly overlaps with "UIKit Fundamentals". I highly encourage you to do the "Grand Central Dispatch"-tutorial, queues are very(!) important in Swift. "iOS Persistence and Core Data" touches on creating your own datamodel using the Xcode equivalent to SQL-database models, very difficult stuff – I didn't finish that tutorial.  
 
 #### Intro to iOS App Development with Swift  
 Absolute basics  
