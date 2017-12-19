@@ -102,7 +102,7 @@ https://stackoverflow.com/questions/27326924/swift-uiscrollview-correct-implemen
 
 6. Pin any other view elements to contentView as you normally would.  
 
-ADDING TEXT VIEW INSIDE SCROLL VIEW  
+ADDING TEXT VIEW INSIDE SCROLL VIEW :] 
     If you want text view to push the parent views bounds you should  
     deselect scrolling in Storyboard.  
 
@@ -113,7 +113,7 @@ https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift
 
 Problem building on real iphone after adding SDK  
 https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
-stackoverflow.com  
+
 
 ## Licence Information 
 Please check out [LICENSE](LICENSE) for information. 
