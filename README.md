@@ -150,15 +150,16 @@ problem? --> https://stackoverflow.com/questions/37268368/swift-bridging-header-
 5. make changes in info.plist  
 
 info.plist  
-	LIAppId: {Application Id}  
-	URL types  
-		Item 0  
-			URL Schemes  
-				Item 0: li{Application Id}  
-	LSApplicationQueriesSchemes:  
-		Item 0: linkedin  
-		Item 1: linkedin-sdk  
-		Item 2:	linkedin-sdk2  
+&nbsp;&nbsp;&nbsp; LIAppId: {Application Id}  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; URL types  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Item 0  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; URL Schemes  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Item 0: li{Application Id}  
+
+&nbsp;&nbsp;&nbsp; LSApplicationQueriesSchemes:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Item 0: linkedin  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Item 1: linkedin-sdk  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Item 2: linkedin-sdk2  
 
 ## Licence Information 
 Please check out [LICENSE](LICENSE) for information. 
