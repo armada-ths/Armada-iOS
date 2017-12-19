@@ -30,9 +30,13 @@ To push an  app to App Store you need to have the role of app manager (not just 
 ### Core data:
 The database, of exhibitors, is kept up to date with backend with the help of the classes in the data/api directory. This means that the exhibitor list completely decoupled from the network and that it can be used offline (as long as the data has been fetched once). Currently ETags are used when querying the backend so that old data isn't fetched unnecessarily.
 ### Matching:
-Swiping between pages in the matchmaking view is made possible with the matchDataClass. This class holds the information of which view the user is currently interacting with and the selections made in each of the match-making views. When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack. Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes. On matching interest it's not clear that the view is scrollable (this is an UX issue, but worth righting here). The second page ("What are you looking for") is not iPhone X compatible at the moment. Page 6 ("How big is your future employer") is on the verge of not being iPhone X compatible.
+Swiping between pages in the matchmaking view is made possible with the matchDataClass. This class holds the information of which view the user is currently interacting with and the selections made in each of the match-making views.  
 
+When swiping left a new view is put on the view-stack and when swiping right the current view is removed from the view-stack.   
+Changing the order or adding/removing a view in the Matching section requires hardcoding those views classes.  
 
+On matching interest it's not clear that the view is scrollable (this is an UX issue, but worth writing here).  
+The second page ("What are you looking for") is not iPhone X compatible at the moment. Page 6 ("How big is your future employer") is on the verge of not being iPhone X compatible.  
 ### Events: 
 The events are made by a GET request to the AIS. An issue which should be changed is that event don’t get labeled as “PAST” until the day has passed (e.g an event which ended 02.00 on the 23 november, will be set as “TODAY” until midnight, this should be changed)
 ### News: 
@@ -53,36 +57,40 @@ Get a beta test group NOW! and get them to try the existing version
 Understand the errors from airbrake
 
 ## Practical links
-Multiple good swift topics  
-http://roadfiresoftware.com/blog/  
+
+Keyboard-shortcuts in Xcode  
 http://roadfiresoftware.com/2015/05/useful-xcode-keyboard-shortcuts-for-developers/  
 
-Never tried to use this but seems interresting.  
+http://fuckingswiftblocksyntax.com/  
+http://goshdarnclosuresyntax.com/  
+
+http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html  
+https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property  
+https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift  
+
+Multiple good swift topics  
+http://roadfiresoftware.com/blog/  
+
+Never tried to use this swift-sublime-package
 https://packagecontrol.io/packages/Swift  
 
-Iphone X compatability to be implemented 2018.  
+Iphone resolutions
 https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions  
+https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
 
 Saving stuff localy.  
 https://www.hackingwithswift.com/read/12/2/reading-and-writing-basics-userdefaults  
-custom saving.  
+
+Custom saving.  
 https://www.hackingwithswift.com/read/12/3/fixing-project-10-nscoding  
 
 Collection view tutorial  
 http://www.brianjcoleman.com/tutorial-collection-view-using-swift  
 https://www.raywenderlich.com/136161/uicollectionview-tutorial-reusable-views-selection-reordering  
 
-http://fuckingswiftblocksyntax.com/  
-http://goshdarnclosuresyntax.com/  
-
 It's possible to use Objective-C code in your Swift project. This requires a "bridging header"  
 https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html#//apple_ref/doc/uid/TP40014216-CH10-XID_80  
 http://www.learnswiftonline.com/getting-started/adding-swift-bridging-header/  
-
-http://www.electricpeelsoftware.com/2014/08/12/map-filter-reduce.html  
-https://stackoverflow.com/questions/24110762/swift-determine-ios-screen-size  
-https://stackoverflow.com/questions/25398753/swift-willset-didset-and-get-set-methods-in-a-property  
-https://stackoverflow.com/questions/39676939/how-does-string-index-work-in-swift  
 
 Problem building on real iphone after adding SDK  
 https://stackoverflow.com/questions/37806538/code-signing-is-required-for-product-type-application-in-sdk-ios-10-0-stic
