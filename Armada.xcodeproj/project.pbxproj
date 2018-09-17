@@ -938,6 +938,7 @@
 				CODE_SIGN_ENTITLEMENTS = Armada.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3HHCQ68669;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -947,10 +948,13 @@
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=300";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -973,10 +977,12 @@
 				INFOPLIST_FILE = Teststs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=300";
 				PRODUCT_BUNDLE_IDENTIFIER = se.ths.kth.Aramda;
 				PRODUCT_NAME = Armada;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
