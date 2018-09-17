@@ -185,7 +185,7 @@ class matchExhibitors: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
+    // swiftlint:disable cyclomatic_complexity
     func reload(_ sender:AnyObject){
         let companies = CatalogueFilter.filteredCompanies
         if(id1 != nil){
@@ -384,6 +384,8 @@ class matchExhibitors: UITableViewController {
             refreshControl?.endRefreshing()
         }
     }
+    // swiftlint:enable cyclomatic_complexity
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if let controller = segue.destination as? matchDetailExhibitor,
             let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
