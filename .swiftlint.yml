@@ -1,0 +1,43 @@
+excluded:
+  - Carthage
+  - Pods
+  - SwiftLint/Common/3rdPartyLib
+
+opt_in_rules:
+  # Rules that improve performance
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - first_where
+  - sorted_first_last
+
+  # Rules that has autocorrection
+  - explicit_init
+  - implicit_return
+  - joined_default_parameter
+  - literal_expression_end_indentation
+  - nimble_operator
+  - number_separator
+  - operator_usage_whitespace
+  - redundant_nil_coalescing
+  - sorted_imports
+  - unneeded_parentheses_in_closure_argument
+
+line_length: 120
+function_body_length:
+  warning: 40
+type_body_length:
+  warning: 200
+
+# TODO: Clean up code so this should result errors, not simply warnings
+empty_count:
+  severity: warning
+force_cast:
+  severity: warning
+force_try:
+  severity: warning
+
+# TODO: Opt in rules later
+disabled_rules:
+  - type_name
+  - identifier_name

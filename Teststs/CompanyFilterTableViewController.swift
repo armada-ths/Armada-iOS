@@ -144,7 +144,7 @@ class CompanyFilterTableViewController: UITableViewController, CompanyBoolCellDe
     
     func armadaField(_ armadaField: ArmadaField, isOn: Bool) {
         if isOn {
-            CompanyFilter.armadaFields = CompanyFilter.armadaFields + [armadaField]
+            CompanyFilter.armadaFields += [armadaField]
         } else {
             CompanyFilter.armadaFields = CompanyFilter.armadaFields.filter { $0 != armadaField }
         }
