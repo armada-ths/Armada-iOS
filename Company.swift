@@ -17,7 +17,6 @@ open class Company: NSManagedObject {
     class func companyFromJson(_ json: AnyObject, managedObjectContext: NSManagedObjectContext) -> Company? {
     
         if let name = json["name"] as? String {
-            print(name)
             
             var website = json["company_website"] as? String ?? ""
             if (!website.starts(with: "http://") && !website.starts(with:"https://") && website != ""){
@@ -118,7 +117,6 @@ open class Company: NSManagedObject {
             return company
         } else {
             let name = json["name"]
-            print(name)
             print("Failed to parse company")
         }
         
