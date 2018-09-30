@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ExhibitorTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
@@ -28,15 +29,20 @@ class ExhibitorTableViewCell: UITableViewCell {
 
         guard let url = URL(string: urlString) else { return }
 
-        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            if let imageData = data {
-                let image = UIImage(data: imageData)
-                DispatchQueue.main.async {
-                    self.logo.image = image
-                }
-            }
+        logo.sd_setImage(with: url)
 
-        }).resume()
+//        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+//            if let imageData = data {
+//                let image = UIImage(data: imageData)
+//                DispatchQueue.main.async {
+//                    self.logo.image = image
+//                }
+//            }
+//
+//        }).resume()
     }
 
+    override func prepareForReuse() {
+        self.logo.image = nil
+    }
 }

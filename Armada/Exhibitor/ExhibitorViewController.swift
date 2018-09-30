@@ -3,7 +3,6 @@ import UIKit
 class ExhibitorViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var button: UIButton!
 
     fileprivate var exhibitors = [Exhibitor]() {
         didSet {
@@ -12,13 +11,11 @@ class ExhibitorViewController: UIViewController {
             })
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                self.showFilteredExhibitors = true
             }
         }
     }
     fileprivate var filteredExhibitors = [Exhibitor]() {
         didSet {
-
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -36,17 +33,12 @@ class ExhibitorViewController: UIViewController {
             self.exhibitors = exhibitors
         }
         filteredExhibitors = exhibitors
-
-        button.addTarget(self, action: #selector(filterTapped), for: .touchUpInside)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
-    func filterTapped() {
-        present(FilterViewController(), animated: true)
-    }
 }
 
 extension ExhibitorViewController: UISearchBarDelegate {
@@ -56,15 +48,16 @@ extension ExhibitorViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
+            filteredExhibitors = []
             showFilteredExhibitors = false
-            return
         }
-        showFilteredExhibitors = true
 
-        filteredExhibitors = exhibitors.filter ({
-            print($0.name)
-            return $0.name.lowercased().hasPrefix(searchText.lowercased())
-        })
+        filteredExhibitors = exhibitors.filter { exhibitor -> Bool in
+            return exhibitor.name.lowercased().contains(searchText.lowercased())
+        }
+        if !filteredExhibitors.isEmpty {
+            showFilteredExhibitors = true
+        }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -86,7 +79,11 @@ extension ExhibitorViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let exhibitor = exhibitors[indexPath.row]
+        var exhibitor = exhibitors[indexPath.row]
+
+        if !filteredExhibitors.isEmpty {
+            exhibitor = filteredExhibitors[indexPath.row]
+        }
 
         let cell: ExhibitorTableViewCell = tableView.dequeueReusableCell(
             withIdentifier: ExhibitorTableViewCell.reuseIdentifier,

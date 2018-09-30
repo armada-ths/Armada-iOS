@@ -23,7 +23,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Ewd-XJ-ZNd">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZEp-63-beV" customClass="TabBarController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZEp-63-beV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="eak-ZC-Sdy"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -32,6 +32,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="fWs-yz-Ypd" kind="relationship" relationship="viewControllers" id="maq-JX-zKM"/>
                         <segue destination="4Pb-Z4-Zgt" kind="relationship" relationship="viewControllers" id="QXw-yx-Mzx"/>
@@ -48,7 +53,7 @@
         <scene sceneID="ekS-Tz-eBf">
             <objects>
                 <viewControllerPlaceholder storyboardName="ExhibitorViewController" id="fWs-yz-Ypd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="oIP-Ki-TCp"/>
+                    <tabBarItem key="tabBarItem" title="Exhibitors" image="Armada-icon" id="oIP-Ki-TCp"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MyT-BT-b6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2342,10 +2347,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9d4-ul-4es" userLabel="headerview">
-                                <rect key="frame" x="0.0" y="20" width="414" height="88"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="95"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match2text" translatesAutoresizingMaskIntoConstraints="NO" id="igh-0s-7ad">
-                                        <rect key="frame" x="39" y="15" width="336" height="73"/>
+                                        <rect key="frame" x="23" y="15" width="368" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="80" id="TbC-IM-hsf"/>
                                             <constraint firstAttribute="width" secondItem="igh-0s-7ad" secondAttribute="height" multiplier="1008:219" id="lpX-kr-N67"/>
@@ -2360,13 +2365,13 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" image="match2select" translatesAutoresizingMaskIntoConstraints="NO" id="ZwF-gf-o0b" userLabel="selectimg">
-                                <rect key="frame" x="20" y="108" width="202" height="593"/>
+                                <rect key="frame" x="20" y="115" width="199.66666666666666" height="586"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZwF-gf-o0b" secondAttribute="height" multiplier="541:1589" id="NvR-13-PXm"/>
                                 </constraints>
                             </imageView>
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLj-pF-xR9" userLabel="button1">
-                                <rect key="frame" x="35" y="205" width="20" height="20"/>
+                                <rect key="frame" x="35" y="212" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CLj-pF-xR9" secondAttribute="height" multiplier="1:1" id="nsn-bi-d2w"/>
                                     <constraint firstAttribute="width" constant="20" id="vqP-EL-tBw"/>
@@ -2380,7 +2385,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQY-iy-1GX" userLabel="button2">
-                                <rect key="frame" x="100" y="294" width="20" height="20"/>
+                                <rect key="frame" x="100" y="301" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dQY-iy-1GX" secondAttribute="height" multiplier="1:1" id="GWJ-Ui-eRB"/>
                                     <constraint firstAttribute="width" constant="20" id="pZW-On-zJB"/>
@@ -2394,7 +2399,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkl-Pp-UrW" userLabel="button3">
-                                <rect key="frame" x="167" y="409" width="20" height="20"/>
+                                <rect key="frame" x="167" y="416" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="6T0-i2-H2G"/>
                                     <constraint firstAttribute="width" secondItem="lkl-Pp-UrW" secondAttribute="height" multiplier="1:1" id="Sy7-AP-D5p"/>
@@ -2408,7 +2413,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rPf-MJ-O8O" userLabel="button4">
-                                <rect key="frame" x="75" y="510" width="20" height="20"/>
+                                <rect key="frame" x="75" y="517" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="JbU-Ah-xAk"/>
                                     <constraint firstAttribute="width" secondItem="rPf-MJ-O8O" secondAttribute="height" multiplier="1:1" id="mxW-kl-Ccb"/>
@@ -2422,19 +2427,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1Q-1Q-yxU">
-                                <rect key="frame" x="85" y="204.66666666666666" width="44" height="21"/>
+                                <rect key="frame" x="85" y="211.66666666666666" width="44" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52c-Ne-DRb">
-                                <rect key="frame" x="150" y="293.66666666666669" width="46.666666666666657" height="21"/>
+                                <rect key="frame" x="150" y="300.66666666666669" width="46.666666666666657" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xml-U7-hjA">
-                                <rect key="frame" x="217" y="408.66666666666669" width="46.666666666666686" height="21"/>
+                                <rect key="frame" x="217" y="415.66666666666669" width="46.666666666666686" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2447,31 +2452,31 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5d-dU-Mkp">
-                                <rect key="frame" x="125" y="509.66666666666674" width="47" height="21"/>
+                                <rect key="frame" x="125" y="516.66666666666663" width="47" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lf-59-Ks5">
-                                <rect key="frame" x="55" y="200" width="96" height="30"/>
+                                <rect key="frame" x="55" y="207" width="96" height="30"/>
                                 <connections>
                                     <action selector="button1Push:" destination="84X-xr-Qdi" eventType="touchUpInside" id="X2n-um-L5Y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1m-pi-iON">
-                                <rect key="frame" x="120" y="289" width="98.666666666666686" height="30"/>
+                                <rect key="frame" x="120" y="296" width="98.666666666666686" height="30"/>
                                 <connections>
                                     <action selector="button2Push:" destination="84X-xr-Qdi" eventType="touchUpInside" id="G25-rV-4qg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAl-RP-111">
-                                <rect key="frame" x="187" y="404" width="98.666666666666686" height="30"/>
+                                <rect key="frame" x="187" y="411" width="98.666666666666686" height="30"/>
                                 <connections>
                                     <action selector="button3Push:" destination="84X-xr-Qdi" eventType="touchUpInside" id="bd1-Kx-P5u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYe-oD-mlH">
-                                <rect key="frame" x="95" y="505" width="99" height="30"/>
+                                <rect key="frame" x="95" y="512" width="99" height="30"/>
                                 <connections>
                                     <action selector="button4Push:" destination="84X-xr-Qdi" eventType="touchUpInside" id="O4a-bs-rmq"/>
                                 </connections>
@@ -3644,7 +3649,7 @@
                                                             <rect key="frame" x="0.0" y="197" width="414" height="98.666666666666686"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppv-1f-Oqw">
-                                                                    <rect key="frame" x="97" y="24.333333333333343" width="220" height="50"/>
+                                                                    <rect key="frame" x="97" y="-25.666666666666657" width="220" height="150"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="220" id="8Hb-To-X2W"/>
                                                                     </constraints>
@@ -4278,61 +4283,62 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EventCalendar" width="322" height="316"/>
-        <image name="EventPin" width="218" height="317"/>
+        <image name="Armada-icon" width="30" height="30"/>
+        <image name="EventCalendar" width="77.279998779296875" height="75.839996337890625"/>
+        <image name="EventPin" width="52.319999694824219" height="76.080001831054688"/>
         <image name="aboutLogo" width="32" height="32"/>
         <image name="aboutLogo-1" width="32" height="32"/>
         <image name="alert" width="351" height="367"/>
-        <image name="alertButton" width="143" height="40"/>
-        <image name="background-2" width="1325" height="505"/>
-        <image name="backwave" width="933" height="316"/>
+        <image name="alertButton" width="143" height="40.333332061767578"/>
+        <image name="background-2" width="318" height="121.19999694824219"/>
+        <image name="backwave" width="223.91999816894531" height="75.839996337890625"/>
         <image name="book" width="32" height="32"/>
         <image name="book-1" width="32" height="32"/>
         <image name="calendar_2-1" width="32" height="32"/>
         <image name="companyBackground" width="268" height="484"/>
         <image name="div" width="31" height="31"/>
-        <image name="diversity" width="127" height="133"/>
-        <image name="doneBottom" width="375" height="351"/>
-        <image name="doneButton" width="336" height="65"/>
+        <image name="diversity" width="127.33333587646484" height="133"/>
+        <image name="doneBottom" width="375" height="351.33334350585938"/>
+        <image name="doneButton" width="336" height="65.666664123535156"/>
         <image name="doneDots" width="5" height="32"/>
         <image name="doneTop" width="392" height="367"/>
         <image name="dots4" width="146" height="44"/>
         <image name="ericsson-logo" width="280" height="248"/>
-        <image name="eventFeed" width="16" height="17"/>
+        <image name="eventFeed" width="16.666666030883789" height="17"/>
         <image name="eventLogo" width="32" height="32"/>
-        <image name="gArrow" width="16" height="30"/>
-        <image name="greenWeb" width="85" height="31"/>
+        <image name="gArrow" width="16.666666030883789" height="30.333333969116211"/>
+        <image name="greenWeb" width="85.333335876464844" height="31.666666030883789"/>
         <image name="headWorld" width="375" height="100"/>
-        <image name="linkedinlogo" width="216" height="50"/>
-        <image name="match" width="48" height="32"/>
-        <image name="match-1" width="45" height="30"/>
-        <image name="match1dots" width="154" height="44"/>
-        <image name="match1group81" width="375" height="351"/>
-        <image name="match1text" width="301" height="99"/>
-        <image name="match2dots" width="146" height="44"/>
-        <image name="match2select" width="180" height="529"/>
-        <image name="match2text" width="336" height="73"/>
-        <image name="match3area1" width="125" height="331"/>
-        <image name="match3area2" width="126" height="331"/>
-        <image name="match3area3" width="125" height="331"/>
+        <image name="linkedinlogo" width="650" height="150"/>
+        <image name="match" width="144" height="97"/>
+        <image name="match-1" width="32.400001525878906" height="22.079999923706055"/>
+        <image name="match1dots" width="462" height="132"/>
+        <image name="match1group81" width="1125" height="1054"/>
+        <image name="match1text" width="905" height="297"/>
+        <image name="match2dots" width="438" height="132"/>
+        <image name="match2select" width="541" height="1589"/>
+        <image name="match2text" width="1008" height="219"/>
+        <image name="match3area1" width="125.66666412353516" height="331.33334350585938"/>
+        <image name="match3area2" width="126" height="331.66665649414062"/>
+        <image name="match3area3" width="125.66666412353516" height="331.66665649414062"/>
         <image name="match3dots" width="146" height="44"/>
-        <image name="match3gbg" width="125" height="331"/>
-        <image name="match3hela" width="125" height="331"/>
-        <image name="match3malmo" width="125" height="331"/>
-        <image name="match3sthlm" width="125" height="331"/>
-        <image name="match5dots" width="146" height="44"/>
-        <image name="match5travel" width="682" height="699"/>
-        <image name="match6dots" width="146" height="44"/>
+        <image name="match3gbg" width="125.66666412353516" height="331.33334350585938"/>
+        <image name="match3hela" width="125.66666412353516" height="331.33334350585938"/>
+        <image name="match3malmo" width="125.66666412353516" height="331.33334350585938"/>
+        <image name="match3sthlm" width="125.66666412353516" height="331.33334350585938"/>
+        <image name="match5dots" width="438" height="132"/>
+        <image name="match5travel" width="2047" height="2099"/>
+        <image name="match6dots" width="438" height="132"/>
         <image name="match7dots" width="146" height="44"/>
         <image name="match8dots" width="146" height="44"/>
         <image name="matchIntrest" width="674" height="748"/>
-        <image name="matchWorldMap" width="384" height="178"/>
-        <image name="newsLogo" width="33" height="32"/>
-        <image name="newsLogo-1" width="33" height="32"/>
-        <image name="quality" width="116" height="125"/>
-        <image name="redomatch" width="173" height="45"/>
+        <image name="matchWorldMap" width="384.33334350585938" height="178.66667175292969"/>
+        <image name="newsLogo" width="33.333332061767578" height="32"/>
+        <image name="newsLogo-1" width="33.333332061767578" height="32"/>
+        <image name="quality" width="55.680000305175781" height="60"/>
+        <image name="redomatch" width="173.66667175292969" height="45.333332061767578"/>
         <image name="sus" width="31" height="31"/>
-        <image name="sustainability" width="118" height="124"/>
+        <image name="sustainability" width="56.639999389648438" height="59.520000457763672"/>
         <image name="topBack" width="375" height="110"/>
     </resources>
     <inferredMetricsTieBreakers>
