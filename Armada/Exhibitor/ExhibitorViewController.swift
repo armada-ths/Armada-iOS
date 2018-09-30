@@ -21,6 +21,13 @@ class ExhibitorViewController: UIViewController {
             }
         }
     }
+    fileprivate var testExhibitors = [Exhibitor]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     fileprivate var showFilteredExhibitors: Bool = false
 
     override func viewDidLoad() {
@@ -55,6 +62,22 @@ extension ExhibitorViewController: UISearchBarDelegate {
         filteredExhibitors = exhibitors.filter { exhibitor -> Bool in
             return exhibitor.name.lowercased().contains(searchText.lowercased())
         }
+        
+        
+        //var types = ["Trainee", "Internship"]
+        //testExhibitors = exhibitors.filter{!$0.employments.filter{types.contains($0.name)}.isEmpty};
+        
+//        var countries = ["Sweden \u2013 Svealand", "World \u2013 Europe"]
+//        testExhibitors = exhibitors.filter{!$0.locations.filter{countries.contains($0.name)}.isEmpty};
+        
+        
+//        values is missing in the model
+//        var values = ["Sustainability", "Innovation"]
+//        testExhibitors = exhibitors.filter{!$0.values.filter{countries.contains($0.name)}.isEmpty};
+        
+//          var industries = ["Architecture", "Environmental Sector"]
+//          testExhibitors = exhibitors.filter{!$0.industries.filter{countries.contains($0.name)}.isEmpty};
+        
         if !filteredExhibitors.isEmpty {
             showFilteredExhibitors = true
         }
