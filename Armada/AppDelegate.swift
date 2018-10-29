@@ -1,5 +1,4 @@
 import UIKit
-import OneSignal
 
 struct ColorScheme {
     static let leilaDesignGrey = UIColor(hex: 0xF8F7F7)
