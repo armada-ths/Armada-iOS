@@ -10,7 +10,6 @@ import UIKit
 
 extension UIStoryboard {
     func initialViewController<T: UIViewController>() -> T {
-        print(T.self)
         return self.instantiateInitialViewController() as! T
     }
 }

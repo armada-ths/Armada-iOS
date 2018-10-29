@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Bh-R7-04x">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -13,17 +13,78 @@
         <!--Filter View Controller-->
         <scene sceneID="BpB-Eq-mG7">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Bh-R7-04x" customClass="FilterViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Bh-R7-04x" customClass="FilterViewController" customModule="Armada" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lWg-bw-afI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Jq-3T-ASg">
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="OyS-SL-gvF">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="ZWD-cA-RxF">
+                                            <color key="tintColor" red="0.0" green="0.85882352939999995" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="dismiss:" destination="8Bh-R7-04x" id="TFJ-gM-sz6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="62g-gQ-5y3">
+                                            <color key="tintColor" red="0.0" green="0.85882352939999995" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="done:" destination="8Bh-R7-04x" id="7i9-yK-Men"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tB4-06-HfW">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterEmploymentCell" id="CEf-X1-7SC" customClass="FilterEmploymentCell" customModule="Armada" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CEf-X1-7SC" id="qnF-ii-8KN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alp-3b-3A5">
+                                                    <rect key="frame" x="15" y="12" width="345" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label" destination="alp-3b-3A5" id="r2o-fM-TMc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tB4-06-HfW" firstAttribute="bottom" secondItem="Hzx-dO-crm" secondAttribute="bottom" id="E7B-Rd-feP"/>
+                            <constraint firstItem="5Jq-3T-ASg" firstAttribute="trailing" secondItem="Hzx-dO-crm" secondAttribute="trailing" id="Lbu-GN-i3j"/>
+                            <constraint firstItem="5Jq-3T-ASg" firstAttribute="top" secondItem="Hzx-dO-crm" secondAttribute="top" id="NyD-kW-X1H"/>
+                            <constraint firstItem="5Jq-3T-ASg" firstAttribute="leading" secondItem="Hzx-dO-crm" secondAttribute="leading" id="dhP-Pg-fTq"/>
+                            <constraint firstItem="tB4-06-HfW" firstAttribute="leading" secondItem="Hzx-dO-crm" secondAttribute="leading" id="hQ1-eT-dAb"/>
+                            <constraint firstItem="tB4-06-HfW" firstAttribute="top" secondItem="5Jq-3T-ASg" secondAttribute="bottom" id="uJ4-hx-Ihx"/>
+                            <constraint firstItem="tB4-06-HfW" firstAttribute="trailing" secondItem="Hzx-dO-crm" secondAttribute="trailing" id="xWi-ib-Eo3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Hzx-dO-crm"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="tB4-06-HfW" id="VUQ-JQ-EXB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kp3-Q3-WJD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="104.8" y="28.335832083958024"/>
+            <point key="canvasLocation" x="104.8" y="28.078817733990149"/>
         </scene>
     </scenes>
 </document>

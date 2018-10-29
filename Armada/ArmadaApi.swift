@@ -209,7 +209,6 @@ open class _ArmadaApi {
     
     var companies = [Company]()
     
-    var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
     
     fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     
@@ -307,71 +306,6 @@ open class _ArmadaApi {
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
-    
-    func generateMap() {
-        var numberOfCompaniesForPropertyValueMap = [CompanyProperty:[String: Int]]()
-        
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.workFields] = [:]
-            let fetchRequest = NSFetchRequest<WorkField>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "WorkField", in: managedObjectContext)!
-            let workFields =  try! managedObjectContext.fetch(fetchRequest)
-            for workField in workFields {
-                numberOfCompaniesForPropertyValueMap[.workFields]![workField.workField] = workField.companies.count
-            }
-            }()
-        
-        
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.programmes] = [:]
-            let fetchRequest = NSFetchRequest<Programme>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Programme", in: managedObjectContext)!
-            let programmes =  try! managedObjectContext.fetch(fetchRequest)
-            for programme in programmes {
-                numberOfCompaniesForPropertyValueMap[.programmes]![programme.programme] = programme.companies.count
-            }
-            }()
-        
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.companyValues] = [:]
-            let fetchRequest = NSFetchRequest<CompanyValue>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "CompanyValue", in: managedObjectContext)!
-            let companyValues =  try! managedObjectContext.fetch(fetchRequest)
-            for companyValue in companyValues {
-                numberOfCompaniesForPropertyValueMap[.companyValues]![companyValue.companyValue] = companyValue.companies.count
-            }
-            }()
-        
-        
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.continents] = [:]
-            let fetchRequest = NSFetchRequest<Continent>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Continent", in: managedObjectContext)!
-            let continents =  try! managedObjectContext.fetch(fetchRequest)
-            for continent in continents {
-                numberOfCompaniesForPropertyValueMap[.continents]![continent.continent] = continent.companies.count
-            }
-            }()
-        
-        
-        _ = {
-            numberOfCompaniesForPropertyValueMap[.jobTypes] = [:]
-            let fetchRequest = NSFetchRequest<JobType>()
-            fetchRequest.entity = NSEntityDescription.entity(forEntityName: "JobType", in: managedObjectContext)!
-            let jobTypes =  try! managedObjectContext.fetch(fetchRequest)
-            for jobType in jobTypes {
-                numberOfCompaniesForPropertyValueMap[.jobTypes]![jobType.jobType] = jobType.companies.count
-            }
-            }()
-        
-        
-        self.numberOfCompaniesForPropertyValueMap = numberOfCompaniesForPropertyValueMap
-    }
-    
-    func numberOfCompaniesContainingValue(_ value: String, forProperty property: CompanyProperty) -> Int? {
-        return numberOfCompaniesForPropertyValueMap[property]![value]
-    }
-    
     
     fileprivate init() {
         let cacheSizeMemory = 256*1024*1024
@@ -672,60 +606,6 @@ open class _ArmadaApi {
         catch{
         }
         return []
-    }
-    
-    func matchFromServer(_ student_id: Int,_ callback: @escaping (Dictionary<String, Any>, Bool, String) -> Void) {
-        let request = NSMutableURLRequest(url: (URL(string: (matchUrl)))!)
-        request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-            if (data == nil){
-                callback(Dictionary<String, Any>(), true, (error?.localizedDescription)!)
-            }
-            else {
-                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                do {
-                    let parsedjson = JSON.init(parseJSON: responseString as! String)
-                    
-                    var tmpid = 0
-                    var areas = Array<Dictionary<String, Any>>()
-                    for (_, val) in parsedjson["areas"] {
-                            areas.append(["id": val["id"].int, "field": val["field"].rawString(), "area": val["area"].string])
-
-                    }
-                    //print(areas)
-                    var slider = Dictionary<String, Any>()
-                    var grader = Dictionary<String, Any>()
-                    for (_, val) in parsedjson["questions"] {
-                        if val["type"].string == "slider" {
-                            slider["step"] = val["step"].int
-                            slider["min"] = val["min"].int
-                            slider["max"] = val["max"].int
-                            slider["question"] = val["question"].string
-                            slider["type"] = val["type"].string
-                        }
-                        if val["type"].string == "grading" {
-                            grader["question"] = val["question"].string
-                            grader["type"] = val["type"].string
-                            grader["steps"] = val["steps"].int
-                        }
-                    }
-                    // save to phone defaults
-                    var match: matchDataClass
-                    if matchDataClass().load() == nil {
-                        match = matchDataClass()
-                    } else {
-                        match = matchDataClass().load()!
-                    }
-                    match.grader = grader
-                    match.slider = slider
-                    match.areas = areas                    
-                    match.createAreasForced()
-                    match.save()
-                    
-                } catch {
-                }
-            }
-        }.resume()
     }
     
     func newsFromServer(_ callback: @escaping (Array<News>, Bool, String) -> Void) {

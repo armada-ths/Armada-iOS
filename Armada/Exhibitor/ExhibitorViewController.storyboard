@@ -21,12 +21,15 @@
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z88-cQ-szQ">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.0" green="0.84313725490196079" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.0" green="0.85882352941176465" blue="0.63137254901960782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Exhibitors" id="If6-yF-C5M">
                                         <barButtonItem key="rightBarButtonItem" title="Filter" id="tmU-aq-9xe">
                                             <color key="tintColor" red="0.0" green="0.84313725490000002" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="filterButtonTapped:" destination="FL2-jn-a1G" id="bKs-8G-mdT"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -40,7 +43,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IXj-x9-N4k">
-                                <rect key="frame" x="0.0" y="144" width="375" height="668"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="619"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ExhibitorTableViewCell" rowHeight="80" id="MCb-wY-fJx" customClass="ExhibitorTableViewCell" customModule="Armada" customModuleProvider="target">
@@ -95,6 +98,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Pd-S9-lbg"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchBar" destination="m63-dx-x2H" id="R6Z-C0-kOa"/>
                         <outlet property="tableView" destination="IXj-x9-N4k" id="R1Y-IB-H1g"/>
