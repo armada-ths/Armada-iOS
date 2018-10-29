@@ -207,9 +207,6 @@ func >>=<T, G>(response: Response<T>, transform: (T) -> Response<G>) -> Response
 let ArmadaApi = _ArmadaApi()
 open class _ArmadaApi {
     
-    var companies = [Company]()
-    
-    
     fileprivate let applicationDocumentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
     
     fileprivate lazy var managedObjectModel: NSManagedObjectModel = {
@@ -263,12 +260,9 @@ open class _ArmadaApi {
         return persistentStoreCoordinator
     }()
     
-    
-    static let companiesFileName = "companies.json"
-    
+
     static let dir = (NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as [String])[0]
     
-    //let apiUrl = "http://armada.nu/api"
     let apiUrl = "https://ais.armada.nu/api"
     let newsUrl = "http://armada.nu"
     let matchUrl = "http://gotham.armada.nu/api/questions"
@@ -306,154 +300,6 @@ open class _ArmadaApi {
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
-    
-    fileprivate init() {
-        let cacheSizeMemory = 256*1024*1024
-        let cacheSizeDisk = 256*1024*1024
-        let sharedCache = URLCache(memoryCapacity: cacheSizeMemory, diskCapacity: cacheSizeDisk, diskPath: (NSTemporaryDirectory() as NSString).appendingPathComponent("nsurlcache"))
-        //URLCache.setSharedURLCache(sharedCache)
-        URLCache.shared = sharedCache
-        let stopWatch = StopWatch()
-        print(persistentStoreUrl)
-        
-        let fetchRequest = NSFetchRequest<Company>()
-        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Company", in: managedObjectContext)!
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-        companies = try! managedObjectContext.fetch(fetchRequest)
-        print("Result: \(companies.count)")
-        stopWatch.print("Fetching managed companies ")
-    }
-    
-    
-    func updateCompanies(_ callback: @escaping () -> ()) {
-        let stopWatch = StopWatch()
-        let fetchRequest = NSFetchRequest<Company>()
-        fetchRequest.entity = NSEntityDescription.entity(forEntityName: "Company", in: managedObjectContext)!
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))]
-        companies = (try? managedObjectContext.fetch(fetchRequest)) ?? []
-        
-        getCompaniesRespectingEtag() {
-            switch $0 {
-            case .success(let (_, usedCache, etag)):
-                if !usedCache {
-                    self.armadaUrlWithPath("exhibitors").getJson() {
-                        switch $0 {
-                        case .success(let json):
-                            if let companiesJson = json as? [AnyObject] {
-                                OperationQueue.main.addOperation {
-                                    print("DESTROYING THE DATABASE!!!!!")
-                                    if companiesJson.count > 0 {
-                                        for company in self.companies {
-                                            self.managedObjectContext.delete(company)
-                                        }
-                                        if let count = self.managedObjectContext.persistentStoreCoordinator?.persistentStores.count
-                                            , count > 0 {
-                                            try? self.managedObjectContext.save()
-                                        }
-                                        self.companies = []
-                                        for json in companiesJson {
-                                            if let company = Company.companyFromJson(json, managedObjectContext: self.managedObjectContext) {
-                                                company.etag = etag
-                                                self.companies.append(company)
-                                            }
-                                        }
-                                        self.storeLogos()
-                                        if let count = self.managedObjectContext.persistentStoreCoordinator?.persistentStores.count
-                                            , count > 0 {
-                                        try? self.managedObjectContext.save()
-                                        }
-                                    }
-                                    callback()
-                                }
-                            } else {
-                                callback()
-                            }
-                            
-                        case .error:
-                            callback()
-                        }
-                    }
-                } else {
-                    callback()
-                }
-            case .error(let error):
-                print(error)
-                callback()
-            }
-        }
-        
-        print("Result: \(companies.count)")
-        stopWatch.print("Fetching managed companies ")
-    }
-    
-    // Used for pre-fetching all companies logos - it's while the app is running in production
-    func storeLogos() {
-        let imageDirectory = applicationDocumentsDirectory.appendingPathComponent("logos")
-        for company in companies {
-            try! FileManager.default.createDirectory(at: imageDirectory, withIntermediateDirectories: true, attributes: nil)
-            if let url = URL(string: company.logoUrl) {
-                url.getData() {
-                    if case .success(let data) = $0 {
-                        try? data.write(to: imageDirectory.appendingPathComponent(company.imageName + ".png"), options: [.atomic])
-                    }
-                }
-            }
-        }
-    }
-    //2e5b04734f94c72083dd70b8d532c8cc
-    func getCompaniesRespectingEtag(_ callback: @escaping (Response<(Data, Bool, String)>) -> Void) {
-        let url = self.armadaUrlWithPath("exhibitors")
-        let session = URLSession.shared
-        let request = URLRequest(url: url)
-        var usedCache = false
-        let dataTask = session.dataTask(with: request, completionHandler: {
-            (data, response, error) in
-            var etag: String?
-            if let httpResponse = response as? HTTPURLResponse {
-                etag = httpResponse.etag
-                usedCache = httpResponse.etag == ArmadaApi.companies.first?.etag
-            }
-            if let data = data,
-                let etag = etag {
-                    let zebra = (data, usedCache, etag)
-                    print("Url: \(url.absoluteString), cached: \(usedCache)")
-                    callback(.success(zebra))
-            } else if let error = error {
-                callback(.error(error))
-            } else {
-                callback(.error(NSError(domain: "getData", code: 1337, userInfo: nil)))
-            }
-        }) 
-        dataTask.resume()
-    }
-    
-    var jobTypes: [String] {
-        return Array(Set(companies.flatMap({ $0.jobTypes }).map { $0.jobType })).sorted(by: <)
-    }
-    
-    var companyValues: [String] {
-        return Array(Set(companies.flatMap({ $0.companyValues }).map { $0.companyValue })).sorted(by: <)
-    }
-    
-    var workWays: [String] {
-        return Array(Set(companies.flatMap({ $0.workWays }).map { $0.workWay })).sorted(by: <)
-    }
-    
-    var continents: [String] {
-        return Array(Set(companies.flatMap({ $0.continents }).map { $0.continent })).sorted(by: <)
-    }
-    
-    var workFields: [String] {
-        return Array(Set(companies.flatMap({ $0.workFields }).map { $0.workField })).sorted(by: <)
-    }
-    
-    var educationTypes: [String] {
-        return Array(Set(companies.flatMap({ $0.programmes }).map { $0.programme })).sorted(by: <)
-    }
-    
-    var programmes: [String] {
-        return educationTypes
-    }
     
     func dateFromString(_ string: String) -> Date? {
         let dateFormatter = DateFormatter()

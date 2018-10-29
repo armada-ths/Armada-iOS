@@ -19,8 +19,8 @@ class FilterViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
-
     }
+    
     override func viewDidLayoutSubviews() {
         tableView.frame = CGRect(x: tableView.frame.origin.x, y: tableView.frame.origin.y, width: tableView.frame.size.width, height: tableView.contentSize.height)
         tableView.reloadData()
