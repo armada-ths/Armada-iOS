@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZEp-63-beV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZEp-63-beV">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,7 +32,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="fWs-yz-Ypd" kind="relationship" relationship="viewControllers" id="maq-JX-zKM"/>
+                        <segue destination="asC-SN-ZWf" kind="relationship" relationship="viewControllers" id="maq-JX-zKM"/>
                         <segue destination="CCD-dD-QcT" kind="relationship" relationship="viewControllers" id="WrS-U1-6tW"/>
                         <segue destination="J7h-B4-S97" kind="relationship" relationship="viewControllers" id="bRF-F4-mrP"/>
                         <segue destination="8Tp-TM-GpC" kind="relationship" relationship="viewControllers" id="RUb-jB-zY6"/>
@@ -42,15 +42,15 @@
             </objects>
             <point key="canvasLocation" x="5956" y="-635"/>
         </scene>
-        <!--ExhibitorViewController-->
+        <!--ExhibitorsViewController-->
         <scene sceneID="ekS-Tz-eBf">
             <objects>
-                <viewControllerPlaceholder storyboardName="ExhibitorViewController" id="fWs-yz-Ypd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Exhibitors" image="Armada-icon" id="oIP-Ki-TCp"/>
+                <viewControllerPlaceholder storyboardName="ExhibitorsViewController" id="fWs-yz-Ypd" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qKf-1I-h9s"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MyT-BT-b6Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6783" y="-635"/>
+            <point key="canvasLocation" x="7586.2318840579719" y="-635.054347826087"/>
         </scene>
         <!--News Article View Controller-->
         <scene sceneID="WTF-vT-l3j">
@@ -64,10 +64,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIB-9r-ahw" userLabel="scrollview">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIB-9r-ahw" userLabel="scrollview">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1287"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wES-PC-AhY" userLabel="contentview">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wES-PC-AhY" userLabel="contentview">
                                         <rect key="frame" x="16" y="2" width="343" height="226.33333333333334"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="equ-OW-aEQ" userLabel="borderview">
@@ -486,7 +486,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="154"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zYu-uI-HsK">
-                                                                            <rect key="frame" x="0.0" y="40.666666666666671" width="118" height="73"/>
+                                                                            <rect key="frame" x="0.0" y="40.333333333333343" width="118" height="73"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="118" id="bzb-5O-AKA" userLabel="imgW"/>
                                                                                 <constraint firstAttribute="height" constant="73" id="ruG-2Q-Qno" userLabel="imgH"/>
@@ -967,10 +967,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4jp-MP-h3i" userLabel="scrollview">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jp-MP-h3i" userLabel="scrollview">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1351"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-f5-4Cx" userLabel="contentview">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-f5-4Cx" userLabel="contentview">
                                         <rect key="frame" x="16" y="-10" width="343" height="223.33333333333334"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccv-ua-K4W" userLabel="borderview">
@@ -1290,6 +1290,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ane-he-qN4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4806" y="1148"/>
+        </scene>
+        <!--Exhibitors-->
+        <scene sceneID="hm0-ho-O95">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="asC-SN-ZWf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Exhibitors" image="Armada-icon" id="oIP-Ki-TCp"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Nio-je-YMt">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.0" green="0.85882352939999995" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fWs-yz-Ypd" kind="relationship" relationship="rootViewController" id="DqN-na-Ewi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R7f-nX-AbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6679.7101449275369" y="-635.054347826087"/>
         </scene>
     </scenes>
     <resources>

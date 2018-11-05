@@ -1,5 +1,5 @@
-class ExhibitorService {
-    static let sharedInstance = ExhibitorService()
+class ExhibitorsService {
+    static let sharedInstance = ExhibitorsService()
 
     private init() {}
 
@@ -18,7 +18,7 @@ class ExhibitorService {
             } catch DecodingError.typeMismatch(let type, let context) {
                 print("\(type) was expected, \(context.debugDescription)")
             } catch let error {
-                print("ExhibitorService::fetchExhibitors - \(error)")
+                print("ExhibitorsService::fetchExhibitors - \(error)")
             }
         }).resume()
     }

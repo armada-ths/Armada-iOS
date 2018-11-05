@@ -1,13 +1,13 @@
-import UIKit
 import SDWebImage
+import UIKit
 
-class ExhibitorViewController: UIViewController {
+class ExhibitorsViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
-    fileprivate var exhibitors = [Exhibitor]() {
+
+    fileprivate var exhibitors: [Exhibitor]? {
         didSet {
-            exhibitors.sort(by: { a, b -> Bool in
+            exhibitors?.sort(by: { a, b -> Bool in
                 a.name < b.name
             })
             DispatchQueue.main.async {
@@ -15,14 +15,7 @@ class ExhibitorViewController: UIViewController {
             }
         }
     }
-    fileprivate var filteredExhibitors = [Exhibitor]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    fileprivate var testExhibitors = [Exhibitor]() {
+    fileprivate var filteredExhibitors: [Exhibitor]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -33,30 +26,36 @@ class ExhibitorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
 
-        ExhibitorService.sharedInstance.fetchExhibitors { exhibitors in
+        ExhibitorsService.sharedInstance.fetchExhibitors { exhibitors in
             self.exhibitors = exhibitors
         }
         filteredExhibitors = exhibitors
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    
+
     @IBAction func filterButtonTapped(_ sender: Any) {
         let filterViewController = FilterViewController.instance()
         filterViewController.modalPresentationStyle = .overFullScreen
+        filterViewController.delegate = self
         present(filterViewController, animated: true, completion: nil)
     }
 
 }
 
-extension ExhibitorViewController: UISearchBarDelegate {
+extension ExhibitorsViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
@@ -67,26 +66,24 @@ extension ExhibitorViewController: UISearchBarDelegate {
             showFilteredExhibitors = false
         }
 
-        filteredExhibitors = exhibitors.filter { exhibitor -> Bool in
-            return exhibitor.name.lowercased().contains(searchText.lowercased())
+        filteredExhibitors = exhibitors?.filter { exhibitor -> Bool in
+            exhibitor.name.lowercased().contains(searchText.lowercased())
         }
-        
-        
+
         //var types = ["Trainee", "Internship"]
         //testExhibitors = exhibitors.filter{!$0.employments.filter{types.contains($0.name)}.isEmpty};
-        
+
 //        var countries = ["Sweden \u2013 Svealand", "World \u2013 Europe"]
 //        testExhibitors = exhibitors.filter{!$0.locations.filter{countries.contains($0.name)}.isEmpty};
-        
-        
+
 //        values is missing in the model
 //        var values = ["Sustainability", "Innovation"]
 //        testExhibitors = exhibitors.filter{!$0.values.filter{countries.contains($0.name)}.isEmpty};
-        
+
 //          var industries = ["Architecture", "Environmental Sector"]
 //          testExhibitors = exhibitors.filter{!$0.industries.filter{countries.contains($0.name)}.isEmpty};
-        
-        if !filteredExhibitors.isEmpty {
+
+        if !(filteredExhibitors!).isEmpty {
             showFilteredExhibitors = true
         }
     }
@@ -97,30 +94,29 @@ extension ExhibitorViewController: UISearchBarDelegate {
     }
 }
 
-extension ExhibitorViewController: UITableViewDelegate, UITableViewDataSource {
+extension ExhibitorsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if showFilteredExhibitors {
-            return filteredExhibitors.count
+            return filteredExhibitors?.count ?? 0
         }
-        return exhibitors.count
+        return exhibitors?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(exhibitors[indexPath.row].name)
-        print(exhibitors[indexPath.row].employments[0].name)
-        
+        guard let exhibitor = exhibitors?[indexPath.row] else { return }
+        let exhibitorVC = ExhibitorDetailViewController.instance()
+        exhibitorVC.exhibitor = exhibitor
+        navigationController?.pushViewController(exhibitorVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var exhibitor = exhibitors[indexPath.row]
-
-        if !filteredExhibitors.isEmpty {
-            exhibitor = filteredExhibitors[indexPath.row]
+        guard let exhibitor = exhibitors?[indexPath.row] else {
+            return UITableViewCell()
         }
 
-        let cell: ExhibitorTableViewCell = tableView.dequeueReusableCell(
-            withIdentifier: ExhibitorTableViewCell.reuseIdentifier,
-            for: indexPath) as! ExhibitorTableViewCell
+        let cell: ExhibitorsTableViewCell = tableView.dequeueReusableCell(
+            withIdentifier: ExhibitorsTableViewCell.reuseIdentifier,
+            for: indexPath) as! ExhibitorsTableViewCell
 
         cell.name.text = exhibitor.name
         cell.path = exhibitor.logoSquared
@@ -129,8 +125,14 @@ extension ExhibitorViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension ExhibitorsViewController: FilterDelegate {
+    func didFilter() {
+        print("didFilter")
+    }
+}
+
 // MARK: TABLE VIEW CELL
-class ExhibitorTableViewCell: UITableViewCell {
+class ExhibitorsTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var logo: UIImageView!
     var path: String? {
@@ -139,19 +141,17 @@ class ExhibitorTableViewCell: UITableViewCell {
             setImage(path: path)
         }
     }
-    
+
     static var reuseIdentifier: String {
-        return "ExhibitorTableViewCell"
+        return String(describing: self)
     }
-    
+
     func setImage(path: String) {
         let urlString = "https://ais.armada.nu" + path
-        
         guard let url = URL(string: urlString) else { return }
-        
         logo.sd_setImage(with: url)
     }
-    
+
     override func prepareForReuse() {
         self.logo.image = nil
     }
