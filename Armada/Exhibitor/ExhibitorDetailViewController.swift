@@ -3,6 +3,8 @@ import UIKit
 
 class ExhibitorDetailViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var industriesTextView: UITextView!
     @IBOutlet weak var employmentsTextView: UITextView!
     @IBOutlet weak var contactPhoneLabel: UILabel!
@@ -18,7 +20,6 @@ class ExhibitorDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = false
-        
         //set logo
         let urlString = "https://ais.armada.nu" + (exhibitor?.logoSquared)!
         guard let url = URL(string: urlString) else {return }
@@ -60,7 +61,12 @@ class ExhibitorDetailViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
+        let width = scrollView.frame.width
+        scrollView.frame = CGRect(origin: scrollView.frame.origin,
+                                  size: CGSize(width: width, height: CGFloat(1000)))
+        scrollView.contentSize = CGSize(width: width, height: CGFloat(1300))
         
         //print(exhibitor?.name)
     }
