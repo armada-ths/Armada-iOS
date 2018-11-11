@@ -15,6 +15,7 @@ struct Exhibitor: Codable {
     let benefits: [Benefit]
     let averageAge: Int?
     let founded: Int?
+    let booths: [Booth]
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -33,5 +34,6 @@ struct Exhibitor: Codable {
         case benefits
         case averageAge = "average_age"
         case founded
+        case booths
     }
 }

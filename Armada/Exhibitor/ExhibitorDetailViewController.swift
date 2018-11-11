@@ -7,6 +7,7 @@ class ExhibitorDetailViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     //@IBOutlet weak var scrollView: UIScrollView!
     //@IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var fariLocationTextView: UITextView!
     @IBOutlet weak var industriesTextView: UITextView!
     @IBOutlet weak var employmentsTextView: UITextView!
     @IBOutlet weak var contactPhoneLabel: UILabel!
@@ -23,9 +24,12 @@ class ExhibitorDetailViewController: UIViewController {
     override func viewDidLoad() {
         self.navigationController?.navigationBar.isHidden = false
         //set logo
-        let urlString = "https://ais.armada.nu" + (exhibitor?.logoSquared)!
-        guard let url = URL(string: urlString) else {return }
-        logo.sd_setImage(with: url)
+        if let logoLink = exhibitor?.logoSquared {
+            let urlString = "https://ais.armada.nu" + logoLink
+            guard let url = URL(string: urlString) else {return }
+            logo.sd_setImage(with: url)
+        }
+        
         
         //set about
         exhibitorAboutTextView.text = exhibitor?.about
@@ -34,6 +38,7 @@ class ExhibitorDetailViewController: UIViewController {
         contactPersonLabel.text = "Contact Person: \(exhibitor?.contactName ?? "")"
         contactEmailLabel.text = "Email : \(exhibitor?.contactEmail ?? "")"
         contactPhoneLabel.text = "Phone: \(exhibitor?.contactPhoneNumber ?? "")"
+        
         
         
         
@@ -57,6 +62,38 @@ class ExhibitorDetailViewController: UIViewController {
         industries = industries.trimmingCharacters(in: .whitespacesAndNewlines)
         industries = industries.trimmingCharacters(in: [","])
         industriesTextView.text = industries
+        print("lala")
+        
+        //set fair locations
+        var locationsText = ""
+        if let booths = exhibitor?.booths {
+            for booth in booths{
+                for day in booth.days {
+                    locationsText += day + ", "
+                    if let par = booth.location.parent {
+                        if let parentName = par.name {
+                            locationsText += parentName
+                            locationsText += ", "
+                        }
+                    }
+                    
+                    if let locationName = booth.location.name {
+                        locationsText += locationName
+                        locationsText += ", "
+                    }
+                    
+                    if let boothName = booth.name {
+                        locationsText += boothName
+                    }
+                    print(locationsText)
+                    locationsText += "\n"
+                }
+                
+            }
+        }
+        fariLocationTextView.text = locationsText
+        
+        
         
         
         
@@ -70,6 +107,7 @@ class ExhibitorDetailViewController: UIViewController {
         scrollView.frame = CGRect(origin: scrollView.frame.origin,
                                   size: CGSize(width: width, height: CGFloat(1000)))
         scrollView.contentSize = CGSize(width: width, height: CGFloat(1300))
+        
         
         //print(exhibitor?.name)
     }
