@@ -62,19 +62,19 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Contact Person:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riW-jM-T9R">
-                                                <rect key="frame" x="8" y="443" width="414" height="21"/>
+                                                <rect key="frame" x="8" y="442" width="414" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Email: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiT-bO-lRY">
-                                                <rect key="frame" x="8" y="468" width="414" height="21"/>
+                                                <rect key="frame" x="8" y="467" width="414" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCf-s3-uVY">
-                                                <rect key="frame" x="8" y="114" width="413.66666666666669" height="124.66666666666669"/>
+                                                <rect key="frame" x="8" y="115" width="413.66666666666669" height="124.66666666666669"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="124" id="0Pk-xO-Wbv"/>
@@ -98,7 +98,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="ABOUT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hbn-yd-jzs">
-                                                <rect key="frame" x="8" y="78.666666666666671" width="413.66666666666669" height="19.333333333333329"/>
+                                                <rect key="frame" x="8" y="78.666666666666671" width="413.66666666666669" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -110,7 +110,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Phone: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up9-me-rSt">
-                                                <rect key="frame" x="8" y="492" width="414" height="21"/>
+                                                <rect key="frame" x="8" y="491" width="414" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -176,10 +176,12 @@
                         <outlet property="contactEmailLabel" destination="LiT-bO-lRY" id="9ez-BB-SHn"/>
                         <outlet property="contactPersonLabel" destination="riW-jM-T9R" id="fpO-KZ-u3d"/>
                         <outlet property="contactPhoneLabel" destination="up9-me-rSt" id="KTg-Rc-qOO"/>
+                        <outlet property="containerView" destination="A3a-3P-Mgy" id="oNR-i5-URV"/>
                         <outlet property="employmentsTextView" destination="cMA-LV-L3V" id="X7h-Rd-EEI"/>
                         <outlet property="exhibitorAboutTextView" destination="dCf-s3-uVY" id="Y1S-PI-Ygm"/>
                         <outlet property="industriesTextView" destination="zhd-gQ-FvF" id="vkv-du-BYg"/>
                         <outlet property="logo" destination="U1B-gB-RgD" id="dPv-rp-J7H"/>
+                        <outlet property="scrollView" destination="OP7-Lt-QEU" id="wht-6a-zhP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KhO-6I-LOc" userLabel="First Responder" sceneMemberID="firstResponder"/>

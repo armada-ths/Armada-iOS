@@ -3,8 +3,10 @@ import UIKit
 
 class ExhibitorDetailViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    //@IBOutlet weak var scrollView: UIScrollView!
+    //@IBOutlet weak var containerView: UIView!
     @IBOutlet weak var industriesTextView: UITextView!
     @IBOutlet weak var employmentsTextView: UITextView!
     @IBOutlet weak var contactPhoneLabel: UILabel!
@@ -63,6 +65,7 @@ class ExhibitorDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        
         let width = scrollView.frame.width
         scrollView.frame = CGRect(origin: scrollView.frame.origin,
                                   size: CGSize(width: width, height: CGFloat(1000)))
