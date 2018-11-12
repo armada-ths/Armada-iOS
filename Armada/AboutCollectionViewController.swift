@@ -25,22 +25,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
 
-        // set title if not set
-        if self.navigationItem.titleView == nil {
-            let frame = CGRect(x: 0,y: 9, width: 240, height: 30);
-            let label = UILabel(frame: frame)
-            let myMutableString = NSMutableAttributedString(
-                string: "A B O U T   THS Armada 2017",
-                attributes: [NSFontAttributeName:UIFont(
-                    name: "BebasNeue-Light",
-                    size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 9))
-            label.textAlignment = .center
-            label.attributedText = myMutableString
-            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 240, height: 50))
-            newTitleView.addSubview(label)
-            self.navigationItem.titleView = newTitleView
-        }
     }
 
     // DELEGATE methods:

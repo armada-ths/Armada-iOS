@@ -5,24 +5,21 @@ class ExhibitorsViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
 
-    fileprivate var exhibitors: [Exhibitor]? {
-        didSet {
-            exhibitors?.sort(by: { a, b -> Bool in
-                a.name < b.name
-            })
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    fileprivate var filteredExhibitors: [Exhibitor]? {
+    fileprivate var result: [Exhibitor]? {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
+    fileprivate var exhibitors: [Exhibitor]?
+    fileprivate var filteredExhibitors: [Exhibitor]?
     fileprivate var showFilteredExhibitors: Bool = false
+
+    fileprivate var selectedEmployments: Set<Employment> = []
+    fileprivate var selectedLocations: Set<Location> = []
+    fileprivate var selectedSectors: Set<Industry> = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +30,9 @@ class ExhibitorsViewController: UIViewController {
 
         ExhibitorsService.sharedInstance.fetchExhibitors { exhibitors in
             self.exhibitors = exhibitors
+            self.filteredExhibitors = exhibitors
+            self.result = exhibitors
         }
-        filteredExhibitors = exhibitors
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,10 +45,13 @@ class ExhibitorsViewController: UIViewController {
     }
 
     @IBAction func filterButtonTapped(_ sender: Any) {
-        let filterViewController = FilterViewController.instance()
-        filterViewController.modalPresentationStyle = .overFullScreen
-        filterViewController.delegate = self
-        present(filterViewController, animated: true, completion: nil)
+        let filterVC = FilterViewController.instance()
+        filterVC.modalPresentationStyle = .overFullScreen
+        filterVC.delegate = self
+        filterVC.selectedEmployments = selectedEmployments
+        filterVC.selectedLocations = selectedLocations
+        filterVC.selectedSectors = selectedSectors
+        present(filterVC, animated: true, completion: nil)
     }
 
 }
@@ -61,29 +62,21 @@ extension ExhibitorsViewController: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            filteredExhibitors = []
+        if searchText.isEmpty, !showFilteredExhibitors {
+            result = exhibitors
             showFilteredExhibitors = false
-        }
-
-        filteredExhibitors = exhibitors?.filter { exhibitor -> Bool in
-            exhibitor.name.lowercased().contains(searchText.lowercased())
-        }
-
-        //var types = ["Trainee", "Internship"]
-        //testExhibitors = exhibitors.filter{!$0.employments.filter{types.contains($0.name)}.isEmpty};
-
-//        var countries = ["Sweden \u2013 Svealand", "World \u2013 Europe"]
-//        testExhibitors = exhibitors.filter{!$0.locations.filter{countries.contains($0.name)}.isEmpty};
-
-//        values is missing in the model
-//        var values = ["Sustainability", "Innovation"]
-//        testExhibitors = exhibitors.filter{!$0.values.filter{countries.contains($0.name)}.isEmpty};
-
-//          var industries = ["Architecture", "Environmental Sector"]
-//          testExhibitors = exhibitors.filter{!$0.industries.filter{countries.contains($0.name)}.isEmpty};
-
-        if !(filteredExhibitors!).isEmpty {
+        } else if searchText.isEmpty, showFilteredExhibitors {
+            result = filteredExhibitors
+            showFilteredExhibitors = true
+        } else if !searchText.isEmpty, showFilteredExhibitors {
+            result = filteredExhibitors?.filter { exhibitor -> Bool in
+                exhibitor.name.lowercased().contains(searchText.lowercased())
+            }
+            showFilteredExhibitors = true
+        } else if !searchText.isEmpty, !showFilteredExhibitors {
+            result = exhibitors?.filter { exhibitor -> Bool in
+                exhibitor.name.lowercased().contains(searchText.lowercased())
+            }
             showFilteredExhibitors = true
         }
     }
@@ -96,21 +89,18 @@ extension ExhibitorsViewController: UISearchBarDelegate {
 
 extension ExhibitorsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if showFilteredExhibitors {
-            return filteredExhibitors?.count ?? 0
-        }
-        return exhibitors?.count ?? 0
+        return result?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let exhibitor = exhibitors?[indexPath.row] else { return }
+        guard let exhibitor = result?[indexPath.row] else { return }
         let exhibitorVC = ExhibitorDetailViewController.instance()
         exhibitorVC.exhibitor = exhibitor
         navigationController?.pushViewController(exhibitorVC, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let exhibitor = exhibitors?[indexPath.row] else {
+        guard let exhibitor = result?[indexPath.row] else {
             return UITableViewCell()
         }
 
@@ -126,8 +116,17 @@ extension ExhibitorsViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ExhibitorsViewController: FilterDelegate {
-    func didFilter() {
-        print("didFilter")
+    func didFilter(_ employments: Set<Employment>, _ locations: Set<Location>, _ sectors: Set<Industry>) {
+        filteredExhibitors = exhibitors?.filter { exhibitor in
+            self.selectedEmployments = employments
+            self.selectedLocations = locations
+            self.selectedSectors = sectors
+            return employments.isSubset(of: Set(exhibitor.employments)) &&
+                locations.isSubset(of: Set(exhibitor.locations)) &&
+                sectors.isSubset(of: Set(exhibitor.industries))
+        }
+        result = filteredExhibitors
+        showFilteredExhibitors = true
     }
 }
 
