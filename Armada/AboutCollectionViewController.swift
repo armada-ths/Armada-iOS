@@ -25,22 +25,6 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
         dataSource = ArmadaSponsorCollectionViewDataSource(collectionViewController: self)
         collectionView?.dataSource = dataSource
 
-        // set title if not set
-        if self.navigationItem.titleView == nil {
-            let frame = CGRect(x: 0,y: 9, width: 240, height: 30);
-            let label = UILabel(frame: frame)
-            let myMutableString = NSMutableAttributedString(
-                string: "A B O U T   THS Armada 2017",
-                attributes: [NSFontAttributeName:UIFont(
-                    name: "BebasNeue-Light",
-                    size: 22.0)!])
-            myMutableString.addAttribute(NSFontAttributeName, value: UIFont(name: "BebasNeueRegular", size: 22.0), range:NSRange(location: 0, length: 9))
-            label.textAlignment = .center
-            label.attributedText = myMutableString
-            let newTitleView = UIView(frame: CGRect(x: 0, y:0 , width: 240, height: 50))
-            newTitleView.addSubview(label)
-            self.navigationItem.titleView = newTitleView
-        }
     }
 
     // DELEGATE methods:
@@ -106,11 +90,11 @@ class AboutCollectionViewController: UICollectionViewController, UICollectionVie
                                                                                  withReuseIdentifier: "AboutHeaderCollectionReusableView",
                                                                                  for: indexPath) as! AboutHeaderCollectionReusableView
                 let about = "<font size='4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>THS Armada arranges Scandinavia's largest career fair at KTH Royal Institute of Technology. Every year, more than 12,000 of Sweden's top engineering and architectural students flock to visit the fair to meet their future employers.</font>"
-                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We are an organization that truly believes in everyone's equal worth and right to equal opportunities. Our exclusive area at the fair is called <b>Diversity Room</b> and is located in KTHB.</font>"
+                let diversity = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We are an organization that truly believes in everyone's equal worth and right to equal opportunities. Our exclusive area at the fair is called <b>Diversity Room</b>."
                 
-                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Our belief in a green future motivates us to continuously make improvements towards a more sustainable fair. THS Armada has been climate neutral since 2015. We have chosen to dedicate a specific area at the fair called <b>Green Room</b>, which is located in Nymble.</font>"
+                let sustainability = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>Our belief in a green future motivates us to continuously make improvements towards a more sustainable fair. THS Armada has been climate neutral since 2015. We have chosen to dedicate a specific area at the fair called <b>Green Room</b></font>"
                 
-                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We put great emphasis on matchmaking the right students with the right companies. This is done by including a matchmaking algorithm in our Android and iOS applications. We want to maximize the value from your THS Armada-participation.</font>"
+                let quality = "<font size = '4.5' style='font-family:Lato-Regular;’ line-height: '0.7'>We put great emphasis on matchmaking the right students with the right companies. This is done by including a matchmaking algorithm on the website. We want to maximize the value from your THS Armada-participation.</font>"
                 headerView.aboutText.attributedText =  about.attributedHtmlString
                 headerView.aboutText.isScrollEnabled = false
                 headerView.aboutText.textAlignment = NSTextAlignment.center
