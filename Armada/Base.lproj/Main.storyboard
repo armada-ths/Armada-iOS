@@ -178,24 +178,17 @@
                                     <rect key="frame" x="8" y="96" width="398" height="60"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sustainability" translatesAutoresizingMaskIntoConstraints="NO" id="ixb-bS-8GH">
-                                            <rect key="frame" x="169" y="0.0" width="60" height="60"/>
+                                            <rect key="frame" x="202" y="0.0" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="mHe-Nh-dSK"/>
                                                 <constraint firstAttribute="width" constant="60" id="yI8-zN-pfm"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diversity" translatesAutoresizingMaskIntoConstraints="NO" id="OmX-rV-lxa">
-                                            <rect key="frame" x="104" y="0.0" width="60" height="60"/>
+                                            <rect key="frame" x="137" y="0.0" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="2R2-qf-cVh"/>
                                                 <constraint firstAttribute="height" constant="60" id="Ybz-QG-t4m"/>
-                                            </constraints>
-                                        </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quality" translatesAutoresizingMaskIntoConstraints="NO" id="9EX-Xw-2Hp">
-                                            <rect key="frame" x="234" y="0.0" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="76R-dd-wyz"/>
-                                                <constraint firstAttribute="width" constant="60" id="VDc-R1-Hjw"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -205,11 +198,8 @@
                                         <constraint firstAttribute="bottom" secondItem="OmX-rV-lxa" secondAttribute="bottom" id="LJv-bc-MLi"/>
                                         <constraint firstItem="ixb-bS-8GH" firstAttribute="leading" secondItem="OmX-rV-lxa" secondAttribute="trailing" constant="5" id="Xqc-3N-xXs"/>
                                         <constraint firstAttribute="height" constant="60" id="ZjE-Ef-btQ"/>
-                                        <constraint firstItem="9EX-Xw-2Hp" firstAttribute="leading" secondItem="ixb-bS-8GH" secondAttribute="trailing" constant="5" id="aGv-jT-hl7"/>
                                         <constraint firstItem="ixb-bS-8GH" firstAttribute="top" secondItem="dJv-0V-ILw" secondAttribute="top" id="cNS-Mq-4AQ"/>
-                                        <constraint firstAttribute="bottom" secondItem="9EX-Xw-2Hp" secondAttribute="bottom" id="cdV-9P-GiX"/>
-                                        <constraint firstItem="ixb-bS-8GH" firstAttribute="centerX" secondItem="dJv-0V-ILw" secondAttribute="centerX" id="jMg-GF-rCT"/>
-                                        <constraint firstItem="9EX-Xw-2Hp" firstAttribute="top" secondItem="dJv-0V-ILw" secondAttribute="top" id="ssM-QP-xPx"/>
+                                        <constraint firstItem="ixb-bS-8GH" firstAttribute="centerX" secondItem="dJv-0V-ILw" secondAttribute="centerX" constant="33" id="jMg-GF-rCT"/>
                                         <constraint firstItem="OmX-rV-lxa" firstAttribute="top" secondItem="dJv-0V-ILw" secondAttribute="top" id="xVH-Mn-tSn"/>
                                     </constraints>
                                 </view>
@@ -683,7 +673,6 @@
         <image name="diversity" width="127.33333587646484" height="133"/>
         <image name="eventFeed" width="16.666666030883789" height="17"/>
         <image name="eventLogo" width="32" height="32"/>
-        <image name="quality" width="55.680000305175781" height="60"/>
         <image name="sustainability" width="56.639999389648438" height="59.520000457763672"/>
     </resources>
 </document>
