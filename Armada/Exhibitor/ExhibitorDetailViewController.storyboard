@@ -50,18 +50,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Contact Person:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riW-jM-T9R">
-                                                <rect key="frame" x="7" y="539.66666666666663" width="414" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Email: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LiT-bO-lRY">
-                                                <rect key="frame" x="7" y="564.33333333333337" width="414" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCf-s3-uVY">
                                                 <rect key="frame" x="8" y="115" width="413.66666666666669" height="124.66666666666669"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -94,12 +82,6 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="FAIR LOCATIONS " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sO2-L3-hRk">
                                                 <rect key="frame" x="8" y="334.33333333333331" width="414" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" text="Phone: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="up9-me-rSt">
-                                                <rect key="frame" x="7" y="589" width="414" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -143,29 +125,20 @@
                                             <constraint firstItem="cMA-LV-L3V" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="FSS-Lc-19x"/>
                                             <constraint firstItem="dCf-s3-uVY" firstAttribute="firstBaseline" secondItem="Hbn-yd-jzs" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="Kau-oh-i2M"/>
                                             <constraint firstItem="3tv-3V-I0t" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="LFk-0k-zHH"/>
-                                            <constraint firstItem="riW-jM-T9R" firstAttribute="firstBaseline" secondItem="cMA-LV-L3V" secondAttribute="baseline" constant="24.333333333333332" symbolType="layoutAnchor" id="OrQ-of-4Vc"/>
                                             <constraint firstItem="Hbn-yd-jzs" firstAttribute="firstBaseline" secondItem="U1B-gB-RgD" secondAttribute="baseline" constant="24.333333333333332" symbolType="layoutAnchor" id="Q01-wI-rFP"/>
                                             <constraint firstItem="dCf-s3-uVY" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="SCa-SA-Y3i"/>
-                                            <constraint firstItem="up9-me-rSt" firstAttribute="firstBaseline" secondItem="LiT-bO-lRY" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="SHE-6b-03v"/>
-                                            <constraint firstItem="up9-me-rSt" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="7" id="WSW-hL-cwI"/>
                                             <constraint firstItem="sO2-L3-hRk" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="Wxx-Lk-b62"/>
                                             <constraint firstItem="8mi-ne-dZQ" firstAttribute="firstBaseline" secondItem="sO2-L3-hRk" secondAttribute="baseline" constant="20" symbolType="layoutAnchor" id="Z80-ug-CY3"/>
                                             <constraint firstItem="Hbn-yd-jzs" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="a5g-iC-tx4"/>
                                             <constraint firstItem="3tv-3V-I0t" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="axx-XZ-m7z"/>
                                             <constraint firstItem="Hbn-yd-jzs" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="cxI-ty-V2J"/>
-                                            <constraint firstItem="riW-jM-T9R" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="7" id="fFq-sT-2Wx"/>
                                             <constraint firstItem="gMS-kZ-sIy" firstAttribute="firstBaseline" secondItem="dCf-s3-uVY" secondAttribute="baseline" constant="24.333333333333332" symbolType="layoutAnchor" id="hzd-gp-6RO"/>
                                             <constraint firstItem="8mi-ne-dZQ" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="ith-lI-bWm"/>
                                             <constraint firstItem="sO2-L3-hRk" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="kUa-vf-o1C"/>
                                             <constraint firstItem="3tv-3V-I0t" firstAttribute="firstBaseline" secondItem="8mi-ne-dZQ" secondAttribute="baseline" constant="24.333333333333332" symbolType="layoutAnchor" id="lfK-WU-zeB"/>
                                             <constraint firstItem="cMA-LV-L3V" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="8" id="nlS-8f-NYc"/>
-                                            <constraint firstItem="riW-jM-T9R" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="pLK-jh-bl4"/>
-                                            <constraint firstItem="LiT-bO-lRY" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="qbk-bM-gj7"/>
                                             <constraint firstItem="8mi-ne-dZQ" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="r78-ir-CB7"/>
-                                            <constraint firstItem="LiT-bO-lRY" firstAttribute="leading" secondItem="A3a-3P-Mgy" secondAttribute="leading" constant="7" id="uB2-tU-amT"/>
-                                            <constraint firstItem="LiT-bO-lRY" firstAttribute="firstBaseline" secondItem="riW-jM-T9R" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="va8-B4-9ar"/>
                                             <constraint firstItem="U1B-gB-RgD" firstAttribute="centerX" secondItem="A3a-3P-Mgy" secondAttribute="centerX" id="xHk-f3-jJW"/>
-                                            <constraint firstItem="up9-me-rSt" firstAttribute="width" secondItem="A3a-3P-Mgy" secondAttribute="width" id="zvE-cl-FRJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -189,9 +162,6 @@
                         <viewLayoutGuide key="safeArea" id="cgR-nR-V6a"/>
                     </view>
                     <connections>
-                        <outlet property="contactEmailLabel" destination="LiT-bO-lRY" id="9ez-BB-SHn"/>
-                        <outlet property="contactPersonLabel" destination="riW-jM-T9R" id="fpO-KZ-u3d"/>
-                        <outlet property="contactPhoneLabel" destination="up9-me-rSt" id="KTg-Rc-qOO"/>
                         <outlet property="containerView" destination="A3a-3P-Mgy" id="oNR-i5-URV"/>
                         <outlet property="employmentsTextView" destination="cMA-LV-L3V" id="X7h-Rd-EEI"/>
                         <outlet property="exhibitorAboutTextView" destination="dCf-s3-uVY" id="Y1S-PI-Ygm"/>

@@ -10,9 +10,7 @@ class ExhibitorDetailViewController: UIViewController {
     @IBOutlet weak var fariLocationTextView: UITextView!
     @IBOutlet weak var industriesTextView: UITextView!
     @IBOutlet weak var employmentsTextView: UITextView!
-    @IBOutlet weak var contactPhoneLabel: UILabel!
-    @IBOutlet weak var contactEmailLabel: UILabel!
-    @IBOutlet weak var contactPersonLabel: UILabel!
+
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var exhibitorAboutTextView: UITextView!
     var exhibitor: Exhibitor? {
@@ -34,10 +32,7 @@ class ExhibitorDetailViewController: UIViewController {
         //set about
         exhibitorAboutTextView.text = exhibitor?.about
         
-        //set contact
-        contactPersonLabel.text = "Contact Person: \(exhibitor?.contactName ?? "")"
-        contactEmailLabel.text = "Email : \(exhibitor?.contactEmail ?? "")"
-        contactPhoneLabel.text = "Phone: \(exhibitor?.contactPhoneNumber ?? "")"
+
         
         
         
