@@ -68,21 +68,21 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         if let employments = employments, indexPath.section == 0 {
             cell.label.text = employments[indexPath.row].name
             if selectedEmployments.contains(employments[indexPath.row]) {
-                cell.setSelected(true, animated: false)
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 cell.accessoryType = .checkmark
             }
         }
         if let locations = locations, indexPath.section == 1 {
             cell.label.text = locations[indexPath.row].name
             if selectedLocations.contains(locations[indexPath.row]) {
-                cell.setSelected(true, animated: false)
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 cell.accessoryType = .checkmark
             }
         }
         if let sectors = sectors, indexPath.section == 2 {
             cell.label.text = sectors[indexPath.row].name
             if selectedSectors.contains(sectors[indexPath.row]) {
-                cell.setSelected(true, animated: false)
+                self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 cell.accessoryType = .checkmark
             }
         }
